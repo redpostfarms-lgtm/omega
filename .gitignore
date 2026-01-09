@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.wav
+*.mp4
+*.map
+temp*.wav
+response.wav
+out.wav
+omega_now.wav
+
+# Browser data and system files
+AppData/
+*.log
+
+# Test outputs
+.pytest_cache/
+.coverage
+htmlcov/

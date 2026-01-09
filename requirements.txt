@@ -1,0 +1,27 @@
+# Omega System Requirements
+# Core TTS and Audio
+TTS>=0.20.0
+torch>=2.0.0
+sounddevice>=0.4.6
+numpy>=1.24.0
+scipy>=1.10.0
+speechbrain>=0.5.16
+
+# Speech Recognition
+SpeechRecognition>=3.10.0
+
+# Audio Processing
+librosa>=0.10.0
+noisereduce>=3.0.0
+pydub>=0.25.1
+soundfile>=0.12.0
+
+# Async and Utilities
+asyncio  # Built-in, but listed for reference
+
+# Optional Dependencies
+pdfplumber>=0.9.0  # For PDF processing if needed
+PyPDF2>=3.0.0  # Alternative PDF processing
+
+# Development and Testing (optional)
+pytest>=7.4.0  # For running tests
