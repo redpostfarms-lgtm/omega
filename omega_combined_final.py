@@ -11,7 +11,6 @@ import torch
 import asyncio
 import signal
 import sys
-from speechbrain.pretrained import EmotionRecognition
 from pathlib import Path
 from rate_limiter import GOOGLE_SPEECH_LIMITER
 
@@ -19,12 +18,30 @@ ROOT = Path(r'D:\RPF_BRAIN\The Gatekeeper')
 CLIP = ROOT / 'clip_0001.wav'
 MEMORY = ROOT / 'world_memory.map'
 
-# Load models
-tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
-emotion_classifier = EmotionRecognition.from_hparams(
-    source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-    savedir="pretrained_emotion"
-)
+# Load models lazily (first run downloads ~2 GB total)
+tts = None
+def get_tts():
+    """Get TTS instance, loading if needed."""
+    global tts
+    if tts is None:
+        # Accept TTS terms automatically
+        import os
+        os.environ['TTS_ACCEPT_TO_S'] = '1'
+        tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
+    return tts
+
+# Load emotion classifier (optional - gracefully handle if unavailable)
+emotion_classifier = None
+try:
+    from speechbrain.pretrained import EmotionRecognition
+    emotion_classifier = EmotionRecognition.from_hparams(
+        source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+        savedir="pretrained_emotion"
+    )
+    print("✓ Emotion detection enabled")
+except Exception as e:
+    print(f"⚠ Emotion detection unavailable: {e}")
+    print("   Continuing without emotion detection...")
 
 # Memory system
 def load_memory():
@@ -51,6 +68,8 @@ def record(duration=5, fs=16000):
 # Detect emotion
 def detect_emotion(wav):
     """Detect emotion from audio file with error handling."""
+    if emotion_classifier is None:
+        return 'neutral'
     try:
         pred = emotion_classifier.classify_file(wav)
         return pred[2].lower() if len(pred) > 2 else 'neutral'
@@ -69,7 +88,7 @@ def omega_speak(text, emotion="neutral"):
         else:
             speaker_wav = str(CLIP)
         
-        tts.tts_to_file(text=prefix + text, speaker_wav=speaker_wav, language='en', file_path='response.wav')
+        get_tts().tts_to_file(text=prefix + text, speaker_wav=speaker_wav, language='en', file_path='response.wav')
         # Non-blocking audio playback
         if sys.platform == 'win32':
             os.startfile('response.wav')

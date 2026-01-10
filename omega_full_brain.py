@@ -10,15 +10,32 @@ import asyncio
 import signal
 import sys
 from pathlib import Path
-from speechbrain.pretrained import EmotionRecognition
 from rate_limiter import GOOGLE_SPEECH_LIMITER
 
-# Load models (first run downloads ~2 GB total)
-tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
-emotion_classifier = EmotionRecognition.from_hparams(
-    source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-    savedir="pretrained_emotion"
-)
+# Load models lazily (first run downloads ~2 GB total)
+tts = None
+def get_tts():
+    """Get TTS instance, loading if needed."""
+    global tts
+    if tts is None:
+        # Accept TTS terms automatically
+        import os
+        os.environ['TTS_ACCEPT_TO_S'] = '1'
+        tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
+    return tts
+
+# Load emotion classifier (optional - gracefully handle if unavailable)
+emotion_classifier = None
+try:
+    from speechbrain.pretrained import EmotionRecognition
+    emotion_classifier = EmotionRecognition.from_hparams(
+        source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+        savedir="pretrained_emotion"
+    )
+    print("✓ Emotion detection enabled")
+except Exception as e:
+    print(f"⚠ Emotion detection unavailable: {e}")
+    print("   Continuing without emotion detection...")
 
 def record_audio(duration=5, fs=16000):
     print("Listening...")
@@ -30,6 +47,8 @@ def record_audio(duration=5, fs=16000):
 
 def detect_emotion(wav_file):
     """Detect emotion from audio file with error handling."""
+    if emotion_classifier is None:
+        return 'neutral'
     try:
         prediction = emotion_classifier.classify_file(wav_file)
         return prediction[2].lower() if len(prediction) > 2 else 'neutral'
@@ -55,7 +74,7 @@ def omega_speak(text, emotion="neutral"):
             print(f"Warning: {clip_path} not found, using default voice")
             clip_path = None
         
-        tts.tts_to_file(
+        get_tts().tts_to_file(
             text=text,
             speaker_wav=str(clip_path) if clip_path else None,
             language='en',
