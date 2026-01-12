@@ -801,13 +801,14 @@ class ControlPanel:
                     break
             
             if audio_found:
+                # Try to update scanner with audio file, fallback to speech detection if it fails
                 try:
                     self.scanner_integration.update_scanner(
                         audio_file=audio_found,
                         audio_position=0.5  # Current position (can be improved with actual position tracking)
                     )
-                # Fallback to speech detection if scanner update fails
                 except Exception:
+                    # Fallback to speech detection if scanner update fails
                     self.scanner_integration.update_scanner(
                         speech_active=self.speaking,
                         audio_amplitude=0.7 if self.speaking else 0.0
