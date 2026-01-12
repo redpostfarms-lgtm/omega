@@ -12,7 +12,15 @@ import asyncio
 import signal
 import sys
 from pathlib import Path
-from rate_limiter import GOOGLE_SPEECH_LIMITER
+
+# Safe rate limiter import with fallback
+try:
+    from rate_limiter import GOOGLE_SPEECH_LIMITER
+    RATE_LIMITER_AVAILABLE = True
+except ImportError:
+    print("[WARNING] rate_limiter not available, rate limiting disabled for Google API")
+    GOOGLE_SPEECH_LIMITER = None
+    RATE_LIMITER_AVAILABLE = False
 
 ROOT = Path(r'H:\The Gatekeeper')
 CLIP = ROOT / 'clip_0001.wav'
@@ -33,7 +41,7 @@ def get_tts():
 # Load emotion classifier (optional - gracefully handle if unavailable)
 emotion_classifier = None
 try:
-    from speechbrain.pretrained import EmotionRecognition
+    from speechbrain.pretrained import EmotionRecognition  # type: ignore
     emotion_classifier = EmotionRecognition.from_hparams(
         source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
         savedir="pretrained_emotion"
@@ -67,12 +75,28 @@ def record(duration=5, fs=16000):
 
 # Detect emotion
 def detect_emotion(wav):
-    """Detect emotion from audio file with error handling."""
+    """Detect emotion from audio file with error handling.
+    SpeechBrain returns emotions like: ang (angry), sad, hap (happy), neu (neutral), exc (excited)
+    """
     if emotion_classifier is None:
         return 'neutral'
     try:
         pred = emotion_classifier.classify_file(wav)
-        return pred[2].lower() if len(pred) > 2 else 'neutral'
+        # SpeechBrain format: typically returns tuple/list with emotion label
+        emotion_raw = pred[2].lower() if len(pred) > 2 else 'neu'
+        
+        # Map SpeechBrain emotions to our emotion keys
+        emotion_map = {
+            'ang': 'angry',
+            'sad': 'sad',
+            'hap': 'happy',
+            'neu': 'neutral',
+            'exc': 'happy',  # excited maps to happy
+            'angry': 'angry',
+            'happy': 'happy',
+            'neutral': 'neutral'
+        }
+        return emotion_map.get(emotion_raw, 'neutral')
     except Exception as e:
         print(f"Emotion detection error: {e}")
         return 'neutral'
@@ -88,6 +112,7 @@ def play_audio_background(wav_file):
             # Use PowerShell MediaPlayer for hidden background playback
             # Escape path for PowerShell (replace backslashes and single quotes)
             # Use .format() instead of f-string to safely handle paths with curly braces
+            # Properly escape backslash for string replacement (\\ matches single \)
             abs_path = str(Path(wav_file).absolute()).replace('\\', '/').replace("'", "''")
             ps_cmd = '''
             Add-Type -AssemblyName presentationCore
@@ -130,7 +155,12 @@ def play_audio_background(wav_file):
 
 # Speak with emotion tone
 def omega_speak(text, emotion="neutral"):
-    """Speak text with emotion-aware tone, using voice clone, non-blocking background playback."""
+    """Speak text with emotion-aware tone, using voice clone, non-blocking background playback.
+    
+    Note: XTTS v2 emotion control is limited - real emotion comes from the reference clip itself.
+    If clip_0001.wav is neutral, output stays mostly neutral regardless of emotion parameter.
+    For stronger emotion shifts, use separate reference clips for happy/angry/sad emotions.
+    """
     # Always use voice clone for better quality
     if not CLIP.exists():
         print(f"Warning: {CLIP} not found, using default voice")
@@ -140,7 +170,14 @@ def omega_speak(text, emotion="neutral"):
         print(f"[Using voice clone: {CLIP.name} for improved quality]")
     
     # Emotion-aware tone (text only, no emoji to avoid Unicode issues on Windows)
-    emotion_prefix = {"happy": "[Happy] ", "angry": "[Angry] ", "sad": "[Sad] ", "neutral": ""}.get(emotion, "")
+    # Note: These prefixes are informational; actual emotion comes from reference clip
+    emotion_prefix = {
+        "happy": "[Happy] ", 
+        "angry": "[Angry] ", 
+        "sad": "[Sad] ", 
+        "neutral": "",
+        "excited": "[Excited] "
+    }.get(emotion, "")
     text_with_emotion = emotion_prefix + text
     
     try:
@@ -163,12 +200,13 @@ def omega_speak(text, emotion="neutral"):
 
 async def recognize_speech_async(wav_file):
     """Async speech recognition with rate limiting."""
-    # Wait for rate limit if needed
-    GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
-    
-    if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
-        wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
-        await asyncio.sleep(wait_time)
+    # Wait for rate limit if needed (with null check)
+    if RATE_LIMITER_AVAILABLE and GOOGLE_SPEECH_LIMITER:
+        GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
+        
+        if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
+            wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
+            await asyncio.sleep(wait_time)
     
     # Run blocking operation in executor
     loop = asyncio.get_event_loop()
@@ -184,16 +222,24 @@ async def recognize_speech_async(wav_file):
             lambda: r.recognize_google(audio)
         )
         
-        GOOGLE_SPEECH_LIMITER.record_success("google_speech")
+        # Record success with null check
+        if RATE_LIMITER_AVAILABLE and GOOGLE_SPEECH_LIMITER:
+            GOOGLE_SPEECH_LIMITER.record_success("google_speech")
         return said
     except sr.UnknownValueError:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
+        # Record failure with null check
+        if RATE_LIMITER_AVAILABLE and GOOGLE_SPEECH_LIMITER:
+            GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise ValueError("Could not understand audio")
     except sr.RequestError as e:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
+        # Record failure with null check
+        if RATE_LIMITER_AVAILABLE and GOOGLE_SPEECH_LIMITER:
+            GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise ConnectionError(f"API error: {e}")
     except Exception as e:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
+        # Record failure with null check
+        if RATE_LIMITER_AVAILABLE and GOOGLE_SPEECH_LIMITER:
+            GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise
 
 

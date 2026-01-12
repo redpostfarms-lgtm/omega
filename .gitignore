@@ -88,6 +88,8 @@ ntuser.ini
 *.temp
 *.bak
 *.backup
+temp_input*.wav
+response.wav
 
 # Test files
 .pytest_cache/

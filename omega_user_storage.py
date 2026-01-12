@@ -59,8 +59,8 @@ class UserStorage:
             # Set restrictive permissions (Unix-like systems)
             try:
                 os.chmod(self.storage_file, 0o600)
-            except:
-                pass  # Windows doesn't support chmod
+            except (OSError, AttributeError):
+                pass  # Windows doesn't support chmod or file system doesn't support it
             return True
         except Exception as e:
             print(f"Error saving users: {e}")
