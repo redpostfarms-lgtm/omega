@@ -24,7 +24,10 @@
             "**/.git/**": true
         },
         "task.autoDetect": "on",
-        "task.quickOpen.history": 10
+        "task.quickOpen.history": 10,
+        "cursorpyright.analysis.extraPaths": [
+            "${workspaceFolder}"
+        ]
     },
     "tasks": {
         "version": "2.0.0",
