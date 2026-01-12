@@ -1,0 +1,3 @@
+2026-01-03 19:46:29,650 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:46:29,651 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Drakalich\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\comtypes\gen'
+2026-01-03 19:46:29,807 - PriceMaster - INFO - PriceMaster: PriceMaster online. Market intel live. 1.9 million listings tracked.

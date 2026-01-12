@@ -1,0 +1,33 @@
+2026-01-03 19:24:44,908 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:24:44,909 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Drakalich\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\comtypes\gen'
+2026-01-03 19:24:45,081 - FarmOS_2026 - INFO - FarmOS: Agent harriet online.
+2026-01-03 19:24:47,602 - FarmOS_2026 - INFO - FarmOS: Agent bob online.
+2026-01-03 19:24:47,678 - FarmOS_2026 - INFO - FarmOS: Agent apothecary online.
+2026-01-03 19:24:47,754 - FarmOS_2026 - INFO - FarmOS: Agent feedmaster online.
+2026-01-03 19:24:47,832 - FarmOS_2026 - INFO - FarmOS: Agent medical online.
+2026-01-03 19:24:47,910 - FarmOS_2026 - INFO - FarmOS: Agent salesbot online.
+2026-01-03 19:29:52,337 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:29:52,413 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Drakalich\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\comtypes\gen'
+2026-01-03 19:29:52,556 - FarmOS_2026 - INFO - FarmOS: Agent harriet online.
+2026-01-03 19:36:49,263 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:36:49,264 - FarmOS_2026 - ERROR - TTS initialization failed: I/O operation on closed file.
+2026-01-03 19:38:49,406 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:38:49,406 - FarmOS_2026 - ERROR - TTS initialization failed: I/O operation on closed file.
+2026-01-03 19:39:35,252 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:39:35,252 - FarmOS_2026 - ERROR - TTS initialization failed: I/O operation on closed file.
+2026-01-03 19:39:51,370 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:39:51,371 - FarmOS_2026 - ERROR - TTS initialization failed: I/O operation on closed file.
+2026-01-03 19:40:41,747 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:40:41,748 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Drakalich\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\comtypes\gen'
+2026-01-03 19:40:41,975 - FarmOS_2026 - INFO - FarmOS: Agent harriet online.
+2026-01-03 19:40:44,520 - FarmOS_2026 - INFO - FarmOS: Agent bob online.
+2026-01-03 19:40:44,595 - FarmOS_2026 - INFO - FarmOS: Agent apothecary online.
+2026-01-03 19:40:44,671 - FarmOS_2026 - INFO - FarmOS: Agent feedmaster online.
+2026-01-03 19:40:44,751 - FarmOS_2026 - INFO - FarmOS: Agent medical online.
+2026-01-03 19:40:44,828 - FarmOS_2026 - INFO - FarmOS: Agent salesbot online.
+2026-01-03 19:41:32,077 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:41:32,077 - FarmOS_2026 - ERROR - TTS initialization failed: I/O operation on closed file.
+2026-01-03 19:41:32,077 - FarmOS_2026 - WARNING - AgentBus initialization failed: I/O operation on closed file.. Creating minimal bus.
+2026-01-03 19:41:32,077 - FarmOS_2026 - WARNING - Could not announce agent harriet: I/O operation on closed file.
+2026-01-03 19:42:36,380 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\Drakalich\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-01-03 19:42:36,380 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\Drakalich\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\comtypes\gen'
