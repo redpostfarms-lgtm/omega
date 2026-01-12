@@ -1,0 +1,153 @@
+{
+  "timestamp": "2026-01-02T12:29:09.459940",
+  "tests_run": 13,
+  "tests_passed": 13,
+  "tests_failed": 0,
+  "errors_found": [],
+  "fixes_applied": [],
+  "components": {
+    "brain_prime": {
+      "component": "brain_prime",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_knowledge_loading": true
+      }
+    },
+    "auto_heal": {
+      "component": "auto_heal",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_file_integrity": true
+      }
+    },
+    "voice_tuner": {
+      "component": "voice_tuner",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_voice_settings": false
+      }
+    },
+    "voiceprint_auth": {
+      "component": "voiceprint_auth",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_voiceprint_exists": true
+      }
+    },
+    "voice_listener": {
+      "component": "voice_listener",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_command_parsing": true
+      }
+    },
+    "self_learn": {
+      "component": "self_learn",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_learning_pipeline": true
+      }
+    },
+    "weekly_growth": {
+      "component": "weekly_growth",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "check_growth_tracking": true
+      }
+    },
+    "planetary_search": {
+      "component": "planetary_search",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_search_init": true
+      }
+    },
+    "agent_council": {
+      "component": "agent_council",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_council_init": true
+      }
+    },
+    "hive_auto": {
+      "component": "hive_auto",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_hive_init": true
+      }
+    },
+    "game_hub": {
+      "component": "game_hub",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_game_init": true
+      }
+    },
+    "chess_replay": {
+      "component": "chess_replay",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_replay_init": true
+      }
+    },
+    "diagnostic_engine": {
+      "component": "diagnostic_engine",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "simulation_results": {
+        "import": "OK",
+        "runtime_check": true,
+        "test_diagnostic_init": true
+      }
+    }
+  }
+}

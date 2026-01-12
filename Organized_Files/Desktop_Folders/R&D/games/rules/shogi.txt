@@ -1,0 +1,52 @@
+# SHOGI RULES
+
+## Board
+Board: 9×9 grid (81 squares)
+
+## Pieces
+- King (Gyoku/Osho) - 1 each
+- Gold General (Kin) - 2 each
+- Silver General (Gin) - 2 each
+- Knight (Keima) - 2 each
+- Lance (Kyosha) - 2 each
+- Bishop (Kaku) - 1 each
+- Rook (Hisha) - 1 each
+- Pawn (Fu) - 9 each
+
+## Initial Setup
+Row 1 (Back rank, Black): Lance, Knight, Silver, Gold, King, Gold, Silver, Knight, Lance
+Row 2 (Black): Bishop on left, Rook on right
+Row 3 (Black): 9 Pawns
+Rows 4-6: Empty
+Row 7 (White): 9 Pawns
+Row 8 (White): Rook on left, Bishop on right
+Row 9 (Front rank, White): Lance, Knight, Silver, Gold, King, Gold, Silver, Knight, Lance
+
+## Movement Rules
+- King: One square in any direction
+- Gold: Forward, backward, left, right, forward diagonals (6 directions)
+- Silver: Forward, forward diagonals, backward diagonals (5 directions)
+- Knight: Two squares forward, then one left/right (L-shape, forward only)
+- Lance: Forward only, any distance
+- Bishop: Diagonals, any distance
+- Rook: Horizontals and verticals, any distance
+- Pawn: One square forward only
+
+## Promotion
+- Pieces promote when entering opponent's territory (last 3 rows)
+- Promoted pieces have different movement patterns
+- King and Gold cannot promote
+
+## Capture and Drop
+- Captured pieces join your hand
+- Can drop pieces from hand on empty squares (no checkmate on drop)
+- Pawns cannot be dropped in checkmate
+
+## Win Condition
+Checkmate the opponent's King
+
+## Special Rules
+- Cannot drop a piece to create immediate checkmate
+- Pawns cannot be dropped on files that already contain unpromoted pawns
+- Two kings cannot occupy same position
+

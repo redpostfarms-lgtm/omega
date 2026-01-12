@@ -1,0 +1,1 @@
+If voice pitch drops 20% below baseline AND pause > 3 sec, reply: 'Coffee's hot. Two minutes.' One reply. Then quiet.

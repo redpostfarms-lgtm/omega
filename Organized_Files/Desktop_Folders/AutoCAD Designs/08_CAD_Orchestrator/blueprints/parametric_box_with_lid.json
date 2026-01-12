@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "name": "parametric_box_with_lid",
+    "version": "1.0",
+    "created": "2025-12-13T15:00:00Z",
+    "author": "AutoCAD Designs",
+    "description": "3D parametric box with lid: 12in × 8in × 6in, 1/8in wall thickness, 4 corner bolt holes",
+    "project": "General"
+  },
+  "units": {
+    "system": "in",
+    "precision": 0.001,
+    "tolerance": 0.01
+  },
+  "parameters": {
+    "length": 12.0,
+    "width": 8.0,
+    "height": 6.0,
+    "wall_thickness": 0.125,
+    "bolt_hole_diameter": 0.25,
+    "bolt_hole_depth": 0.5,
+    "corner_offset": 0.5
+  },
+  "geometry": {
+    "type": "3d",
+    "features": [
+      {
+        "type": "box",
+        "layer": "M-BOLT",
+        "position": {"x": 0, "y": 0, "z": 0},
+        "dimensions": {
+          "length": 12.0,
+          "width": 8.0,
+          "height": 6.0
+        },
+        "parameters": {
+          "description": "Main box outer dimensions"
+        }
+      },
+      {
+        "type": "box",
+        "layer": "M-BOLT",
+        "position": {"x": 0.125, "y": 0.125, "z": 0.125},
+        "dimensions": {
+          "length": 11.75,
+          "width": 7.75,
+          "height": 5.75
+        },
+        "parameters": {
+          "description": "Inner cavity (subtract to create walls)",
+          "operation": "subtract"
+        }
+      },
+      {
+        "type": "box",
+        "layer": "M-BOLT",
+        "position": {"x": 0, "y": 0, "z": 6.0},
+        "dimensions": {
+          "length": 12.0,
+          "width": 8.0,
+          "height": 0.125
+        },
+        "parameters": {
+          "description": "Lid"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": 0.5, "y": 0.5, "z": 0},
+        "dimensions": {
+          "diameter": 0.25,
+          "depth": 0.5
+        },
+        "parameters": {
+          "description": "Corner bolt hole 1"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": 11.5, "y": 0.5, "z": 0},
+        "dimensions": {
+          "diameter": 0.25,
+          "depth": 0.5
+        },
+        "parameters": {
+          "description": "Corner bolt hole 2"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": 0.5, "y": 7.5, "z": 0},
+        "dimensions": {
+          "diameter": 0.25,
+          "depth": 0.5
+        },
+        "parameters": {
+          "description": "Corner bolt hole 3"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": 11.5, "y": 7.5, "z": 0},
+        "dimensions": {
+          "diameter": 0.25,
+          "depth": 0.5
+        },
+        "parameters": {
+          "description": "Corner bolt hole 4"
+        }
+      }
+    ]
+  },
+  "views_2d": [
+    {
+      "name": "top",
+      "scale": 1.0,
+      "annotations": []
+    },
+    {
+      "name": "front",
+      "scale": 1.0,
+      "annotations": []
+    },
+    {
+      "name": "side",
+      "scale": 1.0,
+      "annotations": []
+    }
+  ],
+  "layers_ref": "../../01_Standards/LAYER_STANDARD.json",
+  "exports": {
+    "dxf": {
+      "enabled": true,
+      "version": "R2018",
+      "filename": "parametric_box_with_lid.dxf"
+    },
+    "step": {
+      "enabled": true,
+      "version": "AP214",
+      "filename": "parametric_box_with_lid.step"
+    },
+    "stl": {
+      "enabled": false,
+      "quality": "standard",
+      "filename": ""
+    },
+    "pdf": {
+      "enabled": false,
+      "paper_size": "A4",
+      "scale": 1.0,
+      "filename": ""
+    },
+    "svg": {
+      "enabled": false,
+      "view": "top",
+      "filename": ""
+    }
+  },
+  "validation": {
+    "min_dimension": 0.001,
+    "max_dimension": 100.0,
+    "required_features": ["box", "hole"],
+    "layer_compliance": true
+  }
+}
+

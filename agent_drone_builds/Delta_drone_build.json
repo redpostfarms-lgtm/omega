@@ -1,0 +1,35 @@
+{
+  "agent_name": "Delta",
+  "design_direction": "agility_acro",
+  "frame_size": "450mm",
+  "components": {
+    "motor": "T-Motor MN2312 960KV",
+    "esc": "T-Motor Flame 30A BLHeli_32",
+    "battery": "4S 2200mAh",
+    "propeller": "11x4.7 Carbon Fiber",
+    "frame": "450mm carbon fiber"
+  },
+  "performance": {
+    "total_thrust_grams": 2000.0,
+    "total_weight_grams": 946.0,
+    "payload_capacity_grams": 300.0,
+    "thrust_to_weight_ratio": 2.11,
+    "max_speed_ms": 30.5,
+    "flight_time_minutes": 2.7,
+    "agility_score": 0.95
+  },
+  "cost_usd": 492.0,
+  "build_log": [
+    "Selected T-Motor MN2312 960KV (960KV) for balance",
+    "Selected 4S 2200mAh 40C battery for fast response",
+    "Selected 11x4.7 carbon fiber props for agility",
+    "Selected 450mm frame for maneuverability",
+    "Total Thrust: 2000g",
+    "Total Weight: 946g",
+    "TWR: 2.11:1",
+    "Estimated Max Speed: 30.5 m/s",
+    "Flight Time: 2.7 minutes",
+    "Agility Score: 0.95"
+  ],
+  "build_date": "2026-01-07T23:59:47.517743"
+}

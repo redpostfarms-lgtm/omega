@@ -1,0 +1,35 @@
+{
+  "scan_date": "2026-01-08T11:05:54.683496",
+  "workspace": "C:\\Users\\Drakalich\\Desktop\\R&D",
+  "modules": {
+    "FarmHub Core": {
+      "status": "OK",
+      "path": "The Gatekeeper\\FarmHub\\FarmHub_2026_Final.py"
+    },
+    "FarmHub": {
+      "status": "OK",
+      "path": "The Gatekeeper\\FarmHub\\FarmHub_2026_Final.py"
+    },
+    "Sales": {
+      "status": "OK",
+      "path": "The Gatekeeper\\Sales\\QuantumSalesBot.py"
+    },
+    "Fusion": {
+      "status": "OK",
+      "path": "The Gatekeeper\\gatekeeper_fusion.py"
+    }
+  },
+  "quantum": {
+    "Quantum Optimizer": {
+      "status": "OK",
+      "path": "agent_quantum_optimizer.py"
+    }
+  },
+  "files_found": [
+    {
+      "name": "FarmHub_2026_Final.py",
+      "path": "The Gatekeeper\\FarmHub\\FarmHub_2026_Final.py",
+      "size_kb": 8.8
+    }
+  ]
+}

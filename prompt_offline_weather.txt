@@ -1,0 +1,1 @@
+Every hour, pull NOAA XML: https://w1.weather.gov/xml/current_obs/KMAF.xml. Cache. On ask: 'Gatekeeper, sun tomorrow?' → 'Peak at 2:30 PM, 4.2 kWh.'

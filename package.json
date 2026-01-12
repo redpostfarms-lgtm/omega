@@ -1,0 +1,22 @@
+{
+  "name": "omega-openai-integration",
+  "version": "1.0.0",
+  "description": "Omega OpenAI API Integration (Node.js)",
+  "main": "omega_openai_integration.js",
+  "scripts": {
+    "test": "node test_openai_api.js",
+    "start": "node omega_openai_integration.js"
+  },
+  "keywords": [
+    "openai",
+    "api",
+    "integration",
+    "omega",
+    "ai"
+  ],
+  "author": "Omega System",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^6.0.0"
+  }
+}

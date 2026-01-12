@@ -1,0 +1,142 @@
+{
+  "area": "sensors",
+  "gap": 35,
+  "timestamp": "2026-01-07T20:05:15.677361",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "b-parasite",
+      "full_name": "rbaron/b-parasite",
+      "description": "\ud83c\udf31\ud83d\udca7 An open source DIY soil moisture sensor",
+      "url": "https://github.com/rbaron/b-parasite",
+      "stars": 2317,
+      "language": "C"
+    },
+    {
+      "name": "MySensors",
+      "full_name": "mysensors/MySensors",
+      "description": "MySensors library and examples",
+      "url": "https://github.com/mysensors/MySensors",
+      "stars": 1350,
+      "language": "C++"
+    },
+    {
+      "name": "Arduino-Temperature-Control-Library",
+      "full_name": "milesburton/Arduino-Temperature-Control-Library",
+      "description": "\ud83c\udf21\ufe0f Arduino library for interfacing with Maxim temperature sensors like DS18B20, DS18S20, and MAX31850. \ud83d\udd0c Supports multiple sensors, \u26a1 asynchronous operation, and \ud83c\udfaf configurable resolution for precise temperature monitoring.",
+      "url": "https://github.com/milesburton/Arduino-Temperature-Control-Library",
+      "stars": 1025,
+      "language": "C++"
+    },
+    {
+      "name": "tapo",
+      "full_name": "mihai-dinculescu/tapo",
+      "description": "Unofficial Tapo API Client. Works with TP-Link Tapo smart devices. Tested with light bulbs (L510, L520, L530, L535, L610, L630), light strips (L900, L920, L930), plugs (P100, P105, P110, P110M, P115),     power strips (P300, P304M, P316M), hubs (H100), switches (S200B) and sensors (KE100, T100, T110, T300, T310, T315).",
+      "url": "https://github.com/mihai-dinculescu/tapo",
+      "stars": 680,
+      "language": "Rust"
+    },
+    {
+      "name": "upm",
+      "full_name": "eclipse-upm/upm",
+      "description": "UPM is a high level repository that provides software drivers for a wide variety of commonly used sensors and actuators. These software drivers interact with the underlying hardware platform through calls to MRAA APIs.",
+      "url": "https://github.com/eclipse-upm/upm",
+      "stars": 669,
+      "language": "C++"
+    },
+    {
+      "name": "VINS-Fusion",
+      "full_name": "HKUST-Aerial-Robotics/VINS-Fusion",
+      "description": "An optimization-based multi-sensor state estimator",
+      "url": "https://github.com/HKUST-Aerial-Robotics/VINS-Fusion",
+      "stars": 4298,
+      "language": "C++"
+    },
+    {
+      "name": "bevfusion",
+      "full_name": "mit-han-lab/bevfusion",
+      "description": "[ICRA'23] BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird's-Eye View Representation",
+      "url": "https://github.com/mit-han-lab/bevfusion",
+      "stars": 2967,
+      "language": "Python"
+    },
+    {
+      "name": "transfuser",
+      "full_name": "autonomousvision/transfuser",
+      "description": "[PAMI'23] TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving; [CVPR'21] Multi-Modal Fusion Transformer for End-to-End Autonomous Driving",
+      "url": "https://github.com/autonomousvision/transfuser",
+      "stars": 1483,
+      "language": "Python"
+    },
+    {
+      "name": "gnss-ins-sim",
+      "full_name": "Aceinna/gnss-ins-sim",
+      "description": "Open-source GNSS + inertial navigation, sensor fusion simulator.  Motion trajectory generator, sensor models, and navigation ",
+      "url": "https://github.com/Aceinna/gnss-ins-sim",
+      "stars": 1409,
+      "language": "Python"
+    },
+    {
+      "name": "MPU9250",
+      "full_name": "kriswiner/MPU9250",
+      "description": "Arduino sketches for MPU9250 9DoF with AHRS sensor fusion",
+      "url": "https://github.com/kriswiner/MPU9250",
+      "stars": 1083,
+      "language": "C++"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=IoT%20course",
+      "query": "IoT course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=IoT%20course",
+      "query": "IoT course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=IoT%20course",
+      "query": "IoT course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=IoT%20course",
+      "query": "IoT course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=IoT%20course",
+      "query": "IoT course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=sensor%20fusion%20tutorial",
+      "query": "sensor fusion tutorial"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=sensor%20fusion%20tutorial",
+      "query": "sensor fusion tutorial"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=sensor%20fusion%20tutorial",
+      "query": "sensor fusion tutorial"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=sensor%20fusion%20tutorial",
+      "query": "sensor fusion tutorial"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=sensor%20fusion%20tutorial",
+      "query": "sensor fusion tutorial"
+    }
+  ],
+  "resources": []
+}

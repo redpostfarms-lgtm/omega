@@ -1,0 +1,26 @@
+CHECK THESE FILES
+=================
+
+I found these image files in the images folder:
+
+POSSIBLE LOGO FILES:
+- omega 1.png (1.4 MB) - This might be your logo!
+- CONTROL PANEL FOR omega.png (197 KB)
+- OIP.jpg (11 KB)
+- OIP.jfif (10 KB)
+- omega symbol.jfif (17 KB)
+
+VIDEO FILES (not usable for icon):
+- omega_logo_red_gold_wreath.png.mp4
+- omega_wreath_full_motion_horizontal_rotation.mp4
+
+=================
+
+IF "omega 1.png" IS YOUR LOGO:
+1. Rename it to: omega_logo_red_gold_wreath.png
+2. Or copy it with the correct name
+
+THEN RUN:
+python CREATE_OMEGA_ICON.py
+
+=================

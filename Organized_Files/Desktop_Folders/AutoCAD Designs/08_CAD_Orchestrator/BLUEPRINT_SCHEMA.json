@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CAD Blueprint Schema",
+  "description": "Machine-readable specification for CAD geometry generation",
+  "type": "object",
+  "required": ["metadata", "units", "geometry"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["name", "version", "created"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Part/drawing name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Blueprint version (e.g., '1.0')"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp"
+        },
+        "author": {
+          "type": "string",
+          "description": "Creator name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of the part/drawing"
+        },
+        "project": {
+          "type": "string",
+          "description": "Project name"
+        }
+      }
+    },
+    "units": {
+      "type": "object",
+      "required": ["system", "precision"],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": ["mm", "in", "m", "ft"],
+          "description": "Unit system (millimeters, inches, meters, feet)"
+        },
+        "precision": {
+          "type": "number",
+          "description": "Decimal precision (e.g., 0.01 for 2 decimal places)"
+        },
+        "tolerance": {
+          "type": "number",
+          "description": "Default tolerance value"
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Parametric variables (key-value pairs)",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "examples": {
+        "length": 100,
+        "width": 50,
+        "height": 25,
+        "hole_diameter": 6,
+        "bolt_pattern_radius": 30
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["2d", "3d", "mixed"],
+          "description": "Geometry type"
+        },
+        "features": {
+          "type": "array",
+          "description": "List of geometric features",
+          "items": {
+            "type": "object",
+            "required": ["type", "layer"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["box", "cylinder", "sphere", "line", "circle", "arc", "polyline", "hole", "chamfer", "fillet", "extrude", "revolve", "sweep", "loft"],
+                "description": "Feature type"
+              },
+              "layer": {
+                "type": "string",
+                "description": "Layer name (must match LAYER_STANDARD.json)"
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "x": {"type": "number"},
+                  "y": {"type": "number"},
+                  "z": {"type": "number"}
+                }
+              },
+              "dimensions": {
+                "type": "object",
+                "description": "Feature-specific dimensions",
+                "additionalProperties": {
+                  "type": "number"
+                }
+              },
+              "parameters": {
+                "type": "object",
+                "description": "Feature-specific parameters",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "views_2d": {
+      "type": "array",
+      "description": "2D view definitions (for drafting)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["top", "front", "side", "isometric", "section"],
+            "description": "View name"
+          },
+          "scale": {
+            "type": "number",
+            "description": "View scale (e.g., 1.0 for full scale)"
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Dimensions and annotations",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["dimension", "text", "leader", "symbol"]
+                },
+                "layer": {"type": "string"},
+                "position": {
+                  "type": "object",
+                  "properties": {
+                    "x": {"type": "number"},
+                    "y": {"type": "number"}
+                  }
+                },
+                "value": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "layers_ref": {
+      "type": "string",
+      "description": "Reference to layer standard file (default: '../../01_Standards/LAYER_STANDARD.json')"
+    },
+    "exports": {
+      "type": "object",
+      "description": "Export targets and settings",
+      "properties": {
+        "dxf": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "version": {"type": "string"},
+            "filename": {"type": "string"}
+          }
+        },
+        "step": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "version": {"type": "string"},
+            "filename": {"type": "string"}
+          }
+        },
+        "stl": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "quality": {"type": "string", "enum": ["high", "standard", "draft"]},
+            "filename": {"type": "string"}
+          }
+        },
+        "pdf": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "paper_size": {"type": "string"},
+            "scale": {"type": "number"},
+            "filename": {"type": "string"}
+          }
+        },
+        "svg": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "view": {"type": "string"},
+            "filename": {"type": "string"}
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "description": "Validation rules and checks",
+      "properties": {
+        "min_dimension": {"type": "number"},
+        "max_dimension": {"type": "number"},
+        "required_features": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "layer_compliance": {
+          "type": "boolean",
+          "description": "Must comply with LAYER_STANDARD.json"
+        }
+      }
+    }
+  }
+}
+

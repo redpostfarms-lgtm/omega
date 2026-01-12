@@ -1,0 +1,102 @@
+# Gatekeeper System Requirements - 100% REAL IMPLEMENTATIONS
+# Install with: pip install -r requirements.txt
+# Updated: 2026-01-04 - All fake/placeholder code replaced with real implementations
+
+# Core dependencies
+pyttsx3>=2.90
+numpy>=1.24.0
+speech_recognition>=3.10.0
+
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+scrapy>=2.11.0  # Production-grade scraping framework
+lxml>=5.1.0  # Faster HTML parser (5-10x faster)
+httpx>=0.25.0  # Modern async HTTP client
+
+# Voice recognition (offline - no API keys)
+vosk>=0.3.45  # Offline speech-to-text
+pyaudio>=0.2.11  # Required for Vosk audio input
+speechbrain>=0.5.16  # Advanced voiceprint biometrics
+torch>=2.0.0  # Required for SpeechBrain (PyTorch)
+torchaudio>=2.0.0  # Required for SpeechBrain audio processing
+edge-tts>=6.1.0  # Microsoft Edge TTS (free, no API key)
+
+# Knowledge base (vector database)
+chromadb>=0.4.22  # Vector database for semantic search
+sentence-transformers>=2.3.1  # Text embeddings for better search
+
+# Multi-model fusion (Grok + Cursor + DeepSeek + Llama) - REAL LLM
+llama-cpp-python>=0.2.0  # Local LLM runtime for fusion models
+transformers>=4.35.0  # HuggingFace transformers (for model loading)
+
+# Translation - REAL implementations
+googletrans==4.0.0rc1  # Google Translate API (free tier)
+deep-translator>=1.11.4  # Alternative translation library
+
+# Ultimate local stack (2027 final)
+continue-dev>=0.1.0  # Cursor-level code editing
+open-webui>=1.0.0  # Local AI interface
+firecrawl-py>=1.0.0  # Advanced web scraping
+scrapy-playwright>=0.0.1  # JavaScript rendering for scraping
+onnxruntime>=1.16.0  # Required for Piper TTS
+
+# Hardware interfaces - REAL sensor connections
+pyserial>=3.5  # Serial port communication for battery monitoring
+paho-mqtt>=1.6.0  # MQTT client for IoT sensors (REAL sensor integration)
+smbus>=2.0.0  # I2C interface (Linux/Raspberry Pi) - REAL I2C sensors
+spidev>=3.6  # SPI interface (Linux/Raspberry Pi) - REAL SPI sensors
+adafruit-circuitpython-dht>=3.7.0  # DHT22/DHT11 temperature/humidity sensors (REAL)
+
+# Web interface
+flask>=3.0.0  # Web framework for knowledge base UI
+
+# IoT and sensors - REAL implementations
+redis>=5.0.0  # Redis for sensor data caching
+
+# Image processing and AI - REAL pest/disease detection
+pillow>=10.0.0  # Image processing for pest/disease detection
+opencv-python>=4.8.0  # Computer vision for real image analysis
+ultralytics>=8.0.0  # YOLO models for real pest/disease detection
+
+# FarmHub Sensor Core - REAL sensor data
+# (paho-mqtt already listed above)
+
+# FarmHub Medical Core
+deepface>=0.0.79  # Face analysis and vitals
+
+# Weather APIs - REAL implementations
+# (requests already listed above - used for OpenWeatherMap, NOAA, Weather.gov)
+
+# Market Intelligence - REAL API implementations
+# (requests already listed above - used for USDA, CME Group APIs)
+
+# Hardware monitoring
+psutil>=5.9.0  # CPU, RAM monitoring
+GPUtil>=1.4.0  # GPU monitoring
+wmi>=1.5.1  # Windows hardware info (Windows only)
+
+# Document processing
+python-docx>=1.1.0  # Word document creation
+PyPDF2>=3.0.0  # PDF processing
+pdfplumber>=0.10.0  # Better PDF parsing
+
+# Testing
+pytest>=8.0.0  # Testing framework
+pytest-cov>=4.1.0  # Code coverage
+pybluez>=0.23  # Bluetooth for BLE vitals (Linux) / pywin32 for Windows
+pyttsx3>=2.90  # Text-to-speech (already listed)
+
+# Hardware monitoring (optional but recommended)
+psutil>=5.9.0  # For hardware monitoring (CPU, RAM)
+GPUtil>=1.4.0  # For GPU monitoring
+wmi>=1.5.1  # For Windows hardware info
+
+# Optional but recommended
+python-docx>=1.1.0  # For Word document creation
+PyPDF2>=3.0.0  # For PDF processing
+pdfplumber>=0.10.0  # Better PDF parsing
+
+# Testing
+unittest-xml-reporting>=3.2.0  # For test reports
+

@@ -1,0 +1,1398 @@
+{
+  "multimodal": {
+    "area": "multimodal",
+    "gap": 47,
+    "timestamp": "2026-01-07T20:04:32.858499",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "anything-llm",
+        "full_name": "Mintplex-Labs/anything-llm",
+        "description": "The all-in-one Desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility,  and more.",
+        "url": "https://github.com/Mintplex-Labs/anything-llm",
+        "stars": 53032,
+        "language": "JavaScript"
+      },
+      {
+        "name": "serve",
+        "full_name": "jina-ai/serve",
+        "description": "\u2601\ufe0f Build multimodal AI applications with cloud-native stack",
+        "url": "https://github.com/jina-ai/serve",
+        "stars": 21819,
+        "language": "Python"
+      },
+      {
+        "name": "UI-TARS-desktop",
+        "full_name": "bytedance/UI-TARS-desktop",
+        "description": "The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+        "url": "https://github.com/bytedance/UI-TARS-desktop",
+        "stars": 20455,
+        "language": "TypeScript"
+      },
+      {
+        "name": "NeMo",
+        "full_name": "NVIDIA-NeMo/NeMo",
+        "description": "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",
+        "url": "https://github.com/NVIDIA-NeMo/NeMo",
+        "stars": 16444,
+        "language": "Python"
+      },
+      {
+        "name": "screenpipe",
+        "full_name": "mediar-ai/screenpipe",
+        "description": "AI app store powered by 24/7 desktop history.  open source | 100% local | dev friendly | 24/7 screen, mic recording",
+        "url": "https://github.com/mediar-ai/screenpipe",
+        "stars": 16369,
+        "language": "TypeScript"
+      },
+      {
+        "name": "sharp",
+        "full_name": "lovell/sharp",
+        "description": "High performance Node.js image processing, the fastest module to resize JPEG, PNG, WebP, AVIF and TIFF images. Uses the libvips library.",
+        "url": "https://github.com/lovell/sharp",
+        "stars": 31693,
+        "language": "JavaScript"
+      },
+      {
+        "name": "deep-learning-for-image-processing",
+        "full_name": "WZMIAOMIAO/deep-learning-for-image-processing",
+        "description": "deep learning for image processing including classification and object-detection etc.",
+        "url": "https://github.com/WZMIAOMIAO/deep-learning-for-image-processing",
+        "stars": 25973,
+        "language": "Python"
+      },
+      {
+        "name": "watchtower",
+        "full_name": "containrrr/watchtower",
+        "description": "A process for automating Docker container base image updates. ",
+        "url": "https://github.com/containrrr/watchtower",
+        "stars": 24444,
+        "language": "Go"
+      },
+      {
+        "name": "GPUImage",
+        "full_name": "BradLarson/GPUImage",
+        "description": "An open source iOS framework for GPU-based image and video processing",
+        "url": "https://github.com/BradLarson/GPUImage",
+        "stars": 20338,
+        "language": "Objective-C"
+      },
+      {
+        "name": "jimp",
+        "full_name": "jimp-dev/jimp",
+        "description": "An image processing library written entirely in JavaScript for Node, with zero external or native dependencies.",
+        "url": "https://github.com/jimp-dev/jimp",
+        "stars": 14578,
+        "language": "TypeScript"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=computer%20vision%20course",
+        "query": "computer vision course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=computer%20vision%20course",
+        "query": "computer vision course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=computer%20vision%20course",
+        "query": "computer vision course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=computer%20vision%20course",
+        "query": "computer vision course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=computer%20vision%20course",
+        "query": "computer vision course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=image%20processing%20tutorial",
+        "query": "image processing tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=image%20processing%20tutorial",
+        "query": "image processing tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=image%20processing%20tutorial",
+        "query": "image processing tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=image%20processing%20tutorial",
+        "query": "image processing tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=image%20processing%20tutorial",
+        "query": "image processing tutorial"
+      }
+    ],
+    "resources": []
+  },
+  "sensors": {
+    "area": "sensors",
+    "gap": 35,
+    "timestamp": "2026-01-07T20:05:15.677361",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "b-parasite",
+        "full_name": "rbaron/b-parasite",
+        "description": "\ud83c\udf31\ud83d\udca7 An open source DIY soil moisture sensor",
+        "url": "https://github.com/rbaron/b-parasite",
+        "stars": 2317,
+        "language": "C"
+      },
+      {
+        "name": "MySensors",
+        "full_name": "mysensors/MySensors",
+        "description": "MySensors library and examples",
+        "url": "https://github.com/mysensors/MySensors",
+        "stars": 1350,
+        "language": "C++"
+      },
+      {
+        "name": "Arduino-Temperature-Control-Library",
+        "full_name": "milesburton/Arduino-Temperature-Control-Library",
+        "description": "\ud83c\udf21\ufe0f Arduino library for interfacing with Maxim temperature sensors like DS18B20, DS18S20, and MAX31850. \ud83d\udd0c Supports multiple sensors, \u26a1 asynchronous operation, and \ud83c\udfaf configurable resolution for precise temperature monitoring.",
+        "url": "https://github.com/milesburton/Arduino-Temperature-Control-Library",
+        "stars": 1025,
+        "language": "C++"
+      },
+      {
+        "name": "tapo",
+        "full_name": "mihai-dinculescu/tapo",
+        "description": "Unofficial Tapo API Client. Works with TP-Link Tapo smart devices. Tested with light bulbs (L510, L520, L530, L535, L610, L630), light strips (L900, L920, L930), plugs (P100, P105, P110, P110M, P115),     power strips (P300, P304M, P316M), hubs (H100), switches (S200B) and sensors (KE100, T100, T110, T300, T310, T315).",
+        "url": "https://github.com/mihai-dinculescu/tapo",
+        "stars": 680,
+        "language": "Rust"
+      },
+      {
+        "name": "upm",
+        "full_name": "eclipse-upm/upm",
+        "description": "UPM is a high level repository that provides software drivers for a wide variety of commonly used sensors and actuators. These software drivers interact with the underlying hardware platform through calls to MRAA APIs.",
+        "url": "https://github.com/eclipse-upm/upm",
+        "stars": 669,
+        "language": "C++"
+      },
+      {
+        "name": "VINS-Fusion",
+        "full_name": "HKUST-Aerial-Robotics/VINS-Fusion",
+        "description": "An optimization-based multi-sensor state estimator",
+        "url": "https://github.com/HKUST-Aerial-Robotics/VINS-Fusion",
+        "stars": 4298,
+        "language": "C++"
+      },
+      {
+        "name": "bevfusion",
+        "full_name": "mit-han-lab/bevfusion",
+        "description": "[ICRA'23] BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird's-Eye View Representation",
+        "url": "https://github.com/mit-han-lab/bevfusion",
+        "stars": 2967,
+        "language": "Python"
+      },
+      {
+        "name": "transfuser",
+        "full_name": "autonomousvision/transfuser",
+        "description": "[PAMI'23] TransFuser: Imitation with Transformer-Based Sensor Fusion for Autonomous Driving; [CVPR'21] Multi-Modal Fusion Transformer for End-to-End Autonomous Driving",
+        "url": "https://github.com/autonomousvision/transfuser",
+        "stars": 1483,
+        "language": "Python"
+      },
+      {
+        "name": "gnss-ins-sim",
+        "full_name": "Aceinna/gnss-ins-sim",
+        "description": "Open-source GNSS + inertial navigation, sensor fusion simulator.  Motion trajectory generator, sensor models, and navigation ",
+        "url": "https://github.com/Aceinna/gnss-ins-sim",
+        "stars": 1409,
+        "language": "Python"
+      },
+      {
+        "name": "MPU9250",
+        "full_name": "kriswiner/MPU9250",
+        "description": "Arduino sketches for MPU9250 9DoF with AHRS sensor fusion",
+        "url": "https://github.com/kriswiner/MPU9250",
+        "stars": 1083,
+        "language": "C++"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=IoT%20course",
+        "query": "IoT course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=IoT%20course",
+        "query": "IoT course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=IoT%20course",
+        "query": "IoT course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=IoT%20course",
+        "query": "IoT course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=IoT%20course",
+        "query": "IoT course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=sensor%20fusion%20tutorial",
+        "query": "sensor fusion tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=sensor%20fusion%20tutorial",
+        "query": "sensor fusion tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=sensor%20fusion%20tutorial",
+        "query": "sensor fusion tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=sensor%20fusion%20tutorial",
+        "query": "sensor fusion tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=sensor%20fusion%20tutorial",
+        "query": "sensor fusion tutorial"
+      }
+    ],
+    "resources": []
+  },
+  "context": {
+    "area": "context",
+    "gap": 40,
+    "timestamp": "2026-01-07T20:05:37.693441",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "dify",
+        "full_name": "langgenius/dify",
+        "description": "Production-ready platform for agentic workflow development.",
+        "url": "https://github.com/langgenius/dify",
+        "stars": 125117,
+        "language": "Python"
+      },
+      {
+        "name": "langchain",
+        "full_name": "langchain-ai/langchain",
+        "description": "\ud83e\udd9c\ud83d\udd17 The platform for reliable agents.",
+        "url": "https://github.com/langchain-ai/langchain",
+        "stars": 123675,
+        "language": "Python"
+      },
+      {
+        "name": "open-webui",
+        "full_name": "open-webui/open-webui",
+        "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+        "url": "https://github.com/open-webui/open-webui",
+        "stars": 119969,
+        "language": "Svelte"
+      },
+      {
+        "name": "awesome-llm-apps",
+        "full_name": "Shubhamsaboo/awesome-llm-apps",
+        "description": "Collection of awesome LLM apps with AI Agents and RAG using OpenAI, Anthropic, Gemini and opensource models.",
+        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+        "stars": 87140,
+        "language": "Python"
+      },
+      {
+        "name": "ragflow",
+        "full_name": "infiniflow/ragflow",
+        "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+        "url": "https://github.com/infiniflow/ragflow",
+        "stars": 71081,
+        "language": "Python"
+      },
+      {
+        "name": "ragflow",
+        "full_name": "infiniflow/ragflow",
+        "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+        "url": "https://github.com/infiniflow/ragflow",
+        "stars": 71081,
+        "language": "Python"
+      },
+      {
+        "name": "graphrag",
+        "full_name": "microsoft/graphrag",
+        "description": "A modular graph-based Retrieval-Augmented Generation (RAG) system",
+        "url": "https://github.com/microsoft/graphrag",
+        "stars": 30192,
+        "language": "Python"
+      },
+      {
+        "name": "LightRAG",
+        "full_name": "HKUDS/LightRAG",
+        "description": "[EMNLP2025] \"LightRAG: Simple and Fast Retrieval-Augmented Generation\"",
+        "url": "https://github.com/HKUDS/LightRAG",
+        "stars": 27109,
+        "language": "Python"
+      },
+      {
+        "name": "RAG_Techniques",
+        "full_name": "NirDiamant/RAG_Techniques",
+        "description": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. RAG systems combine information retrieval with generative models to provide accurate and contextually rich responses.",
+        "url": "https://github.com/NirDiamant/RAG_Techniques",
+        "stars": 24043,
+        "language": "Jupyter Notebook"
+      },
+      {
+        "name": "R2R",
+        "full_name": "SciPhi-AI/R2R",
+        "description": "SoTA production-ready AI retrieval system. Agentic Retrieval-Augmented Generation (RAG) with a RESTful API.",
+        "url": "https://github.com/SciPhi-AI/R2R",
+        "stars": 7560,
+        "language": "Python"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=RAG%20tutorial",
+        "query": "RAG tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=RAG%20tutorial",
+        "query": "RAG tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=RAG%20tutorial",
+        "query": "RAG tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=RAG%20tutorial",
+        "query": "RAG tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=RAG%20tutorial",
+        "query": "RAG tutorial"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=vector%20databases",
+        "query": "vector databases"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=vector%20databases",
+        "query": "vector databases"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=vector%20databases",
+        "query": "vector databases"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=vector%20databases",
+        "query": "vector databases"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=vector%20databases",
+        "query": "vector databases"
+      }
+    ],
+    "resources": []
+  },
+  "code_generation": {
+    "area": "code_generation",
+    "gap": 22,
+    "timestamp": "2026-01-07T20:05:58.753451",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "grapesjs",
+        "full_name": "GrapesJS/grapesjs",
+        "description": "Free and Open source Web Builder Framework. Next generation tool for building templates without coding",
+        "url": "https://github.com/GrapesJS/grapesjs",
+        "stars": 25361,
+        "language": "TypeScript"
+      },
+      {
+        "name": "Wav2Lip",
+        "full_name": "Rudrabha/Wav2Lip",
+        "description": "This repository contains the codes of \"A Lip Sync Expert Is All You Need for Speech to Lip Generation In the Wild\", published at ACM Multimedia 2020. For HD commercial model, please try out Sync Labs ",
+        "url": "https://github.com/Rudrabha/Wav2Lip",
+        "stars": 12743,
+        "language": "Python"
+      },
+      {
+        "name": "CodeGeeX",
+        "full_name": "zai-org/CodeGeeX",
+        "description": "CodeGeeX: An Open Multilingual Code Generation Model (KDD 2023)",
+        "url": "https://github.com/zai-org/CodeGeeX",
+        "stars": 8725,
+        "language": "Python"
+      },
+      {
+        "name": "CodeGeeX2",
+        "full_name": "zai-org/CodeGeeX2",
+        "description": "CodeGeeX2: A More Powerful Multilingual Code Generation Model",
+        "url": "https://github.com/zai-org/CodeGeeX2",
+        "stars": 7613,
+        "language": "Python"
+      },
+      {
+        "name": "mockery",
+        "full_name": "vektra/mockery",
+        "description": "A mock code autogenerator for Go",
+        "url": "https://github.com/vektra/mockery",
+        "stars": 6932,
+        "language": "Go"
+      },
+      {
+        "name": "codecompanion-filewise.nvim",
+        "full_name": "dyamon/codecompanion-filewise.nvim",
+        "description": "File-aware AI assistance for Neovim via modular CodeCompanion extensions",
+        "url": "https://github.com/dyamon/codecompanion-filewise.nvim",
+        "stars": 5,
+        "language": "Lua"
+      },
+      {
+        "name": "traycer-planning-layer",
+        "full_name": "Aditi2354/traycer-planning-layer",
+        "description": "\u201cPlan here, execute anywhere \u2014 a TypeScript CLI that converts natural-language goals into file-aware, step-by-step plans with acceptance criteria, and exports agent-ready JSON for coding agents.\u201d",
+        "url": "https://github.com/Aditi2354/traycer-planning-layer",
+        "stars": 0,
+        "language": "TypeScript"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=code%20generation%20course",
+        "query": "code generation course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=code%20generation%20course",
+        "query": "code generation course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=code%20generation%20course",
+        "query": "code generation course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=code%20generation%20course",
+        "query": "code generation course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=code%20generation%20course",
+        "query": "code generation course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=AST%20tutorial",
+        "query": "AST tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=AST%20tutorial",
+        "query": "AST tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=AST%20tutorial",
+        "query": "AST tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=AST%20tutorial",
+        "query": "AST tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=AST%20tutorial",
+        "query": "AST tutorial"
+      }
+    ],
+    "resources": []
+  },
+  "reasoning": {
+    "area": "reasoning",
+    "gap": 18,
+    "timestamp": "2026-01-07T20:06:10.436839",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "mm-cot",
+        "full_name": "amazon-science/mm-cot",
+        "description": "Official implementation for \"Multimodal Chain-of-Thought Reasoning in Language Models\" (stay tuned and more will be updated)",
+        "url": "https://github.com/amazon-science/mm-cot",
+        "stars": 3989,
+        "language": "Python"
+      },
+      {
+        "name": "Awesome-LLM-Reasoning",
+        "full_name": "atfortes/Awesome-LLM-Reasoning",
+        "description": "From Chain-of-Thought prompting to OpenAI o1 and DeepSeek-R1 \ud83c\udf53",
+        "url": "https://github.com/atfortes/Awesome-LLM-Reasoning",
+        "stars": 3500,
+        "language": null
+      },
+      {
+        "name": "chain-of-thought-hub",
+        "full_name": "FranxYao/chain-of-thought-hub",
+        "description": "Benchmarking large language models' complex reasoning ability with chain-of-thought prompting",
+        "url": "https://github.com/FranxYao/chain-of-thought-hub",
+        "stars": 2763,
+        "language": "Jupyter Notebook"
+      },
+      {
+        "name": "griptape",
+        "full_name": "griptape-ai/griptape",
+        "description": "Modular Python framework for AI agents and workflows with chain-of-thought reasoning, tools, and memory. ",
+        "url": "https://github.com/griptape-ai/griptape",
+        "stars": 2454,
+        "language": "Python"
+      },
+      {
+        "name": "Chain-of-Recursive-Thoughts",
+        "full_name": "PhialsBasement/Chain-of-Recursive-Thoughts",
+        "description": "I made my AI think harder by making it argue with itself repeatedly. It works stupidly well.",
+        "url": "https://github.com/PhialsBasement/Chain-of-Recursive-Thoughts",
+        "stars": 2316,
+        "language": "JavaScript"
+      },
+      {
+        "name": "langchainjs",
+        "full_name": "langchain-ai/langchainjs",
+        "description": "\ud83e\udd9c\ud83d\udd17 Build context-aware reasoning applications",
+        "url": "https://github.com/langchain-ai/langchainjs",
+        "stars": 16690,
+        "language": "TypeScript"
+      },
+      {
+        "name": "clip-as-service",
+        "full_name": "jina-ai/clip-as-service",
+        "description": "\ud83c\udfc4 Scalable embedding, reasoning, ranking for images and sentences with CLIP",
+        "url": "https://github.com/jina-ai/clip-as-service",
+        "stars": 12799,
+        "language": "Python"
+      },
+      {
+        "name": "HRM",
+        "full_name": "sapientinc/HRM",
+        "description": "Hierarchical Reasoning Model Official Release",
+        "url": "https://github.com/sapientinc/HRM",
+        "stars": 12219,
+        "language": "Python"
+      },
+      {
+        "name": "nofx",
+        "full_name": "NoFxAiOS/nofx",
+        "description": "Open-source Trading OS with pluggable AI brain | From market data \u2192 AI reasoning \u2192 Trade execution | Self-hosted & Multi-exchange",
+        "url": "https://github.com/NoFxAiOS/nofx",
+        "stars": 9654,
+        "language": "Go"
+      },
+      {
+        "name": "MiniCPM",
+        "full_name": "OpenBMB/MiniCPM",
+        "description": "MiniCPM4 & MiniCPM4.1: Ultra-Efficient LLMs on End Devices, achieving 3+ generation speedup on reasoning tasks",
+        "url": "https://github.com/OpenBMB/MiniCPM",
+        "stars": 8491,
+        "language": "Jupyter Notebook"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=reasoning%20course",
+        "query": "reasoning course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=reasoning%20course",
+        "query": "reasoning course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=reasoning%20course",
+        "query": "reasoning course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=reasoning%20course",
+        "query": "reasoning course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=reasoning%20course",
+        "query": "reasoning course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=logic%20tutorial",
+        "query": "logic tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=logic%20tutorial",
+        "query": "logic tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=logic%20tutorial",
+        "query": "logic tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=logic%20tutorial",
+        "query": "logic tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=logic%20tutorial",
+        "query": "logic tutorial"
+      }
+    ],
+    "resources": []
+  },
+  "math_physics": {
+    "area": "math_physics",
+    "gap": 18,
+    "timestamp": "2026-01-07T20:06:31.984411",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "symengine",
+        "full_name": "symengine/symengine",
+        "description": "SymEngine is a fast symbolic manipulation library, written in C++",
+        "url": "https://github.com/symengine/symengine",
+        "stars": 1323,
+        "language": "C++"
+      },
+      {
+        "name": "Algebrite",
+        "full_name": "davidedc/Algebrite",
+        "description": "Computer Algebra System in Javascript (Typescript)",
+        "url": "https://github.com/davidedc/Algebrite",
+        "stars": 993,
+        "language": "TypeScript"
+      },
+      {
+        "name": "AngouriMath",
+        "full_name": "asc-community/AngouriMath",
+        "description": "Open-source cross-platform symbolic algebra library for C# and F#. Can be used for both production and research purposes.",
+        "url": "https://github.com/asc-community/AngouriMath",
+        "stars": 807,
+        "language": "C#"
+      },
+      {
+        "name": "SymbolicMathematics",
+        "full_name": "facebookresearch/SymbolicMathematics",
+        "description": "Deep Learning for Symbolic Mathematics",
+        "url": "https://github.com/facebookresearch/SymbolicMathematics",
+        "stars": 551,
+        "language": "Python"
+      },
+      {
+        "name": "nerdamer",
+        "full_name": "jiggzson/nerdamer",
+        "description": "a symbolic math expression evaluator for javascript",
+        "url": "https://github.com/jiggzson/nerdamer",
+        "stars": 540,
+        "language": "JavaScript"
+      },
+      {
+        "name": "bullet3",
+        "full_name": "bulletphysics/bullet3",
+        "description": "Bullet Physics SDK: real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.",
+        "url": "https://github.com/bulletphysics/bullet3",
+        "stars": 14126,
+        "language": "C++"
+      },
+      {
+        "name": "JoltPhysics",
+        "full_name": "jrouwe/JoltPhysics",
+        "description": "A multi core friendly rigid body physics and collision detection library. Written in C++. Suitable for games and VR applications. Used by Horizon Forbidden West and Death Stranding 2.",
+        "url": "https://github.com/jrouwe/JoltPhysics",
+        "stars": 9181,
+        "language": "C++"
+      },
+      {
+        "name": "The-Powder-Toy",
+        "full_name": "The-Powder-Toy/The-Powder-Toy",
+        "description": "Written in C++ and using SDL, The Powder Toy is a desktop version of the classic 'falling sand' physics sandbox, it simulates air pressure and velocity as well as heat.",
+        "url": "https://github.com/The-Powder-Toy/The-Powder-Toy",
+        "stars": 4988,
+        "language": "C++"
+      },
+      {
+        "name": "FluidX3D",
+        "full_name": "ProjectPhysX/FluidX3D",
+        "description": "The fastest and most memory efficient lattice Boltzmann CFD software, running on all GPUs and CPUs via OpenCL. Free for non-commercial use.",
+        "url": "https://github.com/ProjectPhysX/FluidX3D",
+        "stars": 4849,
+        "language": "C++"
+      },
+      {
+        "name": "dm_control",
+        "full_name": "google-deepmind/dm_control",
+        "description": "Google DeepMind's software stack for physics-based simulation and Reinforcement Learning environments, using MuJoCo.",
+        "url": "https://github.com/google-deepmind/dm_control",
+        "stars": 4404,
+        "language": "Python"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=symbolic%20math%20course",
+        "query": "symbolic math course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=symbolic%20math%20course",
+        "query": "symbolic math course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=symbolic%20math%20course",
+        "query": "symbolic math course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=symbolic%20math%20course",
+        "query": "symbolic math course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=symbolic%20math%20course",
+        "query": "symbolic math course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=physics%20simulation",
+        "query": "physics simulation"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=physics%20simulation",
+        "query": "physics simulation"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=physics%20simulation",
+        "query": "physics simulation"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=physics%20simulation",
+        "query": "physics simulation"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=physics%20simulation",
+        "query": "physics simulation"
+      }
+    ],
+    "resources": []
+  },
+  "analytics": {
+    "area": "analytics",
+    "gap": 23,
+    "timestamp": "2026-01-07T20:06:53.109529",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "snappydata",
+        "full_name": "TIBCOSoftware/snappydata",
+        "description": "Project SnappyData - memory optimized analytics database, based on Apache Spark\u2122 and Apache Geode\u2122. Stream, Transact, Analyze, Predict in one cluster ",
+        "url": "https://github.com/TIBCOSoftware/snappydata",
+        "stars": 1035,
+        "language": "Scala"
+      },
+      {
+        "name": "retentioneering-tools",
+        "full_name": "retentioneering/retentioneering-tools",
+        "description": "Retentioneering: product analytics, data-driven CJM optimization, marketing analytics, web analytics, transaction analytics, graph visualization, process mining, and behavioral segmentation in Python. Predictive analytics over clickstream, AB tests, machine learning, and Markov Chain simulations.",
+        "url": "https://github.com/retentioneering/retentioneering-tools",
+        "stars": 870,
+        "language": "Python"
+      },
+      {
+        "name": "palladium",
+        "full_name": "ottogroup/palladium",
+        "description": "Framework for setting up predictive analytics services",
+        "url": "https://github.com/ottogroup/palladium",
+        "stars": 488,
+        "language": "Python"
+      },
+      {
+        "name": "FlowViz",
+        "full_name": "nbrown02/FlowViz",
+        "description": "A Power BI template that provides easy to understand, actionable flow metrics and predictive analytics for your agile teams using Azure DevOps, Azure DevOps Server and/or TFS.",
+        "url": "https://github.com/nbrown02/FlowViz",
+        "stars": 234,
+        "language": null
+      },
+      {
+        "name": "CaPTk",
+        "full_name": "CBICA/CaPTk",
+        "description": "Cancer Imaging Phenomics Toolkit (CaPTk) is a software platform to perform image analysis and predictive modeling tasks. Documentation: https://cbica.github.io/CaPTk",
+        "url": "https://github.com/CBICA/CaPTk",
+        "stars": 195,
+        "language": "C++"
+      },
+      {
+        "name": "d3",
+        "full_name": "d3/d3",
+        "description": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:",
+        "url": "https://github.com/d3/d3",
+        "stars": 112116,
+        "language": "Shell"
+      },
+      {
+        "name": "grafana",
+        "full_name": "grafana/grafana",
+        "description": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more. ",
+        "url": "https://github.com/grafana/grafana",
+        "stars": 71607,
+        "language": "TypeScript"
+      },
+      {
+        "name": "superset",
+        "full_name": "apache/superset",
+        "description": "Apache Superset is a Data Visualization and Data Exploration Platform",
+        "url": "https://github.com/apache/superset",
+        "stars": 69702,
+        "language": "TypeScript"
+      },
+      {
+        "name": "echarts",
+        "full_name": "apache/echarts",
+        "description": "Apache ECharts is a powerful, interactive charting and data visualization library for browser",
+        "url": "https://github.com/apache/echarts",
+        "stars": 65384,
+        "language": "TypeScript"
+      },
+      {
+        "name": "metabase",
+        "full_name": "metabase/metabase",
+        "description": "The easy-to-use open source Business Intelligence and Embedded Analytics tool that lets everyone work with data :bar_chart:",
+        "url": "https://github.com/metabase/metabase",
+        "stars": 45507,
+        "language": "Clojure"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=analytics%20course",
+        "query": "analytics course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=analytics%20course",
+        "query": "analytics course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=analytics%20course",
+        "query": "analytics course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=analytics%20course",
+        "query": "analytics course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=analytics%20course",
+        "query": "analytics course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=data%20visualization",
+        "query": "data visualization"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=data%20visualization",
+        "query": "data visualization"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=data%20visualization",
+        "query": "data visualization"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=data%20visualization",
+        "query": "data visualization"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=data%20visualization",
+        "query": "data visualization"
+      }
+    ],
+    "resources": []
+  },
+  "automation": {
+    "area": "automation",
+    "gap": 20,
+    "timestamp": "2026-01-07T20:07:25.375480",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "n8n",
+        "full_name": "n8n-io/n8n",
+        "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+        "url": "https://github.com/n8n-io/n8n",
+        "stars": 167237,
+        "language": "TypeScript"
+      },
+      {
+        "name": "dify",
+        "full_name": "langgenius/dify",
+        "description": "Production-ready platform for agentic workflow development.",
+        "url": "https://github.com/langgenius/dify",
+        "stars": 125117,
+        "language": "Python"
+      },
+      {
+        "name": "airflow",
+        "full_name": "apache/airflow",
+        "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
+        "url": "https://github.com/apache/airflow",
+        "stars": 43767,
+        "language": "Python"
+      },
+      {
+        "name": "kestra",
+        "full_name": "kestra-io/kestra",
+        "description": "Event Driven Orchestration & Scheduling Platform for Mission Critical Applications",
+        "url": "https://github.com/kestra-io/kestra",
+        "stars": 26219,
+        "language": "Java"
+      },
+      {
+        "name": "sim",
+        "full_name": "simstudioai/sim",
+        "description": "Open-source platform to build and deploy AI agent workflows.",
+        "url": "https://github.com/simstudioai/sim",
+        "stars": 25093,
+        "language": "TypeScript"
+      },
+      {
+        "name": "xxl-job",
+        "full_name": "xuxueli/xxl-job",
+        "description": "A distributed task scheduling framework.\uff08\u5206\u5e03\u5f0f\u4efb\u52a1\u8c03\u5ea6\u5e73\u53f0XXL-JOB\uff09",
+        "url": "https://github.com/xuxueli/xxl-job",
+        "stars": 29774,
+        "language": "Java"
+      },
+      {
+        "name": "dask",
+        "full_name": "dask/dask",
+        "description": "Parallel computing with task scheduling",
+        "url": "https://github.com/dask/dask",
+        "stars": 13695,
+        "language": "Python"
+      },
+      {
+        "name": "agenda",
+        "full_name": "agenda/agenda",
+        "description": "Lightweight job scheduling for Node.js",
+        "url": "https://github.com/agenda/agenda",
+        "stars": 9593,
+        "language": "TypeScript"
+      },
+      {
+        "name": "apscheduler",
+        "full_name": "agronholm/apscheduler",
+        "description": "Task scheduling library for Python",
+        "url": "https://github.com/agronholm/apscheduler",
+        "stars": 7216,
+        "language": "Python"
+      },
+      {
+        "name": "Cronicle",
+        "full_name": "jhuckaby/Cronicle",
+        "description": "A simple, distributed task scheduler and runner with a web based UI.",
+        "url": "https://github.com/jhuckaby/Cronicle",
+        "stars": 5321,
+        "language": "JavaScript"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=automation%20course",
+        "query": "automation course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=automation%20course",
+        "query": "automation course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=automation%20course",
+        "query": "automation course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=automation%20course",
+        "query": "automation course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=automation%20course",
+        "query": "automation course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=workflow%20tutorial",
+        "query": "workflow tutorial"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=workflow%20tutorial",
+        "query": "workflow tutorial"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=workflow%20tutorial",
+        "query": "workflow tutorial"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=workflow%20tutorial",
+        "query": "workflow tutorial"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=workflow%20tutorial",
+        "query": "workflow tutorial"
+      }
+    ],
+    "resources": []
+  },
+  "performance": {
+    "area": "performance",
+    "gap": 20,
+    "timestamp": "2026-01-07T20:07:57.605450",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "DeepSpeed",
+        "full_name": "deepspeedai/DeepSpeed",
+        "description": "DeepSpeed is a deep learning optimization library that makes distributed training and inference easy, efficient, and effective.",
+        "url": "https://github.com/deepspeedai/DeepSpeed",
+        "stars": 41176,
+        "language": "Python"
+      },
+      {
+        "name": "scalene",
+        "full_name": "plasma-umass/scalene",
+        "description": "Scalene: a high-performance, high-precision CPU, GPU, and memory profiler for Python with AI-powered optimization proposals",
+        "url": "https://github.com/plasma-umass/scalene",
+        "stars": 13194,
+        "language": "Python"
+      },
+      {
+        "name": "TensorRT-LLM",
+        "full_name": "NVIDIA/TensorRT-LLM",
+        "description": "TensorRT LLM provides users with an easy-to-use Python API to define Large Language Models (LLMs) and supports state-of-the-art optimizations to perform inference efficiently on NVIDIA GPUs. TensorRT LLM also contains components to create Python and C++ runtimes that orchestrate the inference execution in a performant way.",
+        "url": "https://github.com/NVIDIA/TensorRT-LLM",
+        "stars": 12575,
+        "language": "Python"
+      },
+      {
+        "name": "server",
+        "full_name": "triton-inference-server/server",
+        "description": "The Triton Inference Server provides an optimized cloud and edge inferencing solution. ",
+        "url": "https://github.com/triton-inference-server/server",
+        "stars": 10204,
+        "language": "Python"
+      },
+      {
+        "name": "meshoptimizer",
+        "full_name": "zeux/meshoptimizer",
+        "description": "Mesh optimization library that makes meshes smaller and faster to render",
+        "url": "https://github.com/zeux/meshoptimizer",
+        "stars": 7184,
+        "language": "C++"
+      },
+      {
+        "name": "redis",
+        "full_name": "redis/redis",
+        "description": "For developers, who are building real-time data-driven applications, Redis is the preferred, fastest, and most feature-rich cache, data structure server, and document and vector query engine.",
+        "url": "https://github.com/redis/redis",
+        "stars": 72433,
+        "language": "C"
+      },
+      {
+        "name": "glide",
+        "full_name": "bumptech/glide",
+        "description": "An image loading and caching library for Android focused on smooth scrolling",
+        "url": "https://github.com/bumptech/glide",
+        "stars": 35002,
+        "language": "Java"
+      },
+      {
+        "name": "SDWebImage",
+        "full_name": "SDWebImage/SDWebImage",
+        "description": "Asynchronous image downloader with cache support as a UIImageView category",
+        "url": "https://github.com/SDWebImage/SDWebImage",
+        "stars": 25885,
+        "language": "Objective-C"
+      },
+      {
+        "name": "valkey",
+        "full_name": "valkey-io/valkey",
+        "description": "A flexible distributed key-value database that is optimized for caching and other realtime workloads.",
+        "url": "https://github.com/valkey-io/valkey",
+        "stars": 24361,
+        "language": "C"
+      },
+      {
+        "name": "Kingfisher",
+        "full_name": "onevcat/Kingfisher",
+        "description": "A lightweight, pure-Swift library for downloading and caching images from the web.",
+        "url": "https://github.com/onevcat/Kingfisher",
+        "stars": 24231,
+        "language": "Swift"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=performance%20optimization",
+        "query": "performance optimization"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=performance%20optimization",
+        "query": "performance optimization"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=performance%20optimization",
+        "query": "performance optimization"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=performance%20optimization",
+        "query": "performance optimization"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=performance%20optimization",
+        "query": "performance optimization"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=GPU%20programming",
+        "query": "GPU programming"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=GPU%20programming",
+        "query": "GPU programming"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=GPU%20programming",
+        "query": "GPU programming"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=GPU%20programming",
+        "query": "GPU programming"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=GPU%20programming",
+        "query": "GPU programming"
+      }
+    ],
+    "resources": []
+  },
+  "security": {
+    "area": "security",
+    "gap": 14,
+    "timestamp": "2026-01-07T20:08:40.304313",
+    "papers": [],
+    "apis": [],
+    "repos": [
+      {
+        "name": "awesome-threat-detection",
+        "full_name": "0x4D31/awesome-threat-detection",
+        "description": "\u2728 A curated list of awesome threat detection and hunting resources \ud83d\udd75\ufe0f\u200d\u2642\ufe0f",
+        "url": "https://github.com/0x4D31/awesome-threat-detection",
+        "stars": 4451,
+        "language": null
+      },
+      {
+        "name": "ThreatHunter-Playbook",
+        "full_name": "OTRF/ThreatHunter-Playbook",
+        "description": "A community-driven, open-source project to share detection logic, adversary tradecraft and resources to make detection development more efficient.",
+        "url": "https://github.com/OTRF/ThreatHunter-Playbook",
+        "stars": 4420,
+        "language": "Python"
+      },
+      {
+        "name": "securityonion",
+        "full_name": "Security-Onion-Solutions/securityonion",
+        "description": "Security Onion is a free and open platform for threat hunting, enterprise security monitoring, and log management. It includes our own interfaces for alerting, dashboards, hunting, PCAP, detections, and case management. It also includes other tools such as osquery, CyberChef, Elasticsearch, Logstash, Kibana, Suricata, and Zeek.",
+        "url": "https://github.com/Security-Onion-Solutions/securityonion",
+        "stars": 4274,
+        "language": "Shell"
+      },
+      {
+        "name": "teler",
+        "full_name": "teler-sh/teler",
+        "description": "Real-time HTTP Intrusion Detection",
+        "url": "https://github.com/teler-sh/teler",
+        "stars": 3079,
+        "language": "Go"
+      },
+      {
+        "name": "hayabusa",
+        "full_name": "Yamato-Security/hayabusa",
+        "description": "Hayabusa (\u96bc) is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs.",
+        "url": "https://github.com/Yamato-Security/hayabusa",
+        "stars": 2976,
+        "language": "Rust"
+      },
+      {
+        "name": "lynis",
+        "full_name": "CISOfy/lynis",
+        "description": "Lynis - Security auditing tool for Linux, macOS, and UNIX-based systems. Assists with compliance testing (HIPAA/ISO27001/PCI DSS) and system hardening. Agentless, and installation optional.",
+        "url": "https://github.com/CISOfy/lynis",
+        "stars": 15050,
+        "language": "Shell"
+      },
+      {
+        "name": "my-arsenal-of-aws-security-tools",
+        "full_name": "toniblyx/my-arsenal-of-aws-security-tools",
+        "description": "List of open source tools for AWS security: defensive, offensive, auditing, DFIR, etc.",
+        "url": "https://github.com/toniblyx/my-arsenal-of-aws-security-tools",
+        "stars": 9372,
+        "language": "Shell"
+      },
+      {
+        "name": "ScoutSuite",
+        "full_name": "nccgroup/ScoutSuite",
+        "description": "Multi-Cloud Security Auditing Tool",
+        "url": "https://github.com/nccgroup/ScoutSuite",
+        "stars": 7496,
+        "language": "Python"
+      },
+      {
+        "name": "airgeddon",
+        "full_name": "v1s1t0r1sh3r3/airgeddon",
+        "description": "This is a multi-use bash script for Linux systems to audit wireless networks.",
+        "url": "https://github.com/v1s1t0r1sh3r3/airgeddon",
+        "stars": 7417,
+        "language": "Shell"
+      },
+      {
+        "name": "aircrack-ng",
+        "full_name": "aircrack-ng/aircrack-ng",
+        "description": "WiFi security auditing tools suite",
+        "url": "https://github.com/aircrack-ng/aircrack-ng",
+        "stars": 6752,
+        "language": "C"
+      }
+    ],
+    "education": [
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=cybersecurity%20course",
+        "query": "cybersecurity course"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=cybersecurity%20course",
+        "query": "cybersecurity course"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=cybersecurity%20course",
+        "query": "cybersecurity course"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=cybersecurity%20course",
+        "query": "cybersecurity course"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=cybersecurity%20course",
+        "query": "cybersecurity course"
+      },
+      {
+        "platform": "Coursera",
+        "url": "https://www.coursera.org/search?query=threat%20detection",
+        "query": "threat detection"
+      },
+      {
+        "platform": "edX",
+        "url": "https://www.edx.org/search?q=threat%20detection",
+        "query": "threat detection"
+      },
+      {
+        "platform": "Udemy",
+        "url": "https://www.udemy.com/courses/search/?q=threat%20detection",
+        "query": "threat detection"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/results?search_query=threat%20detection",
+        "query": "threat detection"
+      },
+      {
+        "platform": "Khan Academy",
+        "url": "https://www.khanacademy.org/search?page_search_query=threat%20detection",
+        "query": "threat detection"
+      }
+    ],
+    "resources": []
+  }
+}

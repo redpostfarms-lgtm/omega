@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Wazuh Rules for MITRE ATT&CK for ICS: TA0107 (Inhibit Response Function)
+  ==========================================================================
+  Custom rules for detecting behaviors mapped to Inhibit Response Function tactic.
+  Includes all 14 techniques from TA0107 (v18).
+  
+  Installation:
+    1. Copy to /var/ossec/etc/rules/ics_ta0107_rules.xml
+    2. chown wazuh:wazuh ics_ta0107_rules.xml
+    3. chmod 660 ics_ta0107_rules.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Rule IDs: 200700-200799 (reserved for TA0107 rules)
+-->
+
+<group name="ics,ot,scada,ta0107,inhibit_response,">
+
+  <!-- Level 0: Base ICS/OT event for TA0107 (parent) -->
+  <rule id="200100" level="0">
+    <decoded_as>modbus|dnp3|iec104|opcua|ics-syslog</decoded_as>
+    <description>Base ICS/OT event potentially related to Inhibit Response Function (TA0107)</description>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0878: Alarm Suppression -->
+  <!-- ============================================ -->
+  <rule id="200701" level="12" frequency="4" timeframe="300">
+    <if_sid>200100</if_sid>
+    <field name="alarm_status">suppressed|muted|disabled|acknowledged_false</field>
+    <same_dstip/>
+    <description>Multiple suppressed alarms on same ICS device - possible Alarm Suppression (T0878)</description>
+    <mitre>
+      <id>T0878</id>
+    </mitre>
+    <group>ics,inhibit_response,alarm_suppression,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0838: Modify Alarm Settings -->
+  <!-- ============================================ -->
+  <rule id="200702" level="13">
+    <if_sid>200100</if_sid>
+    <field name="action">modify_alarm|set_threshold|change_limit|configure_alarm</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^10\.0\.50\.</field>
+    <description>Unauthorized modification of alarm settings - possible Modify Alarm Settings (T0838)</description>
+    <mitre>
+      <id>T0838</id>
+    </mitre>
+    <group>ics,inhibit_response,alarm_manipulation,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0803: Block Command Message -->
+  <!-- ============================================ -->
+  <rule id="200703" level="11">
+    <if_sid>200100</if_sid>
+    <field name="command_status">blocked|dropped|rejected|timeout</field>
+    <field name="command_type">emergency|shutdown|trip|reset</field>
+    <description>Critical command message blocked - possible Block Command Message (T0803)</description>
+    <mitre>
+      <id>T0803</id>
+    </mitre>
+    <group>ics,inhibit_response,command_blocking,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0804: Block Reporting Message -->
+  <!-- ============================================ -->
+  <rule id="200704" level="10" frequency="10" timeframe="120">
+    <if_matched_sid>200100</if_matched_sid>
+    <field name="report_status">missing|delayed</field>
+    <same_srcip/>
+    <description>Repeated missing telemetry reports from same device - possible Block Reporting Message (T0804)</description>
+    <mitre>
+      <id>T0804</id>
+    </mitre>
+    <group>ics,inhibit_response,reporting_block,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0805: Block Serial COM -->
+  <!-- ============================================ -->
+  <rule id="200705" level="10">
+    <if_sid>200100</if_sid>
+    <field name="serial_status">blocked|failed|dropped</field>
+    <description>Serial COM communication blocked - possible Block Serial COM (T0805)</description>
+    <mitre>
+      <id>T0805</id>
+    </mitre>
+    <group>ics,inhibit_response,serial_block,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0892: Change Credential -->
+  <!-- ============================================ -->
+  <rule id="200706" level="11">
+    <if_sid>200100</if_sid>
+    <field name="action">change_password|modify_credential|set_password</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^10\.0\.50\.</field>
+    <description>Unauthorized credential change on ICS device - possible Change Credential (T0892)</description>
+    <mitre>
+      <id>T0892</id>
+    </mitre>
+    <group>ics,inhibit_response,credential_change,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0809: Data Destruction -->
+  <!-- ============================================ -->
+  <rule id="200707" level="12">
+    <if_sid>200100</if_sid>
+    <field name="action">delete|remove|destroy|wipe</field>
+    <field name="data_type">log|config|backup|interlock</field>
+    <description>Data destruction on ICS device - possible Data Destruction (T0809)</description>
+    <mitre>
+      <id>T0809</id>
+    </mitre>
+    <group>ics,inhibit_response,data_destruction,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0814: Denial of Service -->
+  <!-- ============================================ -->
+  <rule id="200708" level="12" frequency="50" timeframe="60">
+    <if_matched_sid>200100</if_matched_sid>
+    <field name="exception">true</field>
+    <same_dstip/>
+    <description>High volume of exceptions/failed requests to same ICS device - possible Denial of Service (T0814)</description>
+    <mitre>
+      <id>T0814</id>
+    </mitre>
+    <group>ics,inhibit_response,denial_of_service,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0816: Device Restart/Shutdown -->
+  <!-- ============================================ -->
+  <rule id="200709" level="14">
+    <if_sid>200100</if_sid>
+    <field name="device_status">restart|shutdown|reboot|power_cycle</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^maintenance_subnet</field>
+    <description>Unauthorized device restart/shutdown - possible Device Restart/Shutdown (T0816)</description>
+    <mitre>
+      <id>T0816</id>
+    </mitre>
+    <group>ics,inhibit_response,device_control,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0835: Manipulate I/O Image -->
+  <!-- ============================================ -->
+  <rule id="200710" level="13">
+    <if_sid>200100</if_sid>
+    <field name="io_value">unexpected|anomalous|override</field>
+    <description>Unexpected I/O image manipulation - possible Manipulate I/O Image (T0835)</description>
+    <mitre>
+      <id>T0835</id>
+    </mitre>
+    <group>ics,inhibit_response,io_manipulation,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0800: Activate Firmware Update Mode -->
+  <!-- ============================================ -->
+  <rule id="200711" level="13">
+    <if_sid>200100</if_sid>
+    <field name="device_mode">firmware_update|bootloader|update_mode</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^vendor_subnet</field>
+    <description>Device entered firmware update mode from unauthorized source - possible Activate Firmware Update Mode (T0800)</description>
+    <mitre>
+      <id>T0800</id>
+    </mitre>
+    <group>ics,inhibit_response,firmware_mode,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0851: Rootkit (Windows-based HMIs) -->
+  <!-- ============================================ -->
+  <rule id="200712" level="14">
+    <if_sid>200100</if_sid>
+    <match>rootkit|kernel hook|driver injection</match>
+    <description>Rootkit detection on ICS HMI/engineering station - possible Rootkit (T0851)</description>
+    <mitre>
+      <id>T0851</id>
+    </mitre>
+    <group>ics,inhibit_response,rootkit,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0881: Service Stop -->
+  <!-- ============================================ -->
+  <rule id="200713" level="12">
+    <if_sid>200100</if_sid>
+    <field name="action">stop_service|disable_service|service_stopped</field>
+    <field name="service_name">monitor|antivirus|scada|hmi</field>
+    <description>Critical service stopped on ICS system - possible Service Stop (T0881)</description>
+    <mitre>
+      <id>T0881</id>
+    </mitre>
+    <group>ics,inhibit_response,service_stop,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0857: System Firmware -->
+  <!-- ============================================ -->
+  <rule id="200714" level="14">
+    <if_sid>200100</if_sid>
+    <field name="action">firmware_update|flash_firmware|update_firmware</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^vendor_subnet</field>
+    <description>Unauthorized firmware update on ICS device - possible System Firmware (T0857)</description>
+    <mitre>
+      <id>T0857</id>
+    </mitre>
+    <group>ics,inhibit_response,firmware_update,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+</group>

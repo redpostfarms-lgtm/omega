@@ -1,0 +1,43 @@
+{
+  "run": {
+    "time": "2026-01-02T02:40:23.843711",
+    "hardware": {
+      "cpu_temp": -1.0,
+      "gpu_util": 35,
+      "ram_used": -1,
+      "disk_io": -1,
+      "battery": 0
+    },
+    "software": {
+      "python": "3.13",
+      "os": "Host Name:                     DESKTOP-B2PL7EK\nOS Name:                       Microsoft Windows 11 Pro\nOS Version:                    10.0.26200 N/A Build 26200\nOS Manufacturer:               Microsoft Corporation\nOS Configuration:              Standalone Workstation\nOS Build Type:                 Multiprocessor Free\nRegistered Owner:              Drakalich\nRegistered Organization:       N/A\nProduct ID:                    00330-81629-78026-AA801\nOriginal Install Date:         11/17/2025, 8:21:54 AM\nSystem Boot Time:              12/29/2025, 8:08:01 PM\nSystem Manufacturer:           ASUS\nSystem Model:                  System Product Name\nSystem Type:                   x64-based PC\nProcessor(s):                  1 Processor(s) Installed.\n                               [01]: AMD64 Family 25 Model 80 Stepping 0 AuthenticAMD ~3801 Mhz\nBIOS Version:                  American Megatrends Inc. 3611, 9/29/2024\nWindows Directory:             C:\\WINDOWS\nSystem Directory:              C:\\WINDOWS\\system32\nBoot Device:                   \\Device\\HarddiskVolume9\nSystem Locale:                 en-us;English (United States)\nInput Locale:                  en-us;English (United States)\nTime Zone:                     (UTC-07:00) Mountain Time (US & Canada)\nTotal Physical Memory:         16,167 MB\nAvailable Physical Memory:     2,699 MB\nVirtual Memory: Max Size:      24,840 MB\nVirtual Memory: Available:     2,153 MB\nVirtual Memory: In Use:        22,687 MB\nPage File Location(s):         C:\\pagefile.sys\nDomain:                        WORKGROUP\nLogon Server:                  \\\\DESKTOP-B2PL7EK\nHotfix(s):                     4 Hotfix(s) Installed.\n                               [01]: KB5066128\n                               [02]: KB5054156\n                               [03]: KB5072033\n                               [04]: KB5071142\nNetwork Card(s):               2 NIC(s) Installed.\n                               [01]: Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC\n                                     Connection Name: Wi-Fi\n                                     DHCP Enabled:    Yes\n                                     DHCP Server:     10.0.0.1\n                                     IP address(es)\n                                     [01]: 10.0.0.26\n                                     [02]: fe80::9654:54c8:d1a7:b9d1\n                                     [03]: 2601:283:c380:a8d0:483:b091:1389:a4af\n                                     [04]: 2601:283:c380:a8d0:e12d:de1b:87ae:9145\n                                     [05]: 2601:283:c380:a8d0::dc2d\n                               [02]: Realtek PCIe GbE Family Controller\n                                     Connection Name: Ethernet 2\n                                     Status:          Media disconnected\nVirtualization-based security: Status: Not enabled\n                               App Control for Business policy: Enforced\n                               App Control for Business user mode policy: Off\n                               Security Features Enabled:\nHyper-V Requirements:          VM Monitor Mode Extensions: Yes\n                               Virtualization Enabled In Firmware: No\n                               Second Level Address Translation: Yes\n                               Data Execution Prevention Available: Yes",
+      "processes": []
+    },
+    "files": {
+      "agent_anonymous.py": "54f72a04f37b6d04ede3e7624913db6d8c3ffbc8d9a8f73be430f24dc4f7388d",
+      "stonewall/setup.py": "cd49a5c28a3d584d848296e8888f9458ba3216d19125858eaedeebe197c9bc30",
+      "elara_integrated_system.py": "2d92734af1e1119dbc27efdbfa50de81a7194a6dd78d04bef90c461cbce7aaac",
+      "elara_game_engine.py": "fbe33df5c74668c3276689f2a6e19333c864d84b49b73d5c8b269858421b31b8",
+      "agent_swarm_isolated.py": "a6d7d412f9a65f0bd759f29aa756062e0d96a1847b6013c95bd05ba9a9dea9a9",
+      "elara_visual_checkers.py": "e2214862a623fcb7f8b947f79210112988cee0d81b6a8f7c1f817361477a5374"
+    },
+    "baseline_diff": {
+      "agent_anonymous.py": false,
+      "stonewall/setup.py": false,
+      "elara_integrated_system.py": false,
+      "elara_game_engine.py": false,
+      "agent_swarm_isolated.py": false,
+      "elara_visual_checkers.py": false
+    }
+  },
+  "fixed": "No patch needed (Windows)",
+  "optimized_files": [],
+  "upgrades": [
+    "Found AVX-512 patch for ONNX load \u2014 applied",
+    "Leaked NVIDIA 2026 driver fix \u2014 installed",
+    "Kernel 6.12 has 0.7ms lower syscalls \u2014 upgrading",
+    "Stockfish contempt curve \u2014 calibrated",
+    "Trash-talk level scaling \u2014 improved"
+  ],
+  "status": "green"
+}

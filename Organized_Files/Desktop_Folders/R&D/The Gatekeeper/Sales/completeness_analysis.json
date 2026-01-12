@@ -1,0 +1,36 @@
+{
+  "overall_score": 0.952,
+  "files": {
+    "SalesHub.py": {
+      "score": 0.95,
+      "syntax_ok": true,
+      "missing_features": [],
+      "status": "pass"
+    },
+    "ChatbotLogistics.py": {
+      "score": 0.95,
+      "syntax_ok": true,
+      "missing_features": [],
+      "status": "pass"
+    },
+    "QuantumSalesBot.py": {
+      "score": 0.95,
+      "syntax_ok": true,
+      "missing_features": [],
+      "status": "pass"
+    },
+    "Marketing_Playbook.py": {
+      "score": 0.95,
+      "syntax_ok": true,
+      "missing_features": [],
+      "status": "pass"
+    },
+    "QuickPitch.py": {
+      "score": 0.96,
+      "syntax_ok": true,
+      "missing_features": [],
+      "status": "pass"
+    }
+  },
+  "timestamp": "1767492370.840534"
+}

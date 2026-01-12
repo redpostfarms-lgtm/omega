@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Triconex/Triton Decoders for Wazuh
+  ===================================
+  Custom decoders for parsing Triton (TRISIS/HatMan) attack indicators.
+  Focuses on Triconex Safety Instrumented Systems (SIS) and TriStation protocol.
+  
+  Installation:
+    1. Copy to /var/ossec/etc/decoders/triconex_decoders.xml
+    2. chown wazuh:wazuh triconex_decoders.xml
+    3. chmod 660 triconex_decoders.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Reference: Triton attack case study (2017) - Schneider Electric Triconex Tricon SIS
+  Protocol: TriStation (UDP port 1502)
+-->
+
+<!-- Parent: Broad match for Triton-related files/processes -->
+<decoder name="triton-workstation">
+  <prematch>trilog\.exe|TriStation|Triconex|inject\.bin|imain\.bin</prematch>
+</decoder>
+
+<!-- Child: Extract details from workstation logs -->
+<decoder name="triton-detail">
+  <parent>triton-workstation</parent>
+  <regex type="pcre2">(trilog\.exe|TriStation|inject\.bin|imain\.bin|TsHi|TsLow|TS_cnames|library\.zip)\s+(?:from|by|IP)?\s*(\S+)?</regex>
+  <order>process_file, src_ip</order>
+  <offset>after_prematch</offset>
+</decoder>
+
+<!-- Network: TriStation protocol (UDP 1502) -->
+<decoder name="tristation-udp">
+  <prematch>UDP.*1502|TriStation.*1502</prematch>
+</decoder>
+
+<!-- Child: Extract TriStation protocol anomalies -->
+<decoder name="tristation-anomaly">
+  <parent>tristation-udp</parent>
+  <regex type="pcre2">program_append|halt|run|inject|malicious_logic|failed_validation|SafeAppendProgramMod</regex>
+  <order>command_type</order>
+  <offset>after_prematch</offset>
+</decoder>
+
+<!-- Triconex SIS event decoder -->
+<decoder name="triconex-sis-event">
+  <prematch>Triconex|Tricon SIS|safety.*instrumented</prematch>
+</decoder>
+
+<!-- Child: Extract SIS command details -->
+<decoder name="triconex-command">
+  <parent>triconex-sis-event</parent>
+  <regex type="pcre2">(program_append|program_download|halt|run|firmware_write|memory_modify|inject|system_call_exploit)\s+(?:from|to)?\s*(\S+)?</regex>
+  <order>command_type, target</order>
+  <offset>after_prematch</offset>
+</decoder>

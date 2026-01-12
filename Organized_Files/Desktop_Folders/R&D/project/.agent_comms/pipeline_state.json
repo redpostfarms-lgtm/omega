@@ -1,0 +1,31 @@
+{
+  "started": "2026-01-01 23:12:24.702707",
+  "steps": [
+    {
+      "step": "review",
+      "status": "success",
+      "timestamp": "2026-01-01 23:12:24.849190",
+      "result": {
+        "returncode": 0,
+        "stdout_length": 2409
+      }
+    },
+    {
+      "step": "organize",
+      "status": "failed",
+      "timestamp": "2026-01-01 23:12:27.013186",
+      "result": {
+        "returncode": 1,
+        "stderr": null
+      }
+    },
+    {
+      "step": "organize",
+      "status": "pipeline_failed",
+      "timestamp": "2026-01-01 23:12:27.024532",
+      "result": null
+    }
+  ],
+  "current_step": "organize",
+  "status": "pipeline_failed"
+}

@@ -1,27 +1,100 @@
 # Omega System Requirements
+# NOTE: Python 3.9-3.11 recommended (TTS doesn't support 3.14 yet)
+# For Python 3.14, install without version constraints
+
 # Core TTS and Audio
-TTS>=0.20.0
-torch>=2.0.0
-sounddevice>=0.4.6
-numpy>=1.24.0
-scipy>=1.10.0
-speechbrain>=0.5.16
+# TTS>=0.20.0  # Commented - version constraint causes issues with Python 3.14
+TTS==0.22.0  # Pinned for compatibility with Python 3.11
+transformers>=4.21.0,<4.36.0  # Required by TTS 0.22.0 (BeamSearchScorer support)
+torch==2.5.1  # Compatible with TTS and torchcodec
+torchaudio==2.5.1  # Must match PyTorch version
+torchcodec  # Required for audio decoding in TTS
+sounddevice
+numpy
+scipy
+speechbrain
 
 # Speech Recognition
-SpeechRecognition>=3.10.0
+SpeechRecognition
+faster-whisper  # Fast offline speech recognition (<1s latency, optional but recommended)
 
 # Audio Processing
-librosa>=0.10.0
-noisereduce>=3.0.0
-pydub>=0.25.1
-soundfile>=0.12.0
+librosa
+noisereduce
+pydub
+soundfile
+webrtcvad  # Voice Activity Detection for hands-free mode (optional but recommended)
 
 # Async and Utilities
-asyncio  # Built-in, but listed for reference
+aiofiles  # Async file I/O for non-blocking operations
+aiohttp  # Async HTTP client for web scraping and API calls
+# asyncio  # Built-in, listed for reference only
+
+# Monitoring & Metrics
+prometheus-client>=0.19.0  # Metrics collection (used in omega_monitoring.py)
+
+# Structured Logging
+structlog>=23.2.0  # Structured logging (used in omega_logging_config.py, omega_monitoring.py)
+
+# Configuration Management
+python-dotenv>=1.0.0  # Environment variables (used in omega_automation_orchestrator.py)
 
 # Optional Dependencies
-pdfplumber>=0.9.0  # For PDF processing if needed
-PyPDF2>=3.0.0  # Alternative PDF processing
+# pdfplumber  # For PDF processing if needed
+# PyPDF2  # Alternative PDF processing
+beautifulsoup4>=4.12.0  # HTML/XML parsing (used by planetary_search, web_scraper)
 
 # Development and Testing (optional)
-pytest>=7.4.0  # For running tests
+pytest>=7.4.0  # Testing framework (uncommented - used in tests)
+pytest-asyncio>=0.21.0  # Async testing support
+pytest-cov>=4.1.0  # Coverage reporting
+pytest-mock>=3.12.0  # Mocking support
+
+# ============================================
+# LLM Decoding Strategies Dependencies
+# ============================================
+
+# Structured Generation & Constraints
+outlines>=0.0.1  # For JSON schema, regex constraints, structured generation
+pydantic>=2.0.0  # For JSON schema definitions (required by outlines)
+
+# Evaluation Metrics
+mauve-text>=0.1.0  # For MAUVE evaluation metric
+datasets>=2.0.0  # For evaluation datasets
+accelerate>=0.20.0  # For distributed/accelerated inference
+
+# Visualization
+matplotlib>=3.5.0  # For sigmoid curve plotting
+plotly>=5.0.0  # For interactive visualizations
+pandas>=1.3.0  # For data manipulation (optional but useful)
+
+# Security & Token Handling (from Outlines examples)
+pyjwt[crypto]>=2.8.0  # For JWT token generation/verification
+redis>=4.0.0  # For JWKS caching (optional but recommended)
+requests>=2.28.0  # For HTTP requests (JWKS fetching)
+
+# Utilities
+tqdm>=4.64.0  # For progress bars in training/evaluation
+
+# Hardware Control & OS Integration
+WMI  # Windows Management Instrumentation (Windows only)
+psutil>=5.9.0  # System and process utilities (cross-platform)
+pyautogui>=0.9.54  # GUI automation and text input simulation
+pynput>=1.7.6  # Input simulation (keyboard/mouse)
+# openrgb-python  # RGB lighting control (optional, install separately if needed)
+# liquidctl  # Hardware control (optional, install separately if needed)
+
+# Network Security & VPN
+# scapy>=2.5.0  # Advanced network analysis (optional)
+psutil>=5.9.0  # Already listed above - used for process monitoring and VPN system
+dnspython>=2.3.0  # DNS operations for leak protection and testing (optional but recommended)
+cryptography>=41.0.0  # Secure API key encryption and storage (required for API key manager)
+Pillow>=10.0.0  # Image processing for boot logo creation (required for boot logo)
+openrgb-python>=0.2.0  # RGB lighting control (optional but recommended for full RGB spectrum control)
+
+# UI and Graphics (for omega_kitt_ui.py)
+pygame>=2.1.0  # Knight Rider dashboard UI (required for omega_kitt_ui.py)
+pyaudio>=0.2.11  # Real-time microphone input for audio visualization (required for omega_kitt_ui.py)
+
+# Optional: Fast Inference (requires CUDA)
+# vllm>=0.2.0  # Uncomment if CUDA available and desired (5-10x faster inference)

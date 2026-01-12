@@ -1,0 +1,63 @@
+{
+  "temp_air_inside": {
+    "min": 15,
+    "max": 30,
+    "alert": "outside_range"
+  },
+  "temp_soil_root": {
+    "min": 18,
+    "max": 25,
+    "alert": "outside_range"
+  },
+  "ph_soil": {
+    "min": 6.0,
+    "max": 7.0,
+    "alert": "outside_range"
+  },
+  "ph_water": {
+    "min": 6.5,
+    "max": 7.5,
+    "alert": "outside_range"
+  },
+  "soil_moisture_1": {
+    "min": 40,
+    "max": 60,
+    "alert": "outside_range"
+  },
+  "soil_moisture_2": {
+    "min": 40,
+    "max": 60,
+    "alert": "outside_range"
+  },
+  "battery_soc": {
+    "min": 30,
+    "max": 100,
+    "alert": "low"
+  },
+  "flow_out_irrigation": {
+    "min": 0,
+    "max": 50,
+    "alert": "spike"
+  },
+  "flow_in_main": {
+    "min": 0,
+    "max": 100,
+    "alert": "spike"
+  },
+  "voc_ppm": {
+    "min": 0,
+    "max": 0.5,
+    "alert": "high"
+  },
+  "pm2_5": {
+    "min": 0,
+    "max": 25,
+    "alert": "high"
+  },
+  "co2_ppm": {
+    "min": 400,
+    "max": 2000,
+    "alert": "high"
+  }
+}
+

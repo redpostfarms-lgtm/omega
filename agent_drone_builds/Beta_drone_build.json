@@ -1,0 +1,34 @@
+{
+  "agent_name": "Beta",
+  "design_direction": "endurance_long",
+  "frame_size": "550mm",
+  "components": {
+    "motor": "T-Motor MN2814 700KV",
+    "esc": "T-Motor Flame 40A BLHeli_32",
+    "battery": "4S 5000mAh",
+    "propeller": "13x4.5 Carbon Fiber",
+    "frame": "550mm carbon fiber"
+  },
+  "performance": {
+    "total_thrust_grams": 2000.0,
+    "total_weight_grams": 1528.0,
+    "payload_capacity_grams": 500.0,
+    "thrust_to_weight_ratio": 1.31,
+    "max_speed_ms": 17.6,
+    "flight_time_minutes": 4.6,
+    "agility_score": 0.5
+  },
+  "cost_usd": 645.0,
+  "build_log": [
+    "Selected T-Motor MN2814 700KV (700KV) for efficiency",
+    "Selected 4S 5000mAh battery for long flight time",
+    "Selected 13x4.5 carbon fiber props for efficiency",
+    "Selected 550mm frame for stability",
+    "Total Thrust: 2000g",
+    "Total Weight: 1528g",
+    "TWR: 1.31:1",
+    "Estimated Max Speed: 17.6 m/s",
+    "Flight Time: 4.6 minutes"
+  ],
+  "build_date": "2026-01-07T23:59:47.517025"
+}

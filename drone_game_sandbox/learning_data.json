@@ -1,0 +1,93 @@
+{
+  "tag_rules": {
+    "objective": "One agent is \"it\" and must tag others by getting close enough",
+    "tag_distance": 2.0,
+    "tag_method": "physical proximity (no nerf gun needed)",
+    "tagged_agent": "becomes \"it\" and must tag someone else",
+    "win_condition": "last agent not tagged wins, or time limit",
+    "strategy": {
+      "it_agent": "chase closest agent, use speed and positioning",
+      "other_agents": "evade \"it\", maintain distance, use obstacles",
+      "teamwork": "agents can coordinate to trap \"it\""
+    },
+    "learning_points": [
+      "Speed vs maneuverability trade-off",
+      "Predictive positioning",
+      "Energy management (battery)",
+      "Arena awareness (boundaries)",
+      "Multi-agent coordination"
+    ]
+  },
+  "hide_and_seek_rules": {
+    "objective": "Hiders hide, seeker finds and tags them",
+    "phases": {
+      "hiding_phase": "Hiders have time to find hiding spots",
+      "seeking_phase": "Seeker searches for hiders",
+      "tag_phase": "Seeker tags hiders when found"
+    },
+    "tag_distance": 2.0,
+    "hiding_time": 30.0,
+    "win_condition": {
+      "hiders": "avoid being found until time limit",
+      "seeker": "find and tag all hiders"
+    },
+    "strategy": {
+      "hiders": [
+        "Use obstacles for cover",
+        "Stay low to ground",
+        "Move slowly to avoid detection",
+        "Use shadows and blind spots",
+        "Coordinate with other hiders"
+      ],
+      "seeker": [
+        "Systematic search pattern",
+        "Check common hiding spots",
+        "Use altitude advantage",
+        "Listen for movement",
+        "Track multiple targets"
+      ]
+    },
+    "learning_points": [
+      "Spatial awareness",
+      "Stealth movement",
+      "Search patterns",
+      "Environmental utilization",
+      "Time management"
+    ]
+  },
+  "dodgeball_rules": {
+    "objective": "Eliminate opponents by hitting them with nerf darts",
+    "nerf_gun": {
+      "required": true,
+      "range": 10.0,
+      "accuracy": 0.7,
+      "ammo": 20
+    },
+    "hit_detection": "Nerf dart must hit target drone",
+    "elimination": "Hit drone is eliminated and removed from game",
+    "win_condition": "Last drone standing wins",
+    "strategy": {
+      "offensive": [
+        "Aim for center mass",
+        "Lead moving targets",
+        "Use cover while reloading",
+        "Coordinate with teammates",
+        "Manage ammo carefully"
+      ],
+      "defensive": [
+        "Constant movement",
+        "Unpredictable patterns",
+        "Use altitude changes",
+        "Stay near cover",
+        "Monitor all opponents"
+      ]
+    },
+    "learning_points": [
+      "Ballistic trajectory prediction",
+      "Ammo management",
+      "Reload timing",
+      "Multi-target tracking",
+      "Evasion patterns"
+    ]
+  }
+}

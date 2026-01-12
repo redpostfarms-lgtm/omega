@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-01-01T00:24:34.963060",
+  "score": 62.0,
+  "status": "⚠️  NEEDS IMPROVEMENT",
+  "errors": [
+    "Missing required dependency: beautifulsoup4 (web parsing)",
+    "Missing required file: brain_prime.py",
+    "Missing required file: auto_heal.py",
+    "Missing required file: voice_tuner.py",
+    "Missing required file: voiceprint_auth.py",
+    "Missing required file: voice_listener.py",
+    "Missing required file: hardware_scan.py",
+    "Missing required file: planetary_search.py",
+    "Missing required file: hive_auto.py",
+    "Missing required file: agent_council_v2.py",
+    "Missing required file: brain_wakeup.bat"
+  ],
+  "warnings": [
+    "Missing optional dependency: numpy (calculations)",
+    "Missing optional dependency: psutil (hardware monitoring)",
+    "Missing optional dependency: GPUtil (GPU monitoring)",
+    "Missing optional dependency: wmi (Windows hardware info)",
+    "Missing optional dependency: python-docx (Word documents)",
+    "Missing optional dependency: PyPDF2 (PDF processing)"
+  ],
+  "results": {
+    "compilation": {
+      "passed": 0,
+      "failed": 0,
+      "total": 0
+    },
+    "imports": {
+      "passed": 3,
+      "failed": 1,
+      "total": 4
+    },
+    "dependencies": {
+      "missing": [
+        "beautifulsoup4 (web parsing)"
+      ],
+      "optional_missing": [
+        "numpy (calculations)",
+        "psutil (hardware monitoring)",
+        "GPUtil (GPU monitoring)",
+        "wmi (Windows hardware info)",
+        "python-docx (Word documents)",
+        "PyPDF2 (PDF processing)"
+      ]
+    },
+    "file_structure": {
+      "missing": [
+        "brain_prime.py",
+        "auto_heal.py",
+        "voice_tuner.py",
+        "voiceprint_auth.py",
+        "voice_listener.py",
+        "hardware_scan.py",
+        "planetary_search.py",
+        "hive_auto.py",
+        "agent_council_v2.py",
+        "brain_wakeup.bat"
+      ],
+      "exists": [
+        "D:\\RPF_BRAIN\\Archived",
+        "D:\\RPF_BRAIN\\Archived\\voiceprint",
+        "D:\\RPF_BRAIN\\Archived\\learning",
+        "D:\\RPF_BRAIN\\The Gatekeeper\\hive_auto"
+      ]
+    },
+    "syntax": {
+      "errors": []
+    },
+    "runtime": {
+      "errors": []
+    }
+  }
+}

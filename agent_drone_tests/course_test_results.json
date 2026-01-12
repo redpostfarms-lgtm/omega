@@ -1,0 +1,138 @@
+{
+  "Alpha": {
+    "speed": {
+      "agent_name": "Alpha",
+      "course_type": "speed",
+      "time_seconds": 6.25,
+      "score": 150.0,
+      "details": {
+        "course_length_m": 200.0,
+        "max_speed_ms": 37.6,
+        "acceleration_ms2": 14.896
+      }
+    },
+    "agility": {
+      "agent_name": "Alpha",
+      "course_type": "agility",
+      "time_seconds": 18.28,
+      "score": 150.0,
+      "details": {
+        "num_gates": 10,
+        "agility_score": 0.9,
+        "expected_gate_hits": 0.3
+      }
+    },
+    "endurance": {
+      "agent_name": "Alpha",
+      "course_type": "endurance",
+      "time_seconds": 92.0,
+      "score": 51.0,
+      "details": {
+        "flight_time_minutes": 1.53,
+        "battery": "4S 1500mAh"
+      }
+    }
+  },
+  "Beta": {
+    "speed": {
+      "agent_name": "Beta",
+      "course_type": "speed",
+      "time_seconds": 14.26,
+      "score": 150.0,
+      "details": {
+        "course_length_m": 200.0,
+        "max_speed_ms": 17.6,
+        "acceleration_ms2": 3.0380000000000007
+      }
+    },
+    "agility": {
+      "agent_name": "Beta",
+      "course_type": "agility",
+      "time_seconds": 74.32,
+      "score": 80.7,
+      "details": {
+        "num_gates": 10,
+        "agility_score": 0.5,
+        "expected_gate_hits": 1.5
+      }
+    },
+    "endurance": {
+      "agent_name": "Beta",
+      "course_type": "endurance",
+      "time_seconds": 304.0,
+      "score": 168.7,
+      "details": {
+        "flight_time_minutes": 5.06,
+        "battery": "4S 5000mAh"
+      }
+    }
+  },
+  "Gamma": {
+    "speed": {
+      "agent_name": "Gamma",
+      "course_type": "speed",
+      "time_seconds": 7.38,
+      "score": 150.0,
+      "details": {
+        "course_length_m": 200.0,
+        "max_speed_ms": 32.9,
+        "acceleration_ms2": 48.706
+      }
+    },
+    "agility": {
+      "agent_name": "Gamma",
+      "course_type": "agility",
+      "time_seconds": 58.99,
+      "score": 101.7,
+      "details": {
+        "num_gates": 10,
+        "agility_score": 0.4,
+        "expected_gate_hits": 1.8
+      }
+    },
+    "endurance": {
+      "agent_name": "Gamma",
+      "course_type": "endurance",
+      "time_seconds": 180.0,
+      "score": 100.0,
+      "details": {
+        "flight_time_minutes": 3.0,
+        "battery": "6S 5000mAh"
+      }
+    }
+  },
+  "Delta": {
+    "speed": {
+      "agent_name": "Delta",
+      "course_type": "speed",
+      "time_seconds": 7.96,
+      "score": 150.0,
+      "details": {
+        "course_length_m": 200.0,
+        "max_speed_ms": 30.5,
+        "acceleration_ms2": 10.878
+      }
+    },
+    "agility": {
+      "agent_name": "Delta",
+      "course_type": "agility",
+      "time_seconds": 19.01,
+      "score": 150.0,
+      "details": {
+        "num_gates": 10,
+        "agility_score": 0.95,
+        "expected_gate_hits": 0.2
+      }
+    },
+    "endurance": {
+      "agent_name": "Delta",
+      "course_type": "endurance",
+      "time_seconds": 162.0,
+      "score": 90.0,
+      "details": {
+        "flight_time_minutes": 2.7,
+        "battery": "4S 2200mAh"
+      }
+    }
+  }
+}

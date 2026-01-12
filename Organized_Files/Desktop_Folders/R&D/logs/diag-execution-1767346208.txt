@@ -1,0 +1,4 @@
+[WARN] psutil not available. Some features disabled.
+Starting full diagnostic...
+System optimized. Ready.
+Log saved to: logs\diag-v1767346208.json

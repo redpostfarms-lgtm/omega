@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-01-01T00:24:58.602138",
+  "score": 88.5,
+  "status": "✅ GOOD",
+  "errors": [
+    "Missing required dependency: beautifulsoup4 (web parsing)"
+  ],
+  "warnings": [
+    "Missing optional dependency: numpy (calculations)",
+    "Missing optional dependency: psutil (hardware monitoring)",
+    "Missing optional dependency: GPUtil (GPU monitoring)",
+    "Missing optional dependency: wmi (Windows hardware info)",
+    "Missing optional dependency: python-docx (Word documents)",
+    "Missing optional dependency: PyPDF2 (PDF processing)",
+    "Missing directory: C:\\Users\\Drakalich\\Desktop\\R&D\\The Gatekeeper\\hive_auto",
+    "planetary_search has import issues",
+    "3 files lack error handling"
+  ],
+  "results": {
+    "compilation": {
+      "passed": 30,
+      "failed": 0,
+      "total": 30
+    },
+    "imports": {
+      "passed": 3,
+      "failed": 1,
+      "total": 4
+    },
+    "dependencies": {
+      "missing": [
+        "beautifulsoup4 (web parsing)"
+      ],
+      "optional_missing": [
+        "numpy (calculations)",
+        "psutil (hardware monitoring)",
+        "GPUtil (GPU monitoring)",
+        "wmi (Windows hardware info)",
+        "python-docx (Word documents)",
+        "PyPDF2 (PDF processing)"
+      ]
+    },
+    "file_structure": {
+      "missing": [
+        "C:\\Users\\Drakalich\\Desktop\\R&D\\The Gatekeeper\\hive_auto"
+      ],
+      "exists": [
+        "brain_prime.py",
+        "auto_heal.py",
+        "voice_tuner.py",
+        "voiceprint_auth.py",
+        "voice_listener.py",
+        "hardware_scan.py",
+        "planetary_search.py",
+        "hive_auto.py",
+        "agent_council_v2.py",
+        "brain_wakeup.bat",
+        "D:\\RPF_BRAIN\\Archived",
+        "D:\\RPF_BRAIN\\Archived\\voiceprint",
+        "D:\\RPF_BRAIN\\Archived\\learning"
+      ]
+    },
+    "syntax": {
+      "errors": []
+    },
+    "runtime": {
+      "errors": []
+    }
+  }
+}

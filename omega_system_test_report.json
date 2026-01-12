@@ -1,0 +1,224 @@
+{
+  "timestamp": "2026-01-08T00:59:54.302689",
+  "tests_run": 8,
+  "tests_passed": 5,
+  "tests_failed": 3,
+  "errors_found": [],
+  "fixes_applied": [],
+  "performance_metrics": {
+    "total_duration": 4.7231669425964355,
+    "average_test_duration": 0.018014460802078247,
+    "tests_per_second": 1.6937787923291596
+  },
+  "code_quality_score": 30.0,
+  "ast_analysis": {
+    "voice_listener.py": {},
+    "game_hub_final.py": {},
+    "chess_replay.py": {},
+    "process_status_checker.py": {}
+  },
+  "best_practices_comparison": {
+    "type_hints_usage": "Needs Improvement",
+    "docstring_coverage": "Needs Improvement",
+    "error_handling": "Review Recommended",
+    "test_coverage": "8 test suites"
+  },
+  "system_architecture": {},
+  "historical_patterns": {
+    "total_runs": 2,
+    "success_rate_trend": [
+      66.66666666666666,
+      62.5
+    ],
+    "common_errors": {},
+    "improving_areas": [],
+    "declining_areas": [],
+    "error_frequency": {},
+    "quality_trend": [
+      0.0,
+      30.0
+    ],
+    "performance_trend": [],
+    "error_resolution_rate": 0.0,
+    "most_improved_component": null,
+    "most_declining_component": null,
+    "average_success_rate": 64.58333333333333,
+    "average_quality_score": 15.0,
+    "trend": "stable",
+    "quality_trend_direction": "stable"
+  },
+  "error_context": {
+    "total_errors": 18,
+    "error_severity": {
+      "voice_listener: Low code quality score (30.0/100)": "medium",
+      "game_hub: Low code quality score (30.0/100)": "medium",
+      "chess_replay: Low code quality score (30.0/100)": "medium",
+      "process_status: Low code quality score (30.0/100)": "medium",
+      "voice_listener.py: Very low quality (30.0/100)": "warning",
+      "game_hub_final.py: Very low quality (30.0/100)": "warning",
+      "chess_replay.py: Very low quality (30.0/100)": "warning",
+      "process_status_checker.py: Very low quality (30.0/100)": "warning",
+      "WARNING: game_hub_final.py: Line 271: Line too long (128 chars, max 120)": "warning",
+      "WARNING: game_hub_final.py: Line 282: Line too long (151 chars, max 120)": "warning",
+      "WARNING: game_hub_final.py: Line 295: Line too long (128 chars, max 120)": "warning",
+      "WARNING: game_hub_final.py: Line 311: Line too long (128 chars, max 120)": "warning",
+      "WARNING: game_hub_final.py: Line 323: Line too long (151 chars, max 120)": "warning",
+      "WARNING: game_hub_final.py: Function 'main': High complexity (34 control structures)": "warning",
+      "WARNING: game_hub_final.py: Function 'legal_moves': High complexity (39 control structures)": "warning",
+      "WARNING: chess_replay.py: Function 'replay_full_game': High complexity (16 control structures)": "warning",
+      "WARNING: chess_replay.py: Function 'replay_last_n_moves': High complexity (12 control structures)": "warning",
+      "WARNING: process_status_checker.py: Line 604: Line too long (125 chars, max 120)": "warning"
+    },
+    "error_impact": {
+      "voice_listener: Low code quality score (30.0/100)": "high",
+      "game_hub: Low code quality score (30.0/100)": "medium",
+      "chess_replay: Low code quality score (30.0/100)": "medium",
+      "process_status: Low code quality score (30.0/100)": "low",
+      "voice_listener.py: Very low quality (30.0/100)": "high",
+      "game_hub_final.py: Very low quality (30.0/100)": "medium",
+      "chess_replay.py: Very low quality (30.0/100)": "medium",
+      "process_status_checker.py: Very low quality (30.0/100)": "low",
+      "WARNING: game_hub_final.py: Line 271: Line too long (128 chars, max 120)": "medium",
+      "WARNING: game_hub_final.py: Line 282: Line too long (151 chars, max 120)": "medium",
+      "WARNING: game_hub_final.py: Line 295: Line too long (128 chars, max 120)": "medium",
+      "WARNING: game_hub_final.py: Line 311: Line too long (128 chars, max 120)": "medium",
+      "WARNING: game_hub_final.py: Line 323: Line too long (151 chars, max 120)": "medium",
+      "WARNING: game_hub_final.py: Function 'main': High complexity (34 control structures)": "medium",
+      "WARNING: game_hub_final.py: Function 'legal_moves': High complexity (39 control structures)": "medium",
+      "WARNING: chess_replay.py: Function 'replay_full_game': High complexity (16 control structures)": "medium",
+      "WARNING: chess_replay.py: Function 'replay_last_n_moves': High complexity (12 control structures)": "medium",
+      "WARNING: process_status_checker.py: Line 604: Line too long (125 chars, max 120)": "low"
+    },
+    "error_categories": {
+      "voice": [
+        "voice_listener: Low code quality score (30.0/100)",
+        "voice_listener.py: Very low quality (30.0/100)"
+      ],
+      "games": [
+        "game_hub: Low code quality score (30.0/100)",
+        "chess_replay: Low code quality score (30.0/100)",
+        "game_hub_final.py: Very low quality (30.0/100)",
+        "chess_replay.py: Very low quality (30.0/100)",
+        "WARNING: game_hub_final.py: Line 271: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 282: Line too long (151 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 295: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 311: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 323: Line too long (151 chars, max 120)",
+        "WARNING: game_hub_final.py: Function 'main': High complexity (34 control structures)",
+        "WARNING: game_hub_final.py: Function 'legal_moves': High complexity (39 control structures)",
+        "WARNING: chess_replay.py: Function 'replay_full_game': High complexity (16 control structures)",
+        "WARNING: chess_replay.py: Function 'replay_last_n_moves': High complexity (12 control structures)"
+      ],
+      "other": [
+        "process_status: Low code quality score (30.0/100)",
+        "process_status_checker.py: Very low quality (30.0/100)",
+        "WARNING: process_status_checker.py: Line 604: Line too long (125 chars, max 120)"
+      ]
+    },
+    "critical_errors": [],
+    "warnings": [
+      "voice_listener.py: Very low quality (30.0/100)",
+      "game_hub_final.py: Very low quality (30.0/100)",
+      "chess_replay.py: Very low quality (30.0/100)",
+      "process_status_checker.py: Very low quality (30.0/100)",
+      "WARNING: game_hub_final.py: Line 271: Line too long (128 chars, max 120)",
+      "WARNING: game_hub_final.py: Line 282: Line too long (151 chars, max 120)",
+      "WARNING: game_hub_final.py: Line 295: Line too long (128 chars, max 120)",
+      "WARNING: game_hub_final.py: Line 311: Line too long (128 chars, max 120)",
+      "WARNING: game_hub_final.py: Line 323: Line too long (151 chars, max 120)",
+      "WARNING: game_hub_final.py: Function 'main': High complexity (34 control structures)",
+      "WARNING: game_hub_final.py: Function 'legal_moves': High complexity (39 control structures)",
+      "WARNING: chess_replay.py: Function 'replay_full_game': High complexity (16 control structures)",
+      "WARNING: chess_replay.py: Function 'replay_last_n_moves': High complexity (12 control structures)",
+      "WARNING: process_status_checker.py: Line 604: Line too long (125 chars, max 120)"
+    ]
+  },
+  "security_scan": {
+    "vulnerabilities_found": 0,
+    "critical": 0,
+    "warnings": 0
+  },
+  "static_analysis": {
+    "files_analyzed": 4,
+    "issues_found": 10
+  },
+  "test_results": {
+    "Voice Listener Commands": {
+      "test_name": "Voice Listener Commands",
+      "status": "PASS",
+      "errors": [],
+      "duration": 0.014962434768676758,
+      "timestamp": "2026-01-08T00:59:58.881621"
+    },
+    "Game Hub Execution": {
+      "test_name": "Game Hub Execution",
+      "status": "PASS",
+      "errors": [],
+      "duration": 0.008226633071899414,
+      "timestamp": "2026-01-08T00:59:58.896604"
+    },
+    "Chess Replay Logic": {
+      "test_name": "Chess Replay Logic",
+      "status": "PASS",
+      "errors": [],
+      "duration": 0.0005757808685302734,
+      "timestamp": "2026-01-08T00:59:58.904856"
+    },
+    "Diagnostic Engine": {
+      "test_name": "Diagnostic Engine",
+      "status": "PASS",
+      "errors": [],
+      "duration": 0.0005366802215576172,
+      "timestamp": "2026-01-08T00:59:58.905437"
+    },
+    "All Critical Imports": {
+      "test_name": "All Critical Imports",
+      "status": "FAIL",
+      "errors": [
+        "voice_listener: Low code quality score (30.0/100)",
+        "game_hub: Low code quality score (30.0/100)",
+        "chess_replay: Low code quality score (30.0/100)",
+        "process_status: Low code quality score (30.0/100)"
+      ],
+      "duration": 0.021895408630371094,
+      "timestamp": "2026-01-08T00:59:58.905984"
+    },
+    "Code Quality Analysis": {
+      "test_name": "Code Quality Analysis",
+      "status": "FAIL",
+      "errors": [
+        "voice_listener.py: Very low quality (30.0/100)",
+        "game_hub_final.py: Very low quality (30.0/100)",
+        "chess_replay.py: Very low quality (30.0/100)",
+        "process_status_checker.py: Very low quality (30.0/100)"
+      ],
+      "duration": 0.0034003257751464844,
+      "timestamp": "2026-01-08T00:59:58.927901"
+    },
+    "Security Vulnerability Scan": {
+      "test_name": "Security Vulnerability Scan",
+      "status": "PASS",
+      "errors": [],
+      "duration": 0.03076004981994629,
+      "timestamp": "2026-01-08T00:59:58.931320"
+    },
+    "Static Analysis": {
+      "test_name": "Static Analysis",
+      "status": "FAIL",
+      "errors": [
+        "WARNING: game_hub_final.py: Line 271: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 282: Line too long (151 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 295: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 311: Line too long (128 chars, max 120)",
+        "WARNING: game_hub_final.py: Line 323: Line too long (151 chars, max 120)",
+        "WARNING: game_hub_final.py: Function 'main': High complexity (34 control structures)",
+        "WARNING: game_hub_final.py: Function 'legal_moves': High complexity (39 control structures)",
+        "WARNING: chess_replay.py: Function 'replay_full_game': High complexity (16 control structures)",
+        "WARNING: chess_replay.py: Function 'replay_last_n_moves': High complexity (12 control structures)",
+        "WARNING: process_status_checker.py: Line 604: Line too long (125 chars, max 120)"
+      ],
+      "duration": 0.06375837326049805,
+      "timestamp": "2026-01-08T00:59:58.962093"
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "metadata": {
+    "name": "battery_holder_18650",
+    "version": "1.0",
+    "created": "2025-12-13T16:00:00Z",
+    "author": "CADForge AI",
+    "description": "Threaded battery holder for 18650 cell - 80mm length, 22mm inner diameter, M4 mounting holes on 70mm centers, 3mm wall thickness, material ABS",
+    "project": "Electronics"
+  },
+  "units": {
+    "system": "mm",
+    "precision": 0.01,
+    "tolerance": 0.1
+  },
+  "parameters": {
+    "length": 80.0,
+    "inner_diameter": 22.0,
+    "outer_diameter": 28.0,
+    "wall_thickness": 3.0,
+    "mounting_hole_diameter": 4.0,
+    "mounting_hole_spacing": 70.0,
+    "mounting_hole_depth": 6.0,
+    "material": "ABS"
+  },
+  "geometry": {
+    "type": "3d",
+    "features": [
+      {
+        "type": "cylinder",
+        "layer": "M-BOLT",
+        "position": {"x": 0, "y": 0, "z": 0},
+        "dimensions": {
+          "diameter": 28.0,
+          "height": 80.0
+        },
+        "parameters": {
+          "description": "Outer cylinder (holder body)"
+        }
+      },
+      {
+        "type": "cylinder",
+        "layer": "M-BOLT",
+        "position": {"x": 0, "y": 0, "z": 0},
+        "dimensions": {
+          "diameter": 22.0,
+          "height": 80.0
+        },
+        "parameters": {
+          "description": "Inner cavity (subtract to create wall)",
+          "operation": "subtract"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": -35.0, "y": 0, "z": 0},
+        "dimensions": {
+          "diameter": 4.0,
+          "depth": 6.0
+        },
+        "parameters": {
+          "description": "Mounting hole 1 (M4, left side)"
+        }
+      },
+      {
+        "type": "hole",
+        "layer": "M-BOLT",
+        "position": {"x": 35.0, "y": 0, "z": 0},
+        "dimensions": {
+          "diameter": 4.0,
+          "depth": 6.0
+        },
+        "parameters": {
+          "description": "Mounting hole 2 (M4, right side, 70mm spacing)"
+        }
+      }
+    ]
+  },
+  "views_2d": [
+    {
+      "name": "top",
+      "scale": 1.0,
+      "annotations": [
+        {
+          "type": "dimension",
+          "layer": "A-DIM",
+          "position": {"x": 0, "y": -15},
+          "value": "Ø22 (inner diameter)"
+        },
+        {
+          "type": "dimension",
+          "layer": "A-DIM",
+          "position": {"x": 0, "y": -20},
+          "value": "Ø28 (outer diameter)"
+        }
+      ]
+    },
+    {
+      "name": "front",
+      "scale": 1.0,
+      "annotations": [
+        {
+          "type": "dimension",
+          "layer": "A-DIM",
+          "position": {"x": 0, "y": -15},
+          "value": "80 (length)"
+        },
+        {
+          "type": "dimension",
+          "layer": "A-DIM",
+          "position": {"x": 0, "y": -20},
+          "value": "3 (wall thickness)"
+        }
+      ]
+    },
+    {
+      "name": "side",
+      "scale": 1.0,
+      "annotations": [
+        {
+          "type": "dimension",
+          "layer": "A-DIM",
+          "position": {"x": 0, "y": -15},
+          "value": "70 (mounting hole spacing)"
+        }
+      ]
+    }
+  ],
+  "layers_ref": "../../01_Standards/LAYER_STANDARD.json",
+  "exports": {
+    "dxf": {
+      "enabled": true,
+      "version": "R2018",
+      "filename": "battery_holder_18650.dxf"
+    },
+    "step": {
+      "enabled": true,
+      "version": "AP214",
+      "filename": "battery_holder_18650.step"
+    },
+    "stl": {
+      "enabled": false,
+      "quality": "standard",
+      "filename": ""
+    },
+    "pdf": {
+      "enabled": true,
+      "paper_size": "A4",
+      "scale": 1.0,
+      "filename": "battery_holder_18650.pdf"
+    },
+    "svg": {
+      "enabled": false,
+      "view": "top",
+      "filename": ""
+    }
+  },
+  "validation": {
+    "min_dimension": 0.1,
+    "max_dimension": 200.0,
+    "required_features": ["cylinder", "hole"],
+    "layer_compliance": true
+  }
+}
+

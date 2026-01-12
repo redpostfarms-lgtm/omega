@@ -1,0 +1,7 @@
+Read MEMORY.md and WORKFLOW_STATE.md first. MEMORY.md overrides all other instructions.
+
+Minimal diffs only. No refactors or formatting changes unless explicitly requested.
+Before editing: state intent + list files. After editing: verification plan.
+
+If a request is ambiguous or would change public APIs, ask before editing.
+

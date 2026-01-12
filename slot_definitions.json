@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-01-10T00:00:00",
+  "slots": {
+    "time": {
+      "description": "Time specification",
+      "patterns": [
+        "\\d{1,2}:\\d{2}(?:\\s*(?:AM|PM|am|pm))?",
+        "\\d{1,2}\\s*(?:AM|PM|am|pm)",
+        "(?:at|around|about)\\s+\\d{1,2}",
+        "(?:morning|afternoon|evening|night)"
+      ],
+      "spacy_labels": ["TIME"]
+    },
+    "date": {
+      "description": "Date specification",
+      "patterns": [
+        "\\d{1,2}/\\d{1,2}/\\d{2,4}",
+        "\\d{1,2}-\\d{1,2}-\\d{2,4}",
+        "(?:today|tomorrow|yesterday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)",
+        "(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2}"
+      ],
+      "spacy_labels": ["DATE"]
+    },
+    "person": {
+      "description": "Person name",
+      "patterns": [],
+      "spacy_labels": ["PERSON"]
+    },
+    "location": {
+      "description": "Location name",
+      "patterns": [],
+      "spacy_labels": ["GPE", "LOC"]
+    },
+    "number": {
+      "description": "Numeric value",
+      "patterns": [
+        "\\d+",
+        "\\d+\\.\\d+"
+      ],
+      "spacy_labels": ["CARDINAL", "ORDINAL", "QUANTITY", "MONEY"]
+    },
+    "organization": {
+      "description": "Organization name",
+      "patterns": [],
+      "spacy_labels": ["ORG"]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "veracrypt_path": "C:\\Program Files\\VeraCrypt\\VeraCrypt.exe",
+  "volume_path": "D:\\RPF_BRAIN\\encrypted_volume.vc",
+  "mount_letter": "Z:",
+  "password": "",
+  "volume_size_gb": 100,
+  "encryption_algorithm": "AES",
+  "hash_algorithm": "sha512",
+  "filesystem": "NTFS"
+}
+

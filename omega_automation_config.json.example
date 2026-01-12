@@ -1,0 +1,30 @@
+{
+  "local_llm": {
+    "enabled": true,
+    "model": "llama2",
+    "base_url": "http://localhost:11434"
+  },
+  "external_ai": {
+    "enabled": true,
+    "api_url": "https://api.x.ai/v1/chat/completions",
+    "api_key": "your-grok-api-key-here",
+    "model": "grok-beta"
+  },
+  "office": {
+    "enabled": true
+  },
+  "tasks": [
+    {
+      "name": "Process Excel Data",
+      "type": "office",
+      "task_type": "excel",
+      "file_path": "C:\\Data\\reports.xlsx",
+      "schedule": "daily"
+    },
+    {
+      "name": "Daily Analysis",
+      "type": "analysis",
+      "description": "Analyze system performance and generate report"
+    }
+  ]
+}

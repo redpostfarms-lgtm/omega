@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ICS Protocol Decoders for Wazuh
+  ================================
+  Custom decoders for Industrial Control Systems (ICS) protocols:
+  - Modbus TCP/RTU
+  - DNP3
+  - IEC 60870-5-104 (IEC 104)
+  - OPC UA
+  
+  Installation:
+    1. Copy to /var/ossec/etc/decoders/ics_protocols_decoders.xml
+    2. chown wazuh:wazuh ics_protocols_decoders.xml
+    3. chmod 660 ics_protocols_decoders.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+-->
+
+<!-- ============================================ -->
+<!-- Modbus TCP/RTU Decoders -->
+<!-- ============================================ -->
+
+<decoder name="modbus-json">
+  <!-- JSON-formatted Modbus logs (recommended format) -->
+  <prematch>^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \{.*"function_code".*\}</prematch>
+</decoder>
+
+<decoder name="modbus-json-detail">
+  <!-- Extracts all JSON keys as dynamic fields -->
+  <parent>modbus-json</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+
+<decoder name="modbus-syslog">
+  <!-- Syslog-style Modbus logs -->
+  <program_name>^modbus$</program_name>
+</decoder>
+
+<decoder name="modbus-syslog-detail">
+  <!-- Extracts src, dst, unit, func, addr, qty, exception -->
+  <parent>modbus-syslog</parent>
+  <prematch>modbus: src= dst= unit= func= addr= qty=</prematch>
+  <regex type="pcre2">src=(\S+) dst=(\S+) unit=(\d+) func=(0x[0-9a-fA-F]{2}) addr=(\d+) qty=(\d+) exception=(\w+)</regex>
+  <order>srcip, dstip, unit_id, function_code_hex, address, quantity, exception</order>
+  <offset>after_prematch</offset>
+</decoder>
+
+<decoder name="modbus-verbose">
+  <!-- Verbose text Modbus logs (Request/Response) -->
+  <prematch>^ModbusTCP (Request|Response): </prematch>
+</decoder>
+
+<decoder name="modbus-req">
+  <!-- Modbus request details -->
+  <parent>modbus-verbose</parent>
+  <regex type="pcre2">^ModbusTCP Request: TransactionID=(\d+) UnitID=(\d+) Function=([0-9a-fA-F]{2}) Address=(\d+) Quantity=(\d+) Data=(\S+)</regex>
+  <order>transaction_id, unit_id, function_code, address, quantity, data</order>
+</decoder>
+
+<decoder name="modbus-resp">
+  <!-- Modbus response details -->
+  <parent>modbus-verbose</parent>
+  <regex type="pcre2">^ModbusTCP Response: TransactionID=(\d+) Exception=(.+)</regex>
+  <order>transaction_id, exception_msg</order>
+</decoder>
+
+<!-- ============================================ -->
+<!-- DNP3 Decoders -->
+<!-- ============================================ -->
+
+<decoder name="dnp3-syslog">
+  <!-- Syslog-style DNP3 logs -->
+  <program_name>^dnp3</program_name>
+</decoder>
+
+<decoder name="dnp3-detail">
+  <!-- Extracts src, dst, src_addr, dest_addr, fc, obj_type, point, value, event -->
+  <parent>dnp3-syslog</parent>
+  <prematch>DNP3: src= dst= src_addr= dest_addr= fc= obj_type=</prematch>
+  <regex type="pcre2">src=(\S+) dst=(\S+) src_addr=(\d+) dest_addr=(\d+) fc=(\d+) fc_name=(\S+) obj_type=(\d+) obj_var=(\d+) point=(\d+) value=([\d\.]+) event=(\w+)</regex>
+  <order>srcip, dstip, src_addr, dest_addr, fc, fc_name, obj_type, obj_var, point, value, event</order>
+</decoder>
+
+<decoder name="dnp3-json">
+  <!-- JSON-formatted DNP3 logs -->
+  <prematch>^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} \{.*"fc".*"obj_type".*\}</prematch>
+</decoder>
+
+<decoder name="dnp3-json-detail">
+  <!-- Extracts all JSON keys as dynamic fields -->
+  <parent>dnp3-json</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+
+<!-- ============================================ -->
+<!-- IEC 60870-5-104 (IEC 104) Decoders -->
+<!-- ============================================ -->
+
+<decoder name="iec104">
+  <!-- IEC 104 log format -->
+  <prematch>^IEC104: src= dst= asdu_type= cause= io_addr=</prematch>
+</decoder>
+
+<decoder name="iec104-detail">
+  <!-- Extracts src, dst, asdu_type, cause, io_addr, value, quality -->
+  <parent>iec104</parent>
+  <regex type="pcre2">src=(\S+) dst=(\S+) asdu_type=(\d+) cause=(\d+) io_addr=(\d+) value=([\d\.]+) quality=(\w+)</regex>
+  <order>srcip, dstip, asdu_type, cause, io_addr, value, quality</order>
+</decoder>
+
+<!-- ============================================ -->
+<!-- OPC UA Decoders -->
+<!-- ============================================ -->
+
+<decoder name="opcua-json">
+  <!-- JSON-formatted OPC UA logs (recommended) -->
+  <prematch>^\{.*"node_id".*"value".*\}</prematch>
+</decoder>
+
+<decoder name="opcua-json-detail">
+  <!-- Extracts all JSON keys as dynamic fields -->
+  <parent>opcua-json</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+
+<decoder name="opcua-syslog">
+  <!-- Syslog-style OPC UA logs -->
+  <program_name>^opcua</program_name>
+</decoder>

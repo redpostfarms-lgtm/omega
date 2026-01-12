@@ -1,0 +1,11 @@
+{
+  "games_played": 724,
+  "wins": 395,
+  "losses": 329,
+  "draws": 0,
+  "best_move_count": 14,
+  "last_achievement": "Beat engine in 14 moves",
+  "learning_cycles": 724,
+  "skill_level": 0.5991060773480662,
+  "last_updated": "2026-01-02T02:53:38.705093"
+}

@@ -1,0 +1,34 @@
+{
+  "files": {
+    "quantum_self_repair.py": {
+      "lines": 84,
+      "imports": [
+        "os",
+        "sys",
+        "subprocess",
+        "pathlib",
+        "pdfplumber",
+        "PyPDF2"
+      ],
+      "local_imports": [],
+      "category": "Other",
+      "has_main": true,
+      "classes": [],
+      "functions": [
+        "repair_system"
+      ]
+    }
+  },
+  "dependencies": {},
+  "categories": {
+    "Other": [
+      "quantum_self_repair.py"
+    ]
+  },
+  "entry_points": [
+    "quantum_self_repair.py"
+  ],
+  "total_files": 1,
+  "total_lines": 84,
+  "mapped_at": "2026-01-04T11:58:24.179053"
+}

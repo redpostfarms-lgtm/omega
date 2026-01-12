@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Triton (TRISIS/HatMan) Detection Rules for Wazuh
+  ================================================
+  Custom rules for detecting Triton malware attack patterns.
+  Focuses on Triconex Safety Instrumented Systems (SIS) controllers.
+  
+  Installation:
+    1. Copy to /var/ossec/etc/rules/triton_rules.xml
+    2. chown wazuh:wazuh triton_rules.xml
+    3. chmod 660 triton_rules.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Rule IDs: 211000-211999 (reserved for Triton/Triconex rules)
+  
+  Reference: Triton attack case study (2017)
+    - Target: Schneider Electric Triconex Tricon SIS (MP3008 firmware 10.0–10.4)
+    - Protocol: TriStation (UDP port 1502)
+    - Attribution: TEMP.Veles / XENOTIME (CNIIHM lab, Russia)
+    - MITRE Campaign: C0030
+-->
+
+<group name="ics,triton,trisis,hatman,triconex,ot,sis,">
+
+  <!-- Level 0: Base parent for Triton-related events -->
+  <rule id="211000" level="0">
+    <decoded_as>triton-workstation|triton-detail|tristation-udp|tristation-anomaly|triconex-sis-event|triconex-command</decoded_as>
+    <description>Triton/TRISIS/HatMan potential ICS event (parent)</description>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Masquerading & Execution -->
+  <!-- ============================================ -->
+
+  <!-- Suspicious File Execution / Masquerading -->
+  <rule id="211001" level="12">
+    <if_sid>211000</if_sid>
+    <field name="process_file">trilog\.exe</field>
+    <match>inject\.bin|imain\.bin|library\.zip</match>
+    <description>Suspicious execution of trilog.exe with Triton payload files - Masquerading & Execution (T0849/T0871)</description>
+    <mitre>
+      <id>T0849</id>  <!-- Masquerading -->
+      <id>T0871</id>  <!-- Execution through API -->
+    </mitre>
+    <group>ics,triton,masquerading,execution,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- TriStation/Triconex process with suspicious arguments -->
+  <rule id="211002" level="11">
+    <if_sid>211000</if_sid>
+    <match>TriStation.*inject|Triconex.*malicious|trilog.*payload</match>
+    <description>Suspicious TriStation/Triconex process with malicious indicators - possible Triton execution</description>
+    <mitre>
+      <id>T0849</id>
+      <id>T0871</id>
+    </mitre>
+    <group>ics,triton,execution,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Program Manipulation (Triton Core) -->
+  <!-- ============================================ -->
+
+  <!-- Unusual Program Download/Append to SIS -->
+  <rule id="211010" level="14">
+    <if_sid>211000</if_sid>
+    <match>program_append|program_download|SafeAppendProgramMod</match>
+    <description>Unauthorized program append/download to Triconex SIS - Program Download (T0843)</description>
+    <mitre>
+      <id>T0843</id>  <!-- Program Download (TA0104 - Execution) -->
+      <id>T0821</id>  <!-- Modify Controller Tasking -->
+    </mitre>
+    <group>ics,triton,program_manipulation,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Repeated program modifications (Triton pattern) -->
+  <rule id="211011" level="15" frequency="2" timeframe="600">
+    <if_matched_sid>211010</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple program append/download operations in short time - CRITICAL Triton attack pattern</description>
+    <mitre>
+      <id>T0843</id>
+      <id>T0821</id>
+      <id>T0831</id>  <!-- Manipulation of Control -->
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,triton,program_manipulation,attack_chain,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Mode Changes (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- Mode Change / Halt/Run Commands -->
+  <rule id="211020" level="13">
+    <if_sid>211000</if_sid>
+    <match>halt|run|SE_OPMOD_CHANGED|operating.*mode.*change</match>
+    <description>Triconex operating mode change or halt/run command - Change Operating Mode (T0858)</description>
+    <mitre>
+      <id>T0858</id>  <!-- Change Operating Mode (TA0104 - Execution) -->
+    </mitre>
+    <group>ics,triton,mode_manipulation,</group>
+  </rule>
+
+  <!-- Mode change + Program modification (Triton attack chain) -->
+  <rule id="211021" level="15" frequency="2" timeframe="600">
+    <if_matched_sid>211010,211020</if_matched_sid>
+    <same_srcip/>
+    <description>Mode change followed by program modification - CRITICAL Triton attack chain</description>
+    <mitre>
+      <id>T0858</id>
+      <id>T0843</id>
+      <id>T0831</id>
+      <id>T0880</id>
+    </mitre>
+    <group>ics,triton,mode_manipulation,attack_chain,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Firmware/System Modification (Triton Core) -->
+  <!-- ============================================ -->
+
+  <!-- Firmware/System Modification Indicators -->
+  <rule id="211030" level="15">
+    <if_sid>211000</if_sid>
+    <match>firmware_write|memory_modify|inject|system_call_exploit|buffer_overflow</match>
+    <description>Potential firmware/memory modification on Triconex - System Firmware (T0857)</description>
+    <mitre>
+      <id>T0857</id>  <!-- System Firmware (TA0107 - Inhibit Response Function) -->
+      <id>T0800</id>  <!-- Activate Firmware Update Mode -->
+    </mitre>
+    <group>ics,triton,firmware_attack,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Firmware integrity violation -->
+  <rule id="211031" level="15">
+    <if_sid>211000</if_sid>
+    <match>firmware.*integrity.*fail|validation.*failure|failed.*validation|redundant.*processor.*mismatch</match>
+    <description>Triconex firmware integrity violation - possible Triton injection failure (T0857)</description>
+    <mitre>
+      <id>T0857</id>
+      <id>T0874</id>  <!-- Hooking (possible) -->
+    </mitre>
+    <group>ics,triton,firmware_attack,integrity_violation,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Network/Protocol Anomalies (TriStation) -->
+  <!-- ============================================ -->
+
+  <!-- TriStation Protocol Anomalies (Network/UDP 1502) -->
+  <rule id="211040" level="11">
+    <if_sid>211000</if_sid>
+    <match>TriStation|UDP.*1502</match>
+    <match>unexpected_command|broadcast_ping|malicious_payload|anomalous.*traffic</match>
+    <description>Anomalous TriStation protocol activity on UDP 1502 - potential Triton C2/Execution</description>
+    <mitre>
+      <id>T0871</id>  <!-- Execution through API -->
+      <id>T0855</id>  <!-- Unauthorized Command Message -->
+    </mitre>
+    <group>ics,triton,protocol_anomaly,</group>
+  </rule>
+
+  <!-- Unauthorized UDP 1502 traffic from external IP -->
+  <rule id="211041" level="12">
+    <if_sid>211000</if_sid>
+    <match>UDP.*1502</match>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^10\.0\.50\.|^engineering_subnet</field>
+    <description>TriStation protocol (UDP 1502) from unauthorized IP - possible Triton C2</description>
+    <mitre>
+      <id>T0855</id>
+      <id>T0871</id>
+    </mitre>
+    <group>ics,triton,protocol_anomaly,unauthorized_access,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Attack Chain Correlation -->
+  <!-- ============================================ -->
+
+  <!-- Correlation: Repeated Suspicious SIS Commands -->
+  <rule id="211050" level="15" frequency="3" timeframe="600">
+    <if_matched_sid>211010,211020,211030</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple suspicious commands to Triconex SIS in short time - CRITICAL Triton-like attack pattern</description>
+    <mitre>
+      <id>T0831</id>  <!-- Manipulation of Control -->
+      <id>T0857</id>  <!-- System Firmware -->
+      <id>T0843</id>  <!-- Program Download -->
+      <id>T0858</id>  <!-- Change Operating Mode -->
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,triton,attack_chain,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Evasion/Indicator Removal -->
+  <!-- ============================================ -->
+
+  <!-- Indicator Removal Attempt -->
+  <rule id="211060" level="13">
+    <if_sid>211000</if_sid>
+    <match>overwrite_dummy|anti_forensics|reset_failed|junk.*data|malicious.*code.*overwrite</match>
+    <description>Potential indicator removal after failed injection - Indicator Removal on Host (T0872)</description>
+    <mitre>
+      <id>T0872</id>  <!-- Indicator Removal on Host (TA0104 - Execution) -->
+    </mitre>
+    <group>ics,triton,evasion,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Safety System Compromise (Triton Target) -->
+  <!-- ============================================ -->
+
+  <!-- Safety system bypass/violation -->
+  <rule id="211070" level="15">
+    <if_sid>211000</if_sid>
+    <match>safety.*bypass|safety.*disabled|SIS.*violation|safety.*instrumented.*system.*compromised</match>
+    <description>Triconex safety system bypassed - CRITICAL Triton attack target (Loss of Safety)</description>
+    <mitre>
+      <id>T0880</id>  <!-- Loss of Safety (TA0105 - Impact) -->
+      <id>T0837</id>  <!-- Loss of Protection -->
+      <id>T0831</id>  <!-- Manipulation of Control -->
+    </mitre>
+    <group>ics,triton,loss_of_safety,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Fail-safe trigger (Triton bug indicator) -->
+  <rule id="211071" level="14">
+    <if_sid>211000</if_sid>
+    <match>fail.*safe|safe.*state|redundant.*processor.*mismatch|validation.*failure.*safe</match>
+    <description>Triconex fail-safe state triggered - possible Triton injection failure (prevented disaster)</description>
+    <mitre>
+      <id>T0857</id>
+      <id>T0816</id>  <!-- Device Restart/Shutdown -->
+      <id>T0826</id>  <!-- Loss of Availability -->
+    </mitre>
+    <group>ics,triton,fail_safe_trigger,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- I/O Manipulation (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- I/O Image Manipulation -->
+  <rule id="211080" level="13">
+    <if_sid>211000</if_sid>
+    <match>I/O.*manipulate|I/O.*image|control.*logic.*modify</match>
+    <description>Triconex I/O image or control logic manipulation - Manipulate I/O Image (T0835)</description>
+    <mitre>
+      <id>T0835</id>  <!-- Manipulate I/O Image (TA0107 - Inhibit Response Function) -->
+      <id>T0831</id>  <!-- Manipulation of Control -->
+    </mitre>
+    <group>ics,triton,io_manipulation,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+</group>

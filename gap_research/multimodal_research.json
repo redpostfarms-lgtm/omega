@@ -1,0 +1,142 @@
+{
+  "area": "multimodal",
+  "gap": 47,
+  "timestamp": "2026-01-07T20:04:32.858499",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "anything-llm",
+      "full_name": "Mintplex-Labs/anything-llm",
+      "description": "The all-in-one Desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility,  and more.",
+      "url": "https://github.com/Mintplex-Labs/anything-llm",
+      "stars": 53032,
+      "language": "JavaScript"
+    },
+    {
+      "name": "serve",
+      "full_name": "jina-ai/serve",
+      "description": "\u2601\ufe0f Build multimodal AI applications with cloud-native stack",
+      "url": "https://github.com/jina-ai/serve",
+      "stars": 21819,
+      "language": "Python"
+    },
+    {
+      "name": "UI-TARS-desktop",
+      "full_name": "bytedance/UI-TARS-desktop",
+      "description": "The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+      "url": "https://github.com/bytedance/UI-TARS-desktop",
+      "stars": 20455,
+      "language": "TypeScript"
+    },
+    {
+      "name": "NeMo",
+      "full_name": "NVIDIA-NeMo/NeMo",
+      "description": "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",
+      "url": "https://github.com/NVIDIA-NeMo/NeMo",
+      "stars": 16444,
+      "language": "Python"
+    },
+    {
+      "name": "screenpipe",
+      "full_name": "mediar-ai/screenpipe",
+      "description": "AI app store powered by 24/7 desktop history.  open source | 100% local | dev friendly | 24/7 screen, mic recording",
+      "url": "https://github.com/mediar-ai/screenpipe",
+      "stars": 16369,
+      "language": "TypeScript"
+    },
+    {
+      "name": "sharp",
+      "full_name": "lovell/sharp",
+      "description": "High performance Node.js image processing, the fastest module to resize JPEG, PNG, WebP, AVIF and TIFF images. Uses the libvips library.",
+      "url": "https://github.com/lovell/sharp",
+      "stars": 31693,
+      "language": "JavaScript"
+    },
+    {
+      "name": "deep-learning-for-image-processing",
+      "full_name": "WZMIAOMIAO/deep-learning-for-image-processing",
+      "description": "deep learning for image processing including classification and object-detection etc.",
+      "url": "https://github.com/WZMIAOMIAO/deep-learning-for-image-processing",
+      "stars": 25973,
+      "language": "Python"
+    },
+    {
+      "name": "watchtower",
+      "full_name": "containrrr/watchtower",
+      "description": "A process for automating Docker container base image updates. ",
+      "url": "https://github.com/containrrr/watchtower",
+      "stars": 24444,
+      "language": "Go"
+    },
+    {
+      "name": "GPUImage",
+      "full_name": "BradLarson/GPUImage",
+      "description": "An open source iOS framework for GPU-based image and video processing",
+      "url": "https://github.com/BradLarson/GPUImage",
+      "stars": 20338,
+      "language": "Objective-C"
+    },
+    {
+      "name": "jimp",
+      "full_name": "jimp-dev/jimp",
+      "description": "An image processing library written entirely in JavaScript for Node, with zero external or native dependencies.",
+      "url": "https://github.com/jimp-dev/jimp",
+      "stars": 14578,
+      "language": "TypeScript"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=computer%20vision%20course",
+      "query": "computer vision course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=computer%20vision%20course",
+      "query": "computer vision course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=computer%20vision%20course",
+      "query": "computer vision course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=computer%20vision%20course",
+      "query": "computer vision course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=computer%20vision%20course",
+      "query": "computer vision course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=image%20processing%20tutorial",
+      "query": "image processing tutorial"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=image%20processing%20tutorial",
+      "query": "image processing tutorial"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=image%20processing%20tutorial",
+      "query": "image processing tutorial"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=image%20processing%20tutorial",
+      "query": "image processing tutorial"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=image%20processing%20tutorial",
+      "query": "image processing tutorial"
+    }
+  ],
+  "resources": []
+}

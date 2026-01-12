@@ -1,0 +1,142 @@
+{
+  "area": "security",
+  "gap": 14,
+  "timestamp": "2026-01-07T20:08:40.304313",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "awesome-threat-detection",
+      "full_name": "0x4D31/awesome-threat-detection",
+      "description": "\u2728 A curated list of awesome threat detection and hunting resources \ud83d\udd75\ufe0f\u200d\u2642\ufe0f",
+      "url": "https://github.com/0x4D31/awesome-threat-detection",
+      "stars": 4451,
+      "language": null
+    },
+    {
+      "name": "ThreatHunter-Playbook",
+      "full_name": "OTRF/ThreatHunter-Playbook",
+      "description": "A community-driven, open-source project to share detection logic, adversary tradecraft and resources to make detection development more efficient.",
+      "url": "https://github.com/OTRF/ThreatHunter-Playbook",
+      "stars": 4420,
+      "language": "Python"
+    },
+    {
+      "name": "securityonion",
+      "full_name": "Security-Onion-Solutions/securityonion",
+      "description": "Security Onion is a free and open platform for threat hunting, enterprise security monitoring, and log management. It includes our own interfaces for alerting, dashboards, hunting, PCAP, detections, and case management. It also includes other tools such as osquery, CyberChef, Elasticsearch, Logstash, Kibana, Suricata, and Zeek.",
+      "url": "https://github.com/Security-Onion-Solutions/securityonion",
+      "stars": 4274,
+      "language": "Shell"
+    },
+    {
+      "name": "teler",
+      "full_name": "teler-sh/teler",
+      "description": "Real-time HTTP Intrusion Detection",
+      "url": "https://github.com/teler-sh/teler",
+      "stars": 3079,
+      "language": "Go"
+    },
+    {
+      "name": "hayabusa",
+      "full_name": "Yamato-Security/hayabusa",
+      "description": "Hayabusa (\u96bc) is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs.",
+      "url": "https://github.com/Yamato-Security/hayabusa",
+      "stars": 2976,
+      "language": "Rust"
+    },
+    {
+      "name": "lynis",
+      "full_name": "CISOfy/lynis",
+      "description": "Lynis - Security auditing tool for Linux, macOS, and UNIX-based systems. Assists with compliance testing (HIPAA/ISO27001/PCI DSS) and system hardening. Agentless, and installation optional.",
+      "url": "https://github.com/CISOfy/lynis",
+      "stars": 15050,
+      "language": "Shell"
+    },
+    {
+      "name": "my-arsenal-of-aws-security-tools",
+      "full_name": "toniblyx/my-arsenal-of-aws-security-tools",
+      "description": "List of open source tools for AWS security: defensive, offensive, auditing, DFIR, etc.",
+      "url": "https://github.com/toniblyx/my-arsenal-of-aws-security-tools",
+      "stars": 9372,
+      "language": "Shell"
+    },
+    {
+      "name": "ScoutSuite",
+      "full_name": "nccgroup/ScoutSuite",
+      "description": "Multi-Cloud Security Auditing Tool",
+      "url": "https://github.com/nccgroup/ScoutSuite",
+      "stars": 7496,
+      "language": "Python"
+    },
+    {
+      "name": "airgeddon",
+      "full_name": "v1s1t0r1sh3r3/airgeddon",
+      "description": "This is a multi-use bash script for Linux systems to audit wireless networks.",
+      "url": "https://github.com/v1s1t0r1sh3r3/airgeddon",
+      "stars": 7417,
+      "language": "Shell"
+    },
+    {
+      "name": "aircrack-ng",
+      "full_name": "aircrack-ng/aircrack-ng",
+      "description": "WiFi security auditing tools suite",
+      "url": "https://github.com/aircrack-ng/aircrack-ng",
+      "stars": 6752,
+      "language": "C"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=cybersecurity%20course",
+      "query": "cybersecurity course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=cybersecurity%20course",
+      "query": "cybersecurity course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=cybersecurity%20course",
+      "query": "cybersecurity course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=cybersecurity%20course",
+      "query": "cybersecurity course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=cybersecurity%20course",
+      "query": "cybersecurity course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=threat%20detection",
+      "query": "threat detection"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=threat%20detection",
+      "query": "threat detection"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=threat%20detection",
+      "query": "threat detection"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=threat%20detection",
+      "query": "threat detection"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=threat%20detection",
+      "query": "threat detection"
+    }
+  ],
+  "resources": []
+}

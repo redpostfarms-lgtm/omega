@@ -1,0 +1,14 @@
+{
+  "base_frequency": 140.0,
+  "modulation_depth": 0.145,
+  "modulation_rate": 2.6,
+  "harmonic_ratio": 0.32,
+  "resonance_peak": 2350.0,
+  "prosody_variation": 0.14,
+  "attack_time": 0.025,
+  "decay_time": 0.12,
+  "sustain_level": 0.75,
+  "release_time": 0.14,
+  "created_at": "2026-01-04T15:50:30.591441",
+  "source": "default_new"
+}

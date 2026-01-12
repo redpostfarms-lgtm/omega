@@ -1,0 +1,1 @@
+Bind Win + B to full reboot of brain services. Reattach voiceprint, reload memory, resume last task. Log: 'Resumed at 10:12 PM.'

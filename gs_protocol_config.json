@@ -1,0 +1,36 @@
+{
+  "logging": {
+    "max_log_size_mb": 10,
+    "backup_count": 5,
+    "log_file": "defense_log.txt"
+  },
+  "threading": {
+    "predict_interval_seconds": 3,
+    "threat_check_interval_seconds": 4,
+    "auto_save_interval_seconds": 30,
+    "threat_cooldown_seconds": 20
+  },
+  "threat_detection": {
+    "detection_probability": 0.05,
+    "predict_threshold": 0.85,
+    "hostile_intent_threshold": 0.8
+  },
+  "counterstrike": {
+    "min_port": 80,
+    "max_port": 4433,
+    "decohere_packets": 9,
+    "decohere_delay_min": 0.1,
+    "decohere_delay_max": 0.4
+  },
+  "error_recovery": {
+    "max_retries": 3,
+    "retry_delay_seconds": 1.0,
+    "exponential_backoff": true
+  },
+  "resource_monitoring": {
+    "enabled": true,
+    "check_interval_seconds": 60,
+    "max_memory_mb": 512,
+    "max_cpu_percent": 80.0
+  }
+}

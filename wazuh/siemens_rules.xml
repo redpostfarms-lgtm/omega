@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Siemens SIMATIC Wazuh Rules
+  ============================
+  Custom rules for detecting threats and anomalies in Siemens SIMATIC S7-1200/S7-1500 logs.
+  Includes Triton attack detection patterns and MITRE ATT&CK for ICS mappings.
+  
+  Installation:
+    1. Copy to /var/ossec/etc/rules/siemens_rules.xml
+    2. chown wazuh:wazuh siemens_rules.xml
+    3. chmod 660 siemens_rules.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Rule IDs: 210000-210999 (reserved for Siemens rules)
+  
+  References:
+    - Triton (TRISIS/HatMan) attack case study (2017)
+    - MITRE ATT&CK for ICS: TA0107, TA0106, TA0105
+    - Siemens TIA Portal V17+ Syslog documentation
+-->
+
+<group name="ics,siemens,s7,ot,syslog,">
+
+  <!-- Level 0: Base parent for Siemens events -->
+  <rule id="210000" level="0">
+    <decoded_as>siemens-syslog|siemens-security-event|siemens-simple|siemens-auth-detail|siemens-protection-detail</decoded_as>
+    <description>Siemens SIMATIC S7 event (parent)</description>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Authentication & Access Control -->
+  <!-- ============================================ -->
+
+  <!-- Unauthorized login attempt -->
+  <rule id="210001" level="10">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_ACCESS_DENIED|SE_LOGIN_FAILED|SE_AUTHENTICATION_FAILED</field>
+    <description>Siemens S7 unauthorized access attempt</description>
+    <mitre>
+      <id>T0882</id>  <!-- Theft of Operational Information (Recon) -->
+      <id>T1078</id>  <!-- Valid Accounts (Enterprise) -->
+    </mitre>
+    <group>ics,authentication_failure,siemens,</group>
+  </rule>
+
+  <!-- Successful login from unexpected IP -->
+  <rule id="210002" level="8">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_LOGIN_SUCCESS|SE_DEFAULT_USER_AUTHENTICATION_USED|SE_AUTHENTICATION_SUCCESS</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^10\.0\.50\.|^authorized_subnet</field>
+    <description>Siemens S7 login from unauthorized IP</description>
+    <mitre>
+      <id>T0859</id>  <!-- Valid Accounts (ICS) -->
+      <id>T1078</id>  <!-- Valid Accounts (Enterprise) -->
+    </mitre>
+    <group>ics,authentication,unauthorized_access,siemens,</group>
+  </rule>
+
+  <!-- Repeated failed logins (brute-force) -->
+  <rule id="210003" level="13" frequency="6" timeframe="300">
+    <if_matched_sid>210001</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple Siemens S7 failed login attempts - possible brute-force (Triton-like reconnaissance)</description>
+    <mitre>
+      <id>T1110</id>  <!-- Brute Force (Enterprise) -->
+      <id>T0882</id>  <!-- Theft of Operational Information -->
+    </mitre>
+    <group>ics,bruteforce,siemens,triton_pattern,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Default user authentication (security risk) -->
+  <rule id="210004" level="9">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_DEFAULT_USER_AUTHENTICATION_USED</field>
+    <description>Siemens S7 default user authentication - security risk</description>
+    <mitre>
+      <id>T0812</id>  <!-- Default Credentials (ICS) -->
+      <id>T1078</id>  <!-- Valid Accounts -->
+    </mitre>
+    <group>ics,default_credentials,siemens,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Operating Mode Changes (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- Operating mode change (potential manipulation) -->
+  <rule id="210010" level="12">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_OPMOD_CHANGED|SE_OPMOD_CHANGE_INITIATE|SE_MODE_CHANGE</field>
+    <field name="new_state">STOP|ERROR|MAINTENANCE</field>
+    <description>Siemens S7 operating mode change to unsafe state - possible manipulation (Triton pattern)</description>
+    <mitre>
+      <id>T0858</id>  <!-- Change Operating Mode (TA0104 - Execution) -->
+      <id>T0831</id>  <!-- Manipulation of Control (TA0105 - Impact) -->
+    </mitre>
+    <group>ics,execution,mode_change,siemens,triton_pattern,</group>
+  </rule>
+
+  <!-- Unauthorized mode change to engineering/debug -->
+  <rule id="210011" level="13">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_OPMOD_CHANGED</field>
+    <field name="new_state">PROGRAM|ENGINEERING|DEBUG</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^engineering_subnet</field>
+    <description>Siemens S7 unauthorized mode change to engineering/debug - possible program manipulation (Triton pattern)</description>
+    <mitre>
+      <id>T0858</id>  <!-- Change Operating Mode -->
+      <id>T0821</id>  <!-- Modify Controller Tasking -->
+      <id>T0843</id>  <!-- Program Download -->
+    </mitre>
+    <group>ics,execution,mode_change,siemens,triton_pattern,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Multiple mode changes in short time (automation pattern) -->
+  <rule id="210012" level="14" frequency="3" timeframe="300">
+    <if_matched_sid>210010</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple Siemens S7 mode changes in short time - possible automated manipulation (Triton-like attack)</description>
+    <mitre>
+      <id>T0858</id>
+      <id>T0831</id>
+    </mitre>
+    <group>ics,execution,mode_change,siemens,triton_pattern,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Protection Level Changes (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- Protection level change or violation -->
+  <rule id="210020" level="11">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_PROTECTION_ENABLED|SE_PROTECTION_DISABLED|SE_PROTECTION_CHANGED</field>
+    <description>Siemens S7 protection level changed - potential tampering (Triton pattern)</description>
+    <mitre>
+      <id>T0892</id>  <!-- Change Credential (TA0107 - Inhibit Response Function) -->
+      <id>T0838</id>  <!-- Modify Alarm Settings -->
+    </mitre>
+    <group>ics,privilege_escalation,siemens,triton_pattern,</group>
+  </rule>
+
+  <!-- Protection disabled (critical) -->
+  <rule id="210021" level="14">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_PROTECTION_DISABLED</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^maintenance_subnet</field>
+    <description>Siemens S7 protection DISABLED - critical security violation (Triton attack pattern)</description>
+    <mitre>
+      <id>T0892</id>
+      <id>T0837</id>  <!-- Loss of Protection (TA0105 - Impact) -->
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,privilege_escalation,siemens,triton_pattern,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Program/Logic Manipulation (Triton Core) -->
+  <!-- ============================================ -->
+
+  <!-- Program download/upload detected -->
+  <rule id="210030" level="13">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_PROGRAM_DOWNLOAD|SE_PROGRAM_UPLOAD|SE_LOGIC_MODIFIED</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^engineering_subnet</field>
+    <description>Siemens S7 program download/upload from unauthorized source - possible logic manipulation (Triton attack)</description>
+    <mitre>
+      <id>T0821</id>  <!-- Modify Controller Tasking (TA0104 - Execution) -->
+      <id>T0843</id>  <!-- Program Download -->
+      <id>T0831</id>  <!-- Manipulation of Control (TA0105 - Impact) -->
+    </mitre>
+    <group>ics,execution,program_download,siemens,triton_pattern,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Repeated program modifications (automation pattern) -->
+  <rule id="210031" level="15" frequency="2" timeframe="600">
+    <if_matched_sid>210030</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple Siemens S7 program modifications in short time - CRITICAL Triton-like attack pattern</description>
+    <mitre>
+      <id>T0821</id>
+      <id>T0843</id>
+      <id>T0831</id>
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,execution,program_download,siemens,triton_pattern,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Firmware Manipulation (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- Firmware update mode activated -->
+  <rule id="210040" level="13">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_FIRMWARE_UPDATE|SE_FIRMWARE_MODE|SE_BOOTLOADER_MODE</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^vendor_subnet</field>
+    <description>Siemens S7 firmware update mode activated from unauthorized source - possible firmware manipulation (Triton pattern)</description>
+    <mitre>
+      <id>T0800</id>  <!-- Activate Firmware Update Mode (TA0107 - Inhibit Response Function) -->
+      <id>T0857</id>  <!-- System Firmware -->
+    </mitre>
+    <group>ics,inhibit_response,firmware_mode,siemens,triton_pattern,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Firmware integrity violation -->
+  <rule id="210041" level="14">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_FIRMWARE_INTEGRITY_FAILED|SE_FIRMWARE_SIGNATURE_FAILED</field>
+    <description>Siemens S7 firmware integrity check failed - possible tampering (Triton attack pattern)</description>
+    <mitre>
+      <id>T0857</id>  <!-- System Firmware -->
+      <id>T0874</id>  <!-- Hooking (possible) -->
+    </mitre>
+    <group>ics,inhibit_response,firmware_mode,siemens,triton_pattern,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Device Control (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- Device restart/shutdown -->
+  <rule id="210050" level="11">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_DEVICE_RESTART|SE_DEVICE_SHUTDOWN|SE_DEVICE_RESET</field>
+    <field name="src_ip" negate="yes">^192\.168\.10\.|^maintenance_subnet</field>
+    <description>Siemens S7 device restart/shutdown from unauthorized source - possible inhibit response (Triton pattern)</description>
+    <mitre>
+      <id>T0816</id>  <!-- Device Restart/Shutdown (TA0107 - Inhibit Response Function) -->
+      <id>T0826</id>  <!-- Loss of Availability (TA0105 - Impact) -->
+    </mitre>
+    <group>ics,inhibit_response,device_control,siemens,triton_pattern,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Safety System Compromise (Triton Target) -->
+  <!-- ============================================ -->
+
+  <!-- Safety system bypass/violation -->
+  <rule id="210060" level="15">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_SAFETY_BYPASS|SE_SAFETY_DISABLED|SE_SIS_VIOLATION</field>
+    <description>Siemens S7 safety system bypassed - CRITICAL Triton attack pattern (Loss of Safety)</description>
+    <mitre>
+      <id>T0880</id>  <!-- Loss of Safety (TA0105 - Impact) -->
+      <id>T0837</id>  <!-- Loss of Protection -->
+      <id>T0831</id>  <!-- Manipulation of Control -->
+    </mitre>
+    <group>ics,impact,loss_of_safety,siemens,triton_pattern,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- Correlation Rules (Triton Attack Chain) -->
+  <!-- ============================================ -->
+
+  <!-- Triton-like attack pattern: Mode change + Program modification -->
+  <rule id="210070" level="15" frequency="2" timeframe="600">
+    <if_matched_sid>210010,210030</if_matched_sid>
+    <same_srcip/>
+    <description>Siemens S7 mode change followed by program modification - CRITICAL Triton attack chain detected</description>
+    <mitre>
+      <id>T0858</id>  <!-- Change Operating Mode -->
+      <id>T0821</id>  <!-- Modify Controller Tasking -->
+      <id>T0831</id>  <!-- Manipulation of Control -->
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,execution,siemens,triton_attack_chain,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Triton-like attack pattern: Protection disabled + Safety bypass -->
+  <rule id="210071" level="15" frequency="2" timeframe="600">
+    <if_matched_sid>210021,210060</if_matched_sid>
+    <same_srcip/>
+    <description>Siemens S7 protection disabled followed by safety bypass - CRITICAL Triton attack chain (Inhibit Response + Impact)</description>
+    <mitre>
+      <id>T0892</id>  <!-- Change Credential -->
+      <id>T0837</id>  <!-- Loss of Protection -->
+      <id>T0880</id>  <!-- Loss of Safety -->
+    </mitre>
+    <group>ics,inhibit_response,impact,siemens,triton_attack_chain,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- I/O Manipulation (Triton Pattern) -->
+  <!-- ============================================ -->
+
+  <!-- I/O image manipulation detected -->
+  <rule id="210080" level="13">
+    <if_sid>210000</if_sid>
+    <field name="event_code">SE_IO_MANIPULATED|SE_IO_OVERRIDE|SE_INPUT_MASKED</field>
+    <description>Siemens S7 I/O image manipulation detected - possible process tampering (Triton pattern)</description>
+    <mitre>
+      <id>T0835</id>  <!-- Manipulate I/O Image (TA0107 - Inhibit Response Function) -->
+      <id>T0831</id>  <!-- Manipulation of Control -->
+    </mitre>
+    <group>ics,inhibit_response,io_manipulation,siemens,triton_pattern,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+</group>

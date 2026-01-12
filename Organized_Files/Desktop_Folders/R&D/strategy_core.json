@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "extracted_at": "2026-01-02T02:25:12.145248",
+  "strategic_principles": [
+    "Win without fighting = positional dominance",
+    "Know the enemy = move prediction",
+    "Attack where unprepared = exploit weaknesses",
+    "Speed is the essence of war = tempo advantage",
+    "Adapt terrain = remap chessboard to any grid",
+    "Leave no rear exposed = secure flanks",
+    "Strike when they falter = capitalize on mistakes",
+    "Friction of war = calculation uncertainty",
+    "Center of gravity = key resource control",
+    "Fog of war = incomplete information",
+    "Probability in tactics = evaluation confidence",
+    "One cut = decisive move",
+    "Rhythm disruption = tempo breaks",
+    "Distance control = positioning",
+    "Simultaneous attack = fork patterns"
+  ],
+  "vectors": {},
+  "mappings": {
+    "chess_to_war": {
+      "pawn": "infantry",
+      "rook": "tank",
+      "knight": "cavalry",
+      "bishop": "artillery",
+      "queen": "command_unit",
+      "king": "headquarters",
+      "center_control": "strategic_location_control",
+      "tempo": "initiative",
+      "material": "resource_advantage"
+    },
+    "chess_to_mmorpg": {
+      "pawn": "tank",
+      "rook": "melee_dps",
+      "knight": "rogue",
+      "bishop": "healer",
+      "queen": "support",
+      "king": "main_tank",
+      "center_control": "zone_control",
+      "tempo": "aggro_management",
+      "material": "party_composition"
+    },
+    "chess_to_trading": {
+      "pawn": "small_position",
+      "rook": "major_position",
+      "knight": "swing_trade",
+      "bishop": "trend_trade",
+      "queen": "high_leverage",
+      "king": "capital_preservation",
+      "center_control": "market_dominance",
+      "tempo": "momentum",
+      "material": "profit_advantage"
+    }
+  },
+  "openings": [],
+  "tactics": [],
+  "endgames": []
+}

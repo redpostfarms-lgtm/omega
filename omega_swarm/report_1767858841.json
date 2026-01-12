@@ -1,0 +1,8 @@
+{
+  "target": "https://jsonplaceholder.typicode.com/posts/1",
+  "severity": "medium",
+  "payload": "t\\It",
+  "response": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}",
+  "report_text": "Title: XSS in https://jsonplaceholder.typicode.com/posts/1\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://jsonplaceholder.typicode.com/posts/1\n\nSteps to Reproduce:\n\n1. Navigate to https://jsonplaceholder.typicode.com/posts/1\n\n2. Submit payload: t\\It...\n\n3. Observe vulnerability\n\n\nProof of Concept:\nt\\It\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
+  "timestamp": "2026-01-08T00:54:01.989943"
+}

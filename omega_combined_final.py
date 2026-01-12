@@ -77,23 +77,87 @@ def detect_emotion(wav):
         print(f"Emotion detection error: {e}")
         return 'neutral'
 
+def play_audio_background(wav_file):
+    """Play audio file in background without showing media player window."""
+    if not Path(wav_file).exists():
+        print(f"Audio file not found: {wav_file}")
+        return
+    
+    try:
+        if sys.platform == 'win32':
+            # Use PowerShell MediaPlayer for hidden background playback
+            # Escape path for PowerShell (replace backslashes and single quotes)
+            # Use .format() instead of f-string to safely handle paths with curly braces
+            abs_path = str(Path(wav_file).absolute()).replace('\\', '/').replace("'", "''")
+            ps_cmd = '''
+            Add-Type -AssemblyName presentationCore
+            $mediaPlayer = New-Object system.windows.media.mediaplayer
+            $mediaPlayer.open([uri]::new('file:///{0}'))
+            $mediaPlayer.Volume = 1.0
+            $mediaPlayer.Play()
+            # Wait for playback to complete by polling Position vs NaturalDuration
+            # Max 5 minutes timeout for safety (prevents infinite loops)
+            $timeout = (Get-Date).AddMinutes(5)
+            while ($mediaPlayer.Position -lt $mediaPlayer.NaturalDuration.TimeSpan -and (Get-Date) -lt $timeout) {{
+                Start-Sleep -Milliseconds 100
+            }}
+            '''.format(abs_path)
+            # Run PowerShell in background, hidden window
+            subprocess.Popen(
+                ['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else subprocess.DETACHED_PROCESS
+            )
+        else:
+            # Linux/macOS: use background process with proper escaping
+            import shlex
+            safe_wav_file = shlex.quote(str(Path(wav_file).absolute()))
+            if os.system('which ffplay > /dev/null 2>&1') == 0:
+                os.system(f'ffplay -nodisp -autoexit {safe_wav_file} &')
+            else:
+                os.system(f'play {safe_wav_file} &')
+    except Exception as e:
+        print(f"Background audio playback error: {e}")
+        # Fallback: try minimized window
+        try:
+            # Use shell=True with string command (not list) for Windows cmd
+            cmd_str = f'start /min "" "{wav_file}"'
+            subprocess.Popen(cmd_str, shell=True, creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0)
+        except Exception:
+            # Fallback playback failed - audio may not play
+            pass
+
 # Speak with emotion tone
 def omega_speak(text, emotion="neutral"):
-    """Speak text with emotion-aware tone, non-blocking."""
-    prefix = {"happy": "😊 ", "angry": "🔥 ", "sad": "😔 ", "neutral": "🧠 "}.get(emotion, "🧠 ")
+    """Speak text with emotion-aware tone, using voice clone, non-blocking background playback."""
+    # Always use voice clone for better quality
+    if not CLIP.exists():
+        print(f"Warning: {CLIP} not found, using default voice")
+        speaker_wav = None
+    else:
+        speaker_wav = str(CLIP)
+        print(f"[Using voice clone: {CLIP.name} for improved quality]")
+    
+    # Emotion-aware tone (text only, no emoji to avoid Unicode issues on Windows)
+    emotion_prefix = {"happy": "[Happy] ", "angry": "[Angry] ", "sad": "[Sad] ", "neutral": ""}.get(emotion, "")
+    text_with_emotion = emotion_prefix + text
+    
     try:
-        if not CLIP.exists():
-            print(f"Warning: {CLIP} not found, using default voice")
-            speaker_wav = None
-        else:
-            speaker_wav = str(CLIP)
+        print(f"Generating speech: {text_with_emotion[:50]}...")
+        get_tts().tts_to_file(
+            text=text_with_emotion, 
+            speaker_wav=speaker_wav,  # Always use voice clone if available
+            language='en', 
+            file_path='response.wav'
+        )
         
-        get_tts().tts_to_file(text=prefix + text, speaker_wav=speaker_wav, language='en', file_path='response.wav')
-        # Non-blocking audio playback
-        if sys.platform == 'win32':
-            os.startfile('response.wav')
-        else:
-            os.system('start response.wav' if sys.platform == 'darwin' else 'xdg-open response.wav')
+        file_size = Path('response.wav').stat().st_size if Path('response.wav').exists() else 0
+        print(f"[OK] Audio generated: response.wav ({file_size} bytes)")
+        
+        # Play audio in background without showing media player window
+        print("[Playing audio in background - no window will appear]")
+        play_audio_background('response.wav')
     except Exception as e:
         print(f"TTS error: {e}")
 

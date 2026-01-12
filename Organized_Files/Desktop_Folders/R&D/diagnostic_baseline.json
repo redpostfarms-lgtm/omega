@@ -1,0 +1,11 @@
+{
+  "main.py": "MISSING",
+  "agent_anonymous.py": "54f72a04f37b6d04ede3e7624913db6d8c3ffbc8d9a8f73be430f24dc4f7388d",
+  "elara_integrated_system.py": "2d92734af1e1119dbc27efdbfa50de81a7194a6dd78d04bef90c461cbce7aaac",
+  "elara_game_engine.py": "fbe33df5c74668c3276689f2a6e19333c864d84b49b73d5c8b269858421b31b8",
+  "agent_swarm_isolated.py": "a6d7d412f9a65f0bd759f29aa756062e0d96a1847b6013c95bd05ba9a9dea9a9",
+  "elara_visual_checkers.py": "e2214862a623fcb7f8b947f79210112988cee0d81b6a8f7c1f817361477a5374",
+  "strategy_core_converter.py": "455caf463c6d9cce81bf63dd63db1068418d89882c7c4e6bff08a910878703d8",
+  "diagnostic_engine.py": "567de502c3b732cff64313ea764aea6b075b1bb14f033698e766d90ba13b4994",
+  "stonewall/setup.py": "cd49a5c28a3d584d848296e8888f9458ba3216d19125858eaedeebe197c9bc30"
+}

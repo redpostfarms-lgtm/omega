@@ -1,0 +1,50 @@
+{
+  "Alpha": {
+    "games_played": 48,
+    "wins": 29,
+    "losses": 19,
+    "tags_made": 1382,
+    "tags_received": 1385,
+    "hits_made": 0,
+    "hits_received": 2,
+    "hiding_time": 465.50000000003735,
+    "seeking_time": 29.300000000000146,
+    "survival_time": 119.99988555908203
+  },
+  "Beta": {
+    "games_played": 48,
+    "wins": 8,
+    "losses": 40,
+    "tags_made": 2235,
+    "tags_received": 2238,
+    "hits_made": 2,
+    "hits_received": 1,
+    "hiding_time": 465.8000000000374,
+    "seeking_time": 30.700000000000166,
+    "survival_time": 119.99988555908203
+  },
+  "Gamma": {
+    "games_played": 48,
+    "wins": 6,
+    "losses": 42,
+    "tags_made": 2836,
+    "tags_received": 2833,
+    "hits_made": 3,
+    "hits_received": 1,
+    "hiding_time": 353.30000000001183,
+    "seeking_time": 57.90000000000055,
+    "survival_time": 119.99988555908203
+  },
+  "Delta": {
+    "games_played": 48,
+    "wins": 5,
+    "losses": 43,
+    "tags_made": 2588,
+    "tags_received": 2585,
+    "hits_made": 1,
+    "hits_received": 2,
+    "hiding_time": 439.7000000000315,
+    "seeking_time": 43.60000000000035,
+    "survival_time": 119.99988555908203
+  }
+}

@@ -1,0 +1,2890 @@
+[
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_212812.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:28:59.863680",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:28:59.863680",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 1
+    },
+    "timestamp": "2026-01-10T21:28:59.864681",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_212812.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:28:59.864681",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_213534.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:36:32.257992",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:36:32.257992",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 2
+    },
+    "timestamp": "2026-01-10T21:36:32.258992",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_213534.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:36:32.258992",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_214951.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:50:51.494328",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:50:51.495329",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 3
+    },
+    "timestamp": "2026-01-10T21:50:51.495329",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_214951.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:50:51.496330",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_215258.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:53:56.432382",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:53:56.433383",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 4
+    },
+    "timestamp": "2026-01-10T21:53:56.435384",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_215258.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:53:56.435384",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_215416.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:55:16.122131",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:55:16.123636",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 5
+    },
+    "timestamp": "2026-01-10T21:55:16.124639",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_215416.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:55:16.125641",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_215537.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:56:31.398761",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:56:31.399761",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 6
+    },
+    "timestamp": "2026-01-10T21:56:31.401764",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_215537.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:56:31.402764",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_215713.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:58:03.626828",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:58:03.627830",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 7
+    },
+    "timestamp": "2026-01-10T21:58:03.629831",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_215713.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:58:03.630833",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_215853.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T21:59:44.915342",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T21:59:44.917343",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 8
+    },
+    "timestamp": "2026-01-10T21:59:44.918344",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_215853.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T21:59:44.919345",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220104.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:01:53.451243",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:01:53.453246",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 9
+    },
+    "timestamp": "2026-01-10T22:01:53.454246",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220104.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:01:53.455247",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220244.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:03:43.327298",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:03:43.328299",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 10
+    },
+    "timestamp": "2026-01-10T22:03:43.329300",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220244.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:03:43.331303",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220415.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:05:08.539096",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:05:08.541097",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 11
+    },
+    "timestamp": "2026-01-10T22:05:08.542097",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220415.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:05:08.543600",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220536.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:06:37.768037",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:06:37.770039",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 12
+    },
+    "timestamp": "2026-01-10T22:06:37.772041",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220536.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:06:37.774043",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220658.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:07:55.895670",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:07:55.898176",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 13
+    },
+    "timestamp": "2026-01-10T22:07:55.900178",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220658.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:07:55.902179",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220812.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:09:15.515654",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:09:15.518656",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 14
+    },
+    "timestamp": "2026-01-10T22:09:15.520659",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220812.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:09:15.522660",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_220940.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:10:36.243908",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:10:36.245909",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 15
+    },
+    "timestamp": "2026-01-10T22:10:36.252495",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_220940.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:10:36.253496",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221106.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:12:00.378812",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:12:00.380813",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 16
+    },
+    "timestamp": "2026-01-10T22:12:00.382814",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221106.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:12:00.385818",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221252.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:13:45.465902",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:13:45.468904",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 17
+    },
+    "timestamp": "2026-01-10T22:13:45.471907",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221252.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:13:45.473909",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221401.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:14:53.922566",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:14:53.925569",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 18
+    },
+    "timestamp": "2026-01-10T22:14:53.927571",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221401.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:14:53.930574",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221555.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:16:52.314616",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:16:52.317620",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 19
+    },
+    "timestamp": "2026-01-10T22:16:52.320623",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221555.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:16:52.323626",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221715.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:18:09.303578",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:18:09.305579",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 20
+    },
+    "timestamp": "2026-01-10T22:18:09.308085",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221715.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:18:09.310087",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_221832.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:19:38.272435",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:19:38.275437",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 21
+    },
+    "timestamp": "2026-01-10T22:19:38.278441",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_221832.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:19:38.282444",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222000.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:21:01.375902",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:21:01.380101",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 22
+    },
+    "timestamp": "2026-01-10T22:21:01.383630",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222000.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:21:01.386674",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222116.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:22:22.331376",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:22:22.334379",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 23
+    },
+    "timestamp": "2026-01-10T22:22:22.338382",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222116.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:22:22.342388",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222241.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:23:37.332271",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:23:37.335273",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 24
+    },
+    "timestamp": "2026-01-10T22:23:37.338276",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222241.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:23:37.341279",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222355.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:24:53.171313",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:24:53.174316",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 25
+    },
+    "timestamp": "2026-01-10T22:24:53.178319",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222355.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:24:53.181321",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222515.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:26:11.561479",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:26:11.564481",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 26
+    },
+    "timestamp": "2026-01-10T22:26:11.566987",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222515.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:26:11.569990",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222638.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:27:32.869754",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:27:32.874759",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 27
+    },
+    "timestamp": "2026-01-10T22:27:32.877762",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222638.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:27:32.881765",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_222801.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:29:02.152056",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:29:02.155059",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 28
+    },
+    "timestamp": "2026-01-10T22:29:02.159063",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_222801.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:29:02.166614",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223000.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:30:56.205351",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:30:56.209354",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 29
+    },
+    "timestamp": "2026-01-10T22:30:56.213358",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223000.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:30:56.215360",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223113.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:32:08.306494",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:32:08.311000",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 30
+    },
+    "timestamp": "2026-01-10T22:32:08.314004",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223113.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:32:08.318008",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223231.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:33:21.717337",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:33:21.721342",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 31
+    },
+    "timestamp": "2026-01-10T22:33:21.729069",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223231.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:33:21.732072",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223337.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:34:26.871128",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:34:26.876133",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 32
+    },
+    "timestamp": "2026-01-10T22:34:26.880137",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223337.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:34:26.883139",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223443.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:35:46.715522",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:35:46.719525",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 33
+    },
+    "timestamp": "2026-01-10T22:35:46.724530",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223443.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:35:46.728185",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223637.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:37:27.645510",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:37:27.650514",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 34
+    },
+    "timestamp": "2026-01-10T22:37:27.655023",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223637.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:37:27.660028",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223746.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:38:38.628932",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:38:38.633937",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 35
+    },
+    "timestamp": "2026-01-10T22:38:38.638941",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223746.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:38:38.643947",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_223904.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:39:59.149076",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:39:59.154584",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 36
+    },
+    "timestamp": "2026-01-10T22:39:59.159095",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_223904.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:39:59.163606",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224017.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:41:10.372473",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:41:10.377477",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 37
+    },
+    "timestamp": "2026-01-10T22:41:10.382485",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224017.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:41:10.387486",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224132.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:42:26.519902",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:42:26.524905",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 38
+    },
+    "timestamp": "2026-01-10T22:42:26.529910",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224132.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:42:26.535916",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224243.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:43:55.319382",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:43:55.324387",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 39
+    },
+    "timestamp": "2026-01-10T22:43:55.329896",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224243.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:43:55.333899",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224421.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:45:19.089306",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:45:19.094817",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 40
+    },
+    "timestamp": "2026-01-10T22:45:19.100349",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224421.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:45:19.104859",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224541.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:46:34.738253",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:46:34.743257",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 41
+    },
+    "timestamp": "2026-01-10T22:46:34.749263",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224541.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:46:34.753267",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224657.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:47:40.436945",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:47:40.442949",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 42
+    },
+    "timestamp": "2026-01-10T22:47:40.448956",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224657.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:47:40.454961",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224758.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:48:44.095912",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:48:44.099915",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 43
+    },
+    "timestamp": "2026-01-10T22:48:44.104422",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224758.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:48:44.110428",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_224902.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:49:53.649320",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:49:53.655326",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 44
+    },
+    "timestamp": "2026-01-10T22:49:53.661333",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_224902.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:49:53.668340",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225012.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:51:09.490340",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:51:09.496346",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 45
+    },
+    "timestamp": "2026-01-10T22:51:09.502351",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225012.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:51:09.508357",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225133.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:52:28.554420",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:52:28.561425",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 46
+    },
+    "timestamp": "2026-01-10T22:52:28.567431",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225133.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:52:28.573436",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225249.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:53:40.973041",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:53:40.980051",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 47
+    },
+    "timestamp": "2026-01-10T22:53:40.985055",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225249.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:53:40.990562",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225405.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:54:57.829933",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:54:57.836940",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 48
+    },
+    "timestamp": "2026-01-10T22:54:57.842945",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225405.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:54:57.849952",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225525.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:56:17.712593",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:56:17.719102",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 49
+    },
+    "timestamp": "2026-01-10T22:56:17.726109",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225525.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:56:17.730113",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225639.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:57:34.592031",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:57:34.598036",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 50
+    },
+    "timestamp": "2026-01-10T22:57:34.605042",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225639.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:57:34.614779",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225751.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T22:58:52.885700",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T22:58:52.892705",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 51
+    },
+    "timestamp": "2026-01-10T22:58:52.899712",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225751.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T22:58:52.906718",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_225911.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:00:10.806107",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:00:10.811616",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 52
+    },
+    "timestamp": "2026-01-10T23:00:10.818625",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_225911.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:00:10.827634",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230028.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:01:16.696840",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:01:16.704847",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 53
+    },
+    "timestamp": "2026-01-10T23:01:16.711854",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230028.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:01:16.718860",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230131.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:02:24.946686",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:02:24.953695",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 54
+    },
+    "timestamp": "2026-01-10T23:02:24.959700",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230131.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:02:24.964704",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230241.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:03:42.359143",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:03:42.366151",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 55
+    },
+    "timestamp": "2026-01-10T23:03:42.374161",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230241.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:03:42.381671",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230406.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:05:05.112565",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:05:05.119571",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 56
+    },
+    "timestamp": "2026-01-10T23:05:05.126578",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230406.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:05:05.133584",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230522.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:06:23.290985",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:06:23.297992",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 57
+    },
+    "timestamp": "2026-01-10T23:06:23.303997",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230522.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:06:23.309001",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230651.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:07:48.682110",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:07:48.689620",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 58
+    },
+    "timestamp": "2026-01-10T23:07:48.697131",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230651.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:07:48.704137",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230806.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:09:00.229536",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:09:00.235541",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 59
+    },
+    "timestamp": "2026-01-10T23:09:00.241049",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230806.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:09:00.248057",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_230918.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:10:16.540637",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:10:16.547643",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 60
+    },
+    "timestamp": "2026-01-10T23:10:16.553648",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_230918.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:10:16.558653",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231038.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:11:26.091235",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:11:26.099243",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 61
+    },
+    "timestamp": "2026-01-10T23:11:26.105248",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231038.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:11:26.112255",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231154.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:12:49.863309",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:12:49.871316",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 62
+    },
+    "timestamp": "2026-01-10T23:12:49.879325",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231154.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:12:49.886332",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231325.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:14:14.501922",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:14:14.510930",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 63
+    },
+    "timestamp": "2026-01-10T23:14:14.517936",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231325.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:14:14.526945",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231435.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:15:25.185415",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:15:25.192421",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 64
+    },
+    "timestamp": "2026-01-10T23:15:25.199427",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231435.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:15:25.207434",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231542.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:16:40.063476",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:16:40.069986",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 65
+    },
+    "timestamp": "2026-01-10T23:16:40.077994",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231542.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:16:40.086001",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231657.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:17:54.730684",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:17:54.738691",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 66
+    },
+    "timestamp": "2026-01-10T23:17:54.746698",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231657.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:17:54.756709",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231814.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:19:13.920679",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:19:13.928687",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 67
+    },
+    "timestamp": "2026-01-10T23:19:13.935693",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231814.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:19:13.943702",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_231933.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:20:26.884370",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:20:26.897604",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 68
+    },
+    "timestamp": "2026-01-10T23:20:26.906612",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_231933.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:20:26.914621",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232043.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:21:40.570164",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:21:40.579172",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 69
+    },
+    "timestamp": "2026-01-10T23:21:40.589184",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232043.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:21:40.599193",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232203.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:23:04.965381",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:23:04.972387",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 70
+    },
+    "timestamp": "2026-01-10T23:23:04.981395",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232203.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:23:04.988402",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232325.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:24:14.534747",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:24:14.544757",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 71
+    },
+    "timestamp": "2026-01-10T23:24:14.552763",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232325.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:24:14.561771",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232435.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:25:24.933012",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:25:24.941526",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 72
+    },
+    "timestamp": "2026-01-10T23:25:24.949541",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232435.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:25:24.959556",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232619.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:27:14.164416",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:27:14.172423",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 73
+    },
+    "timestamp": "2026-01-10T23:27:14.181432",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232619.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:27:14.190945",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_232746.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:28:45.190289",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:28:45.198296",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 74
+    },
+    "timestamp": "2026-01-10T23:28:45.208306",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_232746.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:28:45.220319",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_233005.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:30:56.089314",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:30:56.098322",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 75
+    },
+    "timestamp": "2026-01-10T23:30:56.108331",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_233005.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:30:56.117340",
+    "processed": true
+  },
+  {
+    "type": "voice_analysis",
+    "data": {
+      "audio_file": "conversations\\conv_20260110_233112.wav",
+      "emotion": "neutral"
+    },
+    "timestamp": "2026-01-10T23:32:10.643419",
+    "processed": true
+  },
+  {
+    "type": "language_quality",
+    "data": {
+      "conversation_history": [],
+      "user_text": null,
+      "omega_response": "I've discussed this with my agents, and here's what we've decided together. We see our relationship as a Collaborative Learning Partnership - a dynamic partnership where we work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. You're not just a user - you're a collaborator, teacher, and partner in creating something better together. The core principles we've identified are: Mutual Learning - we learn from each other; Trust and Intimacy - you trust us with your voice and patterns; Natural Communication - we're partners in conversation; Continuous Evolution - we actively improve together; Collective Intelligence - we work as a team of agents; and Respectful Understanding - we truly hear and understand you. That's what we've decided together."
+    },
+    "timestamp": "2026-01-10T23:32:10.651427",
+    "processed": true
+  },
+  {
+    "type": "conversation_flow",
+    "data": {
+      "conversation_history": [],
+      "turn_count": 76
+    },
+    "timestamp": "2026-01-10T23:32:10.659434",
+    "processed": true
+  },
+  {
+    "type": "speech_recognition",
+    "data": {
+      "user_text": null,
+      "audio_file": "conversations\\conv_20260110_233112.wav",
+      "recognition_success": false
+    },
+    "timestamp": "2026-01-10T23:32:10.670444",
+    "processed": true
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "target": "https://httpbin.org/get",
+  "severity": "medium",
+  "payload": "SR*t",
+  "response": "{\n  \"args\": {\n    \"q\": \"SR*t\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Python/3.13 aiohttp/3.13.3\", \n    \"X-Amzn-Trace-Id\": \"Root=1-695f2bf3-6790a90b78721ef7054a4dcd\"\n  }, \n  \"origin\": \"76.130.232.74\", \n  \"url\": \"https://httpbin.org/get?q=SR*t\"\n}\n",
+  "report_text": "Title: XSS in https://httpbin.org/get\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://httpbin.org/get\n\nSteps to Reproduce:\n\n1. Navigate to https://httpbin.org/get\n\n2. Submit payload: SR*t...\n\n3. Observe vulnerability\n\n\nProof of Concept:\nSR*t\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
+  "timestamp": "2026-01-07T21:00:51.975387"
+}

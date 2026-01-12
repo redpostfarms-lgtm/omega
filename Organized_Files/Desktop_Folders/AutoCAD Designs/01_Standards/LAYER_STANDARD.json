@@ -1,0 +1,101 @@
+{
+  "layer_standard_version": "1.0",
+  "default_units": "mm",
+  "layers": [
+    {
+      "name": "A-WALL",
+      "color": [255, 0, 0],
+      "color_name": "Red",
+      "linetype": "Continuous",
+      "lineweight": 0.50,
+      "usage": "Architectural walls - exterior and interior"
+    },
+    {
+      "name": "A-DOOR",
+      "color": [0, 255, 0],
+      "color_name": "Green",
+      "linetype": "Continuous",
+      "lineweight": 0.25,
+      "usage": "Doors and door openings"
+    },
+    {
+      "name": "A-WINDOW",
+      "color": [0, 0, 255],
+      "color_name": "Blue",
+      "linetype": "Continuous",
+      "lineweight": 0.25,
+      "usage": "Windows and openings"
+    },
+    {
+      "name": "A-DIM",
+      "color": [255, 255, 0],
+      "color_name": "Yellow",
+      "linetype": "Continuous",
+      "lineweight": 0.13,
+      "usage": "Dimensions and annotations"
+    },
+    {
+      "name": "A-TEXT",
+      "color": [255, 255, 255],
+      "color_name": "White",
+      "linetype": "Continuous",
+      "lineweight": 0.13,
+      "usage": "Text and labels"
+    },
+    {
+      "name": "M-BOLT",
+      "color": [255, 128, 0],
+      "color_name": "Orange",
+      "linetype": "Continuous",
+      "lineweight": 0.25,
+      "usage": "Mechanical fasteners - bolts, screws"
+    },
+    {
+      "name": "M-SHAFT",
+      "color": [128, 128, 128],
+      "color_name": "Gray",
+      "linetype": "Continuous",
+      "lineweight": 0.50,
+      "usage": "Mechanical shafts and axles"
+    },
+    {
+      "name": "E-WIRE",
+      "color": [255, 0, 255],
+      "color_name": "Magenta",
+      "linetype": "Continuous",
+      "lineweight": 0.25,
+      "usage": "Electrical wiring and conductors"
+    },
+    {
+      "name": "E-POWER",
+      "color": [255, 0, 128],
+      "color_name": "Pink",
+      "linetype": "Dashed",
+      "lineweight": 0.25,
+      "usage": "Power distribution lines"
+    },
+    {
+      "name": "CONSTRUCTION",
+      "color": [128, 128, 128],
+      "color_name": "Gray",
+      "linetype": "Dotted",
+      "lineweight": 0.13,
+      "usage": "Construction lines and guides - typically hidden in final export"
+    },
+    {
+      "name": "0",
+      "color": [255, 255, 255],
+      "color_name": "White",
+      "linetype": "Continuous",
+      "lineweight": 0.25,
+      "usage": "Default layer - use for general geometry"
+    }
+  ],
+  "notes": {
+    "color_format": "RGB values [R, G, B] where each value is 0-255",
+    "lineweight_units": "mm",
+    "linetype_options": ["Continuous", "Dashed", "Dotted", "DashDot", "Center", "Hidden"],
+    "usage_guidelines": "Layer names follow prefix-suffix convention: PREFIX-OBJECT where PREFIX indicates discipline (A=Architectural, M=Mechanical, E=Electrical, P=Piping)"
+  }
+}
+

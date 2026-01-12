@@ -1,0 +1,366 @@
+{
+  "aphids": [
+    {
+      "name": "Neem Oil Spray",
+      "type": "pest",
+      "target": "aphids",
+      "recipe": {
+        "neem_oil": "2-3 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 3-5 days until controlled. Cover all leaf surfaces.",
+      "frequency": "Every 3-5 days",
+      "effectiveness": "90-95%",
+      "safety": "Safe for beneficial insects when used properly",
+      "prevention": false
+    },
+    {
+      "name": "Insecticidal Soap",
+      "type": "pest",
+      "target": "aphids",
+      "recipe": {
+        "liquid_soap": "1.5 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray directly on aphids. Rinse after 2 hours.",
+      "frequency": "Every 3-5 days",
+      "effectiveness": "85-90%",
+      "safety": "Rinse plants to prevent leaf burn",
+      "prevention": false
+    },
+    {
+      "name": "Beneficial Insects",
+      "type": "pest",
+      "target": "aphids",
+      "recipe": {
+        "ladybugs": "1,500-2,000 per acre",
+        "lacewings": "1,000-2,000 per acre"
+      },
+      "application": "Release early morning or evening. Provide water source.",
+      "frequency": "One-time or as needed",
+      "effectiveness": "80-90%",
+      "safety": "100% safe, natural predators",
+      "prevention": true
+    },
+    {
+      "name": "Garlic Spray",
+      "type": "pest",
+      "target": "aphids",
+      "recipe": {
+        "garlic": "4-5 cloves",
+        "water": "1 quart"
+      },
+      "application": "Spray every 3-4 days. Test on small area first.",
+      "frequency": "Every 3-4 days",
+      "effectiveness": "70-80%",
+      "safety": "Test on small area first",
+      "prevention": false
+    }
+  ],
+  "spider_mites": [
+    {
+      "name": "Water Spray",
+      "type": "pest",
+      "target": "spider_mites",
+      "recipe": {
+        "water": "Strong stream"
+      },
+      "application": "Spray with strong stream of water daily for 3-5 days.",
+      "frequency": "Daily for 3-5 days",
+      "effectiveness": "80-85%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Neem Oil",
+      "type": "pest",
+      "target": "spider_mites",
+      "recipe": {
+        "neem_oil": "2-3 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 5-7 days. Increase humidity.",
+      "frequency": "Every 5-7 days",
+      "effectiveness": "85-90%",
+      "safety": "Safe for beneficial insects",
+      "prevention": false
+    },
+    {
+      "name": "Predatory Mites",
+      "type": "pest",
+      "target": "spider_mites",
+      "recipe": {
+        "phytoseiulus_persimilis": "1,000-2,000 per acre"
+      },
+      "application": "Release early morning. Maintain humidity 50-60%.",
+      "frequency": "One-time or as needed",
+      "effectiveness": "85-95%",
+      "safety": "100% safe, natural predators",
+      "prevention": true
+    }
+  ],
+  "whiteflies": [
+    {
+      "name": "Yellow Sticky Traps",
+      "type": "pest",
+      "target": "whiteflies",
+      "recipe": {
+        "yellow_sticky_cards": "1 per 50-100 sq ft"
+      },
+      "application": "Place traps near plants. Replace when full.",
+      "frequency": "Continuous",
+      "effectiveness": "70-80%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Neem Oil",
+      "type": "pest",
+      "target": "whiteflies",
+      "recipe": {
+        "neem_oil": "2-3 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 5-7 days. Focus on undersides of leaves.",
+      "frequency": "Every 5-7 days",
+      "effectiveness": "85-90%",
+      "safety": "Safe for beneficial insects",
+      "prevention": false
+    },
+    {
+      "name": "Encarsia formosa",
+      "type": "pest",
+      "target": "whiteflies",
+      "recipe": {
+        "parasitic_wasps": "1,000-5,000 per acre"
+      },
+      "application": "Release early morning. Provide nectar sources.",
+      "frequency": "One-time or as needed",
+      "effectiveness": "80-95%",
+      "safety": "100% safe, natural predators",
+      "prevention": true
+    }
+  ],
+  "caterpillars": [
+    {
+      "name": "Bacillus thuringiensis (Bt)",
+      "type": "pest",
+      "target": "caterpillars",
+      "recipe": {
+        "bt_kurstaki": "Follow label instructions"
+      },
+      "application": "Spray on leaves. Most effective on young caterpillars.",
+      "frequency": "Every 5-7 days or as needed",
+      "effectiveness": "90-95%",
+      "safety": "Safe for humans, pets, beneficial insects",
+      "prevention": false
+    },
+    {
+      "name": "Handpicking",
+      "type": "pest",
+      "target": "caterpillars",
+      "recipe": {},
+      "application": "Remove caterpillars by hand. Drop in soapy water.",
+      "frequency": "Daily during peak season",
+      "effectiveness": "80-90%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Row Covers",
+      "type": "pest",
+      "target": "caterpillars",
+      "recipe": {
+        "fine_mesh": "Cover plants"
+      },
+      "application": "Install before egg-laying season. Remove for pollination.",
+      "frequency": "Season-long",
+      "effectiveness": "95%+",
+      "safety": "100% safe",
+      "prevention": true
+    }
+  ],
+  "powdery_mildew": [
+    {
+      "name": "Baking Soda Spray",
+      "type": "disease",
+      "target": "powdery_mildew",
+      "recipe": {
+        "baking_soda": "1 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 7-10 days (preventive) or 3-5 days (active).",
+      "frequency": "Every 7-10 days (preventive)",
+      "effectiveness": "80-85%",
+      "safety": "Test on small area first",
+      "prevention": false
+    },
+    {
+      "name": "Milk Spray",
+      "type": "disease",
+      "target": "powdery_mildew",
+      "recipe": {
+        "milk": "1 part",
+        "water": "9 parts"
+      },
+      "application": "Spray every 7-10 days. Apply in morning.",
+      "frequency": "Every 7-10 days",
+      "effectiveness": "75-80%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Neem Oil",
+      "type": "disease",
+      "target": "powdery_mildew",
+      "recipe": {
+        "neem_oil": "2-3 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 7-10 days.",
+      "frequency": "Every 7-10 days",
+      "effectiveness": "80-85%",
+      "safety": "Safe for beneficial insects",
+      "prevention": false
+    },
+    {
+      "name": "Proper Spacing",
+      "type": "disease",
+      "target": "powdery_mildew",
+      "recipe": {
+        "spacing": "18-24 inches between plants"
+      },
+      "application": "Plant with adequate spacing. Improves air circulation.",
+      "frequency": "At planting",
+      "effectiveness": "70-80%",
+      "safety": "100% safe",
+      "prevention": true
+    }
+  ],
+  "downy_mildew": [
+    {
+      "name": "Copper Fungicide",
+      "type": "disease",
+      "target": "downy_mildew",
+      "recipe": {
+        "copper_sulfate": "Follow label instructions"
+      },
+      "application": "Spray every 7-14 days. Use protective equipment.",
+      "frequency": "Every 7-14 days",
+      "effectiveness": "85-90%",
+      "safety": "Use protective equipment, follow label",
+      "prevention": false
+    },
+    {
+      "name": "Baking Soda Spray",
+      "type": "disease",
+      "target": "downy_mildew",
+      "recipe": {
+        "baking_soda": "1 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 5-7 days.",
+      "frequency": "Every 5-7 days",
+      "effectiveness": "75-80%",
+      "safety": "Test on small area first",
+      "prevention": false
+    },
+    {
+      "name": "Remove Infected Leaves",
+      "type": "disease",
+      "target": "downy_mildew",
+      "recipe": {},
+      "application": "Prune and dispose of infected leaves immediately.",
+      "frequency": "As soon as detected",
+      "effectiveness": "90-95%",
+      "safety": "100% safe",
+      "prevention": false
+    }
+  ],
+  "rust": [
+    {
+      "name": "Remove Infected Leaves",
+      "type": "disease",
+      "target": "rust",
+      "recipe": {},
+      "application": "Prune infected leaves immediately. Burn or bag.",
+      "frequency": "As soon as detected",
+      "effectiveness": "90-95%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Neem Oil",
+      "type": "disease",
+      "target": "rust",
+      "recipe": {
+        "neem_oil": "2-3 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 7-10 days.",
+      "frequency": "Every 7-10 days",
+      "effectiveness": "80-85%",
+      "safety": "Safe for beneficial insects",
+      "prevention": false
+    },
+    {
+      "name": "Sulfur",
+      "type": "disease",
+      "target": "rust",
+      "recipe": {
+        "wettable_sulfur": "Follow label instructions"
+      },
+      "application": "Dust or spray. Don't use when temperature >85°F.",
+      "frequency": "Every 7-10 days",
+      "effectiveness": "85-90%",
+      "safety": "Don't use in hot weather",
+      "prevention": false
+    }
+  ],
+  "black_spot": [
+    {
+      "name": "Baking Soda Spray",
+      "type": "disease",
+      "target": "black_spot",
+      "recipe": {
+        "baking_soda": "1 tsp",
+        "liquid_soap": "1 tsp",
+        "water": "1 quart"
+      },
+      "application": "Spray every 7-10 days.",
+      "frequency": "Every 7-10 days",
+      "effectiveness": "80-85%",
+      "safety": "Test on small area first",
+      "prevention": false
+    },
+    {
+      "name": "Remove Infected Leaves",
+      "type": "disease",
+      "target": "black_spot",
+      "recipe": {},
+      "application": "Prune and dispose immediately. Don't compost.",
+      "frequency": "As soon as detected",
+      "effectiveness": "90-95%",
+      "safety": "100% safe",
+      "prevention": false
+    },
+    {
+      "name": "Water at Base",
+      "type": "disease",
+      "target": "black_spot",
+      "recipe": {},
+      "application": "Water at base of plants. Avoid wetting leaves.",
+      "frequency": "Always",
+      "effectiveness": "70-80%",
+      "safety": "100% safe",
+      "prevention": true
+    }
+  ]
+}

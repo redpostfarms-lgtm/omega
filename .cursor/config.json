@@ -1,0 +1,19 @@
+{
+  "autonomous_implementation": {
+    "enabled": true,
+    "auto_create_files": true,
+    "auto_edit_files": true,
+    "auto_apply_changes": true,
+    "require_confirmation": false,
+    "log_actions": true
+  },
+  "_note": "Search config moved to omega_search_config.json to avoid redundancy",
+  "omega_autonomy": {
+    "enabled": true,
+    "can_implement": true,
+    "can_create_files": true,
+    "can_edit_files": true,
+    "can_run_commands": false,
+    "requires_user_click": false
+  }
+}

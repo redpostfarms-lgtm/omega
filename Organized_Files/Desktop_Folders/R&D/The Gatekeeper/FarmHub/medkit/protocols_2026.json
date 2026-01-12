@@ -1,0 +1,38 @@
+{
+  "auto_triage": {
+    "critical_hr": 180,
+    "critical_spo2": 85,
+    "critical_rr": 30,
+    "fall_protocol": "Check for injury, assess consciousness, call 911 if unresponsive. Check for spinal injury. Do not move if neck/back pain.",
+    "bleeding_protocol": "Apply direct pressure, elevate if possible, call 911 if severe. Use tourniquet if arterial bleeding and >2 inches from joint.",
+    "seizure_protocol": "Clear area, do not restrain, time seizure, call 911 if >5 minutes or multiple seizures. Place on side after seizure.",
+    "cardiac_protocol": "Start CPR if unresponsive and no pulse. Call 911 immediately. Use AED if available. Continue until help arrives.",
+    "respiratory_protocol": "Check airway, breathing, circulation. Administer rescue breaths if needed. Call 911 if severe distress.",
+    "hypoxia_protocol": "Administer oxygen if available. Check airway obstruction. Call 911 if SpO2 < 85%.",
+    "tachycardia_protocol": "Monitor closely. Call 911 if HR > 180 with symptoms. Check for shock, dehydration, cardiac issues.",
+    "tachypnea_protocol": "Monitor breathing. Call 911 if RR > 30 with distress. Check for respiratory infection, asthma, cardiac issues."
+  },
+  "vital_ranges": {
+    "hr_adult": {"min": 60, "max": 100, "normal": "60-100 bpm"},
+    "hr_child": {"min": 70, "max": 120, "normal": "70-120 bpm"},
+    "spo2": {"min": 95, "max": 100, "normal": "95-100%"},
+    "rr_adult": {"min": 12, "max": 20, "normal": "12-20 bpm"},
+    "rr_child": {"min": 20, "max": 30, "normal": "20-30 bpm"},
+    "temp": {"min": 36.1, "max": 37.2, "normal": "36.1-37.2°C"}
+  },
+  "emergency_keywords": [
+    "help",
+    "hurt",
+    "chest",
+    "fall",
+    "can't breathe",
+    "seizing",
+    "emergency",
+    "pain",
+    "heart",
+    "bleeding",
+    "unconscious",
+    "911"
+  ]
+}
+

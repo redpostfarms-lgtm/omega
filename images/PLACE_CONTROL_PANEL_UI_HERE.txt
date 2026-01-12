@@ -1,0 +1,25 @@
+PLACE CONTROL PANEL UI DESIGN IMAGE HERE
+========================================
+
+Please save the control panel UI design image here:
+
+File Name: control_panel_ui_design.png
+Location: images/control_panel_ui_design.png
+
+Image Description:
+- Dark control panel/dashboard design
+- Vertical rectangular display at top with red bars (equalizer-style)
+- Three buttons in center stack:
+  - AUTO CRUISE (yellow glow, active)
+  - NORMAL CRUISE (green glow, active)
+  - PURSUIT (blue glow, active)
+- Side buttons:
+  - Left: AIR, OIL, P1 (pink), P2 (pink)
+  - Right: S1, S2, P3 (red), P4 (red)
+- Blue outline shows central section (THIS IS BEING USED)
+- 1980s/1990s sci-fi aesthetic
+
+Format: PNG
+Usage: Control panel UI layout reference
+
+Note: The blue outline in the image marks the central section that will be used in the control panel.

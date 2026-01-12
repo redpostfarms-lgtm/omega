@@ -1,0 +1,95 @@
+{
+  "source": "Knight Rider TV Series (1982-1986)",
+  "subject": "KITT (Knight Industries Two Thousand)",
+  "research_date": "2026-01-10",
+  "purpose": "Visual aid for Omega UI - Speech-synchronized lighting effect",
+  "kitt_overview": {
+    "name": "KITT",
+    "full_name": "Knight Industries Two Thousand",
+    "type": "AI-powered vehicle",
+    "series": "Knight Rider",
+    "years": "1982-1986",
+    "voice_actor": "William Daniels"
+  },
+  "scanner_system": {
+    "location": "Front grille/hood of vehicle",
+    "appearance": "Red LED light bar",
+    "animation_type": "Horizontal scanning motion",
+    "pattern": "Left-to-right wave, repeating continuously",
+    "color": "Red (bright, highly visible)",
+    "visual_effect": "Wave-like scanning pattern"
+  },
+  "voice_synchronization": {
+    "behavior": "Scanner animation speeds up and intensifies when KITT speaks",
+    "pattern": "Lights pulse and scan faster during speech",
+    "visual_effect": "Synchronized 'talking' effect with voice output",
+    "technical": "Lights respond to audio/voice output in real-time",
+    "characteristics": {
+      "base_state": "Continuous left-to-right scanning wave at normal speed",
+      "speech_active": {
+        "scanner_speed": "Increases",
+        "light_intensity": "Increases",
+        "pulsing_effect": "Added",
+        "movement": "More dynamic"
+      },
+      "idle_state": "Slower, steady scanning pattern"
+    }
+  },
+  "visual_characteristics": {
+    "movement": "Smooth horizontal wave motion",
+    "speed": "Variable (faster during speech)",
+    "intensity": "Variable (brighter during speech)",
+    "pattern": "Repeating wave/scan effect",
+    "color": "Red (classic, can be customized)",
+    "direction": "Left to right (can be bidirectional)",
+    "smoothness": "Smooth, continuous motion"
+  },
+  "implementation_concept": {
+    "for_omega_ui": {
+      "location": "OIP (Omega Introduction Panel) section",
+      "purpose": "Visual feedback during speech",
+      "synchronization": "Sync with audio output (response.wav, omega_intro.wav)",
+      "animation_control": "Speed and intensity based on audio amplitude",
+      "visual_style": "KITT-style horizontal scanning bars"
+    },
+    "integration_points": [
+      "Control Panel UI - OIP section",
+      "Speech output system",
+      "Audio monitoring (librosa)",
+      "Visual rendering (matplotlib)"
+    ]
+  },
+  "technical_specifications": {
+    "animation_pattern": {
+      "base": "Continuous left-to-right scanning wave",
+      "speech": "Increased speed and intensity",
+      "idle": "Steady, slower pattern"
+    },
+    "synchronization_method": {
+      "audio_monitoring": "Real-time audio analysis",
+      "amplitude_detection": "Detect speech activity",
+      "visual_response": "Adjust scanner speed/intensity",
+      "smoothing": "Smooth transitions between states"
+    },
+    "visual_parameters": {
+      "bar_count": "8-16 bars (smooth wave effect)",
+      "color_scheme": "Red (classic) or customizable",
+      "animation_speed": "Variable (0.5x to 2x base speed)",
+      "intensity": "Variable (50% to 100% brightness)",
+      "wave_pattern": "Smooth sine/cosine wave motion"
+    }
+  },
+  "implementation_files": {
+    "scanner_effect": "kitt_scanner_effect.py - Core animation",
+    "integration": "omega_scanner_integration.py - UI integration",
+    "audio_sync": "scanner_audio_sync.py - Speech synchronization",
+    "research": "KITT_SCANNER_RESEARCH.json - This file"
+  },
+  "notes": {
+    "classic_effect": "The KITT scanner is one of the most iconic visual effects in TV history",
+    "application": "Perfect for Omega UI as it provides clear visual feedback during speech",
+    "customization": "Can be adapted to Omega's color scheme (gold/red) while maintaining the classic effect",
+    "user_experience": "Familiar, engaging, and provides clear indication of speech activity"
+  },
+  "status": "Research complete - Ready for implementation"
+}

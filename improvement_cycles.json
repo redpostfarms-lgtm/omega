@@ -1,0 +1,872 @@
+[
+  {
+    "cycle_number": 1,
+    "timestamp": "2026-01-10T11:50:14.019157",
+    "segment_file": "conversations\\conv_20260110_115013.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 2,
+    "timestamp": "2026-01-10T11:50:48.320081",
+    "segment_file": "conversations\\conv_20260110_115048.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 3,
+    "timestamp": "2026-01-10T11:51:24.432171",
+    "segment_file": "conversations\\conv_20260110_115124.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 4,
+    "timestamp": "2026-01-10T11:51:54.278817",
+    "segment_file": "conversations\\conv_20260110_115154.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 5,
+    "timestamp": "2026-01-10T11:52:21.015183",
+    "segment_file": "conversations\\conv_20260110_115220.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 6,
+    "timestamp": "2026-01-10T11:52:56.603496",
+    "segment_file": "conversations\\conv_20260110_115256.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 7,
+    "timestamp": "2026-01-10T11:53:45.404464",
+    "segment_file": "conversations\\conv_20260110_115345.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 8,
+    "timestamp": "2026-01-10T11:54:08.483454",
+    "segment_file": "conversations\\conv_20260110_115408.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 9,
+    "timestamp": "2026-01-10T11:54:46.326670",
+    "segment_file": "conversations\\conv_20260110_115446.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 10,
+    "timestamp": "2026-01-10T11:55:30.435955",
+    "segment_file": "conversations\\conv_20260110_115530.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 11,
+    "timestamp": "2026-01-10T11:55:56.964890",
+    "segment_file": "conversations\\conv_20260110_115556.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 12,
+    "timestamp": "2026-01-10T11:56:25.569024",
+    "segment_file": "conversations\\conv_20260110_115625.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 13,
+    "timestamp": "2026-01-10T11:56:55.457077",
+    "segment_file": "conversations\\conv_20260110_115655.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 14,
+    "timestamp": "2026-01-10T11:57:16.781742",
+    "segment_file": "conversations\\conv_20260110_115716.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 15,
+    "timestamp": "2026-01-10T11:58:00.199726",
+    "segment_file": "conversations\\conv_20260110_115800.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 16,
+    "timestamp": "2026-01-10T11:58:34.941957",
+    "segment_file": "conversations\\conv_20260110_115834.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 17,
+    "timestamp": "2026-01-10T11:59:06.944291",
+    "segment_file": "conversations\\conv_20260110_115906.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 18,
+    "timestamp": "2026-01-10T11:59:34.749723",
+    "segment_file": "conversations\\conv_20260110_115934.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 19,
+    "timestamp": "2026-01-10T12:00:06.755254",
+    "segment_file": "conversations\\conv_20260110_120006.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 20,
+    "timestamp": "2026-01-10T12:00:39.763076",
+    "segment_file": "conversations\\conv_20260110_120039.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 21,
+    "timestamp": "2026-01-10T12:01:16.461412",
+    "segment_file": "conversations\\conv_20260110_120116.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 22,
+    "timestamp": "2026-01-10T12:01:59.078643",
+    "segment_file": "conversations\\conv_20260110_120158.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 23,
+    "timestamp": "2026-01-10T12:02:50.830469",
+    "segment_file": "conversations\\conv_20260110_120250.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 24,
+    "timestamp": "2026-01-10T12:03:15.545721",
+    "segment_file": "conversations\\conv_20260110_120315.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 25,
+    "timestamp": "2026-01-10T12:04:01.349242",
+    "segment_file": "conversations\\conv_20260110_120401.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 26,
+    "timestamp": "2026-01-10T12:04:50.898710",
+    "segment_file": "conversations\\conv_20260110_120450.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 27,
+    "timestamp": "2026-01-10T12:05:17.399782",
+    "segment_file": "conversations\\conv_20260110_120517.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 28,
+    "timestamp": "2026-01-10T12:06:01.214963",
+    "segment_file": "conversations\\conv_20260110_120601.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 29,
+    "timestamp": "2026-01-10T12:06:44.827344",
+    "segment_file": "conversations\\conv_20260110_120644.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 30,
+    "timestamp": "2026-01-10T12:07:22.730515",
+    "segment_file": "conversations\\conv_20260110_120722.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 31,
+    "timestamp": "2026-01-10T12:07:54.565026",
+    "segment_file": "conversations\\conv_20260110_120754.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 32,
+    "timestamp": "2026-01-10T12:08:24.397799",
+    "segment_file": "conversations\\conv_20260110_120824.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 33,
+    "timestamp": "2026-01-10T12:09:06.580561",
+    "segment_file": "conversations\\conv_20260110_120906.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 34,
+    "timestamp": "2026-01-10T12:09:39.602653",
+    "segment_file": "conversations\\conv_20260110_120939.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 35,
+    "timestamp": "2026-01-10T12:10:46.099109",
+    "segment_file": "conversations\\conv_20260110_121045.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 36,
+    "timestamp": "2026-01-10T12:11:20.829209",
+    "segment_file": "conversations\\conv_20260110_121120.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 37,
+    "timestamp": "2026-01-10T12:11:43.554285",
+    "segment_file": "conversations\\conv_20260110_121143.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 38,
+    "timestamp": "2026-01-10T12:12:10.737396",
+    "segment_file": "conversations\\conv_20260110_121210.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 39,
+    "timestamp": "2026-01-10T12:13:00.215288",
+    "segment_file": "conversations\\conv_20260110_121300.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 40,
+    "timestamp": "2026-01-10T12:13:57.747429",
+    "segment_file": "conversations\\conv_20260110_121357.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 41,
+    "timestamp": "2026-01-10T12:14:28.850177",
+    "segment_file": "conversations\\conv_20260110_121428.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 42,
+    "timestamp": "2026-01-10T12:15:10.325912",
+    "segment_file": "conversations\\conv_20260110_121510.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 43,
+    "timestamp": "2026-01-10T12:15:55.960071",
+    "segment_file": "conversations\\conv_20260110_121555.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 44,
+    "timestamp": "2026-01-10T12:16:34.383144",
+    "segment_file": "conversations\\conv_20260110_121634.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 45,
+    "timestamp": "2026-01-10T12:17:10.760598",
+    "segment_file": "conversations\\conv_20260110_121710.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 46,
+    "timestamp": "2026-01-10T12:17:55.189537",
+    "segment_file": "conversations\\conv_20260110_121755.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 47,
+    "timestamp": "2026-01-10T12:18:31.804362",
+    "segment_file": "conversations\\conv_20260110_121831.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 48,
+    "timestamp": "2026-01-10T12:19:21.068740",
+    "segment_file": "conversations\\conv_20260110_121920.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 49,
+    "timestamp": "2026-01-10T12:19:52.793424",
+    "segment_file": "conversations\\conv_20260110_121952.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 50,
+    "timestamp": "2026-01-10T12:20:40.637253",
+    "segment_file": "conversations\\conv_20260110_122040.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 51,
+    "timestamp": "2026-01-10T12:21:27.906661",
+    "segment_file": "conversations\\conv_20260110_122127.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 52,
+    "timestamp": "2026-01-10T12:22:27.073007",
+    "segment_file": "conversations\\conv_20260110_122226.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 53,
+    "timestamp": "2026-01-10T12:22:58.143305",
+    "segment_file": "conversations\\conv_20260110_122258.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 54,
+    "timestamp": "2026-01-10T12:23:26.303208",
+    "segment_file": "conversations\\conv_20260110_122326.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 55,
+    "timestamp": "2026-01-10T12:23:55.508266",
+    "segment_file": "conversations\\conv_20260110_122355.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 56,
+    "timestamp": "2026-01-10T12:24:18.271773",
+    "segment_file": "conversations\\conv_20260110_122418.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 57,
+    "timestamp": "2026-01-10T12:24:55.656519",
+    "segment_file": "conversations\\conv_20260110_122455.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 58,
+    "timestamp": "2026-01-10T12:25:24.740497",
+    "segment_file": "conversations\\conv_20260110_122524.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 59,
+    "timestamp": "2026-01-10T12:25:56.282631",
+    "segment_file": "conversations\\conv_20260110_122556.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 60,
+    "timestamp": "2026-01-10T12:26:32.097053",
+    "segment_file": "conversations\\conv_20260110_122632.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 61,
+    "timestamp": "2026-01-10T12:27:01.435489",
+    "segment_file": "conversations\\conv_20260110_122701.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 62,
+    "timestamp": "2026-01-10T12:27:48.754364",
+    "segment_file": "conversations\\conv_20260110_122748.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 63,
+    "timestamp": "2026-01-10T12:28:23.390462",
+    "segment_file": "conversations\\conv_20260110_122823.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 64,
+    "timestamp": "2026-01-10T12:29:01.333714",
+    "segment_file": "conversations\\conv_20260110_122901.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 65,
+    "timestamp": "2026-01-10T12:30:00.164913",
+    "segment_file": "conversations\\conv_20260110_123000.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 66,
+    "timestamp": "2026-01-10T12:30:40.063987",
+    "segment_file": "conversations\\conv_20260110_123040.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 67,
+    "timestamp": "2026-01-10T12:31:14.652273",
+    "segment_file": "conversations\\conv_20260110_123114.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 68,
+    "timestamp": "2026-01-10T12:31:45.282209",
+    "segment_file": "conversations\\conv_20260110_123145.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 69,
+    "timestamp": "2026-01-10T21:28:13.822588",
+    "segment_file": "conversations\\conv_20260110_212812.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 70,
+    "timestamp": "2026-01-10T21:35:35.677866",
+    "segment_file": "conversations\\conv_20260110_213534.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 71,
+    "timestamp": "2026-01-10T21:49:54.308310",
+    "segment_file": "conversations\\conv_20260110_214951.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 72,
+    "timestamp": "2026-01-10T21:52:58.856592",
+    "segment_file": "conversations\\conv_20260110_215258.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 73,
+    "timestamp": "2026-01-10T21:54:16.092347",
+    "segment_file": "conversations\\conv_20260110_215416.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 74,
+    "timestamp": "2026-01-10T21:55:37.778386",
+    "segment_file": "conversations\\conv_20260110_215537.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 75,
+    "timestamp": "2026-01-10T21:57:13.644341",
+    "segment_file": "conversations\\conv_20260110_215713.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 76,
+    "timestamp": "2026-01-10T21:58:54.131076",
+    "segment_file": "conversations\\conv_20260110_215853.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 77,
+    "timestamp": "2026-01-10T22:01:04.790446",
+    "segment_file": "conversations\\conv_20260110_220104.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 78,
+    "timestamp": "2026-01-10T22:02:44.854750",
+    "segment_file": "conversations\\conv_20260110_220244.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 79,
+    "timestamp": "2026-01-10T22:04:15.782415",
+    "segment_file": "conversations\\conv_20260110_220415.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 80,
+    "timestamp": "2026-01-10T22:05:36.715617",
+    "segment_file": "conversations\\conv_20260110_220536.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 81,
+    "timestamp": "2026-01-10T22:06:58.927179",
+    "segment_file": "conversations\\conv_20260110_220658.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 82,
+    "timestamp": "2026-01-10T22:08:12.751870",
+    "segment_file": "conversations\\conv_20260110_220812.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 83,
+    "timestamp": "2026-01-10T22:09:40.703252",
+    "segment_file": "conversations\\conv_20260110_220940.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 84,
+    "timestamp": "2026-01-10T22:11:06.413486",
+    "segment_file": "conversations\\conv_20260110_221106.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 85,
+    "timestamp": "2026-01-10T22:12:53.136919",
+    "segment_file": "conversations\\conv_20260110_221252.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 86,
+    "timestamp": "2026-01-10T22:14:01.366097",
+    "segment_file": "conversations\\conv_20260110_221401.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 87,
+    "timestamp": "2026-01-10T22:15:55.223165",
+    "segment_file": "conversations\\conv_20260110_221555.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 88,
+    "timestamp": "2026-01-10T22:17:15.980371",
+    "segment_file": "conversations\\conv_20260110_221715.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 89,
+    "timestamp": "2026-01-10T22:18:32.209210",
+    "segment_file": "conversations\\conv_20260110_221832.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 90,
+    "timestamp": "2026-01-10T22:20:00.447263",
+    "segment_file": "conversations\\conv_20260110_222000.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 91,
+    "timestamp": "2026-01-10T22:21:16.516214",
+    "segment_file": "conversations\\conv_20260110_222116.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 92,
+    "timestamp": "2026-01-10T22:22:42.005423",
+    "segment_file": "conversations\\conv_20260110_222241.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 93,
+    "timestamp": "2026-01-10T22:23:55.719749",
+    "segment_file": "conversations\\conv_20260110_222355.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 94,
+    "timestamp": "2026-01-10T22:25:15.837159",
+    "segment_file": "conversations\\conv_20260110_222515.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 95,
+    "timestamp": "2026-01-10T22:26:38.247994",
+    "segment_file": "conversations\\conv_20260110_222638.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 96,
+    "timestamp": "2026-01-10T22:28:01.798689",
+    "segment_file": "conversations\\conv_20260110_222801.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 97,
+    "timestamp": "2026-01-10T22:30:00.257546",
+    "segment_file": "conversations\\conv_20260110_223000.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 98,
+    "timestamp": "2026-01-10T22:31:13.587705",
+    "segment_file": "conversations\\conv_20260110_223113.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 99,
+    "timestamp": "2026-01-10T22:32:31.719139",
+    "segment_file": "conversations\\conv_20260110_223231.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 100,
+    "timestamp": "2026-01-10T22:33:37.594039",
+    "segment_file": "conversations\\conv_20260110_223337.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 101,
+    "timestamp": "2026-01-10T22:34:43.733831",
+    "segment_file": "conversations\\conv_20260110_223443.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 102,
+    "timestamp": "2026-01-10T22:36:37.720224",
+    "segment_file": "conversations\\conv_20260110_223637.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 103,
+    "timestamp": "2026-01-10T22:37:46.774772",
+    "segment_file": "conversations\\conv_20260110_223746.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 104,
+    "timestamp": "2026-01-10T22:39:04.825863",
+    "segment_file": "conversations\\conv_20260110_223904.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 105,
+    "timestamp": "2026-01-10T22:40:18.029987",
+    "segment_file": "conversations\\conv_20260110_224017.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 106,
+    "timestamp": "2026-01-10T22:41:32.295355",
+    "segment_file": "conversations\\conv_20260110_224132.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 107,
+    "timestamp": "2026-01-10T22:42:43.145315",
+    "segment_file": "conversations\\conv_20260110_224243.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 108,
+    "timestamp": "2026-01-10T22:44:21.470020",
+    "segment_file": "conversations\\conv_20260110_224421.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 109,
+    "timestamp": "2026-01-10T22:45:41.689262",
+    "segment_file": "conversations\\conv_20260110_224541.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 110,
+    "timestamp": "2026-01-10T22:46:57.130615",
+    "segment_file": "conversations\\conv_20260110_224657.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 111,
+    "timestamp": "2026-01-10T22:47:58.325362",
+    "segment_file": "conversations\\conv_20260110_224758.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 112,
+    "timestamp": "2026-01-10T22:49:02.234543",
+    "segment_file": "conversations\\conv_20260110_224902.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 113,
+    "timestamp": "2026-01-10T22:50:12.530134",
+    "segment_file": "conversations\\conv_20260110_225012.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 114,
+    "timestamp": "2026-01-10T22:51:33.894497",
+    "segment_file": "conversations\\conv_20260110_225133.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 115,
+    "timestamp": "2026-01-10T22:52:49.451326",
+    "segment_file": "conversations\\conv_20260110_225249.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 116,
+    "timestamp": "2026-01-10T22:54:05.130982",
+    "segment_file": "conversations\\conv_20260110_225405.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 117,
+    "timestamp": "2026-01-10T22:55:25.254739",
+    "segment_file": "conversations\\conv_20260110_225525.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 118,
+    "timestamp": "2026-01-10T22:56:39.142164",
+    "segment_file": "conversations\\conv_20260110_225639.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 119,
+    "timestamp": "2026-01-10T22:57:51.214235",
+    "segment_file": "conversations\\conv_20260110_225751.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 120,
+    "timestamp": "2026-01-10T22:59:12.025212",
+    "segment_file": "conversations\\conv_20260110_225911.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 121,
+    "timestamp": "2026-01-10T23:00:28.172535",
+    "segment_file": "conversations\\conv_20260110_230028.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 122,
+    "timestamp": "2026-01-10T23:01:31.843368",
+    "segment_file": "conversations\\conv_20260110_230131.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 123,
+    "timestamp": "2026-01-10T23:02:41.575879",
+    "segment_file": "conversations\\conv_20260110_230241.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 124,
+    "timestamp": "2026-01-10T23:04:06.754268",
+    "segment_file": "conversations\\conv_20260110_230406.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 125,
+    "timestamp": "2026-01-10T23:05:23.009457",
+    "segment_file": "conversations\\conv_20260110_230522.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 126,
+    "timestamp": "2026-01-10T23:06:51.708432",
+    "segment_file": "conversations\\conv_20260110_230651.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 127,
+    "timestamp": "2026-01-10T23:08:06.316412",
+    "segment_file": "conversations\\conv_20260110_230806.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 128,
+    "timestamp": "2026-01-10T23:09:18.618321",
+    "segment_file": "conversations\\conv_20260110_230918.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 129,
+    "timestamp": "2026-01-10T23:10:38.209606",
+    "segment_file": "conversations\\conv_20260110_231038.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 130,
+    "timestamp": "2026-01-10T23:11:55.031782",
+    "segment_file": "conversations\\conv_20260110_231154.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 131,
+    "timestamp": "2026-01-10T23:13:25.324166",
+    "segment_file": "conversations\\conv_20260110_231325.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 132,
+    "timestamp": "2026-01-10T23:14:35.403878",
+    "segment_file": "conversations\\conv_20260110_231435.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 133,
+    "timestamp": "2026-01-10T23:15:42.823446",
+    "segment_file": "conversations\\conv_20260110_231542.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 134,
+    "timestamp": "2026-01-10T23:16:57.730490",
+    "segment_file": "conversations\\conv_20260110_231657.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 135,
+    "timestamp": "2026-01-10T23:18:14.389607",
+    "segment_file": "conversations\\conv_20260110_231814.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 136,
+    "timestamp": "2026-01-10T23:19:33.818208",
+    "segment_file": "conversations\\conv_20260110_231933.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 137,
+    "timestamp": "2026-01-10T23:20:44.014534",
+    "segment_file": "conversations\\conv_20260110_232043.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 138,
+    "timestamp": "2026-01-10T23:22:03.740767",
+    "segment_file": "conversations\\conv_20260110_232203.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 139,
+    "timestamp": "2026-01-10T23:23:25.619447",
+    "segment_file": "conversations\\conv_20260110_232325.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 140,
+    "timestamp": "2026-01-10T23:24:35.675494",
+    "segment_file": "conversations\\conv_20260110_232435.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 141,
+    "timestamp": "2026-01-10T23:26:19.163394",
+    "segment_file": "conversations\\conv_20260110_232619.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 142,
+    "timestamp": "2026-01-10T23:27:46.873076",
+    "segment_file": "conversations\\conv_20260110_232746.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 143,
+    "timestamp": "2026-01-10T23:30:05.811820",
+    "segment_file": "conversations\\conv_20260110_233005.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 144,
+    "timestamp": "2026-01-10T23:31:12.960749",
+    "segment_file": "conversations\\conv_20260110_233112.wav",
+    "analysis": null
+  },
+  {
+    "cycle_number": 145,
+    "timestamp": "2026-01-10T23:32:35.045503",
+    "segment_file": "conversations\\conv_20260110_233234.wav",
+    "analysis": null
+  }
+]

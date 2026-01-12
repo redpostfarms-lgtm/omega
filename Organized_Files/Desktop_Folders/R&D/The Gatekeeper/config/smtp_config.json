@@ -1,0 +1,12 @@
+{
+  "smtp_enabled": false,
+  "smtp_server": "smtp.gmail.com",
+  "smtp_port": 587,
+  "smtp_use_tls": true,
+  "smtp_username": "",
+  "smtp_password": "",
+  "from_email": "",
+  "to_emails": [],
+  "alert_subject_prefix": "[Gatekeeper Alert]"
+}
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Siemens SIMATIC Decoders for Wazuh
+  ===================================
+  Custom decoders for parsing Siemens SIMATIC S7-1200/S7-1500 Syslog security events.
+  Supports TIA Portal V17+ Syslog format and V19+ enhanced features (UMAC, dynamic PKI).
+  
+  Installation:
+    1. Copy to /var/ossec/etc/decoders/siemens_decoders.xml
+    2. chown wazuh:wazuh siemens_decoders.xml
+    3. chmod 660 siemens_decoders.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Siemens Syslog Format:
+    <PRI>timestamp hostname - IDxx [device@... devVendor="Siemens" devProduct="CPU 151x..." FWVersion="V..."] 
+    [function@... fct="..." oldState="..." newState="..."] 
+    [session@... protocolType="..." userName="..." src="..."] EVENT_CODE
+-->
+
+<!-- Parent: Broad match for Siemens Syslog security events -->
+<decoder name="siemens-syslog">
+  <prematch>devVendor="Siemens" devProduct="CPU</prematch>
+</decoder>
+
+<!-- Child: Extract key fields from structured data (full format with session) -->
+<decoder name="siemens-security-event">
+  <parent>siemens-syslog</parent>
+  <regex type="pcre2">\[device@(\S+) devVendor="Siemens" devProduct="([^"]+)" FWVersion="([^"]+)"\]\s+\[function@(\S+) fct="([^"]+)" oldState="([^"]*)" newState="([^"]*)"\]\s*(?:\[session@(\S+) protocolType="([^"]+)" userName="([^"]*)" src="([^"]+)"\]\s+)?(\S+)</regex>
+  <order>device_id, product, fw_version, function_id, fct, old_state, new_state, session_id, protocol, username, src_ip, event_code</order>
+  <offset>after_prematch</offset>
+</decoder>
+
+<!-- Alternative: Simple format without session block (mode changes, etc.) -->
+<decoder name="siemens-simple">
+  <parent>siemens-syslog</parent>
+  <regex type="pcre2">Operating-Mode-Mgt - ID(\d+)\s+\[device@(\S+) devVendor="Siemens" devProduct="([^"]+)" FWVersion="([^"]+)"\]\s+\[function@(\S+) [^"]+" oldState="([^"]+)" newState="([^"]+)"\]\s+(\S+)</regex>
+  <order>id, device_id, product, fw_version, function_id, old_state, new_state, event_code</order>
+</decoder>
+
+<!-- Login/Authentication events -->
+<decoder name="siemens-auth">
+  <parent>siemens-syslog</parent>
+  <prematch>session@.*protocolType=".*" userName="</prematch>
+</decoder>
+
+<decoder name="siemens-auth-detail">
+  <parent>siemens-auth</parent>
+  <regex type="pcre2">\[session@(\S+) protocolType="([^"]+)" userName="([^"]*)" src="([^"]+)"\]\s+(\S+)</regex>
+  <order>session_id, protocol, username, src_ip, event_code</order>
+  <offset>after_prematch</offset>
+</decoder>
+
+<!-- Protection/Configuration events -->
+<decoder name="siemens-protection">
+  <parent>siemens-syslog</parent>
+  <prematch>SE_PROTECTION</prematch>
+</decoder>
+
+<decoder name="siemens-protection-detail">
+  <parent>siemens-protection</parent>
+  <regex type="pcre2">\[function@(\S+) fct="([^"]+)" oldState="([^"]*)" newState="([^"]*)"\]\s+(\S+)</regex>
+  <order>function_id, fct, old_state, new_state, event_code</order>
+  <offset>after_prematch</offset>
+</decoder>

@@ -1,0 +1,19 @@
+{
+  "api_enabled": false,
+  "client_id": "",
+  "client_secret": "",
+  "api_url": "https://api.digikey.com",
+  "sandbox_mode": true,
+  "default_part_number": "18650",
+  "default_quantity": 1,
+  "shipping_address": {
+    "name": "",
+    "address_line1": "",
+    "address_line2": "",
+    "city": "",
+    "state": "",
+    "zip": "",
+    "country": "US"
+  }
+}
+

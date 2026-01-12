@@ -9,8 +9,21 @@ import torch
 import asyncio
 import signal
 import sys
+import subprocess
 from pathlib import Path
 from rate_limiter import GOOGLE_SPEECH_LIMITER
+
+# Patch torch.load for PyTorch 2.6+ compatibility with TTS
+try:
+    original_load = torch.load
+    def patched_load(*args, **kwargs):
+        if 'weights_only' not in kwargs:
+            kwargs['weights_only'] = False
+        return original_load(*args, **kwargs)
+    torch.load = patched_load
+except Exception:
+    # If torch isn't imported yet, skip (will patch in get_tts)
+    pass
 
 # Load models lazily (first run downloads ~2 GB total)
 tts = None
@@ -18,10 +31,34 @@ def get_tts():
     """Get TTS instance, loading if needed."""
     global tts
     if tts is None:
+        print("Loading TTS model (first time will download ~2GB, please wait)...")
         # Accept TTS terms automatically
         import os
         os.environ['TTS_ACCEPT_TO_S'] = '1'
-        tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
+        
+        # Patch torch.load for PyTorch 2.6+ compatibility (if not already patched)
+        try:
+            if torch.load != patched_load:
+                original_load = torch.load
+                def patched_load(*args, **kwargs):
+                    if 'weights_only' not in kwargs:
+                        kwargs['weights_only'] = False
+                    return original_load(*args, **kwargs)
+                torch.load = patched_load
+        except Exception:
+            # Patch failed - will try again later
+            pass
+        
+        try:
+            # Use the full model path that TTS expects
+            tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
+            print("[OK] TTS model loaded successfully")
+        except Exception as e:
+            print(f"[ERROR] Failed to load TTS model: {e}")
+            if 'torchcodec' in str(e).lower() or 'libtorchcodec' in str(e).lower():
+                print("[INFO] This is a PyTorch 2.6+ compatibility issue.")
+                print("      Try: py -3.11 -m pip install 'torch<2.6.0'")
+            raise
     return tts
 
 # Load emotion classifier (optional - gracefully handle if unavailable)
@@ -32,10 +69,11 @@ try:
         source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
         savedir="pretrained_emotion"
     )
-    print("✓ Emotion detection enabled")
+    print("[OK] Emotion detection enabled")
 except Exception as e:
-    print(f"⚠ Emotion detection unavailable: {e}")
+    print(f"[WARNING] Emotion detection unavailable: {e}")
     print("   Continuing without emotion detection...")
+    emotion_classifier = None  # Make sure it's set to None if failed
 
 def record_audio(duration=5, fs=16000):
     print("Listening...")
@@ -56,37 +94,92 @@ def detect_emotion(wav_file):
         print(f"Emotion detection error: {e}")
         return 'neutral'
 
-def omega_speak(text, emotion="neutral"):
-    """Speak text with emotion-aware tone, non-blocking."""
-    # Emotion-aware tone
-    if emotion == "happy":
-        text = f"😊 {text} Great news!"
-    elif emotion == "angry":
-        text = f"🔥 {text} Calm down, Wiley."
-    elif emotion == "sad":
-        text = f"😔 {text} I'm here."
-    else:
-        text = f"🧠 {text}"
+def play_audio_background(wav_file):
+    """Play audio file in background without showing media player window."""
+    if not Path(wav_file).exists():
+        print(f"Audio file not found: {wav_file}")
+        return
     
     try:
-        clip_path = Path('clip_0001.wav')
-        if not clip_path.exists():
-            print(f"Warning: {clip_path} not found, using default voice")
-            clip_path = None
-        
-        get_tts().tts_to_file(
-            text=text,
-            speaker_wav=str(clip_path) if clip_path else None,
+        if sys.platform == 'win32':
+            # Use PowerShell MediaPlayer for hidden background playback
+            # Escape path for PowerShell (replace backslashes and single quotes)
+            # Use .format() instead of f-string to safely handle paths with curly braces
+            abs_path = str(Path(wav_file).absolute()).replace('\\', '/').replace("'", "''")
+            ps_cmd = '''
+            Add-Type -AssemblyName presentationCore
+            $mediaPlayer = New-Object system.windows.media.mediaplayer
+            $mediaPlayer.open([uri]::new('file:///{0}'))
+            $mediaPlayer.Volume = 1.0
+            $mediaPlayer.Play()
+            # Wait for playback to complete by polling Position vs NaturalDuration
+            # Max 5 minutes timeout for safety (prevents infinite loops)
+            $timeout = (Get-Date).AddMinutes(5)
+            while ($mediaPlayer.Position -lt $mediaPlayer.NaturalDuration.TimeSpan -and (Get-Date) -lt $timeout) {{
+                Start-Sleep -Milliseconds 100
+            }}
+            '''.format(abs_path)
+            # Run PowerShell in background, hidden window
+            subprocess.Popen(
+                ['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else subprocess.DETACHED_PROCESS
+            )
+        else:
+            # Linux/macOS: use background process with proper escaping
+            import shlex
+            safe_wav_file = shlex.quote(str(Path(wav_file).absolute()))
+            if os.system('which ffplay > /dev/null 2>&1') == 0:
+                os.system(f'ffplay -nodisp -autoexit {safe_wav_file} &')
+            else:
+                os.system(f'play {safe_wav_file} &')
+    except Exception as e:
+        print(f"Background audio playback error: {e}")
+        # Fallback: try minimized window
+        try:
+            # Use shell=True with string command (not list) for Windows cmd
+            cmd_str = f'start /min "" "{wav_file}"'
+            subprocess.Popen(cmd_str, shell=True, creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0)
+        except Exception:
+            # Fallback playback failed - audio may not play
+            pass
+
+def omega_speak(text, emotion="neutral"):
+    """Speak text with emotion-aware tone, using voice clone, non-blocking background playback."""
+    # Always use voice clone for better quality
+    clip_path = Path('clip_0001.wav')
+    speaker_wav = str(clip_path) if clip_path.exists() else None
+    
+    if speaker_wav:
+        print(f"[Using voice clone: {clip_path.name} for improved quality]")
+    else:
+        print("[WARNING] clip_0001.wav not found - using default voice")
+    
+    # Emotion-aware tone (text only, no emoji to avoid Unicode issues on Windows)
+    emotion_prefix = {"happy": "[Happy] ", "angry": "[Angry] ", "sad": "[Sad] ", "neutral": ""}.get(emotion, "")
+    text_with_emotion = emotion_prefix + text
+    
+    try:
+        print(f"Generating speech: {text_with_emotion[:50]}...")
+        tts_instance = get_tts()
+        tts_instance.tts_to_file(
+            text=text_with_emotion,
+            speaker_wav=speaker_wav,  # Always use voice clone if available
             language='en',
             file_path='response.wav'
         )
-        # Non-blocking audio playback
-        if sys.platform == 'win32':
-            os.startfile('response.wav')
-        else:
-            os.system('start response.wav' if sys.platform == 'darwin' else 'xdg-open response.wav')
+        
+        file_size = Path('response.wav').stat().st_size if Path('response.wav').exists() else 0
+        print(f"[OK] Audio generated: response.wav ({file_size} bytes)")
+        
+        # Play audio in background without showing media player window
+        print("[Playing audio in background - no window will appear]")
+        play_audio_background('response.wav')
     except Exception as e:
         print(f"TTS error: {e}")
+        import traceback
+        traceback.print_exc()
 
 async def recognize_speech_async(wav_file):
     """Async speech recognition with rate limiting."""

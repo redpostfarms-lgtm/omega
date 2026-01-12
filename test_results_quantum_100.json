@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-01-03T17:05:49.393005",
+  "tests": {
+    "Computer Vision": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\FarmHub\\master_farmhub.py",
+      "type": "regular"
+    },
+    "Market Intelligence": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\projects\\market_intelligence.py",
+      "type": "regular"
+    },
+    "Irrigation": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\projects\\irrigation_automation.py",
+      "type": "regular"
+    },
+    "Pest/Disease": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\projects\\pest_disease_detection.py",
+      "type": "regular"
+    },
+    "Solar/Battery": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\projects\\solar_mppt_controller.py",
+      "type": "regular"
+    },
+    "Drone Control": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\projects\\drone_flight_controller.py",
+      "type": "regular"
+    },
+    "Knowledge Management": {
+      "passed": false,
+      "message": "File not found: D:\\RPF_BRAIN\\The Gatekeeper\\brain_prime.py",
+      "type": "regular"
+    },
+    "Market Intelligence Stress": {
+      "passed": false,
+      "message": "File not found",
+      "type": "stress"
+    },
+    "Irrigation Stress": {
+      "passed": false,
+      "message": "File not found",
+      "type": "stress"
+    }
+  },
+  "summary": {
+    "total": 9,
+    "passed": 0,
+    "failed": 9,
+    "errors": 0
+  }
+}

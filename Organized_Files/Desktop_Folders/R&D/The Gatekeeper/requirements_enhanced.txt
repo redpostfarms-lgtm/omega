@@ -1,0 +1,125 @@
+# Gatekeeper System Requirements (Enhanced)
+# Install with: pip install -r requirements_enhanced.txt
+# This file includes all recommended improvements from FREE_RESOURCES_COMPREHENSIVE.md
+
+# ============================================================================
+# EXISTING CORE DEPENDENCIES (Required)
+# ============================================================================
+
+# Core dependencies
+pyttsx3>=2.90
+numpy>=1.24.0
+speech_recognition>=3.10.0
+
+# Web scraping (existing)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Hardware monitoring (optional but recommended)
+psutil>=5.9.0  # For hardware monitoring (CPU, RAM)
+GPUtil>=1.4.0  # For GPU monitoring
+wmi>=1.5.1  # For Windows hardware info
+
+# Optional but recommended (existing)
+python-docx>=1.1.0  # For Word document creation
+PyPDF2>=3.0.0  # For PDF processing
+pdfplumber>=0.10.0  # Better PDF parsing
+
+# Testing (existing)
+unittest-xml-reporting>=3.2.0  # For test reports
+
+# ============================================================================
+# RECOMMENDED IMPROVEMENTS (High Priority - Install for best performance)
+# ============================================================================
+
+# Web Scraping Improvements
+scrapy>=2.11.0  # Production-grade scraping framework (reduces failures 20-30%)
+lxml>=5.1.0  # Faster HTML parser (5-10x faster than BeautifulSoup)
+httpx>=0.25.0  # Modern async HTTP client
+scrapegraphai>=1.0.0  # AI-driven scraper with graph logic (optional, for self-healing scraping)
+
+# Voice Recognition Improvements (All Offline - No API Keys)
+vosk>=0.3.45  # Offline speech-to-text (download models: https://alphacephei.com/vosk/models)
+pyaudio>=0.2.11  # Required for Vosk audio input
+speechbrain>=0.5.16  # Advanced voiceprint biometrics
+torch>=2.0.0  # Required for SpeechBrain (PyTorch)
+torchaudio>=2.0.0  # Required for SpeechBrain audio processing
+TTS>=0.22.0  # Better text-to-speech (Coqui TTS)
+
+# Knowledge Base Improvements
+chromadb>=0.4.22  # Vector database for semantic search
+sentence-transformers>=2.3.1  # Text embeddings for better search
+
+# ============================================================================
+# OPTIONAL ENHANCEMENTS (Medium Priority - Install as needed)
+# ============================================================================
+
+# Agent Systems
+crewai>=0.28.0  # Multi-agent framework
+langchain>=0.1.0  # Agent orchestration
+langchain-community>=0.0.20  # LangChain community integrations
+
+# Advanced Web Scraping (if JavaScript rendering needed)
+playwright>=1.40.0  # Browser automation (requires: playwright install)
+readability-lxml>=0.8.1  # Article extraction
+
+# Hardware Monitoring Enhancements
+pySMART>=1.2  # Disk health (SMART) monitoring
+nvidia-ml-py>=12.535.133  # Advanced NVIDIA GPU monitoring
+
+# Document Generation Enhancements
+reportlab>=4.0.7  # PDF generation
+weasyprint>=60.2  # HTML to PDF conversion
+markdown>=3.5.1  # Markdown processing
+
+# Security Enhancements
+cryptography>=42.0.0  # Encryption/decryption
+keyring>=25.0.0  # Secure credential storage
+
+# Testing Improvements
+pytest>=8.0.0  # Better testing framework
+pytest-cov>=4.1.0  # Code coverage
+
+# Configuration
+python-dotenv>=1.0.0  # Environment variable management
+
+# Local LLM Support (Offline AI)
+llama-cpp-python>=0.2.0  # Local LLM runtime (download models from HuggingFace)
+
+# Time Series Forecasting
+neuralprophet>=1.0.0  # Time series forecasting (enhance battery_oracle.py, solar_forecaster.py)
+
+# Additional Web Scraping
+readability-lxml>=0.8.1  # Article extraction (clean content from web pages)
+
+# ============================================================================
+# INSTALLATION NOTES
+# ============================================================================
+# 
+# 1. Install core requirements first:
+#    pip install -r requirements.txt
+#
+# 2. Install high-priority improvements:
+#    pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformers llama-cpp-python neuralprophet
+#
+# 3. For Vosk models, download from:
+#    https://alphacephei.com/vosk/models
+#    (Recommended: vosk-model-small-en-us-0.15 for English)
+#
+# 4. For Piper TTS, clone repository:
+#    git clone https://github.com/rhasspy/piper models/piper
+#
+# 5. For llama.cpp models, download from HuggingFace:
+#    Phi-3-mini: https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf
+#    Llama-3.2-8B: https://huggingface.co/meta-llama/Llama-3.2-8B-Instruct-gguf
+#
+# 6. For Playwright, after pip install:
+#    playwright install
+#
+# 7. All libraries are FREE and OPEN-SOURCE
+# 8. All libraries work OFFLINE (no cloud dependencies)
+# 9. See GLOBAL_FREE_RESOURCES_COMPLETE.md for comprehensive resource list
+# 10. See RESOURCES_QUICK_REFERENCE_2026.md for quick reference
+#
+# ============================================================================
+

@@ -1,0 +1,48 @@
+================================================================
+  QUICK FIX: INSTALL PYTHON 3.11
+================================================================
+
+STEP 1: Download Python 3.11
+-----------------------------
+Go to this URL in your browser:
+https://www.python.org/downloads/release/python-31111/
+
+Click "Windows installer (64-bit)" to download
+
+STEP 2: Install Python 3.11
+----------------------------
+1. Run the downloaded installer
+2. CHECK THE BOX: "Add Python 3.11 to PATH" ⚠️ IMPORTANT!
+3. Click "Install Now"
+4. Wait for installation to complete
+
+STEP 3: Verify Installation
+----------------------------
+Open a NEW command prompt and run:
+   py -3.11 --version
+
+You should see: Python 3.11.11 (or similar)
+
+STEP 4: Install Omega Dependencies
+----------------------------------
+In command prompt, run:
+   cd "D:\RPF_BRAIN\The Gatekeeper"
+   py -3.11 -m pip install --upgrade pip
+   py -3.11 -m pip install -r requirements.txt
+
+This will take 5-10 minutes (downloading ~2GB of packages)
+
+STEP 5: Run Omega
+-----------------
+   py -3.11 omega_full_brain.py
+
+OR double-click: START_HERE.bat (after updating it)
+
+================================================================
+
+ALTERNATIVE: Quick Install Script
+---------------------------------
+Double-click: INSTALL_PYTHON_311.bat
+(This will try to install via winget, may need manual steps)
+
+================================================================

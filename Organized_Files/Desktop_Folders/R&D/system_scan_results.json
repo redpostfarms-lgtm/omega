@@ -1,0 +1,163 @@
+{
+  "scan_date": "2026-01-08T11:05:21.003509",
+  "modules": {
+    "FarmHub Core": {
+      "status": "NOT FOUND"
+    },
+    "Quantum": {
+      "status": "OK",
+      "path": "agent_quantum_optimizer.py",
+      "size_bytes": 9752,
+      "size_kb": 9.52
+    },
+    "HR (Harriet)": {
+      "status": "NOT FOUND"
+    },
+    "Engineering (Bob)": {
+      "status": "NOT FOUND"
+    },
+    "Medical": {
+      "status": "NOT FOUND"
+    },
+    "Apothecary": {
+      "status": "NOT FOUND"
+    },
+    "FeedMaster": {
+      "status": "NOT FOUND"
+    },
+    "Sales": {
+      "status": "NOT FOUND"
+    },
+    "Gatekeeper Fusion": {
+      "status": "NOT FOUND"
+    },
+    "Quantum Optimizer": {
+      "status": "OK",
+      "best_fitness": 0.06093567531215435,
+      "test_passed": true
+    },
+    "Quantum Optimization": {
+      "status": "NOT IN PATH",
+      "note": "Using fallback quantum optimizer"
+    }
+  },
+  "dependencies": {
+    "pyttsx3": {
+      "status": "OK",
+      "version": "installed",
+      "purpose": "TTS/Speech"
+    },
+    "cv2": {
+      "status": "NOT INSTALLED",
+      "purpose": "OpenCV (Vision)"
+    },
+    "ultralytics": {
+      "status": "NOT INSTALLED",
+      "purpose": "YOLO (Vision)"
+    },
+    "vosk": {
+      "status": "NOT INSTALLED",
+      "purpose": "Speech Recognition"
+    },
+    "pyaudio": {
+      "status": "OK",
+      "version": "0.2.14",
+      "purpose": "Audio Input"
+    },
+    "qiskit": {
+      "status": "NOT INSTALLED",
+      "purpose": "Quantum Computing (Optional)"
+    },
+    "numpy": {
+      "status": "OK",
+      "version": "2.4.0",
+      "purpose": "Numerical Computing"
+    },
+    "json": {
+      "status": "OK",
+      "version": "built-in",
+      "purpose": "JSON (Built-in)"
+    },
+    "pathlib": {
+      "status": "OK",
+      "version": "built-in",
+      "purpose": "Path handling (Built-in)"
+    },
+    "threading": {
+      "status": "OK",
+      "version": "built-in",
+      "purpose": "Threading (Built-in)"
+    },
+    "subprocess": {
+      "status": "OK",
+      "version": "built-in",
+      "purpose": "Subprocess (Built-in)"
+    }
+  },
+  "files": {
+    "FarmHub": {
+      "path": "D:\\RPF_BRAIN\\FarmHub",
+      "python_files": 0,
+      "total_size_mb": 0.55,
+      "exists": true
+    },
+    "Gatekeeper": {
+      "path": "D:\\RPF_BRAIN\\The Gatekeeper",
+      "python_files": 6,
+      "total_size_mb": 15.4,
+      "exists": true
+    },
+    "Projects": {
+      "exists": false
+    },
+    "HR": {
+      "path": "D:\\RPF_BRAIN\\HR",
+      "python_files": 0,
+      "total_size_mb": 0.0,
+      "exists": true
+    },
+    "Farm Engineer": {
+      "path": "D:\\RPF_BRAIN\\Farm_Engineer",
+      "python_files": 0,
+      "total_size_mb": 0.0,
+      "exists": true
+    },
+    "Sales": {
+      "exists": false
+    }
+  },
+  "configuration": {
+    "Knowledge Base": {
+      "status": "NOT FOUND"
+    },
+    "Voice Key": {
+      "status": "NOT FOUND"
+    },
+    "FarmHub Brain": {
+      "status": "NOT FOUND"
+    },
+    "Laws": {
+      "status": "NOT FOUND"
+    },
+    "Python": {
+      "version": "3.13.9",
+      "executable": "C:\\Users\\Drakalich\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\python.exe",
+      "platform": "win32"
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "FarmHub Core module not found",
+    "HR (Harriet) module not found",
+    "Engineering (Bob) module not found",
+    "Medical module not found",
+    "Apothecary module not found",
+    "FeedMaster module not found",
+    "Sales module not found",
+    "Gatekeeper Fusion module not found",
+    "cv2 not installed (OpenCV (Vision))",
+    "ultralytics not installed (YOLO (Vision))",
+    "vosk not installed (Speech Recognition)",
+    "qiskit not installed (Quantum Computing (Optional))"
+  ]
+}

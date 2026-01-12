@@ -1,0 +1,1 @@
+Say 'Gatekeeper, charge level?' — scan 18650 logs, return exact: total %, weakest cell, cycles to replace. Voice: calm, factual.

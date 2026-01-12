@@ -1,0 +1,32 @@
+{
+  "test_user": {
+    "user_id": "test_user",
+    "current_level": "expert",
+    "games_played": 5,
+    "wins": 4,
+    "losses": 1,
+    "average_move_time": 13.844800000000003,
+    "improvement_trend": 1.0,
+    "last_updated": "2026-01-02T01:13:07.391088"
+  },
+  "default": {
+    "user_id": "default",
+    "current_level": "intermediate",
+    "games_played": 1,
+    "wins": 0,
+    "losses": 1,
+    "average_move_time": 0.215,
+    "improvement_trend": 0.0,
+    "last_updated": "2026-01-02T01:18:34.809657"
+  },
+  "player": {
+    "user_id": "player",
+    "current_level": "beginner",
+    "games_played": 0,
+    "wins": 0,
+    "losses": 0,
+    "average_move_time": 0.0,
+    "improvement_trend": 0.0,
+    "last_updated": "2026-01-02T01:33:43.037560"
+  }
+}

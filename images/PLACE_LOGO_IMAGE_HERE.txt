@@ -1,0 +1,23 @@
+PLACE OMEGA LOGO IMAGE HERE
+============================
+
+Please save the Omega logo image here:
+
+File Name: omega_logo_red_gold_wreath.png (or .bmp)
+Location: images/omega_logo_red_gold_wreath.png
+
+Image Description:
+- Red glossy Omega symbol (Ω) centered
+- Golden laurel wreath encircling the Omega
+- Dark/black textured background
+- 3D volumetric appearance with highlights and shadows
+
+Format: PNG or BMP
+Size: Recommended 1024x768 or higher (for boot logo)
+
+Once saved, the image will be used for:
+1. BIOS boot logo (boot_logo/omega_logo.bmp)
+2. Desktop shortcut icon (omega_icon.ico)
+3. Control panel header/logo
+
+After saving, run: python CREATE_OMEGA_ICON.py

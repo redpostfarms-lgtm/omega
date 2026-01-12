@@ -1,0 +1,46 @@
+================================================================
+  PYTHON VERSION ISSUE - SOLUTION
+================================================================
+
+PROBLEM:
+You have Python 3.14.2 installed, but the TTS library requires 
+Python 3.9-3.11. TTS doesn't support Python 3.14 yet.
+
+SOLUTION OPTIONS:
+
+Option 1: Install Python 3.11 (RECOMMENDED)
+--------------------------------------------
+1. Download Python 3.11 from: https://www.python.org/downloads/
+2. Install it (check "Add Python 3.11 to PATH")
+3. Then run:
+   cd "D:\RPF_BRAIN\The Gatekeeper"
+   py -3.11 -m pip install -r requirements.txt
+   py -3.11 omega_full_brain.py
+
+Option 2: Use Python 3.11 via py launcher
+------------------------------------------
+If you have multiple Python versions, try:
+   py -3.11 --version
+   
+If that works, use:
+   py -3.11 -m pip install -r requirements.txt
+   py -3.11 omega_full_brain.py
+
+Option 3: Create Virtual Environment with Python 3.11
+------------------------------------------------------
+If you have Python 3.11 installed:
+   cd "D:\RPF_BRAIN\The Gatekeeper"
+   py -3.11 -m venv omega_env
+   omega_env\Scripts\activate
+   pip install -r requirements.txt
+   python omega_full_brain.py
+
+QUICK CHECK:
+Run this to see what Python versions you have:
+   py --list
+
+If Python 3.11 is listed, use:
+   py -3.11 -m pip install -r requirements.txt
+   py -3.11 omega_full_brain.py
+
+================================================================

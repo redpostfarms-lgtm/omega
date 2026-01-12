@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-01-10T00:00:00",
+  "intents": {
+    "query": {
+      "description": "Ask a question or request information",
+      "examples": [
+        "what is",
+        "tell me about",
+        "explain",
+        "how does",
+        "what are",
+        "when is",
+        "where is",
+        "who is",
+        "why is"
+      ]
+    },
+    "command": {
+      "description": "Give a command or instruction",
+      "examples": [
+        "do this",
+        "run",
+        "execute",
+        "start",
+        "stop",
+        "open",
+        "close",
+        "create",
+        "delete",
+        "shutdown",
+        "restart"
+      ]
+    },
+    "greeting": {
+      "description": "Greeting or salutation",
+      "examples": [
+        "hello",
+        "hi",
+        "hey",
+        "good morning",
+        "good evening",
+        "good afternoon",
+        "greetings"
+      ]
+    },
+    "farewell": {
+      "description": "Farewell or goodbye",
+      "examples": [
+        "goodbye",
+        "bye",
+        "see you",
+        "later",
+        "farewell",
+        "see you later",
+        "goodnight"
+      ]
+    },
+    "clarification": {
+      "description": "Request clarification or repeat",
+      "examples": [
+        "what did you say",
+        "repeat",
+        "clarify",
+        "what do you mean",
+        "say that again",
+        "can you repeat"
+      ]
+    },
+    "affirmation": {
+      "description": "Agree or confirm",
+      "examples": [
+        "yes",
+        "okay",
+        "sure",
+        "correct",
+        "that's right",
+        "exactly",
+        "affirmative"
+      ]
+    },
+    "negation": {
+      "description": "Disagree or deny",
+      "examples": [
+        "no",
+        "not",
+        "wrong",
+        "incorrect",
+        "that's not right",
+        "negative",
+        "nope"
+      ]
+    }
+  }
+}

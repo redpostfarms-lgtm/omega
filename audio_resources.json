@@ -1,0 +1,106 @@
+{
+  "last_updated": "2026-01-09T23:11:23.458332",
+  "resources": {
+    "sound_effects": {
+      "Freesound": {
+        "url": "https://freesound.org",
+        "license": "CC0/CC-BY",
+        "description": "Over 500,000+ sound effects, music samples, and recordings",
+        "api": "https://freesound.org/docs/api/",
+        "search_url": "https://freesound.org/apiv2/search/text/"
+      },
+      "Zapsplat": {
+        "url": "https://www.zapsplat.com",
+        "license": "Free with attribution",
+        "description": "Professional sound effects library",
+        "categories": [
+          "Human voices",
+          "Ambient sounds",
+          "Foley",
+          "Nature"
+        ]
+      },
+      "BBC Sound Effects": {
+        "url": "https://sound-effects.bbcrewind.co.uk",
+        "license": "RemArc License (non-commercial)",
+        "description": "16,000+ BBC sound effects from archives"
+      },
+      "OpenGameArt": {
+        "url": "https://opengameart.org",
+        "license": "Various open licenses",
+        "description": "Free game assets including sound effects"
+      },
+      "Incompetech": {
+        "url": "https://incompetech.com/music/royalty-free",
+        "license": "Creative Commons",
+        "description": "Royalty-free music and sound effects"
+      },
+      "Mixkit": {
+        "url": "https://mixkit.co/free-sound-effects",
+        "license": "Free license",
+        "description": "Free sound effects for video production"
+      }
+    },
+    "voice_samples": {
+      "Common Voice (Mozilla)": {
+        "url": "https://commonvoice.mozilla.org",
+        "license": "CC0",
+        "description": "Massive open dataset of voice recordings in multiple languages",
+        "download": "https://commonvoice.mozilla.org/en/datasets",
+        "size": "Thousands of hours"
+      },
+      "LibriSpeech": {
+        "url": "https://www.openslr.org/12/",
+        "license": "CC BY 4.0",
+        "description": "1000 hours of read English speech from audiobooks",
+        "formats": [
+          "16kHz, 16-bit"
+        ]
+      },
+      "VoxCeleb": {
+        "url": "https://www.robots.ox.ac.uk/~vgg/data/voxceleb/",
+        "license": "Research use",
+        "description": "Large-scale speaker recognition dataset"
+      },
+      "TED-LIUM": {
+        "url": "http://www.openslr.org/7/",
+        "license": "CC BY-NC-ND 3.0",
+        "description": "TED talks audio dataset"
+      },
+      "LJSpeech": {
+        "url": "https://keithito.com/LJ-Speech-Dataset/",
+        "license": "Public Domain",
+        "description": "13,100 short audio clips of a single speaker",
+        "duration": "~24 hours"
+      },
+      "CMU ARCTIC": {
+        "url": "http://festvox.org/cmu_arctic/",
+        "license": "Free",
+        "description": "Phonetically balanced US English voices"
+      }
+    },
+    "music_background": {
+      "Free Music Archive": {
+        "url": "https://freemusicarchive.org",
+        "license": "CC licenses",
+        "description": "High-quality, legal audio downloads"
+      },
+      "YouTube Audio Library": {
+        "url": "https://www.youtube.com/audiolibrary",
+        "license": "Free for YouTube videos",
+        "description": "Free music and sound effects"
+      },
+      "Purple Planet": {
+        "url": "https://www.purple-planet.com",
+        "license": "Free with attribution",
+        "description": "Background music tracks"
+      }
+    }
+  },
+  "notes": {
+    "freesound_api": "Get API key at: https://freesound.org/apiv2/apply/",
+    "common_voice": "Best for multilingual voice training data",
+    "librispeech": "Best for English TTS training",
+    "ljspeech": "Single speaker, high quality, great for voice cloning"
+  }
+}

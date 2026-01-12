@@ -1,0 +1,51 @@
+{
+  "passed": [],
+  "failed": [
+    {
+      "test": "Import",
+      "status": "FAIL",
+      "message": "Import failed",
+      "timestamp": "2026-01-03T19:37:57.781462",
+      "error": "'_io.StringIO' object has no attribute 'buffer'"
+    },
+    {
+      "test": "Concurrent Queries",
+      "status": "FAIL",
+      "message": "Test failed",
+      "timestamp": "2026-01-03T19:37:57.782042",
+      "error": "'_io.StringIO' object has no attribute 'buffer'"
+    },
+    {
+      "test": "Agent Functions",
+      "status": "FAIL",
+      "message": "Test failed",
+      "timestamp": "2026-01-03T19:37:57.782512",
+      "error": "'_io.StringIO' object has no attribute 'buffer'"
+    },
+    {
+      "test": "Quantum Knowledge",
+      "status": "FAIL",
+      "message": "Test failed",
+      "timestamp": "2026-01-03T19:37:57.782972",
+      "error": "'_io.StringIO' object has no attribute 'buffer'"
+    },
+    {
+      "test": "Error Recovery",
+      "status": "FAIL",
+      "message": "Test failed",
+      "timestamp": "2026-01-03T19:37:57.783440",
+      "error": "'_io.StringIO' object has no attribute 'buffer'"
+    }
+  ],
+  "warnings": [
+    {
+      "test": "Memory Cleanup",
+      "status": "WARN",
+      "message": "Memory test had issues: '_io.StringIO' object has no attribute 'buffer'",
+      "timestamp": "2026-01-03T19:37:57.783892",
+      "error": null
+    }
+  ],
+  "breaking_points": [],
+  "performance": {}
+}

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Wazuh Rules for MITRE ATT&CK for ICS: TA0105 (Impact)
+  =======================================================
+  Custom rules for detecting behaviors mapped to Impact tactic.
+  Includes selected high-impact techniques from TA0105 (v18).
+  
+  Installation:
+    1. Copy to /var/ossec/etc/rules/ics_ta0105_rules.xml
+    2. chown wazuh:wazuh ics_ta0105_rules.xml
+    3. chmod 660 ics_ta0105_rules.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Rule IDs: 200800-200899 (reserved for TA0105 rules)
+-->
+
+<group name="ics,ot,scada,ta0105,impact,">
+
+  <!-- Level 0: Base ICS/OT event for TA0105 (parent) -->
+  <rule id="200100" level="0">
+    <decoded_as>modbus|dnp3|iec104|opcua|ics-syslog</decoded_as>
+    <description>Base ICS/OT event potentially related to Impact (TA0105)</description>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0879: Damage to Property -->
+  <!-- ============================================ -->
+  <rule id="200801" level="15">
+    <if_sid>200100</if_sid>
+    <field name="event_type">equipment_failure|motor_overload|valve_damage|property_damage</field>
+    <description>Potential property damage detected on ICS device - possible Damage to Property (T0879)</description>
+    <mitre>
+      <id>T0879</id>
+    </mitre>
+    <group>ics,impact,property_damage,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0813: Denial of Control -->
+  <!-- ============================================ -->
+  <rule id="200802" level="13" frequency="10" timeframe="60">
+    <if_matched_sid>200100</if_matched_sid>
+    <field name="control_status">blocked|denied|unavailable</field>
+    <same_dstip/>
+    <description>Multiple control denials to same ICS device - possible Denial of Control (T0813)</description>
+    <mitre>
+      <id>T0813</id>
+    </mitre>
+    <group>ics,impact,denial_of_control,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0815: Denial of View -->
+  <!-- ============================================ -->
+  <rule id="200803" level="11" frequency="5" timeframe="120">
+    <if_matched_sid>200100</if_matched_sid>
+    <field name="view_status">blocked|denied|unavailable|jammed</field>
+    <same_dstip/>
+    <description>Repeated view denials to same ICS device - possible Denial of View (T0815)</description>
+    <mitre>
+      <id>T0815</id>
+    </mitre>
+    <group>ics,impact,denial_of_view,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0826: Loss of Availability -->
+  <!-- ============================================ -->
+  <rule id="200804" level="13">
+    <if_sid>200100</if_sid>
+    <field name="availability_status">down|unavailable|offline|shutdown</field>
+    <field name="device_type">critical|pump|server|controller</field>
+    <description>Critical ICS device unavailable - possible Loss of Availability (T0826)</description>
+    <mitre>
+      <id>T0826</id>
+    </mitre>
+    <group>ics,impact,loss_of_availability,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0827: Loss of Control -->
+  <!-- ============================================ -->
+  <rule id="200805" level="14">
+    <if_sid>200100</if_sid>
+    <field name="control_status">lost|runaway|uncontrolled</field>
+    <description>Sustained loss of control on ICS device - possible Loss of Control (T0827)</description>
+    <mitre>
+      <id>T0827</id>
+    </mitre>
+    <group>ics,impact,loss_of_control,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0828: Loss of Productivity and Revenue -->
+  <!-- ============================================ -->
+  <rule id="200806" level="12">
+    <if_sid>200100</if_sid>
+    <field name="event_type">production_halt|line_stop|process_disruption</field>
+    <description>Production disruption detected - possible Loss of Productivity and Revenue (T0828)</description>
+    <mitre>
+      <id>T0828</id>
+    </mitre>
+    <group>ics,impact,productivity_loss,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0837: Loss of Protection -->
+  <!-- ============================================ -->
+  <rule id="200807" level="14">
+    <if_sid>200100</if_sid>
+    <field name="protection_status">disabled|bypassed|compromised</field>
+    <field name="device_type">relay|protection|safety</field>
+    <description>Protection system compromised - possible Loss of Protection (T0837)</description>
+    <mitre>
+      <id>T0837</id>
+    </mitre>
+    <group>ics,impact,loss_of_protection,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0880: Loss of Safety -->
+  <!-- ============================================ -->
+  <rule id="200808" level="15">
+    <if_sid>200100</if_sid>
+    <field name="safety_status">disabled|bypassed|overridden</field>
+    <field name="device_type">sis|safety|interlock|emergency</field>
+    <description>Safety system compromised - possible Loss of Safety (T0880) - CRITICAL</description>
+    <mitre>
+      <id>T0880</id>
+    </mitre>
+    <group>ics,impact,loss_of_safety,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0829: Loss of View -->
+  <!-- ============================================ -->
+  <rule id="200809" level="12">
+    <if_sid>200100</if_sid>
+    <field name="view_status">permanent_loss|sustained_unavailable</field>
+    <description>Sustained loss of view on ICS device - possible Loss of View (T0829)</description>
+    <mitre>
+      <id>T0829</id>
+    </mitre>
+    <group>ics,impact,loss_of_view,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0831: Manipulation of Control -->
+  <!-- ============================================ -->
+  <rule id="200810" level="14">
+    <if_sid>200100</if_sid>
+    <field name="control_action">unauthorized_setpoint|unauthorized_manipulation|control_change</field>
+    <description>Unauthorized control manipulation - possible Manipulation of Control (T0831)</description>
+    <mitre>
+      <id>T0831</id>
+    </mitre>
+    <group>ics,impact,control_manipulation,critical,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0832: Manipulation of View -->
+  <!-- ============================================ -->
+  <rule id="200811" level="13">
+    <if_sid>200100</if_sid>
+    <field name="view_action">falsified|manipulated|spoofed</field>
+    <description>View manipulation detected - possible Manipulation of View (T0832)</description>
+    <mitre>
+      <id>T0832</id>
+    </mitre>
+    <group>ics,impact,view_manipulation,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0882: Theft of Operational Information -->
+  <!-- ============================================ -->
+  <rule id="200812" level="10">
+    <if_sid>200100</if_sid>
+    <field name="action">exfiltrate|steal|copy</field>
+    <field name="data_type">blueprint|recipe|schedule|operational_data</field>
+    <description>Operational information exfiltration - possible Theft of Operational Information (T0882)</description>
+    <mitre>
+      <id>T0882</id>
+    </mitre>
+    <group>ics,impact,data_theft,</group>
+  </rule>
+
+</group>

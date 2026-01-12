@@ -1,0 +1,79 @@
+{
+  "cleanup_date": "2026-01-11T01:47:31.448004",
+  "shortcuts_removed": [
+    {
+      "shortcut_name": "ASUS DriverHub",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\ASUS DriverHub.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\ASUS DriverHub.lnk",
+      "target": null,
+      "working_dir": null,
+      "arguments": null,
+      "moved_date": "2026-01-11T01:46:50.223816"
+    },
+    {
+      "shortcut_name": "Cursor",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\Cursor.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\Cursor.lnk",
+      "target": null,
+      "working_dir": null,
+      "arguments": null,
+      "moved_date": "2026-01-11T01:46:50.541761"
+    },
+    {
+      "shortcut_name": "Discord",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\Discord.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\Discord.lnk",
+      "target": "C:\\Users\\Drakalich\\AppData\\Local\\Discord\\Update.exe",
+      "working_dir": "C:\\Users\\Drakalich\\AppData\\Local\\Discord\\app-1.0.9219",
+      "arguments": "--processStart Discord.exe",
+      "moved_date": "2026-01-11T01:46:50.829834"
+    },
+    {
+      "shortcut_name": "Game Center",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\Game Center.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\Game Center.lnk",
+      "target": null,
+      "working_dir": null,
+      "arguments": null,
+      "moved_date": "2026-01-11T01:46:51.094929"
+    },
+    {
+      "shortcut_name": "Omega",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\Omega.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\Omega.lnk",
+      "target": null,
+      "working_dir": null,
+      "arguments": null,
+      "moved_date": "2026-01-11T01:46:51.400820"
+    },
+    {
+      "shortcut_name": "Personal - Edge",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\Personal - Edge.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\Personal - Edge.lnk",
+      "target": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "working_dir": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application",
+      "arguments": "--profile-directory=\"Default\"",
+      "moved_date": "2026-01-11T01:46:51.665478"
+    },
+    {
+      "shortcut_name": "World of Tanks NA",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\World of Tanks NA.lnk",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Shortcuts\\World of Tanks NA.lnk",
+      "target": null,
+      "working_dir": null,
+      "arguments": null,
+      "moved_date": "2026-01-11T01:46:51.935046"
+    }
+  ],
+  "folders_removed": [
+    {
+      "folder_name": "AutoCAD Designs",
+      "original_location": "C:\\Users\\Drakalich\\Desktop\\AutoCAD Designs",
+      "organized_location": "D:\\RPF_BRAIN\\The Gatekeeper\\Organized_Files\\Desktop_Folders\\AutoCAD Designs",
+      "moved_date": "2026-01-11T01:47:30.027508"
+    }
+  ],
+  "omega_shortcut_created": "C:\\Users\\Drakalich\\Desktop\\Omega.lnk",
+  "total_shortcuts_removed": 7,
+  "total_folders_removed": 1
+}

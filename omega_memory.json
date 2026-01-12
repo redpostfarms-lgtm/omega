@@ -1,0 +1,31 @@
+{
+  "past_runs": [
+    {
+      "timestamp": "2026-01-04T11:58:24.107364",
+      "tests_run": 6,
+      "tests_passed": 4,
+      "tests_failed": 2,
+      "code_quality_score": 0.0,
+      "errors": []
+    },
+    {
+      "timestamp": "2026-01-08T00:38:35.669621",
+      "tests_run": 8,
+      "tests_passed": 5,
+      "tests_failed": 3,
+      "code_quality_score": 30.0,
+      "errors": []
+    },
+    {
+      "timestamp": "2026-01-08T00:59:54.302689",
+      "tests_run": 8,
+      "tests_passed": 5,
+      "tests_failed": 3,
+      "code_quality_score": 30.0,
+      "errors": []
+    }
+  ],
+  "error_patterns": {},
+  "fix_history": {},
+  "trends": {}
+}

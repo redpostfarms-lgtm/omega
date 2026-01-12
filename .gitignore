@@ -40,3 +40,4 @@ AppData/
 .pytest_cache/
 .coverage
 htmlcov/
+node_modules

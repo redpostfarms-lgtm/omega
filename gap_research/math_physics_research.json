@@ -1,0 +1,142 @@
+{
+  "area": "math_physics",
+  "gap": 18,
+  "timestamp": "2026-01-07T20:06:31.984411",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "symengine",
+      "full_name": "symengine/symengine",
+      "description": "SymEngine is a fast symbolic manipulation library, written in C++",
+      "url": "https://github.com/symengine/symengine",
+      "stars": 1323,
+      "language": "C++"
+    },
+    {
+      "name": "Algebrite",
+      "full_name": "davidedc/Algebrite",
+      "description": "Computer Algebra System in Javascript (Typescript)",
+      "url": "https://github.com/davidedc/Algebrite",
+      "stars": 993,
+      "language": "TypeScript"
+    },
+    {
+      "name": "AngouriMath",
+      "full_name": "asc-community/AngouriMath",
+      "description": "Open-source cross-platform symbolic algebra library for C# and F#. Can be used for both production and research purposes.",
+      "url": "https://github.com/asc-community/AngouriMath",
+      "stars": 807,
+      "language": "C#"
+    },
+    {
+      "name": "SymbolicMathematics",
+      "full_name": "facebookresearch/SymbolicMathematics",
+      "description": "Deep Learning for Symbolic Mathematics",
+      "url": "https://github.com/facebookresearch/SymbolicMathematics",
+      "stars": 551,
+      "language": "Python"
+    },
+    {
+      "name": "nerdamer",
+      "full_name": "jiggzson/nerdamer",
+      "description": "a symbolic math expression evaluator for javascript",
+      "url": "https://github.com/jiggzson/nerdamer",
+      "stars": 540,
+      "language": "JavaScript"
+    },
+    {
+      "name": "bullet3",
+      "full_name": "bulletphysics/bullet3",
+      "description": "Bullet Physics SDK: real-time collision detection and multi-physics simulation for VR, games, visual effects, robotics, machine learning etc.",
+      "url": "https://github.com/bulletphysics/bullet3",
+      "stars": 14126,
+      "language": "C++"
+    },
+    {
+      "name": "JoltPhysics",
+      "full_name": "jrouwe/JoltPhysics",
+      "description": "A multi core friendly rigid body physics and collision detection library. Written in C++. Suitable for games and VR applications. Used by Horizon Forbidden West and Death Stranding 2.",
+      "url": "https://github.com/jrouwe/JoltPhysics",
+      "stars": 9181,
+      "language": "C++"
+    },
+    {
+      "name": "The-Powder-Toy",
+      "full_name": "The-Powder-Toy/The-Powder-Toy",
+      "description": "Written in C++ and using SDL, The Powder Toy is a desktop version of the classic 'falling sand' physics sandbox, it simulates air pressure and velocity as well as heat.",
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy",
+      "stars": 4988,
+      "language": "C++"
+    },
+    {
+      "name": "FluidX3D",
+      "full_name": "ProjectPhysX/FluidX3D",
+      "description": "The fastest and most memory efficient lattice Boltzmann CFD software, running on all GPUs and CPUs via OpenCL. Free for non-commercial use.",
+      "url": "https://github.com/ProjectPhysX/FluidX3D",
+      "stars": 4849,
+      "language": "C++"
+    },
+    {
+      "name": "dm_control",
+      "full_name": "google-deepmind/dm_control",
+      "description": "Google DeepMind's software stack for physics-based simulation and Reinforcement Learning environments, using MuJoCo.",
+      "url": "https://github.com/google-deepmind/dm_control",
+      "stars": 4404,
+      "language": "Python"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=symbolic%20math%20course",
+      "query": "symbolic math course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=symbolic%20math%20course",
+      "query": "symbolic math course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=symbolic%20math%20course",
+      "query": "symbolic math course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=symbolic%20math%20course",
+      "query": "symbolic math course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=symbolic%20math%20course",
+      "query": "symbolic math course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=physics%20simulation",
+      "query": "physics simulation"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=physics%20simulation",
+      "query": "physics simulation"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=physics%20simulation",
+      "query": "physics simulation"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=physics%20simulation",
+      "query": "physics simulation"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=physics%20simulation",
+      "query": "physics simulation"
+    }
+  ],
+  "resources": []
+}

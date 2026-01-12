@@ -1,0 +1,118 @@
+{
+  "area": "code_generation",
+  "gap": 22,
+  "timestamp": "2026-01-07T20:05:58.753451",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "grapesjs",
+      "full_name": "GrapesJS/grapesjs",
+      "description": "Free and Open source Web Builder Framework. Next generation tool for building templates without coding",
+      "url": "https://github.com/GrapesJS/grapesjs",
+      "stars": 25361,
+      "language": "TypeScript"
+    },
+    {
+      "name": "Wav2Lip",
+      "full_name": "Rudrabha/Wav2Lip",
+      "description": "This repository contains the codes of \"A Lip Sync Expert Is All You Need for Speech to Lip Generation In the Wild\", published at ACM Multimedia 2020. For HD commercial model, please try out Sync Labs ",
+      "url": "https://github.com/Rudrabha/Wav2Lip",
+      "stars": 12743,
+      "language": "Python"
+    },
+    {
+      "name": "CodeGeeX",
+      "full_name": "zai-org/CodeGeeX",
+      "description": "CodeGeeX: An Open Multilingual Code Generation Model (KDD 2023)",
+      "url": "https://github.com/zai-org/CodeGeeX",
+      "stars": 8725,
+      "language": "Python"
+    },
+    {
+      "name": "CodeGeeX2",
+      "full_name": "zai-org/CodeGeeX2",
+      "description": "CodeGeeX2: A More Powerful Multilingual Code Generation Model",
+      "url": "https://github.com/zai-org/CodeGeeX2",
+      "stars": 7613,
+      "language": "Python"
+    },
+    {
+      "name": "mockery",
+      "full_name": "vektra/mockery",
+      "description": "A mock code autogenerator for Go",
+      "url": "https://github.com/vektra/mockery",
+      "stars": 6932,
+      "language": "Go"
+    },
+    {
+      "name": "codecompanion-filewise.nvim",
+      "full_name": "dyamon/codecompanion-filewise.nvim",
+      "description": "File-aware AI assistance for Neovim via modular CodeCompanion extensions",
+      "url": "https://github.com/dyamon/codecompanion-filewise.nvim",
+      "stars": 5,
+      "language": "Lua"
+    },
+    {
+      "name": "traycer-planning-layer",
+      "full_name": "Aditi2354/traycer-planning-layer",
+      "description": "\u201cPlan here, execute anywhere \u2014 a TypeScript CLI that converts natural-language goals into file-aware, step-by-step plans with acceptance criteria, and exports agent-ready JSON for coding agents.\u201d",
+      "url": "https://github.com/Aditi2354/traycer-planning-layer",
+      "stars": 0,
+      "language": "TypeScript"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=code%20generation%20course",
+      "query": "code generation course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=code%20generation%20course",
+      "query": "code generation course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=code%20generation%20course",
+      "query": "code generation course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=code%20generation%20course",
+      "query": "code generation course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=code%20generation%20course",
+      "query": "code generation course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=AST%20tutorial",
+      "query": "AST tutorial"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=AST%20tutorial",
+      "query": "AST tutorial"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=AST%20tutorial",
+      "query": "AST tutorial"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=AST%20tutorial",
+      "query": "AST tutorial"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=AST%20tutorial",
+      "query": "AST tutorial"
+    }
+  ],
+  "resources": []
+}

@@ -1,0 +1,42 @@
+{
+  "tag": [
+    {
+      "winner": "Beta",
+      "duration": 60.099942684173584,
+      "tags_made": 599,
+      "final_it": "Gamma"
+    },
+    {
+      "winner": "Beta",
+      "duration": 60.099942684173584,
+      "tags_made": 1107,
+      "final_it": "Delta"
+    }
+  ],
+  "hide_and_seek": [
+    {
+      "winner": "Beta",
+      "seeker": "Beta",
+      "found": 3,
+      "hidden": 0
+    },
+    {
+      "winner": "Delta",
+      "seeker": "Delta",
+      "found": 3,
+      "hidden": 0
+    }
+  ],
+  "dodgeball": [
+    {
+      "winner": "Alpha",
+      "survivors": 4,
+      "eliminations": 0
+    },
+    {
+      "winner": "Alpha",
+      "survivors": 4,
+      "eliminations": 0
+    }
+  ]
+}

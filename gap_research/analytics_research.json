@@ -1,0 +1,142 @@
+{
+  "area": "analytics",
+  "gap": 23,
+  "timestamp": "2026-01-07T20:06:53.109529",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "snappydata",
+      "full_name": "TIBCOSoftware/snappydata",
+      "description": "Project SnappyData - memory optimized analytics database, based on Apache Spark\u2122 and Apache Geode\u2122. Stream, Transact, Analyze, Predict in one cluster ",
+      "url": "https://github.com/TIBCOSoftware/snappydata",
+      "stars": 1035,
+      "language": "Scala"
+    },
+    {
+      "name": "retentioneering-tools",
+      "full_name": "retentioneering/retentioneering-tools",
+      "description": "Retentioneering: product analytics, data-driven CJM optimization, marketing analytics, web analytics, transaction analytics, graph visualization, process mining, and behavioral segmentation in Python. Predictive analytics over clickstream, AB tests, machine learning, and Markov Chain simulations.",
+      "url": "https://github.com/retentioneering/retentioneering-tools",
+      "stars": 870,
+      "language": "Python"
+    },
+    {
+      "name": "palladium",
+      "full_name": "ottogroup/palladium",
+      "description": "Framework for setting up predictive analytics services",
+      "url": "https://github.com/ottogroup/palladium",
+      "stars": 488,
+      "language": "Python"
+    },
+    {
+      "name": "FlowViz",
+      "full_name": "nbrown02/FlowViz",
+      "description": "A Power BI template that provides easy to understand, actionable flow metrics and predictive analytics for your agile teams using Azure DevOps, Azure DevOps Server and/or TFS.",
+      "url": "https://github.com/nbrown02/FlowViz",
+      "stars": 234,
+      "language": null
+    },
+    {
+      "name": "CaPTk",
+      "full_name": "CBICA/CaPTk",
+      "description": "Cancer Imaging Phenomics Toolkit (CaPTk) is a software platform to perform image analysis and predictive modeling tasks. Documentation: https://cbica.github.io/CaPTk",
+      "url": "https://github.com/CBICA/CaPTk",
+      "stars": 195,
+      "language": "C++"
+    },
+    {
+      "name": "d3",
+      "full_name": "d3/d3",
+      "description": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:",
+      "url": "https://github.com/d3/d3",
+      "stars": 112116,
+      "language": "Shell"
+    },
+    {
+      "name": "grafana",
+      "full_name": "grafana/grafana",
+      "description": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more. ",
+      "url": "https://github.com/grafana/grafana",
+      "stars": 71607,
+      "language": "TypeScript"
+    },
+    {
+      "name": "superset",
+      "full_name": "apache/superset",
+      "description": "Apache Superset is a Data Visualization and Data Exploration Platform",
+      "url": "https://github.com/apache/superset",
+      "stars": 69702,
+      "language": "TypeScript"
+    },
+    {
+      "name": "echarts",
+      "full_name": "apache/echarts",
+      "description": "Apache ECharts is a powerful, interactive charting and data visualization library for browser",
+      "url": "https://github.com/apache/echarts",
+      "stars": 65384,
+      "language": "TypeScript"
+    },
+    {
+      "name": "metabase",
+      "full_name": "metabase/metabase",
+      "description": "The easy-to-use open source Business Intelligence and Embedded Analytics tool that lets everyone work with data :bar_chart:",
+      "url": "https://github.com/metabase/metabase",
+      "stars": 45507,
+      "language": "Clojure"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=analytics%20course",
+      "query": "analytics course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=analytics%20course",
+      "query": "analytics course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=analytics%20course",
+      "query": "analytics course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=analytics%20course",
+      "query": "analytics course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=analytics%20course",
+      "query": "analytics course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=data%20visualization",
+      "query": "data visualization"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=data%20visualization",
+      "query": "data visualization"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=data%20visualization",
+      "query": "data visualization"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=data%20visualization",
+      "query": "data visualization"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=data%20visualization",
+      "query": "data visualization"
+    }
+  ],
+  "resources": []
+}

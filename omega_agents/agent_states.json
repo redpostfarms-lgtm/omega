@@ -1,0 +1,1780 @@
+{
+  "agents": {
+    "voice_analyst": {
+      "agent_id": "voice_analyst",
+      "role": "Voice Pattern Analyst",
+      "expertise": [
+        "voice",
+        "audio",
+        "spectral"
+      ],
+      "state": "learning",
+      "last_activity": "2026-01-10T23:32:10.679452",
+      "learned_items": 76
+    },
+    "language_expert": {
+      "agent_id": "language_expert",
+      "role": "Language Quality Expert",
+      "expertise": [
+        "language",
+        "vocabulary",
+        "coherence"
+      ],
+      "state": "learning",
+      "last_activity": "2026-01-10T23:32:10.679452",
+      "learned_items": 76
+    },
+    "conversation_coach": {
+      "agent_id": "conversation_coach",
+      "role": "Conversation Flow Coach",
+      "expertise": [
+        "conversation",
+        "engagement",
+        "flow"
+      ],
+      "state": "learning",
+      "last_activity": "2026-01-10T23:32:10.679452",
+      "learned_items": 152
+    },
+    "improvement_strategist": {
+      "agent_id": "improvement_strategist",
+      "role": "Improvement Strategist",
+      "expertise": [
+        "improvement",
+        "optimization",
+        "strategy"
+      ],
+      "state": "learning",
+      "last_activity": "2026-01-10T23:32:10.679452",
+      "learned_items": 228
+    },
+    "speech_recognition_specialist": {
+      "agent_id": "speech_recognition_specialist",
+      "role": "Speech Recognition Specialist",
+      "expertise": [
+        "speech",
+        "recognition",
+        "whisper",
+        "accuracy"
+      ],
+      "state": "learning",
+      "last_activity": "2026-01-10T23:32:10.679452",
+      "learned_items": 76
+    },
+    "learning_coordinator": {
+      "agent_id": "learning_coordinator",
+      "role": "Learning Coordinator",
+      "expertise": [
+        "coordination",
+        "integration",
+        "synthesis"
+      ],
+      "state": "active",
+      "last_activity": "2026-01-10T21:25:02.546741",
+      "learned_items": 0
+    }
+  },
+  "last_updated": "2026-01-10T23:32:10.679452",
+  "communication_log": [
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:15:25.215443"
+      },
+      "timestamp": "2026-01-10T23:15:25.216443"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:15:25.216443"
+      },
+      "timestamp": "2026-01-10T23:15:25.216443"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:15:25.216443"
+      },
+      "timestamp": "2026-01-10T23:15:25.216443"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:15:25.216443"
+      },
+      "timestamp": "2026-01-10T23:15:25.216443"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:16:40.096010"
+      },
+      "timestamp": "2026-01-10T23:16:40.097013"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:17:54.763715"
+      },
+      "timestamp": "2026-01-10T23:17:54.763715"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:19:13.950709"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:19:13.950709"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:19:13.950709"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:19:13.950709"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:19:13.950709"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:19:13.951710"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:19:13.951710"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:19:13.951710"
+      },
+      "timestamp": "2026-01-10T23:19:13.951710"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:20:26.923131"
+      },
+      "timestamp": "2026-01-10T23:20:26.924134"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:21:40.610710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:21:40.610710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:21:40.610710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:21:40.611710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:21:40.611710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:21:40.611710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:21:40.611710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:21:40.611710"
+      },
+      "timestamp": "2026-01-10T23:21:40.611710"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:23:04.996409"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:23:04.996409"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:23:04.996409"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:23:04.996409"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:23:04.996409"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:23:04.997410"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:23:04.997410"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:23:04.997410"
+      },
+      "timestamp": "2026-01-10T23:23:04.997410"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:24:14.569780"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:24:14.569780"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:24:14.569780"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:24:14.570781"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:24:14.570781"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:24:14.570781"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:24:14.570781"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:24:14.570781"
+      },
+      "timestamp": "2026-01-10T23:24:14.570781"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:25:24.967573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:25:24.967573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:25:24.967573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:25:24.967573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:25:24.967573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:25:24.968573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:25:24.968573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:25:24.968573"
+      },
+      "timestamp": "2026-01-10T23:25:24.968573"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:27:14.200954"
+      },
+      "timestamp": "2026-01-10T23:27:14.201955"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:28:45.230328"
+      },
+      "timestamp": "2026-01-10T23:28:45.230328"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:30:56.127348"
+      },
+      "timestamp": "2026-01-10T23:30:56.128349"
+    },
+    {
+      "from": "voice_analyst",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "voice_analyst",
+        "role": "Voice Pattern Analyst",
+        "task": null,
+        "insights": [
+          "Voice pattern analysis: Detected consistent pitch modulation",
+          "Spectral characteristics show natural variation"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "language_expert",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "language_expert",
+        "role": "Language Quality Expert",
+        "task": null,
+        "insights": [
+          "Language coherence: Analyzing 0 conversation turns",
+          "Vocabulary diversity appears optimal"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "conversation_coach",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "conversation_coach",
+        "role": "Conversation Flow Coach",
+        "task": null,
+        "insights": [
+          "Conversation flow: Natural turn-taking detected",
+          "Engagement level: High response relevance"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "speech_recognition_specialist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "speech_recognition_specialist",
+        "role": "Speech Recognition Specialist",
+        "task": null,
+        "insights": [
+          "Audio file available for quality analysis",
+          "Monitoring: Whisper base model should provide good accuracy"
+        ],
+        "recommendations": [],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    },
+    {
+      "from": "improvement_strategist",
+      "to": "learning_coordinator",
+      "message": "Findings from None",
+      "data": {
+        "agent_id": "improvement_strategist",
+        "role": "Improvement Strategist",
+        "task": null,
+        "insights": [],
+        "recommendations": [
+          "Suggestion: Increase response variety in question types",
+          "Suggestion: Better context retention across longer conversations"
+        ],
+        "timestamp": "2026-01-10T23:32:10.679452"
+      },
+      "timestamp": "2026-01-10T23:32:10.679452"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "area": "automation",
+  "gap": 20,
+  "timestamp": "2026-01-07T20:07:25.375480",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "n8n",
+      "full_name": "n8n-io/n8n",
+      "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+      "url": "https://github.com/n8n-io/n8n",
+      "stars": 167237,
+      "language": "TypeScript"
+    },
+    {
+      "name": "dify",
+      "full_name": "langgenius/dify",
+      "description": "Production-ready platform for agentic workflow development.",
+      "url": "https://github.com/langgenius/dify",
+      "stars": 125117,
+      "language": "Python"
+    },
+    {
+      "name": "airflow",
+      "full_name": "apache/airflow",
+      "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
+      "url": "https://github.com/apache/airflow",
+      "stars": 43767,
+      "language": "Python"
+    },
+    {
+      "name": "kestra",
+      "full_name": "kestra-io/kestra",
+      "description": "Event Driven Orchestration & Scheduling Platform for Mission Critical Applications",
+      "url": "https://github.com/kestra-io/kestra",
+      "stars": 26219,
+      "language": "Java"
+    },
+    {
+      "name": "sim",
+      "full_name": "simstudioai/sim",
+      "description": "Open-source platform to build and deploy AI agent workflows.",
+      "url": "https://github.com/simstudioai/sim",
+      "stars": 25093,
+      "language": "TypeScript"
+    },
+    {
+      "name": "xxl-job",
+      "full_name": "xuxueli/xxl-job",
+      "description": "A distributed task scheduling framework.\uff08\u5206\u5e03\u5f0f\u4efb\u52a1\u8c03\u5ea6\u5e73\u53f0XXL-JOB\uff09",
+      "url": "https://github.com/xuxueli/xxl-job",
+      "stars": 29774,
+      "language": "Java"
+    },
+    {
+      "name": "dask",
+      "full_name": "dask/dask",
+      "description": "Parallel computing with task scheduling",
+      "url": "https://github.com/dask/dask",
+      "stars": 13695,
+      "language": "Python"
+    },
+    {
+      "name": "agenda",
+      "full_name": "agenda/agenda",
+      "description": "Lightweight job scheduling for Node.js",
+      "url": "https://github.com/agenda/agenda",
+      "stars": 9593,
+      "language": "TypeScript"
+    },
+    {
+      "name": "apscheduler",
+      "full_name": "agronholm/apscheduler",
+      "description": "Task scheduling library for Python",
+      "url": "https://github.com/agronholm/apscheduler",
+      "stars": 7216,
+      "language": "Python"
+    },
+    {
+      "name": "Cronicle",
+      "full_name": "jhuckaby/Cronicle",
+      "description": "A simple, distributed task scheduler and runner with a web based UI.",
+      "url": "https://github.com/jhuckaby/Cronicle",
+      "stars": 5321,
+      "language": "JavaScript"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=automation%20course",
+      "query": "automation course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=automation%20course",
+      "query": "automation course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=automation%20course",
+      "query": "automation course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=automation%20course",
+      "query": "automation course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=automation%20course",
+      "query": "automation course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=workflow%20tutorial",
+      "query": "workflow tutorial"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=workflow%20tutorial",
+      "query": "workflow tutorial"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=workflow%20tutorial",
+      "query": "workflow tutorial"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=workflow%20tutorial",
+      "query": "workflow tutorial"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=workflow%20tutorial",
+      "query": "workflow tutorial"
+    }
+  ],
+  "resources": []
+}

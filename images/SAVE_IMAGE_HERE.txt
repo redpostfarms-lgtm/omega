@@ -1,0 +1,19 @@
+SAVE YOUR OMEGA LOGO IMAGE HERE
+================================
+
+Location: D:\RPF_BRAIN\The Gatekeeper\images
+
+File Name: omega_logo_red_gold_wreath.png
+OR: omega_logo_red_gold_wreath.bmp
+
+Complete Path:
+D:\RPF_BRAIN\The Gatekeeper\images\omega_logo_red_gold_wreath.png
+
+================================
+
+IMPORTANT:
+- You need a PNG or BMP IMAGE file (not a video file)
+- The file should be a static image of the red Omega with gold wreath
+- After saving, run: python CREATE_OMEGA_ICON.py
+
+================================

@@ -1,0 +1,142 @@
+{
+  "area": "reasoning",
+  "gap": 18,
+  "timestamp": "2026-01-07T20:06:10.436839",
+  "papers": [],
+  "apis": [],
+  "repos": [
+    {
+      "name": "mm-cot",
+      "full_name": "amazon-science/mm-cot",
+      "description": "Official implementation for \"Multimodal Chain-of-Thought Reasoning in Language Models\" (stay tuned and more will be updated)",
+      "url": "https://github.com/amazon-science/mm-cot",
+      "stars": 3989,
+      "language": "Python"
+    },
+    {
+      "name": "Awesome-LLM-Reasoning",
+      "full_name": "atfortes/Awesome-LLM-Reasoning",
+      "description": "From Chain-of-Thought prompting to OpenAI o1 and DeepSeek-R1 \ud83c\udf53",
+      "url": "https://github.com/atfortes/Awesome-LLM-Reasoning",
+      "stars": 3500,
+      "language": null
+    },
+    {
+      "name": "chain-of-thought-hub",
+      "full_name": "FranxYao/chain-of-thought-hub",
+      "description": "Benchmarking large language models' complex reasoning ability with chain-of-thought prompting",
+      "url": "https://github.com/FranxYao/chain-of-thought-hub",
+      "stars": 2763,
+      "language": "Jupyter Notebook"
+    },
+    {
+      "name": "griptape",
+      "full_name": "griptape-ai/griptape",
+      "description": "Modular Python framework for AI agents and workflows with chain-of-thought reasoning, tools, and memory. ",
+      "url": "https://github.com/griptape-ai/griptape",
+      "stars": 2454,
+      "language": "Python"
+    },
+    {
+      "name": "Chain-of-Recursive-Thoughts",
+      "full_name": "PhialsBasement/Chain-of-Recursive-Thoughts",
+      "description": "I made my AI think harder by making it argue with itself repeatedly. It works stupidly well.",
+      "url": "https://github.com/PhialsBasement/Chain-of-Recursive-Thoughts",
+      "stars": 2316,
+      "language": "JavaScript"
+    },
+    {
+      "name": "langchainjs",
+      "full_name": "langchain-ai/langchainjs",
+      "description": "\ud83e\udd9c\ud83d\udd17 Build context-aware reasoning applications",
+      "url": "https://github.com/langchain-ai/langchainjs",
+      "stars": 16690,
+      "language": "TypeScript"
+    },
+    {
+      "name": "clip-as-service",
+      "full_name": "jina-ai/clip-as-service",
+      "description": "\ud83c\udfc4 Scalable embedding, reasoning, ranking for images and sentences with CLIP",
+      "url": "https://github.com/jina-ai/clip-as-service",
+      "stars": 12799,
+      "language": "Python"
+    },
+    {
+      "name": "HRM",
+      "full_name": "sapientinc/HRM",
+      "description": "Hierarchical Reasoning Model Official Release",
+      "url": "https://github.com/sapientinc/HRM",
+      "stars": 12219,
+      "language": "Python"
+    },
+    {
+      "name": "nofx",
+      "full_name": "NoFxAiOS/nofx",
+      "description": "Open-source Trading OS with pluggable AI brain | From market data \u2192 AI reasoning \u2192 Trade execution | Self-hosted & Multi-exchange",
+      "url": "https://github.com/NoFxAiOS/nofx",
+      "stars": 9654,
+      "language": "Go"
+    },
+    {
+      "name": "MiniCPM",
+      "full_name": "OpenBMB/MiniCPM",
+      "description": "MiniCPM4 & MiniCPM4.1: Ultra-Efficient LLMs on End Devices, achieving 3+ generation speedup on reasoning tasks",
+      "url": "https://github.com/OpenBMB/MiniCPM",
+      "stars": 8491,
+      "language": "Jupyter Notebook"
+    }
+  ],
+  "education": [
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=reasoning%20course",
+      "query": "reasoning course"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=reasoning%20course",
+      "query": "reasoning course"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=reasoning%20course",
+      "query": "reasoning course"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=reasoning%20course",
+      "query": "reasoning course"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=reasoning%20course",
+      "query": "reasoning course"
+    },
+    {
+      "platform": "Coursera",
+      "url": "https://www.coursera.org/search?query=logic%20tutorial",
+      "query": "logic tutorial"
+    },
+    {
+      "platform": "edX",
+      "url": "https://www.edx.org/search?q=logic%20tutorial",
+      "query": "logic tutorial"
+    },
+    {
+      "platform": "Udemy",
+      "url": "https://www.udemy.com/courses/search/?q=logic%20tutorial",
+      "query": "logic tutorial"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=logic%20tutorial",
+      "query": "logic tutorial"
+    },
+    {
+      "platform": "Khan Academy",
+      "url": "https://www.khanacademy.org/search?page_search_query=logic%20tutorial",
+      "query": "logic tutorial"
+    }
+  ],
+  "resources": []
+}

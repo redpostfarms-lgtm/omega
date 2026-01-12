@@ -1,0 +1,25 @@
+================================================================================
+GATEKEEPER SYSTEM & OMEGA - COPYRIGHT NOTICE
+================================================================================
+
+Copyright (c) 2025-2026 Red Post Farms, LLC
+All Rights Reserved
+
+PROPRIETARY SOFTWARE - NOT FOR DISTRIBUTION
+
+This software and all associated files, including the Omega AI system, 
+are the exclusive property of Red Post Farms, LLC.
+
+TRADEMARK NOTICE:
+"Omega" and "Ω" (Omega symbol) are proprietary trademarks and service marks 
+of Red Post Farms, LLC. Any unauthorized use of these marks is strictly 
+prohibited.
+
+NO COPYING. NO SHARING. NO DISTRIBUTION.
+
+Explicit written permission required for any use beyond authorized personnel.
+
+================================================================================
+ALL RIGHTS RESERVED.
+================================================================================
+

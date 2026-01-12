@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Wazuh Rules for MITRE ATT&CK for ICS: TA0104 (Execution)
+  ========================================================
+  Custom rules for detecting behaviors mapped to Execution tactic.
+  Includes all 10 techniques from TA0104 (v18), with expanded T0874 (Hooking) detection.
+  
+  Installation:
+    1. Copy to /var/ossec/etc/rules/ics_ta0104_rules.xml
+    2. chown wazuh:wazuh ics_ta0104_rules.xml
+    3. chmod 660 ics_ta0104_rules.xml
+    4. systemctl restart wazuh-manager
+  
+  Test with: /var/ossec/bin/wazuh-logtest
+  
+  Rule IDs: 200900-200999 (reserved for TA0104 rules)
+-->
+
+<group name="ics,ot,scada,ta0104,execution,">
+
+  <!-- Level 0: Base ICS/OT event for TA0104 (parent) -->
+  <rule id="200900" level="0">
+    <decoded_as>modbus|dnp3|iec104|opcua|ics-syslog|engineering_software</decoded_as>
+    <description>Base ICS/OT event potentially related to Execution (TA0104)</description>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0821: Modify Controller Tasking -->
+  <!-- T0843: Program Download -->
+  <!-- ============================================ -->
+  <rule id="200901" level="13">
+    <if_sid>200900</if_sid>
+    <field name="function_code">43|0x2B</field>
+    <field name="command_type">program_download|tasking_modify|logic_upload|project_upload</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^engineering_subnet</field>
+    <description>Unauthorized PLC program/tasking download/modification - possible Modify Controller Tasking (T0821) / Program Download (T0843)</description>
+    <mitre>
+      <id>T0821</id>
+      <id>T0843</id>
+    </mitre>
+    <group>ics,execution,program_download,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0858: Change Operating Mode -->
+  <!-- ============================================ -->
+  <rule id="200902" level="12">
+    <if_sid>200900</if_sid>
+    <field name="device_mode">engineering|debug|program|test|firmware_update</field>
+    <field name="srcip" negate="yes">^192\.168\.10\.|^authorized_maintenance</field>
+    <description>Unauthorized change to engineering/debug mode - possible Change Operating Mode (T0858) for code execution</description>
+    <mitre>
+      <id>T0858</id>
+    </mitre>
+    <group>ics,execution,mode_change,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0871: Execution through API -->
+  <!-- T0834: Native API -->
+  <!-- ============================================ -->
+  <rule id="200903" level="11">
+    <if_sid>200900</if_sid>
+    <field name="operation">api_call|method_execute|native_function</field>
+    <field name="node_id">ns=.*;Execute|Run</field>
+    <description>Execution through API or native functions on ICS device - possible Execution through API (T0871) / Native API (T0834)</description>
+    <mitre>
+      <id>T0871</id>
+      <id>T0834</id>
+    </mitre>
+    <group>ics,execution,api_execution,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0807: Command-Line Interface -->
+  <!-- ============================================ -->
+  <rule id="200904" level="10">
+    <if_sid>200900</if_sid>
+    <field name="access_type">cli|command_line|telnet|ssh|serial_console</field>
+    <field name="command">exec|run|shell|cmd</field>
+    <description>Command-line interface access on ICS device - possible Command-Line Interface (T0807) for execution</description>
+    <mitre>
+      <id>T0807</id>
+    </mitre>
+    <group>ics,execution,cli_access,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0863: User Execution -->
+  <!-- T0823: Graphical User Interface -->
+  <!-- ============================================ -->
+  <rule id="200905" level="9">
+    <if_sid>200900</if_sid>
+    <field name="interface">gui|hmi|panel</field>
+    <field name="action">execute|run_script|button_press|manual_trigger</field>
+    <field name="user">!authorized_operator</field>
+    <description>Suspicious user execution via GUI/HMI - possible User Execution (T0863) / Graphical User Interface (T0823)</description>
+    <mitre>
+      <id>T0863</id>
+      <id>T0823</id>
+    </mitre>
+    <group>ics,execution,user_execution,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0895: Autorun Image -->
+  <!-- T0853: Scripting -->
+  <!-- ============================================ -->
+  <rule id="200906" level="12">
+    <if_sid>200900</if_sid>
+    <field name="media_type">removable|usb|iso|autorun</field>
+    <field name="action">autorun|script_execute</field>
+    <description>Autorun from removable media or script execution - possible Autorun Image (T0895) / Scripting (T0853)</description>
+    <mitre>
+      <id>T0895</id>
+      <id>T0853</id>
+    </mitre>
+    <group>ics,execution,autorun,scripting,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0874: Hooking (Expanded Detection) -->
+  <!-- ============================================ -->
+  
+  <!-- Base rule for hooking events -->
+  <rule id="200910" level="0">
+    <decoded_as>windows_sysmon|ics_syslog|fim_event</decoded_as>
+    <match>hook|SetWindowsHook|IAT|Import Address Table</match>
+    <description>Base event potentially related to Hooking (T0874)</description>
+  </rule>
+
+  <!-- API Call Monitoring: Suspicious hook installation APIs -->
+  <rule id="200911" level="12">
+    <if_sid>200910</if_sid>
+    <field name="api_call">SetWindowsHookEx|SetWinEventHook|SetWindowsHook</field>
+    <field name="process_name">!trusted_engineering|!vendor_process</field>
+    <description>Suspicious API call for hook installation - possible Hooking (T0874)</description>
+    <mitre>
+      <id>T0874</id>
+    </mitre>
+    <group>ics,execution,hooking,api_monitor,</group>
+  </rule>
+
+  <!-- Integrity Violation: Memory vs. Binary Mismatch -->
+  <rule id="200912" level="13">
+    <if_sid>200910</if_sid>
+    <field name="integrity_status">mismatch|altered|redirect_detected</field>
+    <field name="module">kernel|dll|api_table</field>
+    <description>Process memory integrity violation (e.g., IAT hook) - possible Hooking (T0874)</description>
+    <mitre>
+      <id>T0874</id>
+    </mitre>
+    <group>ics,execution,hooking,integrity_check,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Correlation: Repeated Anomalous API Redirects -->
+  <rule id="200913" level="14" frequency="5" timeframe="300">
+    <if_matched_sid>200910</if_matched_sid>
+    <field name="api_response">redirected|unexpected|altered</field>
+    <same_process/>
+    <description>Multiple anomalous API redirects in short time - possible Hooking (T0874)</description>
+    <mitre>
+      <id>T0874</id>
+    </mitre>
+    <group>ics,execution,hooking,behavioral,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- FIM-based: DLL/EXE Integrity Violation -->
+  <rule id="200914" level="14">
+    <if_sid>550</if_sid>
+    <field name="file">\.dll$|\.exe$|\.sys$</field>
+    <field name="integrity_status">altered|mismatch|hash_failed</field>
+    <description>Critical DLL/EXE integrity violation - possible IAT hooking (T0874)</description>
+    <mitre>
+      <id>T0874</id>
+    </mitre>
+    <group>ics,execution,hooking,integrity,fim,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- Module Load Anomaly (Sysmon Event ID 7) -->
+  <rule id="200915" level="11">
+    <if_sid>200910</if_sid>
+    <field name="event_id">7</field>
+    <field name="image_loaded">suspicious|unknown|unsigned</field>
+    <field name="process_name">ics_process|hmi|scada</field>
+    <description>Suspicious module load in ICS process - possible hooking payload (T0874)</description>
+    <mitre>
+      <id>T0874</id>
+    </mitre>
+    <group>ics,execution,hooking,module_load,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0895: Autorun Image (Additional Coverage) -->
+  <!-- ============================================ -->
+  <rule id="200920" level="13" frequency="3" timeframe="600">
+    <if_matched_sid>200906</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple autorun/script execution events from same source - possible automated execution (T0895)</description>
+    <mitre>
+      <id>T0895</id>
+      <id>T0853</id>
+    </mitre>
+    <group>ics,execution,autorun,scripting,correlation,</group>
+  </rule>
+
+  <!-- ============================================ -->
+  <!-- T0821: Modify Controller Tasking (Correlation) -->
+  <!-- ============================================ -->
+  <rule id="200921" level="14" frequency="2" timeframe="300">
+    <if_matched_sid>200901</if_matched_sid>
+    <same_srcip/>
+    <description>Multiple program downloads/modifications in short time - possible automated tasking manipulation (T0821)</description>
+    <mitre>
+      <id>T0821</id>
+      <id>T0843</id>
+    </mitre>
+    <group>ics,execution,program_download,correlation,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+</group>
