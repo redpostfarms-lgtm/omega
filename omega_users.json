@@ -1,0 +1,20 @@
+{
+    "admin": {
+        "password": "pbkdf2:sha256:600000$placeholder$will_be_updated",
+        "role": "admin",
+        "created": "2026-01-01",
+        "active": true
+    },
+    "operator": {
+        "password": "pbkdf2:sha256:600000$placeholder$will_be_updated",
+        "role": "operator",
+        "created": "2026-01-01",
+        "active": true
+    },
+    "viewer": {
+        "password": "pbkdf2:sha256:600000$placeholder$will_be_updated",
+        "role": "viewer",
+        "created": "2026-01-01",
+        "active": true
+    }
+}

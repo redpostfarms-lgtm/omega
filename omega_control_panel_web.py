@@ -81,6 +81,14 @@ except ImportError:
     REQUESTS_AVAILABLE = False
     print("requests not installed. Install with: pip install requests")
 
+# User storage (persistent)
+try:
+    from omega_user_storage import get_user_storage
+    USER_STORAGE_AVAILABLE = True
+except ImportError:
+    USER_STORAGE_AVAILABLE = False
+    print("omega_user_storage not available - using demo users")
+
 # User model for authentication
 class User(UserMixin):
     """User model with role-based access control"""
@@ -340,11 +348,14 @@ class OmegaControlPanelWeb:
         # Multi-AI Chatbot
         self.chatbot = MultiAIChatbot()
         
-        # User storage (demo - use database in production)
-        self._init_demo_users()
-        
-        # User storage (demo - use database in production)
-        self._init_demo_users()
+        # User storage (persistent file-based storage)
+        if USER_STORAGE_AVAILABLE:
+            self.user_storage = get_user_storage()
+            # Ensure admin user exists and is properly configured
+            self.user_storage.ensure_admin_exists()
+        else:
+            self.user_storage = None
+            self._init_demo_users()
         
         # Setup routes
         self._setup_routes()
@@ -366,19 +377,41 @@ class OmegaControlPanelWeb:
             self.demo_users = {}
     
     def _get_user_by_id(self, user_id):
-        """Get user by ID (demo - replace with database query in production)"""
+        """Get user by ID (from persistent storage or demo)"""
         if not LOGIN_AVAILABLE:
             return None
-        if user_id in self.demo_users:
+        
+        # Use persistent storage if available
+        if USER_STORAGE_AVAILABLE and self.user_storage:
+            user_data = self.user_storage.get_user(user_id)
+            if user_data and user_data.get('active', True):
+                return User(id=user_id, username=user_id, 
+                          password_hash=user_data['password'], 
+                          role=user_data.get('role', 'viewer'))
+            return None
+        
+        # Fallback to demo users
+        if hasattr(self, 'demo_users') and user_id in self.demo_users:
             user_data = self.demo_users[user_id]
             return User(id=user_id, username=user_id, password_hash=user_data['password'], role=user_data['role'])
         return None
     
     def _get_user_by_username(self, username):
-        """Get user by username (demo - replace with database query in production)"""
+        """Get user by username (from persistent storage or demo)"""
         if not LOGIN_AVAILABLE:
             return None
-        if username in self.demo_users:
+        
+        # Use persistent storage if available
+        if USER_STORAGE_AVAILABLE and self.user_storage:
+            user_data = self.user_storage.get_user(username)
+            if user_data and user_data.get('active', True):
+                return User(id=username, username=username, 
+                          password_hash=user_data['password'], 
+                          role=user_data.get('role', 'viewer'))
+            return None
+        
+        # Fallback to demo users
+        if hasattr(self, 'demo_users') and username in self.demo_users:
             user_data = self.demo_users[username]
             return User(id=username, username=username, password_hash=user_data['password'], role=user_data['role'])
         return None
