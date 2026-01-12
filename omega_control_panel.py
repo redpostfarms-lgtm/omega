@@ -804,10 +804,10 @@ class ControlPanel:
                 try:
                     self.scanner_integration.update_scanner(
                         audio_file=audio_found,
-                    audio_position=0.5  # Current position (can be improved with actual position tracking)
-                )
-            except Exception:
-                # Fallback to speech detection
+                        audio_position=0.5  # Current position (can be improved with actual position tracking)
+                    )
+                # Fallback to speech detection if scanner update fails
+                except Exception:
                     self.scanner_integration.update_scanner(
                         speech_active=self.speaking,
                         audio_amplitude=0.7 if self.speaking else 0.0
