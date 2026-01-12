@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from rate_limiter import GOOGLE_SPEECH_LIMITER
 
-ROOT = Path(r'D:\RPF_BRAIN\The Gatekeeper')
+ROOT = Path(r'H:\The Gatekeeper')
 CLIP = ROOT / 'clip_0001.wav'
 MEMORY = ROOT / 'world_memory.map'
 

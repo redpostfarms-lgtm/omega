@@ -7,6 +7,7 @@ Persistent storage for user authentication data with role-based access control.
 
 import json
 import os
+from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional, Any
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -25,12 +26,30 @@ class UserStorage:
             try:
                 with open(self.storage_file, 'r') as f:
                     self.users = json.load(f)
+                # Fix any placeholder passwords
+                self._fix_placeholder_passwords()
             except Exception as e:
                 print(f"Error loading users: {e}")
                 self.users = {}
+                self._initialize_default_users()
         else:
             # Initialize with default admin user if file doesn't exist
             self._initialize_default_users()
+    
+    def _fix_placeholder_passwords(self):
+        """Fix placeholder passwords in loaded users"""
+        needs_save = False
+        if 'admin' in self.users and 'placeholder' in str(self.users['admin'].get('password', '')):
+            self.users['admin']['password'] = generate_password_hash('admin2026')
+            needs_save = True
+        if 'operator' in self.users and 'placeholder' in str(self.users['operator'].get('password', '')):
+            self.users['operator']['password'] = generate_password_hash('op2026')
+            needs_save = True
+        if 'viewer' in self.users and 'placeholder' in str(self.users['viewer'].get('password', '')):
+            self.users['viewer']['password'] = generate_password_hash('view2026')
+            needs_save = True
+        if needs_save:
+            self._save_users()
     
     def _save_users(self):
         """Save users to storage file"""
@@ -49,23 +68,24 @@ class UserStorage:
     
     def _initialize_default_users(self):
         """Initialize with default users including admin"""
+        current_time = datetime.now().isoformat()
         self.users = {
             'admin': {
                 'password': generate_password_hash('admin2026'),
                 'role': 'admin',
-                'created': '2026-01-01',
+                'created': current_time,
                 'active': True
             },
             'operator': {
                 'password': generate_password_hash('op2026'),
                 'role': 'operator',
-                'created': '2026-01-01',
+                'created': current_time,
                 'active': True
             },
             'viewer': {
                 'password': generate_password_hash('view2026'),
                 'role': 'viewer',
-                'created': '2026-01-01',
+                'created': current_time,
                 'active': True
             }
         }
@@ -83,7 +103,7 @@ class UserStorage:
         self.users[username] = {
             'password': generate_password_hash(password),
             'role': role,
-            'created': str(Path(__file__).stat().st_mtime),  # Simple timestamp
+            'created': datetime.now().isoformat(),  # Current timestamp when user is created
             'active': active
         }
         return self._save_users()
@@ -94,9 +114,10 @@ class UserStorage:
         if username not in self.users:
             return False
         
-        if password:
+        # Use 'is not None' check to allow empty strings to update password
+        if password is not None:
             self.users[username]['password'] = generate_password_hash(password)
-        if role:
+        if role is not None:
             self.users[username]['role'] = role
         if active is not None:
             self.users[username]['active'] = active
@@ -137,7 +158,7 @@ class UserStorage:
             self.users['admin'] = {
                 'password': generate_password_hash('admin2026'),
                 'role': 'admin',
-                'created': '2026-01-01',
+                'created': datetime.now().isoformat(),
                 'active': True
             }
             return self._save_users()

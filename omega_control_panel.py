@@ -573,48 +573,48 @@ class ControlPanel:
             return
         
         # Create figure with grid layout (3 rows, 4 cols)
-        self.fig = plt.figure(figsize=(16, 10))
-        self.fig.suptitle('OMEGA CONTROL PANEL', fontsize=16, fontweight='bold')
-        gs = GridSpec(3, 4, figure=self.fig, hspace=0.3, wspace=0.3, width_ratios=[1.2, 2, 1, 2])
+        self.fig = plt.figure(figsize=(18, 11))
+        self.fig.suptitle('OMEGA CONTROL PANEL', fontsize=18, fontweight='bold', color='#1a1a1a')
+        gs = GridSpec(3, 4, figure=self.fig, hspace=0.35, wspace=0.35, width_ratios=[1.0, 2.2, 1.1, 2.2])
         
         # File list section (left column, spans all rows)
         self.ax_files = self.fig.add_subplot(gs[:, 0])
-        self.ax_files.set_facecolor('#F5F5F5')
-        self.ax_files.set_title('Important Files', fontweight='bold', pad=10)
+        self.ax_files.set_facecolor('#F0F0F0')
+        self.ax_files.set_title('Important Files', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_files.axis('off')
         
         # OIP section (Omega Introduction Panel - white/grey area, top of column 2)
         self.ax_oip = self.fig.add_subplot(gs[0, 1])
-        self.ax_oip.set_facecolor('#F8F8F8')
-        self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=10)
+        self.ax_oip.set_facecolor('#FAFAFA')
+        self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_oip.axis('off')
         
         # Red section (top-middle, column 2, row 0, now shifted)
         self.ax_red = self.fig.add_subplot(gs[0, 2])
-        self.ax_red.set_facecolor('#FFCCCC')
-        self.ax_red.set_title('Main Status', fontweight='bold', pad=10)
+        self.ax_red.set_facecolor('#FFE5E5')
+        self.ax_red.set_title('System Status', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_red.axis('off')
         
         # Yellow section (top-right)
         self.ax_yellow = self.fig.add_subplot(gs[0, 3])
-        self.ax_yellow.set_facecolor('#FFFFCC')
-        self.ax_yellow.set_title('Notifications & Controls', fontweight='bold', pad=10)
+        self.ax_yellow.set_facecolor('#FFF9E5')
+        self.ax_yellow.set_title('Temperature & Controls', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
         # Green section (middle row, spans columns 1-3)
         self.ax_green = self.fig.add_subplot(gs[1, 1:4])
-        self.ax_green.set_facecolor('#CCFFCC')
-        self.ax_green.set_title('Integrated Systems', fontweight='bold', pad=10)
+        self.ax_green.set_facecolor('#E5FFE5')
+        self.ax_green.set_title('Integrated Systems - CPU Usage & Processing Power', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
         # Blue section (bottom-left, column 1)
         self.ax_blue = self.fig.add_subplot(gs[2, 1])
-        self.ax_blue.set_facecolor('#CCCCFF')
-        self.ax_blue.set_title('Process Improvements', fontweight='bold', pad=10)
+        self.ax_blue.set_facecolor('#E5E5FF')
+        self.ax_blue.set_title('Process Improvements Needed', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_blue.axis('off')
         
         # Orange section (bottom-right, spans columns 2-3)
         self.ax_orange = self.fig.add_subplot(gs[2, 2:4])
-        self.ax_orange.set_facecolor('#FFE5CC')
-        self.ax_orange.set_title('Optional Learning/Processes', fontweight='bold', pad=10)
+        self.ax_orange.set_facecolor('#FFF0E5')
+        self.ax_orange.set_title('Optional Learning/Processes (Daily Scan)', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_orange.axis('off')
         
         # Animation - FuncAnimation will handle updates automatically
@@ -756,8 +756,8 @@ class ControlPanel:
         
         # File list section - Important files only
         self.ax_files.clear()
-        self.ax_files.set_facecolor('#F5F5F5')
-        self.ax_files.set_title('Important Files', fontweight='bold', pad=10)
+        self.ax_files.set_facecolor('#F0F0F0')
+        self.ax_files.set_title('Important Files', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_files.axis('off')
         
         y_pos = 0.95
@@ -765,19 +765,29 @@ class ControlPanel:
         for filename in self.important_files:
             filepath = base_dir / filename
             exists = filepath.exists()
-            color = '#006400' if exists else '#8B0000'
+            color = '#27AE60' if exists else '#E74C3C'
             status = '✓' if exists else '✗'
+            bg_color = '#E8F5E9' if exists else '#FFEBEE'
             
             # Truncate long filenames
-            display_name = filename if len(filename) <= 25 else filename[:22] + '...'
+            display_name = filename if len(filename) <= 28 else filename[:25] + '...'
             
-            self.ax_files.text(0.05, y_pos, f'{status} {display_name}', 
-                              fontsize=8, color=color, transform=self.ax_files.transAxes,
-                              family='monospace', verticalalignment='top')
-            y_pos -= 0.11
+            # Add subtle background box for each file
+            self.ax_files.add_patch(mpatches.Rectangle((0.02, y_pos - 0.08), 0.96, 0.09,
+                                                       facecolor=bg_color, edgecolor=color,
+                                                       linewidth=1.5, alpha=0.6,
+                                                       transform=self.ax_files.transAxes))
+            
+            self.ax_files.text(0.05, y_pos - 0.04, f'{status} {display_name}', 
+                              fontsize=9, color=color, transform=self.ax_files.transAxes,
+                              family='monospace', verticalalignment='top', fontweight='bold')
+            y_pos -= 0.12
         
         # OIP section - Omega Introduction Panel with KITT scanner effect
         self.ax_oip.clear()
+        self.ax_oip.set_facecolor('#FAFAFA')
+        self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
+        self.ax_oip.axis('off')
         
         # Use KITT scanner if available, otherwise fallback to waveform
         if self.scanner_available and self.scanner_integration and self.scanner_integration.scanner:
@@ -813,8 +823,8 @@ class ControlPanel:
         
         else:
             # Fallback to original waveform visualization
-            self.ax_oip.set_facecolor('#F8F8F8')
-            self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=10)
+            self.ax_oip.set_facecolor('#FAFAFA')
+            self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
             self.ax_oip.axis('off')
             
             # Check for audio file and display visual effects
@@ -827,57 +837,66 @@ class ControlPanel:
                     break
             
             if audio_found and self.librosa_available:
-            try:
-                import librosa
-                import numpy as np
-                
-                # Load audio for visualization
-                audio, sr = librosa.load(str(audio_found), sr=None, duration=5.0)
-                
-                # Create waveform visualization (simplified bars for real-time effect)
-                num_bars = 20
-                chunk_size = len(audio) // num_bars
-                bars = []
-                for i in range(num_bars):
-                    chunk = audio[i*chunk_size:(i+1)*chunk_size]
-                    if len(chunk) > 0:
-                        bar_height = np.abs(chunk).max() * 100
-                        bars.append(bar_height)
-                    else:
-                        bars.append(0)
-                
-                # Normalize bars
-                if max(bars) > 0:
-                    bars = [b / max(bars) for b in bars]
-                
-                # Draw bars (vertical equalizer style)
-                x_positions = np.linspace(0.1, 0.9, num_bars)
-                colors = plt.cm.viridis(np.array(bars))
-                
-                for i, (x, height, color) in enumerate(zip(x_positions, bars, colors)):
-                    self.ax_oip.bar(x, height * 0.8, width=0.03, bottom=0.1, 
-                                   color=color, alpha=0.7)
-                
-                # Add text indicator
-                self.ax_oip.text(0.5, 0.05, 'Audio Active', ha='center', va='bottom',
-                                fontsize=9, color='green', fontweight='bold',
+                try:
+                    import librosa
+                    import numpy as np
+                    
+                    # Load audio for visualization
+                    audio, sr = librosa.load(str(audio_found), sr=None, duration=5.0)
+                    
+                    # Create waveform visualization (simplified bars for real-time effect)
+                    num_bars = 24
+                    chunk_size = len(audio) // num_bars
+                    bars = []
+                    for i in range(num_bars):
+                        chunk = audio[i*chunk_size:(i+1)*chunk_size]
+                        if len(chunk) > 0:
+                            bar_height = np.abs(chunk).max() * 100
+                            bars.append(bar_height)
+                        else:
+                            bars.append(0)
+                    
+                    # Normalize bars
+                    if max(bars) > 0:
+                        bars = [b / max(bars) for b in bars]
+                    
+                    # Draw bars (vertical equalizer style with gradient)
+                    x_positions = np.linspace(0.08, 0.92, num_bars)
+                    bar_width = 0.025
+                    
+                    for i, (x, height) in enumerate(zip(x_positions, bars)):
+                        # Create gradient color based on height and position
+                        color_intensity = height
+                        color = plt.cm.plasma(color_intensity * 0.7 + 0.3)
+                        
+                        # Draw bar with rounded effect
+                        bar_height_scaled = height * 0.75
+                        self.ax_oip.bar(x, bar_height_scaled, width=bar_width, bottom=0.15, 
+                                       color=color, alpha=0.85, edgecolor='white', linewidth=0.5)
+                    
+                    # Add pulsing indicator
+                    pulse_alpha = 0.5 + 0.5 * np.sin(frame * 0.2)
+                    self.ax_oip.text(0.5, 0.05, '● Audio Active', ha='center', va='bottom',
+                                    fontsize=10, color='#27AE60', fontweight='bold',
+                                    alpha=pulse_alpha, transform=self.ax_oip.transAxes)
+                except Exception as e:
+                    self.ax_oip.text(0.5, 0.5, 'OIP Ready\n(Visual effects active)', 
+                                    ha='center', va='center', fontsize=11,
+                                    bbox=dict(boxstyle='round', facecolor='#E3F2FD', alpha=0.9, edgecolor='#2196F3', linewidth=2),
+                                    color='#1976D2', fontweight='bold',
+                                    transform=self.ax_oip.transAxes)
+            else:
+                # Default display when no audio
+                self.ax_oip.text(0.5, 0.5, 'OIP Ready\n(Awaiting speech)', 
+                                ha='center', va='center', fontsize=11,
+                                bbox=dict(boxstyle='round', facecolor='#FFF3E0', alpha=0.9, edgecolor='#FF9800', linewidth=2),
+                                color='#F57C00', fontweight='bold',
                                 transform=self.ax_oip.transAxes)
-            except Exception as e:
-                self.ax_oip.text(0.5, 0.5, 'OIP Ready\n(Visual effects active)', 
-                                ha='center', va='center', fontsize=10,
-                                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8),
-                                transform=self.ax_oip.transAxes)
-        else:
-            # Default display when no audio
-            self.ax_oip.text(0.5, 0.5, 'OIP Ready\n(Awaiting speech)', 
-                            ha='center', va='center', fontsize=10,
-                            bbox=dict(boxstyle='round', facecolor='white', alpha=0.8),
-                            transform=self.ax_oip.transAxes)
         
         # Red section - Main status with color-coded CPU/GPU/RAM tiles
         self.ax_red.clear()
-        self.ax_red.set_facecolor('#FFCCCC')
-        self.ax_red.set_title('System Status', fontweight='bold', pad=10)
+        self.ax_red.set_facecolor('#FFE5E5')
+        self.ax_red.set_title('System Status', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_red.axis('off')
         
         # Get usage stats
@@ -968,14 +987,16 @@ class ControlPanel:
         status_text = f"Status: {'RUNNING' if self.running else 'STOPPED'} | "
         status_text += f"Update: {datetime.now().strftime('%H:%M:%S')}"
         
+        status_color = '#27AE60' if self.running else '#E74C3C'
         self.ax_red.text(0.5, 0.05, status_text, fontsize=9, ha='center', va='bottom',
-                         family='monospace', color='black',
+                         family='monospace', color=status_color, fontweight='bold',
+                         bbox=dict(boxstyle='round', facecolor='white', alpha=0.8, pad=5),
                          transform=self.ax_red.transAxes)
         
         # Yellow section - Notifications, Temperature Pie Chart, Controls
         self.ax_yellow.clear()
-        self.ax_yellow.set_facecolor('#FFFFCC')
-        self.ax_yellow.set_title('Temperature & Controls', fontweight='bold', pad=10)
+        self.ax_yellow.set_facecolor('#FFF9E5')
+        self.ax_yellow.set_title('Temperature & Controls', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
         # Temperature pie chart
         cpu_temp = self._get_cpu_temperature()
@@ -1001,17 +1022,18 @@ class ControlPanel:
                                fontsize=10, bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
         
         # Add control info
-        control_text = f"\n\nFan: {self.fan_speed_percentage}%\n"
+        control_text = f"Fan: {self.fan_speed_percentage}%\n"
         control_text += f"RGB: {'ON' if self.rgb_enabled else 'OFF'}\n"
         control_text += f"Color: {self.rgb_color}"
         self.ax_yellow.text(0.5, 0.1, control_text, ha='center', va='top',
-                           fontsize=8, family='monospace',
-                           bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                           fontsize=9, family='monospace', fontweight='bold',
+                           bbox=dict(boxstyle='round', facecolor='white', alpha=0.9, 
+                                    edgecolor='#FFA500', linewidth=2, pad=8))
         
         # Green section - Integrated Systems
         self.ax_green.clear()
-        self.ax_green.set_facecolor('#CCFFCC')
-        self.ax_green.set_title('Integrated Systems - CPU Usage & Processing Power', fontweight='bold', pad=10)
+        self.ax_green.set_facecolor('#E5FFE5')
+        self.ax_green.set_title('Integrated Systems - CPU Usage & Processing Power', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
         if self.integrated_systems:
             systems = [s.name for s in self.integrated_systems]
@@ -1044,28 +1066,59 @@ class ControlPanel:
         
         # Blue section - Process Improvements
         self.ax_blue.clear()
-        self.ax_blue.set_facecolor('#CCCCFF')
-        self.ax_blue.set_title('Process Improvements Needed', fontweight='bold', pad=10)
+        self.ax_blue.set_facecolor('#E5E5FF')
+        self.ax_blue.set_title('Process Improvements Needed', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_blue.axis('off')
         
         if self.process_improvements:
+            # Calculate spacing to fit all items within visible area (0.0 to 1.0)
+            # Rectangle: bottom = y_pos - 0.15, height = 0.16, top = y_pos + 0.01
+            # Strategy: First item at y_pos=0.95, last item positioned so its bottom >= 0.05
+            # This ensures all rectangles stay within the visible axis range
+            num_items = min(5, len(self.process_improvements))
+            if num_items > 1:
+                # First item: y_pos = 0.95, rectangle from 0.80 to 0.96
+                first_y = 0.95
+                # Last item: we want rectangle bottom at 0.05, so y_pos = 0.20
+                # (since rect bottom = y_pos - 0.15, we need y_pos = 0.05 + 0.15 = 0.20)
+                last_y = 0.20  # Ensures last rect bottom = 0.20 - 0.15 = 0.05
+                # Calculate even spacing between items
+                spacing = (first_y - last_y) / (num_items - 1)
+                # Verify: With 5 items, spacing = (0.95 - 0.20) / 4 = 0.1875
+                # This ensures all items fit: last item rect from 0.05 to 0.21 (within bounds)
+            else:
+                spacing = 0.16
+            
             y_pos = 0.95
             for proc in self.process_improvements[:5]:  # Show top 5
-                priority_color = {'high': 'red', 'medium': 'orange', 'low': 'yellow'}.get(proc.priority, 'black')
+                priority_color = {'high': '#E74C3C', 'medium': '#F39C12', 'low': '#F1C40F'}.get(proc.priority, '#34495E')
                 improvement_text = f"{proc.name}: {proc.current_percentage:.1f}% → {proc.target_percentage:.1f}%"
-                self.ax_blue.text(0.05, y_pos, improvement_text, fontsize=9, color=priority_color,
+                
+                # Add background box for each improvement
+                # Ensure rectangle stays within visible bounds (y >= 0)
+                rect_bottom = max(0.0, y_pos - 0.15)  # Safety check: never below 0
+                rect_height = min(0.16, 1.0 - rect_bottom)  # Adjust height if near top
+                bg_color = '#FFEBEE' if proc.priority == 'high' else '#FFF3E0' if proc.priority == 'medium' else '#FFFDE7'
+                self.ax_blue.add_patch(mpatches.Rectangle((0.02, rect_bottom), 0.96, rect_height,
+                                                           facecolor=bg_color, edgecolor=priority_color,
+                                                           linewidth=2, alpha=0.7,
+                                                           transform=self.ax_blue.transAxes))
+                
+                self.ax_blue.text(0.05, y_pos - 0.02, improvement_text, fontsize=9, color=priority_color,
                                  transform=self.ax_blue.transAxes, fontweight='bold')
-                self.ax_blue.text(0.05, y_pos - 0.08, proc.description[:50] + "...", fontsize=7,
-                                 transform=self.ax_blue.transAxes)
-                y_pos -= 0.2
+                self.ax_blue.text(0.05, y_pos - 0.1, proc.description[:55] + "...", fontsize=8,
+                                 transform=self.ax_blue.transAxes, color='#2c3e50')
+                y_pos -= spacing
         else:
             self.ax_blue.text(0.5, 0.5, 'No improvements needed', ha='center', va='center',
-                             fontsize=10, bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                             fontsize=11, bbox=dict(boxstyle='round', facecolor='#E8F5E9', alpha=0.9,
+                                                   edgecolor='#27AE60', linewidth=2, pad=10),
+                             color='#27AE60', fontweight='bold')
         
         # Orange section - Optional Processes
         self.ax_orange.clear()
-        self.ax_orange.set_facecolor('#FFE5CC')
-        self.ax_orange.set_title('Optional Learning/Processes (Daily Scan)', fontweight='bold', pad=10)
+        self.ax_orange.set_facecolor('#FFF0E5')
+        self.ax_orange.set_title('Optional Learning/Processes (Daily Scan)', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_orange.axis('off')
         
         if self.optional_processes:
@@ -1074,23 +1127,35 @@ class ControlPanel:
             
             y_pos = 0.95
             for opt in sorted_processes[:6]:  # Show top 6
-                score_color = 'green' if opt.usefulness_score > 85 else 'orange' if opt.usefulness_score > 70 else 'blue'
+                score_color = '#27AE60' if opt.usefulness_score > 85 else '#F39C12' if opt.usefulness_score > 70 else '#3498DB'
                 process_text = f"{opt.name} ({opt.usefulness_score:.0f}% useful) [{opt.category}]"
-                self.ax_orange.text(0.02, y_pos, process_text, fontsize=9, color=score_color,
+                
+                # Add subtle background for each process
+                bg_alpha = 0.5 if opt.usefulness_score > 85 else 0.4
+                self.ax_orange.add_patch(mpatches.Rectangle((0.01, y_pos - 0.12), 0.98, 0.13,
+                                                            facecolor='white', edgecolor=score_color,
+                                                            linewidth=1.5, alpha=bg_alpha,
+                                                            transform=self.ax_orange.transAxes))
+                
+                self.ax_orange.text(0.02, y_pos - 0.02, process_text, fontsize=9, color=score_color,
                                    transform=self.ax_orange.transAxes, fontweight='bold')
-                self.ax_orange.text(0.02, y_pos - 0.06, opt.description[:70] + "...", fontsize=7,
-                                   transform=self.ax_orange.transAxes)
-                y_pos -= 0.15
+                self.ax_orange.text(0.02, y_pos - 0.08, opt.description[:75] + "...", fontsize=8,
+                                   transform=self.ax_orange.transAxes, color='#2c3e50')
+                y_pos -= 0.16
             
             # Add last scan time
             if self.last_optional_scan:
                 scan_text = f"Last Scan: {self.last_optional_scan.strftime('%Y-%m-%d %H:%M')}"
-                self.ax_orange.text(0.5, 0.02, scan_text, ha='center', fontsize=8,
+                self.ax_orange.text(0.5, 0.02, scan_text, ha='center', fontsize=9, fontweight='bold',
                                    transform=self.ax_orange.transAxes,
-                                   bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                                   bbox=dict(boxstyle='round', facecolor='#FFF3E0', alpha=0.9,
+                                            edgecolor='#FF9800', linewidth=2, pad=8),
+                                   color='#F57C00')
         else:
             self.ax_orange.text(0.5, 0.5, 'No optional processes found', ha='center', va='center',
-                               fontsize=10, bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                               fontsize=11, bbox=dict(boxstyle='round', facecolor='#FFF3E0', alpha=0.9,
+                                                     edgecolor='#FF9800', linewidth=2, pad=10),
+                               color='#F57C00', fontweight='bold')
         
         plt.tight_layout()
     
