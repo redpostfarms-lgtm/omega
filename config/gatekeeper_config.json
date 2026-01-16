@@ -1,0 +1,11 @@
+{
+  "api_port": 5000,
+  "cache_size": 5000,
+  "enable_quantum": true,
+  "log_level": "INFO",
+  "quantum_settings": {
+    "superposition_max_states": 100,
+    "cache_coherence_threshold": 0.8,
+    "error_correction_redundancy": 3
+  }
+}

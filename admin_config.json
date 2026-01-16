@@ -1,0 +1,35 @@
+{
+    "admin_required": true,
+    "admin_enforced": true,
+    "critical_files": [
+        "gatekeeper_integration_module.py",
+        "gatekeeper_integration_config.json",
+        "logs/gatekeeper_system.log",
+        "system_diagnostics.json",
+        "gatekeeper_final_diagnostics.json"
+    ],
+    "log_directory": "logs",
+    "backup_directory": "backups",
+    "data_directory": "data",
+    "reports_directory": "reports",
+    "permissions": {
+        "logs": "rwx",
+        "data": "rwx",
+        "reports": "rwx",
+        "backups": "rwx",
+        "gatekeeper_integration_module.py": "rw",
+        "gatekeeper_integration_config.json": "rw",
+        "gatekeeper_admin_helper.py": "rw"
+    },
+    "auto_elevate": true,
+    "platform": "win32",
+    "features": {
+        "automatic_admin_check": true,
+        "auto_directory_creation": true,
+        "permission_verification": true,
+        "automatic_backup": true,
+        "error_recovery": true
+    },
+    "setup_date": "2026-01-16T00:00:00",
+    "version": "1.0"
+}

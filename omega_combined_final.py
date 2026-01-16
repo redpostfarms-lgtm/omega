@@ -39,14 +39,19 @@ def get_tts():
     return tts
 
 # Load emotion classifier (optional - gracefully handle if unavailable)
+# Updated to use new SpeechBrain inference API (speechbrain.inference.interfaces)
 emotion_classifier = None
 try:
-    from speechbrain.pretrained import EmotionRecognition  # type: ignore
-    emotion_classifier = EmotionRecognition.from_hparams(
+    from speechbrain.inference.interfaces import foreign_class
+    # Use foreign_class for custom models with custom_interface.py
+    emotion_classifier = foreign_class(
         source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-        savedir="pretrained_emotion"
+        pymodule_file="custom_interface.py",
+        classname="CustomEncoderWav2vec2Classifier",
+        savedir="pretrained_emotion",
+        run_opts={"device": "cuda"} if torch.cuda.is_available() else None
     )
-    print("✓ Emotion detection enabled")
+    print("✓ Emotion detection enabled (using foreign_class + custom interface)")
 except Exception as e:
     print(f"⚠ Emotion detection unavailable: {e}")
     print("   Continuing without emotion detection...")
@@ -76,14 +81,15 @@ def record(duration=5, fs=16000):
 # Detect emotion
 def detect_emotion(wav):
     """Detect emotion from audio file with error handling.
+    Updated for new SpeechBrain API: classify_file returns (out_prob, score, index, text_lab).
     SpeechBrain returns emotions like: ang (angry), sad, hap (happy), neu (neutral), exc (excited)
     """
     if emotion_classifier is None:
         return 'neutral'
     try:
-        pred = emotion_classifier.classify_file(wav)
-        # SpeechBrain format: typically returns tuple/list with emotion label
-        emotion_raw = pred[2].lower() if len(pred) > 2 else 'neu'
+        # New API: classify_file returns (probabilities, score, index, label)
+        out_prob, score, index, text_lab = emotion_classifier.classify_file(wav)
+        emotion_raw = text_lab.lower() if text_lab else 'neu'
         
         # Map SpeechBrain emotions to our emotion keys
         emotion_map = {

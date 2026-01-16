@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatekeeper File Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #e0e0e0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0d47a1 0%, #1565c0 100%);
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+        }
+
+        .toolbar {
+            background: #2d2d44;
+            padding: 10px 20px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #3d3d5c;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: #0d47a1;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(21, 101, 192, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px;
+            background: #3d3d5c;
+            border: 1px solid #4d4d6c;
+            color: #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .search-box input::placeholder {
+            color: #888;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #2d2d44;
+            border-right: 1px solid #3d3d5c;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .sidebar-section {
+            padding: 10px 0;
+            border-bottom: 1px solid #3d3d5c;
+        }
+
+        .sidebar-title {
+            padding: 8px 15px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-item {
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background: #3d3d5c;
+            padding-left: 20px;
+        }
+
+        .sidebar-item.active {
+            background: #0d47a1;
+            color: #fff;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .breadcrumb {
+            padding: 10px 20px;
+            background: #2d2d44;
+            border-bottom: 1px solid #3d3d5c;
+            font-size: 12px;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .breadcrumb a {
+            color: #0d9fd9;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .file-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .file-item {
+            padding: 8px 12px;
+            margin: 2px 5px;
+            background: #3d3d5c;
+            border: 1px solid #4d4d6c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+        }
+
+        .file-item:hover {
+            background: #4d4d6c;
+            border-color: #0d9fd9;
+        }
+
+        .file-item.selected {
+            background: #0d47a1;
+            border-color: #0d9fd9;
+        }
+
+        .file-icon {
+            font-size: 14px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .file-details {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .file-name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-size {
+            width: 80px;
+            text-align: right;
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .file-date {
+            width: 120px;
+            text-align: right;
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .status-bar {
+            padding: 10px 20px;
+            background: #2d2d44;
+            border-top: 1px solid #3d3d5c;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-left,
+        .status-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #2d2d44;
+            padding: 20px;
+            border-radius: 8px;
+            min-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #3d3d5c;
+        }
+
+        .modal-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .modal-body {
+            margin-bottom: 15px;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: #3d3d5c;
+            border: 1px solid #4d4d6c;
+            color: #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer .btn {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+        }
+
+        .error {
+            background: #c62828;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        .success {
+            background: #00796b;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 5px;
+            font-size: 12px;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d44;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4d4d6c;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5d5d7c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Gatekeeper File Manager</h1>
+            <div class="header-info">
+                <div id="fileCount">Files: 0</div>
+                <div id="totalSize">Size: 0 B</div>
+                <div id="status">Ready</div>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button class="btn" onclick="goBack()">◀ Back</button>
+            <button class="btn" onclick="goForward()">Forward ▶</button>
+            <button class="btn" onclick="refreshDirectory()">Refresh</button>
+            <button class="btn" onclick="openNewFolderModal()">+ New Folder</button>
+            <button class="btn" onclick="showRecent()">Recent Files</button>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search files..."
+                    onkeypress="if(event.key==='Enter') searchFiles()">
+            </div>
+            <button class="btn" onclick="searchFiles()">Search</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Quick Access</div>
+                    <div class="sidebar-item" onclick="navigateTo('.')">Home</div>
+                    <div class="sidebar-item" onclick="navigateTo('logs')">Logs</div>
+                    <div class="sidebar-item" onclick="navigateTo('data')">Data</div>
+                    <div class="sidebar-item" onclick="navigateTo('reports')">Reports</div>
+                    <div class="sidebar-item" onclick="navigateTo('backups')">Backups</div>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Tools</div>
+                    <div class="sidebar-item" onclick="showStats()">Statistics</div>
+                    <div class="sidebar-item" onclick="showFavorites()">Favorites</div>
+                    <div class="sidebar-item" onclick="exportListing()">Export List</div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb" id="breadcrumb"></div>
+
+                <!-- File List -->
+                <div class="file-list" id="fileList"></div>
+
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div class="status-left">
+                        <span id="statusFiles">0 files selected</span>
+                        <span id="statusPath">Current: .</span>
+                    </div>
+                    <div class="status-right">
+                        <span id="statusTime">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="newFolderModal">
+        <div class="modal-content">
+            <div class="modal-header">Create New Folder</div>
+            <div class="modal-body">
+                <input type="text" id="folderName" placeholder="Folder name">
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('newFolderModal')">Cancel</button>
+                <button class="btn" onclick="createFolder()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5001/api';
+        let currentDirectory = '.';
+        let navigationHistory = ['.'];
+        let historyIndex = 0;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDirectory();
+            setInterval(updateTime, 1000);
+        });
+
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('statusTime').textContent = now.toLocaleTimeString();
+        }
+
+        // Navigate to directory
+        function navigateTo(directory) {
+            currentDirectory = directory;
+            historyIndex = navigationHistory.length;
+            navigationHistory.push(directory);
+            loadDirectory();
+        }
+
+        // Go back in history
+        function goBack() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                currentDirectory = navigationHistory[historyIndex];
+                loadDirectory();
+            }
+        }
+
+        // Go forward in history
+        function goForward() {
+            if (historyIndex < navigationHistory.length - 1) {
+                historyIndex++;
+                currentDirectory = navigationHistory[historyIndex];
+                loadDirectory();
+            }
+        }
+
+        // Load directory contents
+        async function loadDirectory() {
+            try {
+                setStatus('Loading...');
+                const response = await fetch(`${API_BASE}/browse?directory=${encodeURIComponent(currentDirectory)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayFiles(data.items);
+                    updateBreadcrumb();
+                    updateStats(data.items);
+                    setStatus('Ready');
+                } else {
+                    showError(data.error || 'Failed to load directory');
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Display files
+        function displayFiles(files) {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            if (files.length === 0) {
+                fileList.innerHTML = '<div class="loading">Empty folder</div>';
+                return;
+            }
+
+            // Sort directories first
+            files.sort((a, b) => {
+                if (a.type === 'directory' && b.type !== 'directory') return -1;
+                if (a.type !== 'directory' && b.type === 'directory') return 1;
+                return a.name.localeCompare(b.name);
+            });
+
+            files.forEach(file => {
+                const icon = getFileIcon(file);
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.ondblclick = () => handleFileDoubleClick(file);
+                item.innerHTML = `
+                    <span class="file-icon">${icon}</span>
+                    <div class="file-details">
+                        <span class="file-name" title="${file.name}">${file.name}</span>
+                        <span class="file-size">${file.size_human}</span>
+                        <span class="file-date">${new Date(file.modified).toLocaleDateString()}</span>
+                    </div>
+                `;
+                fileList.appendChild(item);
+            });
+        }
+
+        // Get file icon
+        function getFileIcon(file) {
+            if (file.type === 'directory') return '📁';
+            const ext = file.name.split('.').pop().toLowerCase();
+            const icons = {
+                'py': '🐍', 'js': '📜', 'json': '{}', 'txt': '📄', 'md': '📝',
+                'jpg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'mp4': '🎬', 'mp3': '🎵',
+                'zip': '📦', 'rar': '📦', '7z': '📦', 'exe': '⚙️', 'bat': '⚙️'
+            };
+            return icons[ext] || '📄';
+        }
+
+        // Handle file double click
+        function handleFileDoubleClick(file) {
+            if (file.type === 'directory') {
+                navigateTo(file.path.split('\\').slice(-1)[0]);
+            }
+        }
+
+        // Update breadcrumb
+        function updateBreadcrumb() {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const parts = currentDirectory.split(/[/\\]/);
+            breadcrumb.innerHTML = '';
+
+            parts.forEach((part, index) => {
+                if (part) {
+                    const path = parts.slice(0, index + 1).join('/');
+                    const a = document.createElement('a');
+                    a.textContent = part;
+                    a.onclick = () => navigateTo(path);
+                    breadcrumb.appendChild(a);
+
+                    if (index < parts.length - 1) {
+                        const sep = document.createElement('span');
+                        sep.textContent = '/';
+                        breadcrumb.appendChild(sep);
+                    }
+                }
+            });
+
+            document.getElementById('statusPath').textContent = `Current: ${currentDirectory}`;
+        }
+
+        // Update statistics
+        async function updateStats(files) {
+            document.getElementById('fileCount').textContent = `Files: ${files.length}`;
+
+            let totalSize = 0;
+            files.forEach(f => totalSize += f.size);
+
+            document.getElementById('totalSize').textContent = `Size: ${formatSize(totalSize)}`;
+        }
+
+        // Format size
+        function formatSize(bytes) {
+            const units = ['B', 'KB', 'MB', 'GB'];
+            let size = bytes;
+            let unitIndex = 0;
+
+            while (size >= 1024 && unitIndex < units.length - 1) {
+                size /= 1024;
+                unitIndex++;
+            }
+
+            return `${size.toFixed(2)} ${units[unitIndex]}`;
+        }
+
+        // Search files
+        async function searchFiles() {
+            const pattern = document.getElementById('searchInput').value;
+            if (!pattern) return;
+
+            try {
+                setStatus('Searching...');
+                const response = await fetch(`${API_BASE}/search?pattern=${encodeURIComponent(pattern)}&directory=${encodeURIComponent(currentDirectory)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayFiles(data.results);
+                    setStatus(`Found ${data.total_results} results`);
+                }
+            } catch (error) {
+                showError(`Search error: ${error.message}`);
+            }
+        }
+
+        // Show directory statistics
+        async function showStats() {
+            try {
+                const response = await fetch(`${API_BASE}/stats?directory=${encodeURIComponent(currentDirectory)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const stats = data.stats;
+                    alert(`
+Directory Statistics
+====================
+Path: ${stats.path}
+Total Files: ${stats.total_files}
+Total Directories: ${stats.total_directories}
+Total Size: ${stats.total_size_human}
+                    `);
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Show recent files
+        async function showRecent() {
+            try {
+                setStatus('Loading recent files...');
+                const response = await fetch(`${API_BASE}/recent?directory=${encodeURIComponent(currentDirectory)}&limit=20`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayFiles(data.files);
+                    setStatus('Showing recent files');
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Refresh directory
+        function refreshDirectory() {
+            loadDirectory();
+        }
+
+        // New folder modal
+        function openNewFolderModal() {
+            document.getElementById('newFolderModal').classList.add('active');
+            document.getElementById('folderName').focus();
+        }
+
+        // Create folder
+        async function createFolder() {
+            const name = document.getElementById('folderName').value;
+            if (!name) return;
+
+            try {
+                const folderPath = currentDirectory === '.' ? name : `${currentDirectory}/${name}`;
+                const response = await fetch(`${API_BASE}/operations/mkdir`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ directory: folderPath })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    showSuccess('Folder created successfully');
+                    closeModal('newFolderModal');
+                    loadDirectory();
+                } else {
+                    showError(data.message || 'Failed to create folder');
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Show favorites
+        async function showFavorites() {
+            try {
+                const response = await fetch(`${API_BASE}/favorites`);
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`Favorites:\n${data.favorites.join('\n')}`);
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Export listing
+        async function exportListing() {
+            try {
+                const response = await fetch(`${API_BASE}/export`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ directory: currentDirectory, output_file: 'file_listing.json' })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    showSuccess(`Exported to ${data.output_file}`);
+                } else {
+                    showError(data.message || 'Export failed');
+                }
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        // Modal functions
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Status functions
+        function setStatus(text) {
+            document.getElementById('status').textContent = text;
+        }
+
+        function showError(message) {
+            const div = document.createElement('div');
+            div.className = 'error';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 5000);
+        }
+
+        function showSuccess(message) {
+            const div = document.createElement('div');
+            div.className = 'success';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 5000);
+        }
+
+        // Close modals on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+
+</html>
