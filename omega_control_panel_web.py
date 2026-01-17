@@ -1276,6 +1276,17 @@ class OmegaControlPanelWeb:
             `).join('');
         }
         
+        function updateSystemStatus(data) {
+            const statusEl = document.getElementById('systemStatus');
+            if (statusEl) {
+                statusEl.innerHTML = `
+                    <p><strong>Status:</strong> Running</p>
+                    <p><strong>Fan Speed:</strong> ${data.fan_speed || 0}%</p>
+                    <p><strong>RGB:</strong> ${data.rgb_enabled ? 'Enabled' : 'Disabled'} (${data.rgb_color || '#FFD700'})</p>
+                `;
+            }
+        }
+        
         // Legacy functions for polling fallback (if SocketIO not available)
         async function loadStats() {
             try {
@@ -1285,6 +1296,8 @@ class OmegaControlPanelWeb:
                 updateSystemStatus(data);
             } catch (error) {
                 console.error('Error loading stats:', error);
+                // Show error in UI
+                document.getElementById('statsGrid').innerHTML = '<div class="stat-card" style="grid-column: 1/-1;"><p style="color: #f44336;">Error loading system data. Please refresh.</p></div>';
             }
         }
         
@@ -1596,10 +1609,23 @@ class OmegaControlPanelWeb:
             }
         }
         
-        // Initialize chatbot status on page load
+        // Initialize all data on page load
         window.addEventListener('DOMContentLoaded', () => {
+            // Load main dashboard data
+            loadStats();
+            loadNotifications();
+            loadIntegratedSystems();
+            
+            // Load chatbot data
             loadChatbotStatus();
             loadChatHistory();
+            
+            // Set up auto-refresh every 5 seconds
+            setInterval(() => {
+                loadStats();
+                loadNotifications();
+                loadIntegratedSystems();
+            }, 5000);
         });
     </script>
 </body>
