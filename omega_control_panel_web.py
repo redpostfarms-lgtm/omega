@@ -179,6 +179,71 @@ def authenticated_only(f):
     return wrapped
 
 
+def calculate_balance_status(stats: Dict[str, Any], recommendations: List[str]) -> Dict[str, Any]:
+    """Calculate overall system balance status from load balancer stats
+    
+    Args:
+        stats: System statistics dictionary with cpu, ram, gpu metrics
+        recommendations: List of active recommendations from load balancer
+    
+    Returns:
+        Dictionary with balance status, health level, and action items
+    """
+    try:
+        cpu = stats.get('cpu', {}).get('percent', 0)
+        ram = stats.get('ram', {}).get('percent', 0)
+        gpu = stats.get('gpu', {}).get('percent', 0)
+        
+        # Calculate overall stress level (0-100)
+        stress_level = (cpu + ram + gpu) / 3
+        
+        # Determine health status
+        if stress_level < 30:
+            health = 'optimal'
+            color = 'green'
+        elif stress_level < 60:
+            health = 'good'
+            color = 'yellow'
+        elif stress_level < 80:
+            health = 'warning'
+            color = 'orange'
+        else:
+            health = 'critical'
+            color = 'red'
+        
+        # Check if balanced
+        variance = max(cpu, ram, gpu) - min(cpu, ram, gpu)
+        is_balanced = variance < 30  # Less than 30% difference between components
+        
+        # Determine bottleneck
+        bottleneck = None
+        if cpu > 80:
+            bottleneck = 'CPU'
+        elif ram > 75:
+            bottleneck = 'RAM'
+        elif gpu > 85:
+            bottleneck = 'GPU'
+        
+        return {
+            'status': 'balanced' if is_balanced else 'unbalanced',
+            'health': health,
+            'color': color,
+            'stress_level': round(stress_level, 1),
+            'bottleneck': bottleneck,
+            'active_recommendations': len(recommendations),
+            'recommendation_actions': recommendations[:3] if recommendations else []  # Top 3 actions
+        }
+    except Exception as e:
+        return {
+            'status': 'unknown',
+            'health': 'error',
+            'color': 'gray',
+            'stress_level': 0,
+            'bottleneck': None,
+            'error': str(e)
+        }
+
+
 class MultiAIChatbot:
     """Multi-AI chatbot handler for Grok, DeepSeek, ChatGPT"""
     
@@ -616,6 +681,67 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
+        @self.app.route('/api/load-balance', methods=['GET'])
+        def api_load_balance():
+            """Get GPU load balancer metrics and recommendations"""
+            try:
+                with self.control_panel_lock:
+                    if not self.control_panel:
+                        return jsonify({'error': 'Control panel not initialized'}), 503
+                    
+                    load_balancer = getattr(self.control_panel, 'load_balancer', None)
+                    if not load_balancer:
+                        return jsonify({
+                            'error': 'Load balancer not available',
+                            'gpu_available': False,
+                            'status': 'Load balancer disabled'
+                        }), 503
+                    
+                    # Get current load balancer data
+                    config = load_balancer.get_balanced_config()
+                    stats = load_balancer.get_system_stats()
+                    recommendations = load_balancer.get_recommendations()
+                    distribution = load_balancer.get_load_distribution()
+                    
+                    return jsonify({
+                        'status': 'success',
+                        'gpu_available': load_balancer.gpu_available,
+                        'system_stats': {
+                            'cpu_percent': stats.get('cpu', {}).get('percent', 0),
+                            'ram_percent': stats.get('ram', {}).get('percent', 0),
+                            'gpu_percent': stats.get('gpu', {}).get('percent', 0),
+                            'gpu_available_gb': stats.get('gpu', {}).get('available_gb', 0),
+                            'total_ram_gb': stats.get('ram', {}).get('total_gb', 0),
+                            'used_ram_gb': stats.get('ram', {}).get('used_gb', 0)
+                        },
+                        'load_distribution': {
+                            'cpu_utilization': distribution.get('cpu_utilization', 0.5),
+                            'gpu_utilization': distribution.get('gpu_utilization', 0.5),
+                            'recommended_cpu_percent': distribution.get('recommended_cpu_percent', 50),
+                            'recommended_gpu_percent': distribution.get('recommended_gpu_percent', 50)
+                        },
+                        'configuration': {
+                            'use_gpu': config.get('use_gpu', False),
+                            'gpu_batch_size': config.get('gpu_batch_size', 32),
+                            'cpu_batch_size': config.get('cpu_batch_size', 16),
+                            'mixed_precision': config.get('mixed_precision', False),
+                            'use_gradient_checkpointing': config.get('use_gradient_checkpointing', False)
+                        },
+                        'recommendations': recommendations,
+                        'thresholds': {
+                            'cpu_threshold': load_balancer.cpu_threshold,
+                            'ram_threshold': load_balancer.ram_threshold,
+                            'gpu_threshold': load_balancer.gpu_threshold
+                        },
+                        'balance_status': calculate_balance_status(stats, recommendations)
+                    })
+            except Exception as e:
+                import traceback
+                return jsonify({
+                    'error': str(e),
+                    'traceback': traceback.format_exc()
+                }), 500
+        
         @self.app.route('/api/fan-speed', methods=['POST'])
         def api_set_fan_speed():
             """Set fan speed"""
@@ -1018,10 +1144,31 @@ class OmegaControlPanelWeb:
             border: none;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            border-radius: 5px;
         }
-        button:hover {
+        button:hover:not(:disabled) {
             background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
         .system-item {
             padding: 10px;
@@ -1088,16 +1235,85 @@ class OmegaControlPanelWeb:
             <h2>Hardware Controls</h2>
             <div class="controls">
                 <div class="control-group">
-                    <label>Fan Speed: <span id="fanSpeedValue">50</span>%</label>
+                    <label>🔧 Fan Speed: <span id="fanSpeedValue">50</span>%</label>
                     <input type="range" id="fanSpeed" min="0" max="100" value="50" oninput="updateFanSpeed(this.value)">
+                    <small style="color: #666; margin-top: 5px; display: block;">Drag to adjust system fan speed</small>
                 </div>
                 <div class="control-group">
-                    <label>RGB Color</label>
+                    <label>🌈 RGB Color</label>
                     <input type="color" id="rgbColor" value="#FFD700" onchange="updateRGBColor(this.value)">
+                    <small style="color: #666; margin-top: 5px; display: block;">Click to select color</small>
                 </div>
                 <div class="control-group">
-                    <label>RGB Lighting</label>
-                    <button onclick="toggleRGB()">Toggle RGB</button>
+                    <label>💡 RGB Lighting</label>
+                    <button id="rgbToggleBtn" onclick="toggleRGB()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        Toggle RGB
+                    </button>
+                    <small style="color: #666; margin-top: 5px; display: block;">Click to enable/disable RGB</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>⚖️ GPU Load Balancer</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                    <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">System Balance</div>
+                    <div id="balanceStatus" style="font-size: 24px; font-weight: bold; color: #333;">Loading...</div>
+                    <div id="balanceHealth" style="font-size: 12px; color: #666; margin-top: 5px;">Stress Level: <span id="stressLevel">-</span>%</div>
+                </div>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                    <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">GPU Available</div>
+                    <div id="gpuAvailable" style="font-size: 24px; font-weight: bold; color: #f44336;">Checking...</div>
+                    <div style="font-size: 12px; color: #666; margin-top: 5px;">GPU Memory: <span id="gpuMemory">-</span> GB</div>
+                </div>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                    <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">Current Bottleneck</div>
+                    <div id="bottleneck" style="font-size: 20px; font-weight: bold; color: #ff9800;">None</div>
+                    <div style="font-size: 12px; color: #666; margin-top: 5px;">Active Recommendations: <span id="recommendationCount">0</span></div>
+                </div>
+            </div>
+            
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">System Resource Distribution</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                    <div>
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">CPU Usage</div>
+                        <div style="position: relative; background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div id="cpuBar" style="height: 100%; background: linear-gradient(90deg, #ff6b6b 0%, #ee5a6f 100%); width: 0%; transition: width 0.3s ease;">
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #333; margin-top: 5px;">
+                            <span id="cpuPercent">0</span>%
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">RAM Usage</div>
+                        <div style="position: relative; background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div id="ramBar" style="height: 100%; background: linear-gradient(90deg, #4ecdc4 0%, #44a08d 100%); width: 0%; transition: width 0.3s ease;">
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #333; margin-top: 5px;">
+                            <span id="ramPercent">0</span>%
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; color: #666; margin-bottom: 5px;">GPU Usage</div>
+                        <div style="position: relative; background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div id="gpuBar" style="height: 100%; background: linear-gradient(90deg, #ffd93d 0%, #f4d35e 100%); width: 0%; transition: width 0.3s ease;">
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #333; margin-top: 5px;">
+                            <span id="gpuPercent">0</span>%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+                <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">Active Recommendations</div>
+                <div id="recommendations" style="list-style: none;">
+                    <p style="color: #666; font-style: italic;">Optimizing system resources...</p>
                 </div>
             </div>
         </div>
@@ -1322,48 +1538,101 @@ class OmegaControlPanelWeb:
         }
         
         function updateFanSpeed(value) {
-            document.getElementById('fanSpeedValue').textContent = value;
-            if (socket) {
-                // Use SocketIO if available
-                socket.emit('set_fan_speed', {speed: parseInt(value)});
-            } else {
-                // Fallback to REST API
-                fetch('/api/fan-speed', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({speed: parseInt(value)})
-                });
-            }
+            const speedDisplay = document.getElementById('fanSpeedValue');
+            if (speedDisplay) speedDisplay.textContent = value;
+            
+            fetch('/api/fan-speed', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({speed: parseInt(value)})
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(`✓ Fan speed set to ${value}%`);
+                    showNotification(`Fan speed: ${value}%`, 'success');
+                } else {
+                    console.error('Error setting fan speed:', data.error);
+                    showNotification(`Error: ${data.error}`, 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Fan speed request failed:', err);
+                showNotification(`Failed to set fan speed: ${err.message}`, 'error');
+            });
         }
         
         function updateRGBColor(color) {
-            if (socket) {
-                // Use SocketIO if available
-                socket.emit('set_rgb', {color: color});
-            } else {
-                // Fallback to REST API
-                fetch('/api/rgb', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({color: color})
-                });
-            }
+            fetch('/api/rgb', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({color: color})
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(`✓ RGB color set to ${color}`);
+                    showNotification(`RGB color changed to ${color}`, 'success');
+                } else {
+                    console.error('Error setting RGB color:', data.error);
+                    showNotification(`Error: ${data.error}`, 'error');
+                }
+            })
+            .catch(err => {
+                console.error('RGB color request failed:', err);
+                showNotification(`Failed to set RGB color: ${err.message}`, 'error');
+            });
         }
         
         function toggleRGB() {
-            if (socket) {
-                // Use SocketIO if available
-                socket.emit('set_rgb', {enabled: null});
-            } else {
-                // Fallback to REST API
-                fetch('/api/rgb', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({enabled: null})
-                }).then(() => {
-                    if (typeof refreshData !== 'undefined') refreshData();
-                });
-            }
+            const btn = document.getElementById('rgbToggleBtn');
+            if (btn) btn.disabled = true;
+            
+            fetch('/api/rgb', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({enabled: null})
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.success) {
+                    const statusText = data.enabled ? 'enabled' : 'disabled';
+                    console.log(`✓ RGB lighting ${statusText}`);
+                    showNotification(`RGB ${statusText}`, 'success');
+                    refreshData();
+                } else {
+                    console.error('Error toggling RGB:', data.error);
+                    showNotification(`Error: ${data.error}`, 'error');
+                }
+            })
+            .catch(err => {
+                console.error('RGB toggle request failed:', err);
+                showNotification(`Failed to toggle RGB: ${err.message}`, 'error');
+            })
+            .finally(() => {
+                if (btn) btn.disabled = false;
+            });
+        }
+        
+        function showNotification(message, level = 'info') {
+            console.log(`[${level.toUpperCase()}] ${message}`);
+            // Create temporary notification
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 6px;
+                color: white;
+                font-weight: bold;
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+                ${level === 'success' ? 'background: #4caf50;' : 'background: #f44336;'}
+            `;
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
         }
         
         // Chatbot functions
@@ -1609,12 +1878,107 @@ class OmegaControlPanelWeb:
             }
         }
         
+        // GPU Load Balancer Functions
+        async function loadLoadBalancerData() {
+            try {
+                const response = await fetch('/api/load-balance');
+                const data = await response.json();
+                
+                if (data.error && data.status === 'Load balancer disabled') {
+                    // Load balancer not available
+                    document.getElementById('gpuAvailable').textContent = 'Not Available';
+                    document.getElementById('gpuAvailable').style.color = '#999';
+                    return;
+                }
+                
+                // Update GPU availability
+                const gpuStatus = data.gpu_available ? '✓ Available' : '✗ Not Available';
+                const gpuColor = data.gpu_available ? '#4caf50' : '#f44336';
+                document.getElementById('gpuAvailable').textContent = gpuStatus;
+                document.getElementById('gpuAvailable').style.color = gpuColor;
+                
+                // Update system stats and bars
+                const stats = data.system_stats || {};
+                const cpuPercent = stats.cpu_percent || 0;
+                const ramPercent = stats.ram_percent || 0;
+                const gpuPercent = stats.gpu_percent || 0;
+                
+                document.getElementById('cpuPercent').textContent = Math.round(cpuPercent);
+                document.getElementById('ramPercent').textContent = Math.round(ramPercent);
+                document.getElementById('gpuPercent').textContent = Math.round(gpuPercent);
+                document.getElementById('cpuBar').style.width = Math.min(cpuPercent, 100) + '%';
+                document.getElementById('ramBar').style.width = Math.min(ramPercent, 100) + '%';
+                document.getElementById('gpuBar').style.width = Math.min(gpuPercent, 100) + '%';
+                
+                // Update GPU memory info
+                const gpuMemory = (stats.gpu_available_gb || 0).toFixed(1);
+                document.getElementById('gpuMemory').textContent = gpuMemory;
+                
+                // Update balance status
+                const balance = data.balance_status || {};
+                const statusColor = balance.color || 'gray';
+                const statusHealth = balance.health || 'unknown';
+                document.getElementById('balanceStatus').textContent = balance.status ? balance.status.toUpperCase() : 'UNKNOWN';
+                document.getElementById('balanceStatus').style.color = getStatusColor(statusColor);
+                
+                document.getElementById('stressLevel').textContent = Math.round(balance.stress_level || 0);
+                
+                // Update bottleneck
+                const bottleneck = balance.bottleneck || 'None';
+                document.getElementById('bottleneck').textContent = bottleneck;
+                
+                // Update bottleneck color based on which component is stressed
+                if (bottleneck === 'CPU') {
+                    document.getElementById('bottleneck').style.color = '#ff6b6b';
+                } else if (bottleneck === 'RAM') {
+                    document.getElementById('bottleneck').style.color = '#4ecdc4';
+                } else if (bottleneck === 'GPU') {
+                    document.getElementById('bottleneck').style.color = '#ffd93d';
+                } else {
+                    document.getElementById('bottleneck').style.color = '#4caf50';
+                }
+                
+                // Update recommendation count
+                const recommendations = data.recommendations || [];
+                document.getElementById('recommendationCount').textContent = recommendations.length;
+                
+                // Display recommendations
+                const recContainer = document.getElementById('recommendations');
+                if (recommendations.length > 0) {
+                    recContainer.innerHTML = recommendations.slice(0, 5).map((rec, idx) => `
+                        <div style="padding: 10px; margin-bottom: 8px; background: white; border-left: 4px solid #667eea; border-radius: 3px;">
+                            <div style="font-weight: bold; color: #333; font-size: 13px; margin-bottom: 3px;">💡 Recommendation ${idx + 1}</div>
+                            <div style="color: #666; font-size: 12px;">${escapeHtml(rec)}</div>
+                        </div>
+                    `).join('');
+                } else {
+                    recContainer.innerHTML = '<p style="color: #666; font-style: italic;">System is operating optimally</p>';
+                }
+            } catch (error) {
+                console.error('Error loading load balancer data:', error);
+                document.getElementById('gpuAvailable').textContent = 'Error';
+                document.getElementById('gpuAvailable').style.color = '#f44336';
+            }
+        }
+        
+        function getStatusColor(colorName) {
+            const colors = {
+                'green': '#4caf50',
+                'yellow': '#ffc107',
+                'orange': '#ff9800',
+                'red': '#f44336',
+                'gray': '#999'
+            };
+            return colors[colorName] || '#999';
+        }
+        
         // Initialize all data on page load
         window.addEventListener('DOMContentLoaded', () => {
             // Load main dashboard data
             loadStats();
             loadNotifications();
             loadIntegratedSystems();
+            loadLoadBalancerData();
             
             // Load chatbot data
             loadChatbotStatus();
@@ -1625,6 +1989,7 @@ class OmegaControlPanelWeb:
                 loadStats();
                 loadNotifications();
                 loadIntegratedSystems();
+                loadLoadBalancerData();
             }, 5000);
         });
     </script>
