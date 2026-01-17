@@ -82,77 +82,42 @@ class RGBColor:
         return cls(255, 255, 255)  # Default to white
 
 class RGBController:
-    """Full RGB color spectrum control"""
+    """Full RGB color spectrum control - Delegates to Advanced RGB Controller"""
     
     def __init__(self):
         self.system = platform.system()
-        self.rgb_enabled = False
-        self.current_color = RGBColor(0, 0, 0)  # Black by default
-        
-        # Try to initialize RGB control
-        self._init_rgb()
-    
-    def _init_rgb(self):
-        """Initialize RGB control"""
+        # Use the advanced RGB controller with fallback strategies
         try:
-            if self.system == "Windows":
-                # Try OpenRGB
-                try:
-                    import openrgb
-                    self.openrgb_client = openrgb.OpenRGBClient()
-                    self.rgb_enabled = True
-                    self.rgb_method = "openrgb"
-                except ImportError:
-                    # Try ASUS AURA SDK (if available)
-                    # Placeholder for ASUS-specific RGB control
-                    self.rgb_method = "aura"
-                    # Would need ASUS SDK
-                    pass
-            else:
-                # Linux: Try OpenRGB
-                try:
-                    import openrgb
-                    self.openrgb_client = openrgb.OpenRGBClient()
-                    self.rgb_enabled = True
-                    self.rgb_method = "openrgb"
-                except ImportError:
-                    pass
-        except:
+            from omega_rgb_advanced_controller import get_advanced_rgb_controller
+            self.advanced_rgb = get_advanced_rgb_controller()
+            self.rgb_enabled = self.advanced_rgb.rgb_enabled
+            self.current_color = RGBColor(*self.advanced_rgb.current_color)
+            self.rgb_method = self.advanced_rgb.current_method.value
+            print(f"[RGB Controller] Using advanced RGB controller - method: {self.rgb_method}")
+        except Exception as e:
+            print(f"[RGB Controller] Warning: Could not initialize advanced RGB controller: {e}")
+            print("[RGB Controller] Falling back to basic RGB stub")
             self.rgb_enabled = False
+            self.current_color = RGBColor(0, 0, 0)
             self.rgb_method = "none"
+            self.advanced_rgb = None
     
     def set_color(self, color: RGBColor, zone: str = "all") -> bool:
         """Set RGB color (full spectrum)"""
         try:
-            if not self.rgb_enabled:
-                # Fallback: Store color for when RGB is available
-                self.current_color = color
-                print(f"RGB color set to {color.to_hex()} (RGB control not available)")
-                return False
-            
-            if self.rgb_method == "openrgb":
-                # Use OpenRGB
-                try:
-                    devices = self.openrgb_client.devices
-                    for device in devices:
-                        if zone == "all" or zone in device.name.lower():
-                            device.set_color(color.to_tuple())
+            if self.advanced_rgb:
+                success = self.advanced_rgb.set_color(color.r, color.g, color.b, zone)
+                if success:
                     self.current_color = color
-                    return True
-                except:
-                    pass
-            
-            # ASUS AURA SDK (if available)
-            elif self.rgb_method == "aura":
-                # Would use ASUS AURA SDK
-                # Placeholder implementation
+                    self.rgb_enabled = True
+                return success
+            else:
+                # Fallback when advanced RGB not available
                 self.current_color = color
-                print(f"RGB color set to {color.to_hex()} via AURA")
-                return True
-            
-            return False
+                print(f"[RGB] Color set to {color.to_hex()} (no hardware control available)")
+                return False
         except Exception as e:
-            print(f"Error setting RGB color: {e}")
+            print(f"[RGB] Error setting RGB color: {e}")
             return False
     
     def set_color_hex(self, hex_color: str, zone: str = "all") -> bool:
@@ -176,10 +141,14 @@ class RGBController:
     
     def enable_rgb(self) -> bool:
         """Enable RGB lighting"""
+        if self.advanced_rgb:
+            return self.advanced_rgb.enable_rgb()
         return self.set_color(self.current_color)
     
     def disable_rgb(self) -> bool:
         """Disable RGB lighting (set to black)"""
+        if self.advanced_rgb:
+            return self.advanced_rgb.disable_rgb()
         return self.set_color(RGBColor(0, 0, 0))
 
 class USBPortController:

@@ -117,6 +117,16 @@ class ControlPanel:
         self.running = False
         self.update_interval = 2.0  # Update every 2 seconds
         
+        # GPU Load Balancer for optimal resource distribution
+        try:
+            from omega_gpu_load_balancer import get_load_balancer
+            self.load_balancer = get_load_balancer()
+            self.load_balancer.start_monitoring(interval=2.0)
+            print("[Control Panel] GPU Load Balancer initialized")
+        except Exception as e:
+            print(f"[Control Panel] Load Balancer not available: {e}")
+            self.load_balancer = None
+        
         # Resource manager for CPU/GPU/RAM optimization
         try:
             from omega_resource_manager import get_resource_manager, GradualLoader
@@ -126,8 +136,11 @@ class ControlPanel:
             print(f"[Resource Manager] Performance profile: {self.resource_manager.performance_profile}")
             if self.use_gpu:
                 print(f"[Resource Manager] GPU available: {self.resource_manager.gpu_name}")
-        except ImportError:
+        except (ImportError, Exception) as e:
+            print(f"[Resource Manager] Not available: {e}")
             self.resource_manager = None
+            self.gradual_loader = None
+            self.use_gpu = False
             self.gradual_loader = None
             self.use_gpu = False
         
@@ -496,19 +509,23 @@ class ControlPanel:
             except Exception as e:
                 self.add_notification(f"Error setting RGB color: {e}", "error")
     
-    def toggle_rgb(self):
-        """Toggle RGB lighting"""
-        self.rgb_enabled = not self.rgb_enabled
+    def set_rgb_enabled(self, enabled: bool):
+        """Set RGB enabled state"""
+        self.rgb_enabled = enabled
         if self.hw_controller:
             try:
-                if self.rgb_enabled:
+                if enabled:
                     self.hw_controller.set_rgb_color(hex_color=self.rgb_color)
                     self.add_notification("RGB lighting enabled", "success")
                 else:
                     self.hw_controller.rgb.disable_rgb()
                     self.add_notification("RGB lighting disabled", "info")
             except Exception as e:
-                self.add_notification(f"Error toggling RGB: {e}", "error")
+                self.add_notification(f"Error setting RGB: {e}", "error")
+    
+    def toggle_rgb(self):
+        """Toggle RGB lighting"""
+        self.set_rgb_enabled(not self.rgb_enabled)
     
     def _create_text_panel(self):
         """Create text-based control panel (fallback)"""
