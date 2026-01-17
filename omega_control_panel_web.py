@@ -40,6 +40,20 @@ try:
     LOGIN_AVAILABLE = True
 except ImportError:
     LOGIN_AVAILABLE = False
+    # Provide a fallback UserMixin for when flask-login is not available
+    class UserMixin:
+        """Fallback UserMixin when flask-login is not installed"""
+        @property
+        def is_authenticated(self):
+            return True
+        @property
+        def is_active(self):
+            return True
+        @property
+        def is_anonymous(self):
+            return False
+        def get_id(self):
+            return str(self.id)
     print("Flask-Login not installed. Install with: pip install flask-login")
 
 # Flask-SQLAlchemy availability

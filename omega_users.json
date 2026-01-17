@@ -1,18 +1,18 @@
 {
   "admin": {
-    "password": "pbkdf2:sha256:600000$placeholder$will_be_auto_fixed",
+    "password": "scrypt:32768:8:1$xfmfam5DHOsv7FLw$44d08ef3eca1a20c13773500cd76de3f3ef1d4e9c8a447bf1b182675f7dea93497a3f74bac51e1acb8438a84839462794c95eecf8606fa824aad68e627eca3f0",
     "role": "admin",
     "created": "2026-01-01",
     "active": true
   },
   "operator": {
-    "password": "pbkdf2:sha256:600000$placeholder$will_be_auto_fixed",
+    "password": "scrypt:32768:8:1$Bp5noyRyQ17eBAPg$9bf4d4a971fca00cbcfca3dcf22ec39476d9fc7a3b8b1159aa57bf69c902fba6646250871c981f1c409d70a7745f04da7635ca0b16c9974719f1c4210463f3d5",
     "role": "operator",
     "created": "2026-01-01",
     "active": true
   },
   "viewer": {
-    "password": "pbkdf2:sha256:600000$placeholder$will_be_auto_fixed",
+    "password": "scrypt:32768:8:1$jyda8PdA0vOcBIkU$5226efd6177a441901615847a19a8b2dcb151d46c95511ef0b2a85ded335d6f3be0892d22f6308a6aa283f0cece5c88b5935cb3363a065e1873d016039552baa",
     "role": "viewer",
     "created": "2026-01-01",
     "active": true
