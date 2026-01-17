@@ -9,12 +9,12 @@ Scan Integration is Omega's automated system upgrade and optimization pipeline. 
 ### Option 1: Use Batch File (Easiest)
 ```bash
 SCAN_INTEGRATION.bat
-```
+```text
 
 ### Option 2: Use Python Directly
 ```bash
 python omega_scan_integration.py
-```
+```text
 
 ## What Happens?
 

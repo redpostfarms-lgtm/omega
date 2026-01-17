@@ -19,7 +19,7 @@ Comprehensive deep dive audit of Omega system for potential breakage flags, inte
 **Issue**: 
 ```python
 from rate_limiter import GOOGLE_SPEECH_LIMITER
-```
+```text
 If `rate_limiter.py` is missing or has import errors, this will crash the entire speech recognition module.
 
 **Severity**: HIGH  
@@ -33,7 +33,7 @@ try:
 except ImportError:
     print("[WARNING] rate_limiter not available, rate limiting disabled")
     GOOGLE_SPEECH_LIMITER = None
-```
+```text
 
 ---
 
@@ -45,7 +45,7 @@ except ImportError:
 ```python
 GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
 if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
-```
+```text
 If `GOOGLE_SPEECH_LIMITER` is None (from import failure), this will raise AttributeError.
 
 **Severity**: HIGH  
@@ -59,7 +59,7 @@ if GOOGLE_SPEECH_LIMITER:
     if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
         wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
         await asyncio.sleep(wait_time)
-```
+```text
 
 ---
 
@@ -89,7 +89,7 @@ if GOOGLE_SPEECH_LIMITER:
 **Issue**: Frame size calculation for WebRTC VAD:
 ```python
 frame_size = int(SAMPLE_RATE * frame_duration_ms / 1000)  # 480 samples for 30ms at 16kHz
-```
+```text
 This should be correct, but needs validation that frame_size matches WebRTC requirements exactly.
 
 **Severity**: MEDIUM  
@@ -108,7 +108,7 @@ valid_frame_sizes = {160, 320, 480, 640, 960}  # 10, 20, 30, 40, 60ms at 16kHz
 if frame_size not in valid_frame_sizes:
     # Round to nearest valid size
     frame_size = min(valid_frame_sizes, key=lambda x: abs(x - frame_size))
-```
+```text
 
 ---
 
@@ -254,25 +254,25 @@ if frame_size not in valid_frame_sizes:
 ```python
 # Temporarily rename rate_limiter.py and test
 # Should gracefully handle missing module
-```
+```text
 
 ### 2. Test Large-v2 Fallback:
 ```python
 # Force Large-v2 failure (out of memory simulation)
 # Verify fallback to base model works
-```
+```text
 
 ### 3. Test WebRTC VAD Frame Sizes:
 ```python
 # Test with various frame sizes
 # Verify VAD works correctly
-```
+```text
 
 ### 4. Test Audio Quality Edge Cases:
 ```python
 # Test with empty files, corrupted files, very large files
 # Verify error handling
-```
+```text
 
 ---
 

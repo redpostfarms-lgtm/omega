@@ -159,7 +159,7 @@ rule TRITON_Framework {
   condition:
     2 of them and filesize < 3MB
 }
-```
+```text
 
 ---
 
@@ -228,7 +228,7 @@ rule TRITON_Framework {
   <directories>/path/to/tristation/executables</directories>
   <directories>/path/to/payload/directory</directories>
 </syscheck>
-```
+```text
 
 ### Network Monitoring Configuration
 
@@ -244,24 +244,24 @@ rule TRITON_Framework {
 ### Sample Logs for Testing
 
 **trilog.exe Execution**:
-```
+```text
 2026-01-11 15:45:00 workstation01: trilog.exe inject.bin imain.bin library.zip
-```
+```text
 
 **TriStation Protocol Anomaly**:
-```
+```text
 2026-01-11 15:46:00 network-gateway: UDP 1502 TriStation unexpected_command broadcast_ping
-```
+```text
 
 **Program Download**:
-```
+```text
 2026-01-11 15:47:00 triconex-gateway: Triconex program_append SafeAppendProgramMod from 192.168.1.100
-```
+```text
 
 **Fail-Safe Trigger**:
-```
+```text
 2026-01-11 15:48:00 triconex-controller: fail_safe safe_state redundant_processor_mismatch validation_failure_safe
-```
+```text
 
 ### Testing with wazuh-logtest
 
@@ -271,7 +271,7 @@ sudo /var/ossec/bin/wazuh-logtest
 # Paste sample log above
 # Verify Phase 2 shows decoded fields
 # Verify Phase 3 shows matching rules
-```
+```text
 
 ---
 

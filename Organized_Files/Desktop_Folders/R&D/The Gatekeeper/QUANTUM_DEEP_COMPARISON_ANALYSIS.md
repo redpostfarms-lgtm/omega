@@ -123,7 +123,7 @@
 ### **Gap Analysis: Agent Systems**
 
 | Feature | Gatekeeper | Industry Standard | Gap |
-|---------|-----------|-------------------|-----|
+| --------- | ----------- | ------------------- | ----- |
 | **Parallel Execution** | ❌ Sequential | ✅ Parallel | **HIGH** |
 | **Task Decomposition** | ❌ None | ✅ Automatic | **HIGH** |
 | **Agent Communication** | ❌ None | ✅ Direct | **MEDIUM** |
@@ -212,7 +212,7 @@
 ### **Gap Analysis: Voice Systems**
 
 | Feature | Gatekeeper | Industry Standard | Gap |
-|---------|-----------|-------------------|-----|
+| --------- | ----------- | ------------------- | ----- |
 | **Offline Recognition** | ❌ Google API | ✅ Vosk/SpeechBrain | **HIGH** |
 | **Biometric Accuracy** | ⚠️ 85% | ✅ 95-98% | **HIGH** |
 | **Noise Resistance** | ❌ Limited | ✅ Advanced | **HIGH** |
@@ -339,7 +339,7 @@
 ### **Gap Analysis: Knowledge Management**
 
 | Feature | Gatekeeper | Industry Standard | Gap |
-|---------|-----------|-------------------|-----|
+| --------- | ----------- | ------------------- | ----- |
 | **Vector Storage** | ❌ JSON only | ✅ ChromaDB/FAISS | **HIGH** |
 | **Semantic Search** | ❌ Linear | ✅ Vector similarity | **HIGH** |
 | **Embeddings** | ❌ None | ✅ Sentence Transformers | **HIGH** |
@@ -430,7 +430,7 @@
 ### **Gap Analysis: Farm Management**
 
 | Feature | Gatekeeper | Industry Standard | Gap |
-|---------|-----------|-------------------|-----|
+| --------- | ----------- | ------------------- | ----- |
 | **Crop Planning** | ❌ None | ✅ Full system | **MEDIUM** |
 | **Livestock Tracking** | ❌ None | ✅ Full system | **MEDIUM** |
 | **Field Mapping** | ❌ None | ✅ GIS integration | **MEDIUM** |
@@ -500,7 +500,7 @@
 ### **Gap Analysis: Self-Healing**
 
 | Feature | Gatekeeper | Industry Standard | Gap |
-|---------|-----------|-------------------|-----|
+| --------- | ----------- | ------------------- | ----- |
 | **Boot-Time Check** | ✅ Yes | ✅ Yes | **None** |
 | **Runtime Monitoring** | ❌ No | ✅ Yes | **MEDIUM** |
 | **Auto-Restart** | ❌ No | ✅ Yes | **MEDIUM** |
@@ -679,7 +679,7 @@
 ### **The Gatekeeper vs. Industry Leaders**
 
 | Category | Gatekeeper | FarmOS | LiteFarm | Commercial AI |
-|----------|-----------|--------|----------|---------------|
+| ---------- | ----------- | -------- | ---------- | --------------- |
 | **Voice Control** | ✅ Full | ❌ None | ❌ None | ⚠️ Limited |
 | **Self-Learning** | ✅ Yes | ❌ No | ❌ No | ⚠️ Basic |
 | **AI Agents** | ✅ 6-agent council | ❌ No | ❌ No | ⚠️ Single agent |

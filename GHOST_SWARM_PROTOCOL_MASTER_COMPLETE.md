@@ -117,7 +117,7 @@
 
 ```bash
 python ghost_swarm_protocol.py
-```
+```text
 
 **Features:**
 - Threat detection panel

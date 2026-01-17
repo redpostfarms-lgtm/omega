@@ -95,7 +95,7 @@
 ### Basic Launch
 ```python
 python elara_main.py
-```
+```text
 
 ### Voice Command
 ```python
@@ -104,7 +104,7 @@ python elara_main.py "play me"
 
 python elara_main.py "white"
 # Response: "White it is. Board glows. Game starts."
-```
+```text
 
 ### In-Game Controls
 - **Click**: Select and move pieces
@@ -148,7 +148,7 @@ python elara_main.py "white"
 
 ## File Structure
 
-```
+```text
 elara_game_engine.py      (~600 lines) - Core engine
 elara_chess_game.py       (~400 lines) - Chess module
 elara_checkers_game.py    (~300 lines) - Checkers module
@@ -157,7 +157,7 @@ elara_mahjong_game.py     (~350 lines) - Mahjong module
 elara_adaptive_learner.py (~200 lines) - Learning engine
 elara_voice_system.py     (~100 lines) - Voice system
 elara_main.py             (~100 lines) - Main launcher
-```
+```text
 
 ---
 

@@ -92,7 +92,7 @@ resource_manager = get_system_resource_manager()
 
 # Load component gradually
 result = load_component_gradually("component_name", load_function, *args, **kwargs)
-```
+```text
 
 ### Resource-Optimized Components
 ```python
@@ -108,7 +108,7 @@ tts = load_tts_gradually()
 
 # Get optimal workers for parallel processing
 workers = get_optimal_workers_for_task("high")
-```
+```text
 
 ---
 

@@ -140,18 +140,18 @@
 ## Build Commands
 
 ### **Voice:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe BMS in Rust"
 "Hey, Gatekeeper, create a solar MPPT controller in Python"
 "Hey, Gatekeeper, build a farm automation hub"
-```
+```text
 
 ### **Direct:**
 ```bash
 python gatekeeper_fusion.py "write a quantum-safe BMS in Rust"
 python gatekeeper_fusion.py "create a solar MPPT controller in Python"
 python gatekeeper_fusion.py "build a farm automation hub with Rust and Python"
-```
+```text
 
 ---
 
@@ -169,7 +169,7 @@ python projects/village_farm_hub.py  # View village status
 python projects/village_farm_hub.py status  # Status only
 python projects/village_farm_hub.py needs  # Show needs
 python projects/village_farm_hub.py builds  # Show future builds
-```
+```text
 
 ---
 

@@ -124,11 +124,11 @@ Completed comprehensive UI optimization including:
 
 ## UI Layout Structure
 
-```
+```text
 [Files] [OIP]         [Status]    [Controls]
 [Files] [Integrated Systems                    ]
 [Files] [Improve]     [Optional                ]
-```
+```text
 
 ### Sections
 - **Files** (Left): Important files list

@@ -57,7 +57,7 @@
 ```bash
 nvcc --version
 nvidia-smi
-```
+```text
 
 **If CUDA works:**
 - No repair needed

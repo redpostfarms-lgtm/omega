@@ -129,7 +129,7 @@ Completed full integration of slang into Omega's speech patterns, optimized code
 ### Space Efficiency Improvements
 
 | Component | Original | Optimized | Savings |
-|-----------|----------|-----------|---------|
+| ----------- | ---------- | ----------- | --------- |
 | Slang Processor | ~25 KB | ~10 KB | ~60% |
 | Data Structures | Dict-based | Tuple-based | ~40% |
 | Memory Usage | Multiple instances | Singleton | ~50% |

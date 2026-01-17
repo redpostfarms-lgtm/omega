@@ -192,7 +192,7 @@ All systems analyzed, tested, upgraded, and brought to 100% completion through:
 ### Usage
 ```bash
 python quantum_self_repair.py
-```
+```text
 
 ---
 
@@ -201,7 +201,7 @@ python quantum_self_repair.py
 ### Run Complete Analysis
 ```bash
 python quantum_master_100_percent.py
-```
+```text
 
 This runs:
 1. Deep quantum audit

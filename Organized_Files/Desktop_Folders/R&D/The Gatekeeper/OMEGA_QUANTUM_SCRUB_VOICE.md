@@ -115,24 +115,24 @@ from omega_voice import OmegaVoice
 
 omega = OmegaVoice()
 omega.speak("Gate guarded. System monitored.")
-```
+```text
 
 ### With Signature:
 ```python
 omega.speak("Code analyzed.", add_signature=True)
 # Output: "Omega here. Code analyzed."
-```
+```text
 
 ### Get Voice Info:
 ```python
 info = omega.get_voice_info()
 print(info)
-```
+```text
 
 ### Generate Waveform:
 ```python
 omega.speak_with_waveform("Testing waveform", save_audio=True)
-```
+```text
 
 ---
 
@@ -154,7 +154,7 @@ omega_voice = OmegaVoice()
 # After test completion
 if results['tests_failed'] > 0:
     omega_voice.speak(f"Alert: {results['tests_failed']} tests failed", add_signature=True)
-```
+```text
 
 ---
 

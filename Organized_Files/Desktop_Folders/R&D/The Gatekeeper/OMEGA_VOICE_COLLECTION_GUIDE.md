@@ -31,7 +31,7 @@ pip install webrtcvad
 pip install edge-tts          # Microsoft Edge TTS (FREE, no API key)
 pip install TTS               # Coqui TTS (open source)
 # pip install piper-tts       # Piper TTS (if available)
-```
+```text
 
 ---
 
@@ -46,7 +46,7 @@ collector = OmegaVoiceCollector()
 
 # Extract and analyze voice from YouTube video
 voice_id = collector.collect_from_youtube("https://www.youtube.com/watch?v=VIDEO_ID")
-```
+```text
 
 ### **2. Collect Voice from Audio File:**
 
@@ -58,7 +58,7 @@ voice_id = collector.collect_from_file(
     Path("path/to/audio.wav"),
     source_name="audiobook_narrator"
 )
-```
+```text
 
 ### **3. Record Your Voice:**
 
@@ -71,7 +71,7 @@ result = soundboard.record_user_voice(duration=5.0)
 
 # Your voice ID will be in result['voice_id']
 user_voice_id = result['voice_id']
-```
+```text
 
 ### **4. Create Omega's Blended Voice:**
 
@@ -87,7 +87,7 @@ omega_voice = collector.create_omega_voice(
     user_voice_id=user_voice_id,
     weights=[0.25, 0.25, 0.25]  # Optional: custom weights
 )
-```
+```text
 
 ---
 
@@ -162,7 +162,7 @@ from omega_free_tts_apis import FreeTTSManager
 
 manager = FreeTTSManager()
 manager.speak("Hello, I am Omega", engine="edge")
-```
+```text
 
 ### **2. Coqui TTS**
 - ✅ Open source
@@ -216,7 +216,7 @@ omega_profile = collector.create_omega_voice(
 # Step 4: Use Omega's voice with free TTS
 tts_manager = FreeTTSManager()
 tts_manager.speak("I am Omega. Gate guarded.", engine="edge")
-```
+```text
 
 ---
 

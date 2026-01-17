@@ -46,13 +46,13 @@
 chmod +x omega_nvidia_integration.sh
 chmod +x omega_nvidia_integration_example.sh
 chmod +x omega_nvidia_integration_wrapper.sh
-```
+```text
 
 ### 2. Set API Key
 
 ```bash
 export NVIDIA_API_KEY=your_api_key_here
-```
+```text
 
 ### 3. Optional: Install jq for JSON Parsing
 
@@ -65,7 +65,7 @@ brew install jq
 
 # CentOS/RHEL
 sudo yum install jq
-```
+```text
 
 ---
 
@@ -79,7 +79,7 @@ export NVIDIA_API_KEY=your_api_key_here
 
 # Run the example
 ./omega_nvidia_integration_example.sh
-```
+```text
 
 ### Option 2: Using the Full Integration Script
 
@@ -90,7 +90,7 @@ source omega_nvidia_integration.sh
 # Or make executable and run directly
 chmod +x omega_nvidia_integration.sh
 ./omega_nvidia_integration.sh "Hello! How are you?"
-```
+```text
 
 ### Option 3: Using Functions (After Sourcing)
 
@@ -107,7 +107,7 @@ nvidia_generate_response "Explain quantum computing" 1024 0.7
 # Conversation with history
 messages='[{"role":"user","content":"Hello!"},{"role":"assistant","content":"Hi!"},{"role":"user","content":"What can you do?"}]'
 nvidia_conversation "$messages"
-```
+```text
 
 ### Option 4: Using the Wrapper (Simplest)
 
@@ -117,7 +117,7 @@ source omega_nvidia_integration_wrapper.sh
 
 # Use the function
 nvidia_generate_response "Hello! How are you?"
-```
+```text
 
 ### Option 5: Direct curl Usage (Your Original Code)
 
@@ -154,7 +154,7 @@ curl https://integrate.api.nvidia.com/v1/chat/completions \
 
 # Cleanup
 rm payload.json
-```
+```text
 
 ---
 
@@ -187,20 +187,20 @@ Continue a conversation with history.
 ```bash
 source omega_nvidia_integration.sh
 nvidia_generate_response "Hello! How are you?"
-```
+```text
 
 ### Custom Parameters
 
 ```bash
 nvidia_generate_response "Explain quantum computing" 1024 0.7
-```
+```text
 
 ### Conversation
 
 ```bash
 messages='[{"role":"user","content":"Hello!"},{"role":"assistant","content":"Hi!"},{"role":"user","content":"What is AI?"}]'
 nvidia_conversation "$messages"
-```
+```text
 
 ### Full Chat Completion
 
@@ -208,7 +208,7 @@ nvidia_conversation "$messages"
 messages='[{"role":"user","content":"Hello!"}]'
 response=$(nvidia_chat_completion "$messages" 512 1.0 1.0 0.0 0.0 false)
 echo "$response" | jq '.'
-```
+```text
 
 ---
 
@@ -219,7 +219,7 @@ For streaming responses, set `STREAM=true` in the script or use:
 ```bash
 messages='[{"role":"user","content":"Tell me a story"}]'
 nvidia_chat_completion "$messages" 512 1.0 1.0 0.0 0.0 true
-```
+```text
 
 ---
 
@@ -232,7 +232,7 @@ if [ -z "$NVIDIA_API_KEY" ]; then
     echo "Error: NVIDIA_API_KEY not set" >&2
     exit 1
 fi
-```
+```text
 
 ---
 

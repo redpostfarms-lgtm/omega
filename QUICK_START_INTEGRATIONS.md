@@ -4,7 +4,7 @@
 
 ```bash
 python SETUP_DEVELOPER_INTEGRATIONS.py
-```
+```text
 
 ## Step 2: Choose Tools to Setup
 

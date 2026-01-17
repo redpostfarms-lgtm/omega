@@ -71,7 +71,7 @@ force_words_ids = [
     tokenizer.encode(phrase, add_special_tokens=False)
     for phrase in required_phrases
 ]
-```
+```text
 
 ### Generation Configuration:
 
@@ -85,7 +85,7 @@ outputs = model.generate(
     force_words_ids=force_words_ids, # ← Key: constraints
     num_return_sequences=5           # Multiple outputs
 )
-```
+```text
 
 ### Expected Behavior:
 

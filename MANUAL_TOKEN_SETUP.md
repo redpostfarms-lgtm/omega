@@ -24,7 +24,7 @@
 ### Step 3: Verify
 ```bash
 git fetch origin --dry-run
-```
+```text
 
 If it works (or says "repository not found" which is expected), authentication is configured! ✅
 
@@ -38,7 +38,7 @@ git config --global credential.helper manager-core
 
 # The token will be stored automatically on first use
 # Or use the PowerShell script: configure_github_token.ps1
-```
+```text
 
 ---
 

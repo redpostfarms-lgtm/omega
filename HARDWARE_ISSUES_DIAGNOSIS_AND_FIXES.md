@@ -28,19 +28,19 @@ All three issues are **fixable** with targeted installations and configurations.
 
 ### Root Cause Analysis
 
-```
+```text
 RGB Software Layer          →        Hardware Communication          →      Physical LEDs
 ✓ Color commands process   ×  OpenRGB not installed/communicating  ×  No color signals
 ✓ Software state updates   ×  Vendor SDKs not detected            ×  Stay same color
 ✓ LED values change        ×  USB communication not established    ×  Appear broken
 ✓ Settings persist         ×  Driver/firmware not responding      ×  No visual feedback
-```
+```text
 
 ### Why This Happened
 
 The RGB controller tries these methods in order:
 
-```
+```text
 1. Try: OpenRGB Python library      ← NOT INSTALLED
        ↓ (fails)
 2. Try: ASUS AURA SDK              ← NOT DETECTED
@@ -55,7 +55,7 @@ The RGB controller tries these methods in order:
        ↓ (fails)
 7. Fall back to: SIMULATED RGB MODE ← CURRENTLY HERE ✗
        (software-only, no hardware control)
-```
+```text
 
 ### The Fix (Choose ONE approach)
 
@@ -79,7 +79,7 @@ pip install openrgb
 
 # Step 4: Test in Python
 python -c "import openrgb; client = openrgb.OpenRGBClient(); print('Connected!')"
-```
+```text
 
 **How it works:**
 
@@ -142,7 +142,7 @@ print("Changed to RED - check if physical LEDs changed")
 
 # If LEDs changed: ✓ FIXED
 # If LEDs didn't change: See troubleshooting below
-```
+```text
 
 ### If RGB Still Doesn't Work After Installing OpenRGB
 
@@ -189,34 +189,34 @@ print("Changed to RED - check if physical LEDs changed")
 
 ### Root Cause Analysis
 
-```
+```text
 TTS Engine                    →      Audio Encoding        →      Audio Files
 ✓ Loads successfully          ×  FFmpeg DLL not found     ×  Can't create files
 ✓ Generates audio data        ×  torchcodec fails         ×  Generation stops
 ✓ Ready to encode             ×  Audio format error       ×  No output
-```
+```text
 
 ### Why This Happened
 
 The audio system uses this pipeline:
 
-```
+```text
 1. TTS Engine → Generate raw audio data
 2. torchcodec library → Encode to WAV/MP3 format
 3. FFmpeg DLL → Does the actual encoding
 4. Result: Audio file written to disk
-```
+```text
 
 Problem: **FFmpeg is not installed or not in PATH**
 
 When torchcodec tries to call FFmpeg, it gets:
 
-```
+```text
 ERROR: FFmpeg DLL not found
        → Audio generation fails
        → No files created
        → No audio output
-```
+```text
 
 ### The Fix
 
@@ -230,7 +230,7 @@ winget install ffmpeg
 
 # Or using Chocolatey
 choco install ffmpeg
-```
+```text
 
 **Option B: Manual Installation**
 
@@ -249,7 +249,7 @@ choco install ffmpeg
 
 ```bash
 conda install ffmpeg
-```
+```text
 
 #### Step 2: Verify FFmpeg Installation
 
@@ -260,7 +260,7 @@ ffmpeg -version
 # You should see:
 # ffmpeg version 6.0 Copyright (c) 2000-2023
 # built with ...
-```
+```text
 
 If you get "ffmpeg is not recognized...", FFmpeg is not in PATH. Go back to Step 1.
 
@@ -272,7 +272,7 @@ pip uninstall torchcodec -y
 
 # Install fresh
 pip install torchcodec --no-cache-dir
-```
+```text
 
 #### Step 4: Test Audio System
 
@@ -291,7 +291,7 @@ model.tts_to_file(
 
 # If file created: ✓ FIXED
 # If error: See troubleshooting below
-```
+```text
 
 ### Verification Steps
 
@@ -315,7 +315,7 @@ try:
 except FileNotFoundError:
     print("✗ FFmpeg NOT FOUND in PATH")
     print("  Re-install and verify PATH")
-```
+```text
 
 ### If Audio Still Doesn't Work
 
@@ -374,10 +374,10 @@ except FileNotFoundError:
 
 ### Root Cause Analysis
 
-```
+```text
 GPU Hardware        →      NVIDIA Drivers        →      CUDA Toolkit        →      PyTorch
 ? Installed?        →      ? Installed?          →      ? Installed?        →      ✗ Can't detect
-```
+```text
 
 For GPU to work, you need:
 
@@ -407,7 +407,7 @@ nvidia-smi
 
 # If found: GPU is installed
 # If "not found" command: NVIDIA drivers not installed
-```
+```text
 
 #### Step 2: Install/Update NVIDIA Drivers
 
@@ -434,7 +434,7 @@ nvidia-smi
 # NVIDIA-SMI 537.42  Driver Version: 537.42
 # GPU Name: NVIDIA GeForce RTX 3060
 # GPU Memory: 12 GB
-```
+```text
 
 #### Step 3: Install CUDA Toolkit
 
@@ -468,7 +468,7 @@ nvcc --version
 # Should show:
 # nvcc: NVIDIA (R) Cuda compiler driver
 # Cuda compilation tools, release 12.1
-```
+```text
 
 #### Step 4: Reinstall PyTorch with CUDA Support
 
@@ -481,7 +481,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 # OR install with CUDA 12.1 (for newer systems)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 #### Step 5: Test CUDA
 
@@ -499,12 +499,12 @@ if torch.cuda.is_available():
 else:
     print("✗ CUDA NOT working - System will use CPU only")
     print("  Check steps above for issues")
-```
+```text
 
 ### Expected Performance Gains When GPU Enabled
 
 | Task | CPU Only | With GPU | Speedup |
-|------|----------|----------|---------|
+| ------ | ---------- | ---------- | --------- |
 | TTS Audio Generation | 5-10 sec | 1-2 sec | 5-10x |
 | Audio Encoding | 2-5 sec | 0.5-1 sec | 4-10x |
 | RGB Processing | ~100ms | ~10-20ms | 5-10x |
@@ -553,7 +553,7 @@ def test_cuda():
 
 if __name__ == "__main__":
     test_cuda()
-```
+```text
 
 ---
 
@@ -569,7 +569,7 @@ For fastest resolution, do these in order:
 pip install openrgb
 # Then download & run OpenRGB application
 # Verify in Python: RGB should change from Simulated to OpenRGB
-```
+```text
 
 ### Priority 2: Audio FFmpeg (Important)
 
@@ -580,7 +580,7 @@ winget install ffmpeg
 pip uninstall torchcodec -y
 pip install torchcodec --no-cache-dir
 # Verify: Can generate audio files without FFmpeg error
-```
+```text
 
 ### Priority 3: GPU/CUDA (Nice to Have)
 
@@ -591,7 +591,7 @@ pip install torchcodec --no-cache-dir
 # Install CUDA Toolkit 12.1
 # Reinstall PyTorch with CUDA
 # Verify: torch.cuda.is_available() returns True
-```
+```text
 
 ---
 
@@ -608,7 +608,7 @@ ffmpeg -version
 
 # GPU Status
 python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
-```
+```text
 
 ---
 
@@ -616,7 +616,7 @@ python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 
 ### Expected Final State
 
-```
+```text
 RGB SYSTEM:
   ✓ OpenRGB installed
   ✓ Hardware communication active
@@ -636,14 +636,14 @@ GPU SYSTEM:
   ✓ PyTorch configured for CUDA
   ✓ GPU acceleration enabled
   System Status: GPU-accelerated (not CPU-only)
-```
+```text
 
 ---
 
 ## Document Summary
 
 | Issue | Root Cause | Solution | Time |
-|-------|-----------|----------|------|
+| ------- | ----------- | ---------- | ------ |
 | RGB Not Responding | OpenRGB not installed | `pip install openrgb` + download app | 5 min |
 | Audio Not Generating | FFmpeg not installed | Install FFmpeg, reinstall torchcodec | 10 min |
 | GPU Not Used | CUDA not installed | Install NVIDIA drivers + CUDA + PyTorch | 60 min |

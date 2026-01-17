@@ -27,7 +27,7 @@
 REM FarmHub Sensor Core
 echo [7/8] Starting FarmHub Sensor Core...
 start /B python "%GATEKEEPER_DIR%FarmHub\sensor_hub.py"
-```
+```text
 
 **FarmHub now starts automatically on boot.**
 
@@ -45,9 +45,9 @@ start /B python "%GATEKEEPER_DIR%FarmHub\sensor_hub.py"
 8. **FarmHub Sensor Core** ← NEW
 
 **FarmHub says:**
-```
+```text
 All sensors online. 1.2 acres, 342 sensors. Water good. Air fair. Battery 94%. Standing by.
-```
+```text
 
 ---
 

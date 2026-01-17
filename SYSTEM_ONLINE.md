@@ -44,7 +44,7 @@ All systems initialized and ready for operation:
 ## 📊 QUICK STATUS CHECK
 
 | System | Status | Next Action |
-|--------|--------|------------|
+| -------- | -------- | ------------ |
 | Python | ✅ Ready | None |
 | Web UI | ✅ Running | Access at <http://localhost:5000> |
 | RGB | ✅ Ready | Download OpenRGB.exe |
@@ -71,7 +71,7 @@ All systems initialized and ready for operation:
 
 ```bash
 python FINAL_INSTALLATION_CHECK.py
-```
+```text
 
 ### Option 4: Review Documentation
 

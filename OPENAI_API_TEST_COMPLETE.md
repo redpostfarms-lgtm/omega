@@ -59,7 +59,7 @@
 
 ```bash
 python test_openai_api.py
-```
+```text
 
 ### Use OpenAI Integration
 
@@ -72,7 +72,7 @@ openai = get_openai_integration()
 # Generate response
 response = openai.generate_response("write a haiku about ai")
 print(response)
-```
+```text
 
 ### Direct API Call (with stored key)
 
@@ -96,7 +96,7 @@ response = requests.post(
     headers=headers,
     json=payload
 )
-```
+```text
 
 ---
 

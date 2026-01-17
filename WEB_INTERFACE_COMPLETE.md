@@ -27,7 +27,7 @@ Created a comprehensive Flask-based web interface for the Omega Control Panel th
 ### Native GUI vs Web Interface
 
 | Feature | Native GUI (matplotlib) | Web Interface (Flask) |
-|---------|------------------------|----------------------|
+| --------- | ------------------------ | ---------------------- |
 | **Server Required** | ❌ No | ✅ Yes |
 | **Network Access** | ❌ Local only | ✅ Remote access |
 | **Mobile Access** | ❌ No | ✅ Yes |
@@ -68,12 +68,12 @@ Both use the same `ControlPanel` class, so data is consistent.
 ### Required:
 ```bash
 pip install flask flask-cors
-```
+```text
 
 ### Optional (for WebSocket real-time updates):
 ```bash
 pip install flask-socketio
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ pip install flask-socketio
 python OMEGA_WEB_LAUNCHER.py
 # Or directly:
 python omega_control_panel_web.py
-```
+```text
 
 ### Access Dashboard:
 - Open browser: http://localhost:5000
@@ -94,7 +94,7 @@ python omega_control_panel_web.py
 ### Remote Access:
 ```bash
 python omega_control_panel_web.py --host 0.0.0.0 --port 8080
-```
+```text
 Then access from any device on your network: http://YOUR_IP:8080
 
 ---

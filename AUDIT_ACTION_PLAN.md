@@ -63,7 +63,7 @@ pytest>=7.4.0  # Already listed, may need activation
 pytest-asyncio>=0.21.0  # Async testing
 pytest-cov>=4.1.0  # Coverage reporting
 pytest-mock>=3.12.0  # Mocking support
-```
+```text
 
 **Action Steps:**
 1. Update requirements.txt with missing dependencies
@@ -289,7 +289,7 @@ structlog>=23.2.0
 
 # Configuration Management
 python-dotenv>=1.0.0
-```
+```text
 
 ### Add to requirements-dev.txt (Optional but Recommended)
 
@@ -313,7 +313,7 @@ click>=8.1.7
 typer>=0.9.0
 rich>=13.7.0
 tenacity>=8.2.3
-```
+```text
 
 ---
 

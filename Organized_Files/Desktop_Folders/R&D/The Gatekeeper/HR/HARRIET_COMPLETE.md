@@ -142,12 +142,12 @@
 ```bash
 mkdir D:\RPF_BRAIN\HR\forms
 start python D:\RPF_BRAIN\HR\Harriet.py
-```
+```text
 
 **First-time setup:**
 ```bash
 python HR/voiceprint_setup.py
-```
+```text
 
 ---
 
@@ -156,7 +156,7 @@ python HR/voiceprint_setup.py
 ### **Start Harriet:**
 ```bash
 python HR/Harriet.py
-```
+```text
 
 ### **Commands:**
 - `Harriet, new hire John Doe 28.50` → Creates new hire packet

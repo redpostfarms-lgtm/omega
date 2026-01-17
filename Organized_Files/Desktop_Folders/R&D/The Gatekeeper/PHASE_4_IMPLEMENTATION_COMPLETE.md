@@ -42,7 +42,7 @@ with pdfplumber.open(p) as pdf:
     for page in pdf.pages:
         text_pages.append(page.extract_text())
     text = '\n'.join(text_pages)
-```
+```text
 
 **Impact:** +1.0% system completion
 
@@ -76,7 +76,7 @@ def send_alert(batteries):
     if config.get('smtp_enabled'):
         server = smtplib.SMTP(config['smtp_server'], config['smtp_port'])
         # Send email...
-```
+```text
 
 **Configuration File:** `config/smtp_config.json`
 ```json
@@ -91,7 +91,7 @@ def send_alert(batteries):
   "to_emails": [],
   "alert_subject_prefix": "[Gatekeeper Alert]"
 }
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -127,7 +127,7 @@ def send_alert(batteries):
 pip install pdfplumber
 # OR
 pip install PyPDF2
-```
+```text
 
 ### **For Email (already in stdlib):**
 - `smtplib` - Built-in
@@ -137,7 +137,7 @@ pip install PyPDF2
 ### **For Voiceprint ML:**
 ```bash
 pip install speechbrain torch
-```
+```text
 
 ---
 
@@ -153,12 +153,12 @@ pip install speechbrain torch
 ### **2. Install PDF Library:**
 ```bash
 pip install pdfplumber
-```
+```text
 
 ### **3. Install SpeechBrain (if not already):**
 ```bash
 pip install speechbrain torch
-```
+```text
 
 ---
 

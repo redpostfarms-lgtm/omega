@@ -43,7 +43,7 @@ context = episodic.get_episode_context("bug fixes", max_episodes=5)
 
 # Auto-compress old episodes
 episodic.compress_all_old_episodes(age_threshold=86400)  # 24 hours
-```
+```text
 
 **Impact:** Prevents unbounded memory growth, enables true long-term memory
 
@@ -83,7 +83,7 @@ try:
     result = some_function()
 except Exception as e:
     result = recovery.recover(e, context={'fallback': fallback_func}, task=lambda: some_function())
-```
+```text
 
 **Recovery Strategies by Error Type:**
 - Network → Exponential backoff
@@ -133,7 +133,7 @@ optimized_order = optimizer.optimize_task_execution(tasks)
 
 # Optimize agent allocation
 allocation = optimizer.optimize_agent_allocation(agents, tasks)
-```
+```text
 
 **Impact:** 40-50% faster adaptation, better performance for large systems
 

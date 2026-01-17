@@ -120,7 +120,7 @@ from omega_security_enhanced import SANITIZER, KILLSWITCH
 from omega_speed_enhanced import lru_cache, CONNECTION_POOL
 from omega_scalability_enhanced import RATE_LIMITER, RESOURCE_MONITOR
 from omega_quantum_enhanced import HARDWARE_ENTROPY, CRYPTO_RNG
-```
+```text
 
 2. Use in existing systems:
 - Security: Add input sanitization to all user inputs

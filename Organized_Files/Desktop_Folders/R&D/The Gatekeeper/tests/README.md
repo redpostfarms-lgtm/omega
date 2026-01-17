@@ -10,29 +10,29 @@ Comprehensive test suite for The Gatekeeper system using pytest.
 
 ```bash
 pip install pytest pytest-cov
-```
+```text
 
 ## Running Tests
 
 ### Run all tests:
 ```bash
 pytest tests/
-```
+```text
 
 ### Run with coverage:
 ```bash
 pytest tests/ --cov=. --cov-report=html
-```
+```text
 
 ### Run specific test file:
 ```bash
 pytest tests/test_brain_prime.py
-```
+```text
 
 ### Run with verbose output:
 ```bash
 pytest tests/ -v
-```
+```text
 
 ## Test Structure
 

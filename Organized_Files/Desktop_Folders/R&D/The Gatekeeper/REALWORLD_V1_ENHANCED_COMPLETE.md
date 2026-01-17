@@ -86,7 +86,7 @@ titanium = REALWORLD.materials.get('titanium_6al4v')
 from sandbox_realworld_enhanced import boil, stress_test
 print(boil(2, altitude_m=2438))  # At 8000 ft
 print(stress_test('steel_316', 500000, dimensions=(0.0254, 0.0254)))
-```
+```text
 
 ### Base Sandbox (Still Available)
 ```python
@@ -95,7 +95,7 @@ from sandbox_realworld_v1 import REALWORLD, boil, stress_test
 # All original functions still work
 print(boil(1, pressure_kPa=50))
 print(stress_test('steel_1045', 500000, dimensions=(0.0254, 0.0254)))
-```
+```text
 
 ---
 

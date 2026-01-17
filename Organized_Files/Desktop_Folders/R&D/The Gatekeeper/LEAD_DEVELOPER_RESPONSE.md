@@ -79,7 +79,7 @@
 All Lead Developer recommendations **perfectly align** with resources identified in global search:
 
 | Lead Dev Recommendation | Global Search Result | Status |
-|-------------------------|---------------------|--------|
+| ------------------------- | --------------------- | -------- |
 | **Scrapy** | ✅ Found in GLOBAL_FREE_RESOURCES_COMPLETE.md | Matched |
 | **Vosk** | ✅ Found in GLOBAL_FREE_RESOURCES_COMPLETE.md | Matched |
 | **SpeechBrain** | ✅ Found in GLOBAL_FREE_RESOURCES_COMPLETE.md | Matched |
@@ -128,7 +128,7 @@ All integrations follow **minimal diff strategy** with:
 ## Expected Improvements
 
 | Component | Current | After Integration | Improvement |
-|-----------|---------|-------------------|-------------|
+| ----------- | --------- | ------------------- | ------------- |
 | **Web Scraping Reliability** | 95% | 98% | +3% (Scrapy retry logic) |
 | **Voice Recognition** | 90% (online) | 98% (offline) | +8% (Vosk offline) |
 | **Voice Biometrics** | 85% | 95% | +10% (SpeechBrain noise resistance) |

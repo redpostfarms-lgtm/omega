@@ -112,7 +112,7 @@
 ```bash
 cd "The Gatekeeper"
 upgrade_to_100_final.bat
-```
+```text
 
 **Estimated Time:** 7 minutes (depending on download speeds)
 
@@ -204,9 +204,9 @@ upgrade_to_100_final.bat
 ## Usage Examples
 
 ### **Voice Commands:**
-```
+```text
 "Hey, Gatekeeper, write a full-stack off-grid farm OS in Rust and Python"
-```
+```text
 
 **What Happens:**
 1. All 4 final models run in parallel
@@ -224,7 +224,7 @@ upgrade_to_100_final.bat
 ## Performance Metrics
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| -------- | -------- | ------- | ------------- |
 | **System Score** | 99.8/100 | **100.0/100** | **+0.2** |
 | **Model Quality** | Q4-Q5 | Q6-Q8 | **+2-3 quantization levels** |
 | **Context Window** | 4k-8k | 32k (Gemini) | **4-8x larger** |

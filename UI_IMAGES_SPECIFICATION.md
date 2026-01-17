@@ -84,7 +84,7 @@
 ## Image Locations
 
 ### Recommended Folder Structure
-```
+```text
 The Gatekeeper/
 ├── images/
 │   ├── omega_logo_red_gold_wreath.png
@@ -96,7 +96,7 @@ The Gatekeeper/
 │   └── omega_logo.bmp  (copy from images/)
 └── docs/
     └── development_environment_screenshot.png
-```
+```text
 
 ---
 
@@ -108,7 +108,7 @@ Save the provided images to the locations specified above.
 ### 2. Convert Logo to ICO
 ```bash
 python CREATE_OMEGA_ICON.py
-```
+```text
 (Update script to use `omega_logo_red_gold_wreath.png` as source)
 
 ### 3. Update Boot Logo

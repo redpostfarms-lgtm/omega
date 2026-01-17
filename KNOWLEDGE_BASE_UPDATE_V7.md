@@ -67,7 +67,7 @@ diversity_penalty=1.2           # Diversity strength (0.8–2.0)
 length_penalty=0.8              # Length normalization
 repetition_penalty=1.1          # Reduce repetition
 num_return_sequences=3          # Return 3 sequences (one per group)
-```
+```text
 
 ### Model Configuration:
 
@@ -75,7 +75,7 @@ num_return_sequences=3          # Return 3 sequences (one per group)
 # Efficient loading:
 device_map="auto"               # Auto-detect GPU/CPU
 torch_dtype=torch.bfloat16      # Efficient dtype for GPU
-```
+```text
 
 ### Use Cases:
 

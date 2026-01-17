@@ -67,33 +67,33 @@
 cd h:\The Gatekeeper
 python omega_control_panel_web.py --port 5000
 # Open browser: http://localhost:5000
-```
+```text
 
 ### Generate Voice Samples
 
 ```bash
 python omega.py --text "Your message here" --voice warm
 python omega.py --text "Your message here" --voice bright
-```
+```text
 
 ### Analyze Voice Files
 
 ```bash
 python analyze_voices_only.py
-```
+```text
 
 ### Run System Tests
 
 ```bash
 python run_speech_test.py
-```
+```text
 
 ---
 
 ## Integration Timeline
 
 | Date | Action | Status |
-|------|--------|--------|
+| ------ | -------- | -------- |
 | Jan 12 | TTS Framework Analysis | ✅ Complete |
 | Jan 12 | FFmpeg Installation | ✅ Complete |
 | Jan 12 | Voice File Analysis | ✅ Complete |
@@ -107,7 +107,7 @@ python run_speech_test.py
 
 ## System Architecture
 
-```
+```text
 Gatekeeper Voice System
 ├── omega.py                          (Voice synthesis engine)
 ├── omega_control_panel_web.py        (Web UI - RUNNING)
@@ -117,7 +117,7 @@ Gatekeeper Voice System
 ├── voice_profiles_analysis.json      (Extracted profiles)
 ├── audio_resources.json              (Audio metadata)
 └── [Multiple status & config files]
-```
+```text
 
 ---
 

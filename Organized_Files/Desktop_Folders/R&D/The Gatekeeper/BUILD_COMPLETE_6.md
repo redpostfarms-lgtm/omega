@@ -54,7 +54,7 @@
 ```bash
 # Optional but recommended
 pip install python-docx reportlab
-```
+```text
 
 **Note:** System works without these (uses JSON fallback), but DOCX/PDF generation requires them.
 
@@ -69,17 +69,17 @@ python projects/grant_application_automation.py --create --template usda_solar
 
 # Create with custom data file
 python projects/grant_application_automation.py --create --template usda_equipment --data application_data.json
-```
+```text
 
 ### **List Applications:**
 ```bash
 python projects/grant_application_automation.py --list
-```
+```text
 
 ### **Check Status:**
 ```bash
 python projects/grant_application_automation.py --status GRANT-20260103-151234
-```
+```text
 
 ---
 

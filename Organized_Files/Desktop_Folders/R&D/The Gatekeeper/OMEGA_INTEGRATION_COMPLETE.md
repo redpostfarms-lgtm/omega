@@ -41,7 +41,7 @@ if KILLSWITCH.should_kill():
 
 # Security events logged
 AUDIT_LOGGER.log_security_event("system_startup", {...})
-```
+```text
 
 ---
 
@@ -62,7 +62,7 @@ from omega_speed_enhanced import lru_cache, CONNECTION_POOL
 def expensive_operation():
     # Cached results
     pass
-```
+```text
 
 ---
 
@@ -85,7 +85,7 @@ if not RATE_LIMITER.allow():
 # Resource monitoring
 RESOURCE_MONITOR.record_metric("test_duration", elapsed)
 RESOURCE_MONITOR.record_metric("tests_run", count)
-```
+```text
 
 ---
 
@@ -107,7 +107,7 @@ entropy = HARDWARE_ENTROPY.get_entropy_bytes(32)
 
 # Use cryptographic RNG
 random_int = CRYPTO_RNG.random_int(1, 100)
-```
+```text
 
 ---
 
@@ -115,12 +115,12 @@ random_int = CRYPTO_RNG.random_int(1, 100)
 
 When Omega runs, you'll see:
 
-```
+```text
 Security enhancements: ACTIVE
 Speed enhancements: ACTIVE
 Scalability enhancements: ACTIVE
 Quantum enhancements: ACTIVE
-```
+```text
 
 ---
 
@@ -182,7 +182,7 @@ Run Omega to see all enhancements in action:
 
 ```bash
 python deep_system_test.py
-```
+```text
 
 You should see:
 - Security enhancements initialized

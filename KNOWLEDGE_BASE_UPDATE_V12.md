@@ -76,7 +76,7 @@ model_name = "meta-llama/Llama-3.1-8B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(...)
 outlines_model = models.transformers(model, tokenizer)
-```
+```text
 
 **Pattern Implementation:**
 ```python
@@ -87,7 +87,7 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(N):
     result = generator(prompt, max_tokens=X)
     print(result)
-```
+```text
 
 ### vLLM Acceleration:
 
@@ -96,7 +96,7 @@ from vllm import LLM
 
 llm = LLM(model=model_name)
 outlines_model = models.vllm(llm)
-```
+```text
 
 ### Quick Tips:
 

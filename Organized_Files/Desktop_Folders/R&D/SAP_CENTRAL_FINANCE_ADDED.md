@@ -79,7 +79,7 @@ python WorldMemory.py query SLT
 python WorldMemory.py query CFIN
 python WorldMemory.py query AIF
 python WorldMemory.py query-all Central
-```
+```text
 
 ---
 

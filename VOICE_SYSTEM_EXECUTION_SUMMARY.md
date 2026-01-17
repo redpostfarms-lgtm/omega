@@ -31,7 +31,7 @@
 
 ### Phase 1: Voice File Analysis ✅ COMPLETE
 
-```
+```text
 clip_0001.wav:
   - Brightness (spectral centroid): 1527 Hz
   - Loudness (RMS): 0.0333
@@ -43,24 +43,24 @@ omega_downloaded.wav:
   - Loudness (RMS): 0.0049
   - Voice Quality (ZCR): 0.0588
   - Duration: 100.52s
-```
+```text
 
 ### Phase 2: Voice Comparison ✅ COMPLETE
 
-```
+```text
 Recommendations:
   - Use omega_downloaded.wav for brightness/presence
   - Use clip_0001.wav for warmth/personality
   - Blending strategy: Optimal for professional TTS output
-```
+```text
 
 ### Phase 3: TTS Model Loading ⏳ INTERRUPTED (Previous)
 
-```
+```text
 Status: KeyboardInterrupt during model initialization
 Expected: 2-5 minutes for XTTS v2 model to load on CPU
 Next Step: Resume and complete voice cloning generation
-```
+```text
 
 ---
 
@@ -72,7 +72,7 @@ Run the complete dual voice analysis with extended timeout:
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text
 
 **Expected Behavior**:
 

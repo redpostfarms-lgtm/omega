@@ -215,7 +215,7 @@ The control panel uses a **3x4 grid layout** with the following sections:
 **Method 2: Command Line**
 ```bash
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 **Requirements:**
 - ✅ Window appears immediately
@@ -229,14 +229,14 @@ python OMEGA_UI_LAUNCHER.py
 **Method 1: Web Launcher**
 ```bash
 python OMEGA_WEB_LAUNCHER.py
-```
+```text
 
 **Method 2: Direct**
 ```bash
 python omega_control_panel_web.py
 python omega_control_panel_web.py --port 8080
 python omega_control_panel_web.py --host 0.0.0.0  # Remote access
-```
+```text
 
 **Access:**
 - Local: http://localhost:5000

@@ -83,7 +83,7 @@ banter = engine.auto_scale_banter(
     context="blunder"
 )
 # Returns: "That move was so free my grandma declined it."
-```
+```text
 
 ### With Visual Game
 ```python
@@ -95,7 +95,7 @@ banter = banter_engine.auto_scale_banter(
     context="move"
 )
 print(f"[System] {banter}")
-```
+```text
 
 ---
 
@@ -118,7 +118,7 @@ banter = engine.auto_scale_banter(BanterTier.BEGINNER, move_time=1.0, context="m
 # Master tier (deadpan)
 banter = engine.auto_scale_banter(BanterTier.MASTER, move_time=5.0, context="losing")
 # "This isn't checkers, this is charity."
-```
+```text
 
 ---
 

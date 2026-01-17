@@ -37,7 +37,7 @@
 ### Critical Gaps Identified
 
 | Capability | Our % | Industry % | Gap | Status |
-|------------|-------|------------|-----|--------|
+| ------------ | ------- | ------------ | ----- | -------- |
 | Multimodal | 50% | 97% | 47% | 🔴 CRITICAL |
 | Sensors | 60% | 95% | 35% | 🔴 CRITICAL |
 | Context | 60% | 100% | 40% | 🔴 HIGH |

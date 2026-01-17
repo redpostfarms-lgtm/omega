@@ -28,12 +28,12 @@ This guide documents the Flask-Migrate setup for database migrations in the Omeg
 
 ```bash
 pip install Flask-SQLAlchemy Flask-Migrate
-```
+```text
 
 Or install from requirements file:
 ```bash
 pip install -r requirements_migrate.txt
-```
+```text
 
 ---
 
@@ -128,18 +128,18 @@ pip install -r requirements_migrate.txt
 For development (SQLite):
 ```python
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///omega.db'
-```
+```text
 
 For production (PostgreSQL):
 ```python
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'postgresql://user:pass@localhost/omega'
-```
+```text
 
 ### Flask-Migrate
 
 ```python
 migrate = Migrate(app, db)
-```
+```text
 
 ---
 
@@ -148,28 +148,28 @@ migrate = Migrate(app, db)
 ### Initialize Migrations (Run Once)
 ```bash
 flask db init
-```
+```text
 
 ### Create Migration
 ```bash
 flask db migrate -m "Description of changes"
-```
+```text
 
 ### Apply Migrations
 ```bash
 flask db upgrade
-```
+```text
 
 ### Rollback Migration
 ```bash
 flask db downgrade
-```
+```text
 
 ### Check Status
 ```bash
 flask db current    # Show current revision
 flask db history    # Show migration history
-```
+```text
 
 ---
 
@@ -178,18 +178,18 @@ flask db history    # Show migration history
 ### Windows
 ```cmd
 set FLASK_APP=omega_control_panel_web.py
-```
+```text
 
 ### Linux/Mac
 ```bash
 export FLASK_APP=omega_control_panel_web.py
-```
+```text
 
 ### Permanent (via .env file)
-```
+```text
 FLASK_APP=omega_control_panel_web.py
 DATABASE_URL=sqlite:///omega.db
-```
+```text
 
 ---
 
@@ -292,7 +292,7 @@ flask db current                # see what Alembic thinks
 flask db history                # list revisions
 flask db downgrade <revision>   # rollback to known good state
 flask db upgrade head
-```
+```text
 If stuck → `flask db stamp head` (marks DB as up-to-date — use carefully!)
 
 ### 5. Foreign key / constraint issues repeating (removed then added)
@@ -332,7 +332,7 @@ If stuck → `flask db stamp head` (marks DB as up-to-date — use carefully!)
 ### Recommended Convention (2026 Standard)
 
 | Constraint Type | Prefix | Format Example | Notes |
-|----------------|--------|----------------|-------|
+| ---------------- | -------- | ---------------- | ------- |
 | Primary Key | `pk_` | `pk_users` | Almost always single-column (id) |
 | Foreign Key | `fk_` | `fk_users_role_id_roles` | Most popular: `child_table_column_referenced_table` |
 | Unique | `uq_` | `uq_users_email` | Include columns if composite |
@@ -359,7 +359,7 @@ metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
     "pk": "pk_%(table_name)s"                               # primary key
 })
-```
+```text
 
 **Then in your base class:**
 
@@ -368,7 +368,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 class Base(DeclarativeBase):
     metadata = metadata
-```
+```text
 
 **Result:**
 - `Column(..., ForeignKey(...))` → auto-named `fk_users_role_id_roles`
@@ -444,7 +444,7 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     email = Column(String(120), nullable=False, unique=True)  # ← adding unique constraint
-```
+```text
 
 **Generated migration (simplified):**
 ```python
@@ -452,7 +452,7 @@ def upgrade():
     with op.batch_alter_table('users') as batch_op:
         batch_op.alter_column('email', nullable=False)
         batch_op.create_unique_constraint('uq_users_email', ['email'])
-```
+```text
 
 **Under the hood with batch mode (SQLite):**
 ```sql
@@ -472,7 +472,7 @@ DROP TABLE users;
 
 -- Step 4: rename
 ALTER TABLE _alembic_batch_temp RENAME TO users;
-```
+```text
 
 ### When & How Batch Mode Is Activated (2026 Reality)
 
@@ -495,7 +495,7 @@ ALTER TABLE _alembic_batch_temp RENAME TO users;
 ### Important Limitations & Gotchas
 
 | Issue | Impact | Workaround / Best Practice |
-|-------|--------|----------------------------|
+| ------- | -------- | ---------------------------- |
 | **Large tables** | Very slow (full copy) | Test on staging, consider PostgreSQL for serious projects |
 | **Unnamed constraints** | `ValueError: Constraint must have a name` | Always use `MetaData.naming_convention` |
 | **CHECK constraints** | Usually not copied | Re-create manually in migration if needed |
@@ -505,7 +505,7 @@ ALTER TABLE _alembic_batch_temp RENAME TO users;
 ### Quick Summary Table (2026 Perspective)
 
 | Database | Batch Mode Needed? | Typical ALTER TABLE support | Migration speed on large tables |
-|----------|-------------------|----------------------------|--------------------------------|
+| ---------- | ------------------- | ---------------------------- | -------------------------------- |
 | **SQLite** | Yes (auto in recent versions) | Very limited | Slow (full copy) |
 | **PostgreSQL** | No | Excellent | Fast |
 | **MySQL** | No | Good (some limitations) | Fast |
@@ -538,7 +538,7 @@ class User(Base):
     username = Column(String(80), unique=True, nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     role_id = Column(Integer, ForeignKey('roles.id'), nullable=False)  # ← new!
-```
+```text
 
 **Generated migration:**
 ```python
@@ -559,7 +559,7 @@ def downgrade():
         )
         batch_op.alter_column('role_id', nullable=True)
         batch_op.drop_column('role_id')
-```
+```text
 
 **What actually happens (SQLite):**
 ```sql
@@ -585,7 +585,7 @@ DROP TABLE users;
 
 -- 5. Rename temp table
 ALTER TABLE _alembic_batch_temp RENAME TO users;
-```
+```text
 
 **Important fix for existing data:**
 ```python
@@ -593,7 +593,7 @@ def upgrade():
     # ... batch operations ...
     # Set default role for existing users
     op.execute("UPDATE users SET role_id = 1 WHERE role_id IS NULL")
-```
+```text
 
 ### Example 2: Dropping a Column
 
@@ -615,7 +615,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(80))
     email = Column(String(120))
-```
+```text
 
 **Generated migration:**
 ```python
@@ -626,7 +626,7 @@ def upgrade():
 def downgrade():
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.add_column(sa.Column('temp_token', sa.String(length=255), nullable=True))
-```
+```text
 
 **What actually happens (SQLite):**
 ```sql
@@ -646,7 +646,7 @@ DROP TABLE users;
 
 -- 4. Rename temp table
 ALTER TABLE _alembic_batch_temp RENAME TO users;
-```
+```text
 
 **⚠️ Data loss warning:** Dropping a column permanently deletes that data. If you need to preserve it, add a migration to copy to another table first, then drop.
 
@@ -662,7 +662,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(80))
     last_login = Column(DateTime, nullable=True)  # ← new column
-```
+```text
 
 **Generated migration:**
 ```python
@@ -671,7 +671,7 @@ def upgrade():
 
 def downgrade():
     op.drop_column('users', 'last_login')
-```
+```text
 
 **What happens:**
 - ✅ **No batch mode needed** — SQLite supports `ADD COLUMN` directly
@@ -683,7 +683,7 @@ def downgrade():
 **Option A: Database-level default (easiest)**
 ```python
 last_login = Column(DateTime, nullable=False, server_default=func.now())
-```
+```text
 
 **Generated migration:**
 ```python
@@ -694,7 +694,7 @@ def upgrade():
         nullable=False,
         server_default=sa.func.now()
     ))
-```
+```text
 → Existing rows get current timestamp automatically — perfect for timestamps.
 
 **Option B: Add nullable first → set values → make non-nullable (most flexible)**
@@ -709,7 +709,7 @@ def upgrade():
     # Step 3: Make non-nullable (this may trigger batch mode on SQLite)
     with op.batch_alter_table('users') as batch_op:
         batch_op.alter_column('last_login', nullable=False)
-```
+```text
 
 **Why this is popular:**
 - ✅ Works safely even on large tables
@@ -719,7 +719,7 @@ def upgrade():
 ### Quick Summary Table – Common Column Operations (2026)
 
 | Case | Batch Mode? (SQLite) | Speed on large table | Recommended Pattern |
-|------|---------------------|---------------------|---------------------|
+| ------ | --------------------- | --------------------- | --------------------- |
 | **Nullable column** | No | Very fast | Just `op.add_column(..., nullable=True)` |
 | **Non-nullable + server default** | No | Very fast | `server_default=func.now()` or constant |
 | **Non-nullable + custom data** | Yes (only last step) | Medium | Add nullable → migrate data → alter to non-null |

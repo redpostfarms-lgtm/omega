@@ -33,30 +33,30 @@
 
 ### Voice 1: clip_0001.wav (Original Omega)
 
-```
+```text
 Sample Rate:       44,100 Hz
 Duration:          27.21 seconds
 Brightness:        1,527 Hz (warm tone)
 Loudness (RMS):    0.0333 (loud)
 Voice Quality:     0.0414
 Recommendation:    Best for warmth and personality
-```
+```text
 
 ### Voice 2: omega_downloaded.wav (Enhanced Voice)
 
-```
+```text
 Sample Rate:       44,100 Hz
 Duration:          100.52 seconds
 Brightness:        2,139 Hz (bright tone)
 Loudness (RMS):    0.0049 (moderate)
 Voice Quality:     0.0588 (higher quality)
 Recommendation:    Best for clarity and presence
-```
+```text
 
 ### Comparison Summary
 
 | Characteristic | clip_0001.wav | omega_downloaded.wav | Winner |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Brightness | 1,527 Hz | 2,139 Hz | omega_downloaded (+612 Hz) |
 | Loudness | 0.0333 | 0.0049 | clip_0001 (+0.0284) |
 | Voice Quality | 0.0414 | 0.0588 | omega_downloaded (+0.0174) |
@@ -68,13 +68,13 @@ Recommendation:    Best for clarity and presence
 
 ### Optimal Configuration
 
-```
+```text
 Primary Voice:     omega_downloaded.wav (brightness, clarity, quality)
 Secondary Voice:   clip_0001.wav (warmth, power, personality)
 Usage Strategy:    Use omega_downloaded for professional speech
                    Use clip_0001 for conversational tone
                    Blend both for natural-sounding output
-```
+```text
 
 ---
 
@@ -123,7 +123,7 @@ Combining both voices creates:
 ## System Status
 
 | Component | Status | Details |
-|-----------|--------|---------|
+| ----------- | -------- | --------- |
 | Voice Files | ✅ Ready | 2 files analyzed, profiles extracted |
 | Voice Analysis | ✅ Complete | Spectral, energy, quality metrics calculated |
 | FFmpeg | ✅ Installed | Located at C:\ffmpeg, in PATH |
@@ -141,7 +141,7 @@ If TTS audio generation is needed:
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text
 
 **Time Required**: 15-20 minutes  
 **Outputs**: `omega_voice_0001.wav`, `omega_voice_downloaded.wav`
@@ -163,13 +163,13 @@ omega_speak("Hello, I'm Omega", voice_model="clip_0001.wav")
 
 # Using omega_downloaded.wav voice
 omega_speak("Hello, I'm Omega", voice_model="omega_downloaded.wav")
-```
+```text
 
 ---
 
 ## Voice System Architecture
 
-```
+```text
 Input Voice Files
     ↓
 [Spectral Analysis] ← librosa
@@ -183,7 +183,7 @@ Blending Strategy {bright, warm, hybrid}
 [Optional: TTS Generation] ← XTTS v2 + FFmpeg
     ↓
 Audio Output {WAV files}
-```
+```text
 
 ---
 
@@ -219,7 +219,7 @@ Audio Output {WAV files}
 ## Performance Metrics
 
 | Metric | Value |
-|--------|-------|
+| -------- | ------- |
 | Voice files processed | 2 |
 | Analysis duration | < 2 minutes |
 | Profiles extracted | 10+ per voice |

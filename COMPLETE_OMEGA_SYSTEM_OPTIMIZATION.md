@@ -29,7 +29,7 @@ Comprehensive system optimization completed including:
 ```python
 pm = get_power_manager()
 pm.shutdown(force=True, optimize=True)  # Optimized shutdown
-```
+```text
 
 ### Files Modified
 - `omega_windows_power.py` - Added process spacing optimization
@@ -47,13 +47,13 @@ pm.shutdown(force=True, optimize=True)  # Optimized shutdown
 - **Icon Manifest**: Created manifest file for icon tracking
 
 ### Folder Structure
-```
+```text
 Options/
 ├── omega_icon.ico          # Desktop shortcut icon
 ├── omega_logo_red_gold_wreath.png  # Main logo
 ├── ICONS_MANIFEST.txt      # Icon manifest
 └── README.txt              # Icon documentation
-```
+```text
 
 ### Files Created
 - `SETUP_OMEGA_ICONS.py` - Icon organization script
@@ -73,7 +73,7 @@ Options/
 ### Implementation
 ```bash
 python REPAIR_OMEGA_ICONS.py  # Repair and set all icons
-```
+```text
 
 ### Features
 - ✓ Automatic icon creation from logo
@@ -145,7 +145,7 @@ python REPAIR_OMEGA_ICONS.py  # Repair and set all icons
 ```bash
 python IMPROVE_MOTHERBOARD_POWER.py  # Apply power improvements
 python KEEP_VOICE_WAKE_ACTIVE.py     # Keep voice wake active
-```
+```text
 
 ---
 

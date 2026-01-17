@@ -141,26 +141,26 @@ Implemented **ALL** missing items including Phase 1 (Critical), Phase 2 (Medium 
 ```python
 from omega_confidence_calibration import calibrate_confidence
 calibrated = calibrate_confidence(raw_confidence)
-```
+```text
 
 ### Intent Recognition
 ```python
 from omega_intent_recognition import recognize_intent
 intents = recognize_intent("What is the weather?")
-```
+```text
 
 ### NER and Slot Filling
 ```python
 from omega_ner_system import extract_entities, fill_slots
 entities = extract_entities("Meet me at 3 PM tomorrow")
 slots = fill_slots("Meet me at 3 PM tomorrow")
-```
+```text
 
 ### Context Summarization
 ```python
 from omega_context_summarization import summarize_context
 summary = summarize_context(conversation_turns)
-```
+```text
 
 ### Vector Database
 ```python
@@ -168,7 +168,7 @@ from omega_vector_db import get_vector_db
 db = get_vector_db()
 db.add_document("Your text here")
 results = db.search("query", top_k=3)
-```
+```text
 
 ### Monitoring
 ```python
@@ -176,7 +176,7 @@ from omega_monitoring import increment_counter, record_histogram, log_event
 increment_counter('speech_recognition_total')
 record_histogram('tts_generation_duration', 1.5)
 log_event('user_interaction', level='info', user_id='123')
-```
+```text
 
 ---
 

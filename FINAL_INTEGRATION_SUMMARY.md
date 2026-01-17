@@ -56,7 +56,7 @@
 ## Optimization Results
 
 | Metric | Improvement |
-|--------|-------------|
+| -------- | ------------- |
 | **Slang Processor Size** | ~60% smaller (optimized version) |
 | **Memory Footprint** | ~50% reduction (singleton pattern) |
 | **Lookup Speed** | Faster (set-based detection) |

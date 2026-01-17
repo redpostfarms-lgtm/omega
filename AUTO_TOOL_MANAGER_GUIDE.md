@@ -45,23 +45,23 @@ python auto_tool_launcher.py detect
 
 # Show status
 python auto_tool_launcher.py status
-```
+```text
 
 ## Usage Examples
 
 ### Detect Available Tools
 ```bash
 python auto_tool_launcher.py detect
-```
+```text
 Output:
-```
+```text
 === Auto Tool Detection Started ===
 ✓ java found: openjdk version "21.0.1" 2023-10-17
 ✓ gradle found: gradle/wrapper/gradle-wrapper.jar
 ✗ maven not found
 ✓ python found: Python 3.11.0
 ✓ git found: git version 2.40.0
-```
+```text
 
 ### Ensure a Specific Tool
 ```bash
@@ -73,7 +73,7 @@ python auto_tool_launcher.py ensure --tool gradle
 
 # Ensure Maven is available
 python auto_tool_launcher.py ensure --tool maven
-```
+```text
 
 ### Ensure All Tools for a Project
 ```bash
@@ -82,18 +82,18 @@ python auto_tool_launcher.py project --project ./my-maven-project
 
 # Check and install tools for a Gradle project
 python auto_tool_launcher.py project --project ./my-gradle-project
-```
+```text
 
 ### Auto-Build a Project
 ```bash
 # Automatically detect build tool and build
 python auto_tool_launcher.py build --project ./my-project
-```
+```text
 
 ### Show Tool Status
 ```bash
 python auto_tool_launcher.py status
-```
+```text
 
 ## Python Integration
 
@@ -106,7 +106,7 @@ from tool_access_manager import ensure_java
 # Ensure Java 21 is available
 if ensure_java('21'):
     print("Java is ready!")
-```
+```text
 
 #### 2. Access Tools for Projects
 ```python
@@ -115,7 +115,7 @@ from tool_access_manager import ToolAccessManager
 manager = ToolAccessManager()
 tools = manager.access_tools_for_project('./my-project')
 print(f"Available tools: {tools}")
-```
+```text
 
 #### 3. Run Tools
 ```python
@@ -123,7 +123,7 @@ from tool_access_manager import get_tool_manager
 
 manager = get_tool_manager()
 result = manager.run_tool('gradle', ['build', '--info'])
-```
+```text
 
 #### 4. Smart Build
 ```python
@@ -131,7 +131,7 @@ from tool_access_manager import run_build
 
 # Automatically detect build tool and execute build
 run_build('./my-project', '--info')
-```
+```text
 
 #### 5. Complete Tool Management
 ```python
@@ -147,7 +147,7 @@ print(f"Status: {status}")
 # Generate report
 manager.report()
 manager.save_report('tools_report.json')
-```
+```text
 
 ## Configuration
 
@@ -165,7 +165,7 @@ Tools are cached in `tool_cache.json` for faster access:
     "gradle": "/usr/bin/gradle"
   }
 }
-```
+```text
 
 ### Logging
 Logs are saved to `auto_tool_manager.log` for debugging and auditing.
@@ -194,7 +194,7 @@ The system automatically detects project types:
 ## Supported Tools
 
 | Tool | Windows | macOS | Linux | Auto-Install |
-|------|---------|-------|-------|--------------|
+| ------ | --------- | ------- | ------- | -------------- |
 | Java | ✓ | ✓ | ✓ | ✓ |
 | Gradle | ✓ | ✓ | ✓ | ✓ |
 | Maven | ✓ | ✓ | ✓ | ✓ |
@@ -224,7 +224,7 @@ manager.register_tool('custom-tool', detect_custom, install_custom, required=Tru
 
 # Use it
 manager.auto_ensure_tool('custom-tool')
-```
+```text
 
 ### Batch Tool Verification
 ```python
@@ -241,7 +241,7 @@ report = manager.report()
 
 # Save for CI/CD
 manager.save_report('ci_tool_requirements.json')
-```
+```text
 
 ## Troubleshooting
 
@@ -256,13 +256,13 @@ manager.save_report('ci_tool_requirements.json')
 # Clear cache and re-detect
 rm tool_cache.json
 python auto_tool_launcher.py detect
-```
+```text
 
 ### Permission Denied (Linux/macOS)
 ```bash
 # Grant execute permissions
 chmod +x auto_tool_manager.py auto_tool_launcher.py tool_access_manager.py
-```
+```text
 
 ## CI/CD Integration
 
@@ -273,7 +273,7 @@ chmod +x auto_tool_manager.py auto_tool_launcher.py tool_access_manager.py
     python auto_tool_launcher.py detect
     python auto_tool_launcher.py ensure --tool java
     python auto_tool_launcher.py project --project .
-```
+```text
 
 ### Jenkins
 ```groovy
@@ -283,7 +283,7 @@ stage('Setup Tools') {
         sh 'python auto_tool_launcher.py project --project .'
     }
 }
-```
+```text
 
 ## Performance Tips
 

@@ -68,7 +68,7 @@ Exports automatically go to `05_Exports\{format}\` per Blueprint.exports setting
 
 ## File Structure
 
-```
+```text
 08_CAD_Orchestrator\
 ├── BLUEPRINT_SCHEMA.json       # JSON Schema for blueprints
 ├── blueprints\                 # Blueprint JSON files
@@ -84,7 +84,7 @@ Exports automatically go to `05_Exports\{format}\` per Blueprint.exports setting
 │   └── BLUEPRINT_TO_QCAD_SCRIPT.md
 └── references\
     └── REFERENCE_POLICY.md     # Web research guidelines
-```
+```text
 
 ---
 

@@ -114,7 +114,7 @@
 
 ```bash
 python OMEGAVPN_SETUP.py
-```
+```text
 
 This will:
 1. Show OmegaVPN status

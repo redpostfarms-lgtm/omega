@@ -57,7 +57,7 @@ Replaced the swarm infiltration with a quantum nuke payload that uses quantum de
 
 ### Visual Messages
 
-```
+```text
 [⚛] Entangling port {port}...
 [.] Bounce sent. Attacker now punching own firewall.
 [q-1] Wave function collapsing... attacker packet 1 obliterated.
@@ -67,7 +67,7 @@ Replaced the swarm infiltration with a quantum nuke payload that uses quantum de
 [⚛] Every bit flipped like a dying qubit—zero, one, gone.
 [⚛] They can't patch what they can't read.
 [⚛+] Quantum kill confirmed. System secure. Mission logged.
-```
+```text
 
 ### Logging
 

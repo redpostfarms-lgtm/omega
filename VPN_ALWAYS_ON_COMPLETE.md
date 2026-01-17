@@ -57,12 +57,12 @@
 
 ```bash
 python VPN_ALWAYS_ON.py
-```
+```text
 
 Or use the batch file:
 ```bash
 START_VPN_ALWAYS_ON.bat
-```
+```text
 
 ### What Happens
 
@@ -108,7 +108,7 @@ from omega_vpn_system import get_vpn_manager
 vpn = get_vpn_manager()
 vpn.always_on = False
 vpn.save_config()
-```
+```text
 
 ---
 

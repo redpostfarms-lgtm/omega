@@ -54,19 +54,19 @@ A voice-activated marketing system with 57 battle-tested hooks. One line says, o
 ## VOICE COMMANDS
 
 ### Via Gatekeeper
-```
+```text
 "Hey Gatekeeper, Playbook pitch tomatoes"
 "Hey Gatekeeper, Playbook sell beef"
 "Hey Gatekeeper, Playbook status"
-```
+```text
 
 ### Direct Commands
-```
+```text
 > Playbook, pitch tomatoes
 > Playbook, sell beef
 > Playbook, status
 > quit
-```
+```text
 
 ---
 
@@ -127,37 +127,37 @@ A voice-activated marketing system with 57 battle-tested hooks. One line says, o
 ### Quick Deploy
 ```batch
 deploy_playbook.bat
-```
+```text
 
 ### Manual Deploy
 ```bash
 python D:\RPF_BRAIN\Sales\Marketing_Playbook.py
-```
+```text
 
 ---
 
 ## USAGE EXAMPLES
 
 ### Example 1: Pitch Tomatoes
-```
+```text
 > Playbook, pitch tomatoes
 Playbook: Sun-kissed at 9 AM, plate at 11. Fresher than your fridge.
-```
+```text
 
 ### Example 2: Sell Beef
-```
+```text
 > Playbook, sell beef
 Playbook: Grass-fed. Dry-aged 28 days. Tastes like 1992.
-```
+```text
 
 ### Example 3: Pitch Eggs
-```
+```text
 > Playbook, pitch eggs
 Playbook: Blue yolks. Free-range. Shell so strong you can crack nuts.
-```
+```text
 
 ### Example 4: Status
-```
+```text
 > Playbook, status
 Playbook: 57 plays loaded. 100% organic. Zero ad spend.
 
@@ -165,14 +165,14 @@ Playbook: 57 plays loaded. 100% organic. Zero ad spend.
   Organic: 100%
   Ad Spend: $0.00
   Conversion: 100% in the barn
-```
+```text
 
 ---
 
 ## HOOK STRUCTURE
 
 ### plays.txt Format
-```
+```text
 # MARKETING PLAYBOOK 2026 - 57 BATTLE-TESTED HOOKS
 # One line says, one million sells
 
@@ -183,20 +183,20 @@ Pasture-raised, grass-finished, no antibiotics, no hormones...
 # EGGS (Lines 10-18)
 Blue yolks. Free-range. Shell so strong you can crack nuts.
 Free-range, organic, 310 blues a year...
-```
+```text
 
 ---
 
 ## STATUS REPORT
 
-```
+```text
 Playbook: 57 plays loaded. 100% organic. Zero ad spend.
 
   Plays: 57
   Organic: 100%
   Ad Spend: $0.00
   Conversion: 100% in the barn
-```
+```text
 
 ---
 

@@ -79,7 +79,7 @@
 
 ### Category Breakdown
 | Category | Score | Features | Status |
-|----------|-------|----------|--------|
+| ---------- | ------- | ---------- | -------- |
 | Permanent Storage | 100.0% | 14/14 | ✅ EXCEEDS TARGET |
 | Agent Systems | 92.3% | 12/13 | ✅ MEETS TARGET |
 | Voice Systems | 90.0% | 9/10 | ✅ MEETS TARGET |

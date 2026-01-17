@@ -86,7 +86,7 @@
 **Install PyTorch with CUDA support:**
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 This will enable GPU acceleration for:
 - TTS models (Coqui XTTS v2)

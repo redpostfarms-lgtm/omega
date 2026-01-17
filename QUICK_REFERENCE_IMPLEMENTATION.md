@@ -54,29 +54,29 @@
 ## 📦 Dependencies Summary
 
 ### ✅ Required (Already Installed)
-```
+```text
 TTS, transformers, torch, torchaudio, torchcodec
 sounddevice, numpy, scipy, speechbrain
 SpeechRecognition, faster-whisper
 librosa, noisereduce, pydub, soundfile, webrtcvad
 aiofiles, aiohttp
-```
+```text
 
 ### 🔴 High Priority Optional (Recommended)
 ```bash
 pip install sentence-transformers spacy langchain scikit-learn
 python -m spacy download en_core_web_sm
-```
+```text
 
 ### 🟡 Medium Priority Optional
 ```bash
 pip install chromadb faiss-cpu
-```
+```text
 
 ### 🟢 Low Priority Optional
 ```bash
 pip install bitsandbytes onnxruntime prometheus-client structlog
-```
+```text
 
 ---
 
@@ -86,18 +86,18 @@ pip install bitsandbytes onnxruntime prometheus-client structlog
 ```bash
 pip install sentence-transformers spacy langchain scikit-learn
 python -m spacy download en_core_web_sm
-```
+```text
 
 ### Full Install (Everything)
 ```bash
 pip install sentence-transformers spacy langchain scikit-learn chromadb faiss-cpu bitsandbytes onnxruntime prometheus-client structlog
 python -m spacy download en_core_web_sm
-```
+```text
 
 ### Or Use Installation Script
 ```bash
 python INSTALL_ALL_DEPENDENCIES.py
-```
+```text
 
 ---
 

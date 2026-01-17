@@ -149,18 +149,18 @@
 ### Core Libraries (REQUIRED):
 ```bash
 pip install numpy scipy
-```
+```text
 
 ### Advanced Audio Processing (RECOMMENDED):
 ```bash
 pip install librosa soundfile
-```
+```text
 
 ### Voice Processing (OPTIONAL):
 ```bash
 pip install pydub
 pip install speechpy
-```
+```text
 
 ### Advanced TTS (FUTURE):
 ```bash
@@ -168,7 +168,7 @@ pip install speechpy
 pip install TTS
 
 # Or use Piper (already in system)
-```
+```text
 
 ---
 
@@ -289,7 +289,7 @@ config = {
     "vibrato_depth": 0.02
 }
 processed = processor.process_voice(audio, config)
-```
+```text
 
 ### **Voice Blending:**
 ```python
@@ -297,7 +297,7 @@ from omega_voice_modulator import VoiceBlender
 
 blender = VoiceBlender()
 blended = blender.morph_voices(your_voice, omega_voice, ratio=0.5)
-```
+```text
 
 ---
 

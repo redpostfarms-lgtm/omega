@@ -52,7 +52,7 @@ All components integrated into:
 
 ```powershell
 python omega_master_system.py
-```
+```text
 
 ### **Use in Code:**
 
@@ -73,7 +73,7 @@ print(result["response"])  # Laughs, then eats the attack
 # Medical query
 result = omega.process("What are flu symptoms?")
 print(result["response"])  # Enhanced with medical depth
-```
+```text
 
 ---
 

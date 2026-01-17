@@ -41,7 +41,7 @@ Omega now continuously learns from your voice to improve pronunciation and wavef
 
 ```bash
 python omega_voice_learner.py
-```
+```text
 
 **Options:**
 1. **Continuous listening** (default) - Press Enter, then Ctrl+C to stop
@@ -137,7 +137,7 @@ python omega_voice_learner.py
 # Generate improved voice now
 python omega_voice_learner.py
 # Then choose option 4
-```
+```text
 
 ---
 
@@ -205,7 +205,7 @@ Improved Waveform Characteristics:
   prosody_variation: 0.134
 
 ✓ Improved waveform saved to: omega_improved_waveform.json
-```
+```text
 
 ---
 

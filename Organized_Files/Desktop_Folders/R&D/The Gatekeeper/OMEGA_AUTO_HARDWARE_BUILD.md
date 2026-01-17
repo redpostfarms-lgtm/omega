@@ -73,7 +73,7 @@ Fully automated hardware-aware build system that:
 ```powershell
 cd "The Gatekeeper"
 .\omega_auto_hardware_build.ps1
-```
+```text
 
 This will:
 1. Detect your hardware
@@ -92,7 +92,7 @@ This will:
 
 # Option 2: Direct launch
 python $env:USERPROFILE\omega_70b\omega_swarm.py
-```
+```text
 
 ### **Voice Commands:**
 
@@ -102,7 +102,7 @@ xtts-api-server --model xtts --voice "path\to\your_voice.wav" --port 9999
 
 # Test voice
 curl http://localhost:9999/tts -d "text=Hello Omega" --output response.wav
-```
+```text
 
 ---
 
@@ -130,7 +130,7 @@ curl http://localhost:9999/tts -d "text=Hello Omega" --output response.wav
 
 ## FILE STRUCTURE
 
-```
+```text
 %USERPROFILE%\omega_70b\
 ├── hardware_state.json          # Hardware specs
 ├── q_entropy.key                # Quantum entropy key
@@ -142,7 +142,7 @@ curl http://localhost:9999/tts -d "text=Hello Omega" --output response.wav
 ├── llama.cpp\                   # Compiled inference engine
 ├── models\                      # Model files
 └── voice_samples\               # Voice cloning samples
-```
+```text
 
 ---
 
@@ -184,7 +184,7 @@ Agent 1: Processing... (Swarm size: 1/16)
 
 > Tell me about farming
 Agent 2: Processing... (Swarm size: 2/16)
-```
+```text
 
 ---
 
@@ -199,7 +199,7 @@ The auto-upgrade loop:
 **Manual Trigger:**
 ```powershell
 python $env:USERPROFILE\omega_70b\auto_upgrade_loop.ps1
-```
+```text
 
 ---
 

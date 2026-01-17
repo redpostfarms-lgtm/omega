@@ -22,7 +22,7 @@
 ### General Programming Slang
 
 | Term | Meaning | Context | Example Usage |
-|------|---------|---------|---------------|
+| ------ | --------- | --------- | --------------- |
 | **Bug** | Error or flaw in code | Universal | "There's a bug in the login function" |
 | **Debug** | Fix errors in code | Universal | "I need to debug this function" |
 | **Hack** | Quick solution, often inelegant | Informal | "This is a hack but it works" |
@@ -85,7 +85,7 @@
 ### Modern Tech Slang (2020s)
 
 | Term | Meaning | Context |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **Ship it** | Deploy code | Universal |
 | **LGTM** | Looks Good To Me | Code review |
 | **WIP** | Work In Progress | Development |
@@ -129,7 +129,7 @@
 ### Ancient/Classical (Pre-500 CE)
 
 | Term | Origin | Meaning | Context |
-|------|--------|---------|---------|
+| ------ | -------- | --------- | --------- |
 | **Ave** | Latin | Hail/Greetings | Roman greeting |
 | **Salve** | Latin | Hello/Be well | Roman greeting |
 | **Vale** | Latin | Farewell | Roman farewell |
@@ -142,7 +142,7 @@
 ### Medieval (500-1500 CE)
 
 | Term | Origin | Meaning | Context |
-|------|--------|---------|---------|
+| ------ | -------- | --------- | --------- |
 | **Huzzah!** | English | Exclamation of joy | Celebration |
 | **Forsooth** | English | In truth/Indeed | Emphasis |
 | **Prithee** | English | Please/I pray thee | Polite request |
@@ -158,7 +158,7 @@
 ### Renaissance/Early Modern (1500-1800)
 
 | Term | Origin | Meaning | Context |
-|------|--------|---------|---------|
+| ------ | -------- | --------- | --------- |
 | **Marry** | English | Indeed/By Mary | Emphasis |
 | **Pish** | English | Expression of contempt | Disgust |
 | **Tush** | English | Expression of impatience | Dismissal |
@@ -173,7 +173,7 @@
 ### 19th Century
 
 | Term | Origin | Meaning | Context |
-|------|--------|---------|---------|
+| ------ | -------- | --------- | --------- |
 | **Bully!** | American | Excellent! | Approval |
 | **Dandy** | American | Excellent/Fine | Quality |
 | **Humbug** | English | Nonsense/Hoax | Deception |
@@ -489,7 +489,7 @@
 ### Literary Terms (Formal)
 
 | Term | Meaning | Context |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **Metaphor** | Implied comparison | Literary device |
 | **Simile** | Explicit comparison (like/as) | Literary device |
 | **Personification** | Giving human traits to non-human | Literary device |
@@ -540,7 +540,7 @@
 ### Literary Slang (Informal)
 
 | Term | Meaning | Context |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **Mary Sue** | Perfect, unrealistic character | Criticism |
 | **Gary Stu** | Perfect male character | Criticism |
 | **Marty Stu** | Perfect male character | Criticism |
@@ -612,7 +612,7 @@
 ### Writing Community Slang
 
 | Term | Meaning | Context |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **WIP** | Work In Progress | Writing |
 | **NaNoWriMo** | National Novel Writing Month | Writing |
 | **Pantser** | Writer who doesn't plan | Writing |
@@ -651,7 +651,7 @@
 ### Poetry Slang
 
 | Term | Meaning | Context |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **Free verse** | Unrhymed, unmetered poetry | Poetry |
 | **Blank verse** | Unrhymed iambic pentameter | Poetry |
 | **Sonnet** | 14-line poem | Poetry |

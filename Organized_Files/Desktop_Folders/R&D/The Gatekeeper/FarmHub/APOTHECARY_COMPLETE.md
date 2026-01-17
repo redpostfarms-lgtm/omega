@@ -179,18 +179,18 @@ Each recipe includes:
 ### **One-Command Deploy:**
 ```batch
 deploy_apothecary.bat
-```
+```text
 
 ### **Manual Start:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\Apothecary.py
-```
+```text
 
 ### **Via FarmHub:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\master_farmhub.py
 # Then: "apothecary, aphids"
-```
+```text
 
 ---
 

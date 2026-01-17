@@ -20,7 +20,7 @@ try:
         lines = f.readlines()
 except:
     return issues
-```
+```text
 
 **After:**
 ```python
@@ -29,7 +29,7 @@ try:
         lines = f.readlines()
 except (IOError, OSError, PermissionError, UnicodeDecodeError):
     return issues
-```
+```text
 
 **Reason:** Now catches specific file I/O exceptions instead of all exceptions
 
@@ -46,7 +46,7 @@ try:
     os.chmod(self.storage_file, 0o600)
 except:
     pass  # Windows doesn't support chmod
-```
+```text
 
 **After:**
 ```python
@@ -54,7 +54,7 @@ try:
     os.chmod(self.storage_file, 0o600)
 except (OSError, AttributeError):
     pass  # Windows doesn't support chmod or file system doesn't support it
-```
+```text
 
 **Reason:** Now catches specific OS errors instead of all exceptions
 

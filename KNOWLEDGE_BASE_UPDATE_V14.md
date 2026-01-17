@@ -71,7 +71,7 @@
 **Level 1: Basic JWT (Most Common):**
 ```python
 jwt_regex = r'^[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}$'
-```
+```text
 - Any three base64url parts
 - Most common / fastest
 - Very fast performance
@@ -84,7 +84,7 @@ strict_jwt_regex = (
     r'[A-Za-z0-9_-]{2,}\.'
     r'[A-Za-z0-9_-]{2,}$'
 )
-```
+```text
 - Forces HS256/RS256/ES256
 - Security audits, API mocking
 - Fast performance
@@ -92,7 +92,7 @@ strict_jwt_regex = (
 **Level 3: Bearer Header:**
 ```python
 bearer_jwt_regex = r'^Bearer\s+[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}$'
-```
+```text
 - Full Authorization header
 - API request generation
 - Fast performance
@@ -111,7 +111,7 @@ class JWTPayload(BaseModel):
     exp: int
 
 jwt_regex = r"^[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}\.[A-Za-z0-9_-]{2,}$"
-```
+```text
 - Regex + structured payload
 - Full API response validation
 - Slightly slower (but still fast)

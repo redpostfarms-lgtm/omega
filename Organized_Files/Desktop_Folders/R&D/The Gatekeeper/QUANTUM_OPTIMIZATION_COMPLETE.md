@@ -97,7 +97,7 @@
 ## Feature Comparison Matrix
 
 | Feature | Industry Standard | Gatekeeper Before | Gatekeeper After | Status |
-|---------|-------------------|-------------------|------------------|--------|
+| --------- | ------------------- | ------------------- | ------------------ | -------- |
 | **IoT Sensors** | 95% | 0% | 95% | ✅ MATCH |
 | **Precision Ag** | 90% | 30% | 90% | ✅ MATCH |
 | **Market Intel** | 70% | 0% | 70% | ✅ MATCH |
@@ -125,7 +125,7 @@
 ## Performance Improvements
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| -------- | -------- | ------- | ------------- |
 | **Industry Parity** | 13% | 84% | **+71%** |
 | **Feature Coverage** | 4/10 | 8/10 | **+100%** |
 | **System Integration** | 6 systems | 10 systems | **+67%** |
@@ -176,7 +176,7 @@ python projects/irrigation_automation.py --water zone1 auto
 
 # Farm Hub (shows all systems)
 python projects/farm_automation_hub.py --update
-```
+```text
 
 ---
 

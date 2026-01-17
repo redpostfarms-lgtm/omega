@@ -54,7 +54,7 @@ Added a visual threat detection panel that displays threat status and guideline 
 
 ## Visual Layout
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │     [THREAT DETECTED] - Bold, White     │
 │                                         │
@@ -63,7 +63,7 @@ Added a visual threat detection panel that displays threat status and guideline 
 └─────────────────────────────────────────┘
         ↓
   [NUKE THREAT] - Enabled when threat active
-```
+```text
 
 ---
 

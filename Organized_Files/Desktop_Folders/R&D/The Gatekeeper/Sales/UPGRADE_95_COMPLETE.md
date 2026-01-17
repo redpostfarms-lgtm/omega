@@ -80,7 +80,7 @@
 Run the audit to verify:
 ```cmd
 python sales_system_upgrade_95.py
-```
+```text
 
 **Result:** ✅ **95.2% - TARGET EXCEEDED**
 

@@ -8,14 +8,14 @@ The **Omega Scan Integration System** is an automated system upgrade and optimiz
 
 The system follows this exact workflow:
 
-```
+```text
 1. SCAN          → Look for errors or red flags
 2. OPTIMIZE      → Optimize based on findings
 3. QUANTUM SCRAPE → Worldwide web research for improvements
 4. INTEGRATE     → Integrate findings with code
 5. REPEAT SCAN   → Verify integration
 6. FINISH UP     → Complete and generate report
-```
+```text
 
 ## Phase Details
 
@@ -109,19 +109,19 @@ Run the scan integration system:
 
 ```bash
 python omega_scan_integration.py
-```
+```text
 
 Or use the batch file (Windows):
 
 ```bash
 SCAN_INTEGRATION.bat
-```
+```text
 
 ### Command Line Options
 
 ```bash
 python omega_scan_integration.py --root "." --output "SCAN_INTEGRATION_REPORT.md"
-```
+```text
 
 **Options**:
 - `--root`: Root directory to scan (default: current directory)
@@ -138,7 +138,7 @@ python omega_scan_integration.py --root "D:\RPF_BRAIN\The Gatekeeper"
 
 # Custom output file
 python omega_scan_integration.py --output "MY_REPORT.md"
-```
+```text
 
 ## Report Structure
 
@@ -196,7 +196,7 @@ def _check_custom_flags(self, file_path: Path, content: str):
     """Add custom checks here"""
     if re.search(r'your_pattern', content):
         self.result.red_flags.append(f"{file_path}: Your custom check")
-```
+```text
 
 ### Adding New Optimizations
 
@@ -206,7 +206,7 @@ To add new optimizations, modify the `CodeOptimizer` class:
 def optimize_custom_patterns(self):
     """Add custom optimizations here"""
     self.result.optimizations_applied.append("Custom optimization applied")
-```
+```text
 
 ### Enhancing Web Research
 
@@ -221,7 +221,7 @@ def research_custom_topics(self):
         "priority": "high",
         "description": "Research description"
     })
-```
+```text
 
 ## Error Handling
 

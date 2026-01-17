@@ -14,7 +14,7 @@
 3. Imports ControlPanel from omega_control_panel
 4. Creates ControlPanel instance
 5. Calls panel.run()
-```
+```text
 
 ### 3. ControlPanel.run() Method Flow
 ```python
@@ -33,7 +33,7 @@
 7. run() method completes
 8. launch_omega_ui() completes
 9. Script exits (normal termination)
-```
+```text
 
 ## Potential Issues Identified
 

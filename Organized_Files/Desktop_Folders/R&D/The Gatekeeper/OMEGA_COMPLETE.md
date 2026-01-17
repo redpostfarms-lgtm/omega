@@ -139,15 +139,15 @@ Omega has been completely upgraded and integrated with all enhancements. All rol
 Run integration checker:
 ```bash
 python omega_integration.py
-```
+```text
 
 Expected output:
-```
+```text
 Security Enhanced: YES
 Speed Enhanced: YES
 Scalability Enhanced: YES
 Quantum Enhanced: YES
-```
+```text
 
 ---
 
@@ -156,7 +156,7 @@ Quantum Enhanced: YES
 ### Run Omega with All Enhancements:
 ```bash
 python deep_system_test.py
-```
+```text
 
 **You'll see:**
 - Security enhancements: ACTIVE
@@ -167,12 +167,12 @@ python deep_system_test.py
 ### Run Self-Autopsy:
 ```bash
 python omega_self_autopsy.py
-```
+```text
 
 ### Run Master Upgrade:
 ```bash
 python omega_master_upgrade.py
-```
+```text
 
 ---
 

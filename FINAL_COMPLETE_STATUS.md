@@ -43,13 +43,13 @@ All files from the diff have been reviewed, all bugs have been fixed, and all co
 **Before (Incorrect):**
 ```python
 subprocess.Popen(['cmd', '/c', 'start', '/min', '', wav_file], shell=True, ...)
-```
+```text
 
 **After (Fixed):**
 ```python
 cmd_str = f'start /min "" "{wav_file}"'
 subprocess.Popen(cmd_str, shell=True, ...)
-```
+```text
 
 ### ✅ 3. Code Quality Verification
 - ✅ Syntax: No errors

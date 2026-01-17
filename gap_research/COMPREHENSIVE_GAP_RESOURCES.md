@@ -563,7 +563,7 @@ pip install torchvision
 pip install transformers
 pip install tree-sitter
 pip install ultralytics
-```
+```text
 
 ### Step 2: Set Up Free APIs
 

@@ -10,10 +10,10 @@ The following URL shortcuts were removed and need to be restored:
 - Omega - View Wallets.url
 
 **Note:** URL shortcuts (.url files) are simple text files that can be recreated. They contain:
-```
+```text
 [InternetShortcut]
 URL=https://example.com
-```
+```text
 
 ## NVIDIA Developer Tools Analysis
 

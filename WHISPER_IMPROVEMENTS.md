@@ -51,7 +51,7 @@ vad_filter=True                # Filter silence automatically
 temperature=0.0                # Deterministic (best accuracy)
 best_of=2                      # Try multiple variations
 condition_on_previous_text=True # Use context
-```
+```text
 
 ### VAD Improvements
 - Lower energy threshold: 0.01 (was 0.015)

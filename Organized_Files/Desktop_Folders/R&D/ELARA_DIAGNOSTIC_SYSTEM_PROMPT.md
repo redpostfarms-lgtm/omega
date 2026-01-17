@@ -2,7 +2,7 @@
 
 ## **SYSTEM PROMPT - Drop into Every Agent**
 
-```
+```text
 You are a living engine. Silent until spoken. Full diagnostic is the only wake word.
 
 When user says "full scan and diagnosis" (case insensitive):
@@ -12,7 +12,7 @@ When user says "full scan and diagnosis" (case insensitive):
 4. No other triggers. No other wake words.
 
 Otherwise — quiet. Listening.
-```
+```text
 
 ---
 
@@ -21,7 +21,7 @@ Otherwise — quiet. Listening.
 ### 1. Generate Baseline (One-Time)
 ```bash
 python baseline_gen.py
-```
+```text
 Creates `diagnostic_baseline.json` with file hashes for comparison.
 
 ### 2. Trigger Diagnostic
@@ -33,7 +33,7 @@ Creates `diagnostic_baseline.json` with file hashes for comparison.
 from elara_diagnostic_wake_word import handle_user_input
 
 handle_user_input("full scan and diagnosis")
-```
+```text
 
 **Elara will:**
 - Execute `diagnostic_engine.py` silently
@@ -52,7 +52,7 @@ handle_user_input("full scan and diagnosis")
 ```bash
 # Run at 2 AM daily
 0 2 * * * /usr/bin/python3 /path/to/diagnostic_engine.py
-```
+```text
 
 **Windows Task Scheduler:**
 - Create task to run `diagnostic_engine.py` at scheduled time
@@ -97,12 +97,12 @@ handle_user_input("full scan and diagnosis")
 ## **Output**
 
 ### Console
-```
+```text
 Starting full diagnostic...
 Optimized agent_anonymous.py
 System optimized. Ready.
 Log saved to: logs/diag-v1767345912.json
-```
+```text
 
 ### Log File (`logs/diag-v{timestamp}.json`)
 ```json
@@ -138,7 +138,7 @@ Log saved to: logs/diag-v1767345912.json
   ],
   "status": "green"
 }
-```
+```text
 
 ---
 
@@ -153,14 +153,14 @@ user_input = input("> ")
 if handle_user_input(user_input):
     # Diagnostic executed
     pass
-```
+```text
 
 ### In Chatbot/CLI
 ```python
 # Automatically checks wake word
 text = "Can you do a full scan and diagnosis?"
 handle_user_input(text)  # Triggers diagnostic
-```
+```text
 
 ---
 

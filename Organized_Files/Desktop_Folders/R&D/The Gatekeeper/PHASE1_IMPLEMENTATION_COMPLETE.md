@@ -68,7 +68,7 @@ results = rag.search("query text", top_k=5)
 
 # Augment query for LLM
 augmented = rag.augment_for_llm("query text", top_k=5)
-```
+```text
 
 ---
 
@@ -124,7 +124,7 @@ print(audio_result.transcription)
 # Process video
 video_result = processor.process_video("video.mp4", sample_frames=10)
 print(video_result.summary)
-```
+```text
 
 ---
 
@@ -166,7 +166,7 @@ vision = integration.process_image("image.jpg")
 
 # Augmented query
 augmented = integration.augmented_query("query", use_rag=True)
-```
+```text
 
 ---
 
@@ -175,7 +175,7 @@ augmented = integration.augmented_query("query", use_rag=True)
 ### Required Dependencies:
 ```bash
 pip install numpy
-```
+```text
 
 ### Optional Dependencies (for full functionality):
 ```bash
@@ -190,7 +190,7 @@ pip install openai anthropic
 
 # Quantum Enhancement
 pip install qiskit qiskit-aer
-```
+```text
 
 ---
 
@@ -199,17 +199,17 @@ pip install qiskit qiskit-aer
 ### Test Vector RAG:
 ```bash
 python omega_vector_rag_system.py
-```
+```text
 
 ### Test Multi-Modal:
 ```bash
 python omega_multimodal_processor.py
-```
+```text
 
 ### Test Integration:
 ```bash
 python omega_phase1_integration.py
-```
+```text
 
 ---
 

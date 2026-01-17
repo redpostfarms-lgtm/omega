@@ -45,46 +45,46 @@
 
 ### READ FIRST (2 minutes)
 
-```
+```text
 START_HERE.md                          ← Master index with everything
 INSTALLATION_QUICK_START.txt           ← 2-minute quick start
 SESSION_SUMMARY.txt                    ← Visual dashboard
-```
+```text
 
 ### FOR DETAILED INSTRUCTIONS (30 minutes)
 
-```
+```text
 COMPLETE_INSTALLATION_INSTRUCTIONS.md  ← Step-by-step guide
 INSTALLATION_SEQUENCE.py               ← Procedure walkthrough
-```
+```text
 
 ### FOR UNDERSTANDING THE ISSUES (20 minutes)
 
-```
+```text
 SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md ← What was analyzed
 HARDWARE_ISSUES_DIAGNOSIS_AND_FIXES.md ← Why these fixes needed
 DIRECT_ANSWERS_TO_YOUR_QUESTIONS.md    ← Answers in Q&A
-```
+```text
 
 ### FOR TECHNICAL DETAILS (15 minutes)
 
-```
+```text
 GPU_HARDWARE_SPECIFICATION.md          ← GPU documentation
 COMPLETION_REPORT.md                   ← Completion status
-```
+```text
 
 ### FOR VERIFICATION (run anytime)
 
-```
+```text
 python FINAL_INSTALLATION_CHECK.py     ← Check current status
 python OMEGA_FINAL_SETUP.py            ← Setup verification
-```
+```text
 
 ---
 
 ## 📂 FILE ORGANIZATION
 
-```
+```text
 h:\The Gatekeeper\
 ├─ SESSION_SUMMARY.txt                    ✅ Visual dashboard
 ├─ START_HERE.md                          ✅ Master index
@@ -108,7 +108,7 @@ h:\The Gatekeeper\
 ├─ COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py    ✅ Full analysis
 ├─ QUICK_DIAGNOSTICS.py                   ✅ Fast checks
 └─ QUICK_REFERENCE_CARD.txt               ✅ One-page ref
-```
+```text
 
 ---
 
@@ -269,7 +269,7 @@ h:\The Gatekeeper\
 ## 📊 FILE STATISTICS
 
 | Category | Count | Words | Files |
-|----------|-------|-------|-------|
+| ---------- | ------- | ------- | ------- |
 | Summary docs | 5 | 8,000+ | START_HERE, SESSION_SUMMARY, COMPLETION_REPORT, ALL_COMMITMENTS, EVERYTHING_COMPLETE |
 | Installation guides | 3 | 5,500+ | QUICK_START, COMPLETE_INSTRUCTIONS, INSTALLATION_SEQUENCE |
 | Verification tools | 4 | 1,200+ | FINAL_CHECK, OMEGA_SETUP, VERIFY, DIAGNOSTICS |

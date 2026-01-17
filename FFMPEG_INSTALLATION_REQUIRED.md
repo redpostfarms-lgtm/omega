@@ -18,13 +18,13 @@ The voice analysis system requires **FFmpeg** to generate audio files. Without i
 ```powershell
 # Run as Administrator
 winget install FFmpeg
-```
+```text
 
 ### Option 2: Using Chocolatey
 
 ```powershell
 choco install ffmpeg
-```
+```text
 
 ### Option 3: Manual Download
 
@@ -42,7 +42,7 @@ where ffmpeg
 
 # Should show something like:
 # C:\Program Files\FFmpeg\bin\ffmpeg.exe
-```
+```text
 
 ---
 
@@ -71,7 +71,7 @@ Run this command:
 
 ```powershell
 python omega_dual_voice_blend.py
-```
+```text
 
 **Expected execution time**: 10-15 minutes on CPU
 
@@ -91,7 +91,7 @@ python omega_dual_voice_blend.py
 ## System Status
 
 | Component | Status |
-|-----------|--------|
+| ----------- | -------- |
 | Voice files | ✅ Present |
 | Python environment | ✅ Configured |
 | TTS libraries | ✅ Installed |
@@ -106,4 +106,4 @@ python omega_dual_voice_blend.py
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text

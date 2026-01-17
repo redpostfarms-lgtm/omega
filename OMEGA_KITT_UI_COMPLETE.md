@@ -119,7 +119,7 @@ Final master build of the KITT-style dashboard for Omega. All tweaks locked. Eve
     "RAM": 28.0
   }
 }
-```
+```text
 
 ---
 
@@ -148,7 +148,7 @@ All threads are daemon threads (exit when main exits).
 
 ```bash
 python omega_kitt_ui.py
-```
+```text
 
 **First Run**:
 - Creates default state

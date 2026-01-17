@@ -16,7 +16,7 @@
 ### Category Breakdown
 
 | Category | Files | Current % | Target % | Gap | Status |
-|----------|-------|-----------|----------|-----|--------|
+| ---------- | ------- | ----------- | ---------- | ----- | -------- |
 | Omega System | 25+ | 85% | 97% | 12% | ⚠️ Needs Upgrade |
 | Voice System | 15+ | 88% | 97% | 9% | ⚠️ Needs Upgrade |
 | Agent System | 10+ | 82% | 97% | 15% | ⚠️ Needs Upgrade |
@@ -34,7 +34,7 @@
 ### Our Capabilities vs Industry Leaders
 
 | Capability | Our Score | Industry Best | Gap | Priority |
-|------------|-----------|---------------|-----|----------|
+| ------------ | ----------- | --------------- | ----- | ---------- |
 | **Reasoning** | 80% | 98% (Claude) | 18% | 🔴 HIGH |
 | **Code Generation** | 75% | 97% (Claude) | 22% | 🔴 HIGH |
 | **Math/Physics** | 78% | 96% (DeepSeek) | 18% | 🔴 HIGH |

@@ -49,7 +49,7 @@ When Omega is told to **"look up"** or **"search"**, it will automatically:
   "multi_source_validation": true,
   "cross_reference": true
 }
-```
+```text
 
 ---
 

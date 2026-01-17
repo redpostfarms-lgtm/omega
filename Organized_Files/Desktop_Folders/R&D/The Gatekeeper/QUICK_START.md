@@ -5,7 +5,7 @@
 ### Step 1: Run Complete Setup
 ```bash
 "The Gatekeeper\setup_complete_system.bat"
-```
+```text
 This will:
 - Create all directories
 - Prime the brain
@@ -17,7 +17,7 @@ This will:
 ### Step 2: Optional - Max Out Pipelines
 ```bash
 python "The Gatekeeper\max_out_pipelines.py"
-```
+```text
 Sets all education pipelines to 100%. One-time run.
 
 ### Step 3: Add to Startup (Optional)
@@ -91,7 +91,7 @@ Copy `brain_wakeup.bat` to Windows Startup folder:
 Run this to verify everything:
 ```bash
 python "The Gatekeeper\auto_heal.py" --verify
-```
+```text
 
 ## Support
 

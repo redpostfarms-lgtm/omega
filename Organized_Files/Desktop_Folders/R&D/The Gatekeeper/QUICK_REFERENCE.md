@@ -52,7 +52,7 @@ python "The Gatekeeper\verify_system.py"
 
 # Max out pipelines
 python "The Gatekeeper\max_out_pipelines.py"
-```
+```text
 
 ## Response Patterns
 

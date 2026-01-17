@@ -128,7 +128,7 @@ from agent_drone_builder import AgentDroneBuilder
 
 builder = AgentDroneBuilder()
 builder.build_all_agent_drones()
-```
+```text
 
 ### Use in Game Sandbox
 ```python
@@ -137,14 +137,14 @@ from drone_game_sandbox import GameSandbox
 sandbox = GameSandbox()
 sandbox.create_agents(count=4, load_custom_drones=True)
 # Each agent now has their custom drone!
-```
+```text
 
 ---
 
 ## Design Philosophy Summary
 
 | Agent | Philosophy | Key Feature | Best Game |
-|-------|-----------|-------------|-----------|
+| ------- | ----------- | ------------- | ----------- |
 | Alpha | Speed | 37.6 m/s max speed | Tag, Dodgeball |
 | Beta | Endurance | 4.6 min flight time | Hide and Seek |
 | Gamma | Payload | 5.6 kg payload | Heavy missions |

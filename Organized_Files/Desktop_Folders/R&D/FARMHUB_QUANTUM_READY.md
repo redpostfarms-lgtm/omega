@@ -6,47 +6,47 @@
 
 ## Quick Test Results
 
-```
+```text
 Testing Quantum Optimizer...
 Quantum test complete!
 Best fitness: 0.003952
 Best solution (first 3 dims): [0, 0.051, 0.025]
 [OK] Quantum module working!
-```
+```text
 
 ## How to Run
 
 ### Option 1: Quick Test
 ```bash
 python test_quantum_quick.py
-```
+```text
 
 ### Option 2: Full FarmHub with Quantum
 ```bash
 python The Gatekeeper\FarmHub\FarmHub_2026_Final.py
-```
+```text
 
 Then in the interactive prompt:
-```
+```text
 You > quantum
 You > quantum energy
 You > quantum resource
 You > quantum irrigation
 You > status
 You > quit
-```
+```text
 
 ### Option 3: Using Batch Script
 ```bash
 run_farmhub_quantum_test.bat
-```
+```text
 
 ## Available Quantum Commands
 
 Once FarmHub is running:
 
 | Command | Description |
-|---------|-------------|
+| --------- | ------------- |
 | `quantum` | Show quantum capabilities and status |
 | `quantum resource` | Optimize resource allocation (energy, water, labor, budget) |
 | `quantum energy` | Analyze and optimize energy efficiency |

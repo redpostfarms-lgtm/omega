@@ -58,14 +58,14 @@ import numpy as np
 optimizer = GPUPerformanceOptimizer(use_gpu=True)
 data = np.random.rand(10000, 10000).astype(np.float32)
 result = optimizer.accelerate_array_operations(data, "sqrt")
-```
+```text
 
 **Optional Dependencies:**
 ```bash
 pip install cupy-cuda11x  # For CuPy
 # OR
 pip install torch  # For PyTorch
-```
+```text
 
 ### 2. Async HTTP Client
 
@@ -80,12 +80,12 @@ async def main():
         result = await client.get("https://your-api.com/endpoint")
 
 asyncio.run(main())
-```
+```text
 
 **Optional Dependencies:**
 ```bash
 pip install aiohttp
-```
+```text
 
 ### 3. Defensive Security Scanner
 
@@ -98,7 +98,7 @@ from pathlib import Path
 scanner = DefensiveSecurityScanner(Path("your_code_directory"))
 results = scanner.scan_directory()
 print(f"Found {results['total_vulnerabilities']} vulnerabilities")
-```
+```text
 
 **Dependencies:** None (uses standard library)
 
@@ -116,19 +116,19 @@ report = generator.generate_security_report(
     system_name="My Application"
 )
 generator.save_report(report, Path("report.md"))
-```
+```text
 
 **Optional Dependencies:**
 ```bash
 pip install jinja2
-```
+```text
 
 ### 5. Complete Demo
 
 **Run all tools together:**
 ```bash
 python demo_all_tools.py
-```
+```text
 
 ---
 
@@ -200,13 +200,13 @@ pip install aiohttp          # For async HTTP client
 pip install jinja2           # For report generator
 pip install cupy-cuda11x      # For GPU acceleration (CuPy)
 pip install torch             # For GPU acceleration (PyTorch)
-```
+```text
 
 ### Full Installation
 ```bash
 # Install all optional dependencies
 pip install aiohttp jinja2 cupy-cuda11x torch
-```
+```text
 
 ---
 
@@ -225,18 +225,18 @@ python defensive_security_scanner.py
 
 # Report Generator
 python report_generator.py
-```
+```text
 
 ### Run Complete Demo
 ```bash
 python demo_all_tools.py
-```
+```text
 
 ---
 
 ## File Structure
 
-```
+```text
 The Gatekeeper/
 ├── LEARNING_GUIDE_ADVANCED_TECH.md      # Educational guide
 ├── LEGITIMATE_TOOLS_COMPLETE.md         # Complete documentation
@@ -246,14 +246,14 @@ The Gatekeeper/
 ├── defensive_security_scanner.py         # Security scanner
 ├── report_generator.py                   # Report generator
 └── demo_all_tools.py                    # Complete demo
-```
+```text
 
 ---
 
 ## Code Statistics
 
 | Tool | Lines | Dependencies | Status |
-|------|-------|--------------|--------|
+| ------ | ------- | -------------- | -------- |
 | GPU Optimizer | 245 | Optional (CuPy/PyTorch) | ✅ Ready |
 | HTTP Client | 200 | Optional (aiohttp) | ✅ Ready |
 | Security Scanner | 350 | None (stdlib) | ✅ Ready |

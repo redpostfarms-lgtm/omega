@@ -70,21 +70,21 @@ Gatekeeper just pulled the entire world's best agent-council systems and fused t
 ## How to Use
 
 ### Voice Commands
-```
+```text
 "Hey, Gatekeeper, council solve [problem]"
 "Hey, Gatekeeper, agent council on [problem]"
-```
+```text
 
 ### Command Line
 ```bash
 python "The Gatekeeper\agent_council_v2.py" "fix low solar yield in winter"
 python "The Gatekeeper\agent_council_v2.py" "write $47k USDA REAP grant"
-```
+```text
 
 ## Example Sessions
 
 ### Example 1: Solar Yield Problem
-```
+```text
 Problem: fix low solar yield in winter
 
 [Ellis] 1.2 kW array → tilt 42°, clean 15° from dust. Measure irradiance. Report numbers. VOTE: yes - data supports solution.
@@ -94,10 +94,10 @@ Problem: fix low solar yield in winter
 [Oracle] Log shows cell 12 dying. Pattern: winter degradation. Fix at source. VOTE: yes - pattern confirmed.
 
 ✅ CONSENSUS REACHED (5/5 yes votes)
-```
+```text
 
 ### Example 2: Grant Problem (Lawyer Auto-Loads)
-```
+```text
 Problem: write $47k USDA REAP grant for new 18650 barn bank
 
 ⚖️  Lawyer agent auto-loaded (grant/compliance detected)
@@ -110,7 +110,7 @@ Problem: write $47k USDA REAP grant for new 18650 barn bank
 [Lawyer] USDA REAP compliance: All sections verified. Forms complete. Legal review passed. VOTE: yes - ready to submit.
 
 ✅ CONSENSUS REACHED (6/6 yes votes)
-```
+```text
 
 ## Integration Status
 
@@ -137,7 +137,7 @@ Problem: write $47k USDA REAP grant for new 18650 barn bank
 
 ## Directory Structure
 
-```
+```text
 D:\RPF_BRAIN\Archived\
 ├── agents/
 │   ├── Ellis_memory.json
@@ -150,7 +150,7 @@ D:\RPF_BRAIN\Archived\
     ├── 20251231_2356_fix_low_solar_yield_in_winter.txt
     ├── 20251231_2356_write__USDA_REAP_grant_for_new.txt
     └── ...
-```
+```text
 
 ## Philosophy
 

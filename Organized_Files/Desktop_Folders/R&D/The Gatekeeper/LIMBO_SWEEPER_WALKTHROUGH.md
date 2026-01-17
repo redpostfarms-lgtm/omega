@@ -101,7 +101,7 @@ Limbo Sweeper searches for "floating cash" - unclaimed funds, dust, airdrops, an
 ### Step 1: Run Setup
 ```bash
 python limbo_sweeper_test_setup.py
-```
+```text
 
 This will:
 1. Ask about wallet addresses (or use defaults)
@@ -113,35 +113,35 @@ This will:
 ### Step 2: Test Components
 ```bash
 python limbo_sweeper_test_run.py --all
-```
+```text
 
 This tests each component individually and shows what it does.
 
 ### Step 3: Run Full Sweep
 ```bash
 python limbo_sweeper.py
-```
+```text
 
 This runs all enabled components and saves results.
 
 ### Step 4: Check Results
 ```bash
 python limbo_sweeper_test_run.py --results
-```
+```text
 
 Or check the file directly:
-```
+```text
 D:\RPF_BRAIN\Omega\tx_dump.json
-```
+```text
 
 ---
 
 ## Configuration
 
 Configuration is saved to:
-```
+```text
 D:\RPF_BRAIN\Omega\limbo_config.json
-```
+```text
 
 **Example config:**
 ```json
@@ -160,7 +160,7 @@ D:\RPF_BRAIN\Omega\limbo_config.json
   "test_mode": true,
   "rate_limit_delay": 0.1
 }
-```
+```text
 
 ---
 
@@ -254,4 +254,4 @@ Before running a full sweep:
 **Ready to test? Start with:**
 ```bash
 python limbo_sweeper_test_setup.py
-```
+```text

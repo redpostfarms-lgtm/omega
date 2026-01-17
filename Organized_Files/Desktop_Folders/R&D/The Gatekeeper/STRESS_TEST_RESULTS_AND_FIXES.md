@@ -35,7 +35,7 @@ except (IOError, OSError, PermissionError) as e:
         handlers=[logging.StreamHandler(sys.stdout)],
         force=True
     )
-```
+```text
 
 ### 2. **AgentBus Initialization at Module Level** ⚠️ HIGH
 **Issue:** TTS initialization during import causes file I/O errors  
@@ -67,7 +67,7 @@ def get_bus():
                     return quantum_knowledge(f"{agent_name} {question}")
             _bus_instance = MinimalBus()
     return _bus_instance
-```
+```text
 
 ### 3. **UTF-8 Encoding Setup** ⚠️ MEDIUM
 **Issue:** `sys.stdout.buffer` access fails when stdout is StringIO  
@@ -87,7 +87,7 @@ if sys.platform == 'win32' and hasattr(sys.stdout, 'buffer'):
     except (AttributeError, ValueError):
         # Already wrapped or in test mode - skip
         pass
-```
+```text
 
 ### 4. **Agent Registration Announcements** ⚠️ MEDIUM
 **Issue:** Agent registration calls `bus.speak()` during import  
@@ -113,7 +113,7 @@ def register_agent(name: str, func: Callable[[str], str], silent: bool = False) 
 # Register all agents (silent during import)
 register_agent('harriet', harriet_agent, silent=True)
 # ... etc
-```
+```text
 
 ## Performance Improvements
 

@@ -50,7 +50,7 @@ for agent in agents:
 with ThreadPoolExecutor(max_workers=6) as executor:
     futures = [executor.submit(get_agent_response, agent, problem) for agent in agents]
     responses = [f.result() for f in futures]
-```
+```text
 
 **Priority:** 🔴 **HIGHEST**  
 **Impact:** +2-3 points  
@@ -88,7 +88,7 @@ for doc in knowledge_base:
 # Target: Vector search
 embeddings = sentence_transformer.encode(query)
 results = chromadb.query(query_embeddings=embeddings, n_results=10)
-```
+```text
 
 **Priority:** 🔴 **HIGHEST**  
 **Impact:** +2-3 points  

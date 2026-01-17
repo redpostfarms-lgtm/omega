@@ -36,7 +36,7 @@ def project_completion(self, current_pct, historical_velocity, months=6):
     # Optimistic: +20% velocity
     # Pessimistic: -20% velocity
     # Return dict with scenarios
-```
+```text
 
 ---
 
@@ -183,7 +183,7 @@ def calculate_projections(base_value, growth_rate, periods, scenarios):
         results['optimistic'].append(min(100, optimistic))
         results['pessimistic'].append(min(100, pessimistic))
     return results
-```
+```text
 
 ### Risk Assessment Table Pattern
 ```python
@@ -204,7 +204,7 @@ class RiskAssessment:
             'residual_risk': residual_risk,
             'acceptable': residual_risk <= 'Low'
         }
-```
+```text
 
 ### Structured Documentation Pattern
 ```python
@@ -219,7 +219,7 @@ class StructuredReport:
             'appendices': self._appendices(data),
             'visualizations': self._visualizations(data)
         }
-```
+```text
 
 ---
 

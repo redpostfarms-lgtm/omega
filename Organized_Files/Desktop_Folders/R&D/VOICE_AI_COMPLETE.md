@@ -32,7 +32,7 @@
 # Records own waveform after speaking
 voice.speak("Hello, how are you?")
 # → Records waveform internally
-```
+```text
 
 ### 2. Analysis (Every 10 Exchanges)
 ```python
@@ -43,7 +43,7 @@ voice.speak("Hello, how are you?")
 # - Pitch: Matches frequency
 # - Volume: Matches dB levels
 # - Sarcasm: Detects and mirrors
-```
+```text
 
 ### 3. Adaptation (Silent)
 ```python
@@ -53,7 +53,7 @@ voice.speak("Hello, how are you?")
 # - Matches volume levels
 # - Adds sarcastic curl if user did
 # - Never mentions the change
-```
+```text
 
 ### 4. Learning Log (Silent)
 ```python
@@ -64,7 +64,7 @@ voice.speak("Hello, how are you?")
 # "Learned: user pitch 210Hz. Matched."
 # "Learned: user sarcasm indicators. Added sarcastic curl."
 # "Learned: user laughs after ellipsis. Added micro-beat."
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ response = voice.speak("Hello, how are you?")
 voice.listen(waveform=user_audio, text="I'm good, thanks...")
 
 # After 10 exchanges, automatically analyzes and adapts
-```
+```text
 
 ### Get Learning Log
 ```python
@@ -94,72 +94,72 @@ for entry in learnings:
     print(entry)
 # → "Learned: user rhythm 2.3 wps. Adjusted."
 # → "Learned: user laughs after ellipsis. Added micro-beat."
-```
+```text
 
 ### Get Status
 ```python
 status = voice.get_status()
 print(f"Tone: {status['tone']}")
 print(f"Adaptations: {status['adaptation']['learned_patterns']}")
-```
+```text
 
 ---
 
 ## Adaptation Examples
 
 ### Rhythm Matching
-```
+```text
 User: Speaks fast (3.5 words/sec)
 AI: "Hello, how are you?" → Adapts to 3.5 wps
 Log: "Learned: user rhythm 3.5 wps. Adjusted."
-```
+```text
 
 ### Pause Shortening
-```
+```text
 User: Short pauses (0.2s)
 AI: "Well... um... I think..." → "Well, I think..."
 Log: "Learned: user pause 0.2s. Shortened pauses."
-```
+```text
 
 ### Filler Removal
-```
+```text
 User: No fillers
 AI: "Um, like, you know..." → Removes fillers
 Log: "Learned: user uses []. Dropping 'um'."
-```
+```text
 
 ### Volume Matching
-```
+```text
 User: Quiet speech (-25 dB)
 AI: Adapts volume to -25 dB
 Log: "Learned: user volume -25.0dB. Matched."
-```
+```text
 
 ### Sarcasm Mirroring
-```
+```text
 User: Sarcastic tone detected
 AI: Adds subtle sarcastic curl
 Log: "Learned: user sarcasm indicators. Added sarcastic curl."
-```
+```text
 
 ### Special Patterns
-```
+```text
 User: "Haha... that's funny..."
 AI: Detects ellipsis + laughter pattern
 Log: "Learned: user laughs after ellipsis. Added micro-beat."
-```
+```text
 
 ---
 
 ## File Structure
 
-```
+```text
 voice_adaptive.py        (~600 lines)
 ├── VoiceRecorder        - Records waveforms
 ├── SpeechAnalyzer       - Analyzes patterns
 ├── AdaptiveVoiceAI      - Main adaptive system
 └── Learning Log         - Silent log (.voice_learning_log.json)
-```
+```text
 
 ---
 
@@ -170,7 +170,7 @@ voice_adaptive.py        (~600 lines)
 pip install pyaudio      # Audio recording
 pip install scipy        # Signal processing
 pip install numpy        # Array operations
-```
+```text
 
 **Works without:** Falls back to text-only analysis
 

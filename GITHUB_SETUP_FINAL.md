@@ -9,7 +9,7 @@ Your GitHub authentication is now completely set up and ready to use!
 ## ✅ Configuration Summary
 
 | Item | Status | Details |
-|------|--------|---------|
+| ------ | -------- | --------- |
 | **Git Credential Helper** | ✅ Configured | `wincred` (Windows Credential Manager) |
 | **Git Remote** | ✅ Set | `https://github.com/redpostfarms/The-Gatekeeper.git` |
 | **GitHub Token** | ✅ Stored | Stored in Windows Credential Manager |
@@ -56,13 +56,13 @@ git commit -m "Initial commit - Omega System"
 
 # Push to GitHub (use 'main' if that's your default branch)
 git push -u origin master
-```
+```text
 
 **OR** if your default branch is `main`:
 
 ```bash
 git push -u origin main
-```
+```text
 
 ---
 
@@ -72,7 +72,7 @@ After creating the repository, test it:
 
 ```bash
 git fetch origin
-```
+```text
 
 If successful, you'll see no errors and Git will fetch the remote repository information.
 

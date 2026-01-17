@@ -38,7 +38,7 @@ All **TOP 4 CRITICAL improvements** have been successfully integrated into The G
 pip install vosk pyaudio
 # Download model: https://alphacephei.com/vosk/models
 # Extract to: The Gatekeeper/models/vosk/vosk-model-small-en-us-0.15
-```
+```text
 
 ---
 
@@ -61,7 +61,7 @@ pip install vosk pyaudio
 **Installation:**
 ```bash
 pip install speechbrain torch torchaudio
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ pip install speechbrain torch torchaudio
 **Installation:**
 ```bash
 pip install chromadb sentence-transformers
-```
+```text
 
 **Also Added to:** `self_learn.py`
 - Vector storage for self-learning insights
@@ -111,7 +111,7 @@ pip install chromadb sentence-transformers
 **Installation:**
 ```bash
 pip install scrapy
-```
+```text
 
 **Note:** Full Scrapy spider implementation can be added incrementally. Current code maintains backward compatibility.
 
@@ -169,7 +169,7 @@ All new dependencies added to `requirements.txt`:
 ```bash
 cd "The Gatekeeper"
 pip install -r requirements.txt
-```
+```text
 
 ### **Model Downloads**
 
@@ -191,7 +191,7 @@ pip install -r requirements.txt
 ## Expected Score Improvements
 
 | Component | Before | After | Improvement |
-|-----------|--------|-------|-------------|
+| ----------- | -------- | ------- | ------------- |
 | **Voice Recognition** | 90% (online) | 98% (offline) | +8% |
 | **Voice Biometrics** | 85% | 95% | +10% |
 | **Knowledge Search** | Linear (slow) | Semantic (fast) | 100-1000x faster |

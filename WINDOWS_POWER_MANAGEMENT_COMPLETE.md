@@ -45,7 +45,7 @@ pm.sleep()
 
 # Hibernate
 pm.hibernate()
-```
+```text
 
 ### Scheduled Operations
 ```python
@@ -62,7 +62,7 @@ pm.schedule_wake(wake_time, "Morning wake-up")
 # Schedule sleep for 10 PM
 sleep_time = datetime(2026, 1, 10, 22, 0)
 pm.schedule_sleep(sleep_time, "Evening sleep")
-```
+```text
 
 ### List and Cancel
 ```python
@@ -74,7 +74,7 @@ pm.cancel_shutdown()
 
 # Cancel specific task
 pm.cancel_scheduled_task("Omega_Wake_20260111_060000")
-```
+```text
 
 ---
 
@@ -83,7 +83,7 @@ pm.cancel_scheduled_task("Omega_Wake_20260111_060000")
 Run the module directly for interactive mode:
 ```bash
 python omega_windows_power.py
-```
+```text
 
 Commands:
 - `shutdown [delay]` - Shutdown system

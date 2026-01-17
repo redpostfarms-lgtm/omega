@@ -61,7 +61,7 @@
 ### **Single Update:**
 ```bash
 python projects/farm_automation_hub.py --update
-```
+```text
 
 ### **Continuous Monitoring:**
 ```bash
@@ -69,19 +69,19 @@ python projects/farm_automation_hub.py --monitor
 
 # Custom interval
 python projects/farm_automation_hub.py --monitor --interval 30.0
-```
+```text
 
 ### **Generate Briefing:**
 ```bash
 python projects/farm_automation_hub.py --briefing
-```
+```text
 
 ---
 
 ## Output
 
 ### **Dashboard Display:**
-```
+```text
 ============================================================
 RED POST FARMS - AUTOMATION HUB DASHBOARD
 ============================================================
@@ -117,7 +117,7 @@ AGENT SYSTEMS:
   Agents: 6
 
 ============================================================
-```
+```text
 
 ### **Status Files:**
 - Daily status: `Archived/farm_hub/status_YYYYMMDD.json`
@@ -156,7 +156,7 @@ AGENT SYSTEMS:
     "drone_battery_low": 30.0
   }
 }
-```
+```text
 
 ---
 

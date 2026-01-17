@@ -191,7 +191,7 @@ All rules are in `wazuh/siemens_rules.xml` with rule IDs 210000-210999:
   <group>ics,execution,siemens,triton_attack_chain,critical,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ---
 
@@ -233,11 +233,11 @@ All rules are in `wazuh/siemens_rules.xml` with rule IDs 210000-210999:
 ### Log Format
 
 **Siemens Syslog Format** (TIA Portal V17+):
-```
+```text
 <PRI>timestamp hostname - IDxx [device@... devVendor="Siemens" devProduct="CPU 151x..." FWVersion="V..."] 
 [function@... fct="..." oldState="..." newState="..."] 
 [session@... protocolType="..." userName="..." src="..."] EVENT_CODE
-```
+```text
 
 **Decoder**: Use `wazuh/siemens_decoders.xml` to extract fields:
 - `device_id`, `product`, `fw_version`
@@ -328,7 +328,7 @@ All rules are in `wazuh/triton_rules.xml` with rule IDs 211000-211999:
   <group>ics,triton,attack_chain,critical,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ### YARA Integration
 
@@ -351,7 +351,7 @@ rule TRITON_Framework {
   condition:
     2 of them and filesize < 3MB
 }
-```
+```text
 
 ### Log Sources
 

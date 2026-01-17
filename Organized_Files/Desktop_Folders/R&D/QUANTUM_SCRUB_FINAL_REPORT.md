@@ -47,7 +47,7 @@
 ## Category Scores
 
 | Category | Before | After | Target | Status |
-|----------|--------|-------|--------|--------|
+| ---------- | -------- | ------- | -------- | -------- |
 | **Permanent Storage** | 92.9% | 100% | 95% | ✅ EXCEEDED |
 | **Agent Systems** | 30.8% | 92.3% | 95% | ✅ NEAR TARGET |
 | **Knowledge Management** | 63.6% | 90.9% | 95% | ✅ NEAR TARGET |

@@ -178,13 +178,13 @@ All three guides are fully integrated:
 
 ## File Structure
 
-```
+```text
 The Gatekeeper/
 ├── FLASK_MIGRATE_SETUP.md              (24 KB) - Schema management
 ├── POSTGRESQL_JSONB_QUERY_GUIDE.md    (28 KB) - Advanced querying
 ├── DATABASE_GUIDES_INTEGRATION.md      (8 KB) - Integration docs
 └── DATABASE_GUIDES_COMPLETE.md         (this file) - Overview
-```
+```text
 
 ---
 
@@ -202,7 +202,7 @@ The Gatekeeper/
 ## Status Summary
 
 | Component | Status | Size | Lines |
-|-----------|--------|------|-------|
+| ----------- | -------- | ------ | ------- |
 | Flask-Migrate Setup Guide | ✅ Complete | ~24 KB | ~740 |
 | PostgreSQL JSONB Query Guide | ✅ Complete | ~28 KB | ~1030 |
 | Database Guides Integration | ✅ Complete | ~8 KB | ~250 |

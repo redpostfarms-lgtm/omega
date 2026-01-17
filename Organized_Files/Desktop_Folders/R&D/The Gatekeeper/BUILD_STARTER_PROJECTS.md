@@ -9,9 +9,9 @@
 ## Project 1: Quantum-Safe BMS (Rust)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe 18650 battery management system in Rust with voltage monitoring, cell balancing, and health prediction"
-```
+```text
 
 **Expected Output:**
 - Rust crate structure
@@ -26,9 +26,9 @@
 ## Project 2: Solar MPPT Controller (Python)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, create a solar panel MPPT controller in Python with PID loop, data logging, and integration with existing solar_forecaster.py"
-```
+```text
 
 **Expected Output:**
 - MPPT algorithm implementation
@@ -42,9 +42,9 @@
 ## Project 3: Farm Automation Hub (Rust + Python)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, build a farm automation hub with Rust backend, Python sensor modules, REST API, and web dashboard for monitoring"
-```
+```text
 
 **Expected Output:**
 - Rust backend server
@@ -59,9 +59,9 @@
 ## Project 4: Drone Flight Controller (Python)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, write an autonomous drone flight controller in Python with NDVI analysis, crop monitoring, and return-to-home functionality"
-```
+```text
 
 **Expected Output:**
 - Flight control module
@@ -76,9 +76,9 @@
 ## Project 5: Grant Application Automation (Python)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, create a USDA grant application automation system that generates forms, checks compliance, and tracks submissions"
-```
+```text
 
 **Expected Output:**
 - Form generation (PDF/Word)
@@ -93,9 +93,9 @@
 ## Project 6: Knowledge Base Interface (Python + Web)
 
 **Command:**
-```
+```text
 "Hey, Gatekeeper, build a web interface for the knowledge base with semantic search, visualization, and query interface"
-```
+```text
 
 **Expected Output:**
 - Flask/FastAPI backend

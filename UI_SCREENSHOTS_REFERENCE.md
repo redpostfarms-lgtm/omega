@@ -80,9 +80,9 @@
 ## Image Locations
 
 All UI-related screenshots and images are located in:
-```
+```text
 D:\RPF_BRAIN\The Gatekeeper\images\
-```
+```text
 
 ### File List:
 - `CONTROL PANEL FOR omega.png` - Main UI design screenshot

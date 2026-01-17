@@ -46,7 +46,7 @@ Initial scan of The Gatekeeper project reveals:
 ### 1. File Statistics
 
 | Type | Count | Notes |
-|------|-------|-------|
+| ------ | ------- | ------- |
 | Python (.py) | 657 | Core codebase |
 | Markdown (.md) | 692 | Documentation |
 | Batch (.bat) | 90 | Windows scripts |

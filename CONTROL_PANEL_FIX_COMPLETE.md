@@ -35,7 +35,7 @@ plt.pause(0.1)  # Give the window time to render
 while self.running:
     plt.pause(0.1)  # Process GUI events
     time.sleep(0.9)  # Wait between updates
-```
+```text
 
 ### 2. Created Fixed Launcher ✅
 
@@ -59,17 +59,17 @@ while self.running:
 ### Option 1: Use Fixed Launcher (Recommended)
 ```bash
 python START_CONTROL_PANEL_FIXED.py
-```
+```text
 
 ### Option 2: Use Original Launcher (Now Fixed)
 ```bash
 python START_CONTROL_PANEL.py
-```
+```text
 
 ### Option 3: Test Display First
 ```bash
 python TEST_CONTROL_PANEL.py
-```
+```text
 
 ---
 

@@ -44,7 +44,7 @@ This guide provides comprehensive PostgreSQL JSONB querying techniques for the O
 ### Essential Operators Reference
 
 | Operator | Returns | Use Case | Example |
-|----------|---------|----------|---------|
+| ---------- | --------- | ---------- | --------- |
 | `->` | JSONB | Get object/array by key | `data -> 'config'` |
 | `->>` | TEXT | Get value as string | `data ->> 'status'` |
 | `#>` | JSONB | Get nested path (array keys) | `data #> '{user,address,city}'` |
@@ -79,7 +79,7 @@ CREATE TABLE device_settings (
     {"type": "fan", "severity": 3, "timestamp": "2026-01-10T13:15:00Z"}
   ]
 }
-```
+```text
 
 ```sql
 -- Exact match on a field (fast with index)
@@ -96,7 +96,7 @@ WHERE data @> '{"status": "active", "config": {"fan_profile": "quiet"}}';
 SELECT id
 FROM device_settings
 WHERE data ? 'alerts';
-```
+```text
 
 ---
 
@@ -105,7 +105,7 @@ WHERE data ? 'alerts';
 ### JSONPath Operators (PostgreSQL 12+)
 
 | Operator | Meaning | Example |
-|----------|---------|---------|
+| ---------- | --------- | --------- |
 | `$` | Root | `$.config` |
 | `.key` | Object member | `$.config.fan_profile` |
 | `[*]` | Array elements | `$.alerts[*]` |
@@ -131,7 +131,7 @@ WHERE data @? '$.alerts'
 
 -- Array element access
 WHERE data @@ '$.alerts[0].severity >= 7'
-```
+```text
 
 ### Filter Expressions
 
@@ -152,12 +152,12 @@ WHERE data @@ '$.config.fan_profile == "quiet" || $.config.fan_profile == "balan
 
 -- Using IN for membership
 WHERE data @@ '$.config.fan_profile in ("quiet", "balanced", "eco")'
-```
+```text
 
 ### Supported Filter Operators & Functions
 
 | Category | Operators/Functions | Example |
-|----------|---------------------|---------|
+| ---------- | --------------------- | --------- |
 | Comparison | `==`, `!=`, `>`, `>=`, `<`, `<=` | `@.severity > 5` |
 | Logical | `&&` (AND), `\|\|` (OR) | `@.type == "temp" && @.severity >= 7` |
 | Membership | `in (value, ...)` | `@.profile in ("quiet", "balanced")` |
@@ -211,7 +211,7 @@ SELECT id,
            )
        ) AS recent_critical_alerts
 FROM device_settings;
-```
+```text
 
 ### Variables with Arrays
 
@@ -234,7 +234,7 @@ SELECT jsonb_path_query_first(
     '{"metric_name": "avg_temp"}'::jsonb
 ) AS last_hour_avg_temp
 FROM device_settings;
-```
+```text
 
 ### Variables with Array Size Checks
 
@@ -259,7 +259,7 @@ WHERE jsonb_path_exists(
     'size($.alerts) >= $min && size($.alerts) <= $max',
     jsonb_build_object('min', 2, 'max', 10)
 );
-```
+```text
 
 ### Best Practices for Variables (2026)
 
@@ -290,7 +290,7 @@ SELECT jsonb_path_query_first(
     'size($.alerts ? (@.severity >= 7))'
 ) AS critical_count
 FROM device_settings;
-```
+```text
 
 ### Aggregation via SQL Functions
 
@@ -322,7 +322,7 @@ SELECT
 FROM device_settings,
      jsonb_path_query(data, '$.alerts[*].type') AS value
 GROUP BY device_id;
-```
+```text
 
 ---
 
@@ -347,7 +347,7 @@ CROSS JOIN LATERAL jsonb_path_query(
     ds.data,
     '$.alerts[*]'
 ) AS alert(value);
-```
+```text
 
 This is equivalent to: "for each device, unnest all its alerts into separate rows"
 
@@ -390,12 +390,12 @@ CROSS JOIN LATERAL jsonb_path_query(
     '$.alerts[*] ? (@.severity >= $min_sev && @.type = $alert_type)',
     jsonb_build_object('min_sev', 7, 'alert_type', 'temp')
 ) AS alert(value);
-```
+```text
 
 ### CROSS JOIN LATERAL vs LEFT JOIN LATERAL
 
 | Use Case | Join Type | Result when no matches |
-|----------|-----------|------------------------|
+| ---------- | ----------- | ------------------------ |
 | Only want rows that have alerts | `CROSS JOIN LATERAL` | Device disappears if no alerts |
 | Want all devices (even zero alerts) | `LEFT JOIN LATERAL` | Device stays, extracted fields = NULL/0 |
 
@@ -437,7 +437,7 @@ CROSS JOIN LATERAL (
     )
 ) t
 ORDER BY ds.device_id, t.rn;
-```
+```text
 
 ### Last X Days Example
 
@@ -469,7 +469,7 @@ SELECT
 FROM recent_alerts
 GROUP BY device_id, date_trunc('day', alert_time_mst)
 ORDER BY device_id, day_mst DESC;
-```
+```text
 
 ### Timezone Handling
 
@@ -483,7 +483,7 @@ current_timestamp
 -- For other timezones
 current_timestamp AT TIME ZONE 'America/New_York'
 current_timestamp AT TIME ZONE 'Europe/London'
-```
+```text
 
 ---
 
@@ -515,7 +515,7 @@ CROSS JOIN LATERAL (
 ) t
 WHERE t.rn <= 3   -- Top 3
 ORDER BY ds.device_id, t.rn;
-```
+```text
 
 ### Top N as Aggregated JSON Array per Device
 
@@ -538,7 +538,7 @@ CROSS JOIN LATERAL (
 ) t
 WHERE t.rn <= 3
 GROUP BY ds.device_id;
-```
+```text
 
 ### Top N Most Recent Alerts per Device
 
@@ -561,7 +561,7 @@ CROSS JOIN LATERAL (
 ) t
 WHERE t.rn <= 5          -- Top 5 most recent
 ORDER BY ds.device_id, t.rn;
-```
+```text
 
 ### Top N per Alert Type per Device
 
@@ -588,7 +588,7 @@ CROSS JOIN LATERAL (
 ) t
 WHERE t.rn_in_type <= 3   -- Top 3 per type
 ORDER BY ds.device_id, t.alert_type, t.rn_in_type;
-```
+```text
 
 ---
 
@@ -623,7 +623,7 @@ SELECT
 FROM recent_alerts
 GROUP BY device_id, date_trunc('hour', alert_time_mst), alert_type
 ORDER BY device_id, hour_mst DESC, count_per_type_hour DESC;
-```
+```text
 
 ### Count per Type within Each Day
 
@@ -654,7 +654,7 @@ SELECT
 FROM recent_alerts
 GROUP BY device_id, date_trunc('day', alert_time_mst), alert_type
 ORDER BY device_id, day_mst DESC, count_per_type_day DESC;
-```
+```text
 
 ### Pivot-Style: One Column per Type (Dashboards)
 
@@ -685,7 +685,7 @@ CROSS JOIN LATERAL (
 ) t
 GROUP BY device_id, date_trunc('hour', alert_time_mst)
 ORDER BY device_id, hour_mst DESC;
-```
+```text
 
 ---
 
@@ -696,7 +696,7 @@ Indexing is critical for JSONB query performance. Match the index type to your a
 ### Main Index Types for JSONB
 
 | Index Type | Best For | Supported Operators | Size & Write Cost | When to Prefer |
-|------------|----------|---------------------|-------------------|----------------|
+| ------------ | ---------- | --------------------- | ------------------- | ---------------- |
 | **GIN (jsonb_ops)** | General-purpose: containment (@>), key existence (?), path queries | @>, ?, ?, ?&, @?, @@ | Larger (60–80% of table size), slower writes | Need key existence (?) |
 | **GIN (jsonb_path_ops)** | Pure containment + path queries | @>, @?, @@ | Much smaller (20–50% of default), faster writes | Only containment/path, frequent common keys |
 | **Expression B-tree** | Exact match on specific path/value | =, <, >, BETWEEN, ORDER BY | Small | Fixed, high-frequency paths |
@@ -720,7 +720,7 @@ CREATE TABLE device_settings (
     -- GIN for flexible JSONB queries
     INDEX idx_settings_gin USING GIN (settings jsonb_path_ops)  -- containment only
 );
-```
+```text
 
 ### When to Choose jsonb_ops vs jsonb_path_ops
 
@@ -734,7 +734,7 @@ CREATE TABLE device_settings (
 -- Smaller & faster for containment
 CREATE INDEX idx_settings_path_ops
 ON device_settings USING GIN (settings jsonb_path_ops);
-```
+```text
 
 ### Expression Indexes for Specific Paths
 
@@ -746,7 +746,7 @@ ON device_settings ((settings ->> 'fan_profile')) WHERE status = 'active';
 -- Fast containment inside a known nested object
 CREATE INDEX idx_rgb_modes_gin
 ON device_settings USING GIN ((settings -> 'rgb'));
-```
+```text
 
 ### Performance Trade-offs Summary (2025–2026 Benchmarks)
 
@@ -757,7 +757,7 @@ ON device_settings USING GIN ((settings -> 'rgb'));
 
 ### Quick Decision Flowchart
 
-```
+```text
 Do you query mostly fixed paths (status, temp, fan_speed)?
    ↓ Yes → Expression B-tree / normal columns
    ↓ No / variable structure → GIN
@@ -771,7 +771,7 @@ Very large table + infrequent writes?
 
 Frequent updates to large JSONB objects?
    → Minimize JSONB size + use expression indexes + partial indexes
-```
+```text
 
 ---
 
@@ -791,7 +791,7 @@ SELECT
 FROM device_settings
 WHERE data ->> 'status' = 'active'
 ORDER BY critical_alerts DESC, total_alerts DESC;
-```
+```text
 
 ### Use Case 2: Critical Alert Monitoring
 
@@ -818,7 +818,7 @@ CROSS JOIN LATERAL jsonb_path_query(
     )
 ) AS alert(value)
 ORDER BY severity DESC, timestamp DESC;
-```
+```text
 
 ### Use Case 3: Configuration Compliance Check
 
@@ -834,7 +834,7 @@ WHERE NOT (
     AND data @> '{"config": {"max_temp": {}}}'
     AND data @> '{"config": {"rgb": {"enabled": true}}}'
 );
-```
+```text
 
 ### Use Case 4: Hourly Alert Summary (Dashboard Chart Data)
 
@@ -869,7 +869,7 @@ SELECT
 FROM recent_alerts
 GROUP BY device_id, date_trunc('hour', alert_time_mst)
 ORDER BY device_id, hour_mst DESC;
-```
+```text
 
 ### Use Case 5: Top 5 Most Critical Devices
 
@@ -894,7 +894,7 @@ CROSS JOIN LATERAL jsonb_path_query(
 GROUP BY ds.device_id
 ORDER BY critical_alert_count DESC, max_severity DESC
 LIMIT 5;
-```
+```text
 
 ---
 
@@ -931,7 +931,7 @@ def upgrade():
         [sa.text("(data->'config'->>'fan_profile')")],
         postgresql_where=sa.text("data->>'status' = 'active'")
     )
-```
+```text
 
 ### Example Flask-SQLAlchemy Model
 
@@ -967,7 +967,7 @@ class DeviceSettings(db.Model):
             )
         )
         return result.scalar() or 0
-```
+```text
 
 ---
 
@@ -1011,7 +1011,7 @@ FROM device_settings,
 -- Time-based filtering
 '$.alerts[*] ? (@.timestamp >= $since)'
 jsonb_build_object('since', to_char(current_timestamp - interval '24 hours', ...))
-```
+```text
 
 ---
 

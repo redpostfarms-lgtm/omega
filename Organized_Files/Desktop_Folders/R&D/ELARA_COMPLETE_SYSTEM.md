@@ -157,7 +157,7 @@ system.handle_difficulty_switch("teach me")
 # End game
 system.end_game(won=False)
 # Analyzes patterns, evolves, saves
-```
+```text
 
 ---
 
@@ -173,13 +173,13 @@ system.end_game(won=False)
 - Evolution: Working
 
 **Example Output:**
-```
+```text
 [Framework] Board loaded in 0.3s
 [Framework] Patterns detected. Game three complete.
 [Whisper] You feared f7 last time.
 [System] Pawn to e5. Classic.
 [Evolution] Never peaks. Always learns. Natural. Organic.
-```
+```text
 
 ---
 

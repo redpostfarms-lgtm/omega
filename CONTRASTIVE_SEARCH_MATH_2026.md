@@ -180,7 +180,7 @@ This is the version used in most open-source implementations:
 ## Typical Values & Behavior
 
 | Parameter | Typical Range | Effect |
-|-----------|---------------|--------|
+| ----------- | --------------- | -------- |
 | `top_k` | 10 – 50 | Larger → more candidates considered before contrastive penalty |
 | `alpha` | 0.5 – 1.0 | 0.0 → standard top-k<br>0.6–0.8 → sweet spot (most papers)<br>1.0 → very strong anti-similarity |
 | Similarity | Cosine (default) | Some use dot product or negative L2 distance |
@@ -201,9 +201,9 @@ Papers and community benchmarks show contrastive search often:
 - Performs best when combined with moderate top-k (30–50) + alpha ≈ 0.7
 
 **Most popular combination today:**
-```
+```text
 contrastive search + top_k=40 + alpha=0.7 + temperature=0.8
-```
+```text
 
 ## SimCTG: Contrastive Training (Optional Enhancement)
 
@@ -306,7 +306,7 @@ While both aim to improve the isotropy (more uniform distribution) of representa
 ### Core Comparison Table
 
 | Aspect | SimCTG (Contrastive Training Objective) | L2 Normalization (Unit Norm) | Key Difference / Winner |
-|--------|----------------------------------------|------------------------------|-------------------------|
+| -------- | ---------------------------------------- | ------------------------------ | ------------------------- |
 | **Stage of Application** | Training / fine-tuning (modifies model weights) | Inference / post-processing (normalizes embeddings after generation) | SimCTG changes the model; L2 is a cheap fix |
 | **Goal** | Calibrate representation space to be more isotropic via contrastive loss | Force all vectors to have unit length | — |
 | **Mechanism** | InfoNCE-style contrastive loss with positive/negative pairs (dropout augmentation + in-batch negatives) | Simply divide each vector by its L2 norm: $v \leftarrow v / \|v\|_2$ | SimCTG actively learns; L2 just projects |
@@ -422,7 +422,7 @@ $$x_t = \arg\max_y s_t(y) \quad \text{(or sample from softmax}(s_t(y)))$$
 ```python
 alpha_base = 0.6
 alpha = alpha_base * (1 + 0.5 * current_step / max_length)
-```
+```text
 
 **Strengths:** Better balance in long sequences  
 **Used in:** Many Llama-3.x and Qwen forks
@@ -465,7 +465,7 @@ $$\alpha_t = \alpha_{\text{base}} \times (1 + \beta \times t / \text{max\_length
 ### Summary Table – Contrastive Search Variants (2026)
 
 | Variant | Main Change | Alpha Range | top_k Range | Best For | Popularity |
-|---------|-------------|-------------|-------------|----------|------------|
+| --------- | ------------- | ------------- | ------------- | ---------- | ------------ |
 | **Original Contrastive Search** | Fixed $\alpha$ + max similarity | 0.6–1.0 | 10–50 | General long-form | Very high |
 | **Adaptive $\alpha$** | Dynamic $\alpha$ (length/entropy-based) | 0.5–1.0 | 20–60 | Long sequences | High |
 | **Kernel Density Penalty** | KDE instead of max sim | 0.5–0.9 | 30–70 | Research/long-context | Medium |
@@ -474,13 +474,13 @@ $$\alpha_t = \alpha_{\text{base}} \times (1 + \beta \times t / \text{max\_length
 
 **Most popular in 2026:**
 
-```
+```text
 contrastive + top-p hybrid
 alpha = 0.7
 top_k = 40–50
 top_p = 0.93
 temperature = 0.8
-```
+```text
 
 This gives the best balance of fluency, diversity, and low repetition on most open models.
 

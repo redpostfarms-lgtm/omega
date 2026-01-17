@@ -5,7 +5,7 @@
 ### Automatic Deployment
 ```bash
 python deploy.py
-```
+```text
 
 This will:
 - Check Python version (3.8+ required)
@@ -82,7 +82,7 @@ The system includes automatic rate limiting for API calls:
 ### "Module not found" errors
 ```bash
 pip install -r requirements.txt
-```
+```text
 
 ### "No microphone found"
 - Check microphone is connected

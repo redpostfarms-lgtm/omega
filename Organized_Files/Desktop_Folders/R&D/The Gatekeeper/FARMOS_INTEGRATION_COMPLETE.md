@@ -17,11 +17,11 @@ All remaining integration tasks for FarmOS 2026 have been completed. The system 
 - Voice commands now automatically route to FarmOS when agent keywords are detected
 
 **Usage:**
-```
+```text
 "Hey, Gatekeeper, harriet new hire John Doe"
 "Hey, Gatekeeper, bob design 30x60 pole barn"
 "Hey, Gatekeeper, apothecary aphids on tomatoes"
-```
+```text
 
 ### ✅ 2. Brain Wakeup Integration
 **File:** `brain_wakeup.bat`
@@ -38,7 +38,7 @@ start /B python "%GATEKEEPER_DIR%FarmOS_2026.py"
 if errorlevel 1 (
     echo FarmOS startup had issues (continuing)
 )
-```
+```text
 
 ### ✅ 3. Test Script Created
 **File:** `test_farmos_2026.py`
@@ -92,27 +92,27 @@ All 6 agents are integrated:
 ### Deploy FarmOS
 ```cmd
 deploy_farmos_2026.bat
-```
+```text
 
 ### Voice Commands
-```
+```text
 "Hey, Gatekeeper, harriet new hire John Doe"
 "Hey, Gatekeeper, bob design 30x60 pole barn"
 "Hey, Gatekeeper, apothecary aphids on tomatoes"
 "Hey, Gatekeeper, feedmaster layers"
 "Hey, Gatekeeper, medical fall detected"
 "Hey, Gatekeeper, salesbot order 10 lb beef"
-```
+```text
 
 ### Direct Run
 ```cmd
 python D:\RPF_BRAIN\The Gatekeeper\FarmOS_2026.py
-```
+```text
 
 ### Test
 ```cmd
 python D:\RPF_BRAIN\The Gatekeeper\test_farmos_2026.py
-```
+```text
 
 ## Status
 

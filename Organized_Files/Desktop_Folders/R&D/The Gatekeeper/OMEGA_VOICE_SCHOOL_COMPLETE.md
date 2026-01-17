@@ -145,18 +145,18 @@
 ### **Required:**
 ```bash
 pip install numpy scipy
-```
+```text
 
 ### **Recommended (for advanced features):**
 ```bash
 pip install librosa soundfile
-```
+```text
 
 ### **Optional (for more features):**
 ```bash
 pip install pydub
 pip install speechpy
-```
+```text
 
 ### **For Recording:**
 ```bash
@@ -164,7 +164,7 @@ pip install pyaudio
 # Or on Windows:
 pip install pipwin
 pipwin install pyaudio
-```
+```text
 
 ---
 
@@ -173,13 +173,13 @@ pipwin install pyaudio
 ### **1. Start Learning (Continuous):**
 ```bash
 python omega_voice_learner.py
-```
+```text
 Omega listens and learns from your voice.
 
 ### **2. Record & Blend (One-time):**
 ```bash
 python omega_voice_recorder.py
-```
+```text
 Records, analyzes, and blends your voice.
 
 ### **3. Test Advanced Modulation:**
@@ -193,7 +193,7 @@ config = {
     "vibrato_rate": 5.0
 }
 processed = processor.process_voice(audio, config)
-```
+```text
 
 ### **4. Blend Voices:**
 ```python
@@ -201,7 +201,7 @@ from omega_voice_modulator import VoiceBlender
 
 blender = VoiceBlender()
 blended = blender.morph_voices(your_voice, omega_voice, ratio=0.5)
-```
+```text
 
 ---
 
@@ -272,7 +272,7 @@ import numpy as np
 
 processor = AdvancedVoiceProcessor()
 # Load audio, process, save
-```
+```text
 
 ---
 

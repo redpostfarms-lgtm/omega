@@ -23,7 +23,7 @@ python scripts/generate_secure_password.py
 
 # Store in environment
 echo "DB_PASSWORD=your_secure_password" >> .env
-```
+```text
 
 ### Audit Checklist
 - [ ] All placeholder passwords replaced

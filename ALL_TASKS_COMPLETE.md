@@ -58,7 +58,7 @@ All requested tasks have been completed:
 ### To Organize Desktop (Run When Ready)
 ```bash
 python CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py
-```
+```text
 
 This will:
 1. Remove old desktop icons (Omega.lnk, OMEGA.lnk, etc.)
@@ -77,7 +77,7 @@ This will:
 **Method 2: Direct Launch**
 ```bash
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 ### BIOS Logo Implementation (When Ready)
 1. Read `BIOS_Logo_Solution/WHEN_TO_IMPLEMENT_BIOS_LOGO.md`

@@ -39,7 +39,7 @@ def can_grow():
     gpu_load = GPUtil.getGPUs()[0].load * 100 if GPUtil else 0
     
     return ram < 75 and gpu_load < 60 and cpu < 80
-```
+```text
 
 **Behavior:**
 - Starts at 1 agent
@@ -85,19 +85,19 @@ def can_grow():
 ### Basic
 ```bash
 python "The Gatekeeper\hive_auto.py" "optimize 18650 charging curve"
-```
+```text
 
 ### With Voice
-```
+```text
 "Hey, Gatekeeper, hive solve [problem]"
-```
+```text
 
 ## Hardware Requirements
 
 ### Optional (for hardware-aware scaling):
 ```bash
 pip install psutil GPUtil
-```
+```text
 
 **Without these:**
 - Uses conservative limits (max 64 agents)
@@ -119,7 +119,7 @@ pip install psutil GPUtil
   ],
   "population": 64
 }
-```
+```text
 
 ### `state.json`
 ```json
@@ -129,12 +129,12 @@ pip install psutil GPUtil
   "last_solve": "optimize 18650 charging curve",
   "timestamp": "2025-12-31T23:59:00"
 }
-```
+```text
 
 ## Scaling Behavior
 
 ### Growth Pattern (when hardware OK):
-```
+```text
 Generation 1: 1 agent
 Generation 2: 2 agents
 Generation 3: 4 agents
@@ -145,16 +145,16 @@ Generation 7: 64 agents
 Generation 8: 128 agents
 ...
 Generation 12: 4096 agents (max)
-```
+```text
 
 ### Shrink Pattern (when hardware tight):
-```
+```text
 Generation 5: 16 agents → Hardware limit
 Generation 6: 8 agents (shrunk)
 Generation 7: 4 agents (shrunk)
 Generation 8: 2 agents (shrunk)
 Generation 9: 1 agent (min)
-```
+```text
 
 ## Consensus Threshold
 
@@ -164,14 +164,14 @@ Generation 9: 1 agent (min)
 
 ## File Locations
 
-```
+```text
 D:\RPF_BRAIN\The Gatekeeper\hive_auto\
 ├── memory.json          # Permanent solution memory
 ├── state.json           # Current hive state
 └── solutions/
     ├── 20251231_2359_optimize_18650_charging_curve.txt
     └── ...
-```
+```text
 
 ## Philosophy
 

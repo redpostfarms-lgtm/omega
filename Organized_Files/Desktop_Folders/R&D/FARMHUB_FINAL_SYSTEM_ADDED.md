@@ -57,7 +57,7 @@ The FarmHub 2026 Final Master System includes:
 The system can be integrated into `brain_wakeup.bat`:
 ```batch
 start python D:\RPF_BRAIN\FarmHub\FarmHub_2026_Final.py
-```
+```text
 
 ## Query Examples
 
@@ -69,7 +69,7 @@ wm = WorldMemory()
 result = wm.query("FarmHub 2026 Final")
 result = wm.query("FarmHub Master System")
 result = wm.query("farm brain unified system")
-```
+```text
 
 ## Status
 

@@ -11,7 +11,7 @@
 ### Launch Visual Board
 ```bash
 python elara_visual_checkers.py
-```
+```text
 
 ### Controls
 - **Left Click**: Select piece or make move

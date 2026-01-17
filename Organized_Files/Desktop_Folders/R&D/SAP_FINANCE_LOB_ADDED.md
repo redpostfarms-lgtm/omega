@@ -57,7 +57,7 @@ python WorldMemory.py query Universal Journal
 python WorldMemory.py query ACDOCA
 python WorldMemory.py query Finance LoB
 python WorldMemory.py query-all Finance
-```
+```text
 
 ---
 

@@ -8,7 +8,7 @@ Convert a Blueprint JSON file into a FreeCAD Python macro.
 
 ## Prompt Structure
 
-```
+```text
 TASK: Generate FreeCAD Python macro from Blueprint
 
 BLUEPRINT FILE:
@@ -33,5 +33,5 @@ OUTPUT:
 1) Create the FreeCAD macro file
 2) Show build plan (what will be created)
 3) List export commands that will be generated
-```
+```text
 

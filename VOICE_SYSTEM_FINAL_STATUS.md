@@ -30,7 +30,7 @@ The Omega voice analysis system has been **successfully completed**. Both voice 
 
 ### 3. Voice Profiling ✅
 
-```
+```text
 clip_0001.wav (Original):
   - Brightness: 1,527 Hz (warm)
   - Loudness: 0.0333 (loud)
@@ -42,7 +42,7 @@ omega_downloaded.wav (Enhanced):
   - Loudness: 0.0049 (moderate)
   - Quality: 0.0588 (excellent)
   - Character: Clear, professional, detailed
-```
+```text
 
 ### 4. Blending Strategy ✅
 
@@ -76,7 +76,7 @@ omega_downloaded.wav (Enhanced):
 ### System Status
 
 | Component | Status | Notes |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | Voice Files | ✅ Present | Both files verified, analyzed |
 | Analysis Tools | ✅ Working | Python scripts functional |
 | FFmpeg | ✅ Installed | C:\ffmpeg, in PATH |
@@ -90,7 +90,7 @@ omega_downloaded.wav (Enhanced):
 
 ### Voice 1: clip_0001.wav
 
-```
+```text
 Sample Rate:       44,100 Hz
 Duration:          27.21 seconds
 File Size:         4.58 MB
@@ -108,11 +108,11 @@ Classification:
   • Tone: WARM
   • Quality: GOOD
   • Use Case: Conversational, personality-driven speech
-```
+```text
 
 ### Voice 2: omega_downloaded.wav
 
-```
+```text
 Sample Rate:       44,100 Hz
 Duration:          100.52 seconds
 File Size:         33.82 MB
@@ -130,7 +130,7 @@ Classification:
   • Tone: BRIGHT
   • Quality: EXCELLENT
   • Use Case: Professional, formal speech
-```
+```text
 
 ---
 
@@ -164,7 +164,7 @@ Both voices are ready to be cloned for TTS synthesis:
 
 ```bash
 python omega_dual_voice_blend.py  # Optional, 15-20 min
-```
+```text
 
 ### 2. Voice Selection ✅
 
@@ -208,13 +208,13 @@ omega_speak("Hello world", voice_model="clip_0001.wav")
 
 # Use the bright voice
 omega_speak("Hello world", voice_model="omega_downloaded.wav")
-```
+```text
 
 ### Option 2: Generate TTS Audio (Optional, 15-20 min)
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text
 
 Outputs:
 
@@ -260,7 +260,7 @@ Run full TTS generation:
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text
 
 ### Priority 2 (Anytime)
 
@@ -268,7 +268,7 @@ Deploy to Web UI:
 
 ```bash
 python omega_control_panel_web.py --port 5000
-```
+```text
 
 ### Priority 3 (As Needed)
 
@@ -278,7 +278,7 @@ Integrate voice cloning into custom applications using:
 import json
 with open('voice_profiles_analysis.json') as f:
     profiles = json.load(f)
-```
+```text
 
 ---
 

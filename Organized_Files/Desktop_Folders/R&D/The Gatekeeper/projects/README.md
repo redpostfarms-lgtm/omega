@@ -8,7 +8,7 @@ This directory contains projects built by The Gatekeeper fusion system.
 
 ## Project Structure
 
-```
+```text
 projects/
 ├── README.md (this file)
 ├── farm_os/ (Off-grid farm operating system)
@@ -16,21 +16,21 @@ projects/
 ├── solar_controller/ (MPPT solar controller)
 ├── drone_controller/ (Autonomous drone system)
 └── grant_automation/ (USDA grant automation)
-```
+```text
 
 ---
 
 ## Building Projects
 
 ### **Voice Command:**
-```
+```text
 "Hey, Gatekeeper, write [project description]"
-```
+```text
 
 ### **Direct Command:**
 ```bash
 python gatekeeper_fusion.py "[project description]"
-```
+```text
 
 ---
 
@@ -38,9 +38,9 @@ python gatekeeper_fusion.py "[project description]"
 
 ### **1. Off-Grid Farm OS**
 **Command:**
-```
+```text
 "Hey, Gatekeeper, create a full-stack off-grid farm operating system"
-```
+```text
 
 **Components:**
 - Rust backend (system control)
@@ -50,9 +50,9 @@ python gatekeeper_fusion.py "[project description]"
 
 ### **2. Battery Management System**
 **Command:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe 18650 battery management system in Rust"
-```
+```text
 
 **Components:**
 - Cell monitoring
@@ -62,9 +62,9 @@ python gatekeeper_fusion.py "[project description]"
 
 ### **3. Solar MPPT Controller**
 **Command:**
-```
+```text
 "Hey, Gatekeeper, build a solar panel MPPT controller with PID loop"
-```
+```text
 
 **Components:**
 - MPPT algorithm

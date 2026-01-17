@@ -64,21 +64,21 @@ A complete chatbot, order processing, tracking, and logistics system. One voice,
 ## VOICE COMMANDS
 
 ### Via Gatekeeper
-```
+```text
 "Hey Gatekeeper, SalesBot order 10 lb castings"
 "Hey Gatekeeper, SalesBot what do you have"
 "Hey Gatekeeper, SalesBot track 00001"
 "Hey Gatekeeper, SalesBot status"
-```
+```text
 
 ### Direct Commands
-```
+```text
 > SalesBot, order 10 lb castings
 > SalesBot, what do you have
 > SalesBot, track 00001
 > SalesBot, status
 > quit
-```
+```text
 
 ---
 
@@ -111,7 +111,7 @@ A complete chatbot, order processing, tracking, and logistics system. One voice,
 ## ORDER PROCESSING
 
 ### Example Order
-```
+```text
 guest> SalesBot, order 10 lb castings
 SalesBot: 10 castings ordered. Ticket number 00001. Shipping today.
 
@@ -124,7 +124,7 @@ MONTE VISTA, CO 81144
 TO: Shipped
 ETA: Mon, 01/05
 ==================
-```
+```text
 
 ### Order Flow
 1. **Order Received** → Validates stock
@@ -148,7 +148,7 @@ ETA: Mon, 01/05
 - **Other** → 3 days (standard shipping)
 
 ### Tracking Query
-```
+```text
 guest> SalesBot, track 00001
 SalesBot: Order 00001: 10 castings, status shipped, ETA Mon, 01/05, carrier USPS Ground.
 
@@ -157,7 +157,7 @@ SalesBot: Order 00001: 10 castings, status shipped, ETA Mon, 01/05, carrier USPS
   Status: Shipped
   Carrier: USPS Ground
   ETA: Mon, 01/05
-```
+```text
 
 ---
 
@@ -193,12 +193,12 @@ SalesBot: Order 00001: 10 castings, status shipped, ETA Mon, 01/05, carrier USPS
 ### Quick Deploy
 ```batch
 deploy_chatbot_logistics.bat
-```
+```text
 
 ### Manual Deploy
 ```bash
 python D:\RPF_BRAIN\Sales\ChatbotLogistics.py
-```
+```text
 
 ### With Frontend (Optional)
 1. Run frontend on `localhost:3001`
@@ -210,13 +210,13 @@ python D:\RPF_BRAIN\Sales\ChatbotLogistics.py
 ## USAGE EXAMPLES
 
 ### Example 1: Check Inventory
-```
+```text
 guest> SalesBot, what do you have
 SalesBot: We have got 42 pounds pasture beef, 120 dozen eggs, 180 pounds worm castings, 300 pounds tomatoes. All organic.
-```
+```text
 
 ### Example 2: Place Order
-```
+```text
 guest> SalesBot, order 5 lb beef
 SalesBot: 5 beef ordered. Ticket number 00001. Shipping today.
 
@@ -229,19 +229,19 @@ MONTE VISTA, CO 81144
 TO: Shipped
 ETA: Tue, 01/04
 ==================
-```
+```text
 
 ### Example 3: Track Order
-```
+```text
 guest> SalesBot, track 00001
 SalesBot: Order 00001: 5 beef, status shipped, ETA Tue, 01/04, carrier USPS Ground.
-```
+```text
 
 ### Example 4: Status Report
-```
+```text
 guest> SalesBot, status
 SalesBot: Chatbot plus logistics live. 1 total orders. 0 packed. 1 shipped. Inventory auto-sync active.
-```
+```text
 
 ---
 
@@ -250,7 +250,7 @@ SalesBot: Chatbot plus logistics live. 1 total orders. 0 packed. 1 shipped. Inve
 ### orders.jsonl (JSON Lines Format)
 ```json
 {"id": "00001", "user": "portal", "item": "beef", "qty": 5, "time": "2026-01-03T17:30:00", "status": "shipped", "total": 62.50}
-```
+```text
 
 ### stock.json
 ```json
@@ -260,7 +260,7 @@ SalesBot: Chatbot plus logistics live. 1 total orders. 0 packed. 1 shipped. Inve
   "castings": 180,
   "tomatoes": 300
 }
-```
+```text
 
 ### tracking.json
 ```json
@@ -272,7 +272,7 @@ SalesBot: Chatbot plus logistics live. 1 total orders. 0 packed. 1 shipped. Inve
     "eta": "Tue, 01/04"
   }
 }
-```
+```text
 
 ---
 
@@ -294,14 +294,14 @@ SalesBot: Chatbot plus logistics live. 1 total orders. 0 packed. 1 shipped. Inve
 
 ## STATUS REPORT
 
-```
+```text
 SalesBot: Chatbot plus logistics live. X total orders. Y packed. Z shipped. Inventory auto-sync active.
 
   Total Orders: X
   Pending: Y
   Shipped: Z
   Inventory: Auto-sync active
-```
+```text
 
 ---
 

@@ -63,7 +63,7 @@ for other_state in range(1 << num_constraints):
     diversity_penalty_sum += (1.0 - hamming) * diversity_penalty
 
 final_score = base_score - diversity_penalty_sum
-```
+```text
 
 ### Key Components:
 

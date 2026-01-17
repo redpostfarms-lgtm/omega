@@ -41,11 +41,11 @@
 **Status**: ✅ **READY TO USE**
 
 **Example Feedback**:
-```
+```text
 ⚠️  Low SNR (12.3dB): High background noise detected
 ⚠️  Audio too quiet (RMS: 0.08): Increase microphone gain
 ✅ Recommendations: Move to quieter location, speak closer to mic
-```
+```text
 
 ---
 
@@ -64,14 +64,14 @@
 **Status**: ✅ **READY TO USE**
 
 **Example Output**:
-```
+```text
 PERFORMANCE MONITOR - SESSION STATISTICS
 Total Recognition Attempts: 45
 Success Rate: 92.3%
 Average Latency: 4.8s
 Average Confidence: 0.68
 Errors: 2
-```
+```text
 
 ---
 
@@ -125,7 +125,7 @@ from omega_adaptive_improvements import adaptive_threshold
 # In recognition function:
 threshold = adaptive_threshold.get_threshold(audio_file)
 # Use this threshold instead of fixed 0.3
-```
+```text
 
 ### To Use Audio Quality Agent:
 ```python
@@ -134,7 +134,7 @@ from omega_adaptive_improvements import audio_quality_agent
 # After recording:
 quality_metrics = audio_quality_agent.analyze_audio(audio_file)
 print(quality_metrics['feedback'])  # Show warnings/recommendations
-```
+```text
 
 ### To Use Performance Monitor:
 ```python
@@ -149,7 +149,7 @@ performance_monitor.record_recognition(
 
 # Print stats:
 performance_monitor.print_stats()
-```
+```text
 
 ---
 

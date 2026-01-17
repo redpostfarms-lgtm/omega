@@ -76,7 +76,7 @@ outlines_model = models.transformers(model, tokenizer)
 # Generate with guarantees
 generator = generate.json(outlines_model, MySchema)
 result = generator(prompt, max_tokens=250)
-```
+```text
 
 ### Outlines + Diverse Beam Search:
 
@@ -90,7 +90,7 @@ generator = generate.json(
     num_return_sequences=3
 )
 results = generator(prompt)
-```
+```text
 
 ### Key Features:
 

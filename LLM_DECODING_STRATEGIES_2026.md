@@ -14,7 +14,7 @@ Side-by-side comparison of two major decoding strategies used in large language 
 ## Comparison Table
 
 | Aspect | Diverse Beam Search | Top-k Sampling | Winner / When to Choose |
-|--------|---------------------|----------------|-------------------------|
+| -------- | --------------------- | ---------------- | ------------------------- |
 | **Core Mechanism** | Search-based: Keeps multiple high-probability sequences in parallel, split into groups with diversity penalty | Sampling-based: At each step, samples randomly from the top k most probable tokens | Beam for quality, top-k for speed & naturalness |
 | **Determinism** | Yes — same input + parameters → same output | No — random sampling → different outputs every time | **Diverse beam search** |
 | **Diversity** | Medium to high — diversity penalty forces groups to explore different paths | High — can explore many different paths (especially with large k) | **Top-k** (more organic) |
@@ -36,7 +36,7 @@ Side-by-side comparison of two major decoding strategies used in large language 
 Here is the combined comparison of diverse beam search and nucleus sampling (top-p sampling) — presented in a single, comprehensive table with explanations, trade-offs, and real-world guidance (as of January 10, 2026).
 
 | Aspect | Diverse Beam Search | Nucleus Sampling (Top-p) | Winner / Recommendation |
-|--------|---------------------|-------------------------|------------------------|
+| -------- | --------------------- | ------------------------- | ------------------------ |
 | **Core Mechanism** | Search-based: Maintains multiple high-probability sequences in parallel, split into groups with diversity penalty | Sampling-based: At each step, considers only the smallest set of tokens whose cumulative probability ≥ p, then randomly samples | Beam for precision, nucleus for naturalness |
 | **Determinism** | Yes — fixed output for same input/parameters | No — random sampling → different outputs every time | Diverse beam search |
 | **Diversity** | Medium to high — diversity penalty forces groups to explore different paths | High — automatically adapts (more tokens when uncertain, fewer when confident) | Nucleus (more organic) |
@@ -83,7 +83,7 @@ Here's a clear, detailed comparison between diverse beam search and contrastive 
 Contrastive search (introduced in 2022 and refined through 2024–2025) is a relatively newer method that aims to improve diversity and coherence during generation by explicitly penalizing tokens that are too similar to previously generated ones, while still favoring high-probability continuations.
 
 | Aspect | Diverse Beam Search | Contrastive Search | Winner / When to Choose |
-|--------|---------------------|-------------------|------------------------|
+| -------- | --------------------- | ------------------- | ------------------------ |
 | **Core Mechanism** | Search-based: Maintains multiple high-probability sequences in parallel, split into groups with diversity penalty (e.g., Hamming distance) across groups | Sampling-based: At each step, penalizes tokens that are semantically similar to previous tokens (via embedding cosine similarity) while keeping high-prob ones | Diverse beam for structured quality, contrastive for fluency |
 | **Diversity** | Medium to high — controlled via groups + explicit penalty | High — natural diversity emerges from penalizing repetition and similarity | Contrastive (more organic) |
 | **Coherence / Quality** | Very high — explores multiple good paths, keeps best-scoring ones | High — often more fluent and human-like than top-k/p, but can occasionally lose coherence on long sequences | Diverse beam search |
@@ -127,7 +127,7 @@ Contrastive search (introduced in 2022 and refined through 2024–2025) is a rel
 Here is a combined, comprehensive comparison of the four most important decoding strategies in 2026, presented in a single clear table.
 
 | Aspect | Diverse Beam Search | Nucleus Sampling (Top-p) | Contrastive Search | Greedy Decoding | Winner / Recommendation |
-|--------|---------------------|-------------------------|-------------------|-----------------|------------------------|
+| -------- | --------------------- | ------------------------- | ------------------- | ----------------- | ------------------------ |
 | **Core Mechanism** | Search-based: multiple sequences in parallel + diversity penalty across groups | Sampling-based: samples from smallest set of tokens with cumulative prob ≥ p | Sampling-based: penalizes tokens semantically similar to previous ones | Deterministic: always picks the single highest-probability token (argmax) | — |
 | **Determinism** | Yes — fixed output | No — random | No — random | Yes — always the same | Diverse beam / Greedy |
 | **Diversity** | Medium–High (controlled via groups + penalty) | High (adaptive to confidence) | High (semantic anti-repetition) | Zero | Nucleus / Contrastive |
@@ -236,7 +236,7 @@ Choose (or hybridize) based on whether you prioritize speed, quality, diversity,
 **Choose based on priority:**
 
 | Priority | Strategy | Reason |
-|----------|----------|--------|
+| ---------- | ---------- | -------- |
 | **Controlled, high-quality variety** | Diverse Beam Search | Multiple distinct, deterministic outputs |
 | **Fast, organic, single-shot naturalness** | Top-k Sampling | Natural, varied, conversational |
 
@@ -252,7 +252,7 @@ Choose (or hybridize) based on whether you prioritize speed, quality, diversity,
     "diversity_penalty": 0.8-2.0,
     "length_penalty": 1.0-1.5  # To avoid short bias
 }
-```
+```text
 
 ### Top-k Sampling Parameters:
 ```python
@@ -261,7 +261,7 @@ Choose (or hybridize) based on whether you prioritize speed, quality, diversity,
     "temperature": 0.7-0.85,
     "top_p": 0.9-0.95  # Optional: nucleus sampling
 }
-```
+```text
 
 ---
 

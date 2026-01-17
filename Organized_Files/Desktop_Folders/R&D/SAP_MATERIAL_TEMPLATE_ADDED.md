@@ -31,7 +31,7 @@ wm = WorldMemory()
 result = wm.query("Material Migration Template")
 result = wm.query("Material Migration Object Template Fields")
 result = wm.query("SAP Material template fields")
-```
+```text
 
 ## Status
 

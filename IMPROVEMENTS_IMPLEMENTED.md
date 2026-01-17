@@ -34,7 +34,7 @@ All 6 improvements identified in the deep scan audit have been successfully impl
     "log_file": "defense_log.txt"
   }
 }
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ All 6 improvements identified in the deep scan audit have been successfully impl
     "exponential_backoff": true
   }
 }
-```
+```text
 
 ---
 
@@ -140,7 +140,7 @@ All 6 improvements identified in the deep scan audit have been successfully impl
     "max_cpu_percent": 80.0
   }
 }
-```
+```text
 
 ---
 
@@ -219,7 +219,7 @@ All 6 improvements identified in the deep scan audit have been successfully impl
     "max_cpu_percent": 80.0
   }
 }
-```
+```text
 
 ---
 
@@ -238,7 +238,7 @@ All 6 improvements identified in the deep scan audit have been successfully impl
 Run tests with:
 ```bash
 python test_gs_protocol.py
-```
+```text
 
 All tests should pass. Tests use temporary directories and don't affect production files.
 

@@ -55,12 +55,12 @@ All admin-related issues have been identified and resolved. The Gatekeeper syste
 
 ## Critical Directories Created
 
-```
+```text
 [NEW] logs/       - System logs & diagnostics
 [NEW] data/       - Data storage
 [NEW] reports/    - Generated reports
 [NEW] backups/    - Automatic backups
-```
+```text
 
 All directories are writable and ready for use.
 
@@ -69,7 +69,7 @@ All directories are writable and ready for use.
 ## Critical Files Protected
 
 | File | Size | Status | Access |
-|------|------|--------|--------|
+| ------ | ------ | -------- | -------- |
 | gatekeeper_integration_module.py | 37.9 KB | OK | RW |
 | gatekeeper_admin_helper.py | 10.5 KB | OK | RW |
 | run_gatekeeper_admin.bat | 1.5 KB | OK | RW |
@@ -83,7 +83,7 @@ All directories are writable and ready for use.
 ### Method 1: Batch Script (EASIEST)
 ```bash
 run_gatekeeper_admin.bat
-```
+```text
 - Automatically requests admin
 - One-click launcher
 - Works on all Windows versions
@@ -91,7 +91,7 @@ run_gatekeeper_admin.bat
 ### Method 2: PowerShell Script
 ```powershell
 .\run_gatekeeper_admin.ps1
-```
+```text
 - Advanced configuration
 - Better error messages
 - Professional appearance
@@ -101,12 +101,12 @@ run_gatekeeper_admin.bat
 # Right-click PowerShell > Run as Administrator
 cd "h:\The Gatekeeper"
 python gatekeeper_integration_module.py
-```
+```text
 
 ### Method 4: Admin Verification Only
 ```bash
 python gatekeeper_admin_helper.py
-```
+```text
 - Checks admin status
 - Verifies all permissions
 - Creates missing directories
@@ -184,26 +184,26 @@ These files are automatically saved with admin privileges:
 ```bash
 # Solution: Use admin launcher
 run_gatekeeper_admin.bat
-```
+```text
 
 ### Cannot Write Log Files
 ```bash
 # Solution: Verify logs directory
 python gatekeeper_admin_helper.py
-```
+```text
 
 ### Config Not Saving
 ```bash
 # Solution: Check permissions
 icacls "." /grant "%USERNAME%":F /T
-```
+```text
 
 ### Still Getting Permission Errors
 ```bash
 # Solution: Run PowerShell as Admin
 # Right-click PowerShell > Run as Administrator
 # Then: .\run_gatekeeper_admin.ps1
-```
+```text
 
 ---
 
@@ -261,7 +261,7 @@ icacls "." /grant "%USERNAME%":F /T
 
 ## Quick Reference
 
-```
+```text
 LAUNCH WITH ADMIN:
   run_gatekeeper_admin.bat
 
@@ -277,7 +277,7 @@ CHECK PERMISSIONS:
 BACKUP CRITICAL FILES:
   copy admin_config.json backups\
   copy gatekeeper_integration_config.json backups\
-```
+```text
 
 ---
 

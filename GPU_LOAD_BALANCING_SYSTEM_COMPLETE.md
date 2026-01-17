@@ -68,7 +68,7 @@ The Omega Control Panel system has been successfully enhanced with comprehensive
 
 ## 📊 Live API Response Example
 
-```
+```text
 GET http://localhost:5000/api/load-balance
 
 Response Status: 200 OK
@@ -78,7 +78,7 @@ RAM Usage: 88.2% (Critical)
 GPU Usage: 0%
 Stress Level: 36.3% (Good)
 Balance Status: Unknown (Due to recommendations structure)
-```
+```text
 
 ### Full Response Structure
 
@@ -115,7 +115,7 @@ Balance Status: Unknown (Due to recommendations structure)
   },
   "balance_status": {...}
 }
-```
+```text
 
 ---
 
@@ -125,27 +125,27 @@ Balance Status: Unknown (Due to recommendations structure)
 
 **Layer 1: Monitoring**
 
-```
+```text
 Background Thread → Collects CPU, RAM, GPU stats every 2 seconds
                   → Analyzes resource usage patterns
                   → Maintains 30-point historical data
-```
+```text
 
 **Layer 2: Analysis & Decision**
 
-```
+```text
 Threshold Comparison → CPU > 80%? → Recommend GPU offload
                     → RAM > 75%? → Recommend GPU memory optimization
                     → GPU < 85%? → Accept GPU workloads
-```
+```text
 
 **Layer 3: Presentation**
 
-```
+```text
 Web API (/api/load-balance) → Returns JSON with all metrics
                            → Dashboard displays real-time stats
                            → Browser updates every 5 seconds
-```
+```text
 
 ---
 
@@ -153,41 +153,41 @@ Web API (/api/load-balance) → Returns JSON with all metrics
 
 ### Scenario 1: CPU Overload
 
-```
+```text
 Input:  CPU=87%, RAM=45%, GPU=10%
 Output: 
   - Use GPU: YES
   - GPU Batch Size: 128
   - Recommendation: "CPU is under heavy load, offload to GPU"
-```
+```text
 
 ### Scenario 2: Memory Pressure
 
-```
+```text
 Input:  CPU=35%, RAM=82%, GPU=12%
 Output:
   - Use GPU: YES
   - Enable Mixed Precision: YES
   - Enable Gradient Checkpointing: YES
   - Recommendation: "RAM usage is critical, use GPU to free memory"
-```
+```text
 
 ### Scenario 3: Balanced Load
 
-```
+```text
 Input:  CPU=50%, RAM=55%, GPU=45%
 Output:
   - Use GPU: OPTIMAL
   - Keep Current Config
   - Recommendation: "System is operating optimally"
-```
+```text
 
 ---
 
 ## 📈 Performance Metrics
 
 | Metric | Value | Impact |
-|--------|-------|--------|
+| -------- | ------- | -------- |
 | API Response Time | <50ms | Minimal latency |
 | Memory Overhead | 5-10MB | Negligible impact |
 | CPU Overhead | <1% | Background thread only |
@@ -269,7 +269,7 @@ Located in the main web dashboard at `http://localhost:5000/`
 from omega_gpu_load_balancer import get_load_balancer
 self.load_balancer = get_load_balancer()
 self.load_balancer.start_monitoring(interval=2.0)
-```
+```text
 
 ### File: omega_control_panel_web.py
 
@@ -282,7 +282,7 @@ def api_load_balance():
 # Helper Function
 def calculate_balance_status(stats, recommendations):
     # Calculates system balance health
-```
+```text
 
 ### Browser (JavaScript)
 
@@ -293,7 +293,7 @@ setInterval(() => {
         .then(r => r.json())
         .then(data => updateDashboard(data))
 }, 5000);
-```
+```text
 
 ---
 
@@ -358,11 +358,11 @@ GPU Available: False
 CPU Usage: 20.8%
 RAM Usage: 88.2%
 Stress Level: 36.3%
-```
+```text
 
 ### Web Dashboard Test
 
-```
+```text
 http://localhost:5000/
 ↓
 GPU Load Balancer section visible ✅
@@ -370,16 +370,16 @@ Real-time metrics displayed ✅
 Auto-refresh working (5s intervals) ✅
 Recommendations showing ✅
 Status indicators updating ✅
-```
+```text
 
 ### Git Commits
 
-```
+```text
 3 commits made in session:
 1. GPU Load Balancer integration and web UI
 2. Documentation of GPU system
 3. Fix Unicode emoji encoding
-```
+```text
 
 ---
 
@@ -387,50 +387,50 @@ Status indicators updating ✅
 
 ### 1. **User Opens Dashboard**
 
-```
+```text
 Browser → GET http://localhost:5000/
         ← HTML with GPU Load Balancer section
-```
+```text
 
 ### 2. **JavaScript Initialization**
 
-```
+```text
 window.addEventListener('DOMContentLoaded', ...)
 → Calls loadLoadBalancerData()
 → Fetches /api/load-balance
 → Updates dashboard components
-```
+```text
 
 ### 3. **Backend Monitoring**
 
-```
+```text
 Control Panel → GPU Load Balancer
              → Background thread runs every 2 seconds
              → Collects: CPU%, RAM%, GPU%
              → Makes decisions
              → Stores recommendations
-```
+```text
 
 ### 4. **API Response**
 
-```
+```text
 GET /api/load-balance
 → gathers current stats
 → calculates distribution
 → generates recommendations
 → returns JSON response
-```
+```text
 
 ### 5. **Dashboard Update**
 
-```
+```text
 JavaScript receives JSON
 → Updates resource bars
 → Updates status cards
 → Refreshes recommendations
 → Waits 5 seconds
 → Repeat (continuous monitoring)
-```
+```text
 
 ---
 

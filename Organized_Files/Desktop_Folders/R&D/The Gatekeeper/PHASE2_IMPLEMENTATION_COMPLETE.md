@@ -76,7 +76,7 @@ predictions = qsvm.predict(X_test)
 hybrid = pipeline.create_hybrid(num_features=4, num_classes=2)
 train_results = hybrid.train(X, y)
 predictions = hybrid.predict(X_test)
-```
+```text
 
 ---
 
@@ -126,7 +126,7 @@ results = agent.execute_goal(goal)
 
 # Check status
 status = agent.get_status()
-```
+```text
 
 ---
 
@@ -179,7 +179,7 @@ print(f"Output: {result.output}")
 
 # Validate code
 is_valid, issues = sandbox.validate_code("print('Hello')")
-```
+```text
 
 ---
 
@@ -214,7 +214,7 @@ model = integration.train_quantum_model(X, y, model_type="qnn")
 
 # Execute code
 result = integration.execute_code("print('Hello')")
-```
+```text
 
 ---
 
@@ -223,7 +223,7 @@ result = integration.execute_code("print('Hello')")
 ### Required Dependencies:
 ```bash
 # None - all systems work with basic Python
-```
+```text
 
 ### Optional Dependencies (for full functionality):
 ```bash
@@ -235,7 +235,7 @@ pip install qiskit-ibm-provider
 
 # Classical ML (for hybrid models)
 pip install scikit-learn
-```
+```text
 
 ---
 
@@ -247,7 +247,7 @@ python omega_quantum_ml.py
 python omega_autonomous_agent.py
 python omega_code_sandbox.py
 python omega_phase2_integration.py
-```
+```text
 
 ### Expected Output:
 - Quantum ML: Capability report, model creation

@@ -223,18 +223,18 @@ Each recipe includes:
 ### **One-Command Deploy:**
 ```batch
 deploy_feedmaster.bat
-```
+```text
 
 ### **Manual Start:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\FeedMaster.py
-```
+```text
 
 ### **Via FarmHub:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\master_farmhub.py
 # Then: "feedmaster, layers"
-```
+```text
 
 ---
 

@@ -38,7 +38,7 @@ plt.pause(0.1)  # Give the window time to render
 while self.running:
     plt.pause(0.1)  # Process GUI events - CRITICAL!
     time.sleep(0.9)  # Wait between updates
-```
+```text
 
 ### 2. Created Fixed Launcher ✅
 
@@ -60,17 +60,17 @@ while self.running:
 ### Option 1: Fixed Launcher (Recommended)
 ```bash
 python START_CONTROL_PANEL_FIXED.py
-```
+```text
 
 ### Option 2: Original Launcher (Now Fixed)
 ```bash
 python START_CONTROL_PANEL.py
-```
+```text
 
 ### Option 3: Batch File (Windows)
 ```bash
 RUN_CONTROL_PANEL.bat
-```
+```text
 
 ---
 
@@ -92,7 +92,7 @@ The critical fix was adding `plt.pause(0.1)` in the main loop:
 while self.running:
     plt.pause(0.1)  # THIS IS ESSENTIAL - processes GUI events
     time.sleep(0.9)
-```
+```text
 
 Without `plt.pause()`, matplotlib's event loop doesn't run, so the window:
 - May not appear

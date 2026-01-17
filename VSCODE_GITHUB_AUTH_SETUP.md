@@ -32,7 +32,7 @@
 If you have a different repository, update the remote:
 ```bash
 git remote set-url origin https://github.com/your-username/your-repo.git
-```
+```text
 
 ---
 
@@ -74,7 +74,7 @@ If the built-in authentication doesn't work:
 **Option A: Via Command Line**
 ```bash
 git credential-manager-core store
-```
+```text
 Then enter:
 - Protocol: `https`
 - Host: `github.com`
@@ -93,7 +93,7 @@ Then enter:
 ### Step 3: Test Authentication
 ```bash
 git fetch origin
-```
+```text
 
 If successful, authentication is working! ✅
 
@@ -116,7 +116,7 @@ The `.vscode/settings.json` file has been configured with:
 **Solution 1: Clear stored credentials**
 ```bash
 git credential-manager-core erase
-```
+```text
 Then try signing in again via VS Code Command Palette.
 
 **Solution 2: Use Personal Access Token**
@@ -169,7 +169,7 @@ git fetch origin
 
 # Test push (if you have commits)
 git push origin master
-```
+```text
 
 If both work, authentication is properly configured! ✅
 
@@ -213,7 +213,7 @@ Once authenticated, you can use:
 **Test authentication:**
 ```bash
 git fetch origin
-```
+```text
 
 ---
 

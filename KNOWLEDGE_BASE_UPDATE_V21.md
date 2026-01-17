@@ -69,7 +69,7 @@ def contrastive_search(
     temperature: float = 1.0,
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 )
-```
+```text
 
 **Algorithm Steps:**
 1. Get model outputs with past_key_values (KV cache)

@@ -126,7 +126,7 @@ Run the batch script once to download all knowledge bases:
 
 ```batch
 quantum_knowledge_school.bat
-```
+```text
 
 **Time Required:** 18-36 hours on gigabit connection  
 **Disk Space:** 11.1 TB minimum  
@@ -146,7 +146,7 @@ To manually trigger an update:
 
 ```bash
 python D:\RPF_BRAIN\The Gatekeeper\weekly_school.py
-```
+```text
 
 ---
 
@@ -198,7 +198,7 @@ python D:\RPF_BRAIN\The Gatekeeper\weekly_school.py
 
 ## Directory Structure
 
-```
+```text
 D:\RPF_BRAIN\KB\
 ├── Botany\
 │   ├── iNaturalist\
@@ -217,7 +217,7 @@ D:\RPF_BRAIN\KB\
 │   └── feedipedia.jsonl
 └── Agronomy\
     └── harvard_dataverse.zip
-```
+```text
 
 ---
 
@@ -255,10 +255,10 @@ Say: **"Gatekeeper, school mode"** to trigger manual update.
 ## Troubleshooting
 
 ### **wget Not Found:**
-```
+```text
 ERROR: wget not found. Please install wget for Windows.
 Download from: https://eternallybored.org/misc/wget/
-```
+```text
 
 **Solution:** Install wget for Windows from the link above.
 

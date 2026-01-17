@@ -41,12 +41,12 @@
 
 ```bash
 npm install openai
-```
+```text
 
 Or if package.json exists:
 ```bash
 npm install
-```
+```text
 
 ### Use the Integration
 
@@ -68,18 +68,18 @@ const response = await openai.generateResponse('write a haiku about ai', {
 });
 
 console.log(response);
-```
+```text
 
 ### Test the API
 
 ```bash
 node test_openai_api.js
-```
+```text
 
 Or using npm:
 ```bash
 npm test
-```
+```text
 
 ### Environment Variable
 
@@ -94,7 +94,7 @@ set OPENAI_API_KEY=sk-proj-...
 
 # Linux/Mac
 export OPENAI_API_KEY=sk-proj-...
-```
+```text
 
 ---
 
@@ -169,7 +169,7 @@ async function main() {
 }
 
 main().catch(console.error);
-```
+```text
 
 ---
 

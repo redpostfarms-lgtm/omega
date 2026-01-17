@@ -59,13 +59,13 @@ After a full planetary quantum scrub (2.8 million repos, 1.4 million papers, 89k
 ## Architecture
 
 ### Inter-Agent Communication
-```
+```text
 User → FarmOS → AgentBus → [Agent] → Response
                 ↓
          [Quantum Knowledge]
                 ↓
          [Planetary Deep Dive] (if gap detected)
-```
+```text
 
 ### Knowledge Flow
 1. Query received
@@ -80,72 +80,72 @@ User → FarmOS → AgentBus → [Agent] → Response
 ### Deploy
 ```cmd
 deploy_farmos_2026.bat
-```
+```text
 
 Or directly:
 ```cmd
 python D:\RPF_BRAIN\The Gatekeeper\FarmOS_2026.py
-```
+```text
 
 ### Voice Commands
 
 **HR Commands:**
-```
+```text
 You → harriet new hire John Doe
 You → harriet payroll
 You → hr termination employee 123
-```
+```text
 
 **Engineering Commands:**
-```
+```text
 You → bob design 30x60 pole barn
 You → bob battery bank 2 MWh
 You → build solar array ground mount
-```
+```text
 
 **Pest/Disease Commands:**
-```
+```text
 You → apothecary aphids on tomatoes
 You → pest blight treatment
 You → organic disease control
-```
+```text
 
 **Feed Commands:**
-```
+```text
 You → feedmaster layers
 You → feed chicken ration
 You → worm feed calculator
-```
+```text
 
 **Medical Commands:**
-```
+```text
 You → medical fall detected
 You → emergency CPR
 You → medical status
-```
+```text
 
 **Sales Commands:**
-```
+```text
 You → salesbot order 10 lb beef
 You → sell eggs
 You → order castings
-```
+```text
 
 **General Queries:**
-```
+```text
 You → [any question] → Quantum knowledge base search
-```
+```text
 
 **Status:**
-```
+```text
 You → status
 FarmOS: 6 agents live. Knowledge gaps auto-healing. Last quantum dive: 19:10
-```
+```text
 
 ## Technical Details
 
 ### File Structure
-```
+```text
 D:\RPF_BRAIN\
 ├── The Gatekeeper\
 │   ├── FarmOS_2026.py          # Master OS file
@@ -159,13 +159,13 @@ D:\RPF_BRAIN\
 │   └── Sales\QuantumSalesBot.py  # Sales agent
 └── Archived\
     └── gatekeeper_brain.json   # 18 TB knowledge base
-```
+```text
 
 ### Agent Registration
 Agents are registered dynamically:
 ```python
 register_agent('agent_name', agent_function)
-```
+```text
 
 ### Quantum Knowledge System
 - Local knowledge base: 18 TB

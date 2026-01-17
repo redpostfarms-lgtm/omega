@@ -28,7 +28,7 @@ A new automated system upgrade and optimization pipeline called **Scan Integrati
 
 ### 6-Phase Workflow
 
-```
+```text
 PHASE 1: SCAN
    ↓
    Looks for errors or red flags
@@ -52,7 +52,7 @@ PHASE 5: REPEAT SCAN
 PHASE 6: FINISH UP
    ↓
    Generates comprehensive report
-```
+```text
 
 ## Key Features
 
@@ -94,17 +94,17 @@ PHASE 6: FINISH UP
 ### Basic Usage
 ```bash
 python omega_scan_integration.py
-```
+```text
 
 Or:
 ```bash
 SCAN_INTEGRATION.bat
-```
+```text
 
 ### Advanced Usage
 ```bash
 python omega_scan_integration.py --root "path/to/scan" --output "CUSTOM_REPORT.md"
-```
+```text
 
 ## Output
 

@@ -19,9 +19,9 @@ The Gatekeeper automatically:
 ## Example Usage
 
 ### Voice Command
-```
+```text
 "Hey, Gatekeeper, go to college on off-grid battery management"
-```
+```text
 
 ### What Happens
 1. **GitHub Search**: Searches for "off-grid battery management stars:>500"
@@ -31,7 +31,7 @@ The Gatekeeper automatically:
 5. **Approval**: "Learned 18 new repos + 4 docs. Add to pipelines? (yes/no)"
 
 ### Response
-```
+```text
 The doors of knowledge opens. Learning off-grid battery management.
 
 [1/3] Searching GitHub for: off-grid battery management
@@ -45,7 +45,7 @@ The doors of knowledge opens. Learning off-grid battery management.
 Learning complete. Learned 18 new items. Add to pipelines?
 
 > Add to pipelines? (yes/no):
-```
+```text
 
 ## Supported Topics
 
@@ -91,9 +91,9 @@ Any other topic is treated as a direct search term.
 ## Approval Gate
 
 After learning, the Gatekeeper asks:
-```
+```text
 > Add to pipelines? (yes/no):
-```
+```text
 
 - **yes** → Knowledge added to pipelines, integrated
 - **no** → Knowledge saved but not added to pipelines

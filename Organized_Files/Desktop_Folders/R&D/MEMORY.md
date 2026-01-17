@@ -41,11 +41,11 @@ Before answering, editing, refactoring, generating new files, or running command
 ## Session Start Protocol
 **At the start of every new Cursor session, use this prompt:**
 
-```
+```text
 Read MEMORY.md and WORKFLOW_STATE.md. 
 Summarize: (1) project goal, (2) current task, (3) files allowed to edit.
 Do not propose code changes yet.
-```
+```text
 
 **If Cursor summarizes wrong → fix MEMORY/WORKFLOW immediately.**
 **If it summarizes right → proceed.**

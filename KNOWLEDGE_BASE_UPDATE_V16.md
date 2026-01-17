@@ -89,7 +89,7 @@ payload = jwt.decode(
         "verify_nbf": True,
     }
 )
-```
+```text
 
 ### Asymmetric Key Example (RS256):
 
@@ -109,7 +109,7 @@ payload = jwt.decode(
     algorithms=["RS256"],
     options={...}
 )
-```
+```text
 
 ### Security Best Practices:
 
@@ -126,7 +126,7 @@ options = {
 # Never accept "none" algorithm
 if jwt.get_unverified_header(token).get("alg") == "none":
     raise ValueError("None algorithm not allowed!")
-```
+```text
 
 ---
 

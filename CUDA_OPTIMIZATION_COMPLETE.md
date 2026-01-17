@@ -66,7 +66,7 @@ CUDA is installed and working. Optimizations applied for Omega's GPU acceleratio
 ⚠️ **Install PyTorch with CUDA:**
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 ---
 

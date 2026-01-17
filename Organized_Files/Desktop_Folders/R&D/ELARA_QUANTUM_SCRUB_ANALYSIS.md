@@ -68,7 +68,7 @@
 
 ### vs. Stockfish (Chess Engine)
 | Feature | Stockfish | Elara (Before) | Elara (After) |
-|---------|-----------|----------------|---------------|
+| --------- | ----------- | ---------------- | --------------- |
 | Minimax | ✅ | ❌ | ✅ |
 | Alpha-Beta | ✅ | ❌ | ✅ |
 | Transposition Table | ✅ | ❌ | ✅ |
@@ -80,7 +80,7 @@
 
 ### vs. Unity/Unreal (Game Framework)
 | Feature | Unity/Unreal | Elara (Before) | Elara (After) |
-|---------|--------------|----------------|---------------|
+| --------- | -------------- | ---------------- | --------------- |
 | Double Buffering | ✅ | ❌ | ✅ |
 | Dirty Rectangles | ✅ | ❌ | ✅ |
 | Sprite Caching | ✅ | ❌ | ✅ |
@@ -92,7 +92,7 @@
 
 ### vs. Adaptive AI Systems
 | Feature | Industry Standard | Elara |
-|---------|-------------------|-------|
+| --------- | ------------------- | ------- |
 | Micro-Behavior Tracking | ✅ | ✅ |
 | Pattern Detection | ✅ | ✅ |
 | Difficulty Scaling | ✅ | ✅ |

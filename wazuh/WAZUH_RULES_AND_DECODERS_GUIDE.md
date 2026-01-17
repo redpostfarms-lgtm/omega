@@ -91,7 +91,7 @@ All rules include MITRE ATT&CK mappings for enterprise and ICS contexts.
 
 ## File Structure
 
-```
+```text
 wazuh/
 ├── gatekeeper_decoders.xml      # Gatekeeper-specific decoders
 ├── gatekeeper_rules.xml         # Gatekeeper-specific rules
@@ -100,7 +100,7 @@ wazuh/
 ├── ics_ta0107_rules.xml         # TA0107 (Inhibit Response Function) rules
 ├── ics_ta0105_rules.xml         # TA0105 (Impact) rules
 └── WAZUH_RULES_AND_DECODERS_GUIDE.md  # This guide
-```
+```text
 
 **Rule ID Ranges:**
 - `100000-100999`: Gatekeeper-specific rules
@@ -143,7 +143,7 @@ echo '2026-01-11 14:30:22 json_event: {"threat_level": "high", "source": "192.16
 
 # Test anomaly format
 echo 'Gatekeeper: ANOMALY DETECTED - type=network_spike src=10.10.1.100 count=150 threshold=100 time=2026-01-11T16:00:00Z' | /var/ossec/bin/wazuh-logtest
-```
+```text
 
 ---
 
@@ -184,7 +184,7 @@ echo 'Gatekeeper: ANOMALY DETECTED - type=network_spike src=10.10.1.100 count=15
   <group>gatekeeper,roe,execution,violation,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ---
 
@@ -265,7 +265,7 @@ Extracts fields:
   <group>ics,triton,attack_chain,critical,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 **See Also**: `TRITON_ATTACK_DETECTION_GUIDE.md` for comprehensive Triton case study and detection strategies.
 
@@ -278,33 +278,33 @@ Extracts fields:
 **JSON Format (Recommended):**
 ```json
 {"src_ip": "192.168.10.50", "dst_ip": "192.168.10.100", "unit_id": 1, "function_code": 3, "function_name": "Read Holding Registers", "address": 107, "quantity": 5, "exception": false}
-```
+```text
 
 **Syslog Format:**
-```
+```text
 Jan 11 15:45:00 plc-gateway modbus: src=192.168.1.20 dst=192.168.1.10 unit=1 func=0x03 addr=40001 qty=10 exception=false
-```
+```text
 
 ### DNP3
 
 **Syslog Format:**
-```
+```text
 Jan 11 15:45:00 dnp3-gateway DNP3: src=192.168.1.20 dst=192.168.1.10 src_addr=3 dest_addr=1 fc=129 fc_name=Response obj_type=30 obj_var=1 point=45 value=1.0 event=true
-```
+```text
 
 ### IEC 104
 
 **Format:**
-```
+```text
 2026-01-11 16:20:00 IEC104: src=192.168.10.5 dst=192.168.10.100 asdu_type=45 cause=3 io_addr=10045 value=1 quality=good
-```
+```text
 
 ### OPC UA
 
 **JSON Format (Recommended):**
 ```json
 {"timestamp": "2026-01-11T17:00:00Z", "src": "192.168.20.10", "dst": "192.168.20.50", "node_id": "ns=2;s=PressureSensor", "value": 45.2, "status": "Good", "operation": "Read"}
-```
+```text
 
 ---
 
@@ -343,7 +343,7 @@ All 14 techniques from TA0107 are covered:
   <group>ics,inhibit_response,alarm_suppression,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ---
 
@@ -385,7 +385,7 @@ All 10 techniques from TA0104 are covered:
   </mitre>
   <group>ics,execution,hooking,api_monitor,</group>
 </rule>
-```
+```text
 
 **See Also**: `T0874_HOOKING_MITIGATION_GUIDE.md` for comprehensive mitigation and detection strategies.
 
@@ -424,7 +424,7 @@ Selected high-impact techniques from TA0105:
   <group>ics,impact,loss_of_safety,critical,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ---
 
@@ -468,7 +468,7 @@ Selected high-impact techniques from TA0105:
   <group>ics,impair_process_control,critical_write,modbus,</group>
   <options>alert_by_email</options>
 </rule>
-```
+```text
 
 ---
 

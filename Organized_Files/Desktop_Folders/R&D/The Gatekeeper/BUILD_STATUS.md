@@ -41,26 +41,26 @@
 ### **Quick Test:**
 ```bash
 python projects/hello_gatekeeper.py
-```
+```text
 
 ### **First Build:**
 ```bash
 python gatekeeper_fusion.py "write a simple battery voltage monitor in Python"
-```
+```text
 
 ### **Voice Command:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe BMS in Rust"
-```
+```text
 
 ---
 
 ## Build Outputs
 
 All builds saved to:
-```
+```text
 D:\RPF_BRAIN\Archived\fusion_outputs\fusion_YYYYMMDD_HHMMSS.md
-```
+```text
 
 ---
 

@@ -50,7 +50,7 @@ The CUDA installer should now be open. Look for:
 
 ### Typical CUDA Installer Options:
 
-```
+```text
 ┌─────────────────────────────────┐
 │  CUDA Installation Options      │
 ├─────────────────────────────────┤
@@ -60,7 +60,7 @@ The CUDA installer should now be open. Look for:
 │  ○ Modify                       │
 │  ○ Uninstall                    │
 └─────────────────────────────────┘
-```
+```text
 
 ### What Each Option Does:
 

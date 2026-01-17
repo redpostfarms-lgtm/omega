@@ -8,7 +8,7 @@ Open a terminal/command prompt in the project folder and run:
 
 ```bash
 pip install -r requirements.txt
-```
+```text
 
 This will install all required packages (TTS, torch, sounddevice, speech_recognition, etc.)
 
@@ -38,23 +38,23 @@ start_omega.bat
 
 # Mac/Linux  
 ./start_omega.sh
-```
+```text
 
 **Option B: Direct Python Command**
 ```bash
 python omega_full_brain.py
-```
+```text
 
 ---
 
 ### Step 4: Test It Out
 
 Once Omega starts, you'll see:
-```
+```text
 OMEGA FULL BRAIN — VOICE + EMOTION — ALWAYS LISTENING
 Press Ctrl+C to exit
 Listening...
-```
+```text
 
 **Now:**
 1. Speak clearly into your microphone
@@ -89,7 +89,7 @@ python omega_simple_final.py
 
 # Basic (Voice only, no emotion)
 python omega_final_no_emotion.py
-```
+```text
 
 ---
 
@@ -98,7 +98,7 @@ python omega_final_no_emotion.py
 ### "Module not found" error
 ```bash
 pip install -r requirements.txt
-```
+```text
 
 ### "No microphone found"
 - Check Windows Settings > Privacy > Microphone
@@ -159,12 +159,12 @@ While running, you'll see in the console:
 ### Run Tests
 ```bash
 python test_system.py
-```
+```text
 
 ### Run Deployment Script
 ```bash
 python deploy.py
-```
+```text
 (This verifies everything is set up correctly)
 
 ### Check System Status

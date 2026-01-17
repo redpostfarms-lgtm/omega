@@ -26,7 +26,7 @@ The `RGBController` class in `omega_comprehensive_hardware.py` was a stub implem
 
 **Unified 7-Tier RGB Control System** with automatic detection, method selection, and fallback cascade:
 
-```
+```text
 Tier 1: OpenRGB (Universal Protocol)
     ↓ (if unavailable)
 Tier 2: ASUS AURA SDK (ASUS-specific)
@@ -40,7 +40,7 @@ Tier 5: NZXT CAM (NZXT devices)
 Tier 6: WinRing0 (Kernel-level access)
     ↓ (if unavailable)
 Tier 7: Simulated RGB (Fallback for testing/no hardware)
-```
+```text
 
 ---
 
@@ -71,7 +71,7 @@ set_color_hex(hex_color, zone="all")        # Hex color support
 enable_rgb() / disable_rgb() / toggle_rgb() # Power control
 get_status()                                # Return controller state
 start_monitoring(interval=5.0)              # Background monitoring
-```
+```text
 
 **Features**:
 
@@ -100,7 +100,7 @@ class RGBController:
     def set_color(self, rgb):
         # Silent failure if OpenRGB not found
         pass
-```
+```text
 
 **After**: Wrapper delegating to advanced RGB controller
 
@@ -114,7 +114,7 @@ class RGBController:
         # Delegates to 7-tier fallback system
         r, g, b = self._parse_rgb(rgb)
         return self.advanced_rgb.set_color(r, g, b)
-```
+```text
 
 **Backward Compatibility**: ✅ All existing method signatures preserved
 **Status**: ✅ MODIFIED AND INTEGRATED
@@ -154,7 +154,7 @@ class RGBController:
 
 ```bash
 python rgb_setup_and_diagnostics.py
-```
+```text
 
 **Output**:
 
@@ -188,7 +188,7 @@ python rgb_setup_and_diagnostics.py
 
 **Color Change Flow**:
 
-```
+```text
 User: set_color_hex("#FF0000")
     ↓
 omega_control_panel.py: hw_controller.set_rgb_color("FF0000")
@@ -200,7 +200,7 @@ omega_rgb_advanced_controller.py: AdvancedRGBController.set_color_hex(...)
 Active Controller (OpenRGB → ASUS AURA → Corsair → ... → Simulated)
     ↓
 ✓ Color changed on RGB device (or simulated)
-```
+```text
 
 **Error Handling**:
 
@@ -257,7 +257,7 @@ Active Controller (OpenRGB → ASUS AURA → Corsair → ... → Simulated)
 
 ### Test Execution Results
 
-```
+```text
 ✓ RGB Controller Initialization: PASSED
 ✓ Method Detection: 1/7 available (Simulated RGB - expected in test environment)
 ✓ Automatic Fallback: WORKING
@@ -265,7 +265,7 @@ Active Controller (OpenRGB → ASUS AURA → Corsair → ... → Simulated)
 ✓ Status Reporting: WORKING
 ✓ Logging: COMPREHENSIVE
 ✓ Error Handling: WORKING
-```
+```text
 
 ### Test Cases Covered
 
@@ -302,7 +302,7 @@ pip install openrgb
 
 # Or download portable from:
 # https://github.com/CalcProgrammer1/OpenRGB/releases
-```
+```text
 
 ### Step 2: Install USB Drivers (For Hardware Support)
 
@@ -338,7 +338,7 @@ rgb = get_advanced_rgb_controller()
 status = rgb.get_status()
 print(f"RGB Method: {status['current_method']}")
 print(f"Available: {status['available_methods']}")
-```
+```text
 
 ---
 
@@ -375,7 +375,7 @@ print(f"Available: {status['available_methods']}")
 from omega_comprehensive_hardware import HardwareController
 self.hw_controller = HardwareController()
 # RGBController automatically uses advanced controller
-```
+```text
 
 ---
 
@@ -439,7 +439,7 @@ self.hw_controller = HardwareController()
 ## TROUBLESHOOTING QUICK REFERENCE
 
 | Issue | Solution | File |
-|-------|----------|------|
+| ------- | ---------- | ------ |
 | RGB not working | Install OpenRGB | rgb_setup_and_diagnostics.py |
 | Device not detected | Install USB drivers (FTDI/CP210x) | RGB_TROUBLESHOOTING_GUIDE.md |
 | RGB disabled in BIOS | Enable in BIOS settings | RGB_TROUBLESHOOTING_GUIDE.md |

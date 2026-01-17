@@ -91,10 +91,10 @@ Deep scan completed to identify missing equations, knowledge gaps, and areas nee
 **Status:** ❌ Missing - Should be implemented to reduce overconfidence
 
 **Alternative Formulation:**
-```
+```text
 calibrated = 1 / (1 + exp(-(logit(confidence) + bias)))
 where logit(x) = log(x / (1 - x))
-```
+```text
 
 ### Voice Signature Distance ❌ UNCLEAR
 

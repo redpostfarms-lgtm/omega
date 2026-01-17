@@ -1024,7 +1024,7 @@ This comprehensive guide covers natural remedies for common agricultural pests a
 ### Quick Reference: Pest Remedies
 
 | Pest | Primary Remedy | Secondary Remedy | Preventive |
-|------|---------------|------------------|------------|
+| ------ | --------------- | ------------------ | ------------ |
 | Aphids | Neem oil | Insecticidal soap | Beneficial insects |
 | Spider Mites | Water spray | Neem oil | Increase humidity |
 | Whiteflies | Yellow traps | Neem oil | Row covers |
@@ -1036,7 +1036,7 @@ This comprehensive guide covers natural remedies for common agricultural pests a
 ### Quick Reference: Disease Remedies
 
 | Disease | Primary Remedy | Secondary Remedy | Preventive |
-|---------|---------------|------------------|-----------|
+| --------- | --------------- | ------------------ | ----------- |
 | Powdery Mildew | Baking soda | Neem oil | Proper spacing |
 | Downy Mildew | Copper fungicide | Baking soda | Water at base |
 | Rust | Remove leaves | Neem oil | Resistant varieties |

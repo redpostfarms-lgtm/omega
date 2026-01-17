@@ -8,7 +8,7 @@ Generate FreeCAD TechDraw views from 3D model for blueprint-ready DXF/PDF export
 
 ## Prompt Structure
 
-```
+```text
 TASK: Generate TechDraw Drawing from 3D Model
 
 BLUEPRINT FILE:
@@ -41,7 +41,7 @@ OUTPUT:
 1) Create TechDraw macro file
 2) Show drawing plan (which views will be created)
 3) List dimension annotations that will be added
-```
+```text
 
 ---
 

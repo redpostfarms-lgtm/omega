@@ -42,7 +42,7 @@ Complete local 70B LLM system with:
 # Run Windows build script
 cd "The Gatekeeper"
 .\omega_70b_build_windows.ps1
-```
+```text
 
 This will:
 - Install PyTorch with CUDA
@@ -58,7 +58,7 @@ This will:
 
 ```powershell
 python omega_70b_prepare_dataset.py
-```
+```text
 
 This will:
 - Extract training data from codebase
@@ -75,7 +75,7 @@ This will:
 
 ```powershell
 python omega_70b_train.py
-```
+```text
 
 This will:
 - Download base model (if needed)
@@ -88,7 +88,7 @@ This will:
 **Note:** The training script is auto-generated. Run it with:
 ```powershell
 python %USERPROFILE%\omega_70b\train_omega.py
-```
+```text
 
 ---
 
@@ -96,7 +96,7 @@ python %USERPROFILE%\omega_70b\train_omega.py
 
 ```powershell
 python omega_70b_merge.py
-```
+```text
 
 This will:
 - Merge LoRA weights into base model
@@ -111,7 +111,7 @@ This will:
 
 ```powershell
 python omega_70b_server.py
-```
+```text
 
 This will:
 - Start FastAPI server on port 8000
@@ -126,7 +126,7 @@ This will:
 
 ```powershell
 python omega_70b_voice_integration.py
-```
+```text
 
 This will:
 - Start XTTS voice cloning server
@@ -154,7 +154,7 @@ response = requests.post(
 )
 
 print(response.json()["choices"][0]["message"]["content"])
-```
+```text
 
 ### **With Voice:**
 
@@ -164,7 +164,7 @@ from omega_70b_voice_integration import chat_with_voice
 result = chat_with_voice("Hello Omega, tell me about yourself", generate_audio=True)
 print(result["text"])
 # Audio saved to: result["audio"]
-```
+```text
 
 ### **Command Line:**
 
@@ -174,7 +174,7 @@ alias omega='python omega_70b_server.py'
 
 # Then use curl or Python to chat
 curl http://localhost:8000/v1/chat/completions -H "Content-Type: application/json" -d '{"messages":[{"role":"user","content":"Hello"}]}'
-```
+```text
 
 ---
 
@@ -223,7 +223,7 @@ The 70B system integrates with:
 
 ## FILE STRUCTURE
 
-```
+```text
 %USERPROFILE%\omega_70b\
 ├── models\
 │   └── omega-70b-wiley.gguf          # Final model
@@ -234,7 +234,7 @@ The 70B system integrates with:
 ├── llama.cpp\                         # Inference engine
 ├── train_omega.py                     # Training script
 └── cannibal_log.jsonl                 # Defense logs
-```
+```text
 
 ---
 

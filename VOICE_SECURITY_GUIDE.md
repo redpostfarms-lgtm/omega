@@ -59,22 +59,22 @@ Omega now has comprehensive voice security features to protect your voice from c
 ### View Authorized Voices
 ```batch
 py -3.11 manage_authorized_voices.py list
-```
+```text
 
 ### Add Authorized Voice
 ```batch
 py -3.11 manage_authorized_voices.py add "path/to/voice.wav" "Person Name"
-```
+```text
 
 ### Remove Authorized Voice
 ```batch
 py -3.11 manage_authorized_voices.py remove <voice_id>
-```
+```text
 
 ### Adjust Security Threshold
 ```batch
 py -3.11 manage_authorized_voices.py threshold 0.90
-```
+```text
 (0.85 = 85% match required, 0.90 = 90% match required - stricter)
 
 ## Security Best Practices
@@ -135,7 +135,7 @@ See `security_research.md` for full research notes.
 Run to check:
 ```batch
 py -3.11 voice_security_system.py
-```
+```text
 
 Shows:
 - Number of authorized voices

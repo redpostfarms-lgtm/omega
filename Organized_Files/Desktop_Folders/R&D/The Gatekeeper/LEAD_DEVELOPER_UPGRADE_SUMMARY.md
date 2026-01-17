@@ -91,19 +91,19 @@
 ### **Windows Batch Script:**
 ```bash
 "The Gatekeeper\upgrade_to_100.bat"
-```
+```text
 
 ### **Manual Install:**
 ```bash
 pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformers llama-cpp-python crewai langchain langchain-community pySMART nvidia-ml-py reportlab weasyprint markdown cryptography keyring python-dotenv neuralprophet pytest pytest-cov
-```
+```text
 
 ---
 
 ## Resource Breakdown by Category
 
 | Category | Count | Top Resources |
-|----------|-------|---------------|
+| ---------- | ------- | --------------- |
 | **Voice & Speech** | 8 | Vosk, Piper, SpeechBrain, DeepSpeech, Coqui TTS |
 | **Web Scraping** | 7 | Scrapy, Playwright, Selenium, httpx, lxml |
 | **Local LLM** | 5 | llama.cpp, Phi-3, Llama-3.2, Mistral, Ollama |
@@ -126,7 +126,7 @@ pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformer
 ## Expected Score Improvements
 
 | Component | Current | After Integration | Improvement |
-|-----------|---------|-------------------|-------------|
+| ----------- | --------- | ------------------- | ------------- |
 | **Runtime** | 95% | 98% | +3% (Scrapy reliability) |
 | **Voice System** | 90% | 98% | +8% (Offline, faster) |
 | **Knowledge Base** | 85% | 95% | +10% (Vector search) |

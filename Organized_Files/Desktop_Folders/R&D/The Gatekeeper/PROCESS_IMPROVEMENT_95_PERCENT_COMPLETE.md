@@ -131,7 +131,7 @@ All critical processes have been enhanced with advanced features, ML models, and
 ## Process Completion Summary
 
 | Process | Before | After | Improvement | Status |
-|---------|--------|-------|-------------|--------|
+| --------- | -------- | ------- | ------------- | -------- |
 | Market Intelligence | 70% | 95% | +25% | ✅ |
 | Pest Detection | 75% | 95% | +20% | ✅ |
 | Irrigation | 80% | 95% | +15% | ✅ |

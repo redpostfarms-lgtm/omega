@@ -86,7 +86,7 @@ The following tracking/telemetry services are detected and removed:
 ### Option 1: Quick Optimization (Recommended)
 ```bash
 OPTIMIZE_STARTUP.bat
-```
+```text
 
 This will:
 1. Remove all tracking/telemetry items
@@ -97,7 +97,7 @@ This will:
 ### Option 2: Interactive Mode
 ```bash
 python omega_startup_optimizer.py
-```
+```text
 
 Choose option **5** (Complete cleanup + Add Omega) for best results.
 
@@ -121,7 +121,7 @@ results = optimizer.cleanup_startup()
 
 # Add Omega to startup
 success, message = optimizer.add_omega_to_startup()
-```
+```text
 
 ---
 

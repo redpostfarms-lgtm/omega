@@ -155,7 +155,7 @@ When you double-click "Omega" on Desktop:
 ### Run Quantum Scrub
 ```bash
 python QUANTUM_OPERATIONAL_SCRUB.py
-```
+```text
 
 This will:
 1. Run 10-point comprehensive analysis
@@ -166,7 +166,7 @@ This will:
 ### Create Boot Logo
 ```bash
 python create_omega_boot_logo.py
-```
+```text
 
 This will:
 1. Create black and gold Omega logo
@@ -176,7 +176,7 @@ This will:
 ### Update Desktop Shortcut
 ```bash
 UPDATE_DESKTOP_SHORTCUT_TO_CONTROL_PANEL.bat
-```
+```text
 
 This will:
 1. Update desktop shortcut target

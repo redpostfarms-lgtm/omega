@@ -5,12 +5,12 @@
 ### For Ollama:
 ```bash
 ollama create gatekeeper -f SYSTEM_PROMPT.txt
-```
+```text
 
 Or use the compact version:
 ```bash
 ollama create gatekeeper -f LLM_INJECT.txt
-```
+```text
 
 ### For Direct Prompt Injection:
 Copy the contents of `SYSTEM_PROMPT.txt` or `LLM_INJECT.txt` and paste as system prompt.
@@ -27,7 +27,7 @@ response = requests.post('http://localhost:11434/api/generate', json={
     'prompt': 'Hey, Gatekeeper, status',
     'system': system_prompt
 })
-```
+```text
 
 ## Two Versions
 

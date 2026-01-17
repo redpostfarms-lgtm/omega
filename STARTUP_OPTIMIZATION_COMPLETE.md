@@ -67,11 +67,11 @@
 ### Option 1: Quick Optimization (Recommended)
 ```bash
 OPTIMIZE_STARTUP.bat
-```
+```text
 Or:
 ```bash
 python OPTIMIZE_STARTUP.py
-```
+```text
 
 This will:
 1. Scan all startup items
@@ -82,7 +82,7 @@ This will:
 ### Option 2: Interactive Mode
 ```bash
 python omega_startup_optimizer.py
-```
+```text
 
 This provides:
 1. Startup report
@@ -114,7 +114,7 @@ success, message = optimizer.add_omega_to_startup()
 
 # Remove Omega from startup (if needed)
 success, message = optimizer.remove_omega_from_startup()
-```
+```text
 
 ---
 
@@ -180,9 +180,9 @@ To restore disabled items:
 4. **Result**: Omega starts automatically on login
 
 ### Startup Script Location
-```
+```text
 %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Omega_Start.bat
-```
+```text
 
 ### Remove Omega from Startup
 To remove Omega from startup:
@@ -192,12 +192,12 @@ from omega_startup_optimizer import StartupOptimizer
 optimizer = StartupOptimizer()
 success, message = optimizer.remove_omega_from_startup()
 print(message)
-```
+```text
 
 Or manually delete:
-```
+```text
 %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Omega_Start.bat
-```
+```text
 
 ---
 
@@ -261,7 +261,7 @@ This script is designed for **Windows only** and will not work on Linux or macOS
 - **Solution**: Specify path manually:
 ```python
 optimizer.add_omega_to_startup(Path("path/to/omega/script.bat"))
-```
+```text
 
 ---
 

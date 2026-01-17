@@ -125,12 +125,12 @@ def upgrade():
         [sa.text("(data->'config'->>'fan_profile')")],
         postgresql_where=sa.text("data->>'status' = 'active'")
     )
-```
+```text
 
 **Step 2:** Apply migration
 ```bash
 flask db upgrade
-```
+```text
 
 **Step 3:** Use in queries (JSONB Query Guide)
 ```sql
@@ -141,7 +141,7 @@ WHERE data @> '{"config": {"fan_profile": "quiet"}}';
 -- Fast exact match (uses expression index)
 SELECT * FROM device_settings
 WHERE data -> 'config' ->> 'fan_profile' = 'quiet';
-```
+```text
 
 ---
 
@@ -169,7 +169,7 @@ class DeviceSettings(db.Model):
         Index('idx_settings_gin', 'settings', postgresql_using='gin',
               postgresql_ops={'settings': 'jsonb_path_ops'}),
     )
-```
+```text
 
 **Step 2:** Query efficiently (JSONB Query Guide)
 ```sql
@@ -186,7 +186,7 @@ SELECT * FROM device_settings
 WHERE status = 'active'
   AND cpu_temp > 80
   AND settings @@ '$.config.fan_profile == "quiet"';
-```
+```text
 
 ---
 
@@ -204,7 +204,7 @@ flask db migrate -m "Initial schema: users, roles, device_settings"
 
 # Apply migration
 flask db upgrade
-```
+```text
 
 **Step 2:** Add JSONB Indexes (Flask-Migrate Guide)
 ```bash
@@ -215,7 +215,7 @@ flask db migrate -m "Add JSONB indexes for performance"
 
 # Apply migration
 flask db upgrade
-```
+```text
 
 **Step 3:** Query Device Data (JSONB Query Guide)
 ```python
@@ -238,7 +238,7 @@ critical_alerts = db.session.execute(
         WHERE ds.data @@ '$.status == "active"'
     """)
 ).fetchall()
-```
+```text
 
 **Step 4:** Update Schema as Needed (Flask-Migrate Guide)
 ```bash
@@ -252,7 +252,7 @@ flask db migrate -m "Add last_updated column to device_settings"
 
 # Apply migration
 flask db upgrade
-```
+```text
 
 ---
 
@@ -284,7 +284,7 @@ flask db upgrade
 ## Quick Reference: When to Use Which Guide
 
 | Task | Guide | Section |
-|------|-------|---------|
+| ------ | ------- | --------- |
 | Set up Flask-Migrate | Flask-Migrate | Installation, Configuration |
 | Create database models | Flask-Migrate | Database Schema, Implementation Plan |
 | Create initial migration | Flask-Migrate | Commands Reference |

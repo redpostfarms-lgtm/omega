@@ -24,7 +24,7 @@ Your disk is currently full, which prevents downgrading PyTorch. Free up space b
 Once you have free space, run:
 ```batch
 py -3.11 -m pip install "torch<2.6.0" --upgrade
-```
+```text
 
 This will install PyTorch 2.5.x, which is compatible with TTS.
 
@@ -32,7 +32,7 @@ This will install PyTorch 2.5.x, which is compatible with TTS.
 Test TTS:
 ```batch
 py -3.11 SIMPLE_TEST.py
-```
+```text
 
 You should hear "Hello, this is a test. Can you hear me?" if everything works.
 
@@ -40,7 +40,7 @@ You should hear "Hello, this is a test. Can you hear me?" if everything works.
 Once TTS works, start Omega:
 ```batch
 START_HERE.bat
-```
+```text
 
 ## Alternative: If You Can't Downgrade PyTorch
 If you can't free space, you'll need to:

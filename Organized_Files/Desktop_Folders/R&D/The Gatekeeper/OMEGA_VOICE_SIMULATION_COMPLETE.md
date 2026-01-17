@@ -74,7 +74,7 @@ Omega's voice simulation system has been run, and a completely new voice signatu
 ### **1. Run Voice Simulations:**
 ```bash
 python omega_voice_simulator.py
-```
+```text
 
 This will:
 - Load collected samples from quantum scrub
@@ -88,7 +88,7 @@ This will:
 ### **2. Collect Voice Samples (Optional):**
 ```bash
 python quantum_voice_collector.py
-```
+```text
 
 This will:
 - Collect samples from Edge TTS (requires `pip install edge-tts`)
@@ -100,7 +100,7 @@ This will:
 ### **3. Generate Primary Voice Audio (Optional):**
 ```bash
 python create_primary_voice_audio.py
-```
+```text
 
 This will:
 - Generate primary voice audio file

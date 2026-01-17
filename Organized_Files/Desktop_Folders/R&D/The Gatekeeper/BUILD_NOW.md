@@ -12,53 +12,53 @@
 ```bash
 cd "C:\Users\Drakalich\Desktop\R&D\The Gatekeeper"
 pip install -r requirements.txt
-```
+```text
 
 ### **2. Run Upgrade Scripts (If Needed)**
 ```bash
 fusion_2026.bat
 upgrade_to_100_final.bat
-```
+```text
 
 ### **3. Start Building**
 
 **Option A: Voice Command**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe BMS in Rust"
-```
+```text
 
 **Option B: Direct Python**
 ```bash
 python gatekeeper_fusion.py "write a quantum-safe BMS in Rust"
-```
+```text
 
 ---
 
 ## First Build Recommendations
 
 ### **Simple Start:**
-```
+```text
 python gatekeeper_fusion.py "write a hello world in Python"
-```
+```text
 
 ### **Practical Project:**
-```
+```text
 python gatekeeper_fusion.py "create a basic battery voltage monitor in Python that reads from serial port and logs to JSON"
-```
+```text
 
 ### **Full Project:**
-```
+```text
 python gatekeeper_fusion.py "build a complete off-grid farm operating system with Rust backend, Python sensors, REST API, and web dashboard"
-```
+```text
 
 ---
 
 ## Output Location
 
 All builds saved to:
-```
+```text
 D:\RPF_BRAIN\Archived\fusion_outputs\fusion_YYYYMMDD_HHMMSS.md
-```
+```text
 
 ---
 

@@ -117,7 +117,7 @@ These additions complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -129,7 +129,7 @@ LLM Decoding Strategies Knowledge:
     │   ├── Example 5: Hybrid Contrastive-Beam (2-phase)
     │   └── Example 6: Full Hybrid (Contrastive → Beam → Nucleus) (3-phase)
     └── Pattern 9: Nucleus Sampling (Detailed Explanation + Implementation)
-```
+```text
 
 ## Status
 

@@ -47,11 +47,11 @@
 
 ## Layout Structure
 
-```
+```text
 [Files] [OIP]     [Status] [Controls]
 [Files] [Integrated Systems          ]
 [Files] [Improve] [Optional          ]
-```
+```text
 
 ---
 

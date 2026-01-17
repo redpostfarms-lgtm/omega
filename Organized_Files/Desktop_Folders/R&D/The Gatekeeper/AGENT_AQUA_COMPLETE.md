@@ -57,10 +57,10 @@
 - Plant: plant, crop, recognize plant, identify plant
 
 **Example:**
-```
+```text
 "Hey, Gatekeeper, council solve water quality issue"
 → 💧 Aqua agent auto-loaded (water/purification/insect/plant detected)
-```
+```text
 
 ---
 
@@ -183,7 +183,7 @@
 ```bash
 python agent_council_v2.py "water quality issue"
 → Aqua auto-loads and analyzes water sensors
-```
+```text
 
 ### **Direct:**
 ```python
@@ -201,7 +201,7 @@ result = aqua.recognize_insect(image_path)
 
 # Recognize plant
 result = aqua.recognize_plant(image_path)
-```
+```text
 
 ---
 

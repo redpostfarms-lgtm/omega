@@ -70,7 +70,7 @@ python WorldMemory.py query Perrigo
 python WorldMemory.py query Fonterra
 python WorldMemory.py query case studies
 python WorldMemory.py query-all Central Finance
-```
+```text
 
 ---
 

@@ -84,7 +84,7 @@ These enhancements complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -101,7 +101,7 @@ LLM Decoding Strategies Knowledge:
                 ├── Different Midpoint Values (ENHANCED with fixed values)
                 ├── Different Base/Max Alpha Values (ENHANCED with fixed values)
                 └── Comparison: Sigmoid vs Linear
-```
+```text
 
 ## Status
 

@@ -72,7 +72,7 @@ These additions complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -82,7 +82,7 @@ LLM Decoding Strategies Knowledge:
 └── DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md (Code Examples - NOW WITH Enhanced Examples) ⭐
     ├── Section 4: Enhanced Diverse Beam Search Examples
     └── Contrastive Search Section: Improved Implementation with Repetition Penalty
-```
+```text
 
 ## Status
 

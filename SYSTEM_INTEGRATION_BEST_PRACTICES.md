@@ -24,7 +24,7 @@
 
 **Architecture Layers (Bottom to Top):**
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │  Presentation Layer                                         │
 │  (Web UI, API Endpoints, Voice Interface)                  │
@@ -41,7 +41,7 @@
 │  Infrastructure Layer                                       │
 │  (Compute, Storage, Network, Security)                     │
 └─────────────────────────────────────────────────────────────┘
-```
+```text
 
 ### Communication Patterns
 
@@ -74,7 +74,7 @@ from gatekeeper_error_handler import get_error_handler
 
 # Get global error handler instance
 handler = get_error_handler()  # Always returns same instance
-```
+```text
 
 **Benefits:**
 - Single source of truth
@@ -98,7 +98,7 @@ class MyComponent:
             # Do work
         except Exception as e:
             self.error_handler.handle_error(e)
-```
+```text
 
 **Benefits:**
 - Loosely coupled components
@@ -118,7 +118,7 @@ services = {
 
 # Access services
 handler = services['error_handler']
-```
+```text
 
 **Benefits:**
 - Centralized service access
@@ -131,7 +131,7 @@ handler = services['error_handler']
 
 ### Error Flow Diagram
 
-```
+```text
 Component Error
     ↓
 Error Handler
@@ -151,7 +151,7 @@ End User / External System
     ├─ Display Error Message
     ├─ Suggest Action
     └─ Log for Support
-```
+```text
 
 ### Error Classification
 
@@ -201,7 +201,7 @@ except Exception as e:
     elapsed = time.time() - start_time
     log_api_metric('failure', elapsed, error_type)
     handler.handle_integration_error('api', error_type, e, context)
-```
+```text
 
 **Metrics to Track:**
 - Request count
@@ -221,7 +221,7 @@ try:
 except Exception as e:
     elapsed = time.time() - start_time
     log_db_metric('failure', elapsed, error_type)
-```
+```text
 
 **Metrics to Track:**
 - Query count
@@ -238,7 +238,7 @@ status = handler.health_monitor.check_component_health(
 )
 # Log status change
 log_component_health('component_name', status)
-```
+```text
 
 **Metrics to Track:**
 - Component availability
@@ -262,7 +262,7 @@ if avg_response_time > 2000:  # > 2 seconds
 
 if component_status == 'OFFLINE':
     alert('Critical', f'{component} offline')
-```
+```text
 
 ---
 
@@ -279,7 +279,7 @@ def test_error_handler_logs_error():
     
     assert len(handler.error_history) > 0
     assert handler.error_history[-1]['message'] == 'test'
-```
+```text
 
 **Test Health Monitor:**
 ```python
@@ -293,7 +293,7 @@ def test_health_monitor_tracks_status():
     )
     
     assert status == ComponentStatus.HEALTHY
-```
+```text
 
 ### Integration Testing
 
@@ -316,7 +316,7 @@ def test_api_integration_with_error_handling():
             ErrorContext('api', 'call')
         )
         assert error_info['recovery_message'] is not None
-```
+```text
 
 ### Performance Testing
 
@@ -336,7 +336,7 @@ def test_error_handler_performance():
     rate = 1000 / elapsed
     
     assert rate > 1000  # Should handle >1000 errors/sec
-```
+```text
 
 ---
 
@@ -368,7 +368,7 @@ def test_error_handler_performance():
 
 **Multi-Level Caching:**
 
-```
+```text
 Request
   ↓
 L1 Cache (In-Memory) - Check
@@ -380,7 +380,7 @@ Database/API - Fetch
 Update Caches
   ↓
 Return Response
-```
+```text
 
 **Cache Invalidation:**
 - Time-based (TTL): Expire after N seconds
@@ -420,7 +420,7 @@ except requests.Timeout:
         exception,
         context
     )
-```
+```text
 
 ### Issue 2: Resource Exhaustion
 
@@ -444,7 +444,7 @@ except requests.Timeout:
 from collections import deque
 
 error_history = deque(maxlen=1000)  # Auto-removes oldest when full
-```
+```text
 
 ### Issue 3: Cascading Failures
 
@@ -498,7 +498,7 @@ class CircuitBreaker:
     def on_failure(self):
         self.failure_count += 1
         self.last_failure_time = time.time()
-```
+```text
 
 ### Issue 4: State Inconsistency
 
@@ -530,7 +530,7 @@ for item in items:
 
 # Batch requests
 api_batch_call(items)  # 1 request
-```
+```text
 
 **2. Query Optimization**
 ```sql
@@ -543,7 +543,7 @@ for user in users:
 -- Good:
 SELECT u.*, o.* FROM users u 
 JOIN orders o ON u.id = o.user_id;
-```
+```text
 
 **3. Caching Hot Data**
 ```python
@@ -551,7 +551,7 @@ JOIN orders o ON u.id = o.user_id;
 @cache(ttl=300)
 def get_user_profile(user_id):
     return db.query_user(user_id)
-```
+```text
 
 ### Performance Monitoring
 
@@ -589,7 +589,7 @@ def get_user_profile(user_id):
 
 ### Blue-Green Deployment
 
-```
+```text
 Current (Blue) --- Load Balancer --- Users
                          |
                       Testing
@@ -599,7 +599,7 @@ New (Green) --- Validation & Warmup
     Switch Traffic
          |
 Bluebecome old, Green become Blue
-```
+```text
 
 **Advantages:**
 - Zero downtime
@@ -609,7 +609,7 @@ Bluebecome old, Green become Blue
 
 ### Canary Deployment
 
-```
+```text
 Current (90%) --- Load Balancer --- Users
          |
 New (10%) --- Gradual Increase
@@ -617,7 +617,7 @@ New (10%) --- Gradual Increase
 Monitor Metrics
          |
 Switch Complete or Rollback
-```
+```text
 
 **Advantages:**
 - Gradual rollout
@@ -639,7 +639,7 @@ if not is_api_available():
     return 503
 
 return 200  # Service Ready
-```
+```text
 
 ---
 

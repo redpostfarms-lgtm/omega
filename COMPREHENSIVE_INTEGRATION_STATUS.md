@@ -114,7 +114,7 @@ print(status)
 security.set_security_level(SecurityLevel.AIR_GAP)  # Complete isolation
 security.set_security_level(SecurityLevel.LOCKDOWN)  # Maximum security
 security.set_security_level(SecurityLevel.NORMAL)  # Normal operation
-```
+```text
 
 ### VPN Management
 
@@ -128,7 +128,7 @@ print(vpn_status)
 
 # Disconnect VPN
 security.vpn.disconnect_vpn()
-```
+```text
 
 ### Firewall Management
 
@@ -141,7 +141,7 @@ security.firewall.block_connection("192.168.1.100")
 
 # Block IP with port
 security.firewall.block_connection("192.168.1.100", port=443)
-```
+```text
 
 ### Air-Gapping
 
@@ -154,7 +154,7 @@ is_isolated = security.air_gap.is_air_gapped()
 
 # Disable air-gapping
 security.air_gap.disable_air_gap()
-```
+```text
 
 ### Attack Detection & Response
 
@@ -176,7 +176,7 @@ attacked = security.detect_and_respond(connection)
 
 if attacked:
     print("Attack detected! Air-gap enabled and source blocked.")
-```
+```text
 
 ---
 
@@ -186,19 +186,19 @@ if attacked:
 
 ```bash
 pip install psutil
-```
+```text
 
 ### Windows-Only Dependencies
 
 ```bash
 pip install WMI
-```
+```text
 
 ### Optional Dependencies (for advanced features)
 
 ```bash
 pip install pyautogui pynput
-```
+```text
 
 ---
 

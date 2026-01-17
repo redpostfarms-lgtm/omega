@@ -97,27 +97,27 @@ All optional but very beneficial improvements have been successfully integrated 
 ## Usage Examples
 
 ### Adaptive Thresholds (Automatic):
-```
+```text
 [Adaptive Threshold] Using dynamic threshold: 0.225
   - Quiet room (high SNR): Lower threshold (more lenient)
   - Noisy room (low SNR): Higher threshold (more strict)
-```
+```text
 
 ### Audio Quality Feedback (Automatic):
-```
+```text
 [Audio Quality] ⚠️  Low SNR (12.3dB): High background noise detected
 [Audio Quality Recommendation] Move to a quieter location or use a directional microphone
-```
+```text
 
 ### Performance Stats (Every 10 conversations):
-```
+```text
 PERFORMANCE MONITOR - SESSION STATISTICS
 Total Recognition Attempts: 45
 Success Rate: 92.3%
 Average Latency: 4.8s
 Average Confidence: 0.68
 Errors: 2
-```
+```text
 
 ---
 

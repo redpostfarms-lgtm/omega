@@ -112,7 +112,7 @@
 **One-line deploy:**
 ```bash
 python D:\RPF_BRAIN\HR\Harriet_v2.py
-```
+```text
 
 **Say:**
 - "Harriet, new hire Alex Rivera"

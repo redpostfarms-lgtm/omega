@@ -68,17 +68,17 @@ All critical and high-priority code quality improvements have been successfully 
 ## VALIDATION RESULTS
 
 ### Syntax Validation
-```
+```text
 ✅ voice_listener.py - Compiles successfully
 ✅ game_hub_final.py - Compiles successfully
 ✅ chess_replay.py - Compiles successfully
 ✅ process_status_checker.py - Compiles successfully
-```
+```text
 
 ### Linting
-```
+```text
 ✅ No linter errors found
-```
+```text
 
 ---
 

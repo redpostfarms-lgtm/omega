@@ -131,7 +131,7 @@ This document tracks any remaining processes that need optimization or completio
 Run the optimization check:
 ```bash
 python CHECK_REMAINING_OPTIMIZATIONS.py
-```
+```text
 
 This will:
 1. Check for incomplete tasks

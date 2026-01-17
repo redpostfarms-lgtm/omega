@@ -602,7 +602,7 @@ pip install pytest pytest-cov
 
 # Config
 pip install python-dotenv
-```
+```text
 
 ### **Model Downloads**
 ```bash
@@ -620,7 +620,7 @@ git clone https://github.com/rhasspy/piper models/piper
 # Llama.cpp models
 wget -q https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/Phi-3-mini-4k-instruct-q4.gguf -O models/llama/Phi-3-mini-4k-instruct-q4.gguf
 wget -q https://huggingface.co/meta-llama/Llama-3.2-8B-Instruct-gguf/resolve/main/Llama-3.2-8B-Instruct-Q5_K_M.gguf -O models/llama/Llama-3.2-8B-Instruct-Q5_K_M.gguf
-```
+```text
 
 ### **Build llama.cpp** (if using C++ version)
 ```bash
@@ -628,7 +628,7 @@ git clone https://github.com/ggerganov/llama.cpp
 cd llama.cpp
 make
 # Or for Windows: use CMake or pre-built binaries
-```
+```text
 
 ---
 
@@ -685,7 +685,7 @@ make
 ## Expected Score Improvements
 
 | Component | Current | After Integration | Improvement |
-|-----------|---------|-------------------|-------------|
+| ----------- | --------- | ------------------- | ------------- |
 | **Runtime** | 95% | 98% | +3% (Scrapy reliability) |
 | **Voice System** | 90% | 98% | +8% (Offline, faster) |
 | **Knowledge Base** | 85% | 95% | +10% (Vector search) |

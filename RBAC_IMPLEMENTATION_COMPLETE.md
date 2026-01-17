@@ -54,7 +54,7 @@ Role-based access control (RBAC) has been successfully implemented for the Omega
 ## Role Definitions
 
 | Role | Permissions |
-|------|-------------|
+| ------ | ------------- |
 | **admin** | Full access (fan, RGB, view everything) |
 | **operator** | Can control hardware (fan/RGB), view stats |
 | **viewer** | Read-only (stats, notifications, no controls) |
@@ -66,7 +66,7 @@ Role-based access control (RBAC) has been successfully implemented for the Omega
 **Note:** These are for demonstration only. Replace with database in production.
 
 | Username | Password | Role |
-|----------|----------|------|
+| ---------- | ---------- | ------ |
 | `admin` | `admin2026` | admin |
 | `operator` | `op2026` | operator |
 | `viewer` | `view2026` | viewer |

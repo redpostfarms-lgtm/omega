@@ -49,14 +49,14 @@ Added stealth VPN wrapper that routes quantum payload through a multi-hop VPN ch
 ## Visual Output
 
 The stealth VPN process displays:
-```
+```text
 [⚛] Entangling port {port}...
 [🌐] Routing quantum mirror through hop-1.nyc.tor...
 [.] Bounce sent. Attacker now punching own firewall.
 [🌐] Payload cloaked. They see a yawn, we see a grave.
 [q-1] Wave function collapsing... attacker packet 1 obliterated.
 ...
-```
+```text
 
 ---
 

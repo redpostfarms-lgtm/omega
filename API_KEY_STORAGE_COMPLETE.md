@@ -67,7 +67,7 @@ from omega_api_keys import store_openai_key
 
 # Store OpenAI key
 store_openai_key("sk-proj-...")
-```
+```text
 
 ### Retrieve API Key
 
@@ -76,7 +76,7 @@ from omega_api_keys import get_openai_key
 
 # Get OpenAI key
 api_key = get_openai_key()
-```
+```text
 
 ### Use OpenAI Integration
 
@@ -89,7 +89,7 @@ openai = get_openai_integration()
 # Generate response
 response = openai.generate_response("Hello!")
 print(response)
-```
+```text
 
 ---
 

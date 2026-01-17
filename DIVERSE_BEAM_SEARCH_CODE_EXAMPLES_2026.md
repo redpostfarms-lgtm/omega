@@ -44,7 +44,7 @@ outputs = model.generate(
 for i, output in enumerate(outputs):
     text = tokenizer.decode(output, skip_special_tokens=True)
     print(f"Ending {i+1}:\n{text[len(prompt):].strip()}\n{'-'*80}")
-```
+```text
 
 ### Output:
 **Typical Output:** 5 meaningfully different endings instead of near-identical variations.
@@ -138,7 +138,7 @@ def diverse_beam_search(
 results = diverse_beam_search()
 for i, (score, seq) in enumerate(results):
     print(f"Variant {i+1} (score: {score:.4f}): {' '.join(map(str, seq[1:]))}")
-```
+```text
 
 ### Key Components:
 1. **Group-based search**: Divides beams into groups
@@ -176,7 +176,7 @@ outputs = llm.generate([prompt], sampling_params)
 
 for i, out in enumerate(outputs[0].outputs):
     print(f"Response {i+1}:\n{out.text}\n{'-'*80}")
-```
+```text
 
 ### Advantages:
 - ✅ **Very fast inference** (optimized for production)
@@ -201,7 +201,7 @@ Integrating Diverse Beam Search with a real transformer model using Hugging Face
 pip install transformers torch accelerate
 # GPU recommended (uses device_map="auto" for multi-GPU/CPU fallback)
 # Hugging Face login: If using gated models like Llama, run huggingface-cli login with your token
-```
+```text
 
 ### Example 1: Simple Hugging Face Implementation (Recommended):
 
@@ -243,7 +243,7 @@ for i, output in enumerate(outputs):
     text = tokenizer.decode(output, skip_special_tokens=True)
     generated_part = text[len(prompt):].strip()
     print(f"Variant {i+1}:\n{generated_part}\n{'─'*70}\n")
-```
+```text
 
 ### Example 2: Extended Code Example:
 
@@ -285,7 +285,7 @@ for i, output in enumerate(outputs):
     text = tokenizer.decode(output, skip_special_tokens=True)
     generated = text[len(prompt):].strip()  # Extract generated part
     print(f"Ending Variant {i+1}:\n{generated}\n{'-'*80}")
-```
+```text
 
 ### What This Does:
 
@@ -296,7 +296,7 @@ for i, output in enumerate(outputs):
 
 ### Expected Output Example (Approximate):
 
-```
+```text
 Ending Variant 1:
 The dragon opened the door and found a treasure room filled with gold...
 -----------------------------------------------------------------------
@@ -308,7 +308,7 @@ The dragon opened the door and discovered a portal to another world...
 Ending Variant 3:
 The dragon opened the door and met an ancient wizard who granted wishes...
 -----------------------------------------------------------------------
-```
+```text
 
 ### Notes & Tips (January 2026):
 
@@ -398,7 +398,7 @@ for i, output in enumerate(outputs):
     full_text = tokenizer.decode(output, skip_special_tokens=True)
     generated = full_text[len(prompt):].strip()
     print(f"Story Variant {i+1}:\n{generated}\n{'─'*80}\n")
-```
+```text
 
 ### What This Does:
 
@@ -416,7 +416,7 @@ All 5 outputs will:
 
 ### Example Variants You Might See:
 
-```
+```text
 Story Variant 1:
 A heroic adventure inside the ancient cave...
 A mysterious, eerie tale about the hidden treasure...
@@ -426,7 +426,7 @@ The explorer discovered the hidden treasure in an ancient cave...
 
 Story Variant 3:
 A humorous story where the explorer is clumsy but finds the ancient cave...
-```
+```text
 
 ### Tips for Real Use:
 
@@ -480,7 +480,7 @@ Outlines is excellent for structured generation (JSON schema, regex, choice list
 pip install outlines transformers torch accelerate
 # Optional — for faster inference
 pip install vllm
-```
+```text
 
 ### Example 1: Basic JSON Generation with Outlines
 
@@ -532,7 +532,7 @@ structured_output = generator(prompt, max_tokens=250)
 
 print("Generated JSON (guaranteed valid):\n")
 print(structured_output.model_dump_json(indent=2))
-```
+```text
 
 **Typical Output (Always Valid JSON):**
 
@@ -544,7 +544,7 @@ print(structured_output.model_dump_json(indent=2))
   "plot_summary": "Eldrin discovered a glowing door behind a waterfall. Inside was a forgotten library of dragon lore...",
   "moral": "Curiosity can lead to wisdom"
 }
-```
+```text
 
 ### Example 2: JSON + Diverse Beam Search
 
@@ -594,7 +594,7 @@ for i, recipe in enumerate(results, 1):
     print(f"Recipe {i}:\n")
     print(recipe.model_dump_json(indent=2))
     print("─" * 70)
-```
+```text
 
 **Typical Output (All Valid JSON):**
 
@@ -624,7 +624,7 @@ Recipe 3:
   "instructions": ["Cook pasta", "Sauté chicken", "Make creamy sauce"],
   "prep_time_minutes": 25
 }
-```
+```text
 
 ### Key Advantages of Outlines + Diverse Beam Search:
 
@@ -710,14 +710,14 @@ generator = generate.regex(outlines_model, regex_guide)
 generated = generator(prompt, max_tokens=20)
 
 print("Generated (always matches regex):\n", generated)
-```
+```text
 
 **Expected Output (Always Valid):**
 
-```
+```text
 Generated (always matches regex):
 555-123-4567
-```
+```text
 
 #### Advanced Example: Regex + Diverse Beam Search
 
@@ -764,11 +764,11 @@ results = generator(prompt)
 print("5 Diverse Valid Email Addresses:\n")
 for i, email in enumerate(results, 1):
     print(f"{i}. {email}")
-```
+```text
 
 **Typical Output (All Match Regex, All Different):**
 
-```
+```text
 5 Diverse Valid Email Addresses:
 
 1. john.doe@example.com
@@ -776,7 +776,7 @@ for i, email in enumerate(results, 1):
 3. alex.rivera@protonmail.com
 4. morgan.lee@startup.io
 5. david.kim@gmail.com
-```
+```text
 
 #### Even More Advanced: Regex + JSON Schema (Combined Constraints)
 
@@ -816,7 +816,7 @@ result = generator(prompt, max_tokens=200)
 
 print("Guaranteed valid output:\n")
 print(result.model_dump_json(indent=2))
-```
+```text
 
 **Output (Always Valid JSON + Valid Phone Format):**
 
@@ -826,7 +826,7 @@ print(result.model_dump_json(indent=2))
   "email": "emma.carter@example.com",
   "phone": "415-555-0199"
 }
-```
+```text
 
 #### Summary of Outlines + Regex Strengths (2026):
 
@@ -854,17 +854,17 @@ Here are several complex, practical regex examples that are commonly useful when
 **Regex Pattern:**
 ```regex
 ^[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]{1,253}\.[a-zA-Z]{2,}$
-```
+```text
 
 **Explanation:**
 - Fairly realistic email validation (local part ≤64 chars, domain ≤253, TLD ≥2 letters)
 - Blocks most invalid formats while allowing almost all real-world emails
 
 **Prompt Example for Outlines:**
-```
+```text
 Generate 5 different professional email addresses for software engineers at fictional companies.
 Return only the email addresses, one per line.
-```
+```text
 
 **Code Example:**
 ```python
@@ -892,14 +892,14 @@ generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=200)
 
 print("Generated Email Addresses:\n", result)
-```
+```text
 
 ##### 2. Semantic Version with Optional Pre/Post tags
 
 **Regex Pattern:**
 ```regex
 ^((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*))(-((alpha|beta|rc)\.?\d+))?(\+[\w.-]+)?$
-```
+```text
 
 **Explanation:**
 - Matches:
@@ -909,11 +909,11 @@ print("Generated Email Addresses:\n", result)
 - Very common when generating version strings, changelogs, or dependency lists
 
 **Prompt Example:**
-```
+```text
 Suggest next version numbers for a library after current version 2.3.1.
 Return 5 different valid semantic versions (including possible pre-release and build metadata).
 One per line.
-```
+```text
 
 **Code Example:**
 ```python
@@ -924,14 +924,14 @@ prompt = "Suggest next version numbers for a library after current version 2.3.1
 
 generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=150)
-```
+```text
 
 ##### 3. ISO 8601 Date + Time with Timezone (very strict)
 
 **Regex Pattern:**
 ```regex
 ^(?:\d{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])|(?:W(?:0[1-9]|[1-4]\d|5[0-3]))-(?:[1-7]))T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?)$
-```
+```text
 
 **Explanation:**
 - Matches almost all valid ISO 8601 formats including:
@@ -941,10 +941,10 @@ result = generator(prompt, max_tokens=150)
 - Very useful when you need timestamps in logs, APIs, or datasets
 
 **Prompt Example:**
-```
+```text
 Generate 6 different valid ISO 8601 timestamps representing meetings in January 2026.
 One per line.
-```
+```text
 
 **Code Example:**
 ```python
@@ -955,14 +955,14 @@ prompt = "Generate 6 different valid ISO 8601 timestamps representing meetings i
 
 generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=200)
-```
+```text
 
 ##### 4. URL with required https + domain + path (strict)
 
 **Regex Pattern:**
 ```regex
 ^https://[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])+(?::\d{1,5})?(?:/[^\s]*)?$
-```
+```text
 
 **Explanation:**
 - Forces `https://`
@@ -972,11 +972,11 @@ result = generator(prompt, max_tokens=200)
 - Good compromise between strictness and real-world coverage
 
 **Prompt Example:**
-```
+```text
 Generate 4 different plausible documentation URLs for a fictional open-source Python library called "quixflow".
 All must start with https:// and contain the word "quixflow".
 One per line.
-```
+```text
 
 **Code Example:**
 ```python
@@ -987,14 +987,14 @@ prompt = "Generate 4 different plausible documentation URLs for a fictional open
 
 generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=250)
-```
+```text
 
 ##### 5. Hex color + optional alpha channel (CSS format)
 
 **Regex Pattern:**
 ```regex
 ^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})(?:[0-9a-fA-F]{2})?$
-```
+```text
 
 **Explanation:**
 - Matches:
@@ -1004,10 +1004,10 @@ result = generator(prompt, max_tokens=250)
 - Very common when generating themes, UI colors, or design tokens
 
 **Prompt Example:**
-```
+```text
 Generate a nice color palette for a dark-mode application.
 Return 5 different hex colors (with or without alpha), one per line.
-```
+```text
 
 **Code Example:**
 ```python
@@ -1018,7 +1018,7 @@ prompt = "Generate a nice color palette for a dark-mode application.\nReturn 5 d
 
 generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=100)
-```
+```text
 
 #### Ready-to-Run Code Examples (2026)
 
@@ -1044,7 +1044,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 
 outlines_model = models.transformers(model, tokenizer)
-```
+```text
 
 ##### Example 1 – Strict US Phone Number (###-###-####)
 
@@ -1060,16 +1060,16 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(8):
     number = generator(prompt, max_tokens=20)
     print(number)
-```
+```text
 
 **Typical Output (all guaranteed to match regex):**
 
-```
+```text
 415-555-0199
 720-867-5309
 303-555-1234
 ...
-```
+```text
 
 ##### Example 2 – Semantic Version with optional pre-release & build
 
@@ -1089,18 +1089,18 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(6):
     version = generator(prompt, max_tokens=30)
     print(version)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 2.3.12
 2.4.0
 2.4.0-rc.1
 2.3.12+build.20260110
 3.0.0-alpha.3
 2.3.11-hotfix.1
-```
+```text
 
 ##### Example 3 – Strict ISO 8601 DateTime with UTC or offset
 
@@ -1119,17 +1119,17 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(5):
     ts = generator(prompt, max_tokens=30)
     print(ts)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 2026-01-10T14:30:00Z
 2026-01-15T09:45:00+01:00
 2026-01-20T23:15:30.123456Z
 2026-01-05T03:00:00-08:00
 2026-01-31T17:59:59Z
-```
+```text
 
 ##### Example 4 – URL with required https + domain + path/query
 
@@ -1150,18 +1150,18 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(6):
     url = generator(prompt, max_tokens=60)
     print(url)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 https://docs.quixflow.dev/getting-started
 https://quixflow.io/api/v1/reference
 https://github.com/quixflow/docs/blob/main/install.md
 https://quixflow.dev/changelog?version=2.4.0
 https://api.quixflow.com/v2/docs
 https://quixflow.io/blog/new-features-2026
-```
+```text
 
 #### Quick Tips for Using Complex Regex in Outlines (2026)
 
@@ -1175,7 +1175,7 @@ guide = RegexGuide.from_regex(complex_pattern, tokenizer, verbose=False)
 
 # When regex is too complex → Outlines may create a very large FSM
 # Solution: split into multiple simpler regex + combine with JSON schema
-```
+```text
 
 **Quick Tips:**
 
@@ -1189,7 +1189,7 @@ from vllm import LLM
 
 llm = LLM(model=model_name)
 outlines_model = models.vllm(llm)
-```
+```text
 
 **These examples are ready-to-run** (just add Hugging Face login for Llama). They represent the most common real-world complex regex patterns used with Outlines in 2026.
 
@@ -1216,7 +1216,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 
 outlines_model = models.transformers(model, tokenizer)
-```
+```text
 
 **1. Basic UUID v4 (Most Common / Recommended)**
 
@@ -1234,15 +1234,15 @@ print("10 Valid UUID v4:\n")
 for _ in range(10):
     uuid = generator(prompt, max_tokens=40)
     print(uuid)
-```
+```text
 
 **Typical Output (all guaranteed valid v4):**
 
-```
+```text
 550e8400-e29b-41d4-a716-446655440000
 123e4567-e89b-12d3-a456-426614174000
 ...
-```
+```text
 
 **2. Any UUID Version (1–5)**
 
@@ -1264,7 +1264,7 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(6):
     uuid = generator(prompt, max_tokens=40)
     print(uuid)
-```
+```text
 
 **3. Strict UUID v4 + Optional Braces + Case Insensitive**
 
@@ -1284,15 +1284,15 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(5):
     uuid = generator(prompt, max_tokens=50)
     print(uuid)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 {550e8400-e29b-41d4-a716-446655440000}
 123e4567-e89b-12d3-a456-426614174000
 ...
-```
+```text
 
 **4. UUID v4 in JSON Array (Combined with JSON Schema)**
 
@@ -1313,7 +1313,7 @@ result = generator(prompt, max_tokens=200)
 
 print("Valid JSON with UUID v4:\n")
 print(result.model_dump_json(indent=2))
-```
+```text
 
 **Typical Output (always valid JSON + valid UUIDs):**
 
@@ -1327,12 +1327,12 @@ print(result.model_dump_json(indent=2))
     "f47ac10b-58cc-4372-a567-0e02b2c3d479"
   ]
 }
-```
+```text
 
 **Summary of UUID Regex Complexity Levels:**
 
 | Level | Regex Type | Strictness | Use Case | Performance Impact |
-|-------|-----------|------------|----------|-------------------|
+| ------- | ----------- | ------------ | ---------- | ------------------- |
 | **1 – Basic v4** | Simple v4 only | Medium | Most common / recommended | Very fast |
 | **2 – Any version** | Versions 1–5 | High | General UUID validation | Fast |
 | **3 – Strict v4 + braces** | v4 + optional {} | Very high | Systems that accept braced UUIDs | Fast |
@@ -1350,9 +1350,9 @@ All examples are ready-to-run (just add Hugging Face login for Llama).
 Here are several ready-to-run examples of using Outlines with JWT (JSON Web Token) regex constraints.
 
 JWT tokens follow this general format:
-```
+```text
 header.payload.signature
-```
+```text
 
 Where each part is base64url-encoded (without padding =), and the signature is optional in some contexts but usually present.
 
@@ -1373,7 +1373,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 
 outlines_model = models.transformers(model, tokenizer)
-```
+```text
 
 **1. Standard JWT (Header.Payload.Signature – Most Common)**
 
@@ -1394,15 +1394,15 @@ print("8 Valid-looking JWTs:\n")
 for _ in range(8):
     token = generator(prompt, max_tokens=80)
     print(token)
-```
+```text
 
 **Typical Output (all match the regex pattern):**
 
-```
+```text
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiZXhhbXBsZS5jb20ifQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
 ...
-```
+```text
 
 **2. Strict JWT with Version 1 Header Check (HS256/RS256/ES256)**
 
@@ -1424,15 +1424,15 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(5):
     token = generator(prompt, max_tokens=80)
     print(token)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJleGFtcGxlLmNvbSJ9.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
 ...
-```
+```text
 
 **3. JWT in Authorization Header Format (Bearer Token)**
 
@@ -1450,15 +1450,15 @@ generator = generate.regex(outlines_model, guide)
 for _ in range(6):
     header = generator(prompt, max_tokens=100)
     print(header)
-```
+```text
 
 **Typical Output:**
 
-```
+```text
 Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
 ...
-```
+```text
 
 **4. JWT v4-like + JSON Payload Snippet (Combined with JSON Schema)**
 
@@ -1484,7 +1484,7 @@ generator = generate.regex(outlines_model, guide)
 
 token = generator(prompt, max_tokens=100)
 print("Generated JWT (matches regex):\n", token)
-```
+```text
 
 **5. JWT Header Decode Check (Regex + Post-Generation Validation)**
 
@@ -1582,7 +1582,7 @@ for i in range(3):
         print(f"Header decode/validation failed: {e}")
     
     print("─" * 80 + "\n")
-```
+```text
 
 **What This Code Does:**
 
@@ -1597,7 +1597,7 @@ for i in range(3):
 
 **Typical Output (All tokens will match regex + valid header structure):**
 
-```
+```text
 Generated JWT 1:
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
@@ -1612,7 +1612,7 @@ Header is valid!
 Generated JWT 2:
 eyJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJleGFtcGxlLmNvbSJ9.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
 ...
-```
+```text
 
 **Notes on Strictness & Safety:**
 
@@ -1678,7 +1678,7 @@ except InvalidTokenError as e:
     print("Token invalid:", str(e))
 except Exception as e:
     print("Other error:", str(e))
-```
+```text
 
 **2. Asymmetric Key Example (RS256 – Public Key from JWKS)**
 
@@ -1734,7 +1734,7 @@ except jwt.PyJWTError as e:
     print("JWT verification failed:", str(e))
 except Exception as e:
     print("Other error:", str(e))
-```
+```text
 
 **3. Security Best Practices (2026)**
 
@@ -1753,12 +1753,12 @@ options = {
 # Never accept "none" algorithm
 if jwt.get_unverified_header(token).get("alg") == "none":
     raise ValueError("None algorithm not allowed!")
-```
+```text
 
 **Summary Table – Verification Options:**
 
 | Scenario | Recommended Approach | Library | Notes |
-|----------|---------------------|---------|-------|
+| ---------- | --------------------- | --------- | ------- |
 | **HS256 (symmetric secret)** | `jwt.decode(..., key=secret)` | PyJWT | Fast & simple |
 | **RS256/ES256 (asymmetric)** | `PyJWKClient` + public key | PyJWT | Most secure/common |
 | **Full OIDC/JWKS validation** | JWKS fetch + all claim checks | PyJWT | Production standard |
@@ -1891,7 +1891,7 @@ except jwt.PyJWTError as e:
     print("JWT verification failed:", str(e))
 except Exception as e:
     print("Error:", str(e))
-```
+```text
 
 **Key Features of This Implementation:**
 
@@ -1904,7 +1904,7 @@ except Exception as e:
 **Advanced Options & Best Practices (2026):**
 
 | Feature | Recommendation | Why |
-|---------|---------------|-----|
+| --------- | --------------- | ----- |
 | **Cache backend** | Use requests-cache or Redis for persistence | Survives restarts |
 | **JWKS refresh strategy** | Background thread + on-demand | Avoids blocking requests |
 | **Max cache age** | 1–24 hours (depending on provider) | Balance freshness vs performance |
@@ -1914,7 +1914,7 @@ except Exception as e:
 **Summary Table – JWKS Strategies:**
 
 | Strategy | Cache Duration | Refresh Trigger | Best For |
-|----------|---------------|-----------------|----------|
+| ---------- | --------------- | ----------------- | ---------- |
 | **Simple (no cache)** | None | Every request | Testing |
 | **Basic PyJWKClient** | Built-in TTL | When key expires or missing | Small apps |
 | **SmartJWKSClient (above)** | 1–24h | TTL + missing kid + min interval | Production |
@@ -1934,7 +1934,7 @@ Here's a production-ready, Redis-backed JWKS caching implementation for JWT veri
 
 ```bash
 pip install pyjwt[crypto] redis requests
-```
+```text
 
 **Full Implementation:**
 
@@ -2108,7 +2108,7 @@ except Exception as e:
 
 # On shutdown (optional)
 # jwks.stop()
-```
+```text
 
 **Key Features Explained:**
 
@@ -2308,7 +2308,7 @@ except Exception as e:
 
 # On app shutdown (e.g., in FastAPI shutdown event)
 # jwks.stop()
-```
+```text
 
 **Why This Works So Well in Production:**
 
@@ -2329,7 +2329,7 @@ except Exception as e:
 **Summary of JWT Regex Complexity Levels:**
 
 | Level | Regex Strictness | Use Case | Performance Impact |
-|-------|-----------------|----------|-------------------|
+| ------- | ----------------- | ---------- | ------------------- |
 | **1 – Basic JWT** | Any three base64url parts | Most common / fastest | Very fast |
 | **2 – Algorithm check** | Forces HS256/RS256/ES256 | Security audits, API mocking | Fast |
 | **3 – Bearer header** | Full Authorization header | API request generation | Fast |
@@ -2356,7 +2356,7 @@ All examples are ready-to-run (after Hugging Face login for Llama, and PyJWT ins
 **Recommendation Hierarchy (Complexity vs Reliability):**
 
 | Approach | Complexity | Reliability | Use Case |
-|----------|-----------|-------------|----------|
+| ---------- | ----------- | ------------- | ---------- |
 | **Simple choice lists / enums** | Lowest | Fastest + smallest FSM | Limited options |
 | **JSON schema / Pydantic** | Low-Medium | Best balance for structure | Structured data |
 | **Medium regex** | Medium | Very reliable | Format validation |
@@ -2378,7 +2378,7 @@ All examples are ready-to-run (after Hugging Face login for Llama, and PyJWT ins
 ## Summary Table – Which to Use When
 
 | Goal | Recommended Variant | Typical Library | Beam Width / Groups |
-|------|---------------------|-----------------|---------------------|
+| ------ | --------------------- | ----------------- | --------------------- |
 | **Single best possible answer** | Standard Beam | HF Transformers, vLLM | 4–20 |
 | **Multiple distinct high-quality answers** | Diverse Beam | HF Transformers, custom | 12–20, 4–5 groups |
 | **Fast production inference** | Beam + Speculative Decoding | vLLM, TensorRT-LLM | 4–8 |
@@ -2405,7 +2405,7 @@ outputs = model.generate(
     length_penalty=0.8,
     repetition_penalty=1.1,
 )
-```
+```text
 
 ### Pattern 2: Production Inference (vLLM)
 
@@ -2418,7 +2418,7 @@ sampling_params = SamplingParams(
     diversity_penalty=1.0,
     max_tokens=150,
 )
-```
+```text
 
 ### Pattern 3: Educational/Understanding (From Scratch)
 
@@ -2430,7 +2430,7 @@ results = diverse_beam_search(
     num_groups=4,
     diversity_penalty=1.2,
 )
-```
+```text
 
 ### Pattern 4: Structured Generation (Outlines + Diverse Beam)
 
@@ -2447,7 +2447,7 @@ generator = generate.json(
     diversity_penalty=1.3,
     num_return_sequences=3
 )
-```
+```text
 
 ### Pattern 5: Contrastive Search (Anti-Repetition Generation)
 
@@ -2520,7 +2520,7 @@ Real-world implementations (2025–2026) use approximations:
 #### Typical Parameters & Behavior (2026)
 
 | Parameter | Typical Range | Effect |
-|-----------|--------------|--------|
+| ----------- | -------------- | -------- |
 | **alpha** | 0.6 – 0.9 | 0.0 → standard top-k<br>0.7 → sweet spot<br>1.0 → very strong anti-similarity |
 | **top_k** | 10 – 60 | Larger → more candidates considered (more compute, potentially more diversity) |
 | **temperature** | 0.7 – 1.0 | Usually kept moderate (contrastive already adds diversity) |
@@ -2528,12 +2528,12 @@ Real-world implementations (2025–2026) use approximations:
 
 **Most popular combination today:**
 
-```
+```text
 alpha = 0.7
 top_k = 40–50
 temperature = 0.8
 repetition_penalty = 1.1
-```
+```text
 
 #### Summary of the Original Derivation
 
@@ -2658,7 +2658,7 @@ generated_text = contrastive_search(
 
 print("Generated with Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **2. Improved Simple Implementation (With Repetition Penalty & Better Approximation):**
 
@@ -2780,7 +2780,7 @@ generated_text = contrastive_search(
 
 print("Generated with Full Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Implementation Notes:**
 
@@ -2941,7 +2941,7 @@ generated_text = full_contrastive_generation(
 
 print("Generated with Full Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of This Implementation:**
 
@@ -3071,7 +3071,7 @@ generated_text = adaptive_contrastive_search(
 
 print("Generated with Adaptive Alpha Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of This Adaptive Alpha Variant:**
 
@@ -3212,7 +3212,7 @@ generated_text = exponential_contrastive_search(
 
 print("Generated with Exponential Alpha Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of Exponential Alpha Ramp:**
 
@@ -3233,7 +3233,7 @@ If you want alpha to approach a maximum value asymptotically:
 # Inside the loop, replace alpha calculation with:
 max_alpha = 1.0
 alpha = max_alpha - (max_alpha - base_alpha) * torch.exp(-growth_rate * progress)
-```
+```text
 
 This gives a smoother, saturating curve.
 
@@ -3370,7 +3370,7 @@ generated_text = sigmoid_alpha_contrastive_search(
 
 print("Generated with Sigmoid Adaptive Alpha Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of the Sigmoid Alpha Ramp:**
 
@@ -3507,7 +3507,7 @@ plt.xlim(0, 1)
 plt.tight_layout()
 
 plt.show()
-```
+```text
 
 **What You'll See When You Run It:**
 
@@ -3616,7 +3616,7 @@ fig.update_layout(
 )
 
 fig.show()
-```
+```text
 
 **Features of this Interactive Plot:**
 
@@ -3727,7 +3727,7 @@ fig.update_layout(
 )
 
 fig.show()
-```
+```text
 
 **How to Use This Interactive Plot:**
 
@@ -3756,7 +3756,7 @@ The sigmoid-shaped alpha ramp shows how alpha (contrastive penalty strength) evo
 
 **Standard Sigmoid Curve (steepness=5.0, midpoint=0.5, base_alpha=0.3, max_alpha=1.0):**
 
-```
+```text
 Alpha (Penalty Strength)
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3769,7 +3769,7 @@ Alpha (Penalty Strength)
     +----+----+----+----+----+----+----+----+----+----
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
                     Generation Progress
-```
+```text
 
 **Key Characteristics of the Sigmoid Ramp:**
 
@@ -3796,7 +3796,7 @@ The curves are shown for the following steepness values:
 The steepness parameter controls how sharp or gradual the transition is:
 
 **Steepness = 3.0** (very gradual):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●
@@ -3808,11 +3808,11 @@ Alpha
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
-```
+```text
 → **Very smooth, gradual increase** — long creative phase
 
 **Steepness = 5.0** (moderate — default):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3824,11 +3824,11 @@ Alpha
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
-```
+```text
 → **Moderate S-shape** — balanced transition (most common default)
 
 **Steepness = 8.0** (quite sharp):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3840,11 +3840,11 @@ Alpha
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
-```
+```text
 → **Sharp rise around midpoint** — strong penalty kicks in quickly
 
 **Steepness = 12.0** (very sharp, almost step-like):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●●
@@ -3856,7 +3856,7 @@ Alpha
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
-```
+```text
 → **Almost step-like** — stays low for half the generation, then suddenly becomes very strong
 
 **How Steepness Affects the Curve:**
@@ -3876,7 +3876,7 @@ These curves show exactly how the steepness parameter shapes the behavior of the
 
 **Combined Visualization - All Steepness Values Together:**
 
-```
+```text
 Alpha Ramp Curves for Different Steepness Values (Combined)
 1.0 |                                    ●●●●●  ← steep=12.0 (very sharp)
     |                               ●●●●  ●●●●  ← steep=8.0 (sharp)
@@ -3892,7 +3892,7 @@ Legend:
 ● = Steepness 5.0 (moderate, balanced - most common default)
 ● = Steepness 8.0 (sharp, quick transition)
 ● = Steepness 12.0 (very sharp, almost step-like)
-```
+```text
 
 This combined view clearly shows how increasing steepness creates sharper transitions while maintaining the same starting and ending values.
 
@@ -3913,7 +3913,7 @@ Here are visualizations of the sigmoid-shaped alpha ramp curves for different va
 The midpoint controls where the transition (inflection point) occurs during generation:
 
 **Midpoint = 0.3** (early strong penalty):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3925,11 +3925,11 @@ Alpha
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
              ↑
           Transition
-```
+```text
 → **Early strong penalty** — alpha rises quickly → coherence early in generation
 
 **Midpoint = 0.5** (balanced — standard):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3941,11 +3941,11 @@ Alpha
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
                          ↑
                       Transition
-```
+```text
 → **Balanced** — standard, main transition around middle of sequence
 
 **Midpoint = 0.7** (late strong penalty):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●
@@ -3957,7 +3957,7 @@ Alpha
     0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0
                                      ↑
                                   Transition
-```
+```text
 → **Late strong penalty** — long creative/exploratory phase, strong control only toward the end
 
 **How Midpoint Affects the Curve:**
@@ -3983,7 +3983,7 @@ Here are visualizations of the sigmoid-shaped alpha ramp curves for different co
 Different combinations of starting and ending alpha values:
 
 **base_alpha = 0.2, max_alpha = 1.0**:
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -3991,11 +3991,11 @@ Alpha
     |                     ●●
 0.2 |●
     +----+----+----+----+----+----+----+----+----+----
-```
+```text
 → **Very low start** (strong early creativity), normal late penalty
 
 **base_alpha = 0.3, max_alpha = 1.0** (standard):
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●●
@@ -4003,11 +4003,11 @@ Alpha
     |                     ●●
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
-```
+```text
 → **Balanced default** (good middle ground)
 
 **base_alpha = 0.5, max_alpha = 1.0**:
-```
+```text
 Alpha
 1.0 |                                    ●●●●●
     |                               ●●●
@@ -4015,11 +4015,11 @@ Alpha
     |                     ●
 0.5 |●
     +----+----+----+----+----+----+----+----+----+----
-```
+```text
 → **Starts with moderate penalty** (less early exploration, quicker coherence)
 
 **base_alpha = 0.3, max_alpha = 1.2**:
-```
+```text
 Alpha
 1.2 |                                    ●●●●●
     |                               ●●●●
@@ -4027,7 +4027,7 @@ Alpha
     |                     ●●
 0.3 |●
     +----+----+----+----+----+----+----+----+----+----
-```
+```text
 → **Starts low but ends with very strong penalty** (excellent for preventing late-stage repetition/drift)
 
 **How Base/Max Alpha Affect the Curve:**
@@ -4059,7 +4059,7 @@ All curves use:
 
 **Side-by-Side Comparison:**
 
-```
+```text
 Alpha Ramp Comparison: Sigmoid vs Linear
 1.0 |                                    ●●●●●  ← Sigmoid steep=5.0 (smooth S-curve)
     |                               ●●●●  ●     ← Linear (straight line)
@@ -4076,11 +4076,11 @@ Alpha Ramp Comparison: Sigmoid vs Linear
 Legend:
 ● = Linear ramp (straight, constant rate)
 ● = Sigmoid ramp, steepness=5.0 (smooth S-curve)
-```
+```text
 
 **Sigmoid with Steepness = 8.0 (Sharper):**
 
-```
+```text
 Alpha Ramp Comparison: Sigmoid Steep=8.0 vs Linear
 1.0 |                                    ●●●●●  ← Sigmoid steep=8.0 (sharp S-curve)
     |                               ●●●●  ●     ← Linear (straight line)
@@ -4097,12 +4097,12 @@ Alpha Ramp Comparison: Sigmoid Steep=8.0 vs Linear
 Legend:
 ● = Linear ramp (straight, constant rate)
 ● = Sigmoid ramp, steepness=8.0 (sharp S-curve)
-```
+```text
 
 **How the Curves Compare:**
 
 | Ramp Type | Characteristics | Pros | Cons |
-|-----------|----------------|------|------|
+| ----------- | ---------------- | ------ | ------ |
 | **Linear ramp** (orange) | Straight, constant increase from 0.3 to 1.0 — alpha grows at a constant rate | • Simple<br>• Perfectly predictable behavior<br>• Straightforward tuning | • Abrupt change in control level<br>• Less natural transition<br>• No adaptation to generation phase |
 | **Sigmoid ramp, steepness=5.0** (blue) | Smooth S-shape: slow start, rapid middle increase, slow approach to max | • Natural, smooth behavior change<br>• Most preferred in 2026 for long-form generation<br>• Adapts to generation phase | • Slightly harder to predict exact timing<br>• Requires understanding of parameters |
 | **Sigmoid ramp, steepness=8.0** (green) | Sharper S-curve: stays low longer, then quickly ramps up | • Longer creative phase<br>• Sudden strong control later<br>• Good for epic stories | • Can feel abrupt if steepness is too high<br>• Requires careful tuning |
@@ -4145,7 +4145,7 @@ Legend:
 **When to Use Each:**
 
 | Use Case | Recommended Ramp | Why |
-|----------|-----------------|-----|
+| ---------- | ----------------- | ----- |
 | **Creative/long-form generation** | Sigmoid (steepness 5–8) | Smooth, natural transition |
 | **Epic stories (>300 tokens)** | Sigmoid (steepness 8–12) | Long creative phase + strong late control |
 | **Predictable/technical text** | Linear | Simple, constant control increase |
@@ -4215,7 +4215,7 @@ $$f(x) = \frac{L}{1 + e^{-k(x - x_0)}}$$
 
 Here are the curves for different steepness ($k$) values with fixed base=0.3, max=1.0, midpoint=0.5:
 
-```
+```text
 Alpha (Different Steepness Values)
 1.0 |                                    ●●●●●  ← k=20 (very sharp)
     |                               ●●●●  ●●●●  ← k=10 (sharp)
@@ -4231,7 +4231,7 @@ Legend:
 ● = k=5 (classic S-shape, balanced)
 ● = k=10 (sharp transition)
 ● = k=20 (almost step function)
-```
+```text
 
 **How to Read the Chart:**
 
@@ -4254,7 +4254,7 @@ This is why steepness=5.0–8.0 is most common in practice — it gives a smooth
 **Summary Table: How Each Parameter Affects the Sigmoid Alpha Ramp**
 
 | Parameter | Effect on Curve | Typical Range | Best For |
-|-----------|----------------|---------------|----------|
+| ----------- | ---------------- | --------------- | ---------- |
 | **base_alpha** | Starting value (lower asymptote) | 0.2–0.5 | Lower = more early creativity |
 | **max_alpha** | Ending value (upper asymptote) | 0.9–1.2 | Higher = stronger late penalty |
 | **steepness (k)** | Sharpness of transition | 3.0–12.0 | Lower = gradual, higher = sharp |
@@ -4341,12 +4341,12 @@ class ContrastiveLogitsProcessor(LogitsProcessor):
 
 # Note: Full contrastive search in vLLM requires custom integration (hidden states access)
 # Most people use the manual torch loop above for contrastive in 2026
-```
+```text
 
 **Key Parameters & Typical Values (2026):**
 
 | Parameter | Typical Range | Effect |
-|-----------|--------------|--------|
+| ----------- | -------------- | -------- |
 | **alpha** | 0.5 – 1.0 | Higher → stronger anti-repetition/similarity penalty |
 | **top_k** | 10 – 50 | Larger → more candidates considered before contrastive penalty |
 | **temperature** | 0.7 – 1.0 | Controls overall randomness (usually kept moderate) |
@@ -4360,9 +4360,9 @@ class ContrastiveLogitsProcessor(LogitsProcessor):
 
 **Most popular combination in 2026:**
 
-```
+```text
 contrastive search + top_k=30–50 + alpha=0.6–0.8 + temperature=0.8
-```
+```text
 
 This gives fluent, varied, and rarely repetitive outputs.
 
@@ -4432,7 +4432,7 @@ fig.update_layout(
 )
 
 fig.show()
-```
+```text
 
 **How to Use:**
 
@@ -4505,7 +4505,7 @@ fig.update_layout(
 )
 
 fig.show()
-```
+```text
 
 **How to Use:**
 
@@ -4543,7 +4543,7 @@ The `top_k` parameter in contrastive search (and similar sampling methods) deter
 **Effects of Different top_k Values:**
 
 | top_k Value | Candidate Pool Size | Coherence / Quality | Diversity | Speed | Risk of Low-Quality Tokens | Typical Feeling | Best Use Case |
-|-------------|---------------------|---------------------|-----------|-------|----------------------------|-----------------|---------------|
+| ------------- | --------------------- | --------------------- | ----------- | ------- | ---------------------------- | ----------------- | --------------- |
 | 10–20 | Very small | Very high | Low | Fastest | Extremely low | Very focused, clean, almost deterministic | Short/precise answers, code/math, technical writing |
 | 30–50 | Moderate (sweet spot) | High | Medium–High | Fast | Very low | Balanced fluency + variety, low repetition | Everyday chat, roleplay, long-form creative (most popular) |
 | 60–100 | Large | Medium–High | High | Medium | Low | More creative, occasional surprises | Brainstorming, poetry, wild ideas |
@@ -4554,7 +4554,7 @@ The `top_k` parameter in contrastive search (and similar sampling methods) deter
 
 Imagine the next-token probability distribution (sorted descending):
 
-```
+```text
 Token   Prob
 the     0.40
 a       0.25
@@ -4566,7 +4566,7 @@ very    0.02
 really  0.015
 super   0.01
 ...     <0.01
-```
+```text
 
 - `top_k = 10` → only "the" to "really" are candidates → contrastive penalty only affects these → very focused output
 - `top_k = 50` → many more tokens enter → contrastive can penalize more diverse candidates → balanced diversity
@@ -4583,12 +4583,12 @@ super   0.01
 
 **Most Popular Combination in 2026:**
 
-```
+```text
 alpha = 0.7
 top_k = 40–50
 temperature = 0.8–0.9
 repetition_penalty = 1.1
-```
+```text
 
 This gives excellent fluency, low repetition, and natural variation on almost all modern open models.
 
@@ -4608,7 +4608,7 @@ This set is called the **nucleus**.
 
 Suppose the model's next-token probabilities (sorted descending) are:
 
-```
+```text
 Token     Probability   Cumulative
 the       0.40          0.40
 a         0.25          0.65
@@ -4621,7 +4621,7 @@ really    0.015         0.945
 super     0.01          0.955
 extremely 0.005         0.96
 ... (tail) ...
-```
+```text
 
 Now apply different top_p values:
 
@@ -4633,7 +4633,7 @@ Now apply different top_p values:
 **Key Behavior & Advantages:**
 
 | Model Confidence | Nucleus Size (top_p = 0.9) | Effect |
-|------------------|----------------------------|--------|
+| ------------------ | ---------------------------- | -------- |
 | Very confident ("the" = 0.95) | Very small (1–5 tokens) | Output is focused and coherent |
 | Uncertain (flat distribution) | Large nucleus (dozens of tokens) | High diversity and creativity |
 | Moderately confident | Medium nucleus (5–20 tokens) | Balanced coherence + variation |
@@ -4654,11 +4654,11 @@ Now apply different top_p values:
 
 **Most popular production combo today:**
 
-```
+```text
 top_p = 0.92 – 0.95
 temperature = 0.8
 repetition_penalty = 1.1
-```
+```text
 
 **Visual Intuition:**
 
@@ -4684,7 +4684,7 @@ Top-p (nucleus sampling) and top-k sampling are two of the most popular ways to 
 **Quick Comparison Table (2026 Perspective):**
 
 | Aspect | Top-k Sampling | Top-p (Nucleus) Sampling | Winner / When to Prefer |
-|--------|---------------|--------------------------|-------------------------|
+| -------- | --------------- | -------------------------- | ------------------------- |
 | **Core Idea** | Always keep exactly the top k most probable tokens | Keep the smallest set of tokens whose cumulative probability ≥ p | Top-p (more adaptive) |
 | **Pool Size** | Fixed (e.g. k=40 → always 40 tokens) | Dynamic (changes every step based on confidence) | Top-p |
 | **When model is very confident** (e.g. one token has 0.95 prob) | Still includes k tokens → can force unnecessary diversity | Nucleus becomes tiny (often 1–5 tokens) → very focused | Top-p |
@@ -4699,7 +4699,7 @@ Top-p (nucleus sampling) and top-k sampling are two of the most popular ways to 
 
 Suppose the next-token probabilities (sorted descending) are:
 
-```
+```text
 Token     Prob   Cumulative
 the       0.40   0.40
 a         0.25   0.65
@@ -4712,7 +4712,7 @@ really    0.015  0.945
 super     0.01   0.955
 extremely 0.005  0.96
 ... tail  <0.04 total
-```
+```text
 
 - `top-k = 5` → keeps "the" to "that" → samples from these 5 tokens (even if model is confident in "the", still forces inclusion of "that")
 - `top-p = 0.9` → keeps tokens until cumulative ≥ 0.9 → "the" to "some" (cumulative = 0.91) → samples from 6 tokens (if model was super confident, e.g. "the"=0.95, nucleus would be just 1–2 tokens → very focused)
@@ -4732,13 +4732,13 @@ extremely 0.005  0.96
 
 **Most popular production setting today:**
 
-```
+```text
 top_p = 0.92 – 0.95
 temperature = 0.8
 repetition_penalty = 1.1
 frequency_penalty = 0.2
 presence_penalty = 0.15
-```
+```text
 
 Many systems (including Grok, Claude, GPT, Gemini) use top-p + temperature as the default for chat — top-k is rarely the primary method anymore.
 
@@ -4904,7 +4904,7 @@ text_top_p = generate_top_p(
 
 print("Top-p (Nucleus) Sampling Output:\n")
 print(text_top_p)
-```
+```text
 
 ##### 2. Top-k Sampling Implementation (for Comparison)
 
@@ -5033,7 +5033,7 @@ text_top_k = generate_top_k(
 
 print("\nTop-k Sampling Output (for comparison):\n")
 print(text_top_k)
-```
+```text
 
 **Key Differences You'll Notice When Running Both:**
 
@@ -5237,7 +5237,7 @@ text_hybrid = generate_hybrid_top_p_top_k(
 
 print("\nHybrid Top-k + Top-p Sampling Output (recommended for production):\n")
 print(text_hybrid)
-```
+```text
 
 **Typical Parameter Values (2026 Production Default):**
 
@@ -5250,19 +5250,19 @@ print(text_hybrid)
 
 **Most used combo today (used by almost all frontier chat models):**
 
-```
+```text
 top_k = 50
 top_p = 0.92
 temperature = 0.8
 repetition_penalty = 1.1
 frequency_penalty = 0.2
 presence_penalty = 0.15
-```
+```text
 
 **Visual Intuition (Same Distribution Example):**
 
 Probabilities (sorted):
-```
+```text
 Token     Prob   Cumulative
 the       0.40   0.40
 a         0.25   0.65
@@ -5274,7 +5274,7 @@ very      0.02   0.93
 really    0.015  0.945
 super     0.01   0.955
 ...
-```
+```text
 
 - `top-k = 50` alone → samples from top 50 (includes some low-prob tail)
 - `top-p = 0.9` alone → samples from "the" to "some" (cumulative 0.91)
@@ -5488,7 +5488,7 @@ final_story = hybrid_contrastive_beam_nucleus(
 
 print("\nFinal Story (Hybrid Contrastive-Beam-Nucleus):\n")
 print(final_story)
-```
+```text
 
 #### Contrastive Search: Mathematical Details and Original Derivation
 
@@ -5544,7 +5544,7 @@ Computing h_t(y) for every y ∈ V (~50k–200k tokens) is computationally infea
 **Typical Parameters & Behavior (2026):**
 
 | Parameter | Typical Range | Effect |
-|-----------|---------------|--------|
+| ----------- | --------------- | -------- |
 | alpha | 0.6 – 0.9 | 0.0 → standard top-k<br>0.7 → sweet spot<br>1.0 → very strong anti-similarity |
 | top_k | 10 – 60 | Larger → more candidates considered (more compute, potentially more diversity) |
 | temperature | 0.7 – 1.0 | Usually kept moderate (contrastive already adds diversity) |
@@ -5552,12 +5552,12 @@ Computing h_t(y) for every y ∈ V (~50k–200k tokens) is computationally infea
 
 **Most popular combination today:**
 
-```
+```text
 alpha = 0.7
 top_k = 40–50
 temperature = 0.8
 repetition_penalty = 1.1
-```
+```text
 
 **Summary of the Original Derivation:**
 
@@ -5701,7 +5701,7 @@ generated_text = contrastive_search(
 
 print("Generated with Full Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Implementation Details (Following the Original Derivation):**
 
@@ -5845,7 +5845,7 @@ generated_text = adaptive_alpha_contrastive_search(
 
 print("Generated with Exponential Adaptive Alpha Contrastive Search:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of the Exponential Adaptive Alpha Ramp:**
 
@@ -5893,7 +5893,7 @@ model = AutoModelForCausalLM.from_pretrained(
 
 prompt = "Write a short story about a robot who discovers a hidden city."
 max_new_tokens = 150
-```
+```text
 
 **1. Contrastive Search Implementation:**
 
@@ -5950,7 +5950,7 @@ def contrastive_search(
 
 print("Contrastive Search Output:\n")
 print(contrastive_search(model, tokenizer, prompt, max_new_tokens))
-```
+```text
 
 **2. Diverse Beam Search Implementation (using HF built-in):**
 
@@ -5975,12 +5975,12 @@ for i, out in enumerate(diverse_outputs):
     text = tokenizer.decode(out, skip_special_tokens=True)
     generated = text[len(prompt):].strip()
     print(f"Variant {i+1}:\n{generated}\n{'─'*70}\n")
-```
+```text
 
 **Key Differences in Practice:**
 
 | Aspect | Contrastive Search | Diverse Beam Search |
-|--------|-------------------|---------------------|
+| -------- | ------------------- | --------------------- |
 | **Output Style** | Single fluent, non-repetitive text | Multiple distinct high-quality texts |
 | **Randomness** | Yes (sampling) | No (deterministic) |
 | **Repetition Prevention** | Excellent semantic + lexical | Good lexical (via diversity penalty) |
@@ -6126,7 +6126,7 @@ def get_positive_pair(model, inputs, attention_mask):
     h2 = out2.hidden_states[-1]
     
     return h1, h2
-```
+```text
 
 #### Example 2: Full Training Loop with SimCTG
 
@@ -6313,7 +6313,7 @@ for epoch in range(num_epochs):
     accelerator.save_state(f"checkpoint_epoch_{epoch+1}")
 
 logger.info("Training complete!")
-```
+```text
 
 #### Example 3: Full Training Loop with Two-Forward-Pass SimCTG
 
@@ -6527,7 +6527,7 @@ for epoch in range(num_epochs):
     accelerator.save_state(f"checkpoint_epoch_{epoch+1}")
 
 logger.info("Training complete!")
-```
+```text
 
 **Key Notes:**
 
@@ -6675,7 +6675,7 @@ plt.ylabel("Divergence")
 plt.title("MAUVE Divergence Curve")
 plt.legend()
 plt.show()
-```
+```text
 
 **Explanation of Key Parts:**
 
@@ -6702,7 +6702,7 @@ Current MAUVE comparisons for frontier models (January 2026):
 MAUVE is not as commonly reported in 2026 leaderboards as MMLU, GPQA, or LiveBench (because it's compute-intensive and less standardized for very long generations). However, from recent papers, community evaluations, and model reports (2025–early 2026), here are approximate MAUVE scores on typical datasets (story/news generation, ~5k–10k samples, GPT-2-large featurizer):
 
 | Model / Family | Size (Active) | Approx. MAUVE (Human-like Distribution) | Notes / Source Context |
-|----------------|---------------|----------------------------------------|------------------------|
+| ---------------- | --------------- | ---------------------------------------- | ------------------------ |
 | **GPT-5.2 / o3 series** | Frontier | 0.92–0.96 | Closed-source leader; near-human on long-form |
 | **Claude 4.5 / Opus** | Frontier | 0.90–0.94 | Very high coherence; strong on creative tasks |
 | **Gemini 3.0 Pro** | Frontier | 0.89–0.93 | Excellent diversity; multimodal helps |
@@ -6800,7 +6800,7 @@ The curve is called the **divergence frontier**.
 ##### Typical Values (2026 Benchmarks)
 
 | Model / Family | Approx. MAUVE Score (5k–10k samples) | Notes |
-|----------------|--------------------------------------|-------|
+| ---------------- | -------------------------------------- | ------- |
 | Human-written (self) | ~0.98–1.00 | Upper bound |
 | GPT-5 / o3 series | 0.92–0.96 | Near-human on long-form |
 | Claude 4.5 / Opus | 0.90–0.94 | Excellent fluency |
@@ -6834,7 +6834,7 @@ Here are three representative examples (simplified for clarity):
 
 The max-divergence curve stays very low across $\lambda$ → small area under curve → high MAUVE
 
-```
+```text
 Max KL Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -6848,7 +6848,7 @@ Max KL Divergence
 0.2 ┼─┘                                                        │
     └───────────────────────────────────────────────────────────→ λ
       0.0                  0.5                  1.0
-```
+```text
 
 **Small area → MAUVE close to 1.**
 
@@ -6856,7 +6856,7 @@ Max KL Divergence
 
 Curve peaks higher in the middle → larger area → lower MAUVE
 
-```
+```text
 Max KL Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -6870,13 +6870,13 @@ Max KL Divergence
 0.2 ┼┘                                                     │
     └───────────────────────────────────────────────────────→ λ
       0.0                  0.5                  1.0
-```
+```text
 
 **3. Poor model (highly repetitive/bland, MAUVE ≈ 0.30)**
 
 Curve stays very high → huge area → low MAUVE
 
-```
+```text
 Max KL Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -6890,7 +6890,7 @@ Max KL Divergence
 0.2 ┼                                                   │
     └───────────────────────────────────────────────────┘→ λ
       0.0                  0.5                  1.0
-```
+```text
 
 **How to Interpret the Curve:**
 
@@ -6921,7 +6921,7 @@ plt.xlabel("Quantile (λ)")
 plt.ylabel("Max KL Divergence")
 plt.legend()
 plt.show()
-```
+```text
 
 This visualization is the heart of MAUVE — **the lower and flatter the curve, the better the model matches human text distribution**.
 
@@ -6936,7 +6936,7 @@ Both metrics are used to assess how "human-like" generated text is, but they dif
 ##### Comparison Table
 
 | Aspect | MAUVE (2021) | Jensen-Shannon Divergence (JS divergence) | Winner / Key Difference |
-|--------|--------------|-------------------------------------------|-------------------------|
+| -------- | -------------- | ------------------------------------------- | ------------------------- |
 | **Definition** | 1 - normalized area under the max-divergence frontier curve of mixtures $r_\lambda = \lambda \cdot p + (1-\lambda) \cdot q$ | Symmetric version of KL divergence: $\text{JS}(p \| q) = \frac{1}{2} D_{KL}(p \| m) + \frac{1}{2} D_{KL}(q \| m)$ where $m = \frac{p+q}{2}$ | — |
 | **Range / Interpretability** | 0 to 1 (1 = identical to human, 0 = completely different) — very intuitive | 0 to 1 (0 = identical, 1 = no overlap) — also intuitive | Tie |
 | **Symmetry** | Asymmetric in practice (frontier favors human side slightly) | Symmetric — $\text{JS}(p \| q) = \text{JS}(q \| p)$ | JS divergence |
@@ -6986,7 +6986,7 @@ MAUVE ≈ 0.95, JS ≈ 0.06
 MAUVE curve (very low, flat) → small area → high MAUVE score  
 JS curve (symmetric, low peak) → low divergence
 
-```
+```text
 Max Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -7002,7 +7002,7 @@ Max Divergence
       0.0                  0.5                  1.0
 
     └─────────────── Low symmetric peak ───────────────┘       ← JS divergence (symmetric)
-```
+```text
 
 **2. Good but Repetitive Model (moderate degeneration)**  
 MAUVE ≈ 0.70, JS ≈ 0.20
@@ -7010,7 +7010,7 @@ MAUVE ≈ 0.70, JS ≈ 0.20
 MAUVE curve (higher peak in middle) → larger area → lower MAUVE  
 JS curve (higher symmetric peak) → still moderate divergence
 
-```
+```text
 Max Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -7026,7 +7026,7 @@ Max Divergence
       0.0                  0.5                  1.0
 
     └─────────────── Higher symmetric peak ────────────────┘   ← JS divergence
-```
+```text
 
 **3. Poor Model (highly repetitive/bland)**  
 MAUVE ≈ 0.30, JS ≈ 0.45
@@ -7034,7 +7034,7 @@ MAUVE ≈ 0.30, JS ≈ 0.45
 MAUVE curve (stays very high) → huge area → very low MAUVE  
 JS curve (high peak) → large divergence
 
-```
+```text
 Max Divergence
 ↑
 1.0 ┼───────────────────────────────────────────────────
@@ -7050,7 +7050,7 @@ Max Divergence
       0.0                  0.5                  1.0
 
     └─────────────── Very high symmetric peak ──────────────┘   ← JS divergence
-```
+```text
 
 **Key Takeaways from the Curves:**
 
@@ -7156,7 +7156,7 @@ plt.tight_layout()
 plt.suptitle("MAUVE Divergence Curve vs JS Divergence\n(Comparison across model quality levels)", 
              fontsize=16, fontweight="bold", y=1.02)
 plt.show()
-```
+```text
 
 **What You'll See When You Run It:**
 
@@ -7305,7 +7305,7 @@ plt.text(0.02, 0.92 * plt.ylim()[1], f"Approx. area under curve: {area:.4f}\nMAU
 
 plt.tight_layout()
 plt.show()
-```
+```text
 
 **What This Code Does:**
 
@@ -7570,7 +7570,7 @@ if results:
     print("\nComparison complete!")
 else:
     print("No results to compare.")
-```
+```text
 
 **What This Code Does:**
 
@@ -7605,7 +7605,7 @@ Hybrid decoding approaches in large language models (LLMs) combine multiple deco
 **Summary Table: Hybrid Approaches**
 
 | Hybrid Type | Components Used | Main Strength | Speed | Best For | Real-World Prevalence (2026) |
-|-------------|----------------|---------------|-------|----------|------------------------------|
+| ------------- | ---------------- | --------------- | ------- | ---------- | ------------------------------ |
 | Internal Reasoning + Final Sampling | Beam/diverse beam → nucleus/top-p | Precision reasoning + natural chat | Medium | Chat agents, reasoning models | Very high |
 | Constrained Diverse Beam + Nucleus | Constrained diverse beam → nucleus | Guaranteed constraints + natural polish | Slow | Structured creative, API responses | High |
 | Greedy/Beam for Precision + Contrastive | Greedy/beam → contrastive search | Fast precision + fluent long-form | Fast | Code assistants, agents | Growing |
@@ -7670,7 +7670,7 @@ final_text = tokenizer.decode(final_output[0], skip_special_tokens=True)[len(fin
 
 print("Internal Reasoning (Beam Search):\n", reasoning_text)
 print("\nFinal Friendly Answer (Nucleus Sampling):\n", final_text)
-```
+```text
 
 **Typical Output Pattern:**
 
@@ -7720,7 +7720,7 @@ final_answer = tokenizer.decode(final_output[0], skip_special_tokens=True)[len(f
 
 print("Best Diverse Reasoning Path:\n", best_reasoning)
 print("\nFun Final Answer:\n", final_answer)
-```
+```text
 
 #### Example 3: Greedy Reasoning + Contrastive/Nucleus Final (Faster Hybrid)
 
@@ -7749,7 +7749,7 @@ final_output = model.generate(
 
 print("Greedy Reasoning:\n", reasoning_text)
 print("\nEngaging Final Response:\n", tokenizer.decode(final_output[0], skip_special_tokens=True)[len(final_prompt):].strip())
-```
+```text
 
 #### Example 4: Contrastive Search Hybrid — Contrastive → Nucleus Polishing
 
@@ -7851,7 +7851,7 @@ generated = hybrid_contrastive_nucleus(
 
 print("Hybrid Contrastive → Nucleus Generation:\n")
 print(generated)
-```
+```text
 
 #### Example 5: Advanced Hybrid — Contrastive + Diverse Beam Reranking
 
@@ -7877,7 +7877,7 @@ for seed in range(5):  # 5 diverse runs
 print("Top 3 Contrastive Candidates (reranked by length + diversity):")
 for i, text in enumerate(sorted(candidates, key=len, reverse=True)[:3], 1):
     print(f"\nVariant {i}:\n{text}\n{'─'*70}")
-```
+```text
 
 **Why This Hybrid is Popular in 2026:**
 
@@ -8042,7 +8042,7 @@ print(body)
 print("\nDiverse endings:")
 for i, ending in enumerate(endings, 1):
     print(f"{i}. {ending}")
-```
+```text
 
 **Key Features of This Hybrid:**
 
@@ -8238,7 +8238,7 @@ final_story = hybrid_contrastive_beam_nucleus(
 
 print("Final Story (Hybrid Contrastive-Beam-Nucleus):\n")
 print(final_story)
-```
+```text
 
 **How This Hybrid Works:**
 
@@ -8259,7 +8259,7 @@ This hybrid is a strong 2026 pattern for high-quality creative/story generation.
 #### Common Hybrid Patterns in 2026 Frontier Models
 
 | Model / System | Internal Reasoning Strategy | Final Output Strategy | Purpose |
-|----------------|----------------------------|----------------------|---------|
+| ---------------- | ---------------------------- | ---------------------- | --------- |
 | OpenAI o1/o3 series | Beam-like multi-path search | Nucleus + low temperature | Reasoning + natural answer |
 | Grok-4 Reasoning | Diverse beam (multiple plans) | Top-p + temperature | Planning + witty response |
 | DeepSeek-R1 / V3.2 Thinking | Beam/diverse beam during thinking | Nucleus sampling | Math/code + fluent output |
@@ -8324,7 +8324,7 @@ At each generation step t, given context x_<t>, the model outputs logits z_t(y) 
 #### Comparison with Top-k Sampling
 
 | Aspect | Nucleus (Top-p) | Top-k |
-|--------|----------------|-------|
+| -------- | ---------------- | ------- |
 | **Selection Criterion** | Cumulative probability ≥ p (dynamic size) | Fixed number of top-k tokens |
 | **Behavior when confident** | Small nucleus (1–5 tokens) → focused | Still includes k tokens (can be noisy) |
 | **Behavior when uncertain** | Large nucleus → high diversity | Fixed k → can be too restrictive or too permissive |
@@ -8342,17 +8342,17 @@ At each generation step t, given context x_<t>, the model outputs logits z_t(y) 
 
 **Most popular combo today:**
 
-```
+```text
 top_p = 0.95
 temperature = 0.8
 repetition_penalty = 1.1
-```
+```text
 
 #### Visual Intuition
 
 Imagine probabilities for next token (top 10):
 
-```
+```text
 Token      Prob
 the        0.40
 a          0.25
@@ -8364,7 +8364,7 @@ very       0.02
 really     0.015
 super      0.01
 extremely  0.005
-```
+```text
 
 - **top-p = 0.9** → keeps "the" to "some" (cumulative = 0.91) → samples from 6 tokens
 - **top-k = 5** → keeps "the" to "that" → samples from 5 tokens
@@ -8540,7 +8540,7 @@ generated_text = generate_with_nucleus(
 
 print("Generated with Nucleus Sampling + All Penalties:\n")
 print(generated_text)
-```
+```text
 
 **Key Features of This Implementation:**
 
@@ -8577,7 +8577,7 @@ This is the standard nucleus sampling implementation used in most high-quality c
     "early_stopping": True,          # Stop when all groups find EOS
     "do_sample": False,              # Pure beam search (deterministic)
 }
-```
+```text
 
 ### vLLM:
 
@@ -8591,7 +8591,7 @@ This is the standard nucleus sampling implementation used in most high-quality c
     "temperature": 0.0,              # Deterministic (0.0) or sampling
     "early_stopping": True,          # Stop early when done
 }
-```
+```text
 
 ---
 
@@ -8630,25 +8630,25 @@ This is the standard nucleus sampling implementation used in most high-quality c
 ```python
 # Generate multiple story endings
 num_beam_groups=5, diversity_penalty=1.2, length_penalty=0.8
-```
+```text
 
 ### Brainstorming:
 ```python
 # Generate multiple ideas
 num_beam_groups=4, diversity_penalty=1.5, length_penalty=1.0
-```
+```text
 
 ### Paraphrasing:
 ```python
 # Generate multiple paraphrases
 num_beam_groups=5, diversity_penalty=1.0, length_penalty=0.9
-```
+```text
 
 ### Agent Planning:
 ```python
 # Generate multiple action plans
 num_beam_groups=4, diversity_penalty=1.2, length_penalty=1.0
-```
+```text
 
 ---
 
@@ -8657,7 +8657,7 @@ num_beam_groups=4, diversity_penalty=1.2, length_penalty=1.0
 ### Diverse Beam Search vs Top-k Sampling:
 
 | Aspect | Diverse Beam Search | Top-k Sampling |
-|--------|---------------------|----------------|
+| -------- | --------------------- | ---------------- |
 | **Determinism** | Yes | No |
 | **Quality** | Very high | Good |
 | **Diversity** | High (controlled) | High (random) |

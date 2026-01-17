@@ -19,7 +19,7 @@ Using `shell=True` with a list argument in `subprocess.Popen` causes inconsisten
 **Code Before (Incorrect):**
 ```python
 subprocess.Popen(['cmd', '/c', 'start', '/min', '', wav_file], shell=True, creationflags=...)
-```
+```text
 
 **Problem:**
 - When `shell=True`, Python passes the list to the shell as-is, which may not work correctly
@@ -30,7 +30,7 @@ subprocess.Popen(['cmd', '/c', 'start', '/min', '', wav_file], shell=True, creat
 ```python
 cmd_str = f'start /min "" "{wav_file}"'
 subprocess.Popen(cmd_str, shell=True, creationflags=...)
-```
+```text
 
 **Solution:**
 - Changed from list argument to string command when using `shell=True`
@@ -80,7 +80,7 @@ subprocess.Popen('start /min "" "file.wav"', shell=True)
 
 # Incorrect: List argument (what we had)
 subprocess.Popen(['cmd', '/c', 'start', '/min', '', 'file.wav'], shell=True)
-```
+```text
 
 **shell=False (default, recommended):**
 ```python
@@ -88,7 +88,7 @@ subprocess.Popen(['cmd', '/c', 'start', '/min', '', 'file.wav'], shell=True)
 subprocess.Popen(['cmd', '/c', 'start', '/min', '', 'file.wav'], shell=False)
 # or simply
 subprocess.Popen(['cmd', '/c', 'start', '/min', '', 'file.wav'])
-```
+```text
 
 ---
 

@@ -79,33 +79,33 @@ Complete educational system created to achieve **100% proficiency** on all stand
 ### Option 1: Launch Educational System
 ```bash
 python omega_education_launcher.py
-```
+```text
 or
 ```bash
 START_EDUCATION.bat
-```
+```text
 
 ### Option 2: Access Individual Components
 
 **Knowledge Assessment:**
 ```bash
 python omega_knowledge_assessment.py
-```
+```text
 
 **Educational System:**
 ```bash
 python omega_educational_system.py
-```
+```text
 
 **Hands-On Guidance:**
 ```bash
 python omega_hands_on_guide.py
-```
+```text
 
 **Educational Agents:**
 ```bash
 python omega_educational_agents.py
-```
+```text
 
 ---
 

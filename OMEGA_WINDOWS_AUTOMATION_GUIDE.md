@@ -74,14 +74,14 @@ Windows security (UAC) prevents fully silent elevation without setup, but you ca
 ### Create Desktop Shortcut (On-Demand Execution)
 
 **Shortcut Target:**
-```
+```text
 schtasks /run /tn "OmegaAutomation"
-```
+```text
 
 **Full Command:**
 ```cmd
 schtasks /run /tn "OmegaAutomation"
-```
+```text
 
 **Create Shortcut Script:**
 ```python
@@ -98,7 +98,7 @@ shortcut.Targetpath = "schtasks"
 shortcut.Arguments = '/run /tn "OmegaAutomation"'
 shortcut.IconLocation = "python.exe,0"
 shortcut.save()
-```
+```text
 
 ### Method 2: PowerShell Script (Alternative)
 
@@ -114,7 +114,7 @@ $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -RunLevel Highest 
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
 
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Omega Multi-AI Automation System"
-```
+```text
 
 ---
 
@@ -143,7 +143,7 @@ ollama pull llama2  # or your preferred model
 
 # OR LM Studio (alternative)
 pip install openai  # for OpenAI-compatible API
-```
+```text
 
 ### Core Orchestrator Script
 
@@ -549,7 +549,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-```
+```text
 
 ---
 
@@ -588,7 +588,7 @@ if __name__ == "__main__":
     }
   ]
 }
-```
+```text
 
 **Environment Variables (Alternative):**
 
@@ -608,7 +608,7 @@ EXTERNAL_AI_MODEL=grok-beta
 
 # Office Automation
 OFFICE_ENABLED=true
-```
+```text
 
 ---
 
@@ -661,7 +661,7 @@ def trigger_automation():
         return jsonify({"success": True, "message": "Automation triggered"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-```
+```text
 
 ---
 
@@ -677,7 +677,7 @@ Use NSSM (Non-Sucking Service Manager) to run as Windows service:
 nssm install OmegaAutomation "C:\Python311\python.exe" "-u D:\RPF_BRAIN\The Gatekeeper\omega_automation_orchestrator.py"
 nssm set OmegaAutomation AppDirectory "D:\RPF_BRAIN\The Gatekeeper"
 nssm start OmegaAutomation
-```
+```text
 
 ### GUI Automation Fallback
 
@@ -685,13 +685,13 @@ If an app lacks COM API, use `pywinauto`:
 
 ```bash
 pip install pywinauto
-```
+```text
 
 ```python
 from pywinauto import Application
 app = Application().start("notepad.exe")
 app.Notepad.Edit.type_keys("Hello from Omega")
-```
+```text
 
 ### Integration with Agent Council
 
@@ -705,7 +705,7 @@ from omega_agent_council import AgentCouncil
 council = AgentCouncil()
 orchestrator = OmegaOrchestrator(config)
 orchestrator.agent_council = council  # Integrate with existing system
-```
+```text
 
 ---
 

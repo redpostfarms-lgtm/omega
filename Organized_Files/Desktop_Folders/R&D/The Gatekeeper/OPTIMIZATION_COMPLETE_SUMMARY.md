@@ -51,7 +51,7 @@
 ## Industry Parity Progress
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| -------- | -------- | ------- | ------------- |
 | **Industry Parity** | 13% | **84%** | **+71%** |
 | **Feature Coverage** | 4/10 | 8/10 | +100% |
 | **System Integration** | 6 | 10 | +67% |
@@ -94,26 +94,26 @@
 ## Test Results
 
 ### **IoT Sensor Hub:**
-```
+```text
 ✅ 5 sensors registered
 ✅ Real-time monitoring working
 ✅ Alert system functional
 ✅ Data logging operational
-```
+```text
 
 ### **Market Intelligence:**
-```
+```text
 ✅ Price fetching working
 ✅ Trend analysis functional
 ✅ Recommendations operational
-```
+```text
 
 ### **Farm Hub Integration:**
-```
+```text
 ✅ All 10 systems showing in dashboard
 ✅ Status updates working
 ✅ Alert detection functional
-```
+```text
 
 ---
 

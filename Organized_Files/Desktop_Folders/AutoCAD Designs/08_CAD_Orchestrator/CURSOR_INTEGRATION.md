@@ -79,7 +79,7 @@ This guide explains how to use Cursor (cursor.com) as your AI brain for AutoCAD/
 
 ### Example Prompt
 
-```
+```text
 New project: parametric enclosure from this sketch
 [attach image or describe]
 
@@ -89,7 +89,7 @@ Follow the orchestrator workflow:
 3. Generate 3D model macro
 4. Generate TechDraw macro
 5. Output execution steps
-```
+```text
 
 ---
 
@@ -145,12 +145,12 @@ Composer mode can:
 
 ### 1. Use Project Rules
 Add to Cursor Settings → Rules:
-```
+```text
 Always reference:
 - 01_Standards\LAYER_STANDARD.json for layers
 - 01_Standards\EXPORT_PIPELINE.md for exports
 - 08_CAD_Orchestrator\VALIDATION_RULES.md for checks
-```
+```text
 
 ### 2. Start with Blueprint
 Always create Blueprint first:
@@ -179,13 +179,13 @@ Always fill out:
 ⌘+L (Mac) or Ctrl+L (Win)
 
 ### Step 2: Give Blueprint
-```
+```text
 Create a parametric mounting bracket:
 - Base: 4in × 3in × 0.25in
 - Vertical plate: 3in × 2in × 0.25in
 - 4 mounting holes: 0.25in diameter, 0.5in from edges
 - Export: STEP + DXF + PDF
-```
+```text
 
 ### Step 3: Cursor Executes
 Cursor will:
@@ -209,14 +209,14 @@ Cursor will:
 
 Add to Cursor Settings → Rules for AutoCAD-specific work:
 
-```
+```text
 AutoCAD Rules:
 - Always use (vl-load-com) for ActiveX
 - Never use entmake for blocks
 - Prefer ActiveX over entmod
 - Comment every function
 - Target AutoCAD 2024+
-```
+```text
 
 ---
 

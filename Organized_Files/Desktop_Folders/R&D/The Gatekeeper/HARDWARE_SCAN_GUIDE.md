@@ -28,7 +28,7 @@ When `brain_wakeup.bat` runs, the Gatekeeper will:
 ## Status Report Format
 
 ### Spoken Output:
-```
+```text
 Ara... opens.
 Hardware scan complete:
 CPU: AMD Ryzen seven five zero zero X — three point nine gigahertz base.
@@ -42,7 +42,7 @@ Knowledge: Updated.
 Compliance: Clean.
 Last session: agent hive scaling.
 Ready when you are.
-```
+```text
 
 ## Hardware Detected
 
@@ -120,7 +120,7 @@ Ready when you are.
 ## Example Boot Session
 
 ### Startup:
-```
+```text
 ============================================================
 Gatekeeper Brain Wakeup - Complete System
 ============================================================
@@ -151,7 +151,7 @@ Ready when you are.
 ===========================================================
 Gatekeeper ready. The doors of knowledge opens.
 ===========================================================
-```
+```text
 
 ## Files
 

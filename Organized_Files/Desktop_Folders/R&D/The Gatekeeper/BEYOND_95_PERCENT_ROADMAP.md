@@ -53,7 +53,7 @@ try:
 except ImportError:
     PDF_AVAILABLE = False
     print("[WARNING] pdfplumber not installed. Install with: pip install pdfplumber")
-```
+```text
 
 **Impact:** +1.0% system completion
 
@@ -80,7 +80,7 @@ try:
 except ImportError:
     ML_AVAILABLE = False
     # Fallback to RMS + zero-crossing
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -108,7 +108,7 @@ from email.mime.multipart import MIMEMultipart
 def send_email(to, subject, body, html=False):
     # SMTP configuration from config file
     pass
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -137,7 +137,7 @@ def order_battery_from_digikey(part_number, quantity):
     # DigiKey API integration
     # https://developer.digikey.com/
     pass
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -164,7 +164,7 @@ def encrypt_with_veracrypt(volume_path, password):
     # VeraCrypt command-line integration
     # veracrypt --create volume.vc --size=1G --password=password
     pass
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -188,7 +188,7 @@ def encrypt_with_veracrypt(volume_path, password):
 # Add actual Kiwix ZIM file URLs
 # Add download progress tracking
 # Add resume capability
-```
+```text
 
 **Impact:** +0.5% system completion
 
@@ -218,7 +218,7 @@ def test_scan_archived_directory():
     bp = BrainPrime()
     result = bp.scan_archived()
     assert result['success'] == True
-```
+```text
 
 **Impact:** +0.8% system completion
 
@@ -242,7 +242,7 @@ def test_scan_archived_directory():
 def test_voice_command_flow():
     # Test: "Hey, Gatekeeper" → voiceprint → command → response
     pass
-```
+```text
 
 **Impact:** +0.8% system completion
 

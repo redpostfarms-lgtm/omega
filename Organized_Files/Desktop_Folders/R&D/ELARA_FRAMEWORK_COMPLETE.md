@@ -141,19 +141,19 @@
 ```python
 framework.difficulty_system = DifficultySystem()
 # Adjusts AI depth, speed, sarcasm per level
-```
+```text
 
 ### With Teaching Mode
 ```python
 framework.teaching_mode = TeachingMode()
 # Explains every breath when asked
-```
+```text
 
 ### With Player Profiles
 ```python
 framework.current_player = PlayerProfile(name="user")
 # Tracks every data point
-```
+```text
 
 ---
 
@@ -188,7 +188,7 @@ smack = framework.generate_smack_talk("expert", "move_e4")
 # Evolve
 framework.evolve()
 # Never peaks. Always learns.
-```
+```text
 
 ---
 

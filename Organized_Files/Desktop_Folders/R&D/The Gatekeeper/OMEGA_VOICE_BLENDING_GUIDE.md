@@ -19,13 +19,13 @@ To record and analyze your voice, you need:
 
 ```bash
 pip install pyaudio numpy scipy
-```
+```text
 
 **Note:** PyAudio installation on Windows can be tricky. If it fails, try:
 ```bash
 pip install pipwin
 pipwin install pyaudio
-```
+```text
 
 Or download pre-built wheel from: https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
 
@@ -68,7 +68,7 @@ Extracts characteristics:
 
 ```bash
 python omega_voice_recorder.py
-```
+```text
 
 **What happens:**
 1. System checks for PyAudio/NumPy
@@ -83,7 +83,7 @@ python omega_voice_recorder.py
 Edit `omega_voice_recorder.py` line ~550:
 ```python
 blended = blender.blend_voices(analysis, blend_ratio=0.7)  # 70% your voice
-```
+```text
 
 ---
 
@@ -110,9 +110,9 @@ blended = blender.blend_voices(analysis, blend_ratio=0.7)  # 70% your voice
 ### How They're Blended:
 
 Each characteristic is blended using the formula:
-```
+```text
 blended_value = omega_value * (1 - ratio) + your_value * ratio
-```
+```text
 
 Example (50/50 blend):
 - Your pitch: 150 Hz
@@ -152,19 +152,19 @@ pipwin install pyaudio
 
 # Or download wheel manually
 # https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
-```
+```text
 
 **Linux:**
 ```bash
 sudo apt-get install portaudio19-dev python3-pyaudio
 pip install pyaudio
-```
+```text
 
 **macOS:**
 ```bash
 brew install portaudio
 pip install pyaudio
-```
+```text
 
 ### No Audio Detected:
 

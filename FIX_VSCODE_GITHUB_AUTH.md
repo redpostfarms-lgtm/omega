@@ -84,7 +84,7 @@ Add to VS Code settings (`.vscode/settings.json` or User Settings):
   "git.enableSmartCommit": true,
   "github.gitAuthentication": true
 }
-```
+```text
 
 ---
 
@@ -137,7 +137,7 @@ git remote -v
 
 # Test authentication
 git fetch origin
-```
+```text
 
 ---
 
@@ -149,7 +149,7 @@ After setup, verify authentication:
 git config --global credential.helper
 git remote -v
 git fetch origin --dry-run
-```
+```text
 
 If all commands succeed, authentication is working! ✅
 

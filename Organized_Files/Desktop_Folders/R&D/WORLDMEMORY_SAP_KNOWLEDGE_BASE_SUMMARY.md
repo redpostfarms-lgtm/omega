@@ -128,7 +128,7 @@ python WorldMemory.py query "SAP"
 python WorldMemory.py query "Central Finance"
 python WorldMemory.py query "EDF"
 python WorldMemory.py query "Fonterra"
-```
+```text
 
 ### Specific Topic Queries:
 ```bash
@@ -136,14 +136,14 @@ python WorldMemory.py query "Activate methodology"
 python WorldMemory.py query "Universal Journal"
 python WorldMemory.py query "challenges"
 python WorldMemory.py query "comparison"
-```
+```text
 
 ### Comprehensive Searches:
 ```bash
 python WorldMemory.py query-all "Central Finance"
 python WorldMemory.py query-all "EDF"
 python WorldMemory.py query-all "SAP"
-```
+```text
 
 ---
 

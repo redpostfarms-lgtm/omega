@@ -198,7 +198,7 @@ Comprehensive Siemens SIMATIC integration for Wazuh, including:
   <protocol>udp</protocol>
   <allowed-ips>192.168.10.0/24</allowed-ips>
 </remote>
-```
+```text
 
 ---
 
@@ -207,19 +207,19 @@ Comprehensive Siemens SIMATIC integration for Wazuh, including:
 ### Sample Siemens Logs for Testing
 
 **Authentication Failure**:
-```
+```text
 <134>Jan 11 15:45:00 plc-gateway - ID123 [device@001 devVendor="Siemens" devProduct="CPU 1515-2 PN" FWVersion="V2.8"] [session@456 protocolType="TLS" userName="admin" src="192.168.1.100"] SE_ACCESS_DENIED
-```
+```text
 
 **Mode Change**:
-```
+```text
 <134>Jan 11 15:46:00 plc-gateway Operating-Mode-Mgt - ID124 [device@001 devVendor="Siemens" devProduct="CPU 1515-2 PN" FWVersion="V2.8"] [function@789 fct="ChangeMode" oldState="RUN" newState="PROGRAM"] SE_OPMOD_CHANGED
-```
+```text
 
 **Program Download**:
-```
+```text
 <134>Jan 11 15:47:00 plc-gateway - ID125 [device@001 devVendor="Siemens" devProduct="CPU 1515-2 PN" FWVersion="V2.8"] [function@012 fct="ProgramDownload" oldState="Valid" newState="Modified"] SE_PROGRAM_DOWNLOAD
-```
+```text
 
 ### Testing with wazuh-logtest
 
@@ -229,7 +229,7 @@ sudo /var/ossec/bin/wazuh-logtest
 # Paste sample log above
 # Verify Phase 2 shows decoded fields
 # Verify Phase 3 shows matching rules
-```
+```text
 
 ---
 

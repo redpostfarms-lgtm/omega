@@ -35,7 +35,7 @@ initialize_tts_preload()
 
 # Use optimized TTS (auto-limits length)
 tts_to_file_optimized("Your text here", speaker_wav="clip_0001.wav", output_file="response.wav")
-```
+```text
 
 ---
 
@@ -63,7 +63,7 @@ tts_to_file_optimized("Your text here", speaker_wav="clip_0001.wav", output_file
 **Installation:**
 ```bash
 pip install faster-whisper
-```
+```text
 
 **Usage:**
 ```python
@@ -74,7 +74,7 @@ initialize_whisper()
 
 # Recognize (offline, fast)
 text = await recognize_speech_optimized("audio.wav")
-```
+```text
 
 ---
 
@@ -111,7 +111,7 @@ self._signature_cache = {}
 # Optimized extraction
 mfccs = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=8)  # Was 13
 # Removed: chroma, harmonic separation, tempo, spectral envelope
-```
+```text
 
 ---
 
@@ -151,7 +151,7 @@ tasks = {
 }
 results = await asyncio.gather(*tasks.values())
 # Total: max(0.5-1.0s, 0.2-0.5s, 0.5-1.5s) = 0.5-1.5s (fastest path)
-```
+```text
 
 **Profiling:**
 - Each major function timed automatically
@@ -164,7 +164,7 @@ results = await asyncio.gather(*tasks.values())
 
 ### Before Optimization:
 | Component | Latency | Notes |
-|-----------|---------|-------|
+| ----------- | --------- | ------- |
 | VAD + Recording | 2-10s | User speaking time |
 | Voice Security | 0.5-1.0s | Sequential |
 | Emotion Detection | 0.2-0.5s | Sequential |
@@ -175,7 +175,7 @@ results = await asyncio.gather(*tasks.values())
 
 ### After Optimization:
 | Component | Latency | Notes |
-|-----------|---------|-------|
+| ----------- | --------- | ------- |
 | VAD + Recording | 2-10s | User speaking time (unchanged) |
 | **Parallel Processing** | | |
 | - Voice Security | 0.2-0.5s | ✅ Optimized, cached |
@@ -207,12 +207,12 @@ results = await asyncio.gather(*tasks.values())
 ### 1. Install New Dependencies
 ```bash
 pip install faster-whisper aiofiles
-```
+```text
 
 ### 2. Run Optimized Version
 ```bash
 py -3.11 hands_free_omega_optimized.py
-```
+```text
 
 ### 3. Compare Performance
 - Original: `py -3.11 hands_free_omega.py`
@@ -290,7 +290,7 @@ initialize_whisper()
 start = time.perf_counter()
 # text = await recognize_speech_optimized("test_audio.wav")
 print(f"Recognition Time: {time.perf_counter() - start:.2f}s")
-```
+```text
 
 ### Expected Results:
 - TTS: <3s for 30-word response
@@ -308,12 +308,12 @@ The optimized version includes built-in profiling:
 - Can be disabled by removing `@profile_time` decorator
 
 ### Example Output:
-```
+```text
 [PROFILE] process_conversation_turn_parallel: 1.234s
 [PROFILE] recognize_speech_optimized: 0.856s
 [TTS Generation: 2.145s]
 [Total Turn Time: 4.567s]
-```
+```text
 
 ---
 

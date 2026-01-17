@@ -115,7 +115,7 @@
 
 ```bash
 python omega_dual_voice_blend.py
-```
+```text
 
 **Output**:
 
@@ -127,7 +127,7 @@ python omega_dual_voice_blend.py
 
 ```bash
 python omega.py
-```
+```text
 
 **Output**:
 
@@ -139,7 +139,7 @@ python omega.py
 
 ```bash
 python omega_control_panel_web.py --port 5000
-```
+```text
 
 **Result**:
 
@@ -217,25 +217,25 @@ python omega_control_panel_web.py --port 5000
 
 # Git commit & history
 git log --oneline -5
-```
+```text
 
 ---
 
 ## Git Commits
 
-```
+```text
 57e50be8 - Dual Voice System - Integrate omega_downloaded.wav
 c942da43 - Voice Analysis & Cloning
 c40a1f86 - TTS Deep Analysis & Testing Suite
 3866dd1c - Complete all changes and integrations
-```
+```text
 
 ---
 
 ## Status Summary
 
 | Component | Status | Files |
-|-----------|--------|-------|
+| ----------- | -------- | ------- |
 | Voice Files | ✅ Ready | clip_0001.wav, omega_downloaded.wav |
 | Analysis Tools | ✅ Ready | omega_dual_voice_blend.py, omega_voice_analysis.py |
 | TTS System | ✅ Ready | omega.py, omega_optimized_tts.py |

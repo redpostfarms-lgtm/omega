@@ -30,12 +30,12 @@
 ### Option 1: Python Script (Recommended)
 ```bash
 python CREATE_DESKTOP_SHORTCUT.py
-```
+```text
 
 ### Option 2: Batch File
 ```bash
 CREATE_DESKTOP_SHORTCUT.bat
-```
+```text
 
 Both methods will:
 1. Create a desktop shortcut named "Omega.lnk"

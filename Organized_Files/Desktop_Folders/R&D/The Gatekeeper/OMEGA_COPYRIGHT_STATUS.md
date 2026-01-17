@@ -91,7 +91,7 @@ All protected files include:
 #
 # TRADEMARK NOTICE: "Omega" and "Ω" are trademarks of Red Post Farms, LLC.
 #
-```
+```text
 
 ---
 

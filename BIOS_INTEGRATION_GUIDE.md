@@ -45,7 +45,7 @@ print(message)
 # Or manually enable cross-connect
 success, message = bios.enable_gpu_cross_connect()
 print(message)
-```
+```text
 
 ### 2. Hard Drive Auto-Enable ✅
 
@@ -75,7 +75,7 @@ print(message)
 # Or configure for new drive
 success, message = bios.configure_for_new_hard_drive()
 print(message)
-```
+```text
 
 ---
 
@@ -130,7 +130,7 @@ if success:
     print("Note: System restart may be required")
 else:
     print(f"❌ {message}")
-```
+```text
 
 ### Example 2: Add New Hard Drive
 
@@ -149,7 +149,7 @@ if success:
     print("Note: System restart may be required")
 else:
     print(f"❌ {message}")
-```
+```text
 
 ### Example 3: Check Status
 
@@ -169,7 +169,7 @@ for gpu in status['gpus_detected']:
 print(f"Hard Drives: {status['hard_drives']}")
 for drive in status['drives_detected']:
     print(f"  - {drive['drive_id']}: {drive['model']} ({drive['capacity']})")
-```
+```text
 
 ---
 

@@ -71,7 +71,7 @@ Complete educational framework and legitimate tools for learning and using advan
 optimizer = GPUPerformanceOptimizer(use_gpu=True)
 result = optimizer.accelerate_array_operations(data, "sqrt")
 benchmark = optimizer.benchmark(data, iterations=10)
-```
+```text
 
 ---
 
@@ -102,7 +102,7 @@ benchmark = optimizer.benchmark(data, iterations=10)
 async with RateLimitedHTTPClient(requests_per_second=10.0) as client:
     result = await client.get("https://your-api.com/endpoint")
     results = await client.fetch_multiple(urls)
-```
+```text
 
 ---
 
@@ -134,7 +134,7 @@ async with RateLimitedHTTPClient(requests_per_second=10.0) as client:
 scanner = DefensiveSecurityScanner(Path("your_code_directory"))
 results = scanner.scan_directory()
 # Returns: vulnerabilities, severity counts, recommendations
-```
+```text
 
 ---
 
@@ -168,7 +168,7 @@ report = generator.generate_security_report(
     system_name="My Application"
 )
 generator.save_report(report, Path("report.md"))
-```
+```text
 
 ---
 
@@ -187,7 +187,7 @@ pip install aiohttp
 
 # For report generation
 pip install jinja2
-```
+```text
 
 ### Core Dependencies (included in Python)
 - `ast` - AST parsing
@@ -215,7 +215,7 @@ result = optimizer.accelerate_array_operations(data, "sqrt")
 # Benchmark performance
 benchmark = optimizer.benchmark(data, iterations=10)
 print(f"Speedup: {benchmark['speedup']:.2f}x")
-```
+```text
 
 ### Rate-Limited HTTP Requests
 ```python
@@ -229,7 +229,7 @@ async def main():
         print(f"Status: {result['status']}")
 
 asyncio.run(main())
-```
+```text
 
 ### Security Scanning
 ```python
@@ -242,7 +242,7 @@ results = scanner.scan_directory()
 
 print(f"Found {results['total_vulnerabilities']} vulnerabilities")
 print(f"High severity: {results['high_severity']}")
-```
+```text
 
 ### Report Generation
 ```python
@@ -258,7 +258,7 @@ report = generator.generate_security_report(
 
 # Save report
 generator.save_report(report, Path("security_report.md"))
-```
+```text
 
 ---
 

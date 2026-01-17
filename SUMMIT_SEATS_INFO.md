@@ -152,7 +152,7 @@ PERMANENT_SEATS = {
         'reserved': True
     }
 }
-```
+```text
 
 ---
 

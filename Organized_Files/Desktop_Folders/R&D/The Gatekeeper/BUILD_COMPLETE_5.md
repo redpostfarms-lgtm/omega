@@ -69,7 +69,7 @@ python projects/drone_flight_controller.py --simulate --home-lat 40.123 --home-l
 python projects/drone_flight_controller.py --simulate --grid \
   --corner1-lat 40.120 --corner1-lon -75.450 \
   --corner2-lat 40.130 --corner2-lon -75.460
-```
+```text
 
 ---
 
@@ -119,7 +119,7 @@ python projects/drone_flight_controller.py --simulate --grid \
   "battery_used": 15.5,
   "flight_state": "IDLE"
 }
-```
+```text
 
 ### **Saved Files:**
 - Flight logs: `Archived/drone_flights/flight_YYYYMMDD_HHMMSS.json`

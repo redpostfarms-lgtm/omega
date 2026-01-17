@@ -62,7 +62,7 @@ Complete education in drone construction and design with **real specifications, 
 - **Propellers**: 10x4.5, 11x4.7, 12x4.5, 13x4.5, 15x5.5 (plastic and carbon fiber)
 
 **Example Output:**
-```
+```text
 550mm Quadcopter Design:
 - Motor: T-Motor MN2814 800KV
 - ESC: T-Motor Flame 40A BLHeli_32
@@ -73,7 +73,7 @@ Complete education in drone construction and design with **real specifications, 
 - TWR: 2.88:1
 - Flight Time: 3.8 minutes
 - Total Cost: $629
-```
+```text
 
 ---
 
@@ -255,13 +255,13 @@ from drone_design_calculator import DroneDesignCalculator
 calculator = DroneDesignCalculator()
 design = calculator.design_quadcopter('550mm', payload=1000.0)
 print(design)
-```
+```text
 
 ### List All Components
 ```python
 components = calculator.list_all_components()
 print(components)
-```
+```text
 
 ### Calculate TWR
 ```python
@@ -275,7 +275,7 @@ twr = calculator.calculate_twr(
     payload=1000.0
 )
 print(f"TWR: {twr}:1")
-```
+```text
 
 ---
 

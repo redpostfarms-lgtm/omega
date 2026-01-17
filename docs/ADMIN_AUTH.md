@@ -20,7 +20,7 @@ create_admin_user(
     email="admin@example.com",
     password="your_secure_password"
 )
-```
+```text
 
 ### 2. Configuration
 ```python
@@ -31,7 +31,7 @@ AUTH_CONFIG = {
     "lockout_duration": 900,  # 15 minutes
     "token_expiry": 86400,  # 24 hours
 }
-```
+```text
 
 ### 3. Usage
 ```python
@@ -44,7 +44,7 @@ token = authenticate(username, password)
 @requires_auth
 def admin_dashboard():
     return "Admin Dashboard"
-```
+```text
 
 ## Security Features
 - Password hashing with bcrypt

@@ -30,7 +30,7 @@ Created automatic application optimization scripts that intelligently select and
 **Usage:**
 ```bash
 python AUTO_OPTIMIZE_APPS.py
-```
+```text
 
 **What it does:**
 1. Detects all running applications
@@ -59,7 +59,7 @@ python AUTO_OPTIMIZE_APPS.py
 **Usage:**
 ```bash
 python AUTO_SELECT_AND_OPTIMIZE.py
-```
+```text
 
 **What it does:**
 1. Automatically selects apps by category
@@ -147,15 +147,15 @@ Both scripts use intelligent rules to automatically select and optimize apps:
 ### Run Auto-Optimize
 ```bash
 python AUTO_OPTIMIZE_APPS.py
-```
+```text
 
 ### Run Auto-Select and Optimize
 ```bash
 python AUTO_SELECT_AND_OPTIMIZE.py
-```
+```text
 
 ### Expected Output
-```
+```text
 ================================================================================
                 AUTO SELECT AND OPTIMIZE APPLICATIONS
 ================================================================================
@@ -187,7 +187,7 @@ Total apps optimized: X
 
 All applications automatically selected and optimized!
 ================================================================================
-```
+```text
 
 ---
 

@@ -124,7 +124,7 @@ export_strategy_core(
     chess_agent_path="./swarm_sandboxes/chess_agent_*/",
     output_path="strategy_core.json"
 )
-```
+```text
 
 ### Apply to War Game
 ```python
@@ -133,19 +133,19 @@ from strategy_integration import StrategyApplicator
 applicator = StrategyApplicator("strategy_core.json")
 war_strategy = applicator.apply_to_war_game(game_state)
 # Returns: center_control, tempo, material, flanking_vectors, aggression_index
-```
+```text
 
 ### Apply to MMORPG
 ```python
 mmorpg_strategy = applicator.apply_to_mmorpg(raid_state)
 # Returns: healer (bishop pair logic), rogue (fork patterns), tank (tempo control)
-```
+```text
 
 ### Apply to Trading
 ```python
 trading_strategy = applicator.apply_to_trading(market_state)
 # Returns: position_size, entry_timing, risk_management, momentum
-```
+```text
 
 ### Trigger Diagnostic
 ```bash
@@ -154,7 +154,7 @@ python diagnostic_engine.py
 
 # Say: "full scan and diagnosis"
 # Elara runs diagnostic, optimizes, saves log, resumes
-```
+```text
 
 ---
 

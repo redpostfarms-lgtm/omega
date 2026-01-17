@@ -98,9 +98,9 @@ In the sample `malware_exec.pcap`, the plugin flags a malicious upload during th
 4. Export alerts/logs to Wazuh
 
 **Workflow:**
-```
+```text
 Network Traffic → SPAN Port → PCAP Capture → Wireshark Analysis → Alerts → Wazuh
-```
+```text
 
 ### Option 2: Automated Analysis Script
 
@@ -119,7 +119,7 @@ python parse_tristation_alerts.py triStation_analysis.json > wazuh_alerts.log
 tail -f wazuh_alerts.log | while read line; do
     echo "$line" | /var/ossec/bin/wazuh-logtest
 done
-```
+```text
 
 ### Option 3: Suricata/Zeek Integration
 
@@ -208,23 +208,23 @@ The Nozomi dissector automatically detects TRITON by identifying:
 ## Example Output
 
 **Normal TriStation Packet:**
-```
+```text
 Direction: Request
 Function Code: Status Query
 Sequence Number: 12345
 Checksum: Valid
 Response: Acknowledged
-```
+```text
 
 **Triton-flagged Packet:**
-```
+```text
 Direction: Request
 Function Code: Safe Append Program Mod
 Sequence Number: 12346
 Checksum: Valid
 ⚠ TRITON INDICATOR: Malicious program upload detected
 Response: Validation Failure (redundant processor mismatch)
-```
+```text
 
 ---
 

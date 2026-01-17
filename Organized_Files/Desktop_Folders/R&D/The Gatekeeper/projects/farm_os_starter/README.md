@@ -22,9 +22,9 @@ A full-stack off-grid farm operating system built with Rust and Python.
 ## Quick Start
 
 ### **Build with Gatekeeper:**
-```
+```text
 "Hey, Gatekeeper, create a full-stack off-grid farm operating system with Rust backend, Python sensors, REST API, and web dashboard"
-```
+```text
 
 ### **Manual Setup:**
 1. Install Rust: https://rustup.rs/
@@ -37,7 +37,7 @@ A full-stack off-grid farm operating system built with Rust and Python.
 
 ## Project Structure
 
-```
+```text
 farm_os_starter/
 ├── README.md
 ├── rust_backend/
@@ -60,7 +60,7 @@ farm_os_starter/
 │   └── styles.css
 └── config/
     └── farm_os.toml
-```
+```text
 
 ---
 

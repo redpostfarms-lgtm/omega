@@ -93,7 +93,7 @@ A complete, self-healing, voice-locked farm management AI system. All free. All 
 ## System Architecture
 
 ### File Structure
-```
+```text
 D:\RPF_BRAIN\
 ├── The Gatekeeper\          # Main system files
 │   ├── *.py                 # Python scripts
@@ -104,7 +104,7 @@ D:\RPF_BRAIN\
     ├── learning\            # Learning data
     ├── docs\                # Generated documents
     └── gatekeeper_brain.json # Main knowledge base
-```
+```text
 
 ### Boot Sequence
 1. Hardware scan & status report
@@ -187,7 +187,7 @@ Install dependencies: `pip install -r requirements.txt`
 ### Quick Start
 ```bash
 "The Gatekeeper\setup_complete_system.bat"
-```
+```text
 
 ### Manual Setup
 1. Run `brain_wakeup.bat`

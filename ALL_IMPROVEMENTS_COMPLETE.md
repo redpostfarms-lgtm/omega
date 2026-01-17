@@ -45,7 +45,7 @@ except:
         whisper_model = WhisperModel("large-v2", device="cpu", compute_type="int8")
     except:
         whisper_model = WhisperModel("base", device="cpu", compute_type="int8")
-```
+```text
 
 ---
 
@@ -187,7 +187,7 @@ from STREAMING_TTS_IMPLEMENTATION import StreamingTTS
 
 streaming_tts = StreamingTTS()
 # Use streaming_tts.generate_streaming_audio() for low-latency TTS
-```
+```text
 
 ### 2. Integrate LangChain
 
@@ -198,7 +198,7 @@ from OMEGA_LANGCHAIN_INTEGRATION import get_langchain_integration
 langchain = get_langchain_integration()
 context = langchain.get_context_for_whisper()
 # Use context as initial_prompt for Whisper
-```
+```text
 
 ### 3. Integrate RAG System
 
@@ -209,7 +209,7 @@ from OMEGA_RAG_SYSTEM import get_rag_system
 rag = get_rag_system()
 augmented_prompt = rag.augment_prompt(user_query)
 # Use augmented_prompt for more accurate responses
-```
+```text
 
 ---
 

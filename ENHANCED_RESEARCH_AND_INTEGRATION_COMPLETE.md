@@ -89,7 +89,7 @@
 ### 1. Setup Developer Integrations
 ```bash
 python SETUP_DEVELOPER_INTEGRATIONS.py
-```
+```text
 
 This will:
 - Show available tools
@@ -104,7 +104,7 @@ from omega_enhanced_research_system import get_research_coordinator, ResearchLev
 
 coordinator = get_research_coordinator()
 result = await coordinator.research_topic("speech recognition improvements", ResearchLevel.QUANTUM)
-```
+```text
 
 ### 3. Use Developer Integrations
 ```python
@@ -115,7 +115,7 @@ manager = get_integration_manager()
 report = manager.get_setup_report()
 # Get integration code
 code = manager.generate_integration_code("huggingface")
-```
+```text
 
 ---
 

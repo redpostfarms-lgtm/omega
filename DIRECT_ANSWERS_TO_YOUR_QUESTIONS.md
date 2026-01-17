@@ -12,12 +12,12 @@ Your RGB control software is working perfectly. The colors ARE changing in the d
 
 ### Why
 
-```
+```text
 Your Software              Hardware Communication       Physical LEDs
 ✓ Color values change      ✗ NO CONNECTION            ✗ Don't change
 ✓ LED settings update      ✗ NO DRIVER                ✗ Stay same color
 ✓ Display shows new color  ✗ OpenRGB NOT INSTALLED    ✗ Appear broken
-```
+```text
 
 ### The Problem In Plain English
 
@@ -33,7 +33,7 @@ It's like your computer is sending text messages to a phone that's not turned on
 pip install openrgb
 # Download and run OpenRGB.exe
 # Keep it running in background
-```
+```text
 
 **Time:** 5 minutes  
 **Result:** Physical RGB LEDs will respond to color changes ✓
@@ -48,13 +48,13 @@ Your audio system **is mostly working**. It's generating audio files correctly. 
 
 ### What's Happening
 
-```
+```text
 1. TTS Engine Generates Audio Waveform ✓
 2. System Tries to Encode Audio         ✗ FAILS HERE
    ↳ FFmpeg.exe not found
 3. Audio File Should Be Created         ✗ Doesn't happen
 4. Audio Should Play                    ✗ No file to play
-```
+```text
 
 ### The Problem In Plain English
 
@@ -69,7 +69,7 @@ You have a pen (TTS) that can write, and paper (Python libraries) to write on. B
 ```bash
 winget install ffmpeg
 pip install torchcodec --no-cache-dir
-```
+```text
 
 **Time:** 10 minutes  
 **Result:** Audio files will generate and play correctly ✓
@@ -84,11 +84,11 @@ Your logging system has no active logs. The infrastructure is in place, but it's
 
 ### What I Found
 
-```
+```text
 Location: h:\The Gatekeeper\logs\
 Current Status: Empty
 Reason: Logging not initialized/running
-```
+```text
 
 ### What Was Logged Previously
 
@@ -98,14 +98,14 @@ Reason: Logging not initialized/running
 
 ### Current System State (From Analysis)
 
-```
+```text
 GPU: Not available (CPU-only mode)
 Audio: FFmpeg failing to load
 RGB: Simulated mode (no hardware)
 Logging: Not active
 Memory: Available
 CPU: Available
-```
+```text
 
 ### Recommendation
 
@@ -131,7 +131,7 @@ Actually, we don't have definitive information about YOUR specific GPU yet. But 
 
 ### What I Analyzed
 
-```
+```text
 System has GPU infrastructure:
   ✓ GPU load balancer code (383 lines)
   ✓ CUDA detection throughout codebase
@@ -140,7 +140,7 @@ System has GPU infrastructure:
   ✗ GPU not detected
 
 Current Status: Waiting for GPU/CUDA activation
-```
+```text
 
 ### How to Find Your GPU
 
@@ -153,7 +153,7 @@ nvidia-smi
 
 # Command 2: Check what model
 # Device Manager → Display adapters → Look for NVIDIA device
-```
+```text
 
 ### GPU Information Created
 
@@ -177,7 +177,7 @@ nvidia-smi  # Verify
 
 # 3. Reinstall PyTorch for CUDA
 pip install torch --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 **Time:** 60-90 minutes  
 **Result:** System will auto-detect and use GPU for 4-10x speedup ✓
@@ -253,30 +253,30 @@ Complete overview of what's wrong and how to fix it
 
 ### Issue #1: RGB Lights
 
-```
+```text
 Problem:     Software shows colors, hardware doesn't
 Root Cause:  OpenRGB not installed
 Time to Fix: 5 minutes
 Install:     pip install openrgb + download OpenRGB.exe
-```
+```text
 
 ### Issue #2: Audio System
 
-```
+```text
 Problem:     TTS works, audio encoding fails
 Root Cause:  FFmpeg not installed
 Time to Fix: 10 minutes
 Install:     winget install ffmpeg + pip install torchcodec
-```
+```text
 
 ### Issue #3: GPU Not Used
 
-```
+```text
 Problem:     System uses CPU only, CUDA offline
 Root Cause:  CUDA Toolkit not installed
 Time to Fix: 60-90 minutes
 Install:     NVIDIA drivers + CUDA Toolkit + PyTorch reinstall
-```
+```text
 
 ---
 
@@ -325,7 +325,7 @@ Install:     NVIDIA drivers + CUDA Toolkit + PyTorch reinstall
 
 ## ESTIMATED TIME BREAKDOWN
 
-```
+```text
 Quick Fix (RGB only):
 ├─ Install OpenRGB: 3 min
 ├─ Download & test: 2 min
@@ -344,14 +344,14 @@ Complete Fix (All 3):
 ├─ PyTorch reinstall: 15 min
 ├─ Computer restart: 10 min
 └─ Total: 60-90 minutes
-```
+```text
 
 ---
 
 ## CONFIDENCE LEVELS
 
 | Issue | Diagnosis | Solution | Success Rate |
-|-------|-----------|----------|--------------|
+| ------- | ----------- | ---------- | -------------- |
 | RGB | 100% confirmed | 99% success | High |
 | Audio | 100% confirmed | 99% success | High |
 | GPU | 100% confirmed | 99% success | High |

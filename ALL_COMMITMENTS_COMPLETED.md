@@ -305,7 +305,7 @@ python -c "import torch; print(torch.cuda.is_available())"
 
 # Full system check
 python FINAL_INSTALLATION_CHECK.py
-```
+```text
 
 ---
 
@@ -338,7 +338,7 @@ python FINAL_INSTALLATION_CHECK.py
 ## 📊 CURRENT STATE SUMMARY
 
 | Component | Status | Action | Time |
-|-----------|--------|--------|------|
+| ----------- | -------- | -------- | ------ |
 | **Python Packages** | ✅ All installed | None | - |
 | **RGB Library** | ✅ Installed | Download app | 5 min |
 | **Audio Libraries** | ✅ All installed | Download FFmpeg | 10 min |

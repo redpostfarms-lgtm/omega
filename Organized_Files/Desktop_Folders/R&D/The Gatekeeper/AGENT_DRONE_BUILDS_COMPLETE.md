@@ -138,7 +138,7 @@ Each of the 4 agents (Alpha, Beta, Gamma, Delta) has built their own drone with 
 ## Design Comparison
 
 | Agent | Direction | Frame | Motor KV | Battery | Prop | TWR | Speed | Flight Time | Agility | Cost |
-|-------|-----------|-------|----------|---------|------|-----|-------|-------------|---------|------|
+| ------- | ----------- | ------- | ---------- | --------- | ------ | ----- | ------- | ------------- | --------- | ------ |
 | Alpha | Speed | 450mm | 2300KV | 4S 1500mAh | 10x4.5 | 2.52 | 37.6 m/s | 1.8 min | 0.90 | $432 |
 | Beta | Endurance | 550mm | 700KV | 4S 5000mAh | 13x4.5 | 1.31 | 17.6 m/s | 4.6 min | 0.50 | $645 |
 | Gamma | Payload | 650mm | 580KV | 6S 5000mAh | 15x5.5 | 5.97 | 32.9 m/s | 3.0 min | 0.40 | $887 |

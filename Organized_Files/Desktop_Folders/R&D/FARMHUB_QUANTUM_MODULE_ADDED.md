@@ -58,13 +58,13 @@ The quantum module is automatically loaded when FarmHub starts and can be trigge
   - Install: `pip install dwave-ocean-sdk`
 
 ### Module Architecture
-```
+```text
 FarmHub_2026_Final.py
   └── quantum() method
        ├── Loads quantum_optimization.py (primary)
        ├── Falls back to agent_quantum_optimizer.py (secondary)
        └── Provides example optimizations for common tasks
-```
+```text
 
 ### Example Optimizations
 
@@ -76,7 +76,7 @@ tasks = [
     {'name': 'harvesting', 'energy': 30, 'water': 100, 'labor': 3, 'cost': 200}
 ]
 # Returns optimized allocation respecting constraints
-```
+```text
 
 #### Energy Efficiency
 ```python
@@ -86,7 +86,7 @@ systems = [
     {'name': 'Irrigation', 'energy_kwh': 20, 'capacity': 40}
 ]
 # Returns efficiency analysis and recommendations
-```
+```text
 
 #### Irrigation Schedule
 ```python
@@ -96,14 +96,14 @@ zones = [
 ]
 weather = {'rain_tomorrow': False}
 # Returns optimized watering schedule
-```
+```text
 
 ## System Status
 
 When running `status` command, quantum module now shows:
-```
+```text
 Quantum Optimization: ✅ Ready
-```
+```text
 
 ## Dependencies
 

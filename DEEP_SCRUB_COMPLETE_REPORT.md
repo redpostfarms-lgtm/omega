@@ -69,7 +69,7 @@ calibrated_confidence = sigmoid(logit(confidence) + bias)
 
 # Bias calculation
 bias = mean(logit(calibrated) - logit(confidence))
-```
+```text
 
 **Location:** `omega_confidence_calibration.py`  
 **Status:** ✅ Complete implementation

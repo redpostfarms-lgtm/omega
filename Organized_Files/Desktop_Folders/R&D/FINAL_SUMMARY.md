@@ -111,7 +111,7 @@ results = agent.execute_plan(plan)
 
 # Check capabilities
 print(agent.get_capabilities())
-```
+```text
 
 ---
 

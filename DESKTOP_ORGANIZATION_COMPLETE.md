@@ -88,7 +88,7 @@ Cleaned up old desktop icons, organized files into proper storage locations, and
 
 ## File Organization Structure
 
-```
+```text
 The Gatekeeper/
 ├── OMEGA_UI_LAUNCHER.py          # Main UI launcher (NEW)
 ├── omega_control_panel.py        # Control Panel UI
@@ -109,7 +109,7 @@ The Gatekeeper/
 └── BIOS_Logo_Solution/            # BIOS logo solution (NEW)
     ├── BIOS_LOGO_SOLUTION.json
     └── WHEN_TO_IMPLEMENT_BIOS_LOGO.md
-```
+```text
 
 ---
 
@@ -144,12 +144,12 @@ The Gatekeeper/
 **Method 2: Direct Launch**
 ```bash
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 **Method 3: Previous Launchers (Still Work)**
 ```bash
 python Launchers/START_CONTROL_PANEL.py
-```
+```text
 
 ---
 

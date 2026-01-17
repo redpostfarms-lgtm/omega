@@ -48,7 +48,7 @@ from omega_continuous_voice_learner import learn_from_interaction
 
 # Record user voice during interaction and learn
 success = learn_from_interaction(duration=5.0)
-```
+```text
 
 ### **From Audio File:**
 
@@ -59,7 +59,7 @@ from pathlib import Path
 # Learn from saved audio file
 audio_file = Path("user_voice.wav")
 success = learn_from_audio_file(audio_file)
-```
+```text
 
 ### **Manual Learning:**
 
@@ -73,7 +73,7 @@ success = learner.record_and_learn(duration=5.0)
 
 # Or learn from file
 success = learner.learn_from_file(Path("audio.wav"))
-```
+```text
 
 ---
 
@@ -96,7 +96,7 @@ def handle_user_interaction():
     
     # Process interaction normally
     # ...
-```
+```text
 
 ---
 
@@ -138,7 +138,7 @@ def handle_user_interaction():
 ### **Required:**
 ```bash
 pip install numpy
-```
+```text
 
 ### **For Recording:**
 ```bash
@@ -146,12 +146,12 @@ pip install pyaudio
 # Or on Windows:
 pip install pipwin
 pipwin install pyaudio
-```
+```text
 
 ### **For Advanced Analysis:**
 ```bash
 pip install librosa soundfile
-```
+```text
 
 ---
 

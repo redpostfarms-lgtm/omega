@@ -108,12 +108,12 @@
 **Option 1: Batch File (Easiest)**
 ```bash
 PREPARE_PRODUCTION.bat
-```
+```text
 
 **Option 2: Python Script**
 ```bash
 python PREPARE_PRODUCTION.py
-```
+```text
 
 This will:
 1. Run deep code analysis
@@ -127,17 +127,17 @@ This will:
 **Option 1: Batch File (Easiest)**
 ```bash
 OMEGA_OPERATIONAL_STARTUP.bat
-```
+```text
 
 **Option 2: Python Script**
 ```bash
 python omega_operational_startup.py
-```
+```text
 
 **Option 3: Use START_HERE.bat (Updated)**
 ```bash
 START_HERE.bat
-```
+```text
 
 This will:
 1. Initialize system

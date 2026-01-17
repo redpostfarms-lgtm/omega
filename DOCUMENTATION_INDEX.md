@@ -249,7 +249,7 @@ Performed complete hardware diagnostics and identified **three interconnected is
 ## 📊 DOCUMENTATION OVERVIEW TABLE
 
 | Document | Purpose | Length | Read Time | Execute Time |
-|----------|---------|--------|-----------|--------------|
+| ---------- | --------- | -------- | ----------- | -------------- |
 | DIRECT_ANSWERS_TO_YOUR_QUESTIONS.md | Answer your questions | 5 KB | 10 min | N/A |
 | SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md | Executive summary | 8 KB | 15 min | N/A |
 | HARDWARE_ISSUES_DIAGNOSIS_AND_FIXES.md | Detailed analysis | 12 KB | 25 min | N/A |
@@ -311,7 +311,7 @@ All documentation is in: `h:\The Gatekeeper\`
 dir h:\The Gatekeeper\*.md
 dir h:\The Gatekeeper\*DIAGNOSTICS*.py
 dir h:\The Gatekeeper\QUICK_REFERENCE*
-```
+```text
 
 ---
 
@@ -319,38 +319,38 @@ dir h:\The Gatekeeper\QUICK_REFERENCE*
 
 ### Path A: Fast (Just want RGB working) - 5 minutes
 
-```
+```text
 1. Read: QUICK_REFERENCE_CARD.txt (2 min)
 2. Follow: Install OpenRGB section
 3. Test: RGB should work ✓
-```
+```text
 
 ### Path B: Balanced (Want RGB + Audio) - 15 minutes
 
-```
+```text
 1. Read: SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md (10 min)
 2. Follow: INSTALLATION_AND_FIX_GUIDE.md FIX #1 & #2
 3. Test: RGB + Audio should work ✓
-```
+```text
 
 ### Path C: Complete (Everything) - 60-90 minutes
 
-```
+```text
 1. Read: DIRECT_ANSWERS_TO_YOUR_QUESTIONS.md (10 min)
 2. Read: INSTALLATION_AND_FIX_GUIDE.md (5 min)
 3. Follow: All 3 FIX sections (15-90 min execution)
 4. Test: Everything should work ✓
-```
+```text
 
 ### Path D: Learning (Understand everything) - 90 minutes
 
-```
+```text
 1. Read: SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md (15 min)
 2. Read: HARDWARE_ISSUES_DIAGNOSIS_AND_FIXES.md (25 min)
 3. Read: GPU_HARDWARE_SPECIFICATION.md (20 min)
 4. Follow: INSTALLATION_AND_FIX_GUIDE.md (15-90 min)
 5. All systems working ✓
-```
+```text
 
 ---
 
@@ -406,7 +406,7 @@ dir h:\The Gatekeeper\QUICK_REFERENCE*
 ```bash
 python QUICK_DIAGNOSTICS.py
 # Shows: Which systems work, which don't
-```
+```text
 
 ### Full Analysis (when needed)
 
@@ -414,7 +414,7 @@ python QUICK_DIAGNOSTICS.py
 python COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py
 # Creates: SYSTEM_DIAGNOSTICS_REPORT.json
 # Shows: Everything in detail
-```
+```text
 
 ### Manual Checks
 
@@ -427,14 +427,14 @@ python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 
 # Check FFmpeg
 ffmpeg -version
-```
+```text
 
 ---
 
 ## 📝 SUMMARY
 
 | What | Where | Time |
-|------|-------|------|
+| ------ | ------- | ------ |
 | Quick answers | DIRECT_ANSWERS_TO_YOUR_QUESTIONS.md | 10 min |
 | Complete overview | SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md | 15 min |
 | Deep dive | HARDWARE_ISSUES_DIAGNOSIS_AND_FIXES.md | 25 min |
@@ -449,7 +449,7 @@ ffmpeg -version
 ## 🎯 YOUR THREE ISSUES SOLVED
 
 | Issue | Cause | Solution | Time | Doc |
-|-------|-------|----------|------|-----|
+| ------- | ------- | ---------- | ------ | ----- |
 | RGB not responding | OpenRGB missing | pip install openrgb | 5 min | INSTALLATION_AND_FIX_GUIDE.md |
 | Audio fails | FFmpeg missing | winget install ffmpeg | 10 min | INSTALLATION_AND_FIX_GUIDE.md |
 | GPU not used | CUDA offline | Install CUDA Toolkit | 60 min | INSTALLATION_AND_FIX_GUIDE.md |

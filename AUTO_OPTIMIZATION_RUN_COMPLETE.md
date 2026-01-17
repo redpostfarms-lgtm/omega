@@ -29,17 +29,17 @@
 ### Option 1: Direct Python Execution
 ```bash
 python AUTO_SELECT_AND_OPTIMIZE.py
-```
+```text
 
 ### Option 2: Batch File (Windows)
 ```bash
 RUN_AUTO_OPTIMIZE.bat
-```
+```text
 
 ### Option 3: Quick Version
 ```bash
 python QUICK_AUTO_OPTIMIZE.py
-```
+```text
 
 ---
 
@@ -65,7 +65,7 @@ python QUICK_AUTO_OPTIMIZE.py
 
 ## Expected Output
 
-```
+```text
 ================================================================================
                 AUTO SELECT AND OPTIMIZE APPLICATIONS
 ================================================================================
@@ -99,7 +99,7 @@ All applications automatically selected and optimized!
 ================================================================================
 
 Optimization log saved: auto_optimization_log.json
-```
+```text
 
 ---
 

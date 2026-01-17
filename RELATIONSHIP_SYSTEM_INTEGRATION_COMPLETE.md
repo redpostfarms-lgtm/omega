@@ -110,12 +110,12 @@ print(f"Level: {status['mutual_level']}")
 print(f"User Points: {status['user_points']}")
 print(f"Omega Points: {status['omega_points']}")
 print(f"Greeting: {rel.get_appropriate_greeting()}")
-```
+```text
 
 ### Record Interaction
 ```python
 rel.record_interaction(success=True, interaction_type="collaborative_task")
-```
+```text
 
 ### Analyze Trust
 ```python
@@ -125,7 +125,7 @@ insights = analyze_trust_dimensions()
 print(f"Overall Trust: {insights['overall_trust_score']}")
 print(f"Strongest: {insights['strongest_dimension']}")
 print(f"Growth Area: {insights['growth_area']}")
-```
+```text
 
 ---
 

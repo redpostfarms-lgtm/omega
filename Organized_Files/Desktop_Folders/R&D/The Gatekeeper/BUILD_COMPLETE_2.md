@@ -65,19 +65,19 @@ python projects/solar_mppt_controller.py --simulate --algorithm incremental_cond
 
 # Custom interval
 python projects/solar_mppt_controller.py --simulate --interval 2.0
-```
+```text
 
 ### **Hardware Mode:**
 ```bash
 python projects/solar_mppt_controller.py --max-voltage 24.0 --max-current 10.0
-```
+```text
 
 ---
 
 ## Output
 
 ### **Real-Time Display:**
-```
+```text
 ============================================================
 SOLAR MPPT CONTROLLER - REAL-TIME STATUS
 ============================================================
@@ -96,7 +96,7 @@ Efficiency: 100.00%
 
 Forecast: 5.2 kWh expected tomorrow
 ============================================================
-```
+```text
 
 ### **JSON Logs:**
 ```json
@@ -112,7 +112,7 @@ Forecast: 5.2 kWh expected tomorrow
     "efficiency": 100.0
   }
 ]
-```
+```text
 
 ---
 

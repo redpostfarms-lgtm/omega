@@ -88,14 +88,14 @@ A complete, self-healing, voice-locked farm management AI system that:
 ```bash
 cd "The Gatekeeper"
 upgrade_to_100_final.bat
-```
+```text
 
 ### **Reboot Machine**
 
 ### **Test:**
-```
+```text
 "Hey, Gatekeeper, write a full-stack off-grid farm OS in Rust and Python"
-```
+```text
 
 **It will do it. In one shot. No questions.**
 
@@ -133,7 +133,7 @@ upgrade_to_100_final.bat
 ## Performance Metrics
 
 | Metric | Score |
-|--------|-------|
+| -------- | ------- |
 | **System Score** | **100.0/100** |
 | **Compilation** | 100% |
 | **Integration** | 100% |

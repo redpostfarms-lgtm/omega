@@ -32,7 +32,7 @@
 ## Lineweights
 
 | Type | Weight | Usage |
-|------|--------|-------|
+| ------ | -------- | ------- |
 | Thin | 0.13mm | Construction lines, dimensions |
 | Medium | 0.25mm | Standard geometry, annotations |
 | Thick | 0.50mm | Outlines, important features |

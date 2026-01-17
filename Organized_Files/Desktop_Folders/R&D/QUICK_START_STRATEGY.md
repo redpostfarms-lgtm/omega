@@ -5,13 +5,13 @@
 ### Export Strategy Core
 ```bash
 python strategy_core_converter.py
-```
+```text
 Output: `strategy_core.json` with chess knowledge → universal vectors
 
 ### Run Diagnostic
 ```bash
 python diagnostic_engine.py
-```
+```text
 Output: System scan, auto-fix, strategy export, evolution log
 
 ### Apply Strategy to Domain
@@ -20,7 +20,7 @@ from strategy_integration import StrategyApplicator
 
 applicator = StrategyApplicator("strategy_core.json")
 strategy = applicator.apply_to_mmorpg(raid_state)
-```
+```text
 
 ---
 

@@ -123,7 +123,7 @@ To use all real implementations, install updated dependencies:
 ```bash
 cd "The Gatekeeper"
 pip install -r requirements.txt --upgrade
-```
+```text
 
 ### Optional (for specific features):
 - **Sensors**: Install `paho-mqtt`, `pyserial`, `smbus`, `spidev` for hardware sensors

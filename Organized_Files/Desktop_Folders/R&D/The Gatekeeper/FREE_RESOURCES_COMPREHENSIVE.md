@@ -503,7 +503,7 @@ pytest-cov>=4.1.0
 
 # Config
 python-dotenv>=1.0.0
-```
+```text
 
 ---
 

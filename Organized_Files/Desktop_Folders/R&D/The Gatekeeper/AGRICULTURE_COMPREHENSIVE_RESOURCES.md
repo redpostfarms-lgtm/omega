@@ -617,7 +617,7 @@ This document contains **100+ free, open-source resources** covering every aspec
 ## 📊 API Summary Table
 
 | API Category | API Name | Free Tier | Key Features |
-|--------------|----------|-----------|--------------|
+| -------------- | ---------- | ----------- | -------------- |
 | **Weather** | AG FARM API | 1,000/mo | Weather, plants, commodities |
 | **Weather** | OpenWeatherMap | 1M/mo | Current, forecast, historical |
 | **Weather** | NOAA CDO | Unlimited | Historical climate data |

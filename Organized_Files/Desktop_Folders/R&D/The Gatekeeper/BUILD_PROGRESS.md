@@ -83,7 +83,7 @@ python projects/solar_mppt_controller.py --simulate
 
 # 3. Farm Hub (dashboard)
 python projects/farm_automation_hub.py --update
-```
+```text
 
 ---
 

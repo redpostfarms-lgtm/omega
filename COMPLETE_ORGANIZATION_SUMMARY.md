@@ -56,7 +56,7 @@ Completed all requested tasks:
 **To Run:**
 ```bash
 python CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py
-```
+```text
 
 **Status:** ✅ Script ready to organize desktop and files
 
@@ -79,7 +79,7 @@ python CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py
 **Usage:**
 ```bash
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 **Status:** ✅ Omega UI launcher created and ready
 
@@ -106,7 +106,7 @@ python OMEGA_UI_LAUNCHER.py
 
 ## File Organization Structure
 
-```
+```text
 The Gatekeeper/
 ├── OMEGA_UI_LAUNCHER.py          # Main UI launcher ✅ (NEW)
 ├── CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py  # Organization script ✅ (NEW)
@@ -121,7 +121,7 @@ The Gatekeeper/
 │   └── omega_logo.ico (needed for shortcut)
 ├── Config/                        # Configuration files (created when script runs)
 └── Logs/                          # Log files (created when script runs)
-```
+```text
 
 ---
 

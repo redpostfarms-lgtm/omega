@@ -156,7 +156,7 @@ def get_adaptive_threshold(audio_quality_metrics):
     elif snr < 15:
         return base_threshold * 1.5  # More strict
     return base_threshold
-```
+```text
 
 ### Audio Quality Monitoring:
 ```python
@@ -168,7 +168,7 @@ class AudioQualityAgent:
         if metrics['rms'] < 0.1:
             return "WARNING: Audio too quiet. Increase microphone gain."
         return "Audio quality: Good"
-```
+```text
 
 ### Post-Processing Error Correction:
 ```python
@@ -180,14 +180,14 @@ def post_process_correction(text, context):
     }
     # Apply corrections based on context
     return corrected_text
-```
+```text
 
 ---
 
 ## Expected Benefits Summary
 
 | Improvement | Impact | Complexity | Priority |
-|------------|--------|------------|----------|
+| ------------ | -------- | ------------ | ---------- |
 | Adaptive Confidence Thresholds | High | Low | ⭐⭐⭐ |
 | Audio Quality Monitoring Agent | High | Medium | ⭐⭐⭐ |
 | Post-Processing Error Correction | Medium | Medium | ⭐⭐ |

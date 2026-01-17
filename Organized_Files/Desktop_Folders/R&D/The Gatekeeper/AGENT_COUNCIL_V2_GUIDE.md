@@ -52,26 +52,26 @@
 ## How It Works
 
 ### Voice Commands
-```
+```text
 "Hey, Gatekeeper, council solve [problem]"
 "Hey, Gatekeeper, agent council on [problem]"
-```
+```text
 
 ### Command Line
 ```bash
 python "The Gatekeeper\agent_council_v2.py" "fix low solar yield in winter"
 python "The Gatekeeper\agent_council_v2.py" "write $47k USDA REAP grant"
-```
+```text
 
 ## Example Session
 
 ### Input:
-```
+```text
 "Hey, Gatekeeper, council solve fix low solar yield in winter"
-```
+```text
 
 ### Output:
-```
+```text
 ============================================================
 GATEKEEPER – AGENT COUNCIL v2
 ============================================================
@@ -105,18 +105,18 @@ ROUND 1 / 3
 Solution locked.
 
 Solution saved to: D:\RPF_BRAIN\Archived\council_solutions\20251231_2356_fix_low_solar_yield_in_winter.txt
-```
+```text
 
 ## Grant/Compliance Auto-Detection
 
 When you mention **grant**, **USDA**, **compliance**, or **legal**, the **Lawyer** agent auto-loads:
 
-```
+```text
 "Hey, Gatekeeper, council solve write $47k USDA REAP grant"
-```
+```text
 
 **Output:**
-```
+```text
 ⚖️  Lawyer agent auto-loaded (grant/compliance detected)
 
 [Ellis] Debating... Done.
@@ -127,7 +127,7 @@ When you mention **grant**, **USDA**, **compliance**, or **legal**, the **Lawyer
 [Lawyer] Debating... Done.
 
 ✅ Lawyer: USDA REAP compliance: All sections verified. Forms complete. Legal review passed. VOTE: yes - ready to submit.
-```
+```text
 
 ## Voting & Consensus
 
@@ -165,7 +165,7 @@ All solutions saved to:
 `D:\RPF_BRAIN\Archived\council_solutions/`
 
 **Format:**
-```
+```text
 Problem: fix low solar yield in winter
 Timestamp: 2025-12-31T23:56:00
 Consensus: 5 yes, 0 no
@@ -175,7 +175,7 @@ Round 1:
   Ellis: [response]
   Mara: [response]
   ...
-```
+```text
 
 ## Integration
 

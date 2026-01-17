@@ -84,14 +84,14 @@
 ### 1. Install Dependencies
 ```bash
 python omega_v5_swarm_setup.py
-```
+```text
 
 ### 2. Add Proxies (Optional)
 Edit `omega_swarm/proxies.txt`:
-```
+```text
 192.168.1.1:8080:user:pass
 192.168.1.2:8080
-```
+```text
 
 ### 3. Configure
 Edit `omega_swarm/swarm_config.json`:
@@ -102,12 +102,12 @@ Edit `omega_swarm/swarm_config.json`:
 ### 4. Run
 ```bash
 python omega_v5_swarm.py
-```
+```text
 
 ### 5. Stop
 ```bash
 touch omega_swarm/kill.omega
-```
+```text
 
 ---
 

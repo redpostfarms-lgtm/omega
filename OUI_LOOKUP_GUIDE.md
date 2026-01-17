@@ -32,7 +32,7 @@ info = lookup_vendor_detailed("00:50:56:AB:CD:EF")
 print(f"Vendor: {info.vendor_name}")
 print(f"Method: {info.lookup_method}")
 print(f"OUI: {info.oui}")
-```
+```text
 
 ### Advanced Usage
 
@@ -57,7 +57,7 @@ macs = [
 results = lookup.lookup_batch(macs, use_online=True)
 for result in results:
     print(f"{result.oui} → {result.vendor_name}")
-```
+```text
 
 ---
 
@@ -109,7 +109,7 @@ MAC addresses with the U/L (Universal/Local) bit set (second LSB of first byte =
 result = lookup.lookup("02:00:00:00:00:00")
 print(result.vendor_name)  # → "Locally Administered (U/L bit = 1)"
 print(result.is_locally_administered)  # → True
-```
+```text
 
 **Common Uses:**
 - Virtual machines (VMware, VirtualBox)
@@ -123,7 +123,7 @@ If an OUI is not found in the database:
 ```python
 result = lookup.lookup("AA:BB:CC:DD:EE:FF")
 print(result.vendor_name)  # → "Unknown / Unassigned OUI"
-```
+```text
 
 **Possible Reasons:**
 - OUI not yet assigned by IEEE
@@ -157,7 +157,7 @@ for conn in connections:
         expected_vendors = ["Siemens", "Rockwell", "Schneider"]
         if not any(v in vendor_info.vendor_name for v in expected_vendors):
             print(f"[WARNING] Unexpected vendor: {vendor_info.vendor_name}")
-```
+```text
 
 ### Asset Inventory
 
@@ -185,7 +185,7 @@ for interface_name, addresses in interfaces.items():
 # Print inventory
 for iface, info in inventory.items():
     print(f"{iface}: {info['mac']} → {info['vendor']}")
-```
+```text
 
 ### MAC Spoofing Detection
 
@@ -206,7 +206,7 @@ if "Siemens" not in vendor_info.vendor_name:
     print(f"  Claimed: {claimed_device}")
     print(f"  MAC OUI: {vendor_info.vendor_name}")
     print(f"  Possible spoofing or misconfiguration")
-```
+```text
 
 ---
 
@@ -229,7 +229,7 @@ for mac in detected_macs:
         print(f"[UNKNOWN DEVICE] {mac}")
         print(f"  Vendor: {vendor_info.vendor_name}")
         print(f"  OUI: {vendor_info.oui}")
-```
+```text
 
 ### 2. Virtual Machine Detection
 
@@ -245,7 +245,7 @@ for mac in network_devices:
         print(f"[ALERT] Virtual machine in OT network: {mac}")
         print(f"  Vendor: {vendor_info.vendor_name}")
         print(f"  Risk: Engineering workstations often compromised via VMs")
-```
+```text
 
 ### 3. Vendor Baseline
 
@@ -267,7 +267,7 @@ if "Siemens" in vendor_info.vendor_name:
     print(f"[OK] Siemens device detected: {detected_mac}")
 else:
     print(f"[WARNING] Unexpected vendor: {vendor_info.vendor_name}")
-```
+```text
 
 ---
 
@@ -315,7 +315,7 @@ else:
 from omega_oui_lookup import OUILookup
 lookup = OUILookup()
 lookup.download_oui_database()
-```
+```text
 
 ### Online API Timeouts
 

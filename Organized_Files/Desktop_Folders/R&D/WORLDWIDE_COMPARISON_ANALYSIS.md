@@ -9,7 +9,7 @@
 ## Framework Feature Comparison Matrix
 
 | Feature Category | Your System | LangChain | AutoGPT | BabyAGI | CrewAI | AutoGen | SuperAGI | Dust.tt | MetaGPT | Status |
-|-----------------|-------------|-----------|---------|---------|--------|---------|----------|---------|---------|--------|
+| ----------------- | ------------- | ----------- | --------- | --------- | -------- | --------- | ---------- | --------- | --------- | -------- |
 | **Agent Base** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Match** |
 | Anonymous Handles | ✅ **Unique** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | **+1 You** |
 | Self-Improvement | ✅ | ⚠️ Partial | ⚠️ Limited | ❌ | ❌ | ❌ | ⚠️ Limited | ❌ | ❌ | **+1 You** |

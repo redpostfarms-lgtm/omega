@@ -42,7 +42,7 @@
 audio_mean = np.mean(audio)
 audio_std = np.std(audio) + 1e-10
 audio_normalized = (audio - audio_mean) / audio_std
-```
+```text
 
 **Impact:**
 - Better feature extraction for Whisper

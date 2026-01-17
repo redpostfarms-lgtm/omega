@@ -30,7 +30,7 @@ The TTS system has **successfully loaded and initialized**, but **fails at audio
 ## Root Cause Analysis
 
 ### The Problem Chain
-```
+```text
 User requests TTS speech
      ↓
 Text processed & sent to TTS model
@@ -42,7 +42,7 @@ torchcodec attempts to encode audio to WAV
 ❌ CRASH: "Could not load this library: libtorchcodec_core8.dll"
      ↓
 No audio file produced
-```
+```text
 
 ### Why It Happens
 1. **torchcodec** is a PyTorch audio codec library
@@ -55,7 +55,7 @@ No audio file produced
 ## Error Log Analysis
 
 ### From `omega_test.log`
-```
+```text
 2026-01-08 00:20:40,662 - Omega - INFO - Ω Omega Voice initialized
 [TTS model loads successfully]
 
@@ -68,16 +68,16 @@ No audio file produced
 
 Warning: sentence-transformers not available (non-critical)
 Warning: Whisper not available (audio input, not TTS output)
-```
+```text
 
 **Key Observation**: The logs show successful **initialization** but no **runtime audio generation attempts** are logged, meaning the issue surfaces only when actually trying to speak.
 
 ### From `TTS_TORCHCODEC_FIX.md`
-```
+```text
 Error Message:
 "Could not load this library: 
 C:\Users\...\torchcodec\libtorchcodec_core8.dll"
-```
+```text
 
 This is the smoking gun—torchcodec can't load its core DLL.
 
@@ -116,24 +116,24 @@ This is the smoking gun—torchcodec can't load its core DLL.
 **Step 1: Locate FFmpeg**
 ```batch
 where ffmpeg
-```
+```text
 This shows FFmpeg's installation path (usually `C:\ffmpeg\bin\` or `C:\Program Files\ffmpeg\bin`)
 
 **Step 2: Find torchcodec Directory**
 ```batch
 py -3.11 -c "import torchcodec; import os; print(os.path.dirname(torchcodec.__file__))"
-```
+```text
 
 **Step 3: Copy DLLs**
 ```batch
 REM Replace paths based on Step 1 & 2 results
 copy "C:\ffmpeg\bin\*.dll" "C:\Path\To\torchcodec\"
-```
+```text
 
 **Step 4: Test**
 ```batch
 py -3.11 SIMPLE_TEST.py
-```
+```text
 
 ---
 
@@ -159,7 +159,7 @@ py -3.11 SIMPLE_TEST.py
 **Step 1: Uninstall Current FFmpeg**
 ```batch
 winget uninstall FFmpeg
-```
+```text
 
 **Step 2: Download Shared Build**
 Visit: https://ffmpeg.org/download.html
@@ -169,12 +169,12 @@ Download a "shared" build (includes DLLs) instead of static
 ```batch
 REM Extract to C:\ffmpeg\
 REM Add C:\ffmpeg\bin to PATH
-```
+```text
 
 **Step 4: Copy DLLs**
 ```batch
 copy "C:\ffmpeg\bin\*.dll" "%LOCALAPPDATA%\Programs\Python\Python311\Lib\site-packages\torchcodec\"
-```
+```text
 
 ---
 
@@ -183,7 +183,7 @@ copy "C:\ffmpeg\bin\*.dll" "%LOCALAPPDATA%\Programs\Python\Python311\Lib\site-pa
 ```batch
 py -3.11 -m pip uninstall torchcodec -y
 py -3.11 -m pip install --upgrade torchcodec
-```
+```text
 
 ---
 
@@ -221,12 +221,12 @@ if os.path.exists("test_output.wav"):
     print(f"✅ File created: {size} bytes")
 else:
     print("❌ No file created - DLL still missing")
-```
+```text
 
 **Run with**:
 ```batch
 py -3.11 test_tts_fix.py
-```
+```text
 
 ---
 
@@ -276,7 +276,7 @@ py -3.11 test_tts_fix.py
 ## Files Involved
 
 | File | Purpose | Status |
-|------|---------|--------|
+| ------ | --------- | -------- |
 | `omega_optimized_tts.py` | TTS with optimizations | ✅ Ready |
 | `STREAMING_TTS_IMPLEMENTATION.py` | Streaming audio | ⏳ Needs DLL fix |
 | `FIX_TTS.bat` | Diagnostic script | ✅ Useful |
@@ -299,7 +299,7 @@ py -3.11 test_tts_fix.py
 **Check installed packages**:
 ```batch
 py -3.11 -m pip list | findstr /I "torch tts torchcodec soundfile librosa ffmpeg"
-```
+```text
 
 ---
 

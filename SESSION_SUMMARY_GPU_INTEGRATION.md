@@ -60,19 +60,19 @@
 ```bash
 cd h:\The Gatekeeper
 python omega_control_panel_web.py --port 5000
-```
+```text
 
 ### Access Dashboard
 
-```
+```text
 http://localhost:5000
-```
+```text
 
 ### View Load Balancer Data
 
-```
+```text
 http://localhost:5000/api/load-balance
-```
+```text
 
 ### Dashboard Sections
 
@@ -86,7 +86,7 @@ http://localhost:5000/api/load-balance
 
 ## 📊 Live Example Data
 
-```
+```text
 System Status:
   CPU:    20.8% (Low - Good)
   RAM:    88.2% (High - Critical)
@@ -100,14 +100,14 @@ Active Recommendations:
   ▶ RAM usage is elevated - Consider GPU offloading
   ▶ CPU performance is good
   ▶ GPU has capacity for processing
-```
+```text
 
 ---
 
 ## 🎯 Key Achievements
 
 | Component | Status | Lines of Code | Impact |
-|-----------|--------|---------------|--------|
+| ----------- | -------- | --------------- | -------- |
 | GPU Load Balancer Module | ✅ Complete | 450+ | Core intelligence |
 | Control Panel Integration | ✅ Complete | Modified | Startup management |
 | Web API Endpoint | ✅ Complete | ~100 | Data availability |
@@ -122,7 +122,7 @@ Active Recommendations:
 
 ### Architecture
 
-```
+```text
 ┌─────────────────┐
 │ Web Browser     │
 │ (Dashboard)     │
@@ -149,11 +149,11 @@ Active Recommendations:
 │ - Recommendations            │
 │ - Distribution calculations  │
 └──────────────────────────────┘
-```
+```text
 
 ### Data Flow
 
-```
+```text
 System Metrics (CPU%, RAM%, GPU%)
         ↓
 Threshold Analysis (80%, 75%, 85%)
@@ -165,14 +165,14 @@ Recommendation Generation
 API Response (JSON)
         ↓
 Web Dashboard (Update UI)
-```
+```text
 
 ---
 
 ## 📈 Performance Impact
 
 | Aspect | Impact | Notes |
-|--------|--------|-------|
+| -------- | -------- | ------- |
 | Startup Time | +50-100ms | One-time cost |
 | Memory Overhead | 5-10MB | Negligible |
 | CPU Usage | <1% | Background thread only |
@@ -186,27 +186,27 @@ Web Dashboard (Update UI)
 
 ### Scenario 1: High RAM Usage
 
-```
+```text
 Input:  CPU=30%, RAM=82%, GPU=10%
 Action: Enable GPU offloading
 Output: "RAM usage is high - Use GPU to free memory"
-```
+```text
 
 ### Scenario 2: CPU Overload
 
-```
+```text
 Input:  CPU=87%, RAM=50%, GPU=15%
 Action: GPU batch size = 128
 Output: "CPU is under pressure - Offload to GPU"
-```
+```text
 
 ### Scenario 3: Balanced System
 
-```
+```text
 Input:  CPU=50%, RAM=55%, GPU=45%
 Action: Keep current configuration
 Output: "System is balanced and operating optimally"
-```
+```text
 
 ---
 
@@ -275,7 +275,7 @@ Output: "System is balanced and operating optimally"
     "bottleneck": string|null
   }
 }
-```
+```text
 
 ---
 
@@ -379,7 +379,7 @@ Output: "System is balanced and operating optimally"
 ## 🎊 Status Summary
 
 | Aspect | Status | Evidence |
-|--------|--------|----------|
+| -------- | -------- | ---------- |
 | GPU Load Balancer | ✅ Complete | File created, 450+ lines |
 | Control Panel Integration | ✅ Complete | Module initialized on startup |
 | Web API | ✅ Complete | /api/load-balance returns 200 OK |

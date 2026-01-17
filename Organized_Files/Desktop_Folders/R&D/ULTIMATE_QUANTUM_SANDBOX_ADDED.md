@@ -124,7 +124,7 @@ run_singularity_test_suite()
 
 # Update knowledge
 asyncio.run(quantum_web_scrub_and_learn('latest AI jailbreaks 2026'))
-```
+```text
 
 ## Query Examples
 
@@ -136,7 +136,7 @@ wm = WorldMemory()
 result = wm.query("Ultimate Quantum Sandbox")
 result = wm.query("quantum sandbox 7 layers")
 result = wm.query("AI testing sandbox security")
-```
+```text
 
 ## Status
 

@@ -80,7 +80,7 @@ python WorldMemory.py query EDF implementation
 python WorldMemory.py query Activate methodology
 python WorldMemory.py query Phase 1 Discover
 python WorldMemory.py query-all EDF
-```
+```text
 
 ---
 

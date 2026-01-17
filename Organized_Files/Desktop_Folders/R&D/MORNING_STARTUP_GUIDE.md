@@ -11,7 +11,7 @@
 ### Windows Startup
 ```bash
 setup_morning_startup.bat
-```
+```text
 
 This will:
 1. Create a shortcut in Windows Startup folder
@@ -47,7 +47,7 @@ This will:
 Create flag file:
 ```bash
 echo. > swarm_auto_start.flag
-```
+```text
 
 This will automatically start the 4-agent swarm (Chess, Checkers, Mahjong, Go) after diagnostic.
 
@@ -55,7 +55,7 @@ This will automatically start the 4-agent swarm (Chess, Checkers, Mahjong, Go) a
 Create flag file:
 ```bash
 echo. > games_auto_start.flag
-```
+```text
 
 This prepares the game framework for immediate use.
 
@@ -71,7 +71,7 @@ Create `startup_tasks.json`:
     }
   ]
 }
-```
+```text
 
 ---
 
@@ -80,12 +80,12 @@ Create `startup_tasks.json`:
 ### Run Morning Startup Now
 ```bash
 python morning_startup.py
-```
+```text
 
 Or:
 ```bash
 morning_startup.bat
-```
+```text
 
 ---
 
@@ -110,7 +110,7 @@ morning_startup.bat
 Or run:
 ```powershell
 Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\Morning Startup.lnk"
-```
+```text
 
 ---
 

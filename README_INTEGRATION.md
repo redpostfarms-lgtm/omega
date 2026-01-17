@@ -27,7 +27,7 @@ from gatekeeper_omega_bridge import get_bridge
 bridge = get_bridge()
 diagnostics = bridge.run_diagnostics()
 print(f"Status: {diagnostics['system_health']['status']}")
-```
+```text
 
 **Features**:
 - Thread-safe component management
@@ -50,7 +50,7 @@ try:
 except Exception as e:
     context = ErrorContext('module', 'operation')
     handler.handle_error(e, context, recover=True)
-```
+```text
 
 **Features**:
 - Multi-level logging (console + file + rotation)
@@ -70,7 +70,7 @@ from gatekeeper_system_health_monitor import get_health_monitor
 monitor = get_health_monitor()
 health = monitor.get_health_report()
 print(f"Overall Status: {health['overall_status']}")
-```
+```text
 
 **Features**:
 - CPU, memory, disk, network metrics
@@ -86,18 +86,18 @@ print(f"Overall Status: {health['overall_status']}")
 ### Installation
 ```bash
 pip install psutil flask flask-cors
-```
+```text
 
 ### Run Tests
 ```bash
 python test_integration.py
-```
+```text
 
 ### System Check
 ```bash
 python gatekeeper_omega_bridge.py
 python gatekeeper_system_health_monitor.py
-```
+```text
 
 ### Full Diagnostics
 ```python
@@ -105,13 +105,13 @@ from gatekeeper_omega_bridge import get_bridge
 
 bridge = get_bridge()
 bridge.save_diagnostics('report.json')
-```
+```text
 
 ---
 
 ## 📊 Architecture
 
-```
+```text
         ┌──────────────────────────────┐
         │  GATEKEEPER-OMEGA BRIDGE     │
         │  (Central Hub)               │
@@ -131,14 +131,14 @@ bridge.save_diagnostics('report.json')
         │  HEALTH MONITOR             │
         │  (Continuous Diagnostics)   │
         └─────────────────────────────┘
-```
+```text
 
 ---
 
 ## 🔍 Key Improvements
 
 | Aspect | Before | After | Impact |
-|--------|--------|-------|--------|
+| -------- | -------- | ------- | -------- |
 | Component Integration | Loose | Unified | Better coordination |
 | Error Handling | Scattered | Centralized | Consistent recovery |
 | System Monitoring | Manual | Real-time | Proactive alerts |
@@ -150,11 +150,11 @@ bridge.save_diagnostics('report.json')
 ## 📈 Metrics
 
 ### System Quality Score
-```
+```text
 Before: ████████████████████░ 92.5/100
 After:  ████████████████████░░ 96.0/100
         +3.5% improvement
-```
+```text
 
 ### Component Coverage
 - ✅ Gatekeeper Security (100%)
@@ -172,7 +172,7 @@ After:  ████████████████████░░ 96.0/
 ### Run Integration Tests
 ```bash
 python test_integration.py
-```
+```text
 
 **Tests Performed**:
 - Module imports verification
@@ -182,7 +182,7 @@ python test_integration.py
 - Component integration
 
 ### Expected Output
-```
+```text
 GATEKEEPER SYSTEM INTEGRATION TEST
 ======================================
 
@@ -212,7 +212,7 @@ File Operations:      1/1 ✓ PASS
 Overall: 8/8 tests passed (100.0%)
 
 🟢 ALL TESTS PASSED - SYSTEM READY FOR PRODUCTION
-```
+```text
 
 ---
 
@@ -227,7 +227,7 @@ health = bridge.get_system_health()
 print(f"Status: {health['status']}")
 print(f"Components: {len(health['components'])}")
 print(f"Errors: {health['error_count']}")
-```
+```text
 
 ### Example 2: Error Handling with Recovery
 ```python
@@ -246,7 +246,7 @@ try:
 except Exception as e:
     context = ErrorContext('my_module', 'network_operation')
     result = handler.handle_error(e, context, recover=True)
-```
+```text
 
 ### Example 3: Health Monitoring
 ```python
@@ -267,14 +267,14 @@ if health['overall_status'] == 'CRITICAL':
 checker = ComponentHealthChecker()
 gk_status = checker.check_gatekeeper()
 voice_status = checker.check_omega_voice()
-```
+```text
 
 ---
 
 ## 📋 Documentation Files
 
 | File | Purpose |
-|------|---------|
+| ------ | --------- |
 | `INTEGRATION_IMPROVEMENTS_COMPLETE.md` | Detailed guide to new modules |
 | `SYSTEM_IMPROVEMENTS_REPORT.md` | Executive summary & analysis |
 | `test_integration.py` | Integration test suite |
@@ -342,7 +342,7 @@ voice_status = checker.check_omega_voice()
 ### Import Errors
 ```bash
 pip install psutil flask flask-cors
-```
+```text
 
 ### Module Not Found
 - Ensure all three modules are in the same directory as other gatekeeper files
@@ -372,13 +372,13 @@ For issues:
 
 ## 🎉 System Status
 
-```
+```text
 Overall Score: 96.0/100 ✅
 Production Ready: YES ✅
 Integration Complete: YES ✅
 All Tests Pass: YES ✅
 Documentation: COMPLETE ✅
-```
+```text
 
 **System is READY for production deployment**
 

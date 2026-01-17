@@ -68,7 +68,7 @@ regex_guide = RegexGuide.from_regex(phone_regex, tokenizer)
 # Generate with strict regex constraint
 generator = generate.regex(outlines_model, regex_guide)
 result = generator(prompt, max_tokens=20)
-```
+```text
 
 ### Regex + Diverse Beam Search:
 
@@ -84,7 +84,7 @@ generator = generate.regex(
     diversity_penalty=1.3,
     num_return_sequences=5
 )
-```
+```text
 
 ### Regex + JSON Schema:
 
@@ -96,7 +96,7 @@ class Contact(BaseModel):
 
 # Outlines enforces BOTH JSON schema and regex
 generator = generate.json(outlines_model, Contact)
-```
+```text
 
 ---
 

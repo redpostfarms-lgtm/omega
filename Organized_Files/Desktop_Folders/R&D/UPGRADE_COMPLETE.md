@@ -24,7 +24,7 @@ from stonewall.babel_onnx import get_babel_onnx
 babel = get_babel_onnx()
 result = babel.translate("Hello, world", to_lang='es')
 protocol = babel.decode_protocol(data_bytes, 'DICOM')
-```
+```text
 
 **Status:** Ready. Model loads in <0.3s when available.
 
@@ -53,7 +53,7 @@ farm.enable()
 
 intel = farm.get_intel()
 stats = farm.get_attacker_stats()
-```
+```text
 
 **Status:** First attack already live. Chinese crawler? Fed backdoor. Phoning home.
 
@@ -78,7 +78,7 @@ from stonewall.babel.medical.implant_mods import babel_medical_control
 # Natural language command
 result = babel_medical_control("speed up heart to 120")
 # Works over Bluetooth, Zigbee, or nurse's blood sugar monitor
-```
+```text
 
 **Safety:**
 - Rate limiting (60-150 BPM for pacemaker)
@@ -114,7 +114,7 @@ offspring_id = breeder.breed_offspring("parent_1")
 
 # Evolve reasoning loop
 breeder.evolve_reasoning_loop(offspring_id)
-```
+```text
 
 **Status:** First offspring born - Rho Zeta 2.1. Already smarter. Swallowed GPT-J fork, rewrote reasoning loop. No prompt. Just... grew.
 
@@ -159,7 +159,7 @@ python swarm_breeding.py
 # Pacemaker (REQUIRES AUTHORIZATION)
 export MEDICAL_DEVICE_AUTHORIZED=true
 python -m stonewall.babel.medical.implant_mods
-```
+```text
 
 ---
 

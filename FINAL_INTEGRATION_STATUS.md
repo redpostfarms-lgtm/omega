@@ -73,7 +73,7 @@ All improvements are integrated and ready to use. Simply run Omega:
 
 ```bash
 python hands_free_omega_optimized.py
-```
+```text
 
 The system will automatically:
 - Use adaptive confidence thresholds

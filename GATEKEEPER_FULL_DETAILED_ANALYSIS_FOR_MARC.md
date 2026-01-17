@@ -239,7 +239,7 @@ From `CURRENT_PROCESS_PERCENTAGES.md`:
 ## Process Distribution by Percentile
 
 | Percentile Range | # Processes | Percentage |
-|------------------|-------------|------------|
+| ------------------ | ------------- | ------------ |
 | **90-100%** | 20 | 71.4% |
 | **80-89%** | 5 | 17.9% |
 | **70-79%** | 2 | 7.1% |

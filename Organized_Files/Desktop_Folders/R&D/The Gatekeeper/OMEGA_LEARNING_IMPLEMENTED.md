@@ -130,9 +130,9 @@
 5. Updates memory with new results
 
 ### Learning Loop:
-```
+```text
 Run Tests → Save Results → Analyze Patterns → Learn → Improve Testing
-```
+```text
 
 ---
 
@@ -141,17 +141,17 @@ Run Tests → Save Results → Analyze Patterns → Learn → Improve Testing
 ### Standard Run (with learning):
 ```bash
 python deep_system_test.py
-```
+```text
 
 ### Force Architecture Remap:
 ```bash
 python deep_system_test.py --remap
-```
+```text
 
 ### Parallel Execution (with learning):
 ```bash
 python deep_system_test.py --parallel
-```
+```text
 
 ---
 
@@ -183,7 +183,7 @@ After running, Omega will know:
 
 ## Example Output
 
-```
+```text
 ================================================================================
 MAPPING SYSTEM ARCHITECTURE...
 ================================================================================
@@ -205,7 +205,7 @@ ASSESSING ERROR CONTEXT & IMPACT...
 ✓ Critical: 1
 ✓ Warnings: 2
 ✓ Error categories: 3
-```
+```text
 
 ---
 

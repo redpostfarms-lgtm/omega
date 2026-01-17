@@ -24,7 +24,7 @@ The Python Launcher (also called `py.exe` or `py`) is a utility introduced with 
 ### Main Executables
 
 | Executable | Purpose | Console Output |
-|------------|---------|----------------|
+| ------------ | --------- | ---------------- |
 | `py.exe` | Console version (uses terminal window) | Yes |
 | `pyw.exe` | GUI/no-console version (no terminal window) | No |
 
@@ -35,7 +35,7 @@ The Python Launcher (also called `py.exe` or `py`) is a utility introduced with 
 ## Python Launcher vs python.exe
 
 | Feature / Aspect | `python.exe` / `pythonw.exe` | `py.exe` / `pyw.exe` (Launcher) |
-|------------------|------------------------------|----------------------------------|
+| ------------------ | ------------------------------ | ---------------------------------- |
 | **Location** | Inside specific Python install folder (e.g. `C:\Python312\python.exe`) | Usually `C:\Windows\py.exe` (always in PATH) |
 | **Multiple versions support** | You must specify full path or manage PATH carefully | Automatically selects correct version |
 | **Default behavior** | Always runs the exact Python install it's part of | Runs the default (usually latest) or specified version |
@@ -55,7 +55,7 @@ py -3               # Latest Python 3.x
 py -2               # Latest Python 2.x (if still installed)
 py -3.11            # Specific version 3.11 (latest patch)
 py -3.12-32         # 32-bit version of 3.12 (if both 32 & 64-bit exist)
-```
+```text
 
 ### Running Scripts
 
@@ -63,21 +63,21 @@ py -3.12-32         # 32-bit version of 3.12 (if both 32 & 64-bit exist)
 py script.py              # Run script using default Python
 py -3.10 script.py        # Run with specific version
 py -3.11 omega_automation_orchestrator.py
-```
+```text
 
 ### Package Management
 
 ```bash
 py -m pip install ...     # Run pip from the chosen Python
 py -3.11 -m pip install requests
-```
+```text
 
 ### List Installed Versions
 
 ```bash
 py -0p                   # List all detected Python installs (very useful!)
 py -0                    # List versions only (no paths)
-```
+```text
 
 ---
 
@@ -91,7 +91,7 @@ The launcher reads the first line of your script (if it starts with `#!`) and us
 
 ```python
 #!/usr/bin/env python3
-```
+```text
 
 **Why it's best:**
 - Uses `env` to search your PATH for the `python3` command
@@ -108,7 +108,7 @@ The launcher reads the first line of your script (if it starts with `#!`) and us
 #!/usr/bin/env python3.12      # Latest patch of Python 3.12
 #!/usr/bin/env python3.11-32   # 32-bit Python 3.11 (if you have both 32/64-bit installs)
 #!/usr/bin/env python          # Latest Python (major version) — avoid unless you really need 2+3 compatibility
-```
+```text
 
 ### Hardcoded Absolute Path (Less Portable — Avoid Unless Necessary)
 
@@ -116,7 +116,7 @@ The launcher reads the first line of your script (if it starts with `#!`) and us
 #!/usr/bin/python3
 #!/usr/local/bin/python3.10
 #!/opt/homebrew/bin/python3     # Common on macOS with Homebrew
-```
+```text
 
 **Only use if you know the exact location and want to force a specific install.**
 - Breaks easily when moving the script to another machine or user
@@ -126,7 +126,7 @@ The launcher reads the first line of your script (if it starts with `#!`) and us
 ```python
 #!python3
 #!python
-```
+```text
 
 On Windows, shebangs are ignored unless you run via `py.exe` / Python launcher. These still work via the launcher as "virtual" shebangs, but `#!/usr/bin/env python3` is preferred because it's cross-platform.
 
@@ -136,14 +136,14 @@ On Windows, shebangs are ignored unless you run via `py.exe` / Python launcher. 
 #!/usr/bin/env python3 -u     # Unbuffered output (good for real-time logging)
 #!/usr/bin/env python3 -i     # Interactive mode after script finishes (great for debugging)
 #!/usr/bin/python3 -O         # Optimize mode (removes assert statements)
-```
+```text
 
 ---
 
 ## Quick Summary Table
 
 | Shebang Line | Portability | Best For | Windows Support (via py/launcher) |
-|--------------|-------------|----------|-----------------------------------|
+| -------------- | ------------- | ---------- | ----------------------------------- |
 | `#!/usr/bin/env python3` | ★★★★★ | Modern default – everything! | Excellent |
 | `#!/usr/bin/env python3.12` | ★★★★ | Force specific minor version | Excellent |
 | `#!/usr/bin/python3` | ★★★ | Known fixed system install | Good (as virtual) |
@@ -158,18 +158,18 @@ On Windows, shebangs are ignored unless you run via `py.exe` / Python launcher. 
 
 ```python
 #!/usr/bin/env python3
-```
+```text
 
 **Then make the file executable (on Unix-like systems):**
 ```bash
 chmod +x script.py
-```
+```text
 
 **And run it directly:**
 ```bash
 ./script.py           # On Linux/macOS
 py script.py          # On Windows (or double-click if associated)
-```
+```text
 
 **It just works everywhere modern Python is installed!**
 
@@ -182,7 +182,7 @@ py script.py          # On Windows (or double-click if associated)
 ```bash
 where py              # Windows: shows path to py.exe
 which py              # Linux/macOS: shows path to py (if available)
-```
+```text
 
 ### Common Locations
 
@@ -194,7 +194,7 @@ which py              # Linux/macOS: shows path to py (if available)
 ```bash
 py --version          # Shows Python Launcher version
 py -0p                # Lists all detected Python installs
-```
+```text
 
 ---
 
@@ -205,16 +205,16 @@ py -0p                # Lists all detected Python installs
 When setting up Omega Automation via Task Scheduler, you can use either approach:
 
 **Option 1: Use `py.exe` directly**
-```
+```text
 Program/script: C:\Windows\py.exe
 Add arguments: -3.11 "D:\RPF_BRAIN\The Gatekeeper\omega_automation_orchestrator.py"
-```
+```text
 
 **Option 2: Use full Python path**
-```
+```text
 Program/script: C:\Python311\python.exe
 Add arguments: -u "D:\RPF_BRAIN\The Gatekeeper\omega_automation_orchestrator.py"
-```
+```text
 
 **Option 1 is preferred** because it automatically selects the correct Python version based on the shebang in your script.
 
@@ -242,13 +242,13 @@ source venv/bin/activate  # Linux/macOS
 
 # Script with shebang will use venv Python
 py script.py              # Uses venv Python if activated
-```
+```text
 
 ### Using Specific Python Version in venv
 
 ```python
 #!/usr/bin/env python3.11    # Forces Python 3.11 even if venv has different version
-```
+```text
 
 ---
 
@@ -296,7 +296,7 @@ Works on Windows (via py.exe), Linux, and macOS
 """
 import sys
 # ... rest of script
-```
+```text
 
 ### Example 2: Script Requiring Specific Python Version
 
@@ -308,7 +308,7 @@ Omega Script requiring Python 3.11
 import sys
 assert sys.version_info >= (3, 11), "Python 3.11+ required"
 # ... rest of script
-```
+```text
 
 ### Example 3: Script with Unbuffered Output (Logging)
 
@@ -321,7 +321,7 @@ Omega Script with real-time logging
 import sys
 import logging
 # ... rest of script
-```
+```text
 
 ### Example 4: Windows Task Scheduler Script
 
@@ -334,7 +334,7 @@ Runs silently with elevated privileges via Task Scheduler
 import sys
 import logging
 # ... rest of script
-```
+```text
 
 **Task Scheduler Configuration:**
 - Program/script: `C:\Windows\py.exe`
@@ -365,7 +365,7 @@ py --version
 
 # Find launcher location
 where py
-```
+```text
 
 ---
 

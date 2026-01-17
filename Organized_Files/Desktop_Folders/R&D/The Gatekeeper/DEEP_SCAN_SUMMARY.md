@@ -14,7 +14,7 @@
 ### Current Status by Category
 
 | Category | Files | Current % | Target % | Gap | Status |
-|----------|-------|-----------|----------|-----|--------|
+| ---------- | ------- | ----------- | ---------- | ----- | -------- |
 | Omega System | 25+ | 85% | 97% | 12% | 🔄 Upgrading |
 | Voice System | 15+ | 88% | 97% | 9% | ✅ Near Target |
 | Agent System | 10+ | 82% | 97% | 15% | 🔄 Upgrading |
@@ -32,7 +32,7 @@
 ### Critical Gaps vs Industry Leaders
 
 | Capability | Our % | Industry % | Gap | Priority | Status |
-|------------|-------|------------|-----|----------|--------|
+| ------------ | ------- | ------------ | ----- | ---------- | -------- |
 | **Multimodal** | 50% | 97% | 47% | 🔴 CRITICAL | ✅ Base System Created |
 | **Sensors** | 60% | 95% | 35% | 🔴 CRITICAL | 🔄 Next |
 | **Context** | 60% | 100% | 40% | 🔴 HIGH | 🔄 Next |

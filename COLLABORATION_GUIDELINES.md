@@ -153,7 +153,7 @@ This code represents collaborative effort and shared knowledge.
 # Based on work by [Contributor Name]
 # Enhanced with input from [Team Member]
 # Collaborative development with [Others]
-```
+```text
 
 ---
 

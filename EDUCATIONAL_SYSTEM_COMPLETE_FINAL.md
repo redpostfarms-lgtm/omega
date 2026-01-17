@@ -205,7 +205,7 @@ Omega's comprehensive educational system is **COMPLETE** and ready to achieve **
 ## 📊 System Architecture
 
 ### Core Systems:
-```
+```text
 Omega Educational System
 ├── Educational Modules System (1,800+ hours)
 │   ├── SAT Modules (300 hours)
@@ -229,7 +229,7 @@ Omega Educational System
     ├── Technical Instructor Agent
     ├── Hands-On Coach Agent
     └── Quality Inspector Agent
-```
+```text
 
 ---
 

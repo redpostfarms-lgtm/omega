@@ -107,7 +107,7 @@ The following integrations are checked:
 **Run Production Preparation:**
 ```bash
 PREPARE_PRODUCTION.bat
-```
+```text
 
 This will:
 1. Run deep code analysis
@@ -125,12 +125,12 @@ This will:
 **Start Omega in Operational Mode:**
 ```bash
 OMEGA_OPERATIONAL_STARTUP.bat
-```
+```text
 
 Or:
 ```bash
 START_HERE.bat
-```
+```text
 
 This will:
 1. Initialize system

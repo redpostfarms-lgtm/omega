@@ -138,7 +138,7 @@
 Run verification:
 ```bash
 python omega_verify_all_real.py
-```
+```text
 
 All systems verified:
 - ✅ LLM System: Real
@@ -166,7 +166,7 @@ print(result['response'])
 
 # Speak in Mandarin
 OMEGA_COMPLETE.speak("你好，我是欧米茄。", language='zh')
-```
+```text
 
 ### Individual Systems
 ```python
@@ -186,7 +186,7 @@ is_intrusion, response = OMEGA_SECURITY.check_intrusion(prompt)
 # Performance
 from omega_performance_real import OMEGA_PERFORMANCE
 report = OMEGA_PERFORMANCE.get_optimization_report()
-```
+```text
 
 ---
 

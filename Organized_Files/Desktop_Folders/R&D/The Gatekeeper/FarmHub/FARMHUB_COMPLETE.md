@@ -150,26 +150,26 @@
 ## Voice Examples
 
 **Startup:**
-```
+```text
 All sensors online. 1.2 acres, 342 sensors. Water good. Air fair. Battery 94%. Standing by.
-```
+```text
 
 **Status Command:**
-```
+```text
 Root zone 18.4°C. pH 6.2. Flow normal. PM2.5 14 µg/m³. No alerts.
-```
+```text
 
 **Predict Rain:**
-```
+```text
 Front 3.7 mm by 22:15. Pre-soak drip 30%.
-```
+```text
 
 **Alerts:**
-```
+```text
 Soil pH dropping to 5.8 — lime needed. 4 hours left.
 Flow main spike — leak zone 3, 12 L/min.
 VOC 0.45 ppm — barn fan 80% on.
-```
+```text
 
 ---
 
@@ -218,12 +218,12 @@ VOC 0.45 ppm — barn fan 80% on.
 
 ```bash
 pip install paho-mqtt redis numpy
-```
+```text
 
 **Optional (for voice):**
 ```bash
 pip install vosk piper-tts
-```
+```text
 
 ---
 
@@ -232,12 +232,12 @@ pip install vosk piper-tts
 **Run once:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\sensor_hub.py
-```
+```text
 
 **Add to startup (brain_wakeup.bat):**
 ```bat
 start /B python D:\RPF_BRAIN\FarmHub\sensor_hub.py
-```
+```text
 
 ---
 
@@ -246,7 +246,7 @@ start /B python D:\RPF_BRAIN\FarmHub\sensor_hub.py
 ### **Start FarmHub:**
 ```bash
 python FarmHub/sensor_hub.py
-```
+```text
 
 ### **Check Status:**
 Say: "FarmHub, status"
@@ -257,7 +257,7 @@ Say: "FarmHub, predict rain"
 ### **Self-Diagnose:**
 ```bash
 python FarmHub/self_diagnose.py
-```
+```text
 
 ---
 

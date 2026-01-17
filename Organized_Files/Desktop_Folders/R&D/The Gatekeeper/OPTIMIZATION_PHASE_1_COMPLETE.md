@@ -79,7 +79,7 @@
 ## Industry Parity Progress
 
 | Feature | Before | After | Improvement |
-|---------|--------|-------|-------------|
+| --------- | -------- | ------- | ------------- |
 | **IoT Sensors** | 0% | 95% | +95% |
 | **Precision Ag** | 30% | 90% | +60% |
 | **Market Intel** | 0% | 70% | +70% |
@@ -131,25 +131,25 @@
 ### **IoT Sensors:**
 ```bash
 python projects/iot_sensor_hub.py --simulate --monitor
-```
+```text
 
 ### **Precision Agriculture:**
 ```bash
 python projects/precision_agriculture.py --register-field field1 "Field A" 10 corn
 python projects/precision_agriculture.py --predict-yield field1 zone1
-```
+```text
 
 ### **Market Intelligence:**
 ```bash
 python projects/market_intelligence.py --price corn
 python projects/market_intelligence.py --recommend wheat 1000
-```
+```text
 
 ### **Irrigation:**
 ```bash
 python projects/irrigation_automation.py --register-zone zone1 "Field A" 1000 corn
 python projects/irrigation_automation.py --water zone1 auto
-```
+```text
 
 ---
 

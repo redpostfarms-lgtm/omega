@@ -57,7 +57,7 @@ python WorldMemory.py query SAP
 python WorldMemory.py query FICO
 python WorldMemory.py query modules
 python WorldMemory.py query-all SAP
-```
+```text
 
 ---
 

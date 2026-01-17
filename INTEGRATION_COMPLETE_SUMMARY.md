@@ -44,13 +44,13 @@
 
 ```bash
 pip install -r requirements.txt
-```
+```text
 
 Then run the test:
 
 ```bash
 python test_llm_decoding_integration.py
-```
+```text
 
 ---
 

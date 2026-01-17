@@ -20,10 +20,10 @@
 4. **Wake Activation**: System wakes only if voice is verified as authorized
 
 ### 3. Security Flow ✅
-```
+```text
 Audio Detected → Save to temp file → Voice Verification → 
 Authorized? → Yes: Wake System | No: Block & Continue Listening
-```
+```text
 
 ---
 
@@ -36,14 +36,14 @@ from omega_voice_wake import get_voice_wake_system
 vw = get_voice_wake_system()
 vw.start_listening()  # Voice authentication enabled automatically
 vw.sleep_with_voice_wake()  # Only your voice can wake
-```
+```text
 
 ### Register Your Voice
 Your voice is automatically registered on first use (if no authorized voices exist). Or register manually:
 ```python
 from voice_security_system import voice_security
 voice_security.register_authorized_voice("your_voice_sample.wav", "Your Name")
-```
+```text
 
 ---
 

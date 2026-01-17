@@ -33,7 +33,7 @@ shutdown(delay_seconds=5)  # 5 second shutdown with force
 # Uses Windows command:
 shutdown /s /f /t 0  # Immediate force shutdown
 shutdown /s /f /t 5  # 5 second force shutdown
-```
+```text
 
 **Flags:**
 - `/s` - Shutdown
@@ -57,12 +57,12 @@ from omega_windows_power import get_power_manager
 
 pm = get_power_manager()
 pm.shutdown(force=True)  # Immediate shutdown (5 seconds max)
-```
+```text
 
 ### Update Shortcut Icon
 ```bash
 python CREATE_DESKTOP_SHORTCUT.py
-```
+```text
 This will update the desktop shortcut with the Omega logo icon.
 
 ---

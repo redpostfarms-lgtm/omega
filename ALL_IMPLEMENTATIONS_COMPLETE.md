@@ -91,13 +91,13 @@ pip install -r requirements.txt
 
 # Install development dependencies (optional)
 pip install -r requirements-dev.txt
-```
+```text
 
 Or use the batch scripts:
 ```batch
 INSTALL_DEPENDENCIES.bat
 INSTALL_DEV_DEPENDENCIES.bat
-```
+```text
 
 ---
 

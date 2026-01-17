@@ -35,7 +35,7 @@ const response = openai.responses.create({
 });
 
 response.then((result) => console.log(result.output_text));
-```
+```text
 
 ### Corrected Code ✅
 
@@ -54,7 +54,7 @@ const response = await openai.chat.completions.create({
 
 const outputText = response.choices[0].message.content;
 console.log(outputText);
-```
+```text
 
 ---
 
@@ -65,12 +65,12 @@ console.log(outputText);
 **Before:**
 ```javascript
 openai.responses.create()
-```
+```text
 
 **After:**
 ```javascript
 openai.chat.completions.create()
-```
+```text
 
 **Reason:** The `/v1/responses` endpoint doesn't exist in the standard OpenAI API. The correct endpoint is `/v1/chat/completions`, which is accessed via `openai.chat.completions.create()`.
 
@@ -79,12 +79,12 @@ openai.chat.completions.create()
 **Before:**
 ```javascript
 model: "gpt-5-nano"
-```
+```text
 
 **After:**
 ```javascript
 model: "gpt-4"
-```
+```text
 
 **Reason:** `gpt-5-nano` doesn't exist yet. Use `gpt-4`, `gpt-4-turbo`, or `gpt-3.5-turbo`.
 
@@ -94,7 +94,7 @@ model: "gpt-4"
 ```javascript
 input: "write a haiku about ai",
 store: true
-```
+```text
 
 **After:**
 ```javascript
@@ -104,7 +104,7 @@ messages: [
     content: "write a haiku about ai"
   }
 ]
-```
+```text
 
 **Reason:** The standard OpenAI API uses a `messages` array with `role` and `content` fields. The `input` and `store` parameters don't exist in the standard API.
 
@@ -113,12 +113,12 @@ messages: [
 **Before:**
 ```javascript
 result.output_text
-```
+```text
 
 **After:**
 ```javascript
 response.choices[0].message.content
-```
+```text
 
 **Reason:** The standard OpenAI API response format is:
 ```javascript
@@ -132,21 +132,21 @@ response.choices[0].message.content
     }
   ]
 }
-```
+```text
 
 ### 5. Async/Await ✅
 
 **Before:**
 ```javascript
 response.then((result) => console.log(result.output_text));
-```
+```text
 
 **After:**
 ```javascript
 const response = await openai.chat.completions.create({...});
 const outputText = response.choices[0].message.content;
 console.log(outputText);
-```
+```text
 
 **Reason:** Using `await` makes the code cleaner and easier to read. The promise is automatically resolved.
 
@@ -177,31 +177,31 @@ console.log(outputText);
 
 ```bash
 node openai_quick_test.js
-```
+```text
 
 ### Set API Key (Environment Variable)
 
 ```powershell
 # Windows PowerShell
 $env:OPENAI_API_KEY = "sk-proj-..."
-```
+```text
 
 ```bash
 # Linux/Mac
 export OPENAI_API_KEY=sk-proj-...
-```
+```text
 
 ### Or Store Securely (Python)
 
 ```bash
 python STORE_API_KEY.py
-```
+```text
 
 Then use the Node.js bridge:
 ```javascript
 const { getOpenAIAPIKey } = require('./omega_api_keys_node');
 const apiKey = getOpenAIAPIKey();
-```
+```text
 
 ---
 
@@ -219,7 +219,7 @@ const response = await openai.chat.completions.create({
     max_tokens: 100,
     temperature: 0.7
 });
-```
+```text
 
 ### Response
 
@@ -245,14 +245,14 @@ const response = await openai.chat.completions.create({
         total_tokens: 27
     }
 }
-```
+```text
 
 ### Access Response Content
 
 ```javascript
 const outputText = response.choices[0].message.content;
 console.log(outputText);
-```
+```text
 
 ---
 

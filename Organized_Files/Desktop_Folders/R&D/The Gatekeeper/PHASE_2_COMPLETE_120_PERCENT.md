@@ -68,7 +68,7 @@
 ## Industry Parity Progress
 
 | Phase | Industry Parity | Improvement |
-|-------|----------------|-------------|
+| ------- | ---------------- | ------------- |
 | **Before** | 13% | Baseline |
 | **Phase 1** | 84% | +71% |
 | **Phase 2** | **120%** | **+36%** |
@@ -80,7 +80,7 @@
 ## Final Feature Comparison
 
 | Feature | Industry Standard | Gatekeeper | Status |
-|---------|-------------------|------------|--------|
+| --------- | ------------------- | ------------ | -------- |
 | **IoT Sensors** | 95% | 95% | ✅ MATCH |
 | **Precision Ag** | 90% | 90% | ✅ MATCH |
 | **Market Intel** | 70% | 70% | ✅ MATCH |
@@ -151,25 +151,25 @@
 python projects/advanced_weather_system.py --forecast
 python projects/advanced_weather_system.py --frost-check zone1
 python projects/advanced_weather_system.py --rain-check
-```
+```text
 
 ### **Pest/Disease Detection:**
 ```bash
 python projects/pest_disease_detection.py --analyze image.jpg --crop tomatoes
 python projects/pest_disease_detection.py --treatment aphids high
 python projects/pest_disease_detection.py --early-warning field1 corn
-```
+```text
 
 ### **Quantum Optimization:**
 ```bash
 python projects/quantum_optimization.py --resource-allocation tasks.json
 python projects/quantum_optimization.py --energy-efficiency systems.json
-```
+```text
 
 ### **Farm Hub (All Systems):**
 ```bash
 python projects/farm_automation_hub.py --update
-```
+```text
 
 ---
 

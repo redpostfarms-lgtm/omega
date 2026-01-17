@@ -128,7 +128,7 @@ outputs = model.generate(
 )
 
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
-```
+```text
 
 **Note:** Hugging Face's `force_words_ids` uses a simplified grid-like mechanism internally.
 
@@ -146,7 +146,7 @@ prompt = "Write a story about a dragon."
 generator = generate.text(model, prompt, constraints=["ancient cave", "hidden treasure"])
 
 print(generator())
-```
+```text
 
 ### 3. Custom / Research Implementations
 
@@ -322,7 +322,7 @@ for i, (score, seq) in enumerate(results, 1):
     if 11 in seq:
         text = text.split("<EOS>")[0].strip()
     print(f"Result {i} (score: {score:.4f}):\n{text}\n{'-'*70}")
-```
+```text
 
 **Key Features:**
 - ✅ Uses **bitmask for constraint states** (efficient for small number of constraints)
@@ -337,7 +337,7 @@ for i, (score, seq) in enumerate(results, 1):
 - ⚠️ Mock logits — replace `mock_next_logits` with real model forward pass
 
 **Typical Output:**
-```
+```text
 Running Grid Beam Search — must include: 'cat', 'sat', 'mat'
 
 Result 1 (score: -0.9123):
@@ -351,7 +351,7 @@ the cat is very cute and sat on mat
 Result 3 (score: -1.1892):
 the very happy cat sat on mat
 ----------------------------------------------------------------------
-```
+```text
 
 **Note:** This is a pedagogical but functional from-scratch implementation — real libraries (Outlines, Guidance, custom constrained decoding forks) are more optimized and support more complex constraints (disjunctions, regex, grammars).
 
@@ -390,7 +390,7 @@ the very happy cat sat on mat
 ### Decision Framework:
 
 | Need | Use Grid Beam Search? |
-|------|----------------------|
+| ------ | ---------------------- |
 | **Must include specific words/phrases** | ✅ Yes |
 | **Order doesn't matter** | ✅ Yes |
 | **Need high quality** | ✅ Yes |
@@ -428,7 +428,7 @@ the very happy cat sat on mat
 ### Grid Beam Search vs Standard Constrained Decoding:
 
 | Aspect | Grid Beam Search | Standard Constrained |
-|--------|------------------|---------------------|
+| -------- | ------------------ | --------------------- |
 | **Constraint Flexibility** | High (order-agnostic) | Low (position-specific) |
 | **Quality** | Very high | High |
 | **Guaranteed Inclusion** | Yes | Yes |
@@ -439,7 +439,7 @@ the very happy cat sat on mat
 ### Grid Beam Search vs Unconstrained Beam Search:
 
 | Aspect | Grid Beam Search | Unconstrained Beam |
-|--------|------------------|-------------------|
+| -------- | ------------------ | ------------------- |
 | **Constraints** | Required | None |
 | **Quality** | High (constrained) | Very high |
 | **Guaranteed Output** | Yes (if possible) | No |
@@ -461,7 +461,7 @@ the very happy cat sat on mat
     "max_new_tokens": 100-200,                  # Maximum length
     "repetition_penalty": 1.0-1.2,             # Reduces repetition
 }
-```
+```text
 
 ### Outlines/Guidance:
 
@@ -472,7 +472,7 @@ the very happy cat sat on mat
     "temperature": 0.0-0.7,                      # 0.0 = deterministic
     "top_p": 0.9-0.95,                          # Nucleus sampling
 }
-```
+```text
 
 ---
 
@@ -514,7 +514,7 @@ the very happy cat sat on mat
 
 force_words = ["eco-friendly", "durable"]
 # Use diverse beam search + grid beam search
-```
+```text
 
 ### Example 2: Creative Writing
 
@@ -524,7 +524,7 @@ force_words = ["eco-friendly", "durable"]
 
 force_words = ["ancient cave", "hidden treasure", "magical portal"]
 # Use grid beam search with diversity
-```
+```text
 
 ### Example 3: Code Generation
 
@@ -534,7 +534,7 @@ force_words = ["ancient cave", "hidden treasure", "magical portal"]
 
 constraints = ["def calculate", "api.request", "return result"]
 # Use constrained decoding with grid beam search
-```
+```text
 
 ---
 

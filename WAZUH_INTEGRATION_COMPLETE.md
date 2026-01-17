@@ -52,7 +52,7 @@ threats = integration.get_recent_threats(min_level=7, hours=1)
 
 # Get status report
 status = integration.get_status_report()
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ Wazuh integration is disabled by default (requires Wazuh server). To enable:
     "verify_ssl": false
   }
 }
-```
+```text
 
 ---
 
@@ -152,7 +152,7 @@ export WAZUH_PROTOCOL=https
 export WAZUH_USERNAME=wazuh-wui
 export WAZUH_PASSWORD=your-password
 export WAZUH_VERIFY_SSL=false
-```
+```text
 
 ### Config File
 Create or update `gatekeeper_integration_config.json`:
@@ -168,7 +168,7 @@ Create or update `gatekeeper_integration_config.json`:
     "verify_ssl": false
   }
 }
-```
+```text
 
 ---
 
@@ -189,7 +189,7 @@ if client and client.test_connection():
     print("✓ Wazuh connection successful")
 else:
     print("✗ Wazuh connection failed")
-```
+```text
 
 ### Test Integration Module
 ```python
@@ -203,7 +203,7 @@ print(status)
 if integration.wazuh_integration:
     threats = integration.get_wazuh_threats(min_level=7, hours=1)
     print(f"Found {threats['count']} threats")
-```
+```text
 
 ---
 
@@ -220,7 +220,7 @@ for threat in threats['threats']:
     if roe.evaluate_threat(threat):
         # ROE met - authorize counterstrike
         authorize_counterstrike(threat)
-```
+```text
 
 ---
 

@@ -32,7 +32,7 @@
 ### For Quick Reference (2-5 minutes)
 
 | File | Purpose | Read Time |
-|------|---------|-----------|
+| ------ | --------- | ----------- |
 | `INSTALLATION_QUICK_START.txt` | Quick installation overview with links | 2 min |
 | `COMPLETION_REPORT.md` | What's done and what's left | 5 min |
 | `ALL_COMMITMENTS_COMPLETED.md` | All requests fulfilled summary | 5 min |
@@ -41,7 +41,7 @@
 ### For Detailed Instructions (15-30 minutes)
 
 | File | Purpose | Read Time |
-|------|---------|-----------|
+| ------ | --------- | ----------- |
 | `COMPLETE_INSTALLATION_INSTRUCTIONS.md` | Step-by-step installation guide | 30 min |
 | `INSTALLATION_SEQUENCE.py` | Python script with procedures | 10 min |
 | `OMEGA_FINAL_SETUP.py` | Final setup and verification | 5 min |
@@ -49,7 +49,7 @@
 ### For Understanding the Issues (10-20 minutes)
 
 | File | Purpose | Read Time |
-|------|---------|-----------|
+| ------ | --------- | ----------- |
 | `SYSTEM_DIAGNOSTICS_COMPLETE_SUMMARY.md` | What was analyzed | 10 min |
 | `HARDWARE_ISSUES_DIAGNOSIS_AND_FIXES.md` | Why these issues exist | 15 min |
 | `DIRECT_ANSWERS_TO_YOUR_QUESTIONS.md` | Answers in Q&A format | 10 min |
@@ -57,7 +57,7 @@
 ### For Technical Details (20-30 minutes)
 
 | File | Purpose | Read Time |
-|------|---------|-----------|
+| ------ | --------- | ----------- |
 | `GPU_HARDWARE_SPECIFICATION.md` | GPU documentation | 15 min |
 | `AGENT_SYSTEM_README.md` | System architecture | 20 min |
 | `AUDIO_TROUBLESHOOT.md` | Audio system details | 10 min |
@@ -65,7 +65,7 @@
 ### For Verification (5-15 minutes)
 
 | File | Purpose | Run Time |
-|------|---------|----------|
+| ------ | --------- | ---------- |
 | `FINAL_INSTALLATION_CHECK.py` | Complete system verification | 5 min |
 | `VERIFY_INSTALLATIONS.py` | Package verification | 2 min |
 | `OMEGA_FINAL_SETUP.py` | Setup verification | 3 min |
@@ -143,15 +143,15 @@
 
 ### Fast (15 minutes - RGB + Audio)
 
-```
+```text
 1. Download OpenRGB → Extract → Run OpenRGB.exe (5 min)
 2. Download FFmpeg → Extract to C:\ffmpeg → Add to PATH (10 min)
 3. Done! RGB and Audio systems working
-```
+```text
 
 ### Full (90 minutes - All 3 systems)
 
-```
+```text
 1. Do OpenRGB (5 min)
 2. Do FFmpeg (10 min)
 3. Check: nvidia-smi (1 min)
@@ -159,7 +159,7 @@
 5. Restart (15 min)
 6. Reinstall PyTorch (5 min)
 7. Verify all (5 min)
-```
+```text
 
 ---
 
@@ -178,7 +178,7 @@
 ```bash
 python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller; print(get_advanced_rgb_controller().get_status()['current_method'])"
 # Should show: 'OpenRGB' (not 'Simulated')
-```
+```text
 
 ### FFmpeg Installation (10 minutes)
 
@@ -200,7 +200,7 @@ python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller
 ```bash
 ffmpeg -version
 # Should show FFmpeg version info
-```
+```text
 
 ### CUDA Installation (45 minutes - OPTIONAL)
 
@@ -226,7 +226,7 @@ ffmpeg -version
 ```bash
 python -c "import torch; print('CUDA Available:', torch.cuda.is_available())"
 # Should show: CUDA Available: True
-```
+```text
 
 ---
 
@@ -282,7 +282,7 @@ After each installation, verify it worked:
 
 ```bash
 python FINAL_INSTALLATION_CHECK.py
-```
+```text
 
 ---
 
@@ -375,7 +375,7 @@ python FINAL_INSTALLATION_CHECK.py
 ## ⏱️ TIMELINE TO COMPLETION
 
 | Activity | Time | Status |
-|----------|------|--------|
+| ---------- | ------ | -------- |
 | Diagnosis (DONE) | 30 min | ✅ Complete |
 | Documentation (DONE) | 60 min | ✅ Complete |
 | Python setup (DONE) | 15 min | ✅ Complete |

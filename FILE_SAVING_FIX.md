@@ -32,7 +32,7 @@ temp_file = self.log_file.with_suffix('.tmp')
 with open(temp_file, 'w', encoding='utf-8') as f:
     f.write('\n'.join(self.report))
 temp_file.replace(self.log_file)  # Atomic rename
-```
+```text
 
 **After:**
 ```python
@@ -40,7 +40,7 @@ self.log_file.parent.mkdir(parents=True, exist_ok=True)
 with open(self.log_file, 'w', encoding='utf-8') as f:
     f.write('\n'.join(self.report))
     f.flush()  # Ensure data is written
-```
+```text
 
 ---
 

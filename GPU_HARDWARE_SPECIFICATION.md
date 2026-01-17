@@ -44,20 +44,20 @@ The system uses PyTorch to detect CUDA availability:
 import torch
 CUDA_AVAILABLE = torch.cuda.is_available()  # Returns: False
 TORCH_AVAILABLE = True  # PyTorch is installed
-```
+```text
 
 **Current Status:**
 
-```
+```text
 CUDA_AVAILABLE = False
 TORCH_AVAILABLE = True
 GPU_MODE = CPU_ONLY
-```
+```text
 
 ### What This Means
 
 | Component | Status | Interpretation |
-|-----------|--------|-----------------|
+| ----------- | -------- | ----------------- |
 | PyTorch | ✅ Installed | System can use GPU if available |
 | CUDA Support Code | ✅ Present | GPU acceleration paths defined |
 | NVIDIA GPU Hardware | ⚠️ Unknown | Needs verification |
@@ -96,14 +96,14 @@ GPU_MODE = CPU_ONLY
 
 ### Installation Priority
 
-```
+```text
 Order  │  Component                  │ Command
 ────────────────────────────────────────────────────────────────
 1.     │ NVIDIA GPU Drivers          │ nvidia.com manual install
 2.     │ NVIDIA CUDA Toolkit         │ nvidia.com CUDA download
 3.     │ PyTorch with CUDA Support   │ pip install torch --cu118
 4.     │ cuDNN (optional but rec.)   │ nvidia.com cuDNN download
-```
+```text
 
 ---
 
@@ -115,7 +115,7 @@ Order  │  Component                  │ Command
 
 **Main Components:**
 
-```
+```text
 GPULoadBalancer (Main Orchestrator)
 ├── System Statistics
 │   ├── CPU Monitoring (all cores, %)
@@ -139,7 +139,7 @@ GPULoadBalancer (Main Orchestrator)
     ├── Decision history (last 100 decisions)
     ├── Performance metrics tracking
     └── Configuration persistence
-```
+```text
 
 ### Load Balancing Thresholds
 
@@ -149,17 +149,17 @@ The system automatically decides between CPU and GPU based on:
 CPU Threshold:  80%  → Use GPU if CPU > 80%
 RAM Threshold:  75%  → Use GPU if RAM > 75%
 GPU Threshold:  85%  → Offload if GPU > 85%
-```
+```text
 
 ### GPU Memory Requirements
 
-```
+```text
 GPU Memory Allocation:
 ├── Model Weight Storage:    Variable (depends on model size)
 ├── Activation Memory:       Variable (depends on batch size)
 ├── Cache/Buffers:          Variable
 └── Recommended Minimum:     2GB free (for small operations)
-```
+```text
 
 ---
 
@@ -196,7 +196,7 @@ Based on the GPU load balancer implementation, the system can:
 ### System Capabilities When GPU Active
 
 | Operation | CPU Only | GPU Enabled | Speedup |
-|-----------|----------|-------------|---------|
+| ----------- | ---------- | ------------- | --------- |
 | TTS Audio Generation | ~2-5 sec | ~0.5-1 sec | 4-10x |
 | RGB LED Processing | ~100ms | ~10-20ms | 5-10x |
 | Audio Playback | ~Real-time | ~Real-time | 1x |
@@ -217,7 +217,7 @@ try:
 except ImportError:
     TORCH_AVAILABLE = False
     CUDA_AVAILABLE = False
-```
+```text
 
 ### GPU Load Balancer Initialization
 
@@ -240,7 +240,7 @@ recommendations = balancer.get_recommendations()
 
 # Start monitoring
 balancer.start_monitoring(interval=5.0)
-```
+```text
 
 ### GPU Task Execution Pattern
 
@@ -255,7 +255,7 @@ else:
     # Run on CPU
     result = torch.tensor(data, device='cpu')
     # ... CPU operations ...
-```
+```text
 
 ---
 
@@ -304,13 +304,13 @@ devmgmt.msc → Display adapters → Look for NVIDIA
 
 # Method 2: Command line
 nvidia-smi  → If installed, shows GPU info
-```
+```text
 
 **If you see this:**
 
-```
+```text
 nvidia-smi is not recognized as an internal or external command
-```
+```text
 
 → **NVIDIA drivers NOT installed**
 
@@ -325,13 +325,13 @@ nvcc --version
 # Expected output:
 # nvcc: NVIDIA (R) Cuda compiler driver
 # Cuda compilation tools, release 11.8
-```
+```text
 
 **If you see this:**
 
-```
+```text
 nvcc is not recognized...
-```
+```text
 
 → **CUDA Toolkit NOT installed**
 
@@ -351,7 +351,7 @@ if torch.cuda.is_available():
     print(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
 else:
     print("CUDA NOT available - Running on CPU only")
-```
+```text
 
 ---
 
@@ -378,14 +378,14 @@ else:
 
 ```bash
 pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-```
+```text
 
 **4. Verify Installation**
 
 ```python
 import torch
 print(torch.cuda.is_available())  # Should print: True
-```
+```text
 
 #### Option B: Using Conda (If using Anaconda)
 
@@ -401,7 +401,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvi
 
 # Verify
 python -c "import torch; print(torch.cuda.is_available())"
-```
+```text
 
 ---
 
@@ -412,7 +412,7 @@ python -c "import torch; print(torch.cuda.is_available())"
 **Possible Causes & Fixes:**
 
 | Cause | Check | Fix |
-|-------|-------|-----|
+| ------- | ------- | ----- |
 | No NVIDIA GPU | Run `nvidia-smi` | Install NVIDIA GPU hardware |
 | Drivers not installed | Check Device Manager | Install NVIDIA drivers from nvidia.com |
 | CUDA not installed | Run `nvcc --version` | Install CUDA Toolkit |
@@ -432,7 +432,7 @@ print(f"GPU Memory: {stats['gpu']}")
 
 # System auto-offloads if GPU > 85% full
 # If issue persists, reduce task size or offload to CPU
-```
+```text
 
 ### Problem: GPU Very Slow
 
@@ -450,7 +450,7 @@ print(f"GPU Memory: {stats['gpu']}")
 if balancer.should_use_gpu():
     # Manually override for debugging
     device = 'cpu'  # Use CPU instead
-```
+```text
 
 ---
 
@@ -477,11 +477,11 @@ balancer.save_metrics(Path("gpu_metrics.json"))
 
 # Stop monitoring
 balancer.stop_monitoring()
-```
+```text
 
 ### Interpreting GPU Load Balancer Output
 
-```
+```text
 Status: balanced
 ├── CPU: 45.2% (threshold: 80%)
 ├── RAM: 62.1% (threshold: 75%)
@@ -490,7 +490,7 @@ Status: balanced
 
 Recommendations: 1
 ├── [info] GPU underutilized. Consider offloading more tasks.
-```
+```text
 
 **This means:** System is balanced, GPU has capacity, but no tasks are pressuring the CPU so GPU isn't needed.
 

@@ -44,7 +44,7 @@ stonewall\install.bat
 # Or manually
 python -m pip install cryptography requests
 python -m stonewall.setup
-```
+```text
 
 ### Start VPN
 ```bash
@@ -59,7 +59,7 @@ python -m stonewall.stonewall_core --status
 
 # Stop
 python -m stonewall.stonewall_core --stop
-```
+```text
 
 ---
 
@@ -73,7 +73,7 @@ from stonewall.agent_protection import ProtectedScraper
 with ProtectedScraper() as scraper:
     response = scraper.fetch("https://example.com")
     data = scraper.post("https://api.example.com", json={"key": "value"})
-```
+```text
 
 ### Option 2: Protect Existing Agent
 ```python
@@ -85,7 +85,7 @@ protect_agent_requests(agent)
 
 # All agent.fetch() calls now protected
 response = agent.fetch("https://example.com")
-```
+```text
 
 ### Option 3: Automatic (Already Integrated)
 ```python
@@ -98,7 +98,7 @@ agent = Agent("scrape data")
 if hasattr(agent, '_protection') and agent._protection:
     # Protection is active
     pass
-```
+```text
 
 ### Option 4: Enhanced Agent
 ```python
@@ -110,13 +110,13 @@ agent = EnhancedAgent("web scraping")
 with ProtectedScraper() as scraper:
     # Use agent's tool with protection
     result = agent.use_tool("search_web", "query")
-```
+```text
 
 ---
 
 ## Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    Agent System                         │
 │  (Code Reviewer, Organizer, Dashboard, etc.)           │
@@ -155,7 +155,7 @@ with ProtectedScraper() as scraper:
                           │   Exit Node   │
                           │  (Randomized) │
                           └───────────────┘
-```
+```text
 
 ---
 
@@ -191,7 +191,7 @@ with ProtectedScraper() as scraper:
 
 ## File Structure
 
-```
+```text
 stonewall/
 ├── __init__.py              # Package exports
 ├── stonewall_core.py        # Core VPN engine (450+ lines)
@@ -200,7 +200,7 @@ stonewall/
 ├── install.sh              # Linux/Mac installer
 ├── install.bat             # Windows installer
 └── README.md               # Documentation
-```
+```text
 
 ---
 
@@ -239,7 +239,7 @@ from stonewall.stonewall_core import StonewallVPN, StonewallConfig
 vpn = StonewallVPN()
 status = vpn.get_status()
 print(f"VPN Status: {status}")
-```
+```text
 
 ---
 

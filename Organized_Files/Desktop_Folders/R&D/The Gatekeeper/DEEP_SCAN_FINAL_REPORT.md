@@ -23,7 +23,7 @@
 ### System Categories Analyzed
 
 | Category | Files | Current % | Target % | Gap | Priority |
-|----------|-------|-----------|----------|-----|----------|
+| ---------- | ------- | ----------- | ---------- | ----- | ---------- |
 | Omega System | 25+ | 85% | 97% | 12% | 🟡 Medium |
 | Voice System | 15+ | 88% | 97% | 9% | 🟢 Low |
 | Agent System | 10+ | 82% | 97% | 15% | 🟡 Medium |
@@ -41,7 +41,7 @@
 ### Our Capabilities vs Industry Leaders
 
 | Capability | Our % | Industry Best | Gap | Status | Action Taken |
-|------------|-------|---------------|-----|--------|--------------|
+| ------------ | ------- | --------------- | ----- | -------- | -------------- |
 | **Multimodal** | 50% | 97% (GPT-4) | 47% | 🔴 CRITICAL | ✅ Base System Created |
 | **Sensors** | 60% | 95% (FarmOS) | 35% | 🔴 CRITICAL | 📋 Upgrade Planned |
 | **Context** | 60% | 100% (Claude) | 40% | 🔴 HIGH | 📋 Upgrade Planned |

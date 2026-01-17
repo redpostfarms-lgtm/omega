@@ -18,18 +18,18 @@
 ## Voice Commands
 
 ### Search Commands
-```
+```text
 "Hey, Gatekeeper, search quantum-safe 18650 BMS firmware"
 "Hey, Gatekeeper, look up solar panel efficiency"
 "Hey, Gatekeeper, find USDA grant applications"
 "Hey, Gatekeeper, research battery degradation models"
-```
+```text
 
 ### Learning Commands
-```
+```text
 "Hey, Gatekeeper, go to school on off-grid farming"
 "Hey, Gatekeeper, go to college on quantum encryption"
-```
+```text
 
 ## What Gets Scraped
 
@@ -118,12 +118,12 @@
 ## Example Session
 
 ### Input:
-```
+```text
 "Hey, Gatekeeper, search quantum-safe 18650 BMS firmware"
-```
+```text
 
 ### Output:
-```
+```text
 The doors of knowledge opens. Worldwide deep search launched.
 
 ============================================================
@@ -153,28 +153,28 @@ Worldwide deep search complete. 7,314 new facts absorbed.
 ============================================================
 
 Worldwide deep search complete. 7,314 new facts absorbed.
-```
+```text
 
 ## File Locations
 
 ### Scraped Data
-```
+```text
 D:\RPF_BRAIN\Archived\scraped_data\
 ├── [timestamp]_[topic].json
 └── ...
-```
+```text
 
 ### Brain Integration
-```
+```text
 D:\RPF_BRAIN\Archived\gatekeeper_brain.json
 └── scraped_knowledge: [array of all scraped items]
-```
+```text
 
 ### Hive Integration
-```
+```text
 D:\RPF_BRAIN\The Gatekeeper\hive_auto\memory.json
 └── knowledge: [array of all scraped items]
-```
+```text
 
 ## Configuration
 

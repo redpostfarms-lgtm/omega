@@ -187,7 +187,7 @@
 ## 📊 CURRENT COMPLETION STATUS
 
 | Item | Status | Action |
-|------|--------|--------|
+| ------ | -------- | -------- |
 | System Analysis | ✅ 100% | None |
 | Documentation | ✅ 100% | None |
 | Python Packages | ✅ 100% | None |
@@ -226,7 +226,7 @@
 ## 📖 WHERE TO FIND WHAT YOU NEED
 
 | Need | File |
-|------|------|
+| ------ | ------ |
 | Quick start (2 min) | START_HERE.md or INSTALLATION_QUICK_START.txt |
 | Visual summary (5 min) | SESSION_SUMMARY.txt |
 | Detailed guide (30 min) | COMPLETE_INSTALLATION_INSTRUCTIONS.md |
@@ -256,7 +256,7 @@ Before you start downloads:
 ## ⏱️ TIME ESTIMATES
 
 | Task | Time | Required |
-|------|------|----------|
+| ------ | ------ | ---------- |
 | Read START_HERE.md | 5 min | Yes |
 | Download OpenRGB | 5 min | Yes |
 | Download FFmpeg | 10 min | Yes |

@@ -51,7 +51,7 @@ status = handler.health_monitor.check_component_health(
 
 # Get comprehensive health report
 report = handler.health_monitor.get_health_report()
-```
+```text
 
 **Health Status Meanings:**
 - **HEALTHY**: Component fully operational, all functions working
@@ -85,7 +85,7 @@ handler = get_error_handler()
 report = handler.health_monitor.get_health_report()
 print(f"Overall Status: {report['status']}")
 print(f"Healthy Components: {report['healthy_count']}/{report['total_components']}")
-```
+```text
 
 **Step 2: Review Error Logs**
 ```python
@@ -94,7 +94,7 @@ errors = handler.error_history
 print(f"Total Errors: {len(errors)}")
 for error in errors[-10:]:  # Last 10 errors
     print(f"{error['timestamp']}: {error['severity']} - {error['message']}")
-```
+```text
 
 **Step 3: Check Integration Status**
 ```python
@@ -104,7 +104,7 @@ if integration_report.get('total_integrations_with_errors', 0) > 0:
     print("Integration errors detected:")
     for integration, details in integration_report['integration_errors'].items():
         print(f"  {integration}: {details['error_count']} errors")
-```
+```text
 
 **Step 4: Validate API Keys**
 ```python
@@ -116,7 +116,7 @@ result = handler.validate_integration_setup(
 )
 if not result['ready']:
     print(f"Integration not ready: {result}")
-```
+```text
 
 ### Common Issues & Solutions
 
@@ -235,7 +235,7 @@ process = psutil.Process()
 memory_info = process.memory_info()
 print(f"RSS: {memory_info.rss / 1024 / 1024:.1f} MB")
 print(f"VMS: {memory_info.vms / 1024 / 1024:.1f} MB")
-```
+```text
 
 **Memory Optimization Techniques:**
 - Use generators instead of lists for large data
@@ -297,7 +297,7 @@ error_info = handler.handle_integration_error(
 # Recovery message contains strategy
 print(error_info.get('recovery_message'))
 # Example: "Rate limited. Implement exponential backoff: wait 2^attempt seconds"
-```
+```text
 
 **Recovery Strategies by Error Type:**
 
@@ -323,7 +323,7 @@ integration_report = handler.get_integration_error_report()
 # - Context information
 # - Severity levels
 # - Recovery strategies
-```
+```text
 
 ---
 
@@ -367,7 +367,7 @@ for integration in integrations:
     
     if not result['ready']:
         print(f"Warning: {integration} not ready")
-```
+```text
 
 **Integration Priority Handling:**
 - Prioritize critical integrations for retry
@@ -421,7 +421,7 @@ for integration in integrations:
     }
   }
 }
-```
+```text
 
 **Configuration Best Practices:**
 - Keep configuration separate from code
@@ -498,7 +498,7 @@ metrics = {
         'database': 'HEALTHY'
     }
 }
-```
+```text
 
 ### Performance Reporting
 
@@ -515,7 +515,7 @@ error_rate = avg_errors_per_hour / total_requests_per_hour
 # Report
 print(f"Error Rate: {error_rate:.2%}")
 print(f"Health Status: {health_report['status']}")
-```
+```text
 
 ---
 
@@ -543,7 +543,7 @@ can_connect = handler.api_key_validator.test_api_connection(
     'https://api.huggingface.co/models',
     {'Authorization': f'Bearer {key}'}
 )
-```
+```text
 
 ### Access Control
 
@@ -607,7 +607,7 @@ except Exception as e:
         e,
         context
     )
-```
+```text
 
 ### Retry Strategy
 
@@ -623,7 +623,7 @@ def retry_with_backoff(func, max_attempts=3):
                 time.sleep(wait_time)
             else:
                 raise
-```
+```text
 
 **Retry Conditions:**
 - Retry on: Connection timeout, rate limit, service unavailable
@@ -659,7 +659,7 @@ except Exception as e:
             context
         )
         raise
-```
+```text
 
 ---
 
@@ -700,7 +700,7 @@ try:
 finally:
     # Always return connection to pool
     pool.return_connection(connection)
-```
+```text
 
 ### Transaction Management
 

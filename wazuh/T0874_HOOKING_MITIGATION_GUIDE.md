@@ -88,7 +88,7 @@ Hooking in ICS involves intercepting system calls or API functions to alter beha
   <description>Critical DLL/EXE integrity violation - possible IAT hooking (T0874)</description>
   <mitre><id>T0874</id></mitre>
 </rule>
-```
+```text
 
 ### M0944: Restrict Library Loading
 
@@ -121,7 +121,7 @@ Hooking in ICS involves intercepting system calls or API functions to alter beha
   <description>Suspicious module load in ICS process - possible hooking payload (T0874)</description>
   <mitre><id>T0874</id></mitre>
 </rule>
-```
+```text
 
 ---
 
@@ -143,7 +143,7 @@ Hooking in ICS involves intercepting system calls or API functions to alter beha
   <description>Suspicious API call for hook installation - possible Hooking (T0874)</description>
   <mitre><id>T0874</id></mitre>
 </rule>
-```
+```text
 
 ### 2. Memory Forensics and Integrity Checks
 
@@ -184,7 +184,7 @@ Hooking in ICS involves intercepting system calls or API functions to alter beha
   <description>Multiple anomalous API redirects - possible Hooking (T0874)</description>
   <mitre><id>T0874</id></mitre>
 </rule>
-```
+```text
 
 ### 4. Endpoint Detection and Response (EDR) in OT
 
@@ -334,7 +334,7 @@ sudo /var/ossec/bin/wazuh-logtest
 
 # Sample log for API hook detection:
 # Event: SetWindowsHookEx called by suspicious_process.exe
-```
+```text
 
 ---
 

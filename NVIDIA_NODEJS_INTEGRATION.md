@@ -36,7 +36,7 @@
 
 ```bash
 npm install axios
-```
+```text
 
 ---
 
@@ -76,7 +76,7 @@ nvidia.conversation(messages)
   .catch(error => {
     console.error(error);
   });
-```
+```text
 
 ### Option 2: Using the Example Code (Direct)
 
@@ -86,7 +86,7 @@ process.env.NVIDIA_API_KEY = "your_api_key_here";
 
 // Run the example
 node omega_nvidia_integration_example.js
-```
+```text
 
 ### Option 3: Custom Implementation
 
@@ -120,7 +120,7 @@ axios.post(invokeUrl, payload, { headers })
   .catch(error => {
     console.error(error);
   });
-```
+```text
 
 ---
 
@@ -131,17 +131,17 @@ axios.post(invokeUrl, payload, { headers })
 **Linux/Mac:**
 ```bash
 export NVIDIA_API_KEY=your_api_key_here
-```
+```text
 
 **Windows (PowerShell):**
 ```powershell
 $env:NVIDIA_API_KEY="your_api_key_here"
-```
+```text
 
 **Windows (Command Prompt):**
 ```cmd
 set NVIDIA_API_KEY=your_api_key_here
-```
+```text
 
 ---
 
@@ -187,7 +187,7 @@ nvidia.chatCompletion({
   .catch(error => {
     console.error(error);
   });
-```
+```text
 
 ---
 
@@ -209,7 +209,7 @@ nvidia.generateResponse("Hello!")
       console.error('Unexpected error:', error.message);
     }
   });
-```
+```text
 
 ---
 

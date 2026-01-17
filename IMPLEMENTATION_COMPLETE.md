@@ -31,7 +31,7 @@ pytest>=7.4.0
 pytest-asyncio>=0.21.0
 pytest-cov>=4.1.0
 pytest-mock>=3.12.0
-```
+```text
 
 **Status:** ✅ COMPLETE
 
@@ -195,7 +195,7 @@ pip install -r requirements.txt
 
 # Install development dependencies (optional)
 pip install -r requirements-dev.txt
-```
+```text
 
 ---
 
@@ -212,7 +212,7 @@ pip list | grep -E "prometheus-client|structlog|python-dotenv"
 
 # Run tests
 pytest tests/ -v
-```
+```text
 
 ---
 

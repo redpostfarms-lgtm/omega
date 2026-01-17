@@ -97,7 +97,7 @@ CUDA installer window is open but **no "Repair" option** is available.
 ```bash
 nvcc --version
 nvidia-smi
-```
+```text
 
 ---
 

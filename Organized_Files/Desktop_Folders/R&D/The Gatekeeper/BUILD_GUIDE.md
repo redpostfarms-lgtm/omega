@@ -12,24 +12,24 @@
 ```bash
 cd "The Gatekeeper"
 pip install -r requirements.txt
-```
+```text
 
 ### **2. Run Build System**
 ```bash
 python build_system.py
-```
+```text
 
 ### **3. Start Building**
 
 **Voice Command:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe BMS in Rust"
-```
+```text
 
 **Direct Command:**
 ```bash
 python gatekeeper_fusion.py "write a quantum-safe BMS in Rust"
-```
+```text
 
 ---
 
@@ -96,22 +96,22 @@ python gatekeeper_fusion.py "write a quantum-safe BMS in Rust"
 ### **Example 1: Simple Hello World**
 ```bash
 python gatekeeper_fusion.py "write a hello world in Python"
-```
+```text
 
 ### **Example 2: Rust BMS Starter**
 ```bash
 python gatekeeper_fusion.py "create a basic battery management system in Rust with voltage monitoring"
-```
+```text
 
 ### **Example 3: Python Solar Controller**
 ```bash
 python gatekeeper_fusion.py "write a solar panel MPPT controller in Python with PID loop"
-```
+```text
 
 ### **Example 4: Full-Stack Farm OS**
 ```bash
 python gatekeeper_fusion.py "create a full-stack off-grid farm operating system with Rust backend and Python sensors"
-```
+```text
 
 ---
 
@@ -128,9 +128,9 @@ python gatekeeper_fusion.py "create a full-stack off-grid farm operating system 
 ## Output Location
 
 All fusion outputs saved to:
-```
+```text
 D:\RPF_BRAIN\Archived\fusion_outputs\fusion_YYYYMMDD_HHMMSS.md
-```
+```text
 
 ---
 

@@ -64,7 +64,7 @@
 ## Industry Comparison Matrix
 
 | Category | Industry | Gatekeeper | Status |
-|----------|----------|------------|--------|
+| ---------- | ---------- | ------------ | -------- |
 | **Standard Features** | | | |
 | IoT Sensors | 95% | 95% | ✅ MATCH |
 | Precision Ag | 90% | 90% | ✅ MATCH |
@@ -87,7 +87,7 @@
 ## Performance Metrics
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| -------- | -------- | ------- | ------------- |
 | **Industry Parity** | 13% | **120%** | **+107%** |
 | **Feature Coverage** | 4/10 | 10/10 | **+150%** |
 | **System Integration** | 6 | 13 | **+117%** |

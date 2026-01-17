@@ -23,7 +23,7 @@
 ### **Regular Tests: 7/7 Passed**
 
 | System | Status | Features Verified |
-|--------|--------|-------------------|
+| -------- | -------- | ------------------- |
 | Computer Vision | ✅ PASSED | YOLOv10, multi-spectral imaging |
 | Market Intelligence | ✅ PASSED | Real-time APIs, ML predictions, aggregation |
 | Irrigation | ✅ PASSED | Multi-depth moisture, ET, variable rate, flow monitoring |
@@ -35,7 +35,7 @@
 ### **Stress Tests: 2/2 Passed**
 
 | Test | Status | Result |
-|------|--------|--------|
+| ------ | -------- | -------- |
 | Market Intelligence Stress | ✅ PASSED | Code quality: 673 lines, 20 error handlers |
 | Irrigation Stress | ✅ PASSED | All required methods present |
 

@@ -36,7 +36,7 @@ pip install openrgb
 
 # Step 3: Test
 python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller; print(get_advanced_rgb_controller().get_status())"
-```
+```text
 
 If you see `'current_method': 'OpenRGB'` → **✓ FIXED**
 
@@ -55,13 +55,13 @@ cd "h:\The Gatekeeper"
 
 # Install via pip
 pip install openrgb
-```
+```text
 
 **Expected output:**
 
-```
+```text
 Successfully installed openrgb-0.x.x
-```
+```text
 
 #### Step 1b: Download OpenRGB Application
 
@@ -88,7 +88,7 @@ status = rgb.get_status()
 print(f'Method: {status[\"current_method\"]}')
 print(f'Devices: {status[\"available_methods\"]}')
 "
-```
+```text
 
 **Success Indicators:**
 
@@ -122,14 +122,14 @@ winget install ffmpeg
 # Should show:
 # Found FFmpeg [FFmpeg.FFmpeg] version 6.0
 # Successfully installed
-```
+```text
 
 **Option B: Using Chocolatey**
 
 ```bash
 # If you have Chocolatey installed
 choco install ffmpeg
-```
+```text
 
 **Option C: Manual Installation (If above don't work)**
 
@@ -152,7 +152,7 @@ ffmpeg -version
 
 # Should show:
 # ffmpeg version 6.0 Copyright (c) 2000-2023
-```
+```text
 
 If "ffmpeg is not recognized":
 
@@ -168,7 +168,7 @@ pip uninstall torchcodec -y
 
 # Install fresh (without cache)
 pip install torchcodec --no-cache-dir
-```
+```text
 
 #### Step 2d: Test Audio System
 
@@ -190,7 +190,7 @@ model = TTS(model_name='tts_models/en/ljspeech/tacotron2-DDC', gpu=False)
 model.tts_to_file('Hello world, testing audio', 'test.wav')
 print('✓ Audio file created')
 "
-```
+```text
 
 **Success Indicator:** `test.wav` file created in current directory
 
@@ -206,7 +206,7 @@ nvidia-smi
 
 # If shows GPU info: GPU present ✓
 # If "not recognized": GPU not detected or drivers missing
-```
+```text
 
 #### Step 3b: Install NVIDIA GPU Drivers
 
@@ -261,7 +261,7 @@ nvcc --version
 # nvcc: NVIDIA (R) Cuda compiler driver
 # Cuda compilation tools, release 12.1
 # Build cuda_12.1.r12.1/compiler.33018258_0
-```
+```text
 
 #### Step 3e: Reinstall PyTorch with CUDA Support
 
@@ -279,7 +279,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # This will take a few minutes...
-```
+```text
 
 #### Step 3f: Test CUDA Installation
 
@@ -298,17 +298,17 @@ if torch.cuda.is_available():
 else:
     print('✗ GPU NOT working - check steps above')
 "
-```
+```text
 
 **Success Indicator:**
 
-```
+```text
 PyTorch: 2.x.x+cu121
 CUDA Available: True
 GPU: NVIDIA GeForce RTX 3060 (or your GPU)
 Memory: 12.0 GB
 ✓ GPU IS WORKING
-```
+```text
 
 ---
 
@@ -343,7 +343,7 @@ After installing everything:
 ```bash
 # Reinstall in current Python environment
 python -m pip install --force-reinstall openrgb
-```
+```text
 
 ### Problem: "ffmpeg is not recognized"
 
@@ -367,7 +367,7 @@ pip uninstall torch torchvision torchaudio -y
 
 # Install AFTER CUDA installed
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 ### Problem: RGB Still in "Simulated" Mode
 
@@ -394,7 +394,7 @@ torch.cuda.empty_cache()  # Clear GPU memory
 
 # Or run tasks on CPU
 device = 'cpu'  # Use CPU instead of 'cuda'
-```
+```text
 
 ---
 
@@ -402,7 +402,7 @@ device = 'cpu'  # Use CPU instead of 'cuda'
 
 ### After All Fixes Complete
 
-```
+```text
 OMEGA SYSTEM STATUS
 ═══════════════════════════════════════════
 
@@ -425,7 +425,7 @@ OMEGA SYSTEM STATUS
   • Acceleration: Enabled system-wide
 
 ═══════════════════════════════════════════
-```
+```text
 
 ---
 
@@ -436,7 +436,7 @@ Run this diagnostic to see current status:
 ```bash
 cd "h:\The Gatekeeper"
 python QUICK_DIAGNOSTICS.py
-```
+```text
 
 This will show:
 

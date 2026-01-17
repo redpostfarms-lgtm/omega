@@ -62,12 +62,12 @@ The agent system is integrated into `hands_free_omega_optimized.py`:
 
 ```bash
 python omega_agent_council.py
-```
+```text
 
 Or use the batch script:
 ```bash
 WAKE_AGENTS.bat
-```
+```text
 
 ### View Agent Status
 
@@ -76,7 +76,7 @@ from omega_agent_council import agent_council
 
 status = agent_council.get_agent_status()
 print(f"Active agents: {status['active_agents']}/{status['total_agents']}")
-```
+```text
 
 ### Process Learning Tasks
 
@@ -93,7 +93,7 @@ conversation_data = {
 }
 
 insight = await learning_swarm.process_conversation_learning(conversation_data)
-```
+```text
 
 ## Files
 

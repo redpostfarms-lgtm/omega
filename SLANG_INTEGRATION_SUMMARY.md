@@ -119,7 +119,7 @@ is_ok = processor.is_appropriate("bug", FormalityLevel.FORMAL)
 
 # Explain slang
 explanation = processor.explain_slang("bug")
-```
+```text
 
 ### Integration into Omega
 The slang processor can be integrated into Omega's:
@@ -135,7 +135,7 @@ The slang processor can be integrated into Omega's:
 ## Knowledge Coverage
 
 | Domain | Terms | Status |
-|--------|-------|--------|
+| -------- | ------- | -------- |
 | Coding Slang | 100+ | ✅ Complete |
 | Historical Slang | 200+ | ✅ Complete |
 | Language Arts Slang | 300+ | ✅ Complete |

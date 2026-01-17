@@ -55,12 +55,12 @@ diagnostics = bridge.run_diagnostics()
 
 # Save report
 bridge.save_diagnostics('system_report.json')
-```
+```text
 
 **Quick Start**:
 ```bash
 python gatekeeper_omega_bridge.py
-```
+```text
 
 ---
 
@@ -107,12 +107,12 @@ handler.register_recovery_handler(
 # Get error report
 report = handler.get_error_report()
 handler.save_error_report('errors.json')
-```
+```text
 
 **Quick Start**:
 ```bash
 python gatekeeper_error_handler.py
-```
+```text
 
 ---
 
@@ -153,18 +153,18 @@ monitor.export_report('health_report.json')
 # Check individual component
 checker = ComponentHealthChecker()
 gk_status = checker.check_gatekeeper()
-```
+```text
 
 **Quick Start**:
 ```bash
 python gatekeeper_system_health_monitor.py
-```
+```text
 
 ---
 
 ## Integration Flow
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                   GATEKEEPER SYSTEM                     │
 │                                                         │
@@ -195,7 +195,7 @@ python gatekeeper_system_health_monitor.py
 │  │  • Alert generation                            │   │
 │  └─────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
-```
+```text
 
 ---
 
@@ -204,7 +204,7 @@ python gatekeeper_system_health_monitor.py
 ### 1. Install Dependencies
 ```bash
 pip install psutil flask flask-cors
-```
+```text
 
 ### 2. Initialize Bridge
 ```python
@@ -214,13 +214,13 @@ from gatekeeper_system_health_monitor import get_health_monitor
 
 bridge = get_bridge()
 monitor = get_health_monitor()
-```
+```text
 
 ### 3. Check Status
 ```bash
 python gatekeeper_omega_bridge.py
 python gatekeeper_system_health_monitor.py
-```
+```text
 
 ---
 
@@ -236,7 +236,7 @@ diagnostics = bridge.run_diagnostics()
 print(f"Status: {diagnostics['system_health']['status']}")
 print(f"Components: {len(diagnostics['component_details'])}")
 print(f"Errors: {len(diagnostics['system_health'].get('errors', []))}")
-```
+```text
 
 ### Handle Errors with Recovery
 ```python
@@ -273,7 +273,7 @@ except TimeoutError as e:
         severity=ErrorSeverity.WARNING,
         recover=True  # Will use recovery handler
     )
-```
+```text
 
 ### Monitor System Health
 ```python
@@ -293,14 +293,14 @@ if health['overall_status'] == 'CRITICAL':
 
 # Full check
 full_check = perform_full_health_check()
-```
+```text
 
 ---
 
 ## Key Improvements
 
 | Area | Before | After | Impact |
-|------|--------|-------|--------|
+| ------ | -------- | ------- | -------- |
 | **Error Handling** | Scattered try/catch | Centralized handler | Consistent, recoverable |
 | **Logging** | Console only | File + console + rotation | Better debugging |
 | **Health Monitoring** | Manual checks | Continuous monitoring | Proactive alerts |
@@ -359,7 +359,7 @@ check = perform_full_health_check()
 bridge.save_diagnostics()
 print('Reports saved to: system_diagnostics.json, health_report.json')
 "
-```
+```text
 
 ---
 

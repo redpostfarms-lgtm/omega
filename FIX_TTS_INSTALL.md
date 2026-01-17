@@ -17,7 +17,7 @@ TTS installation failed because it requires **Microsoft Visual C++ 14.0 or great
 Sometimes pre-built wheels are available:
 ```cmd
 py -3.11 -m pip install TTS --only-binary :all:
-```
+```text
 
 ### Option 3: Alternative TTS Library
 We could modify Omega to use a different TTS library that doesn't require compilation, but this would require code changes.
@@ -30,7 +30,7 @@ We could modify Omega to use a different TTS library that doesn't require compil
 ## Quick Install Command (After installing C++ Build Tools)
 ```cmd
 py -3.11 -m pip install TTS
-```
+```text
 
 ---
 

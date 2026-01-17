@@ -11,23 +11,23 @@
 ### Crypto Wallets Generated
 
 **Bitcoin Address:**
-```
+```text
 1e2cb99f8e7b393b13aa57c5d11ffa4bf0
-```
+```text
 - For Bitcoin dust/puzzles
 - Private key stored securely in `crypto_wallets.json`
 
 **Ethereum Address:**
-```
+```text
 0x3e0d7d94c094221162aebc11ca8070c50bd06d70
-```
+```text
 - For Ethereum-based opportunities
 - Private key stored securely
 
 **Testnet Address:**
-```
+```text
 0x44faa1a6f6103a82636b7a719a3ca342428d3d6c
-```
+```text
 - For testnet airdrops (Jito, Blast, zkSync, Linea)
 - Testnet tokens (no real value, but safe to claim)
 
@@ -64,7 +64,7 @@
 ## Where Money Goes
 
 | Component | Payment Method | Address/Account |
-|-----------|---------------|-----------------|
+| ----------- | --------------- | ----------------- |
 | Bitcoin Puzzles | Bitcoin Wallet | `1e2cb99f8e7b393b13aa57c5d11ffa4bf0` |
 | Dust Reclamation | Bitcoin Wallet | `1e2cb99f8e7b393b13aa57c5d11ffa4bf0` |
 | Testnet Airdrops | Testnet Address | `0x44faa1a6f6103a82636b7a719a3ca342428d3d6c` |
@@ -97,17 +97,17 @@
 **Run the sweeper:**
 ```bash
 python limbo_sweeper.py
-```
+```text
 
 **Check results:**
 ```bash
 python limbo_sweeper_test_run.py --results
-```
+```text
 
 Or check the file directly:
-```
+```text
 D:\RPF_BRAIN\Omega\tx_dump.json
-```
+```text
 
 ---
 

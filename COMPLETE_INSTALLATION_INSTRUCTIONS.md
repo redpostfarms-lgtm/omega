@@ -104,7 +104,7 @@ winget install ffmpeg
 
 # Using Scoop (if installed):
 scoop install ffmpeg
-```
+```text
 
 ### Result
 
@@ -126,7 +126,7 @@ NVIDIA technology for GPU-accelerated computing (4-10x faster)
 
 ```bash
 nvidia-smi
-```
+```text
 
 - If shows GPU info → You have NVIDIA GPU, continue
 - If "not found" → No NVIDIA GPU, skip this step
@@ -167,7 +167,7 @@ nvidia-smi
 
 ```bash
 python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
-```
+```text
 
 Should print: `CUDA: True`
 
@@ -188,13 +188,13 @@ After completing steps above, run these commands:
 
 ```bash
 python -c "import openrgb_python; print('✓ OpenRGB Python OK')"
-```
+```text
 
 ### Test 2: FFmpeg
 
 ```bash
 ffmpeg -version
-```
+```text
 
 Should show FFmpeg version
 
@@ -203,13 +203,13 @@ Should show FFmpeg version
 ```bash
 python -c "import torchcodec; print('✓ torchcodec OK')"
 python -c "from TTS.api import TTS; print('✓ TTS OK')"
-```
+```text
 
 ### Test 4: RGB Hardware Detection
 
 ```bash
 python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller; status = get_advanced_rgb_controller().get_status(); print(f'RGB Method: {status.get(\"current_method\")}'); print(f'Available: {status.get(\"available_methods\")}')"
-```
+```text
 
 **Success:** Should show `RGB Method: OpenRGB` (not `Simulated`)
 
@@ -217,7 +217,7 @@ python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller
 
 ```bash
 python -c "import torch; print(f'CUDA Available: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"N/A\"}')"
-```
+```text
 
 **Success:** Should show `CUDA Available: True` and your GPU name
 
@@ -226,7 +226,7 @@ python -c "import torch; print(f'CUDA Available: {torch.cuda.is_available()}'); 
 ```bash
 cd "h:\The Gatekeeper"
 python test_rgb_system.py
-```
+```text
 
 Should show: `✓ ALL TESTS PASSED`
 
@@ -278,7 +278,7 @@ Should show: `✓ ALL TESTS PASSED`
 
 Mark these off as you complete them:
 
-```
+```text
 REQUIRED:
 □ Downloaded OpenRGB from https://openrgb.org/download
 □ Extracted OpenRGB ZIP file
@@ -305,7 +305,7 @@ VERIFICATION:
 □ Audio libraries load without error
 □ (If GPU) CUDA shows True
 □ test_rgb_system.py shows ALL TESTS PASSED
-```
+```text
 
 ---
 
@@ -361,7 +361,7 @@ VERIFICATION:
 ```bash
 python QUICK_DIAGNOSTICS.py
 python COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py
-```
+```text
 
 ---
 

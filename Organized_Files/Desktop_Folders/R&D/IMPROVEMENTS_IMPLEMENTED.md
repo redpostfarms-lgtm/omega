@@ -34,7 +34,7 @@ results = memory.search("coding preferences", top_k=5)
 
 # Get context
 context = memory.get_context("what user likes")
-```
+```text
 
 ---
 
@@ -79,7 +79,7 @@ generator.generate_feature(
     "Process data faster",
     ["input", "output"]
 )
-```
+```text
 
 ---
 
@@ -119,7 +119,7 @@ agent1.send_message(
 
 # Broadcast
 agent1.broadcast(MessageType.NOTIFICATION, "Status update")
-```
+```text
 
 ---
 

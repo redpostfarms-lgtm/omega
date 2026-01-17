@@ -56,7 +56,7 @@ python WorldMemory.py query S/4HANA
 python WorldMemory.py query Universal Journal
 python WorldMemory.py query LoBs
 python WorldMemory.py query-all SAP
-```
+```text
 
 ---
 

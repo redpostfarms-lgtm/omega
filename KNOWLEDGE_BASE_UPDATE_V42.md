@@ -81,7 +81,7 @@ These additions complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -98,7 +98,7 @@ LLM Decoding Strategies Knowledge:
                 ├── Comparison Table
                 ├── When to Use Each
                 └── Mathematical Comparison
-```
+```text
 
 ## Status
 

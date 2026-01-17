@@ -248,7 +248,7 @@
 ```bash
 # Run the control panel to see current state
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 ### Step 2: Analyze the UI
 - Observe visual layout

@@ -53,6 +53,6 @@
 Once torchcodec DLL issue is resolved:
 ```batch
 py -3.11 SIMPLE_TEST.py
-```
+```text
 
 Should generate and play "Hello, this is a test. Can you hear me?"

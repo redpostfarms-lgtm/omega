@@ -54,7 +54,7 @@
 
 ```bash
 pip install pyserial
-```
+```text
 
 ---
 
@@ -63,29 +63,29 @@ pip install pyserial
 ### **Basic:**
 ```bash
 python projects/battery_voltage_monitor.py
-```
+```text
 
 ### **Custom Port:**
 ```bash
 python projects/battery_voltage_monitor.py --port COM4
-```
+```text
 
 ### **Custom Interval:**
 ```bash
 python projects/battery_voltage_monitor.py --interval 10.0
-```
+```text
 
 ### **Logging Only (No Display):**
 ```bash
 python projects/battery_voltage_monitor.py --no-display
-```
+```text
 
 ---
 
 ## Output
 
 ### **Real-Time Display:**
-```
+```text
 ============================================================
 BATTERY VOLTAGE MONITOR - REAL-TIME STATUS
 ============================================================
@@ -97,7 +97,7 @@ Cell 02: [OK] 3.820V @ 24.5°C | OK | Health: 68.3% | Good
 Cell 03: [OK] 3.680V @ 25.2°C | OK | Health: 56.7% | Monitor
 Cell 04: [LOW] 2.950V @ 26.0°C | LOW | Health: 0.0% | Critical
 ============================================================
-```
+```text
 
 ### **JSON Logs:**
 ```json
@@ -110,7 +110,7 @@ Cell 04: [LOW] 2.950V @ 26.0°C | LOW | Health: 0.0% | Critical
     "timestamp": "2026-01-03T13:50:00"
   }
 ]
-```
+```text
 
 ---
 

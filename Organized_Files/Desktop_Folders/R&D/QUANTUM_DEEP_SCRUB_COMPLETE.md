@@ -148,7 +148,7 @@
 ## Expected Score Improvements
 
 | Category | Before | After | Target | Status |
-|----------|--------|-------|--------|--------|
+| ---------- | -------- | ------- | -------- | -------- |
 | **Permanent Storage** | 92.9% | 95.0% | 95% | ✅ Achieved |
 | **Agent Systems** | 30.8% | 95.0% | 95% | ✅ Achieved |
 | **Voice Systems** | 60.0% | 95.0% | 95% | ✅ Achieved* |

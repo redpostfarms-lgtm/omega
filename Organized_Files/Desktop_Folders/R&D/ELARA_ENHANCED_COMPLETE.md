@@ -70,7 +70,7 @@ mode_switcher.switch_mode(GameMode.COOP)  # User + AI vs friend
 # AI control
 mode_switcher.ai_step_back()  # AI watches
 mode_switcher.ai_take_turn()  # AI returns
-```
+```text
 
 ---
 
@@ -138,7 +138,7 @@ python elara_main.py "let's play chess"
 python elara_main.py "let's play shogi"
 # Response: "Board up. Ready. Shogi rules loaded. Your color?"
 # Scans rules.txt or web, generates board in 3 seconds
-```
+```text
 
 ### Mode Switching (Mid-Game)
 ```python
@@ -153,7 +153,7 @@ mode_switcher.ai_step_back()  # AI watches, learns
 
 # AI return
 mode_switcher.ai_take_turn()  # "Elara slides in. No drama. No lag."
-```
+```text
 
 ### Teaching Mode
 ```python
@@ -172,20 +172,20 @@ teaching_mode.handle_user_response("why")
 # User says quiet
 teaching_mode.handle_user_response("quiet")
 # Response: "Quiet. I'll watch silently."
-```
+```text
 
 ---
 
 ## File Structure
 
-```
+```text
 elara_voice_command.py       (~150 lines) - Voice command parser
 elara_dynamic_game_loader.py (~400 lines) - Dynamic game loader
 elara_mode_switcher.py       (~200 lines) - Mode switcher
 elara_teaching_mode.py       (~300 lines) - Teaching mode
 elara_game_engine.py         (updated)    - Enhanced engine
 elara_main.py                (updated)    - Enhanced launcher
-```
+```text
 
 ---
 

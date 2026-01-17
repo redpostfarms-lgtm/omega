@@ -89,7 +89,7 @@
 ## Score Breakdown
 
 | Category | Score | Weight | Points |
-|----------|-------|--------|--------|
+| ---------- | ------- | -------- | -------- |
 | Compilation | 100% | 30% | 30.0 |
 | Dependencies | 75% | 20% | 15.0 |
 | File Structure | 95% | 15% | 14.25 |
@@ -106,7 +106,7 @@
 ### Quick Fix (Install Dependencies):
 ```bash
 pip install -r "The Gatekeeper\requirements.txt"
-```
+```text
 
 This will:
 - Install beautifulsoup4 (required)

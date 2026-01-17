@@ -48,7 +48,7 @@
 
 ### User Roles
 | Role | Permissions |
-|------|-------------|
+| ------ | ------------- |
 | **admin** | Full access (fan, RGB, view everything, user management) |
 | **operator** | Can control hardware (fan/RGB), view stats |
 | **viewer** | Read-only (stats, notifications, no controls) |
@@ -60,12 +60,12 @@
 ### Setup Admin User
 ```bash
 python SETUP_ADMIN_USER.py
-```
+```text
 
 ### Initialize User Storage
 ```bash
 python omega_user_storage.py
-```
+```text
 
 ### Use in Code
 ```python
@@ -83,18 +83,18 @@ admin = storage.get_user('admin')
 # Verify password
 if storage.verify_password('admin', 'admin2026'):
     print("Password correct!")
-```
+```text
 
 ---
 
 ## File Structure
 
-```
+```text
 omega_user_storage.py          # Persistent user storage system
 omega_users.json               # User data file (created on first run)
 SETUP_ADMIN_USER.py            # Admin user setup script
 omega_control_panel_web.py     # Updated authenticator integration
-```
+```text
 
 ---
 

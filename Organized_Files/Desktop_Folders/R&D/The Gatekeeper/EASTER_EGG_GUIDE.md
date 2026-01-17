@@ -48,7 +48,7 @@ This document describes the hidden Easter egg signatures that prove ownership of
 ### Quick Verification
 ```bash
 python "The Gatekeeper\verify_ownership.py"
-```
+```text
 
 ### Manual Verification
 1. Check for `.signature_rpf_2026` in Gatekeeper directory

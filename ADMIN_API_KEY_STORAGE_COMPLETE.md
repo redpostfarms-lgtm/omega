@@ -63,7 +63,7 @@ preferred_key = get_api_key(prefer_admin=True)
 
 # Get preferred key (regular first, then admin)
 preferred_key = get_api_key(prefer_admin=False)
-```
+```text
 
 ---
 
@@ -73,7 +73,7 @@ preferred_key = get_api_key(prefer_admin=False)
 
 ```bash
 python STORE_ADMIN_API_KEY.py
-```
+```text
 
 ### Use Admin Key in Code
 
@@ -86,7 +86,7 @@ admin_key = get_admin_key()
 # Use with OpenAI
 from openai import OpenAI
 client = OpenAI(api_key=admin_key)
-```
+```text
 
 ### Use Preferred Key
 
@@ -98,7 +98,7 @@ api_key = get_api_key(prefer_admin=True)
 
 # Or prefer regular key
 api_key = get_api_key(prefer_admin=False)
-```
+```text
 
 ---
 

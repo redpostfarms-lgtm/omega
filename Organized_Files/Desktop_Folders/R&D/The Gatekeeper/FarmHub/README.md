@@ -14,7 +14,7 @@ FarmHub Sensor Core reads 43 sensors every second, aggregates every 5 minutes, p
 
 ```bash
 pip install paho-mqtt redis numpy
-```
+```text
 
 ---
 
@@ -23,12 +23,12 @@ pip install paho-mqtt redis numpy
 **Run once, done:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\sensor_hub.py
-```
+```text
 
 **Add to startup (brain_wakeup.bat):**
 ```bat
 python D:\RPF_BRAIN\FarmHub\sensor_hub.py
-```
+```text
 
 ---
 

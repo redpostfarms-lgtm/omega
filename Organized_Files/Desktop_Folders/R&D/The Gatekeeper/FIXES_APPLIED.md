@@ -64,7 +64,7 @@
 To reach 100%:
 ```bash
 pip install -r "The Gatekeeper\requirements.txt"
-```
+```text
 
 This will install:
 - beautifulsoup4 (required)

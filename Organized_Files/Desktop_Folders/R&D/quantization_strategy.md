@@ -14,7 +14,7 @@
 
 ```cmd
 .\llama.cpp\quantize.exe .\models\Llama-3.2-70B-Instruct-Q4_K_M.gguf .\models\omega-70b-q2k.gguf Q2_K
-```
+```text
 
 **When to use:**
 - Need to free up VRAM for other tasks
@@ -53,7 +53,7 @@ Keep Q3_K_S for most tasks, but selectively load Q4_K_M or Q5_K_M for:
 ## Comparison Matrix (70B Model)
 
 | Quant Type | File Size | VRAM | Quality | Speed | Use Case |
-|------------|-----------|------|---------|-------|----------|
+| ------------ | ----------- | ------ | --------- | ------- | ---------- |
 | Q2_K | ~22-25 GB | ~6-7 GB | Lower | Fastest | Ultra-low VRAM |
 | **Q3_K_S** | **~28 GB** | **~8 GB** | **Good** | **Fast** | **Current - Balanced** |
 | Q4_K_M | ~35-38 GB | ~10-12 GB | Very Good | Moderate | Best balance (most popular) |
@@ -94,7 +94,7 @@ class HybridModelRouter:
                 if self.quality_model:
                     self.quality_model = None  # Unload to free VRAM
             return self.fast_model
-```
+```text
 
 ## Next Steps
 

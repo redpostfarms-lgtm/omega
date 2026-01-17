@@ -10,7 +10,7 @@
 
 Your system has **three interconnected hardware issues**, all of which are **completely fixable** with standard software installations. The infrastructure is perfect - it's just missing a few key pieces.
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                      CURRENT SITUATION                       │
 ├─────────────────────────────────────────────────────────────┤
@@ -22,7 +22,7 @@ Your system has **three interconnected hardware issues**, all of which are **com
 │  Result: Software ready, hardware not responding             │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
-```
+```text
 
 ---
 
@@ -47,7 +47,7 @@ Your system has **three interconnected hardware issues**, all of which are **com
 pip install openrgb
 # Then download & run OpenRGB.exe application
 # Takes 5 minutes
-```
+```text
 
 **Impact when fixed:** Physical LED colors will change with software commands
 
@@ -75,7 +75,7 @@ winget install ffmpeg
 # Then reinstall torchcodec
 pip uninstall torchcodec -y && pip install torchcodec
 # Takes 10 minutes
-```
+```text
 
 **Impact when fixed:** Audio files generate successfully, TTS works completely
 
@@ -104,7 +104,7 @@ pip uninstall torchcodec -y && pip install torchcodec
 # Reinstall PyTorch for CUDA
 pip uninstall torch -y && pip install torch --index-url https://download.pytorch.org/whl/cu121
 # Takes 60 minutes (including restarts)
-```
+```text
 
 **Impact when fixed:** 4-10x performance boost for TTS, audio, and processing
 
@@ -167,7 +167,7 @@ I've generated **4 comprehensive documents** to help you fix everything:
 
 ### Infrastructure Status
 
-```
+```text
 ✓ RGB Controller:        omega_rgb_advanced_controller.py (623 lines)
                          → 7-tier fallback system fully implemented
                          → Currently in "Simulated" fallback mode
@@ -180,25 +180,25 @@ I've generated **4 comprehensive documents** to help you fix everything:
                          → Monitors CPU/RAM/GPU automatically
                          → Makes offload decisions
                          → Complete infrastructure, CUDA offline
-```
+```text
 
 ### Missing Components
 
-```
+```text
 ✗ OpenRGB:              Python interface → USB RGB control
 ✗ FFmpeg:               Audio encoding library (missing DLLs)
 ✗ CUDA Toolkit:         NVIDIA GPU programming environment
 ✗ NVIDIA Drivers:       May need update for GPU detection
-```
+```text
 
 ### Current Performance
 
-```
+```text
 RGB Lights:             Software-only (no hardware response)
 Audio Generation:       Fails when encoding (FFmpeg missing)
 GPU Acceleration:       Not available (CUDA offline)
 System:                 Running on CPU at 100% capacity
-```
+```text
 
 ---
 
@@ -206,28 +206,28 @@ System:                 Running on CPU at 100% capacity
 
 ### If You Fix Just RGB (5 minutes)
 
-```
+```text
 Time: 00:00 - Start
 Time: 00:03 - Install OpenRGB package
 Time: 00:04 - Download OpenRGB application
 Time: 00:05 - Test and confirm working
 Result: RGB LEDs respond to color commands ✓
-```
+```text
 
 ### If You Fix RGB + Audio (15 minutes)
 
-```
+```text
 Time: 00:00 - Start
 Time: 00:05 - Install OpenRGB (above)
 Time: 10:00 - Install FFmpeg
 Time: 12:00 - Fix torchcodec
 Time: 15:00 - Done
 Result: RGB working + Audio generating ✓✓
-```
+```text
 
 ### Complete System Fix (60-90 minutes)
 
-```
+```text
 Time: 00:00 - Start
 Time: 05:00 - RGB working ✓
 Time: 15:00 - Audio working ✓
@@ -237,7 +237,7 @@ Time: 45:00 - Install CUDA Toolkit
 Time: 70:00 - Reinstall PyTorch for CUDA
 Time: 90:00 - Verify all systems
 Result: Everything working at maximum performance ✓✓✓
-```
+```text
 
 ---
 
@@ -245,7 +245,7 @@ Result: Everything working at maximum performance ✓✓✓
 
 ### Phase 1: Quick Wins (Do First)
 
-```
+```text
 1. Install OpenRGB
    - pip install openrgb
    - Download & run OpenRGB.exe
@@ -255,19 +255,19 @@ Result: Everything working at maximum performance ✓✓✓
    - winget install ffmpeg
    - pip reinstall torchcodec
    - Verify: Can generate audio without errors
-```
+```text
 
 **Time:** 15 minutes  
 **Benefit:** RGB + Audio fully functional
 
 ### Phase 2: GPU Acceleration (Do When You Have Time)
 
-```
+```text
 1. Install NVIDIA drivers (if needed)
 2. Install CUDA Toolkit
 3. Reinstall PyTorch for CUDA
 4. Test: torch.cuda.is_available() = True
-```
+```text
 
 **Time:** 60-90 minutes (includes restarts)  
 **Benefit:** 4-10x performance boost on AI/audio tasks
@@ -280,12 +280,12 @@ Result: Everything working at maximum performance ✓✓✓
 
 Your system has sophisticated load balancing:
 
-```
+```text
 When CPU > 80%:    → Offload to GPU
 When RAM > 75%:    → Offload to GPU
 When GPU > 85%:    → Offload back to CPU
 When balanced:     → Stay on CPU (GPU not needed)
-```
+```text
 
 This means once CUDA is enabled, your system will automatically use GPU when beneficial and CPU when optimal.
 
@@ -305,7 +305,7 @@ Installing OpenRGB (step 1) will move you from step 7 to step 1.
 
 ### Audio Pipeline
 
-```
+```text
 TTS Engine
     ↓ (generates audio waveform)
 torchcodec Library
@@ -319,7 +319,7 @@ sounddevice Library
 Windows Audio Service
     ↓ (plays sound)
 Speakers/Headphones 🔊
-```
+```text
 
 Currently breaks at "FFmpeg DLLs" step.
 
@@ -333,7 +333,7 @@ Currently breaks at "FFmpeg DLLs" step.
 from omega_rgb_advanced_controller import get_advanced_rgb_controller
 status = get_advanced_rgb_controller().get_status()
 print(status['current_method'])  # Shows "OpenRGB" not "Simulated"
-```
+```text
 
 ### Audio Working ✓
 
@@ -341,7 +341,7 @@ print(status['current_method'])  # Shows "OpenRGB" not "Simulated"
 from TTS.api import TTS
 model = TTS(model_name='tts_models/en/ljspeech/tacotron2-DDC', gpu=False)
 model.tts_to_file('test', 'test.wav')  # File created without error
-```
+```text
 
 ### GPU Working ✓
 
@@ -349,7 +349,7 @@ model.tts_to_file('test', 'test.wav')  # File created without error
 import torch
 print(torch.cuda.is_available())  # Returns True
 print(torch.cuda.get_device_name(0))  # Shows GPU name
-```
+```text
 
 ---
 
@@ -419,7 +419,7 @@ print(torch.cuda.get_device_name(0))  # Shows GPU name
 ## Summary Table
 
 | Issue | Cause | Solution | Time | Priority |
-|-------|-------|----------|------|----------|
+| ------- | ------- | ---------- | ------ | ---------- |
 | RGB not responding | OpenRGB not installed | `pip install openrgb` + download app | 5 min | HIGH |
 | Audio fails | FFmpeg missing | `winget install ffmpeg` | 10 min | HIGH |
 | GPU not used | CUDA not installed | Install CUDA Toolkit + reinstall PyTorch | 60 min | MEDIUM |

@@ -100,7 +100,7 @@ python WorldMemory.py query EDF vs Fonterra
 python WorldMemory.py query Fonterra
 python WorldMemory.py query insightsoftware
 python WorldMemory.py query-all Central Finance
-```
+```text
 
 ---
 

@@ -32,12 +32,12 @@ This guide covers setting up GitHub integration for The Gatekeeper project.
 ```bash
 git init
 git remote add origin https://github.com/USERNAME/REPO.git
-```
+```text
 
 ### 4. Test Connection
 ```bash
 python scripts/test_github_connection.py
-```
+```text
 
 ## Security Best Practices
 - Never commit `.env` file

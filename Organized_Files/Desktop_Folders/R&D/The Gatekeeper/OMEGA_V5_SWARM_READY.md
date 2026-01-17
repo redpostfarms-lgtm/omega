@@ -28,7 +28,7 @@
 
 ```bash
 python omega_v5_swarm_run.py
-```
+```text
 
 ---
 
@@ -42,7 +42,7 @@ from omega_v5_swarm_config import load_config, save_config
 config = load_config()
 config['targets'] = ['your', 'targets', 'here']
 save_config(config)
-```
+```text
 
 ---
 

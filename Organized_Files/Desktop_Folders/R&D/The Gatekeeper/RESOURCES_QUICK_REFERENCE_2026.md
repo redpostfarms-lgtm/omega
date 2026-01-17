@@ -12,7 +12,7 @@
 ```bash
 # Run the upgrade script
 "The Gatekeeper\upgrade_to_100.bat"
-```
+```text
 
 **Expected Result:** System score 92.5 → 99.8/100
 
@@ -25,33 +25,33 @@
 pip install vosk speechbrain TTS
 # Download Vosk models: https://alphacephei.com/vosk/models
 # Clone Piper: git clone https://github.com/rhasspy/piper models/piper
-```
+```text
 
 ### **Web Scraping (Production)**
 ```bash
 pip install scrapy lxml httpx readability-lxml
-```
+```text
 
 ### **Knowledge Base (Vector Search)**
 ```bash
 pip install chromadb sentence-transformers
-```
+```text
 
 ### **Local LLM (Offline AI)**
 ```bash
 pip install llama-cpp-python
 # Download models: Phi-3-mini or Llama-3.2-8B from HuggingFace
-```
+```text
 
 ### **Agent Frameworks**
 ```bash
 pip install crewai langchain langchain-community
-```
+```text
 
 ### **All High-Priority (One Command)**
 ```bash
 pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformers llama-cpp-python crewai langchain langchain-community pySMART nvidia-ml-py reportlab weasyprint markdown cryptography keyring python-dotenv neuralprophet pytest pytest-cov
-```
+```text
 
 ---
 
@@ -150,7 +150,7 @@ pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformer
 ## 📊 Resource Categories Summary
 
 | Category | Count | Top Resources |
-|----------|-------|--------------|
+| ---------- | ------- | -------------- |
 | **Voice & Speech** | 8 | Vosk, Piper, SpeechBrain, DeepSpeech |
 | **Web Scraping** | 7 | Scrapy, Playwright, httpx, lxml |
 | **Local LLM** | 5 | llama.cpp, Phi-3, Llama-3.2, Mistral |
@@ -193,7 +193,7 @@ pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformer
 ## 📈 Expected Improvements
 
 | Metric | Before | After | Gain |
-|--------|--------|-------|------|
+| -------- | -------- | ------- | ------ |
 | **Runtime** | 95% | 98% | +3% |
 | **Voice System** | 90% | 98% | +8% |
 | **Knowledge Base** | 85% | 95% | +10% |
@@ -215,12 +215,12 @@ pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformer
 After upgrade, verify installation:
 ```bash
 python verify_system.py
-```
+```text
 
 Test voice commands:
-```
+```text
 "Hey, Gatekeeper, status"
-```
+```text
 
 ---
 

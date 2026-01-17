@@ -42,7 +42,7 @@ Added comprehensive documentation for Quantum Computing Integration using Qiskit
 ```python
 from qiskit import QuantumCircuit, transpile
 from qiskit_aer import AerSimulator
-```
+```text
 
 **Key Components:**
 - QuantumCircuit: Creates quantum circuits
@@ -55,7 +55,7 @@ from qiskit_aer import AerSimulator
 
 ```powershell
 pip install qiskit qiskit-aer
-```
+```text
 
 ## Query Examples
 
@@ -67,7 +67,7 @@ wm = WorldMemory()
 result = wm.query("Quantum Computing Integration")
 result = wm.query("Qiskit quantum integration")
 result = wm.query("quantum random number generator")
-```
+```text
 
 ## Status
 

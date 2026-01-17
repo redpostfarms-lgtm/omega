@@ -12,7 +12,7 @@ The Omega Control Panel has been started successfully!
 ### Launch Command
 ```bash
 python START_CONTROL_PANEL.py
-```
+```text
 
 ### Control Panel Features
 - ✅ **File List Section** (Left Column) - Minimal, important files only
@@ -24,11 +24,11 @@ python START_CONTROL_PANEL.py
 - ✅ **Optional Learning/Processes Section** - Daily scan updates
 
 ### UI Layout
-```
+```text
 [Files] [OIP]         [Status]    [Controls]
 [Files] [Integrated Systems                    ]
 [Files] [Improve]     [Optional                ]
-```
+```text
 
 ### Visual Aids
 - Real-time waveform visualization in OIP section

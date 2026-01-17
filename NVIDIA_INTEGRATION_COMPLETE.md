@@ -48,7 +48,7 @@ nvidia = get_nvidia_integration()
 # Generate simple response
 response = nvidia.generate_response("Hello! How are you?")
 print(response)
-```
+```text
 
 ### Conversation with History
 
@@ -61,7 +61,7 @@ messages = [
 
 response = nvidia.conversation(messages)
 print(response)
-```
+```text
 
 ### Advanced Usage
 
@@ -78,7 +78,7 @@ response = nvidia.chat_completion(
 )
 
 print(response["choices"][0]["message"]["content"])
-```
+```text
 
 ---
 
@@ -87,13 +87,13 @@ print(response["choices"][0]["message"]["content"])
 ### Option 1: Environment Variable
 ```bash
 export NVIDIA_API_KEY=your_api_key_here
-```
+```text
 
 ### Option 2: In Code
 ```python
 from omega_nvidia_integration import set_nvidia_api_key
 set_nvidia_api_key("your_api_key_here")
-```
+```text
 
 ### Option 3: Through Integration Manager
 ```python
@@ -101,7 +101,7 @@ from omega_developer_integrations import get_integration_manager
 
 manager = get_integration_manager()
 manager.set_api_key("nvidia_playground", "your_api_key_here")
-```
+```text
 
 ---
 
@@ -140,6 +140,6 @@ set_nvidia_api_key("YOUR_KEY")
 nvidia = get_nvidia_integration()
 response = nvidia.generate_response("Hello!")
 print(response)
-```
+```text
 
 ---

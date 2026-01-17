@@ -68,7 +68,7 @@ Omega System Test has been upgraded with **Quantum Scrub** methodology, incorpor
     "average_test_duration": 2.469,
     "tests_per_second": 0.49
 }
-```
+```text
 
 ### 4. **Parallel Test Execution** ✅
 
@@ -81,7 +81,7 @@ Omega System Test has been upgraded with **Quantum Scrub** methodology, incorpor
 **Usage:**
 ```bash
 python deep_system_test.py --parallel
-```
+```text
 
 ### 5. **Enhanced Logging** ✅
 
@@ -124,7 +124,7 @@ python deep_system_test.py --parallel
     "error_handling": "Good" | "Review Recommended",
     "test_coverage": "X test suites"
 }
-```
+```text
 
 ### 8. **Enhanced Error Reporting** ✅
 
@@ -153,7 +153,7 @@ python deep_system_test.py --verbose
 
 # Combined
 python deep_system_test.py --parallel --verbose
-```
+```text
 
 ---
 
@@ -166,7 +166,7 @@ import time                   # Performance metrics
 import logging                # Enhanced logging
 from concurrent.futures import ThreadPoolExecutor, as_completed  # Parallel execution
 from collections import defaultdict  # Data structures
-```
+```text
 
 ### New Methods
 1. `analyze_code_ast(file_path)` - AST-based code analysis
@@ -211,7 +211,7 @@ from collections import defaultdict  # Data structures
         "test_coverage": "6 test suites"
     }
 }
-```
+```text
 
 ### Console Output
 - Performance metrics display
@@ -264,17 +264,17 @@ from collections import defaultdict  # Data structures
 ```bash
 cd "The Gatekeeper"
 python deep_system_test.py
-```
+```text
 
 ### Parallel Execution (Faster)
 ```bash
 python deep_system_test.py --parallel
-```
+```text
 
 ### Verbose Debugging
 ```bash
 python deep_system_test.py --verbose
-```
+```text
 
 ### View Logs
 ```bash
@@ -283,7 +283,7 @@ type omega_test.log
 
 # Or open in editor
 notepad omega_test.log
-```
+```text
 
 ---
 

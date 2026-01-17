@@ -92,7 +92,7 @@ python WorldMemory.py query change management
 python WorldMemory.py query master data harmonization
 python WorldMemory.py query-all EDF
 python WorldMemory.py query-all Central Finance
-```
+```text
 
 ---
 

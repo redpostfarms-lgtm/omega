@@ -39,7 +39,7 @@ python -m stonewall.stonewall_core --status
 
 # Stop
 python -m stonewall.stonewall_core --stop
-```
+```text
 
 ## Agent Protection
 
@@ -62,7 +62,7 @@ protect_agent_requests(agent)
 
 # All agent.fetch() calls now go through VPN
 response = agent.fetch("https://example.com")
-```
+```text
 
 ## Integration with Agent System
 
@@ -76,11 +76,11 @@ agent = EnhancedAgent("scrape data")
 with ProtectedScraper() as scraper:
     # Agent's web requests automatically protected
     agent.use_tool("search_web", "query")
-```
+```text
 
 ## Architecture
 
-```
+```text
 ┌─────────────┐
 │   Agent     │
 │  (Web Req)  │
@@ -97,7 +97,7 @@ with ProtectedScraper() as scraper:
 │   Phone     │ --> │  Starlink   │ --> │   Exit      │
 │   Hotspot   │     │    Node     │     │   Node      │
 └─────────────┘     └─────────────┘     └─────────────┘
-```
+```text
 
 ## Security Features
 

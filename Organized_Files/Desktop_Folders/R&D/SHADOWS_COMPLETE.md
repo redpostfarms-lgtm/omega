@@ -39,7 +39,7 @@
 ### One-Line Command
 ```bash
 python -m stonewall.stonewall_core --anti-tag --trace-bait
-```
+```text
 
 **That's it.** No extra keys. No prompts.
 
@@ -53,7 +53,7 @@ python -m stonewall.stonewall_core --daemon --anti-tag --trace-bait
 
 # Check status
 python -m stonewall.stonewall_core --status --anti-tag --trace-bait
-```
+```text
 
 ### Agent Integration
 ```python
@@ -64,14 +64,14 @@ with ProtectedScraper(anti_tag=True, trace_bait=True) as scraper:
     # All requests protected
     response = scraper.fetch("https://example.com")
     # Tags neutralized, probes swallowed, automatically
-```
+```text
 
 ---
 
 ## How It Works
 
 ### Anti-Tag Flow
-```
+```text
 Agent Request
     │
     ▼
@@ -84,10 +84,10 @@ Agent Request
     │
     ▼
 Continue Request
-```
+```text
 
 ### Trace-Bait Flow
-```
+```text
 Incoming Probe
     │
     ▼
@@ -99,7 +99,7 @@ Incoming Probe
     │
     ▼
 No Response (Silence)
-```
+```text
 
 ---
 
@@ -148,7 +148,7 @@ vpn.start()
 status = vpn.get_status()
 print(f"Anti-Tag: {status['anti_tag']}")
 print(f"Trace-Bait: {status['trace_bait']}")
-```
+```text
 
 **Output:**
 ```json
@@ -171,7 +171,7 @@ print(f"Trace-Bait: {status['trace_bait']}")
     "last_probe": 1767337309.234
   }
 }
-```
+```text
 
 ---
 
@@ -195,13 +195,13 @@ print(f"Trace-Bait: {status['trace_bait']}")
 
 ## Files Created
 
-```
+```text
 stonewall/
 ├── anti_tag.py           (~250 lines) - Anti-tagging system
 ├── trace_bait.py         (~300 lines) - Trace-bait system
 ├── stonewall_core.py     (updated)    - Core integration
 └── agent_protection.py   (updated)    - Protection integration
-```
+```text
 
 ---
 

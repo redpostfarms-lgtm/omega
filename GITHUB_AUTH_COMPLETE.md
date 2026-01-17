@@ -43,13 +43,13 @@ git commit -m "Initial commit - Omega System"
 
 # Push to GitHub
 git push -u origin master
-```
+```text
 
 Or if your default branch is `main`:
 
 ```bash
 git push -u origin main
-```
+```text
 
 ---
 
@@ -59,7 +59,7 @@ To test authentication after creating the repository:
 
 ```bash
 git fetch origin
-```
+```text
 
 If successful, you'll see the remote branches without errors.
 

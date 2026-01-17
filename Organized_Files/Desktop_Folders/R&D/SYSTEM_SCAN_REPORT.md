@@ -9,7 +9,7 @@
 ## EXECUTIVE SUMMARY
 
 | Metric | Status | Count |
-|--------|--------|-------|
+| -------- | -------- | ------- |
 | **Python Files** | ✅ | 435 files (5.3 MB) |
 | **FarmHub Modules** | ✅ | 4 modules found |
 | **Quantum Modules** | ✅ | 1 active module |
@@ -24,7 +24,7 @@
 ### ✅ OPERATIONAL MODULES
 
 | Module | Location | Status | Size |
-|--------|----------|--------|------|
+| -------- | ---------- | -------- | ------ |
 | **FarmHub Core** | `The Gatekeeper\FarmHub\FarmHub_2026_Final.py` | ✅ OK | 8.8 KB |
 | **Quantum Optimizer** | `agent_quantum_optimizer.py` | ✅ OK | 9.5 KB |
 | **Gatekeeper Fusion** | `The Gatekeeper\gatekeeper_fusion.py` | ✅ OK | - |
@@ -50,7 +50,7 @@ The scan found modules in workspace but expected them in `D:\RPF_BRAIN`:
 ### ✅ Active Components
 
 | Component | Status | Details |
-|-----------|--------|---------|
+| ----------- | -------- | --------- |
 | **Quantum Optimizer** | ✅ WORKING | Best fitness: 0.001155 (tested) |
 | **Performance** | ✅ OK | 40-50% faster adaptation |
 | **Algorithms** | ✅ OK | Superposition, tunneling, entanglement |
@@ -75,7 +75,7 @@ The scan found modules in workspace but expected them in `D:\RPF_BRAIN`:
 ### ✅ INSTALLED (Core Required)
 
 | Dependency | Version | Purpose | Status |
-|------------|---------|---------|--------|
+| ------------ | --------- | --------- | -------- |
 | **Python** | 3.13.9 | Runtime | ✅ OK |
 | **pyttsx3** | installed | TTS/Speech | ✅ OK |
 | **pyaudio** | 0.2.14 | Audio Input | ✅ OK |
@@ -88,7 +88,7 @@ The scan found modules in workspace but expected them in `D:\RPF_BRAIN`:
 ### ⚠️ NOT INSTALLED (Optional)
 
 | Dependency | Purpose | Impact |
-|------------|---------|--------|
+| ------------ | --------- | -------- |
 | **cv2 (OpenCV)** | Vision module | Vision features disabled |
 | **ultralytics (YOLO)** | Object detection | Fall detection disabled |
 | **vosk** | Speech recognition | Offline voice disabled |
@@ -101,7 +101,7 @@ The scan found modules in workspace but expected them in `D:\RPF_BRAIN`:
 
 ```bash
 pip install opencv-python ultralytics
-```
+```text
 
 ---
 
@@ -110,7 +110,7 @@ pip install opencv-python ultralytics
 ### Directory Summary
 
 | Directory | Python Files | Size | Status |
-|-----------|--------------|------|--------|
+| ----------- | -------------- | ------ | -------- |
 | **Workspace Root** | 435 files | 5.3 MB | ✅ OK |
 | **The Gatekeeper** | 238 files | 15.4 MB | ✅ OK |
 | **Gatekeeper\FarmHub** | Multiple | - | ✅ OK |
@@ -118,21 +118,21 @@ pip install opencv-python ultralytics
 
 ### Key Files Found
 
-```
+```text
 ✅ The Gatekeeper\FarmHub\FarmHub_2026_Final.py (8.8 KB)
 ✅ agent_quantum_optimizer.py (9.5 KB)
 ✅ The Gatekeeper\HR\Harriet_v2.py
 ✅ The Gatekeeper\Farm_Engineer\Bob.py
 ✅ The Gatekeeper\Sales\QuantumSalesBot.py
 ✅ The Gatekeeper\gatekeeper_fusion.py
-```
+```text
 
 ---
 
 ## CONFIGURATION FILES
 
 | Config File | Expected Location | Status | Action |
-|-------------|-------------------|--------|--------|
+| ------------- | ------------------- | -------- | -------- |
 | **Knowledge Base** | `D:\RPF_BRAIN\FarmHub\knowledge_2026.json` | ❌ Not found | Will be created on first run |
 | **Voice Key** | `D:\RPF_BRAIN\FarmHub\voiceprint.sha256` | ❌ Not found | Will be created on first run |
 | **FarmHub Brain** | `D:\RPF_BRAIN\FarmHub\farmhub_brain.json` | ❌ Not found | Will be created on first run |
@@ -207,7 +207,7 @@ python The Gatekeeper\FarmHub\FarmHub_2026_Final.py
 quantum          # Show quantum capabilities
 quantum energy   # Run energy efficiency analysis
 status           # Check all modules
-```
+```text
 
 ---
 

@@ -143,7 +143,7 @@
 ### Launch Control Panel
 ```bash
 python OMEGA_UI_LAUNCHER.py
-```
+```text
 
 ### Control Buttons
 1. **Push to Talk**: Press and hold to activate voice input

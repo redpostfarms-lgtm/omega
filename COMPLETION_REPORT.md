@@ -67,7 +67,7 @@
 ```bash
 python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller; print(get_advanced_rgb_controller().get_status()['current_method'])"
 # Should show: 'OpenRGB' (not 'Simulated')
-```
+```text
 
 ---
 
@@ -100,7 +100,7 @@ python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller
 ```bash
 ffmpeg -version
 # Should show FFmpeg version information
-```
+```text
 
 ---
 
@@ -135,7 +135,7 @@ ffmpeg -version
 ```bash
 python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
 # Should show: CUDA Available: True
-```
+```text
 
 ---
 
@@ -175,15 +175,15 @@ python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); pr
 
 ### ⚡ FASTEST PATH (Just Audio + RGB - 15 minutes)
 
-```
+```text
 1. Download OpenRGB → Extract → Run OpenRGB.exe (5 min)
 2. Download FFmpeg → Extract to C:\ffmpeg → Add to PATH (10 min)
 3. Test: ffmpeg -version ✓
-```
+```text
 
 ### 🚀 FULL SETUP (All 3 Systems - 90 minutes)
 
-```
+```text
 1. Do OpenRGB install (5 min)
 2. Do FFmpeg install (10 min)
 3. Run: nvidia-smi (1 min - check if you have GPU)
@@ -191,7 +191,7 @@ python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); pr
 5. Restart computer (15 min)
 6. Reinstall PyTorch with CUDA (5 min)
 7. Verify all systems (5 min)
-```
+```text
 
 ---
 
@@ -204,28 +204,28 @@ After each installation, run:
 ```bash
 python -c "from omega_rgb_advanced_controller import get_advanced_rgb_controller; print(get_advanced_rgb_controller().get_status())"
 # Check that 'current_method' shows 'OpenRGB' instead of 'Simulated'
-```
+```text
 
 **After FFmpeg:**
 
 ```bash
 ffmpeg -version
 # Should display FFmpeg version and libraries
-```
+```text
 
 **After CUDA (optional):**
 
 ```bash
 python -c "import torch; print('CUDA:', torch.cuda.is_available())"
 # Should show: CUDA: True
-```
+```text
 
 **Final System Test:**
 
 ```bash
 python FINAL_INSTALLATION_CHECK.py
 # Will show complete status of all systems
-```
+```text
 
 ---
 
@@ -320,7 +320,7 @@ python FINAL_INSTALLATION_CHECK.py
 **Overall Progress:** 15/18 tasks complete (83%)
 
 | Component | Status | Action |
-|-----------|--------|--------|
+| ----------- | -------- | -------- |
 | Python packages | ✅ Complete | None needed |
 | RGB library | ✅ Complete | Download app |
 | Audio libraries | ✅ Complete | Download FFmpeg |

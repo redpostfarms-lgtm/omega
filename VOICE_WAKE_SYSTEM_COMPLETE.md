@@ -42,12 +42,12 @@ vw.start_listening()
 vw.sleep_with_voice_wake()
 
 # Say "wake up" - system will wake automatically
-```
+```text
 
 ### Interactive Mode
 ```bash
 python omega_voice_wake.py
-```
+```text
 
 Commands:
 - `start` - Start listening for wake phrase

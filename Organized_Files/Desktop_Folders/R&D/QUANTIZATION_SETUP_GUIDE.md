@@ -30,7 +30,7 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
-```
+```text
 4. The `quantize.exe` will be in `llama.cpp\build\bin\Release\` or `llama.cpp\build\Release\`
 
 #### Option C: Use Visual Studio (If you have VS)
@@ -50,34 +50,34 @@ Unsloth installation encountered a Windows Long Path issue. To resolve:
 2. Run:
 ```powershell
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-```
+```text
 3. Restart your computer
 4. Then install Unsloth:
 ```cmd
 python -m pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
-```
+```text
 
 **OR** use an alternative installation location with shorter paths, or install Unsloth in WSL.
 
 ### 3. Model File
 
 Place your input model at:
-```
+```text
 .\models\Llama-3.2-70B-Instruct-Q4_K_M.gguf
-```
+```text
 
 ### 4. Dataset File
 
 Prepare your fine-tuning dataset as JSONL format:
-```
+```text
 your_farm_dataset.jsonl
-```
+```text
 
 Format example:
 ```jsonl
 {"instruction": "...", "input": "...", "output": "..."}
 {"instruction": "...", "input": "...", "output": "..."}
-```
+```text
 
 ## Running the Pipeline
 
@@ -85,7 +85,7 @@ Once all prerequisites are met:
 
 ```cmd
 quantize_and_finetune.bat
-```
+```text
 
 This will:
 1. Convert `Llama-3.2-70B-Instruct-Q4_K_M.gguf` to `omega-70b-q3ks.gguf` (Q3_K_S quantization)
@@ -120,17 +120,17 @@ If you prefer to run commands manually:
 ### Step 1: Quantization
 ```cmd
 .\llama.cpp\quantize.exe .\models\Llama-3.2-70B-Instruct-Q4_K_M.gguf .\models\omega-70b-q3ks.gguf Q3_K_S
-```
+```text
 
 ### Step 2: Fine-tuning
 ```cmd
 unsloth-train --model omega-70b-q3ks.gguf --lora-r 16 --quant 4bit --data your_farm_dataset.jsonl
-```
+```text
 
 ### Step 3: Merge and re-quantize
 ```cmd
 .\llama.cpp\quantize.exe omega-70b-lora-merged.gguf omega-final-q3ks.gguf Q3_K_S
-```
+```text
 
 ## Files Created
 

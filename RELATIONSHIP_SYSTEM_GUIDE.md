@@ -83,7 +83,7 @@ Bidirectional relationship and trust system between user and Omega. Both sides e
 from omega_relationship_system import get_relationship_manager
 
 rel = get_relationship_manager()
-```
+```text
 
 ### Get Relationship Status
 ```python
@@ -91,7 +91,7 @@ status = rel.get_relationship_status()
 print(f"Mutual Level: {status['mutual_level']}")
 print(f"User Level: {status['user_level']} ({status['user_points']} points)")
 print(f"Omega Level: {status['omega_level']} ({status['omega_points']} points)")
-```
+```text
 
 ### Record Interactions
 ```python
@@ -100,7 +100,7 @@ rel.record_interaction(success=True, interaction_type="collaborative_task")
 
 # Failed interaction
 rel.record_interaction(success=False, interaction_type="interaction")
-```
+```text
 
 ### Add Trust Points Directly
 ```python
@@ -109,13 +109,13 @@ rel.add_trust_points('user', 10, "helpful assistance")
 
 # Omega gains trust
 rel.add_trust_points('omega', 10, "helpful assistance")
-```
+```text
 
 ### Get Appropriate Greeting
 ```python
 greeting = rel.get_appropriate_greeting()
 # Returns greeting appropriate for current mutual level
-```
+```text
 
 ---
 

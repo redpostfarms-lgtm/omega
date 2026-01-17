@@ -54,13 +54,13 @@ pip install pyserial
 
 # Run (needs hardware)
 python projects/battery_voltage_monitor.py --port COM3
-```
+```text
 
 ### **MPPT Controller:**
 ```bash
 # Test simulation (no hardware needed)
 python projects/solar_mppt_controller.py --simulate --interval 2.0
-```
+```text
 
 ---
 

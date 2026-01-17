@@ -107,25 +107,25 @@ processor = SlangProcessor()
 text = "There's a bug in the code, we need to debug it. LGTM, ship it!"
 detected = processor.detect_slang(text)
 # Returns: [('bug', {...}), ('debug', {...}), ('lgtm', {...}), ('ship it', {...})]
-```
+```text
 
 ### Getting Meaning
 ```python
 meaning = processor.get_meaning("bug", context=SlangContext.CODING)
 # Returns: {"meaning": "Error or flaw in code", "context": "coding", ...}
-```
+```text
 
 ### Checking Appropriateness
 ```python
 is_ok = processor.is_appropriate("bug", FormalityLevel.FORMAL, SlangContext.CODING)
 # Returns: True (bug is neutral, acceptable in formal coding contexts)
-```
+```text
 
 ### Explaining Slang
 ```python
 explanation = processor.explain_slang("bug")
 # Returns formatted explanation with meaning, context, formality, example
-```
+```text
 
 ---
 

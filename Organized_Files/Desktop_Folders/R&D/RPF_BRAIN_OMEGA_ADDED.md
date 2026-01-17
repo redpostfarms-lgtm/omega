@@ -65,23 +65,23 @@ Added comprehensive documentation for the RPF_BRAIN_Ω (Omega) Final Fusion syst
 
 ### Workflow
 
-```
+```text
 Question → Quantum Seed → Web Scraping → All LLMs → Fusion → Final Answer
-```
+```text
 
 ## Installation
 
 ```powershell
 pip install httpx qiskit qiskit-aer asyncio
 python D:\RPF_BRAIN\Omega\RPF_BRAIN_Omega_Quantum_Web.py
-```
+```text
 
 ## Usage
 
 ```python
 omega = Omega()
 omega.fuse("Your question here")
-```
+```text
 
 **Interactive Mode:**
 - Run the script
@@ -119,7 +119,7 @@ wm = WorldMemory()
 result = wm.query("RPF_BRAIN Omega")
 result = wm.query("Omega Quantum Web LLM")
 result = wm.query("singularity fusion system")
-```
+```text
 
 ## Status
 

@@ -63,7 +63,7 @@ Comprehensive codebase scanner that finds:
 **Usage:**
 ```bash
 python deep_worldwide_scrub.py
-```
+```text
 
 **Output:**
 - `deep_scrub_report.json` - Detailed JSON report
@@ -75,7 +75,7 @@ Automated GitHub setup and authentication fixer.
 **Usage:**
 ```bash
 python fix_github_setup.py
-```
+```text
 
 ---
 
@@ -91,7 +91,7 @@ Based on `COMPLETE_IMPLEMENTATION_PLAN.md`, the following formulas are missing:
 calibrated_confidence = sigmoid(logit(confidence) + bias)
 bias = mean(logit(calibrated) - logit(confidence))
 logit(x) = log(x / (1 - x))
-```
+```text
 
 **File:** `omega_confidence_calibration.py` (needs to be created/integrated)
 
@@ -99,7 +99,7 @@ logit(x) = log(x / (1 - x))
 **Formula:**
 ```python
 intent = argmax(softmax(W * embedding(query) + b))
-```
+```text
 
 **File:** `omega_intent_recognition.py` (exists, needs verification)
 
@@ -135,7 +135,7 @@ from omega_api_keys_enhanced import get_enhanced_api_key_manager
 
 manager = get_enhanced_api_key_manager()
 manager.store_key("OPENAI", "your-api-key-here", "OpenAI API Key")
-```
+```text
 
 ---
 

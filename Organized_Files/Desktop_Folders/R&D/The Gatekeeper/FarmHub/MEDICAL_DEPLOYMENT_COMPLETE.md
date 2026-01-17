@@ -45,7 +45,7 @@
 **In brain_wakeup.bat:**
 ```bat
 start /B python D:\RPF_BRAIN\FarmHub\medical_core_final_2026.py
-```
+```text
 
 **Already added. FarmHub Medical Core starts on boot.**
 
@@ -90,15 +90,15 @@ start /B python D:\RPF_BRAIN\FarmHub\medical_core_final_2026.py
 - "FarmHub, medical status"
 
 **FarmHub responds:**
-```
+```text
 Heart rate: 88 bpm. SpO2: 98%. Respiration: 16 bpm. All systems monitoring. No alerts.
-```
+```text
 
 **Emergency detected:**
-```
+```text
 EMERGENCY DETECTED. INITIATING PROTOCOL.
 CRITICAL: Fall detected. Check for injury, assess consciousness, call 911 if unresponsive.
-```
+```text
 
 ---
 

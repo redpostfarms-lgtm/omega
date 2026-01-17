@@ -77,7 +77,7 @@ jwt_regex = (
     r'[A-Za-z0-9_-]{20,}\.'               # Payload
     r'[A-Za-z0-9_-]{20,}$'                # Signature
 )
-```
+```text
 
 **Post-Generation Validation:**
 ```python
@@ -94,7 +94,7 @@ elif header_json.get("typ") != "JWT":
     print("Header 'typ' is not 'JWT'")
 else:
     print("Header is valid!")
-```
+```text
 
 ### Security Considerations:
 

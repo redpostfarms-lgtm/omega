@@ -114,17 +114,17 @@
 ### Option 1: Use Batch File (Easiest)
 ```bash
 START_CONTROL_PANEL.bat
-```
+```text
 
 ### Option 2: Use Python Script
 ```bash
 python START_CONTROL_PANEL.py
-```
+```text
 
 ### Option 3: Run Directly
 ```bash
 python omega_control_panel.py
-```
+```text
 
 ---
 

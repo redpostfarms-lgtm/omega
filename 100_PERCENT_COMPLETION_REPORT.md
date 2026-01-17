@@ -111,7 +111,7 @@ python install_wazuh_dependencies.py
 # Verification
 python verify_dependencies.py
 python verify_all_systems.py
-```
+```text
 
 ---
 

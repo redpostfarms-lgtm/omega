@@ -52,12 +52,12 @@
 
 ```bash
 pip install flask
-```
+```text
 
 **Optional (for semantic search):**
 ```bash
 pip install chromadb sentence-transformers
-```
+```text
 
 ---
 
@@ -72,7 +72,7 @@ python projects/knowledge_web_ui.py --port 8080
 
 # Debug mode
 python projects/knowledge_web_ui.py --debug
-```
+```text
 
 ### **Access Interface:**
 - Web UI: http://localhost:5000
@@ -95,12 +95,12 @@ python projects/knowledge_web_ui.py --debug
 **Search API:**
 ```bash
 curl "http://localhost:5000/api/search?q=battery&n=10"
-```
+```text
 
 **Stats API:**
 ```bash
 curl "http://localhost:5000/api/stats"
-```
+```text
 
 ---
 

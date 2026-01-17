@@ -32,7 +32,7 @@
 ```bash
 pip install cupy-cuda11x aiodns scapy z3-solver
 git clone https://github.com/uber/kernel-fuzzer.git
-```
+```text
 
 **Implementation:**
 - GPU-accelerated mutation using CuPy
@@ -69,7 +69,7 @@ solver = z3.Solver()
 solver.add(constraint == payload)
 if solver.check() == z3.UNSAT:
     del fake_hit  # False positive filtered
-```
+```text
 
 **Features:**
 - Z3 theorem prover
@@ -94,7 +94,7 @@ Title: {% if severity == 'critical' %}RCE{% else %}IDOR{% endif %} in {{ target 
 Severity: {{ severity }}
 POC: {{ steps }}
 Bounty: ${{ payout }}
-```
+```text
 
 ---
 
@@ -145,7 +145,7 @@ Bounty: ${{ payout }}
 ```bash
 touch omega_swarm/kill.omega  # Stop swarm
 rm omega_swarm/kill.omega      # Resume swarm
-```
+```text
 
 ---
 
@@ -163,7 +163,7 @@ rm omega_swarm/kill.omega      # Resume swarm
 ### Step 1: Install Dependencies
 ```bash
 python omega_v5_swarm_setup.py
-```
+```text
 
 This installs:
 - cupy-cuda11x (GPU acceleration)
@@ -176,14 +176,14 @@ This installs:
 ### Step 2: Clone Kernel Fuzzer
 ```bash
 git clone https://github.com/uber/kernel-fuzzer.git
-```
+```text
 
 ### Step 3: Add Proxies
 Edit `omega_swarm/proxies.txt`:
-```
+```text
 192.168.1.1:8080:user:pass
 192.168.1.2:8080
-```
+```text
 
 ### Step 4: Configure
 Edit `omega_swarm/swarm_config.json`:
@@ -194,7 +194,7 @@ Edit `omega_swarm/swarm_config.json`:
 ### Step 5: Run
 ```bash
 python omega_v5_swarm.py
-```
+```text
 
 ---
 
@@ -206,19 +206,19 @@ from omega_v5_swarm import OMEGA_V5_SWARM, run_swarm
 
 # Run swarm on target
 stats = await run_swarm('https://target.com', base_payload='test')
-```
+```text
 
 ### Check Status
 ```python
 stats = OMEGA_V5_SWARM.get_stats()
 print(f"Payloads tested: {stats['payloads_tested']}")
 print(f"Real vulns: {stats['real_vulns']}")
-```
+```text
 
 ### Stop Swarm
 ```bash
 touch omega_swarm/kill.omega
-```
+```text
 
 ---
 

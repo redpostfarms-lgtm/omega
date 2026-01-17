@@ -67,7 +67,7 @@ python WorldMemory.py query implementation partner
 python WorldMemory.py query Business Process Consolidation
 python WorldMemory.py query-all EDF
 python WorldMemory.py query-all Central Finance
-```
+```text
 
 ---
 

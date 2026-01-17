@@ -141,12 +141,12 @@ class PlanetarySearch:
             self.scraped_data = all_results
         
         return self.scraped_data
-```
+```text
 
 #### **Installation:**
 ```bash
 pip install scrapy
-```
+```text
 
 #### **Benefits:**
 - ✅ 20-30% reduction in scraping failures (built-in retry logic)
@@ -206,12 +206,12 @@ class PlanetarySearch:
         except Exception as e:
             print(f"  ⚠️  AI scraper failed, using fallback: {e}")
             return self.scrape_with_requests(url)
-```
+```text
 
 #### **Installation:**
 ```bash
 pip install scrapegraphai
-```
+```text
 
 ---
 
@@ -394,14 +394,14 @@ def listen_for_commands():
         except Exception as e:
             print(f"  ⚠️  Error: {e}")
             time.sleep(1)
-```
+```text
 
 #### **Installation:**
 ```bash
 pip install vosk pyaudio
 # Download model: https://alphacephei.com/vosk/models
 # Extract to: The Gatekeeper/models/vosk/vosk-model-small-en-us-0.15
-```
+```text
 
 #### **Benefits:**
 - ✅ 100% offline (no internet required)
@@ -516,12 +516,12 @@ def is_me():
     
     # Verify
     return auth.verify_voiceprint(audio.raw_data)
-```
+```text
 
 #### **Installation:**
 ```bash
 pip install speechbrain torch torchaudio
-```
+```text
 
 #### **Benefits:**
 - ✅ Noise-resistant (ideal for outdoor farms)
@@ -593,7 +593,7 @@ All integrations follow MEMORY.md rules:
 ## 6. Expected Improvements
 
 | Component | Current | After Integration | Improvement |
-|-----------|---------|-------------------|-------------|
+| ----------- | --------- | ------------------- | ------------- |
 | **Web Scraping Reliability** | 95% | 98% | +3% (Scrapy retry logic) |
 | **Voice Recognition** | 90% (online) | 98% (offline) | +8% (Vosk offline) |
 | **Voice Biometrics** | 85% | 95% | +10% (SpeechBrain noise resistance) |

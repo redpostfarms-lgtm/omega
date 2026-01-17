@@ -55,32 +55,32 @@ winget install -e --id LibreCAD.LibreCAD
 # QCAD (manual)
 # Visit: https://www.qcad.org/en/download
 # Download and install Windows MSI
-```
+```text
 
 ### 2. Write Initial Standards to Brain
 
 In Cursor chat, write these to MCP brain:
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: architecture
 - content: "Unified CAD workspace: FreeCAD (3D Python), QCAD (2D ECMAScript), LibreCAD (2D fallback). Export pipeline: DXF/STEP/STL/PDF/SVG to 05_Exports\{format}\"
-```
+```text
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: constraint
 - content: "Default units: millimeters. Layer standard v1.0: Prefix-suffix convention (A-WALL, M-BOLT, E-WIRE). Colors and lineweights defined in LAYER_STANDARD.json"
-```
+```text
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: gotcha
 - content: "Onshape free plan documents are public. Do not use for proprietary/confidential designs."
-```
+```text
 
 ### 3. Test Automation Templates
 

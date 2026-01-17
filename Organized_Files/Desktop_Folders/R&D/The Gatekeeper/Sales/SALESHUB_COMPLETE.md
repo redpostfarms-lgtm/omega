@@ -58,19 +58,19 @@ A voice-activated, farm-to-fork marketing system that delivers killer sales pitc
 ## VOICE COMMANDS
 
 ### Via Gatekeeper
-```
+```text
 "Hey Gatekeeper, SalesHub pitch tomatoes"
 "Hey Gatekeeper, SalesHub sell beef"
 "Hey Gatekeeper, SalesHub status"
-```
+```text
 
 ### Direct Commands
-```
+```text
 > SalesHub, pitch tomatoes
 > SalesHub, sell beef
 > SalesHub, status
 > quit
-```
+```text
 
 ---
 
@@ -119,19 +119,19 @@ A voice-activated, farm-to-fork marketing system that delivers killer sales pitc
 ### Quick Deploy
 ```batch
 deploy_saleshub.bat
-```
+```text
 
 ### Manual Deploy
 ```bash
 python D:\RPF_BRAIN\Sales\SalesHub.py
-```
+```text
 
 ---
 
 ## USAGE EXAMPLES
 
 ### Example 1: Pitch Tomatoes
-```
+```text
 > SalesHub, pitch tomatoes
 SalesHub: Three seconds to customer — here's your line:
 SalesHub: Hydroponic, year-round, Colorado sun, zero miles. Pick it at 9 AM, on your plate at 11. Fresher than your neighbor's fridge.
@@ -139,10 +139,10 @@ SalesHub: Hydroponic, year-round, Colorado sun, zero miles. Pick it at 9 AM, on 
   Price Point: Premium
   Target: Health-conscious, local food supporters
   Emotion: Freshness, local, quality
-```
+```text
 
 ### Example 2: Sell Beef
-```
+```text
 > SalesHub, sell beef
 SalesHub: Three seconds to customer — here's your line:
 SalesHub: Pasture-raised, grass-finished, no antibiotics, no hormones. Hangs 28 days for buttery marbling. Tastes like Sunday dinner — delivered Monday.
@@ -150,15 +150,15 @@ SalesHub: Pasture-raised, grass-finished, no antibiotics, no hormones. Hangs 28 
   Price Point: Premium
   Target: Foodies, health-conscious, local supporters
   Emotion: Nostalgia, quality, tradition
-```
+```text
 
 ### Example 3: Unknown Product
-```
+```text
 > SalesHub, pitch kale
 SalesHub: Reverse searching for kale...
 SalesHub: Updated. New pitch loaded from planetary search.
 SalesHub: Farm-fresh kale. Local, organic, zero miles. Tastes like it should. Delivered fresh.
-```
+```text
 
 ---
 
@@ -173,20 +173,20 @@ SalesHub: Farm-fresh kale. Local, organic, zero miles. Tastes like it should. De
     "emotion": "Emotional triggers"
   }
 }
-```
+```text
 
 ---
 
 ## STATUS REPORT
 
-```
+```text
 SalesHub: 47 product lines. 47 pitches. Zero cost. 100% conversion rate in the barn.
 
   Products: 47
   Pitches: 47
   Cost: $0.00
   Status: Online
-```
+```text
 
 ---
 

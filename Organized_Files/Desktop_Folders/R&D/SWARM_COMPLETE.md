@@ -58,7 +58,7 @@ from agent_swarm_isolated import SwarmOrchestrator
 
 swarm = SwarmOrchestrator()
 swarm.start_swarm()  # All 4 agents start learning independently
-```
+```text
 
 ### Summon Individual Agent
 ```python
@@ -69,22 +69,22 @@ print(swarm.summon_agent(GameType.CHESS))
 
 # Go agent report
 print(swarm.summon_agent(GameType.GO))
-```
+```text
 
 ### Summon All
 ```python
 print(swarm.summon_all())
-```
+```text
 
 ### Quick Status
 ```python
 print(swarm.quick_status_all())
-```
+```text
 
 ### Command Line
 ```bash
 python swarm_control.py
-```
+```text
 
 Commands:
 - `start` - Start all agents
@@ -101,7 +101,7 @@ Commands:
 
 ## Example Output
 
-```
+```text
 [CHESS_AGENT_1234567890] CHESS AGENT REPORT
 ============================================================
 Games Played: 127
@@ -112,13 +112,13 @@ Skill Level: 0.42 (Intermediate)
 Learning Cycles: 127
 Last Achievement: Beat engine in 35 moves
 ============================================================
-```
+```text
 
 ---
 
 ## Sandbox Structure
 
-```
+```text
 swarm_sandboxes/
 ├── chess_agent_1234567890/
 │   ├── memory.json      # Isolated learning data
@@ -132,7 +132,7 @@ swarm_sandboxes/
 └── go_agent_1234567890/
     ├── memory.json
     └── stats.json
-```
+```text
 
 ---
 

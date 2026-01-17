@@ -64,7 +64,7 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 
 ### Weather APIs
 | API | Free Tier | Link |
-|-----|-----------|------|
+| ----- | ----------- | ------ |
 | AG FARM | 1,000/mo | https://agfarmapi.com |
 | OpenWeatherMap | 1M/mo | https://openweathermap.org/api |
 | NOAA CDO | Unlimited | https://www.ncdc.noaa.gov/cdo-web |
@@ -72,7 +72,7 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 
 ### Plant Identification
 | API | Free Tier | Link |
-|-----|-----------|------|
+| ----- | ----------- | ------ |
 | PlantNet | 500/day | https://my.plantnet.org |
 | iNaturalist | Unlimited | https://www.inaturalist.org |
 | AG FARM | 1,000/mo | https://agfarmapi.com |
@@ -80,7 +80,7 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 
 ### Government APIs (US)
 | API | Free Tier | Link |
-|-----|-----------|------|
+| ----- | ----------- | ------ |
 | USDA FoodData | Unlimited | https://fdc.nal.usda.gov/api-guide.html |
 | USDA NAL | Unlimited | https://agricola.nal.usda.gov |
 | USDA NRCS | Unlimited | https://www.nrcs.usda.gov |
@@ -88,14 +88,14 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 
 ### Farm Management (Open-Source)
 | System | Language | GitHub |
-|--------|----------|--------|
+| -------- | ---------- | -------- |
 | FarmOS | PHP | https://github.com/farmOS/farmOS |
 | LiteFarm | JavaScript | https://github.com/LiteFarmOrg/LiteFarm |
 | Tania | Go | https://github.com/Tanibox/tania-core |
 
 ### Research Databases
 | Database | Records | Link |
-|----------|---------|------|
+| ---------- | --------- | ------ |
 | AGRIS (FAO) | 15M+ | https://agris.fao.org |
 | AGRICOLA | 5M+ | https://agricola.nal.usda.gov |
 | Ag Data Commons | Various | https://data.nal.usda.gov |
@@ -111,7 +111,7 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 - PlantNet API integration
 - iNaturalist API integration
 - Weed identification database
-```
+```text
 
 ### Priority 2: Weather Data
 ```python
@@ -119,7 +119,7 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 - OpenWeatherMap API
 - NOAA CDO API
 - AG FARM Weather API
-```
+```text
 
 ### Priority 3: Government Data
 ```python
@@ -127,14 +127,14 @@ Quick lookup for free agriculture APIs, repositories, and resources.
 - USDA FoodData Central
 - USDA NAL (AGRICOLA)
 - USDA NRCS soil data
-```
+```text
 
 ### Priority 4: Animal Identification
 ```python
 # Add to knowledge base
 - iNaturalist API (animals)
 - GBIF API (biodiversity)
-```
+```text
 
 ---
 
@@ -152,7 +152,7 @@ pip install requests  # Standard HTTP client
 
 # All APIs use standard HTTP (requests library)
 # No special SDKs required for most
-```
+```text
 
 ---
 

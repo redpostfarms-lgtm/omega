@@ -54,7 +54,7 @@ backup_path = file_path.with_suffix(file_path.suffix + '.backup')
 
 # Validate syntax before writing
 compile(code, str(file_path), 'exec')
-```
+```text
 
 ---
 
@@ -87,7 +87,7 @@ if 'execute(' in line and '?' not in line:
 # Unsafe deserialization
 if node.func.id in ['pickle.loads', 'yaml.load']:
     vulnerabilities.append("Unsafe deserialization")
-```
+```text
 
 **Safety:** Read-only analysis (no file modifications)
 
@@ -114,7 +114,7 @@ patterns = {
     "decline_rate": 0.0,  # NEW
     "quality_trend_direction": "stable"  # NEW
 }
-```
+```text
 
 **Trend Analysis:**
 - Compares recent 5 runs vs older runs
@@ -149,7 +149,7 @@ if len(line) > 120:
 stmt_count = len([n for n in ast.walk(node) if isinstance(n, (ast.If, ast.For, ast.While, ast.Try))])
 if stmt_count > 10:
     issues["complex_functions"].append(f"Function '{node.name}': High complexity")
-```
+```text
 
 ---
 
@@ -172,7 +172,7 @@ if stmt_count > 10:
 ## Code Statistics
 
 | Metric | Before | After | Change |
-|--------|--------|-------|--------|
+| -------- | -------- | ------- | -------- |
 | Total Lines | 1,123 | 1,455 | +332 |
 | Methods | 20 | 28 | +8 |
 | Test Suites | 6 | 8 | +2 |
@@ -216,22 +216,22 @@ All enhancements include comprehensive safety measures:
 ### Run All Tests (Including New Suites)
 ```bash
 python deep_system_test.py
-```
+```text
 
 ### Run with Parallel Execution
 ```bash
 python deep_system_test.py --parallel
-```
+```text
 
 ### Manual Mode (Auto-fix disabled)
 ```bash
 python deep_system_test.py --manual
-```
+```text
 
 ### Verbose Output
 ```bash
 python deep_system_test.py --verbose
-```
+```text
 
 ---
 

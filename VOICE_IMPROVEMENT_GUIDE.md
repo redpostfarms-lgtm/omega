@@ -37,13 +37,13 @@ This system helps improve Omega's TTS voice quality by:
 Finds and catalogs free audio resources.
 ```batch
 py -3.11 audio_resource_finder.py
-```
+```text
 
 ### 2. `conversation_recorder.py`
 Records conversation segments and analyzes them.
 ```batch
 py -3.11 conversation_recorder.py
-```
+```text
 
 ### 3. `voice_improvement_analyzer.py`
 Analyzes voice characteristics:
@@ -58,7 +58,7 @@ Analyzes voice characteristics:
 
 ```batch
 py -3.11 voice_improvement_analyzer.py
-```
+```text
 
 ### 4. `interactive_omega.py`
 Interactive conversation mode with:
@@ -70,19 +70,19 @@ Interactive conversation mode with:
 
 ```batch
 py -3.11 interactive_omega.py
-```
+```text
 
 ## Quick Start
 
 ### Option 1: Quick Conversation
 ```batch
 TALK_WITH_OMEGA.bat
-```
+```text
 
 ### Option 2: Full System
 ```batch
 START_VOICE_IMPROVEMENT.bat
-```
+```text
 
 ## What Gets Analyzed
 
@@ -135,14 +135,14 @@ START_VOICE_IMPROVEMENT.bat
 
 ## File Structure
 
-```
+```text
 conversations/          # Recorded conversation segments
   ├── conv_YYYYMMDD_HHMMSS.wav
   └── conv_YYYYMMDD_HHMMSS.json  # Metadata
 
 audio_resources.json    # Catalog of free resources
 clip_0001.wav          # Your voice reference sample
-```
+```text
 
 ## Next Steps
 

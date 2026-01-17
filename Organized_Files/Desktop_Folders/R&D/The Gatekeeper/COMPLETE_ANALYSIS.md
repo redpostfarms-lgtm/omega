@@ -361,7 +361,7 @@
 ## FINAL SCORES BY CATEGORY
 
 | Category | Score | Status |
-|----------|-------|--------|
+| ---------- | ------- | -------- |
 | **Core System Files** | 98% | ✅ Excellent |
 | **8 Hidden Pieces** | 90% | ✅ Very Good |
 | **Additional Features** | 100% | ✅ Perfect |

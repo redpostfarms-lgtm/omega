@@ -35,7 +35,7 @@
 ### **Run Once:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\sensor_hub.py
-```
+```text
 
 ### **Auto-Start on Boot:**
 Already added to `brain_wakeup.bat` - starts automatically.
@@ -45,9 +45,9 @@ Already added to `brain_wakeup.bat` - starts automatically.
 ## Startup Message
 
 **FarmHub says on boot:**
-```
+```text
 All sensors online. 1.2 acres, 342 sensors. Water good. Air fair. Battery 94%. Standing by.
-```
+```text
 
 ---
 
@@ -57,17 +57,17 @@ All sensors online. 1.2 acres, 342 sensors. Water good. Air fair. Battery 94%. S
 - "FarmHub, status"
 
 **FarmHub responds:**
-```
+```text
 Root zone 18.4°C. pH 6.2. Flow normal. PM2.5 14 µg/m³. No alerts.
-```
+```text
 
 **You say:**
 - "FarmHub, predict rain"
 
 **FarmHub responds:**
-```
+```text
 Front 3.7 mm by 22:15. Pre-soak drip 30%.
-```
+```text
 
 ---
 

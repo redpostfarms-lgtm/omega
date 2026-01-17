@@ -70,7 +70,7 @@
 
 **All systems integrated and operational:**
 
-```
+```text
 Battery Monitor ──┐
                   ├──> Farm Automation Hub ──> Dashboard
 Solar MPPT ──────┤
@@ -80,7 +80,7 @@ Drone Controller ─┤
 Grant Automation ─┤
                   │
 Knowledge Base ───┘
-```
+```text
 
 ---
 
@@ -106,7 +106,7 @@ python projects/drone_flight_controller.py --simulate --duration 60
 
 # 6. Grant Automation
 python projects/grant_application_automation.py --create --template usda_solar
-```
+```text
 
 ---
 
@@ -150,7 +150,7 @@ python projects/grant_application_automation.py --create --template usda_solar
 **Install all:**
 ```bash
 pip install pyserial flask python-docx reportlab chromadb sentence-transformers
-```
+```text
 
 ---
 

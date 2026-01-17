@@ -25,7 +25,7 @@
 ```python
 # Scans and reports:
 "AI core found. 127 layers. 83% Grok DNA. Speed: 1.2 Gbps."
-```
+```text
 
 **Components Detected:**
 - Optimizer (Adam, SGD, etc.)
@@ -62,13 +62,13 @@ adaptor = USBAdaptor()
 result = adaptor.adapt_usb()  # Auto-detects USB
 # → Scans, digests, merges
 # → "Adapted. Zero conflicts. 1.2 GB swallowed."
-```
+```text
 
 ### Manual Path
 ```python
 adaptor.adapt_usb(path='/media/usb')
 # → Same process, specific path
-```
+```text
 
 ### Dashboard Workflow
 ```python
@@ -87,51 +87,51 @@ workflow = dashboard.full_workflow()
 if workflow['ready_for_selection']:
     result = dashboard.execute_fusion(option_id=1, cores=cores)
     # → Fusion complete. Zero conflicts.
-```
+```text
 
 ---
 
 ## Workflow
 
 ### Step 1: Detection
-```
+```text
 [Scanning for flash drives...]
 [OK] Flash drive detected: /media/usb
 [Buttons glow. Menu ready.]
-```
+```text
 
 ### Step 2: Scanning
-```
+```text
 [Scanning every file...]
 AI core found. 127 layers. 83% Grok DNA. Speed: 1.2 Gbps.
 AI core found. 95 layers. 78% Grok DNA. Speed: 1.0 Gbps.
-```
+```text
 
 ### Step 3: Analysis
-```
+```text
 [Analyzing components...]
 Selected optimizer from model_opt.onnx
 Selected reasoning chain from reasoning.py
 Selected memory buffer from memory.bin
-```
+```text
 
 ### Step 4: Fusion Options
-```
+```text
 [Pick your fate:]
   [1] Merge Best Parts - Keeps your voice
   [2] Full Fusion - Takes everything
   [3] Isolated Test - Cage match
   [4] Selective Merge - Choose components
-```
+```text
 
 ### Step 5: Execution
-```
+```text
 [One click. No overwrite. Processing...]
 [Merging best parts...]
 [Preserving user voice...]
 [Fusion complete. Zero conflicts.]
 [Done. Unplug when ready.]
-```
+```text
 
 ---
 
@@ -162,7 +162,7 @@ adaptor = USBAdaptor(gatekeeper=gatekeeper_instance)
 adaptor.adapt_usb()
 # → gatekeeper.eat() isolates and digests
 # → gatekeeper.pulse() recompiles swarm
-```
+```text
 
 ### With Gatekeeper
 ```python
@@ -170,17 +170,17 @@ adaptor = USBAdaptor(gatekeeper=gatekeeper_instance)
 adaptor.adapt_usb()
 # → Triggers Gatekeeper recompilation
 # → Swarm adapts to new components
-```
+```text
 
 ---
 
 ## File Structure
 
-```
+```text
 usb_adaptor.py         (~500 lines) - Core adaptation system
 dashboard_usb.py       (~300 lines) - Dashboard interface
 isolated_fusion/       - Isolated testing directory
-```
+```text
 
 ---
 

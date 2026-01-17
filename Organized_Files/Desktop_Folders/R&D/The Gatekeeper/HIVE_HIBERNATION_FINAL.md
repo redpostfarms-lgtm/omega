@@ -24,9 +24,9 @@
 ## How It Works
 
 ### **Problem Hits:**
-```
+```text
 Hey, Gatekeeper, solve why the barn goes dark at 4 PM
-```
+```text
 
 ### **Hive Awakens:**
 1. **Gen 1:** 1 agent wakes
@@ -85,7 +85,7 @@ Hey, Gatekeeper, solve why the barn goes dark at 4 PM
 - 🔄 Auto-adjusts based on resources
 
 ### **Example:**
-```
+```text
 Gen 1: 1 agent (RAM: 45%, GPU: 23%) → ✅ Grow
 Gen 2: 2 agents (RAM: 47%, GPU: 25%) → ✅ Grow
 Gen 3: 4 agents (RAM: 50%, GPU: 28%) → ✅ Grow
@@ -94,7 +94,7 @@ Gen 5: 16 agents (RAM: 62%, GPU: 45%) → ✅ Grow
 Gen 6: 32 agents (RAM: 72%, GPU: 58%) → ✅ Grow
 Gen 7: 64 agents (RAM: 78%, GPU: 65%) → ⚠️ Shrink
 Gen 8: 32 agents (RAM: 74%, GPU: 60%) → ✅ Stable
-```
+```text
 
 ---
 
@@ -136,7 +136,7 @@ Gen 8: 32 agents (RAM: 74%, GPU: 60%) → ✅ Stable
     "abc123def456": { /* solution */ }
   }
 }
-```
+```text
 
 ### **`hive_state.json`:**
 ```json
@@ -148,28 +148,28 @@ Gen 8: 32 agents (RAM: 74%, GPU: 60%) → ✅ Stable
   "timestamp": "2026-01-03T16:30:00",
   "generation": 5
 }
-```
+```text
 
 ---
 
 ## Voice Commands
 
 ### **Activate Hive:**
-```
+```text
 Hey, Gatekeeper, solve why the barn goes dark at 4 PM
 Hey, Gatekeeper, hive solve optimize 18650 charging curve
 Hey, Gatekeeper, solve fix solar yield drop
-```
+```text
 
 ### **Response:**
-```
+```text
 Ara... opens. Hive awakens.
 Generation 1 — 1 agents active
 [Agent 1/1] Thinking... Done. Vote: YES
 ...
 ✅ Hive consensus reached (75.0% yes). Solution locked.
 💾 16 agents in hibernation. Memory saved.
-```
+```text
 
 ---
 
@@ -236,19 +236,19 @@ Generation 1 — 1 agents active
 ### **Command Line:**
 ```bash
 python D:\RPF_BRAIN\The Gatekeeper\hive_hibernation_final.py "why does the fence glitch at 3:17 AM"
-```
+```text
 
 ### **Voice:**
-```
+```text
 Hey, Gatekeeper, solve [problem]
-```
+```text
 
 ---
 
 ## Example Flow
 
 ### **First Time:**
-```
+```text
 Problem: "why is the barn dark at 4 PM"
 Gen 1: 1 agent → VOTE: YES
 Gen 2: 2 agents → VOTE: YES, YES
@@ -257,15 +257,15 @@ Gen 4: 8 agents → VOTE: YES (6), NO (1), ABSTAIN (1)
 ✅ Consensus: 75% YES
 Solution: "Full yield. 18650 at 3.7V. Panel 3 cleaned. MPPT reset."
 💾 8 agents hibernating
-```
+```text
 
 ### **Next Time (Same Problem):**
-```
+```text
 Problem: "why is the barn dark at 4 PM"
 🔄 Hive remembers. Waking from hibernation...
 💾 8 agents waking (instant)
 Solution: "Full yield. 18650 at 3.7V. Panel 3 cleaned. MPPT reset."
-```
+```text
 
 ---
 

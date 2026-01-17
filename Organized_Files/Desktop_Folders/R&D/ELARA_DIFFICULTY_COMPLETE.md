@@ -67,7 +67,7 @@
 system.switch_level_mid_game(DifficultyLevel.EXPERT)
 # Response: "Switched mid-game: intermediate -> expert"
 # "2200 ELO, no mercy. Tightened."
-```
+```text
 
 ### 3. Teach Mode
 ```python
@@ -75,7 +75,7 @@ system.switch_level_mid_game(DifficultyLevel.EXPERT)
 system.enable_teach_mode()
 # Expert → Intermediate
 # Explains every breath
-```
+```text
 
 ### 4. Adaptive Learning
 - Tracks game results
@@ -101,14 +101,14 @@ from elara_difficulty_system import DifficultySystem, DifficultyLevel
 system = DifficultySystem()
 system.set_user_level("user_id", DifficultyLevel.INTERMEDIATE)
 # Sticky per user - persists across sessions
-```
+```text
 
 ### Mid-Game Switch
 ```python
 # During game, switch difficulty
 system.switch_level_mid_game(DifficultyLevel.EXPERT)
 # "Boom, tightened. 2200 ELO, no mercy."
-```
+```text
 
 ### Teach Mode
 ```python
@@ -120,7 +120,7 @@ system.enable_teach_mode()
 # Disable
 system.disable_teach_mode()
 # Back to original level
-```
+```text
 
 ### Get Move Strategy
 ```python
@@ -132,13 +132,13 @@ strategy = system.get_move_strategy(position)
 #   'mistake_probability': 0.02,
 #   ...
 # }
-```
+```text
 
 ### Select Move
 ```python
 move = system.select_move(legal_moves, position)
 # Level-appropriate move selection
-```
+```text
 
 ---
 
@@ -153,7 +153,7 @@ engine.difficulty_system.set_user_level("user", DifficultyLevel.INTERMEDIATE)
 if engine.difficulty_system.can_ai_move():
     strategy = engine.difficulty_system.get_move_strategy(position)
     move = engine.difficulty_system.select_move(legal_moves, position)
-```
+```text
 
 ### With Voice Commands
 - "expert on" → `switch_level_mid_game(EXPERT)`
@@ -187,41 +187,41 @@ Teach mode automatically adjusts difficulty:
 ## Examples
 
 ### Beginner Game
-```
+```text
 [Beginner] e4 (opens wide)
 [Beginner] Qh5? (leaves queen hanging)
 [You] Capture queen
 [Beginner] Oops. (random mistake)
 Win in 20 moves
-```
+```text
 
 ### Intermediate Game
-```
+```text
 [Intermediate] e4 (center control)
 [Intermediate] Nf3 (solid development)
 [You] e5
 [Intermediate] Nxe5! (punishes first slip)
 [You] Outlast with careful play
-```
+```text
 
 ### Expert Game
-```
+```text
 [Expert] e4
 [Expert] Nf3
 [Expert] Bb5 (castles fast)
 [Expert] O-O (no delay)
 [Expert] Sacs piece for attack
 You need a plan or you die
-```
+```text
 
 ### Master Game
-```
+```text
 [Master] e4
 [Master] Already playing Ruy Lopez to Zaitsev
 [Master] Sees 6 moves ahead
 [Master] Perfect endgame
 You're not playing. You're studying.
-```
+```text
 
 ---
 

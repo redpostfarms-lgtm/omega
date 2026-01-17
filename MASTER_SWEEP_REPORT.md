@@ -140,7 +140,7 @@ Comprehensive test suite created (`test_system.py`):
 **Run tests with:**
 ```bash
 python test_system.py
-```
+```text
 
 ---
 
@@ -155,7 +155,7 @@ All dependencies listed in `requirements.txt`:
 **Install with:**
 ```bash
 pip install -r requirements.txt
-```
+```text
 
 ---
 

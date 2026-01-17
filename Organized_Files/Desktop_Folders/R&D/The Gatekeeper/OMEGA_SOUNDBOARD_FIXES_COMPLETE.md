@@ -99,7 +99,7 @@ except KeyboardInterrupt:
 except Exception as e:
     # Detailed error reporting
     traceback.print_exc()
-```
+```text
 
 ### **Audio Processing:**
 ```python
@@ -112,7 +112,7 @@ audio_array = audio_array - np.mean(audio_array)  # Remove DC offset
 max_val = np.max(np.abs(audio_array))
 if max_val > 0:
     audio_array = audio_array / max_val * 0.95  # Normalize with headroom
-```
+```text
 
 ### **Frequency Analysis:**
 ```python
@@ -125,7 +125,7 @@ if np.any(voice_range):
     voice_magnitude = magnitude[voice_range]
     voice_freqs = freqs[voice_range]
     dominant_idx = np.argmax(voice_magnitude)
-```
+```text
 
 ---
 
@@ -148,19 +148,19 @@ if np.any(voice_range):
 ### **Record Voice:**
 ```bash
 python omega_soundboard.py --record --duration 5.0
-```
+```text
 
 ### **Generate Sound:**
 ```bash
 python omega_soundboard.py --generate sine
 python omega_soundboard.py --generate chord
 python omega_soundboard.py --generate noise
-```
+```text
 
 ### **List Effects:**
 ```bash
 python omega_soundboard.py --list-effects
-```
+```text
 
 ---
 

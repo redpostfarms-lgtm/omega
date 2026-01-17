@@ -17,7 +17,7 @@ The following separate modules were merged into one unified file:
 ### New Structure
 The consolidated file now contains all functionality organized into logical sections:
 
-```
+```text
 Section 1: Configuration & Enumerations
   - ErrorSeverity enum
   - SystemStatus enum
@@ -40,7 +40,7 @@ Section 5: Global Utilities
 
 Section 6: Main Execution
   - main() - entry point with diagnostics
-```
+```text
 
 ## Key Improvements
 
@@ -80,14 +80,14 @@ health = integration.get_system_health()
 diagnostics = integration.run_diagnostics()
 integration.save_diagnostics()  # JSON export
 integration.shutdown()  # Graceful shutdown
-```
+```text
 
 ## Verification
 
 ### ✓ Syntax Check
-```
+```text
 No syntax errors found in gatekeeper_integration_module.py
-```
+```text
 
 ### ✓ Import Test
 All classes imported successfully:
@@ -127,7 +127,7 @@ from gatekeeper_integration_module import (
     SystemHealthMonitor,
     ErrorContext
 )
-```
+```text
 
 #### Initialize and use:
 ```python
@@ -144,17 +144,17 @@ integration.save_diagnostics('system_health.json')
 
 # Graceful shutdown
 integration.shutdown()
-```
+```text
 
 #### From command line:
 ```bash
 python gatekeeper_integration_module.py
-```
+```text
 
 ## Architecture Benefits
 
 ### Before (Fragmented)
-```
+```text
 gatekeeper_integration_module.py  (core integration)
        +
 gatekeeper_omega_bridge.py  (bridge layer)
@@ -162,17 +162,17 @@ gatekeeper_omega_bridge.py  (bridge layer)
 gatekeeper_error_handler.py  (error handling)
        +
 gatekeeper_system_health_monitor.py  (monitoring)
-```
+```text
 
 ### After (Unified)
-```
+```text
 gatekeeper_integration_module.py  (complete system)
   - All core functionality
   - All error handling
   - All health monitoring
   - Unified API
   - Centralized logging
-```
+```text
 
 ## Configuration
 
@@ -188,7 +188,7 @@ The unified module uses the same config file structure:
   "metrics_file": "system_metrics.json",
   "health_check_interval": 60
 }
-```
+```text
 
 ## Next Steps
 

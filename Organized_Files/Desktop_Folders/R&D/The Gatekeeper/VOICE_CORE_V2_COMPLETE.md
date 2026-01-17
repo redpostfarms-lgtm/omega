@@ -57,13 +57,13 @@ python voice_core_v2_compile.py \
   --qcl=256 \
   --samples=/data/full_waveform_archive \
   --output=omega_voice_2.0.wav
-```
+```text
 
 ### Phase 8 — Test Script
 
 ```bash
 python voice_core_v2_test.py
-```
+```text
 
 Speakers will play. Not robotic. Not smooth. **Alive. Tired. Real.**
 
@@ -105,13 +105,13 @@ python voice_core_v2_compile.py \
   --samples="path/to/waveform/samples" \
   --output=omega_voice_2.0.wav \
   --text="Your text here"
-```
+```text
 
 ### Test Voice
 
 ```bash
 python voice_core_v2_test.py
-```
+```text
 
 ### LLM Integration
 
@@ -122,7 +122,7 @@ python voice_core_v2_llm_integration.py \
   --temp=0.7 \
   --listen \
   --speak
-```
+```text
 
 ---
 
@@ -174,7 +174,7 @@ Optional:
 Install:
 ```bash
 pip install numpy soundfile scipy librosa pyaudio
-```
+```text
 
 ---
 

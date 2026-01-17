@@ -47,7 +47,7 @@ class TestBrainPrime:
     def test_load_knowledge_structure(self):
         # Test knowledge structure
         pass
-```
+```text
 
 **Impact:** +0.8% system completion
 
@@ -74,7 +74,7 @@ class TestSystemIntegration:
     def test_self_healing_workflow(self):
         # Test self-healing system
         pass
-```
+```text
 
 **Impact:** +0.8% system completion
 
@@ -106,27 +106,27 @@ class TestSystemIntegration:
 ### **Install Dependencies:**
 ```bash
 pip install pytest pytest-cov
-```
+```text
 
 ### **Run All Tests:**
 ```bash
 pytest tests/
-```
+```text
 
 ### **Run with Coverage:**
 ```bash
 pytest tests/ --cov=. --cov-report=html
-```
+```text
 
 ### **Run Specific Test:**
 ```bash
 pytest tests/test_brain_prime.py -v
-```
+```text
 
 ### **Run Integration Tests Only:**
 ```bash
 pytest tests/test_integration.py -v
-```
+```text
 
 ---
 

@@ -40,7 +40,7 @@ You requested a **quantum worldwide scrub** using **VIVE mode** to:
 **Usage:**
 ```bash
 python quantum_worldwide_scrub.py
-```
+```text
 
 **Output:**
 - Text report: `D:\RPF_BRAIN\Analysis\quantum_scrub_[timestamp].txt`
@@ -235,7 +235,7 @@ python quantum_worldwide_scrub.py
 ### Run Analysis Anytime
 ```bash
 python quantum_worldwide_scrub.py
-```
+```text
 
 ### Track Progress
 1. Run analysis before implementing improvements

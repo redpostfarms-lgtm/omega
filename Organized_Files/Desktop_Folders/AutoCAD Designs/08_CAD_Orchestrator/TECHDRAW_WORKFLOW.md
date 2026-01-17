@@ -17,17 +17,17 @@ TechDraw is FreeCAD's technical drawing workbench. It converts 3D models into 2D
 
 ### 1. Create 3D Model First
 Run the main FreeCAD macro to generate the 3D solid:
-```
+```text
 builds\freecad\{name}.py
-```
+```text
 
 This creates the 3D geometry (box, lid, holes, etc.)
 
 ### 2. Generate TechDraw Drawing
 Run the TechDraw macro:
-```
+```text
 builds\freecad\{name}_techdraw.py
-```
+```text
 
 This creates:
 - TechDraw page (A4 or specified paper size)

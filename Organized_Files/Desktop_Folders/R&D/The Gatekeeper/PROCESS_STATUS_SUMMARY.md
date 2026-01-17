@@ -10,7 +10,7 @@
 
 ### Core System (5 processes)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | brain_prime | ✅ Found | 60% | 100% | 40% | None |
 | auto_heal | ✅ Found | 60% | 100% | 40% | None |
 | voice_tuner | ✅ Found | 60% | 100% | 40% | None |
@@ -19,20 +19,20 @@
 
 ### Learning Systems (3 processes)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | self_learn | ✅ Found | 60% | 90% | 30% | None |
 | weekly_growth | ✅ Found | 60% | 85% | 25% | None |
 | planetary_search | ✅ Found | 60% | 95% | 35% | None |
 
 ### Agent Systems (2 processes)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | agent_council | ✅ Found | 60% | 92% | 32% | None |
 | hive_auto | ✅ Found | 40% | 88% | 48% | Needs work |
 
 ### Automation (5 processes)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | battery_oracle | ✅ Found | 60% | 90% | 30% | None |
 | grant_machine | ✅ Found | 60% | 85% | 25% | None |
 | drone_brain | ✅ Found | 60% | 80% | 20% | None |
@@ -41,18 +41,18 @@
 
 ### Security (1 process)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | scorched_earth | ✅ Found | 60% | 95% | 35% | None |
 
 ### Game System (2 processes)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | game_hub | ✅ Found | 60% | 85% | 25% | None |
 | chess_replay | ✅ Found | 60% | 90% | 30% | None |
 
 ### Diagnostics (1 process)
 | Process | Status | Completion | Industry Standard | Gap | Issues |
-|---------|--------|------------|-------------------|-----|--------|
+| --------- | -------- | ------------ | ------------------- | ----- | -------- |
 | diagnostic_engine | ⚠️ Needs Work | 80% | 95% | 15% | Debug prints, TODOs |
 
 ---

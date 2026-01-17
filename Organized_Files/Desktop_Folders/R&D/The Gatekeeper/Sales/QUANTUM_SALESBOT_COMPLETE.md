@@ -36,13 +36,13 @@ The Quantum SalesBot is a fusion of:
 ```bash
 pip install pyttsx3
 pip install llama-cpp-python
-```
+```text
 
 ### Model Setup
 Place your Llama model at:
-```
+```text
 D:\RPF_BRAIN\models\Llama-3.2-8B-Instruct-abliterated-Q8_0.gguf
-```
+```text
 
 If the model is not found, the bot will run in fallback mode with hardcoded responses.
 
@@ -51,17 +51,17 @@ If the model is not found, the bot will run in fallback mode with hardcoded resp
 ### Deploy
 ```cmd
 deploy_quantum_salesbot.bat
-```
+```text
 
 Or directly:
 ```cmd
 python D:\RPF_BRAIN\Sales\QuantumSalesBot.py
-```
+```text
 
 ### Voice Commands / Chat
 
 **Chat Examples:**
-```
+```text
 Customer: Hi, what do you have?
 SalesBot: [Responds with product list and prices]
 
@@ -71,7 +71,7 @@ SalesBot: [LLM-generated sales pitch about grass-fed beef]
 Customer: order 10 lb beef
 SalesBot: Order 240103181234 — 10 grass-fed beef locked in. Shipping tomorrow. Thank you.
 [Shipping label printed]
-```
+```text
 
 **Order Processing:**
 - Natural language order extraction
@@ -85,14 +85,14 @@ Type `quit`, `bye`, `exit`, or `q` to exit.
 
 ## File Structure
 
-```
+```text
 D:\RPF_BRAIN\Sales\
 ├── QuantumSalesBot.py          # Main bot file
 ├── deploy_quantum_salesbot.bat  # Deploy script
 ├── orders.jsonl                 # Order history (JSONL format)
 ├── inventory.json               # Current stock levels
 └── QUANTUM_SALESBOT_COMPLETE.md # This file
-```
+```text
 
 ## Technical Details
 
@@ -118,7 +118,7 @@ D:\RPF_BRAIN\Sales\
   "time": "Fri Jan  3 18:12:34 2026",
   "status": "shipped"
 }
-```
+```text
 
 ## Integration
 
@@ -130,14 +130,14 @@ The bot can be extended to accept POST requests from a local frontend:
 def webhook():
     data = request.json
     bot.chat(data['message'])
-```
+```text
 
 ### Voice Listener Integration
 Add to `voice_listener.py`:
 ```python
 elif 'quantum salesbot' in text or 'salesbot' in text:
     handle_quantum_salesbot(text)
-```
+```text
 
 ## Performance
 

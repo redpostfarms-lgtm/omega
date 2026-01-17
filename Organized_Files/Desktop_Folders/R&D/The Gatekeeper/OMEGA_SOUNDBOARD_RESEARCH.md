@@ -131,20 +131,20 @@
 ### **Required:**
 ```bash
 pip install numpy
-```
+```text
 
 ### **Recommended (for full functionality):**
 ```bash
 pip install pyaudio numpy scipy
 pip install librosa soundfile
 pip install pydub
-```
+```text
 
 ### **Windows PyAudio:**
 ```bash
 pip install pipwin
 pipwin install pyaudio
-```
+```text
 
 ---
 
@@ -156,7 +156,7 @@ from omega_soundboard import OmegaSoundboard
 
 soundboard = OmegaSoundboard()
 result = soundboard.record_user_voice(duration=5.0)
-```
+```text
 
 ### **Generate Sounds:**
 ```python
@@ -168,7 +168,7 @@ notification = soundboard.generate_sound("notification")
 
 # Generate noise
 noise = soundboard.generate_sound("noise", noise_type="pink", duration=2.0)
-```
+```text
 
 ### **Modulate Voice:**
 ```python
@@ -177,12 +177,12 @@ modulated = soundboard.modulate_voice(audio, {
     "reverb": {"room_size": 0.7, "damping": 0.5},
     "vibrato": {"depth": 0.02, "rate": 5.0}
 })
-```
+```text
 
 ### **Save Sounds:**
 ```python
 soundboard.save_sound(audio, "my_sound")
-```
+```text
 
 ---
 

@@ -473,7 +473,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### High Priority (Immediate Integration Candidates)
 
 | Project | Feature | Integration Benefit | Effort | Risk |
-|---------|---------|---------------------|--------|------|
+| --------- | --------- | --------------------- | -------- | ------ |
 | **Dshell** | Forensic Analysis Modules | Enhanced attack analysis | Low | Low |
 | **OSSEC** | Log Analysis Engine | Improved threat detection | Medium | Low |
 | **Shinken** | System Monitoring | Real-time performance tracking | Low | Low |
@@ -483,7 +483,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### Medium Priority (Future Enhancements)
 
 | Project | Feature | Integration Benefit | Effort | Risk |
-|---------|---------|---------------------|--------|------|
+| --------- | --------- | --------------------- | -------- | ------ |
 | **PacketFence** | Network Anomaly Detection | Proactive threat detection | High | Medium |
 | **OPA Gatekeeper** | Policy Framework | Enhanced ROE enforcement | Medium | Medium |
 | **Authelia** | MFA Authentication | Agent security | Medium | Low |
@@ -493,7 +493,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### Low Priority (Architectural Reference)
 
 | Project | Feature | Integration Benefit | Effort | Risk |
-|---------|---------|---------------------|--------|------|
+| --------- | --------- | --------------------- | -------- | ------ |
 | **GNU Gatekeeper** | Routing Patterns | Network routing | Low | Low |
 | **Karabo** | Distributed Architecture | Agent framework | High | High |
 | **ZoneMinder** | Pattern Detection | Anomaly detection | Medium | Medium |
@@ -655,7 +655,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### Expected Performance Impacts
 
 | Integration | CPU Impact | Memory Impact | Network Impact | Overall Impact |
-|-------------|------------|---------------|----------------|----------------|
+| ------------- | ------------ | --------------- | ---------------- | ---------------- |
 | Dshell Modules | +5% | +50MB | +1% | Low |
 | OSSEC Log Analysis | +10% | +100MB | 0% | Medium |
 | Shinken Monitoring | +3% | +30MB | 0% | Low |
@@ -782,7 +782,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### Appendix B: License Compatibility Matrix
 
 | Gatekeeper License | Upstream License | Compatibility | Notes |
-|-------------------|------------------|---------------|-------|
+| ------------------- | ------------------ | --------------- | ------- |
 | Proprietary | MIT | ✅ Compatible | Can integrate |
 | Proprietary | Apache 2.0 | ✅ Compatible | Requires attribution |
 | Proprietary | GPL v2 | ⚠️ Incompatible | Reference only |
@@ -792,7 +792,7 @@ This report presents a comprehensive analysis of open-source projects discovered
 ### Appendix C: Integration Effort Estimates
 
 | Project | Integration Effort | Testing Effort | Documentation Effort | Total Effort |
-|---------|-------------------|----------------|---------------------|--------------|
+| --------- | ------------------- | ---------------- | --------------------- | -------------- |
 | Dshell | 40 hours | 20 hours | 10 hours | 70 hours |
 | OSSEC | 80 hours | 40 hours | 20 hours | 140 hours |
 | Shinken | 60 hours | 30 hours | 15 hours | 105 hours |

@@ -72,19 +72,19 @@
 ## Build Examples
 
 ### **Simple:**
-```
+```text
 python gatekeeper_fusion.py "write a hello world in Python"
-```
+```text
 
 ### **Practical:**
-```
+```text
 python gatekeeper_fusion.py "create a battery voltage monitor in Python"
-```
+```text
 
 ### **Complex:**
-```
+```text
 python gatekeeper_fusion.py "build a full-stack off-grid farm OS with Rust and Python"
-```
+```text
 
 ---
 

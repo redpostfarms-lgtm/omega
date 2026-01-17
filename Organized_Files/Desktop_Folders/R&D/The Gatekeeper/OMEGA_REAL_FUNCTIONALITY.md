@@ -42,7 +42,7 @@
 **Dependencies:**
 ```bash
 pip install watchdog  # For file monitoring (optional but recommended)
-```
+```text
 
 **Without watchdog:** Autonomous core still works, but file monitoring is disabled.
 
@@ -91,7 +91,7 @@ pip install watchdog  # For file monitoring (optional but recommended)
   "patterns": {...},    // Patterns learned
   "last_updated": "..." // Timestamp
 }
-```
+```text
 
 **Memory is actually used:**
 - Loaded on startup
@@ -117,7 +117,7 @@ pip install librosa soundfile
 
 # For continuous learning
 pip install pyaudio numpy
-```
+```text
 
 **Without Dependencies:**
 - Basic TTS works (pyttsx3)
@@ -163,7 +163,7 @@ pip install pyaudio numpy
 ```bash
 # No dependencies needed - basic functionality works
 python deep_system_test.py
-```
+```text
 
 ### **Recommended (Full Functionality):**
 ```bash
@@ -175,13 +175,13 @@ pip install pyaudio numpy scipy
 
 # Install for advanced voice
 pip install librosa soundfile
-```
+```text
 
 ### **Windows PyAudio:**
 ```bash
 pip install pipwin
 pipwin install pyaudio
-```
+```text
 
 ---
 
@@ -190,7 +190,7 @@ pipwin install pyaudio
 ### **Autonomous Mode (Default):**
 ```bash
 python deep_system_test.py
-```
+```text
 
 **What Happens:**
 - File monitoring starts (if watchdog installed)
@@ -202,7 +202,7 @@ python deep_system_test.py
 ### **Manual Mode:**
 ```bash
 python deep_system_test.py --manual
-```
+```text
 
 **What Happens:**
 - No file monitoring
@@ -220,7 +220,7 @@ from omega_autonomous_core import OmegaAutonomousCore
 core = OmegaAutonomousCore()
 status = core.get_autonomous_status()
 print(status)
-```
+```text
 
 ### **Check Memory:**
 ```python
@@ -234,7 +234,7 @@ if memory_file.exists():
     print(f"Events: {len(memory.get('events', []))}")
     print(f"Reactions: {len(memory.get('reactions', []))}")
     print(f"Learnings: {len(memory.get('learnings', []))}")
-```
+```text
 
 ---
 

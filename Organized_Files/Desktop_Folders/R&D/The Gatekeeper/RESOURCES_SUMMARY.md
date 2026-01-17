@@ -156,19 +156,19 @@ As Lead Developer, I've completed a comprehensive analysis of The Gatekeeper sys
 ### Install High-Priority Improvements
 ```bash
 pip install scrapy lxml httpx vosk speechbrain TTS chromadb sentence-transformers
-```
+```text
 
 ### Download Vosk Models
 ```bash
 # Visit: https://alphacephei.com/vosk/models
 # Recommended: vosk-model-small-en-us-0.15 (39MB, English)
 # Extract to: D:\RPF_BRAIN\Archived\voiceprint\vosk-models\
-```
+```text
 
 ### Install All Enhancements
 ```bash
 pip install -r requirements_enhanced.txt
-```
+```text
 
 ---
 

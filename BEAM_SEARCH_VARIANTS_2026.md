@@ -178,7 +178,7 @@ Beam search variants are extensions and modifications of the classic beam search
 ## Quick Summary Table (2026 Perspective)
 
 | Variant | Diversity | Quality | Speed | Best For | Real-World Popularity |
-|---------|-----------|---------|-------|----------|----------------------|
+| --------- | ----------- | --------- | ------- | ---------- | ---------------------- |
 | **Standard Beam** | Very low | Highest | Medium | Code, math, translation | Very high |
 | **Diverse Beam** | High | Very high | Medium-slow | Creative writing, brainstorming | High (creative tools) |
 | **Length-Normalized Beam** | Low | High | Medium | Any beam search task | Almost universal |
@@ -235,7 +235,7 @@ Beam search variants are extensions and modifications of the classic beam search
     "num_beams": 4-20,
     "length_penalty": 0.6-1.0
 }
-```
+```text
 
 ### Diverse Beam Search:
 ```python
@@ -245,7 +245,7 @@ Beam search variants are extensions and modifications of the classic beam search
     "diversity_penalty": 0.8-2.0,
     "length_penalty": 0.6-1.0
 }
-```
+```text
 
 ### Length-Normalized Beam:
 ```python
@@ -253,7 +253,7 @@ Beam search variants are extensions and modifications of the classic beam search
     "num_beams": 4-20,
     "length_penalty": 0.6-1.0  # Default: 1.0
 }
-```
+```text
 
 ### Constrained Beam Search:
 ```python
@@ -263,7 +263,7 @@ Beam search variants are extensions and modifications of the classic beam search
     "force_words_ids": [...],  # Token ID constraints
     "guidance_scale": 1.0-2.0  # Constraint strength
 }
-```
+```text
 
 ### Beam + Speculative Decoding:
 ```python
@@ -273,7 +273,7 @@ Beam search variants are extensions and modifications of the classic beam search
     "draft_model": "...",
     "speculation_length": 4-8
 }
-```
+```text
 
 ---
 

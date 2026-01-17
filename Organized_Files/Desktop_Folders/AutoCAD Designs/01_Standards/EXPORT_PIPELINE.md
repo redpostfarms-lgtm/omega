@@ -136,14 +136,14 @@ All export macros/scripts must:
 5. **Log export** details (date, format, version)
 
 **Example automation flow:**
-```
+```text
 1. Load project file
 2. Apply layer standards
 3. Verify units
 4. Execute export with standardized settings
 5. Save to 05_Exports\{format}\
 6. Log export metadata
-```
+```text
 
 ---
 

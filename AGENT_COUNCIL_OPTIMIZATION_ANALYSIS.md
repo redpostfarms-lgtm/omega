@@ -37,7 +37,7 @@ Using a collaborative agent council (knowledge graph) to:
 
 ## Relationships Identified
 
-```
+```text
 Collaborative-Council → analyzes → Optimization-Tasks
 Optimization-Tasks → requires → Omega-Logo-Image
 Optimization-Tasks → requires → BIOS-Boot-Logo
@@ -45,7 +45,7 @@ Optimization-Tasks → requires → Control-Panel-UI-Design
 Optimization-Tasks → requires → Desktop-Shortcut-Icon
 BIOS-Boot-Logo → uses → Omega-Logo-Image
 Desktop-Shortcut-Icon → uses → Omega-Logo-Image
-```
+```text
 
 **Key Insight:** All tasks depend on the Omega logo image as the primary asset.
 
@@ -115,12 +115,12 @@ Desktop-Shortcut-Icon → uses → Omega-Logo-Image
 ## Agent Council Insights
 
 ### Dependency Chain Identified
-```
+```text
 Omega Logo Image (Save First)
     ├─→ BIOS Boot Logo (Create after)
     └─→ Desktop Icon (Create after)
             └─→ Desktop Shortcut Icon (Set after)
-```
+```text
 
 ### Parallel Tasks
 - **Control Panel UI Design** - Can be saved independently

@@ -150,14 +150,14 @@ youtube_voice = collector.collect_from_youtube("https://youtube.com/...")
 
 # From audio file
 file_voice = collector.collect_from_file(Path("audio.wav"), "source_name")
-```
+```text
 
 ### **Step 2: Record Your Voice**
 ```python
 soundboard = OmegaSoundboard()
 your_voice = soundboard.record_user_voice(duration=5.0)
 user_voice_id = your_voice['voice_id']
-```
+```text
 
 ### **Step 3: Blend Voices**
 ```python
@@ -166,13 +166,13 @@ omega_voice = collector.create_omega_voice(
     user_voice_id=user_voice_id,
     weights=[0.35, 0.35]  # Your voice gets 30% automatically
 )
-```
+```text
 
 ### **Step 4: Use Omega's Voice**
 ```python
 tts_manager = FreeTTSManager()
 tts_manager.speak("I am Omega. Gate guarded.", engine="edge")
-```
+```text
 
 ---
 
@@ -202,7 +202,7 @@ pip install TTS               # Coqui TTS
 
 # Voice activity detection (optional)
 pip install webrtcvad
-```
+```text
 
 ---
 

@@ -16,7 +16,7 @@
 ```python
 except:
     continue
-```
+```text
 
 **Problem:**
 - Catches SystemExit (prevents proper shutdown)
@@ -27,7 +27,7 @@ except:
 ```python
 except Exception:
     continue
-```
+```text
 
 **Severity:** MEDIUM  
 **Impact:** Can prevent proper shutdown, makes debugging harder
@@ -42,7 +42,7 @@ except Exception:
 ```python
 except:
     pass
-```
+```text
 
 **Problems:**
 - Silently ignores errors
@@ -56,7 +56,7 @@ except Exception as e:
     # Log or notify at least
     print(f"[WARNING] Failed to initialize: {e}")
     pass
-```
+```text
 
 **Severity:** LOW-MEDIUM  
 **Impact:** Errors are hidden, debugging is harder
@@ -76,14 +76,14 @@ except Exception as e:
 **Current Code:**
 ```python
 self.ani = FuncAnimation(self.fig, self._update_gui, interval=int(self.update_interval * 1000), blit=False)
-```
+```text
 
 **Fix:**
 ```python
 # In stop() method:
 if hasattr(self, 'ani') and self.ani:
     self.ani.event_source.stop()  # Stop the animation
-```
+```text
 
 **Severity:** LOW  
 **Impact:** Potential resource leak, minor issue
@@ -103,7 +103,7 @@ if hasattr(self, 'ani') and self.ani:
 **Current Code:**
 ```python
 self.daily_scan_thread = threading.Thread(target=daily_scan_worker, daemon=True)
-```
+```text
 
 **Fix:**
 ```python
@@ -112,7 +112,7 @@ if hasattr(self, 'daily_scan_thread') and self.daily_scan_thread:
     if self.daily_scan_thread.is_alive():
         # Thread will stop when self.running = False
         pass  # Daemon thread, will stop on exit
-```
+```text
 
 **Severity:** LOW  
 **Impact:** Minor - daemon threads are handled, but explicit cleanup is better
@@ -130,7 +130,7 @@ except Exception as e:
     import traceback
     traceback.print_exc()
     self._create_text_panel()
-```
+```text
 
 **Analysis:** Proper exception handling with traceback and fallback to text mode  
 **Action:** No fix needed - this is good practice
@@ -144,7 +144,7 @@ except Exception as e:
 **Code:**
 ```python
 plt.close('all')
-```
+```text
 
 **Analysis:** Matplotlib figures are properly closed  
 **Action:** No fix needed
@@ -159,7 +159,7 @@ plt.close('all')
 **Code:**
 ```python
 'disk_usage': psutil.disk_usage('/').percent if PSUTIL_AVAILABLE else 0.0,
-```
+```text
 
 **Problem:**
 - On Windows, `'/'` might not work
@@ -170,7 +170,7 @@ plt.close('all')
 import os
 disk_path = os.path.splitdrive(os.getcwd())[0] + '\\' if os.name == 'nt' else '/'
 'disk_usage': psutil.disk_usage(disk_path).percent if PSUTIL_AVAILABLE else 0.0,
-```
+```text
 
 **Severity:** LOW  
 **Impact:** Might fail on Windows in some cases

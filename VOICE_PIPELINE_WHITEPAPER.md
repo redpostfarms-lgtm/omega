@@ -37,10 +37,10 @@ The system is designed for seamless, hands-free interaction with built-in securi
 
 The Omega voice pipeline follows a unidirectional processing flow:
 
-```
+```text
 [Microphone] → [VAD] → [Recording] → [Voice Security] → [Speech Recognition] 
     → [NLP/Response] → [TTS] → [Voice Clone] → [Audio Playback]
-```
+```text
 
 **Key Components:**
 - **Voice Activity Detection (VAD)**: Real-time speech detection using energy-based analysis
@@ -98,7 +98,7 @@ def record_continuous_speech():
     with sd.InputStream(samplerate=SAMPLE_RATE, channels=1, dtype='float32', 
                        blocksize=chunk_size) as stream:
         # Real-time streaming and VAD
-```
+```text
 
 ### 2.2 Voice Activity Detection (VAD)
 
@@ -120,7 +120,7 @@ SILENCE_THRESHOLD = 0.015      # RMS energy threshold
 SILENCE_DURATION = 2.0          # Seconds of silence before ending
 MIN_SPEECH_DURATION = 0.8       # Minimum valid speech length
 CHUNK_DURATION = 0.25           # Processing chunk size (seconds)
-```
+```text
 
 **Performance:**
 - **Latency**: < 250ms (single chunk delay)
@@ -190,7 +190,7 @@ signature = {
     'spectral_envelope': [100 floats],
     'duration': float
 }
-```
+```text
 
 ### 3.2 Voice Signature Comparison
 
@@ -225,7 +225,7 @@ signature = {
 **Overall Similarity:**
 ```python
 overall_sim = (pitch_sim * 0.3) + (mfcc_sim * 0.4) + (centroid_sim * 0.15) + (chroma_sim * 0.15)
-```
+```text
 
 **Authorization Threshold:** 0.85 (85% match required)
 
@@ -299,7 +299,7 @@ async def recognize_speech(wav_file):
     
     text = await loop.run_in_executor(None, recognize)
     return text
-```
+```text
 
 **Performance:**
 - **Latency**: 1-3 seconds (network-dependent)
@@ -331,7 +331,7 @@ elif '?' in user_text:
     response = "Interesting question. What are your thoughts..."
 else:
     response = "That's interesting! What else..."
-```
+```text
 
 ### 5.2 Conversation History
 
@@ -380,7 +380,7 @@ else:
 **Initialization:**
 ```python
 tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
-```
+```text
 
 **Lazy Loading:**
 - Model loaded only when first needed
@@ -410,7 +410,7 @@ tts.tts_to_file(
     language='en',
     file_path='response.wav'
 )
-```
+```text
 
 ### 6.3 PyTorch Compatibility
 
@@ -424,7 +424,7 @@ def patched_load(*args, **kwargs):
         kwargs['weights_only'] = False
     return original_load(*args, **kwargs)
 torch.load = patched_load
-```
+```text
 
 **Version Constraints:**
 - `torch==2.5.1` (compatible with TTS and torchcodec)
@@ -460,7 +460,7 @@ subprocess.Popen(['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 creationflags=subprocess.CREATE_NO_WINDOW)
-```
+```text
 
 **Linux/macOS:**
 - **Fallback**: `ffplay -nodisp -autoexit` or `play` (SoX)
@@ -522,7 +522,7 @@ subprocess.Popen(['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
     'avg_mfccs': [13 floats],
     'recommendations': [list of improvement strings]
 }
-```
+```text
 
 ### 8.2 Language Quality Improvement
 
@@ -565,7 +565,7 @@ strategy = {
         'Better reference previous messages'
     ]
 }
-```
+```text
 
 ---
 
@@ -573,7 +573,7 @@ strategy = {
 
 ### 9.1 Complete Pipeline Flow
 
-```
+```text
 ┌─────────────────┐
 │   Microphone    │
 │  (16 kHz Mono)  │
@@ -642,11 +642,11 @@ Authorized  Unauthorized
 │ Background      │ ──► PowerShell MediaPlayer (Hidden)
 │ Audio Playback  │     Non-blocking, Auto-cleanup
 └─────────────────┘
-```
+```text
 
 ### 9.2 Improvement Cycle Flow
 
-```
+```text
 Every 3 Conversations
          │
          ▼
@@ -687,7 +687,7 @@ Analysis   Analysis
 │ Next Response   │ ◄── Improved Quality
 │ Uses            │
 └─────────────────┘
-```
+```text
 
 ---
 
@@ -696,7 +696,7 @@ Analysis   Analysis
 ### 10.1 Audio Specifications
 
 | Parameter | Value | Notes |
-|-----------|-------|-------|
+| ----------- | ------- | ------- |
 | Input Sample Rate | 16,000 Hz | Industry standard for speech |
 | Input Channels | Mono (1) | Sufficient for voice |
 | Input Bit Depth | 32-bit float (process), 16-bit PCM (store) | Float for processing, PCM for storage |
@@ -708,7 +708,7 @@ Analysis   Analysis
 ### 10.2 Performance Specifications
 
 | Metric | Value | Notes |
-|--------|-------|-------|
+| -------- | ------- | ------- |
 | VAD Latency | < 250ms | Single chunk delay |
 | Speech Recognition | 1-3 seconds | Network dependent |
 | TTS Generation | 5-10 seconds | Text length dependent |
@@ -721,7 +721,7 @@ Analysis   Analysis
 ### 10.3 Security Specifications
 
 | Parameter | Value | Notes |
-|-----------|-------|-------|
+| ----------- | ------- | ------- |
 | Voice Match Threshold | 85% | Weighted similarity score |
 | Signature Size | ~2 KB | Per voice (compressed) |
 | Hash Algorithm | SHA-256 | For voice ID generation |
@@ -750,7 +750,7 @@ Analysis   Analysis
 ### 11.2 Accuracy Metrics
 
 | Component | Accuracy | Notes |
-|-----------|----------|-------|
+| ----------- | ---------- | ------- |
 | VAD (Speech Detection) | 95%+ | With proper threshold tuning |
 | Speech Recognition | 95%+ | Google API accuracy |
 | Voice Authentication | 98%+ | 85% threshold prevents false positives |
@@ -894,7 +894,7 @@ The system is ready for deployment and can serve as a foundation for advanced co
 
 ## Appendix A: File Structure
 
-```
+```text
 omega/
 ├── hands_free_omega.py          # Main conversation loop
 ├── omega_full_brain.py          # Core TTS and audio functions
@@ -908,11 +908,11 @@ omega/
 ├── conversations/               # Conversation recordings
 ├── voice_security/              # Security data
 └── response.wav                 # TTS output (temporary)
-```
+```text
 
 ## Appendix B: Key Dependencies
 
-```
+```text
 TTS==0.22.0
 torch==2.5.1
 torchaudio==2.5.1
@@ -924,7 +924,7 @@ librosa
 speech_recognition
 speechbrain==1.0.3
 transformers>=4.21.0,<4.36.0
-```
+```text
 
 ---
 

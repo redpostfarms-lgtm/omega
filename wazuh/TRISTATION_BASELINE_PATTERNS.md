@@ -237,7 +237,7 @@ Use these baseline patterns to tune Wazuh rules:
   <timeframe>60</timeframe>
   <description>High-volume TriStation traffic - possible Triton activity</description>
 </rule>
-```
+```text
 
 ### Whitelisting
 
@@ -249,7 +249,7 @@ Whitelist authorized engineering IPs:
   <field name="src_ip">^192\.168\.10\.|^10\.0\.50\.</field>
   <description>Authorized engineering subnet - whitelist</description>
 </rule>
-```
+```text
 
 ---
 

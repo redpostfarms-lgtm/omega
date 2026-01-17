@@ -70,7 +70,7 @@
 **Level 1: Basic UUID v4 (Most Common):**
 ```python
 uuid_v4_regex = r"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-```
+```text
 - Strict enough for 99% of real use cases
 - Keeps FSM small
 - Very fast performance
@@ -83,7 +83,7 @@ any_uuid_regex = (
     r"[89ab][0-9a-f]{3}-"
     r"[0-9a-f]{12}$"
 )
-```
+```text
 - Matches versions 1–5
 - General UUID validation
 - Fast performance
@@ -95,7 +95,7 @@ strict_v4_regex = (
     r"4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-"
     r"[0-9a-fA-F]{12}(?:\})?$"
 )
-```
+```text
 - Supports optional braces
 - Case insensitive
 - Fast performance
@@ -108,7 +108,7 @@ class UUIDList(BaseModel):
     ids: conlist(UUID4, min_length=3, max_length=8)
 
 generator = generate.json(outlines_model, UUIDList)
-```
+```text
 - Combines JSON schema with UUID v4 regex
 - Structured API responses, configs
 - Slightly slower (but still fast)

@@ -111,7 +111,7 @@
 ### JWKS Strategies Comparison:
 
 | Strategy | Cache Duration | Refresh Trigger | Best For |
-|----------|---------------|-----------------|----------|
+| ---------- | --------------- | ----------------- | ---------- |
 | **Simple (no cache)** | None | Every request | Testing |
 | **Basic PyJWKClient** | Built-in TTL | When key expires or missing | Small apps |
 | **SmartJWKSClient** | 1–24h | TTL + missing kid + min interval | Production |

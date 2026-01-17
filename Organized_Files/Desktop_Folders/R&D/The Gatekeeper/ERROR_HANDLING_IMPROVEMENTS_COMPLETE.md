@@ -91,7 +91,7 @@ except (IOError, OSError, PermissionError) as e:
     # Handle file access errors
 except Exception as e:
     # Handle unexpected errors
-```
+```text
 
 ### Pattern 2: Data Parsing
 ```python
@@ -101,7 +101,7 @@ except (ValueError, KeyError, json.JSONDecodeError) as e:
     # Handle parsing errors
 except Exception as e:
     # Handle unexpected errors
-```
+```text
 
 ### Pattern 3: External Dependencies
 ```python
@@ -113,7 +113,7 @@ except RuntimeError as e:
     # Handle runtime errors
 except Exception as e:
     # Handle unexpected errors
-```
+```text
 
 ---
 
@@ -136,17 +136,17 @@ except Exception as e:
 ## VALIDATION
 
 ### Syntax Check
-```
+```text
 ✅ voice_listener.py - Compiles successfully
 ✅ game_hub_final.py - Compiles successfully
 ✅ chess_replay.py - Compiles successfully
 ✅ process_status_checker.py - Compiles successfully
-```
+```text
 
 ### Linting
-```
+```text
 ✅ No linter errors found
-```
+```text
 
 ---
 

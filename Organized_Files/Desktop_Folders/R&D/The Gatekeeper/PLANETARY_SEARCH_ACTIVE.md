@@ -30,12 +30,12 @@
 ## Example
 
 ### Input:
-```
+```text
 "Hey, Gatekeeper, search quantum-safe 18650 BMS firmware"
-```
+```text
 
 ### Output:
-```
+```text
 The doors of knowledge opens. Worldwide deep search launched.
 
 ============================================================
@@ -65,7 +65,7 @@ Worldwide deep search complete. X new facts absorbed.
 ============================================================
 
 Worldwide deep search complete. X new facts absorbed.
-```
+```text
 
 ## Platforms Scraped
 

@@ -18,7 +18,7 @@
 ## Key Files
 
 | File | Purpose | Location |
-|------|---------|----------|
+| ------ | --------- | ---------- |
 | `quantum_worldwide_scrub.py` | Analysis script | Root directory |
 | `QUANTUM_SCRUB_ACTION_PLAN.md` | Implementation roadmap | Root directory |
 | `QUANTUM_SCRUB_SUMMARY.md` | Complete summary | Root directory |
@@ -31,24 +31,24 @@
 ### Run Analysis
 ```bash
 python quantum_worldwide_scrub.py
-```
+```text
 
 ### View Latest Report
 ```bash
 type "D:\RPF_BRAIN\Analysis\quantum_scrub_[latest].txt"
-```
+```text
 
 ### View Action Plan
 ```bash
 type QUANTUM_SCRUB_ACTION_PLAN.md
-```
+```text
 
 ---
 
 ## System Scores (Current)
 
 | Category | Score | Status |
-|----------|-------|--------|
+| ---------- | ------- | -------- |
 | Agent Systems | 61.5% | ✅ STRONG |
 | Permanent Storage | 57.1% | ✅ GOOD |
 | Voice Systems | 30.0% | ⚠️ MODERATE |

@@ -14,9 +14,9 @@
 
 Omega uses a multi-layer approach:
 
-```
+```text
 OpenRGB (Primary) -> ASUS AURA -> Corsair iCUE -> Razer Chroma -> NZXT CAM -> WinRing0 -> Simulated
-```
+```text
 
 ## Step-by-Step Solutions
 
@@ -36,7 +36,7 @@ pip install openrgb
 sudo apt install openrgb  # Ubuntu/Debian
 sudo pacman -S openrgb    # Arch
 sudo dnf install openrgb  # Fedora
-```
+```text
 
 #### After Installation
 
@@ -50,13 +50,13 @@ sudo dnf install openrgb  # Fedora
 
 **Why**: Native ASUS RGB support
 
-```
+```text
 1. Visit: https://rog.asus.com/ca/
 2. Search for your motherboard model
 3. Download "ASUS AURA" from driver page
 4. Install and restart
 5. Omega will detect automatically
-```
+```text
 
 ### Solution 3: Install USB Drivers
 
@@ -64,26 +64,26 @@ sudo dnf install openrgb  # Fedora
 
 #### For FTDI Devices (Most common)
 
-```
+```text
 1. Download: https://ftdichip.com/drivers/d2xx/
 2. Run installer
 3. Restart PC
 4. Devices should appear in OpenRGB
-```
+```text
 
 #### For Silicon Labs CP210x (NZXT, some others)
 
-```
+```text
 1. Download: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers
 2. Run installer
 3. Restart PC
-```
+```text
 
 ### Solution 4: Check BIOS Settings
 
 **Why**: BIOS may disable RGB for performance reasons
 
-```
+```text
 Steps:
 1. Restart and press DEL or F2 (depends on motherboard)
 2. Look for sections like:
@@ -94,13 +94,13 @@ Steps:
 3. Enable RGB settings
 4. Save and exit (usually F10)
 5. Restart Omega Control Panel
-```
+```text
 
 ### Solution 5: Check Physical Connections
 
 **Why**: Most common cause of non-functional RGB
 
-```
+```text
 Steps:
 1. Power off and unplug system
 2. Open case
@@ -110,20 +110,20 @@ Steps:
 4. Check fan RGB connector to RGB header
 5. Ensure connectors not backwards
 6. Power on and test
-```
+```text
 
 ### Solution 6: Update Fan Firmware
 
 **Why**: Older firmware may have RGB issues
 
-```
+```text
 Steps:
 1. Identify your fan brand/model
 2. Visit manufacturer's website
 3. Download latest firmware
 4. Follow firmware update instructions
 5. Restart Omega
-```
+```text
 
 ## Diagnostics
 
@@ -135,7 +135,7 @@ rgb = get_advanced_rgb_controller()
 status = rgb.get_status()
 print("Available RGB methods:", status['available_methods'])
 print("Current method:", status['current_method'])
-```
+```text
 
 ### Test OpenRGB Command Line
 
@@ -148,7 +148,7 @@ openrgb -c FF0000
 
 # Test specific device
 openrgb -d 0 -c 00FF00  # Device 0, green
-```
+```text
 
 ### Check Device Manager (Windows)
 
@@ -201,7 +201,7 @@ openrgb -d 0 -c 00FF00  # Device 0, green
 import logging
 logging.basicConfig(level=logging.DEBUG)
 # Now RGB operations will show detailed debug info
-```
+```text
 
 ## Quick Checklist
 
@@ -255,7 +255,7 @@ print("Available:", status['available_methods'])
 
 # Enable monitoring thread
 rgb.start_monitoring(interval=5.0)
-```
+```text
 
 ---
 **Generated**: 2024 Omega RGB System

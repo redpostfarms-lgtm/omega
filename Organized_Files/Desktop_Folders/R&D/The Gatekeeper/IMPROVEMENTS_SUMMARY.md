@@ -53,7 +53,7 @@
 ### All Components Now 90%+
 
 | Category | Before | After | Status |
-|----------|-------|-------|--------|
+| ---------- | ------- | ------- | -------- |
 | **Core System** | 97.6% | **98.4%** | ✅ Improved |
 | **8 Hidden Pieces** | 90.1% | **91.8%** | ✅ Improved |
 | **Additional Features** | 99.0% | **99.3%** | ✅ Improved |

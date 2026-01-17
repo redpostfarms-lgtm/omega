@@ -23,11 +23,11 @@ Voice signature comparison uses a weighted similarity formula to match voices. T
 - Standard deviation
 
 **Formula:**
-```
+```text
 pitch_values = librosa.piptrack(y=audio, sr=sr, threshold=0.1)
 pitch_mean = mean(pitch_values[pitch_values > 0])
 pitch_std = std(pitch_values[pitch_values > 0])
-```
+```text
 
 ---
 
@@ -40,10 +40,10 @@ pitch_std = std(pitch_values[pitch_values > 0])
 - Mean of 8 MFCC coefficients across time
 
 **Formula:**
-```
+```text
 mfccs = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=8)
 mfccs_mean = mean(mfccs, axis=1)  # Mean across time
-```
+```text
 
 ---
 
@@ -56,10 +56,10 @@ mfccs_mean = mean(mfccs, axis=1)  # Mean across time
 - Mean spectral centroid
 
 **Formula:**
-```
+```text
 spectral_centroids = librosa.feature.spectral_centroid(y=audio, sr=sr)[0]
 centroid_mean = mean(spectral_centroids)
-```
+```text
 
 ---
 
@@ -70,9 +70,9 @@ centroid_mean = mean(spectral_centroids)
 **Location:** `voice_security_system.py::compare_voice_signatures()`
 
 **Formula:**
-```
+```text
 overall_sim = (pitch_sim * 0.4) + (mfcc_sim * 0.5) + (centroid_sim * 0.1)
-```
+```text
 
 **Weights:**
 - Pitch similarity: 40%
@@ -84,9 +84,9 @@ overall_sim = (pitch_sim * 0.4) + (mfcc_sim * 0.5) + (centroid_sim * 0.1)
 ### 2.2 Pitch Similarity
 
 **Formula:**
-```
+```text
 pitch_sim = 1.0 - min(abs(pitch1['mean'] - pitch2['mean']) / 200.0, 1.0)
-```
+```text
 
 **Where:**
 - `pitch1['mean']` = mean pitch of first voice (Hz)
@@ -100,10 +100,10 @@ pitch_sim = 1.0 - min(abs(pitch1['mean'] - pitch2['mean']) / 200.0, 1.0)
 ### 2.3 MFCC Similarity
 
 **Formula:**
-```
+```text
 mfcc_diff = ||mfcc1 - mfcc2||  # Euclidean distance
 mfcc_sim = 1.0 / (1.0 + mfcc_diff / 10.0)
-```
+```text
 
 **Where:**
 - `mfcc1` = MFCC mean vector of first voice (8 coefficients)
@@ -114,9 +114,9 @@ mfcc_sim = 1.0 / (1.0 + mfcc_diff / 10.0)
 **Range:** [0, 1] where 1.0 = identical MFCCs, 0.0 = very different MFCCs
 
 **Alternative Form (using cosine similarity):**
-```
+```text
 mfcc_sim = dot(mfcc1, mfcc2) / (||mfcc1|| * ||mfcc2||)
-```
+```text
 
 **Current Implementation:** Euclidean distance-based (as shown above)
 
@@ -125,9 +125,9 @@ mfcc_sim = dot(mfcc1, mfcc2) / (||mfcc1|| * ||mfcc2||)
 ### 2.4 Spectral Centroid Similarity
 
 **Formula:**
-```
+```text
 centroid_sim = 1.0 - min(abs(centroid1 - centroid2) / 2000.0, 1.0)
-```
+```text
 
 **Where:**
 - `centroid1` = spectral centroid mean of first voice (Hz)
@@ -143,9 +143,9 @@ centroid_sim = 1.0 - min(abs(centroid1 - centroid2) / 2000.0, 1.0)
 **Location:** `voice_security_system.py::verify_voice()`
 
 **Formula:**
-```
+```text
 authorized = overall_sim >= threshold
-```
+```text
 
 **Default Threshold:** 0.85 (85% similarity required)
 
@@ -156,7 +156,7 @@ authorized = overall_sim >= threshold
 ## 4. Complete Comparison Algorithm
 
 **Pseudocode:**
-```
+```text
 function compare_voice_signatures(sig1, sig2):
     similarities = []
     
@@ -179,7 +179,7 @@ function compare_voice_signatures(sig1, sig2):
     // Clamp to [0, 1]
     return min(max(overall_sim, 0.0), 1.0)
 end function
-```
+```text
 
 ---
 
@@ -211,22 +211,22 @@ end function
 
 Given two voice signatures `sig1` and `sig2`:
 
-```
+```text
 similarity(sig1, sig2) = 
     0.4 * pitch_sim(sig1, sig2) +
     0.5 * mfcc_sim(sig1, sig2) +
     0.1 * centroid_sim(sig1, sig2)
-```
+```text
 
 Where:
 
-```
+```text
 pitch_sim(sig1, sig2) = 1.0 - min(|sig1.pitch_mean - sig2.pitch_mean| / 200.0, 1.0)
 
 mfcc_sim(sig1, sig2) = 1.0 / (1.0 + ||sig1.mfccs_mean - sig2.mfccs_mean|| / 10.0)
 
 centroid_sim(sig1, sig2) = 1.0 - min(|sig1.centroid_mean - sig2.centroid_mean| / 2000.0, 1.0)
-```
+```text
 
 ---
 

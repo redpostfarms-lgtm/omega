@@ -69,7 +69,7 @@ def process_large_dataset(data):
     return cp.asnumpy(result)
 
 # Use for: Your own data processing, ML training, scientific computing
-```
+```text
 
 ---
 
@@ -131,7 +131,7 @@ class RateLimitedClient:
                 return await response.text()
 
 # Use for: Your own APIs, authorized testing, legitimate scraping
-```
+```text
 
 ---
 
@@ -191,7 +191,7 @@ def generate_test_cases():
     return None
 
 # Use for: Test case generation, code verification, optimization
-```
+```text
 
 ---
 
@@ -248,7 +248,7 @@ def generate_security_report(findings):
     )
 
 # Use for: Your own reports, documentation, code generation
-```
+```text
 
 ---
 
@@ -291,7 +291,7 @@ def process_files_parallel(files):
     return results
 
 # Use for: Your own code optimization
-```
+```text
 
 ---
 
@@ -339,7 +339,7 @@ def scan_code_security(file_path):
     return vulnerabilities
 
 # Use for: Your own code security assessment
-```
+```text
 
 ---
 

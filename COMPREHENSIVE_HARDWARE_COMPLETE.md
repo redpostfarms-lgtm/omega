@@ -65,7 +65,7 @@ hw.set_rgb_color(color_name="gold")
 
 # Set color for specific zone
 hw.set_rgb_color(r=255, g=0, b=0, zone="motherboard")
-```
+```text
 
 **Quick Command:**
 ```bash
@@ -74,7 +74,7 @@ python SET_RGB_COLOR.py gold
 python SET_RGB_COLOR.py #FFD700
 # Or
 python SET_RGB_COLOR.py 255,215,0
-```
+```text
 
 ### 2. USB Port Management ✅
 
@@ -107,7 +107,7 @@ print(message)
 devices = hw.usb.get_usb_devices()
 for device in devices:
     print(f"Device: {device['name']}")
-```
+```text
 
 ### 3. Fan Speed Control ✅
 
@@ -134,7 +134,7 @@ print(message)
 # Set fan speed (percentage)
 success, message = hw.fans.set_fan_percentage("CPU_FAN", 75)  # 75%
 print(message)
-```
+```text
 
 ### 4. Temperature Monitoring ✅
 
@@ -161,7 +161,7 @@ print(f"CPU Temperature: {cpu_temp}°C")
 temps = hw.temperature.get_all_temperatures()
 for component, temp in temps.items():
     print(f"{component}: {temp}°C")
-```
+```text
 
 ### 5. M.2 Drive Management ✅
 
@@ -174,7 +174,7 @@ for component, temp in temps.items():
 ```bash
 # Enable M.2 drive in new slot
 python ENABLE_M2_DRIVE.py
-```
+```text
 
 Or in code:
 ```python
@@ -185,7 +185,7 @@ hw = get_hardware_controller()
 # Enable M.2 drive in new slot
 success, message = hw.enable_m2_drive("M.2_2")
 print(message)
-```
+```text
 
 ### 6. Boot Logo Customization ✅
 
@@ -198,7 +198,7 @@ print(message)
 ```bash
 # Create Omega logo
 python create_omega_boot_logo.py
-```
+```text
 
 **Next Steps:**
 1. Install ASUS AI Suite (includes MyLogo utility)
@@ -248,17 +248,17 @@ python create_omega_boot_logo.py
 ### Enable M.2 Drive
 ```bash
 python ENABLE_M2_DRIVE.py
-```
+```text
 
 ### Set RGB Color (Gold)
 ```bash
 python SET_RGB_COLOR.py gold
-```
+```text
 
 ### Create Boot Logo
 ```bash
 python create_omega_boot_logo.py
-```
+```text
 
 ### Get Hardware Status
 ```python
@@ -267,7 +267,7 @@ from omega_comprehensive_hardware import get_hardware_controller
 hw = get_hardware_controller()
 status = hw.get_hardware_status()
 print(status)
-```
+```text
 
 ---
 
@@ -277,7 +277,7 @@ print(status)
 
 ```bash
 pip install Pillow openrgb-python psutil WMI
-```
+```text
 
 ### System Requirements
 

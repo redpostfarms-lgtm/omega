@@ -164,7 +164,7 @@ def apply_cmvn(features):
     std = np.std(features, axis=0)
     normalized = (features - mean) / (std + 1e-10)
     return normalized
-```
+```text
 
 ### WebRTC VAD:
 - Use `webrtcvad` library (already in requirements.txt)
@@ -174,7 +174,7 @@ def apply_cmvn(features):
 ### Large-v2 Upgrade:
 ```python
 whisper_model = WhisperModel("large-v2", device="cpu", compute_type="int8")
-```
+```text
 
 ### Multi-Model Ensemble:
 - Run Whisper, DeepSpeech, Wav2Vec2 in parallel

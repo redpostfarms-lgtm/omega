@@ -82,7 +82,7 @@
 ## Files Available in Gatekeeper Folder
 
 All analysis and test files are saved and ready:
-```
+```text
 h:\The Gatekeeper\
 ├── DEEP_TTS_ANALYSIS_AND_ERROR_LOG.md      (Full analysis)
 ├── test_tts_fix.py                         (Full test suite)
@@ -92,25 +92,25 @@ h:\The Gatekeeper\
 ├── FIX_TTS_GUIDE.md                        (Manual guide)
 ├── FIX_TTS.bat                             (Diagnostic tool)
 └── omega.py                                (Simple TTS test)
-```
+```text
 
 ---
 
 ## System Architecture
 
 ### Omega TTS Pipeline
-```
+```text
 User Text → TTS Model → Audio Generation → WAV File → Playback
                             ↓
                     torchcodec (BLOCKED)
                        FFmpeg DLLs
                      (Missing/Inaccessible)
-```
+```text
 
 ### Solution
-```
+```text
 Copy FFmpeg DLLs → torchcodec finds them → Audio generation works
-```
+```text
 
 ---
 

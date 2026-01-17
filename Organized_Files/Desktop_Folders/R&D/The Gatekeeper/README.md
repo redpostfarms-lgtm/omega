@@ -190,7 +190,7 @@ The Gatekeeper is a complete, self-healing farm management AI system. All free, 
 **Easiest way:** Run the complete setup script:
 ```bash
 "The Gatekeeper\setup_complete_system.bat"
-```
+```text
 This automates all setup steps below.
 
 ### Manual Setup
@@ -204,7 +204,7 @@ This automates all setup steps below.
 Run system verification:
 ```bash
 python "The Gatekeeper\verify_system.py"
-```
+```text
 
 ### Daily Operation
 - Run `brain_wakeup.bat` on boot
@@ -212,7 +212,7 @@ python "The Gatekeeper\verify_system.py"
 - All systems auto-start
 
 ## File Structure
-```
+```text
 The Gatekeeper/
 ├── brain_prime.py          # Knowledge upload
 ├── auto_heal.py            # Self-repair system
@@ -259,7 +259,7 @@ The Gatekeeper/
 ├── LLM_INJECT.txt           # Compact LLM injection
 ├── INGEST_INSTRUCTIONS.md   # LLM ingestion guide
 └── README.md                # This file
-```
+```text
 
 ## Dependencies
 - Python 3.x

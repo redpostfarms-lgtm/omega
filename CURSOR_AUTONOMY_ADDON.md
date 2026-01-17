@@ -30,7 +30,7 @@ Cursor can be configured to allow automatic implementation through settings.
   "omega.auto_edit_files": true,
   "omega.auto_run_commands": false
 }
-```
+```text
 
 ### Option 2: Cursor Command Palette Integration
 
@@ -68,7 +68,7 @@ Create `.vscode/settings.json` in workspace:
     "source.organizeImports": true
   }
 }
-```
+```text
 
 ### Method 2: Cursor Commands File
 
@@ -82,7 +82,7 @@ Create `.cursor/commands.json`:
     "requires_confirmation": false
   }
 }
-```
+```text
 
 ### Method 3: Python Script Integration
 
@@ -107,7 +107,7 @@ Create Python scripts that can be called from Cursor:
 
 ### Workflow
 
-```
+```text
 1. Receive Requirements
    ↓
 2. Deep Search (Automatic)
@@ -119,7 +119,7 @@ Create Python scripts that can be called from Cursor:
 5. Validate Implementation
    ↓
 6. Report Completion
-```
+```text
 
 ---
 
@@ -187,7 +187,7 @@ class AutonomousImplementation:
     def validate(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """Validate implementation"""
         pass
-```
+```text
 
 ---
 
@@ -208,7 +208,7 @@ Add to workspace settings or create configuration file:
     "log_actions": true
   }
 }
-```
+```text
 
 ---
 

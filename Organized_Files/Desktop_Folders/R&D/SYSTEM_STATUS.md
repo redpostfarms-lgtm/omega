@@ -30,7 +30,7 @@ from stonewall.babel_onnx import get_babel_onnx
 babel = get_babel_onnx()
 result = babel.translate("Hello, world", to_lang='es')
 protocol = babel.decode_protocol(data_bytes, 'DICOM')
-```
+```text
 
 ---
 
@@ -58,7 +58,7 @@ farm.enable()
 # Automatically detects and baits
 intel = farm.get_intel()
 stats = farm.get_attacker_stats()
-```
+```text
 
 **Callback Port:** 8443 (configurable)
 
@@ -86,7 +86,7 @@ from stonewall.babel.medical.implant_mods import babel_medical_control
 # Natural language
 result = babel_medical_control("speed up heart to 120")
 # Works over Bluetooth, Zigbee, or any available connection
-```
+```text
 
 **Safety Checks:**
 - Heart rate limits: 60-150 BPM
@@ -119,7 +119,7 @@ breeder = SwarmBreeder()
 breeder.register_agent("parent_1", agent_code)
 offspring_id = breeder.breed_offspring("parent_1")
 breeder.evolve_reasoning_loop(offspring_id)
-```
+```text
 
 **Offspring Directory:** `./swarm_offspring/`
 
@@ -144,7 +144,7 @@ python -c "from stonewall.babel_onnx import get_babel_onnx; print('Babel ONNX: O
 python -c "from stonewall.bait_farm import BaitFarm; print('Bait Farm: OK')"
 python -c "from swarm_breeding import SwarmBreeder; print('Swarm Breeding: OK')"
 python -c "import os; print('Pacemaker Plugin:', 'OK' if os.path.exists('stonewall/babel/medical/implant_mods.py') else 'Missing')"
-```
+```text
 
 ---
 

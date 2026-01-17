@@ -99,7 +99,7 @@ These additions complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -113,7 +113,7 @@ LLM Decoding Strategies Knowledge:
             ├── Mathematical Formula for Sigmoid Alpha Ramp (NEW)
             ├── Code to Generate and Plot Sigmoid Curves (NEW)
             └── Visualization Sections
-```
+```text
 
 ## Status
 

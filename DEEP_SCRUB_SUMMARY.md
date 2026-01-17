@@ -57,7 +57,7 @@
 ### 1. Fix GitHub Authentication (If Still Failing)
 ```bash
 python fix_github_setup.py
-```
+```text
 
 Then set up Personal Access Token:
 1. Go to: https://github.com/settings/tokens
@@ -69,7 +69,7 @@ Then set up Personal Access Token:
 ### 2. Run Deep Scrub
 ```bash
 python deep_worldwide_scrub.py
-```
+```text
 
 This will generate:
 - `deep_scrub_report.json` - Detailed JSON report
@@ -83,7 +83,7 @@ manager = get_enhanced_api_key_manager()
 manager.store_key("OPENAI", "your-key-here", "OpenAI API Key")
 manager.store_key("GROK", "your-key-here", "Grok API Key")
 # etc.
-```
+```text
 
 ### 4. Review Implementation Plans
 - `COMPLETE_IMPLEMENTATION_PLAN.md` - Complete list of missing items
@@ -95,7 +95,7 @@ manager.store_key("GROK", "your-key-here", "Grok API Key")
 git add .
 git commit -m "Initial commit - Deep scrub complete"
 git push -u origin master
-```
+```text
 
 ---
 

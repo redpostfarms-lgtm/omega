@@ -66,7 +66,7 @@
 
 ```bash
 pip install WMI psutil pyautogui pynput
-```
+```text
 
 ### Optional Dependencies (for advanced features)
 
@@ -76,7 +76,7 @@ pip install openrgb-python liquidctl
 
 # Advanced Network Analysis
 pip install scapy
-```
+```text
 
 ### Linux Additional Requirements
 
@@ -89,7 +89,7 @@ sudo apt-get install pwmconfig
 
 # For network security
 sudo apt-get install ufw iptables
-```
+```text
 
 ---
 
@@ -113,7 +113,7 @@ print(f"Fan Speed: {info['fans'].get('fan_0')} RPM")
 from omega_hardware_integration import HardwareComponent
 status = hw.get_component_status(HardwareComponent.CPU)
 print(f"CPU Status: {status}")
-```
+```text
 
 ### OS Integration
 
@@ -136,7 +136,7 @@ os_int.open_browser("https://example.com")
 
 # Type text (simulates keyboard input)
 os_int.type_text("Hello, World!")
-```
+```text
 
 ### Network Security
 
@@ -168,7 +168,7 @@ security.air_gap.enable_air_gap()
 
 # Disable air-gapping
 security.air_gap.disable_air_gap()
-```
+```text
 
 ---
 

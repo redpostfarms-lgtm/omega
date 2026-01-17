@@ -81,7 +81,7 @@ result = omega_complete("What is 2+2?", use_reasoning=True, use_grok=True, use_m
 
 # Speak in Mandarin
 OMEGA_COMPLETE.speak("你好，我是欧米茄。", language='zh')
-```
+```text
 
 ---
 

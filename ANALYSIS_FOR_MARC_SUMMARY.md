@@ -17,7 +17,7 @@
 ## File Type Overview
 
 | File Type | Estimated Count | Estimated Completion |
-|-----------|----------------|---------------------|
+| ----------- | ---------------- | --------------------- |
 | Python (.py) | ~644+ | 85-95% |
 | Markdown (.md) | ~665+ | 90-95% |
 | JSON (.json) | ~4,900+ | 95% |

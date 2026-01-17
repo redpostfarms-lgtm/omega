@@ -7,10 +7,10 @@
 ## Voice Commands
 
 ### Generate White Page
-```
+```text
 "Hey, Gatekeeper, generate white page"
 "Hey, Gatekeeper, white page"
-```
+```text
 
 **What it does:**
 - Opens Word (or LibreOffice Writer if offline)
@@ -22,9 +22,9 @@
 - Says: "White page ready. File saved."
 
 ### Send White Page (with Download Link)
-```
+```text
 "Hey, Gatekeeper, send white page"
-```
+```text
 
 **What it does:**
 - Creates the white page document
@@ -44,16 +44,16 @@
 - **Footer:** "Page 1 of 1"
 
 ### File Location
-```
+```text
 D:\RPF_BRAIN\Archived\docs\White Page - YYYY-MM-DD.docx
-```
+```text
 
 ## Download Link Format
 
 ### Local File URL
-```
+```text
 file://D:/RPF_BRAIN/Archived/docs/White%20Page%20-%202026-01-01.docx
-```
+```text
 
 ### Cloud Sync
 If you sync `D:\RPF_BRAIN\Archived\docs\` to:
@@ -66,14 +66,14 @@ If you sync `D:\RPF_BRAIN\Archived\docs\` to:
 ## Usage Examples
 
 ### Example 1: Generate White Page
-```
+```text
 User: "Hey, Gatekeeper, generate white page"
 Gatekeeper: "White page ready. File saved."
 Result: Document opens in Word, saved to docs folder
-```
+```text
 
 ### Example 2: Send White Page
-```
+```text
 User: "Hey, Gatekeeper, send white page"
 Gatekeeper: "White page ready. Link copied to clipboard. Folder opened."
 Result: 
@@ -81,7 +81,7 @@ Result:
   - Folder opened
   - Link copied: file://D:/RPF_BRAIN/Archived/docs/White%20Page%20-%202026-01-01.docx
   - Ready to paste anywhere
-```
+```text
 
 ## Technical Details
 

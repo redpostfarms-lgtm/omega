@@ -84,7 +84,7 @@ This code complements:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -92,7 +92,7 @@ LLM Decoding Strategies Knowledge:
 ├── GRID_BEAM_SEARCH_FROM_SCRATCH.py (Grid Beam Search Implementation)
 ├── CONTRASTIVE_SEARCH_MATH_2026.md (Mathematical Details & Derivation)
 └── DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md (Code Examples - NOW WITH Full Derivation Implementation) ⭐
-```
+```text
 
 ## Status
 

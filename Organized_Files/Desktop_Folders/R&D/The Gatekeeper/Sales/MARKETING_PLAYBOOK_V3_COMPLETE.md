@@ -33,19 +33,19 @@ PLAYS = {
     'worms': 'Living soil engines. Happy, red-wigglers. Eat waste. Poop miracle.',
     'general': '100% organic. Zero chemicals. Zero miles. Zero excuses.'
 }
-```
+```text
 
 ## Usage
 
 ### Deploy
 ```cmd
 python D:\RPF_BRAIN\Sales\Marketing_Playbook.py
-```
+```text
 
 ### Commands
 
 **Pitch Products:**
-```
+```text
 > pitch beef
 Playbook: Grass-fed. Dry-aged twenty-eight days. One bite and Sunday dinner comes home.
 
@@ -60,10 +60,10 @@ Playbook: Night-crawler turbo-castings. One pound turns four square feet of dirt
 
 > pitch worms
 Playbook: Living soil engines. Happy, red-wigglers. Eat waste. Poop miracle.
-```
+```text
 
 **Status:**
-```
+```text
 > status
 Playbook: Loaded: 6 killer lines. Beef, eggs, castings, tomatoes, worms, default. Ready.
 
@@ -71,13 +71,13 @@ Playbook: Loaded: 6 killer lines. Beef, eggs, castings, tomatoes, worms, default
   Organic: 100%
   Ad Spend: $0.00
   Latency: 0ms
-```
+```text
 
 **Exit:**
-```
+```text
 > quit
 Playbook: Playbook offline. No ads. No billboards. Just truth.
-```
+```text
 
 ## Technical Details
 
@@ -96,7 +96,7 @@ Playbook: Playbook offline. No ads. No billboards. Just truth.
 ## Comparison: v2 vs v3
 
 | Feature | v2 | v3 |
-|---------|----|----|
+| --------- | ---- | ---- |
 | TTS | Yes (pyttsx3) | No (console only) |
 | File I/O | Yes (plays.txt) | No (hardcoded) |
 | Latency | ~500ms (TTS) | 0ms (instant) |

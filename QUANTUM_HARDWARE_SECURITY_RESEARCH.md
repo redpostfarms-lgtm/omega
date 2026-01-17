@@ -215,7 +215,7 @@ hw = get_hardware_manager()
 info = hw.get_system_info()
 print(f"CPU Temperature: {info['temperatures'].get('cpu')}°C")
 print(f"BIOS: {info['bios']}")
-```
+```text
 
 ### OS Integration
 ```python
@@ -225,7 +225,7 @@ os_int = get_os_integration()
 os_int.open_word()  # Open Microsoft Word
 os_int.open_browser("https://example.com")
 os_int.type_text("Hello, World!")
-```
+```text
 
 ### Security Management
 ```python
@@ -235,7 +235,7 @@ security = get_security_manager()
 security.set_security_level(SecurityLevel.AIR_GAP)  # Enable air-gapping
 status = security.get_security_status()
 print(status)
-```
+```text
 
 ---
 

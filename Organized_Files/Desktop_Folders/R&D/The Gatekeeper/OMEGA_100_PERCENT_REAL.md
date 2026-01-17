@@ -74,7 +74,7 @@ Run the test script to verify all systems:
 ```bash
 cd "The Gatekeeper"
 python test_real_systems.py
-```
+```text
 
 **Expected Results:**
 - ✅ LLM Core imported and functional

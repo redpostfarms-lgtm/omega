@@ -50,7 +50,7 @@ requests>=2.28.0  # For HTTP requests (JWKS fetching)
 
 # Progress bars and utilities
 tqdm>=4.64.0  # For progress bars in training/evaluation
-```
+```text
 
 #### Optional but Recommended
 ```python
@@ -60,7 +60,7 @@ vllm>=0.2.0  # For 5-10x faster inference (requires CUDA)
 
 # Additional Utilities
 scipy>=1.9.0  # For advanced signal processing (already included)
-```
+```text
 
 ### Updated requirements.txt Section
 
@@ -100,7 +100,7 @@ tqdm>=4.64.0
 
 # Optional: Fast Inference (requires CUDA)
 # vllm>=0.2.0  # Uncomment if CUDA available and desired
-```
+```text
 
 ---
 

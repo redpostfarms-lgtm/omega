@@ -61,7 +61,7 @@ The chess knowledge is now part of the Gatekeeper's educational system:
 ```python
 # In agent_forge.py - automatically loaded
 "In chess: [comprehensive chess knowledge...]"
-```
+```text
 
 When the Gatekeeper is asked chess questions, it has full knowledge of:
 - Rules and mechanics
@@ -104,13 +104,13 @@ print(suggestion)
 
 # Reset
 agent.reset_board()
-```
+```text
 
 ---
 
 ## Example Session
 
-```
+```text
 [Chess Agent initialized]
 
 Board:
@@ -148,7 +148,7 @@ Analysis: {'material': {'white': 39, 'black': 39},
 Lesson: Opening principles: control center (d4/d5/e4/e5), 
         develop pieces (knights before bishops), 
         castle early, don't move same piece twice...
-```
+```text
 
 ---
 

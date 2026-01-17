@@ -83,7 +83,7 @@
 - Speed/intensity controlled by audio amplitude
 - Color: Red (classic) or customizable
 - Pattern: Repeating wave effect
-```
+```text
 
 ### Speech Synchronization
 ```python
@@ -93,7 +93,7 @@
 - Pulsing effect added
 - Dynamic movement
 - Synchronized with audio waveform
-```
+```text
 
 ---
 

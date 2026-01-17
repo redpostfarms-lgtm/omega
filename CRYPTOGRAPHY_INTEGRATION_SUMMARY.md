@@ -197,7 +197,7 @@ needs_rotation = manager.check_key_rotation("OPENAI")
 info = manager.get_key_info("OPENAI")
 print(f"Age: {info['age_days']} days")
 print(f"Needs rotation: {info['needs_rotation']}")
-```
+```text
 
 ---
 

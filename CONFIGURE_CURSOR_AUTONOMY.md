@@ -34,7 +34,7 @@ Create or edit `.vscode/settings.json` in your workspace:
   "cursor.autonomousMode": true,
   "cursor.autoImplement": true
 }
-```
+```text
 
 ### Step 2: Create Cursor Configuration
 
@@ -57,7 +57,7 @@ Create `.cursor/config.json`:
     "use_all_resources": true
   }
 }
-```
+```text
 
 ### Step 3: Enable Omega Autonomous Mode
 
@@ -65,7 +65,7 @@ Run the configuration script:
 
 ```bash
 python OMEGA_AUTONOMOUS_IMPLEMENTATION.py
-```
+```text
 
 This will create:
 - `omega_autonomous_config.json` - Autonomous implementation configuration
@@ -120,13 +120,13 @@ When Omega needs to implement a solution:
 
 ```bash
 python OMEGA_AUTONOMOUS_IMPLEMENTATION.py
-```
+```text
 
 ### Check Configuration
 
 ```bash
 python -c "from OMEGA_AUTONOMOUS_IMPLEMENTATION import AutonomousImplementation; a = AutonomousImplementation(); print(a.config)"
-```
+```text
 
 ---
 

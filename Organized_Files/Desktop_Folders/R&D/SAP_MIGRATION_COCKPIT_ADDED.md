@@ -31,7 +31,7 @@ wm = WorldMemory()
 result = wm.query("Migration Cockpit Templates")
 result = wm.query("SAP S/4HANA Migration Cockpit")
 result = wm.query("Migration objects templates")
-```
+```text
 
 ## Status
 

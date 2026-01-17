@@ -20,7 +20,7 @@
 ### **Core Farm Automation Features**
 
 | Feature | Industry Leader | Gatekeeper | Status |
-|---------|----------------|------------|--------|
+| --------- | ---------------- | ------------ | -------- |
 | **Voice Control** | 40% | 100% | ✅ **EXCEEDS** |
 | **AI Agents** | 60% | 100% | ✅ **EXCEEDS** |
 | **Self-Learning** | 30% | 100% | ✅ **EXCEEDS** |

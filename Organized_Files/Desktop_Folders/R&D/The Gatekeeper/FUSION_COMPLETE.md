@@ -38,9 +38,9 @@
 ## How It Works
 
 ### **Voice Command:**
-```
+```text
 "Hey, Gatekeeper, write a quantum-safe BMS in Rust"
-```
+```text
 
 ### **Auto-Routing:**
 - **Cursor brain** → Writes the code (file-aware)
@@ -62,7 +62,7 @@
 ```bash
 cd "The Gatekeeper"
 fusion_2026.bat
-```
+```text
 
 This will:
 - Create models directory
@@ -72,7 +72,7 @@ This will:
 ### **2. Install Dependencies:**
 ```bash
 pip install llama-cpp-python
-```
+```text
 
 ### **3. Download Models (if script fails):**
 
@@ -105,14 +105,14 @@ pip install llama-cpp-python
 ### **Direct Command:**
 ```bash
 python gatekeeper_fusion.py "write a quantum-safe BMS in Rust"
-```
+```text
 
 ---
 
 ## Architecture
 
 ### **Parallel Execution:**
-```
+```text
 User Prompt
     ↓
 ┌─────────────────────────────────────┐
@@ -125,12 +125,12 @@ User Prompt
 Synthesis Engine
     ↓
 Final Output (Markdown)
-```
+```text
 
 ### **Model Roles:**
 
 | Model | Role | Temperature | Use Case |
-|-------|------|-------------|----------|
+| ------- | ------ | ------------- | ---------- |
 | **Grok** | Fast + Sarcastic | 0.7 | Comments, personality |
 | **Cursor** | Code Writing | 0.3 | Production code |
 | **DeepSeek** | Math + Context | 0.2 | Algorithms, math |
@@ -141,9 +141,9 @@ Final Output (Markdown)
 ## Output Format
 
 Fusion outputs are saved as Markdown files in:
-```
+```text
 D:\RPF_BRAIN\Archived\fusion_outputs\fusion_YYYYMMDD_HHMMSS.md
-```
+```text
 
 Format:
 ```markdown
@@ -165,7 +165,7 @@ Format:
 
 ---
 # FUSION COMPLETE
-```
+```text
 
 ---
 
@@ -199,7 +199,7 @@ Already integrated in `voice_listener.py`:
 ### **Command Line:**
 ```bash
 python gatekeeper_fusion.py "<your prompt>"
-```
+```text
 
 ---
 

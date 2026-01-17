@@ -9,10 +9,10 @@ TTS loads successfully, but fails when generating audio due to torchcodec not be
 - ❌ torchcodec still can't load FFmpeg DLLs
 
 ## Error Message
-```
+```text
 Could not load this library: 
 C:\Users\...\torchcodec\libtorchcodec_core8.dll
-```
+```text
 
 ## Possible Solutions
 

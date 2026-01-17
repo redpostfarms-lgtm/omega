@@ -24,7 +24,7 @@ except:
 except Exception:
     # Backend not available, try next one
     continue
-```
+```text
 
 **Status:** ✅ FIXED  
 **Result:** Now only catches Exception (not SystemExit/KeyboardInterrupt)
@@ -47,7 +47,7 @@ except:
 except Exception as e:
     # Hardware controller not available - continue without it
     pass
-```
+```text
 
 **Status:** ✅ FIXED  
 **Result:** Better comments explaining why exceptions are ignored
@@ -69,7 +69,7 @@ if hasattr(self, 'ani') and self.ani:
         self.ani.event_source.stop()
     except Exception:
         pass
-```
+```text
 
 **Status:** ✅ FIXED  
 **Result:** Animation is explicitly stopped when panel stops
@@ -89,7 +89,7 @@ if hasattr(self, 'ani') and self.ani:
 
 # After:
 'disk_usage': psutil.disk_usage(os.path.splitdrive(os.getcwd())[0] + os.sep if os.name == 'nt' else '/').percent if PSUTIL_AVAILABLE else 0.0,
-```
+```text
 
 **Status:** ✅ FIXED  
 **Result:** Uses current drive on Windows, '/' on Unix/Linux

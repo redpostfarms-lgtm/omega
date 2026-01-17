@@ -413,7 +413,7 @@ User Request: **"RGB lighting in desktop fans not active or changing - run deep 
 ### Original Requirements
 
 | Requirement | Status | Evidence |
-|-------------|--------|----------|
+| ------------- | -------- | ---------- |
 | Deep dive scan on RGB | ✅ COMPLETE | omega_rgb_advanced_controller.py + analysis docs |
 | Worldwide repository search | ✅ COMPLETE | Researched 7 RGB methods, documented all |
 | Check BIOS & operator controls | ✅ COMPLETE | RGB_TROUBLESHOOTING_GUIDE.md with BIOS guide |

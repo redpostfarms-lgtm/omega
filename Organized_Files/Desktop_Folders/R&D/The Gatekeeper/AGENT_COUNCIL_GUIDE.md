@@ -17,25 +17,25 @@ When a task lands, the Agent Council debates. You decide.
 ## How It Works
 
 ### Voice Command
-```
+```text
 "Hey, Gatekeeper, council solve [problem]"
 "Hey, Gatekeeper, agent council on [problem]"
-```
+```text
 
 ### Command Line
 ```bash
 python "The Gatekeeper\agent_council.py" --problem "fix low solar yield in winter"
-```
+```text
 
 ## Example Session
 
 ### Input:
-```
+```text
 "Hey, Gatekeeper, council solve fix low solar yield in winter"
-```
+```text
 
 ### Output:
-```
+```text
 ============================================================
 GATEKEEPER – AGENT COUNCIL MODE
 ============================================================
@@ -73,7 +73,7 @@ Council vote? (yes/no)
 
 ✅ Solution locked.
 Council session saved.
-```
+```text
 
 ## Agent Personalities
 

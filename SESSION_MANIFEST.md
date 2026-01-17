@@ -311,7 +311,7 @@
 pip install openrgb
 # Download: https://openrgb.org/download
 # Run: OpenRGB.exe
-```
+```text
 
 **Effectiveness:** 99%
 **Time:** 5 minutes
@@ -327,7 +327,7 @@ pip install openrgb
 winget install ffmpeg
 pip uninstall torchcodec -y
 pip install torchcodec
-```
+```text
 
 **Effectiveness:** 99%
 **Time:** 10 minutes
@@ -345,7 +345,7 @@ pip install torchcodec
 
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cu121
-```
+```text
 
 **Effectiveness:** 99%
 **Time:** 60-90 minutes
@@ -464,7 +464,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cu121
 ## Session Statistics
 
 | Metric | Value |
-|--------|-------|
+| -------- | ------- |
 | Issues Identified | 3 major, 1 minor |
 | Documents Created | 9 total |
 | Code Files Reviewed | 4+ major files |

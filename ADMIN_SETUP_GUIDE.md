@@ -16,7 +16,7 @@ This document ensures the Gatekeeper system has proper administrator privileges 
 ### Option 1: Windows Batch Script (Recommended)
 ```bash
 run_gatekeeper_admin.bat
-```
+```text
 **Automatically:**
 - Requests admin privileges
 - Creates required directories
@@ -26,7 +26,7 @@ run_gatekeeper_admin.bat
 ### Option 2: PowerShell Script
 ```powershell
 .\run_gatekeeper_admin.ps1
-```
+```text
 **Automatically:**
 - Requests admin privileges (if needed)
 - Sets up environment
@@ -36,7 +36,7 @@ run_gatekeeper_admin.bat
 ### Option 3: Python Admin Helper
 ```bash
 python gatekeeper_admin_helper.py
-```
+```text
 **Runs:**
 - Admin status check
 - File permission verification
@@ -49,7 +49,7 @@ python gatekeeper_admin_helper.py
 # Run as Administrator (right-click PowerShell > Run as administrator)
 cd "h:\The Gatekeeper"
 python gatekeeper_integration_module.py
-```
+```text
 
 ## Critical Files Protected
 
@@ -94,7 +94,7 @@ File: `admin_config.json` (auto-created)
   "auto_elevate": true,
   "platform": "win32"
 }
-```
+```text
 
 ## Permission Issues Resolution
 
@@ -106,24 +106,24 @@ File: `admin_config.json` (auto-created)
 # Then:
 cd "h:\The Gatekeeper"
 python run_gatekeeper_admin.ps1
-```
+```text
 
 **Solution 2: Use Batch Script**
 ```bash
 run_gatekeeper_admin.bat
-```
+```text
 
 **Solution 3: Check Directory Permissions**
 ```powershell
 # List directory permissions
 icacls "h:\The Gatekeeper" /T
-```
+```text
 
 **Solution 4: Grant Full Access**
 ```powershell
 # Run as admin first, then:
 icacls "h:\The Gatekeeper" /grant "%USERNAME%":F /T
-```
+```text
 
 ### Issue: Cannot Create Log Files
 
@@ -132,7 +132,7 @@ icacls "h:\The Gatekeeper" /grant "%USERNAME%":F /T
 # Ensure logs directory exists and is writable
 mkdir logs
 icacls logs /grant "%USERNAME%":F
-```
+```text
 
 ### Issue: Config File Not Saving
 
@@ -140,19 +140,19 @@ icacls logs /grant "%USERNAME%":F
 ```bash
 # Recreate with admin privileges
 python gatekeeper_admin_helper.py
-```
+```text
 
 ## Verification Steps
 
 ### 1. Check Admin Status
 ```bash
 python -c "import ctypes; print('Admin:', bool(ctypes.windll.shell.IsUserAnAdmin()))"
-```
+```text
 
 ### 2. Verify File Permissions
 ```bash
 python gatekeeper_admin_helper.py
-```
+```text
 
 ### 3. Test File Writing
 ```bash
@@ -163,7 +163,7 @@ test_file.write_text('Admin write test')
 print('Test file written successfully')
 test_file.unlink()
 "
-```
+```text
 
 ## Automated Admin Tasks
 
@@ -261,7 +261,7 @@ PowerShell script that:
 # Verify Windows settings
 # Settings > Apps > Apps & features > Related settings > Advanced options
 # Look for "Run this program in compatibility mode"
-```
+```text
 
 ### Log Files Not Being Created
 ```bash
@@ -269,19 +269,19 @@ PowerShell script that:
 dir /Q logs/
 # If not writable, run:
 icacls logs /grant "%USERNAME%":F
-```
+```text
 
 ### Config Not Saving
 ```bash
 # Manually set permissions
 icacls gatekeeper_integration_config.json /grant "%USERNAME%":F
-```
+```text
 
 ### System Won't Start With Admin Helper
 ```bash
 # Run diagnostic
 python -c "import gatekeeper_admin_helper; gatekeeper_admin_helper.AdminHelper().check_admin_status()"
-```
+```text
 
 ## Status: COMPLETE ✓
 
@@ -308,4 +308,4 @@ run_gatekeeper_admin.bat
 
 # Manual Admin Verification
 python gatekeeper_admin_helper.py
-```
+```text

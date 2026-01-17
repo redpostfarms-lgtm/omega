@@ -51,7 +51,7 @@ The Omega Control Panel now includes comprehensive GPU load balancing to optimiz
 
 system_stats = load_balancer.get_system_stats()
 should_use_gpu = load_balancer.should_use_gpu(task_size_mb)
-```
+```text
 
 ### 2. Load Distribution
 
@@ -124,7 +124,7 @@ should_use_gpu = load_balancer.should_use_gpu(task_size_mb)
     "recommendation_actions": [...]
   }
 }
-```
+```text
 
 ---
 
@@ -182,7 +182,7 @@ should_use_gpu = load_balancer.should_use_gpu(task_size_mb)
 
 ### 1. **High CPU Load Scenario**
 
-```
+```text
 CPU: 85%, RAM: 50%, GPU: 20%
 → Recommendations:
    - Offload processing to GPU
@@ -192,11 +192,11 @@ CPU: 85%, RAM: 50%, GPU: 20%
    - use_gpu = true
    - gpu_batch_size = 128
    - cpu_batch_size = 16
-```
+```text
 
 ### 2. **Memory Pressure Scenario**
 
-```
+```text
 CPU: 40%, RAM: 78%, GPU: 15%
 → Recommendations:
    - Use GPU to free RAM
@@ -206,11 +206,11 @@ CPU: 40%, RAM: 78%, GPU: 15%
    - use_gpu = true
    - mixed_precision = true
    - use_gradient_checkpointing = true
-```
+```text
 
 ### 3. **Optimal Load Scenario**
 
-```
+```text
 CPU: 50%, RAM: 55%, GPU: 45%
 → Recommendations:
    - System is operating optimally
@@ -218,7 +218,7 @@ CPU: 50%, RAM: 55%, GPU: 45%
 → Configuration:
    - Balanced CPU/GPU utilization
    - Normal batch sizes
-```
+```text
 
 ---
 
@@ -230,7 +230,7 @@ CPU: 50%, RAM: 55%, GPU: 45%
 # In omega_control_panel_web.py __init__
 load_balancer = get_load_balancer()
 load_balancer.start_monitoring(interval=2.0)
-```
+```text
 
 ### Control Panel Integration
 
@@ -238,7 +238,7 @@ load_balancer.start_monitoring(interval=2.0)
 # In omega_control_panel.py
 self.load_balancer = get_load_balancer()
 self.load_balancer.start_monitoring()
-```
+```text
 
 ### JavaScript Frontend
 
@@ -254,14 +254,14 @@ async function loadLoadBalancerData() {
     const data = await response.json();
     // Update UI with stats, recommendations, status
 }
-```
+```text
 
 ---
 
 ## 📋 Configuration Thresholds
 
 | Component | Threshold | Action |
-|-----------|-----------|--------|
+| ----------- | ----------- | -------- |
 | CPU | 80% | Offload tasks to GPU |
 | RAM | 75% | Enable GPU memory optimization |
 | GPU | 85% | Avoid further GPU tasks |
@@ -312,7 +312,7 @@ def _monitoring_loop(self, interval):
         recommendations = self.get_recommendations()
         # Update history
         time.sleep(interval)
-```
+```text
 
 ---
 
@@ -338,11 +338,11 @@ The web dashboard now shows:
 python omega_control_panel_web.py --port 5000
 # Server starts with GPU load balancer enabled
 # Dashboard immediately shows system metrics
-```
+```text
 
 ### Accessing Dashboard
 
-```
+```text
 http://localhost:5000
 ↓
 GPU Load Balancer section visible
@@ -350,16 +350,16 @@ GPU Load Balancer section visible
 Real-time metrics update every 5 seconds
 ↓
 Recommendations automatically generated
-```
+```text
 
 ### Making Decisions
 
-```
+```text
 High CPU load detected (87%) →
 Recommendation: "Offload processing to GPU" →
 Configuration auto-adjusts →
 Monitor results in real-time
-```
+```text
 
 ---
 

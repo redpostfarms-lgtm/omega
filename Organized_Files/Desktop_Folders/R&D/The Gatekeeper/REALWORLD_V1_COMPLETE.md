@@ -48,7 +48,7 @@ A complete duplicate of:
 ```python
 boil(1, pressure_kPa=50)  # → 1 kg boils at 81.33°C
 boil(2, altitude_m=2438)  # → At 8000 ft (your farm altitude)
-```
+```text
 
 Uses **real Clausius-Clapeyron equation** with altitude correction.
 
@@ -56,7 +56,7 @@ Uses **real Clausius-Clapeyron equation** with altitude correction.
 ```python
 stress_test('steel_1045', force_N=500000, dimensions=(0.0254, 0.0254))
 # → 1 inch square plate under 500 kN
-```
+```text
 
 Calculates:
 - Stress (MPa)
@@ -68,7 +68,7 @@ Calculates:
 ```python
 cool_down(95, 65, 0.3, 'water', 20, 10)  # Ruth's tea
 # → How long tea cools from 95°C to 65°C
-```
+```text
 
 Uses **Newton's law of cooling** with real convection coefficients.
 
@@ -76,7 +76,7 @@ Uses **Newton's law of cooling** with real convection coefficients.
 ```python
 ballistics('.308', 850, -10, 0)  # .308 at -10°C
 # → Velocity drop due to temperature and air density
-```
+```text
 
 Real temperature and altitude corrections.
 
@@ -84,7 +84,7 @@ Real temperature and altitude corrections.
 ```python
 melt('copper', 1100, 0)  # Copper in vacuum
 # → Check if material melts at temperature
-```
+```text
 
 ---
 
@@ -94,14 +94,14 @@ melt('copper', 1100, 0)  # Copper in vacuum
 
 ```bash
 python sandbox_interactive.py
-```
+```text
 
 Then type:
-```
+```text
 REALWORLD> boil(1, altitude_m=2438)
 REALWORLD> stress_test('steel_1045', 500000, dimensions=(0.0254, 0.0254))
 REALWORLD> cool_down(95, 65, 0.3, 'water', 20, 10)
-```
+```text
 
 ### Python Import
 
@@ -116,7 +116,7 @@ print(stress_test('steel_1045', 500000, dimensions=(0.0254, 0.0254)))
 
 # Cool down tea
 print(cool_down(95, 65, 0.3, 'water', 20, 10))
-```
+```text
 
 ### Direct Access
 
@@ -130,7 +130,7 @@ planck_length = REALWORLD.constants.get('planck_length')
 # Access materials
 steel = REALWORLD.materials.get('steel_4140')
 print(steel['yield_strength'])  # 655e6 Pa
-```
+```text
 
 ---
 
@@ -199,7 +199,7 @@ Required:
 Install:
 ```bash
 pip install scipy sympy numpy
-```
+```text
 
 ---
 
@@ -209,7 +209,7 @@ pip install scipy sympy numpy
 ```python
 >>> boil(1, altitude_m=2438)
 1 kg boils at 91.23°C (364.38 K) at 75.47 kPa (2438 m altitude)
-```
+```text
 
 ### Example 2: Stress Test Steel
 ```python
@@ -222,7 +222,7 @@ Yield strength: 450.00 MPa
 Status: FAILED - Exceeds yield strength
 Strain: 0.00388 mm/mm
 Deflection (1m beam): 1.94 mm
-```
+```text
 
 ### Example 3: Cool Down Tea
 ```python
@@ -233,7 +233,7 @@ Initial: 95.0°C
 Final: 65.0°C
 Ambient: 20.0°C
 Time to cool: 12.3 minutes (738 seconds)
-```
+```text
 
 ### Example 4: Ballistics
 ```python
@@ -245,7 +245,7 @@ Altitude: 0 m
 Air density: 1.341 kg/m³ (std: 1.225)
 Corrected velocity: 824.5 m/s
 Velocity drop: 25.5 m/s (3.0%)
-```
+```text
 
 ### Example 5: Melt Copper
 ```python
@@ -254,7 +254,7 @@ Material: Copper (C11000)
 Temperature: 1100.0°C (1373.1 K)
 Melting point: 1084.9°C (1358.0 K)
 Status: MELTS
-```
+```text
 
 ---
 

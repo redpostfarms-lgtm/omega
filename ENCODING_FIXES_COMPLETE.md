@@ -34,7 +34,7 @@
 ```batch
 REM Set console to UTF-8 for Unicode support
 chcp 65001 >nul 2>&1
-```
+```text
 
 This sets the Windows console code page to UTF-8 (65001), enabling Unicode support.
 
@@ -51,7 +51,7 @@ if sys.platform == 'win32':
         import io
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
         sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
-```
+```text
 
 **Fallback Method (Older Python):**
 - Uses `io.TextIOWrapper` to wrap stdout/stderr with UTF-8 encoding
@@ -81,7 +81,7 @@ def safe_print(text):
         # Also replace any other problematic Unicode
         safe_text = safe_text.encode('ascii', errors='replace').decode('ascii')
         print(safe_text)
-```
+```text
 
 **Features:**
 - Tries to print with Unicode support
@@ -103,7 +103,7 @@ def safe_print(text):
 ### Test 1: UTF-8 Code Page
 ```batch
 chcp 65001
-```
+```text
 ✅ Console code page set to UTF-8
 
 ### Test 2: Python Encoding
@@ -111,13 +111,13 @@ chcp 65001
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 print('Test Unicode: OK')
-```
+```text
 ✅ UTF-8 encoding configured
 
 ### Test 3: Safe Print
 ```python
 safe_print('✓ Unicode test')
-```
+```text
 ✅ Falls back to `[OK] Unicode test` if encoding fails
 
 ---

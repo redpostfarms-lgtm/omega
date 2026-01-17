@@ -46,7 +46,7 @@ def search_digikey_part(part_number, access_token, config):
 def auto_order_digikey(batteries):
     # Complete auto-ordering workflow
     pass
-```
+```text
 
 **Configuration File:** `config/digikey_config.json`
 ```json
@@ -59,7 +59,7 @@ def auto_order_digikey(batteries):
   "default_part_number": "18650",
   "default_quantity": 1
 }
-```
+```text
 
 **API Setup:**
 1. Register at https://developer.digikey.com/
@@ -93,7 +93,7 @@ def encrypt_with_veracrypt():
     # Step 3: Copy files to encrypted volume
     # Step 4: Unmount volume
     pass
-```
+```text
 
 **Configuration File:** `config/veracrypt_config.json`
 ```json
@@ -106,7 +106,7 @@ def encrypt_with_veracrypt():
   "encryption_algorithm": "AES",
   "hash_algorithm": "sha512"
 }
-```
+```text
 
 **Installation:**
 1. Download VeraCrypt from https://www.veracrypt.fr/
@@ -137,7 +137,7 @@ REM kiwix-manage download en-wikipedia
 
 REM After: Complete download URLs
 curl -L -o "%WIKI_DIR%\wikipedia_en_all_nopic_2023-10.zim" "https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2023-10.zim"
-```
+```text
 
 **Download Sources:**
 1. Wikipedia (English, all articles, no pictures)
@@ -163,7 +163,7 @@ curl -L -o "%WIKI_DIR%\wikipedia_en_all_nopic_2023-10.zim" "https://download.kiw
 ### **For DigiKey API:**
 ```bash
 pip install requests
-```
+```text
 
 ### **For VeraCrypt:**
 1. Download from https://www.veracrypt.fr/

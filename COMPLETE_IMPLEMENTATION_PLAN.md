@@ -93,7 +93,7 @@ Complete implementation plan including all missing equations, features, systems,
 ```bash
 pip install spacy
 python -m spacy download en_core_web_sm
-```
+```text
 
 ---
 
@@ -188,7 +188,7 @@ python -m spacy download en_core_web_sm
 ```bash
 pip install bitsandbytes  # For 8-bit quantization
 pip install onnxruntime   # For ONNX models
-```
+```text
 
 ---
 
@@ -217,7 +217,7 @@ pip install onnxruntime   # For ONNX models
 pip install chromadb          # Local vector DB
 pip install faiss-cpu         # Facebook AI Similarity Search (CPU)
 # pip install pinecone-client  # Cloud vector DB (optional)
-```
+```text
 
 ---
 
@@ -246,7 +246,7 @@ pip install faiss-cpu         # Facebook AI Similarity Search (CPU)
 pip install prometheus-client  # Metrics collection
 pip install structlog          # Structured logging
 # pip install sentry-sdk       # Error tracking (optional)
-```
+```text
 
 ---
 
@@ -271,7 +271,7 @@ pip install structlog          # Structured logging
 
 ### 4.1 Required Dependencies (Already Installed) ✅
 
-```
+```text
 TTS>=0.20.0
 transformers>=4.21.0,<4.36.0
 torch==2.5.1
@@ -290,46 +290,46 @@ soundfile
 webrtcvad
 aiofiles
 aiohttp
-```
+```text
 
 ### 4.2 High Priority Optional Dependencies ❌
 
-```
+```text
 sentence-transformers  # Better embeddings for RAG and intent recognition
 spacy                  # Named Entity Recognition
 langchain              # Already created, optional to install
-```
+```text
 
 ### 4.3 Medium Priority Optional Dependencies ⚠️
 
-```
+```text
 chromadb               # Vector database for RAG
 faiss-cpu              # Alternative vector database (CPU version)
 scikit-learn           # Already used in RAG (TF-IDF), ensure installed
-```
+```text
 
 ### 4.4 Low Priority Optional Dependencies ⚠️
 
-```
+```text
 bitsandbytes           # Advanced quantization
 onnxruntime            # ONNX model quantization
 prometheus-client      # Metrics collection
 structlog              # Structured logging
 sentry-sdk             # Error tracking (optional, cloud-based)
-```
+```text
 
 ### 4.5 Language Models for spaCy ❌
 
-```
+```text
 en_core_web_sm         # English small model (required for NER)
 en_core_web_md         # English medium model (optional, better accuracy)
-```
+```text
 
 **Installation:**
 ```bash
 python -m spacy download en_core_web_sm  # Small model (recommended)
 python -m spacy download en_core_web_md  # Medium model (optional)
-```
+```text
 
 ---
 
@@ -356,7 +356,7 @@ pip install webrtcvad
 
 # Async and Utilities
 pip install aiofiles aiohttp
-```
+```text
 
 ### 5.2 High Priority Optional Dependencies
 
@@ -370,7 +370,7 @@ python -m spacy download en_core_web_sm
 
 # LangChain (already created, optional to install)
 pip install langchain
-```
+```text
 
 ### 5.3 Medium Priority Optional Dependencies
 
@@ -382,7 +382,7 @@ pip install faiss-cpu
 
 # Machine learning utilities (if not already installed)
 pip install scikit-learn
-```
+```text
 
 ### 5.4 Low Priority Optional Dependencies
 
@@ -395,7 +395,7 @@ pip install onnxruntime
 pip install prometheus-client
 pip install structlog
 # pip install sentry-sdk  # Optional cloud-based error tracking
-```
+```text
 
 ---
 
@@ -470,7 +470,7 @@ pip install structlog
 ### Quick Install (Required Only)
 ```bash
 pip install TTS==0.22.0 transformers torch torchaudio torchcodec sounddevice numpy scipy speechbrain SpeechRecognition faster-whisper librosa noisereduce pydub soundfile webrtcvad aiofiles aiohttp
-```
+```text
 
 ### Recommended Install (Required + High Priority Optional)
 ```bash
@@ -480,7 +480,7 @@ pip install TTS==0.22.0 transformers torch torchaudio torchcodec sounddevice num
 # High Priority Optional
 pip install sentence-transformers spacy langchain scikit-learn
 python -m spacy download en_core_web_sm
-```
+```text
 
 ### Full Install (Everything)
 ```bash
@@ -496,7 +496,7 @@ pip install chromadb faiss-cpu
 
 # Low Priority Optional
 pip install bitsandbytes onnxruntime prometheus-client structlog
-```
+```text
 
 ---
 

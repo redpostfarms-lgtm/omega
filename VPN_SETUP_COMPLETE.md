@@ -74,7 +74,7 @@
 
 ```bash
 python SETUP_VPN.py
-```
+```text
 
 This will:
 - Show available providers
@@ -86,7 +86,7 @@ This will:
 
 ```bash
 python VPN_BROWSER_INTEGRATION.py
-```
+```text
 
 Options:
 - Monitor for browser startup (auto-activate VPN)
@@ -97,7 +97,7 @@ Options:
 
 ```bash
 python VPN_BROWSER_INTEGRATION.py --monitor
-```
+```text
 
 This will:
 - Monitor for browser startup
@@ -116,7 +116,7 @@ sudo apt-get install openvpn
 
 # macOS:
 brew install openvpn
-```
+```text
 
 ### For WireGuard
 ```bash
@@ -126,7 +126,7 @@ sudo apt-get install wireguard wireguard-tools
 
 # macOS:
 brew install wireguard-tools
-```
+```text
 
 ### For Cloudflare WARP
 ```bash
@@ -138,7 +138,7 @@ sudo dpkg -i cloudflare-warp-*.deb
 
 # Or use package manager:
 sudo apt-get install cloudflare-warp
-```
+```text
 
 ---
 
@@ -159,7 +159,7 @@ success, message = vpn.connect(VPNProvider.OPENVPN, config_path="config.ovpn")
 
 # Connect to WireGuard
 success, message = vpn.connect(VPNProvider.WIREGUARD, config_path="config.conf")
-```
+```text
 
 ### Check Status
 
@@ -168,7 +168,7 @@ status = vpn.get_status()
 print(f"Connected: {status['connected']}")
 print(f"Provider: {status['provider']}")
 print(f"IP: {status['ip_address']}")
-```
+```text
 
 ### Test Connection
 
@@ -176,7 +176,7 @@ print(f"IP: {status['ip_address']}")
 success, result = vpn.test_connection()
 if success:
     print(f"IP Address: {result['ip']}")
-```
+```text
 
 ---
 
@@ -195,7 +195,7 @@ The browser integration system:
 
 ```bash
 python VPN_BROWSER_INTEGRATION.py --setup-startup
-```
+```text
 
 This creates a startup script that will:
 - Start monitoring on boot

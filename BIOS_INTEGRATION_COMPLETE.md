@@ -85,7 +85,7 @@
 ```bash
 # Auto-configure all new hardware
 python AUTO_CONFIGURE_NEW_HARDWARE.py
-```
+```text
 
 ### Manual Configuration
 
@@ -109,7 +109,7 @@ print(message)
 # Enable GPU cross-connect
 success, message = bios.enable_gpu_cross_connect()
 print(message)
-```
+```text
 
 ### Check Status
 
@@ -126,7 +126,7 @@ for gpu in status['gpus_detected']:
 print(f"Hard Drives: {status['hard_drives']}")
 for drive in status['drives_detected']:
     print(f"  - {drive['model']} ({drive['capacity']}) ({'Enabled' if drive['enabled'] else 'Disabled'})")
-```
+```text
 
 ---
 

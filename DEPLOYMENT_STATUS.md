@@ -29,7 +29,7 @@ The Omega system has been successfully deployed and is ready for production use.
 ### Option 1: Automatic Deployment
 ```bash
 python deploy.py
-```
+```text
 
 ### Option 2: Manual Start
 ```bash
@@ -41,7 +41,7 @@ start_omega.bat
 
 # Or directly
 python omega_full_brain.py
-```
+```text
 
 ---
 
@@ -81,15 +81,15 @@ python --version
 
 # Verify dependencies
 pip list | findstr "TTS torch sounddevice"
-```
+```text
 
 ### Expected Output
 When starting, you should see:
-```
+```text
 OMEGA FULL BRAIN — VOICE + EMOTION — ALWAYS LISTENING
 Press Ctrl+C to exit
 Listening...
-```
+```text
 
 ---
 

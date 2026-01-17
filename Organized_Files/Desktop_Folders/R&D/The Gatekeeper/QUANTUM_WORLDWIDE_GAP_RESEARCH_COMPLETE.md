@@ -375,7 +375,7 @@ pip install pandas matplotlib seaborn plotly scikit-learn
 pip install schedule celery apscheduler
 pip install numba cython
 pip install cryptography pyjwt bcrypt
-```
+```text
 
 ### Step 2: Set Up Free APIs
 1. Sign up for free tiers

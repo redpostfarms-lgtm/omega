@@ -56,12 +56,12 @@
 Run with:
 ```bash
 python ghost_swarm_protocol.py
-```
+```text
 
 Or:
 ```bash
 python -m ghost_swarm_protocol
-```
+```text
 
 ---
 

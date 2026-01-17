@@ -48,7 +48,7 @@ git commit -m "Initial commit - Omega System"
 
 # Push to GitHub
 git push -u origin master
-```
+```text
 
 ---
 
@@ -84,7 +84,7 @@ git fetch origin
 
 # Test push (after creating repository and committing)
 git push origin master
-```
+```text
 
 ---
 

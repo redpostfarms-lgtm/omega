@@ -43,7 +43,7 @@
 ### Method 1: Auto-Launch Script (Recommended)
 ```bash
 python AUTO_LAUNCH_UI.py
-```
+```text
 - Automatically starts web interface
 - Opens browser automatically
 - Runs on http://localhost:5000
@@ -62,7 +62,7 @@ python AUTO_LAUNCH_UI.py
 ### Method 4: Batch File
 ```bash
 LAUNCH_UI.bat
-```
+```text
 - Double-click or run from command line
 - Opens browser and starts server
 
@@ -71,7 +71,7 @@ LAUNCH_UI.bat
 python omega_control_panel_web.py
 python omega_control_panel_web.py --port 5000
 python omega_control_panel_web.py --host 0.0.0.0  # Remote access
-```
+```text
 
 ---
 

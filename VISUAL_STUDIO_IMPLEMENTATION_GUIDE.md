@@ -104,7 +104,7 @@ class OmegaAPI:
     
     def get_notifications(self):
         return [{"message": n.message, "level": n.level} for n in list(self.panel.notifications)[-5:]]
-```
+```text
 
 ### Step 5: C# Code to Call Python
 
@@ -154,7 +154,7 @@ namespace OmegaControlPanel
         }
     }
 }
-```
+```text
 
 ### Step 6: Design XAML UI
 
@@ -245,7 +245,7 @@ Create MainWindow.xaml with control panel layout:
         </Border>
     </Grid>
 </Window>
-```
+```text
 
 ### Step 7: Code-Behind (MainWindow.xaml.cs)
 
@@ -319,7 +319,7 @@ namespace OmegaControlPanel
         }
     }
 }
-```
+```text
 
 ---
 
@@ -355,7 +355,7 @@ public class PythonSubprocess
         }
     }
 }
-```
+```text
 
 ---
 

@@ -138,7 +138,7 @@ The Limbo Sweeper **finds** opportunities. Actually **claiming** them requires a
 ## Summary Table
 
 | Component | What Sweeper Does | Can It Claim? | Where Money Goes |
-|-----------|------------------|---------------|------------------|
+| ----------- | ------------------ | --------------- | ------------------ |
 | Bitcoin Puzzles | Probes ranges | No (needs solving) | Your wallet (if solved) |
 | Dust Reclamation | Checks addresses | No (needs private keys) | Nowhere (can't claim) |
 | Testnet Airdrops | Claims testnet tokens | Yes | Your testnet address (fake money) |

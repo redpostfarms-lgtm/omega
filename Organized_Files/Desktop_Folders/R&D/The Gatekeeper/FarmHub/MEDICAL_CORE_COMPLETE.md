@@ -133,15 +133,15 @@
 - "FarmHub, medical status"
 
 **FarmHub responds:**
-```
+```text
 Heart rate: 88 bpm. SpO2: 98%. Respiration: 16 bpm. All systems monitoring. No alerts.
-```
+```text
 
 **Emergency detected:**
-```
+```text
 EMERGENCY DETECTED. INITIATING PROTOCOL.
 CRITICAL: Fall detected. Check for injury, assess consciousness, call 911 if unresponsive.
-```
+```text
 
 ---
 
@@ -152,7 +152,7 @@ CRITICAL: Fall detected. Check for injury, assess consciousness, call 911 if unr
 **Run once:**
 ```bash
 python D:\RPF_BRAIN\FarmHub\medical_core_final_2026.py
-```
+```text
 
 **Auto-start (already added to brain_wakeup.bat):**
 - Starts automatically on boot
@@ -172,7 +172,7 @@ python D:\RPF_BRAIN\FarmHub\medical_core_final_2026.py
 **Dependencies:**
 ```bash
 pip install ultralytics deepface opencv-python numpy pyaudio vosk pyttsx3 pybluez
-```
+```text
 
 ---
 

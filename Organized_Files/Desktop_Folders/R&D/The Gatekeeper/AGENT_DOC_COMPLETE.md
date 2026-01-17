@@ -40,10 +40,10 @@
 - Plant/Animal: plant, animal, recognize, identify, species, crop, livestock, pest, disease
 
 **Example:**
-```
+```text
 "Hey, Gatekeeper, council solve medical emergency detected"
 → Doc agent auto-loaded (medical/plant/animal detected)
-```
+```text
 
 ---
 
@@ -119,7 +119,7 @@
 ```bash
 python agent_council_v2.py "medical emergency detected"
 → Doc auto-loads and organizes medical data
-```
+```text
 
 ### **Direct:**
 ```python
@@ -134,7 +134,7 @@ result = doc.recognize_plant(image_path)
 
 # Recognize animal
 result = doc.recognize_animal(image_path)
-```
+```text
 
 ---
 

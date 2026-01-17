@@ -83,13 +83,13 @@ from omega_relationship_system import get_relationship_manager
 
 rel = get_relationship_manager()
 status = rel.set_partners_status(voice_response=True)
-```
+```text
 
 ### Get Partners Greeting
 ```python
 greeting = rel.get_appropriate_greeting()
 # Returns: "Partner! Good to see you. Ready to work together? What do you need?"
-```
+```text
 
 ---
 

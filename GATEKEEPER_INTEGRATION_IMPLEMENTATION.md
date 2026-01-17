@@ -30,7 +30,7 @@ from gatekeeper_threat_simulation import ThreatSimulator
 
 simulator = ThreatSimulator()
 result = simulator.run_random_simulation()
-```
+```text
 
 ---
 
@@ -58,7 +58,7 @@ from gatekeeper_forensic_analysis import ForensicAnalyzer
 
 analyzer = ForensicAnalyzer()
 results = analyzer.analyze_log_file(Path("attack_log.txt"))
-```
+```text
 
 ---
 
@@ -87,7 +87,7 @@ from gatekeeper_enhanced_monitoring import EnhancedMonitor
 monitor = EnhancedMonitor()
 metrics = monitor.collect_metrics()
 summary = monitor.get_metrics_summary(window_minutes=5)
-```
+```text
 
 ---
 
@@ -115,7 +115,7 @@ from gatekeeper_integration_module import GatekeeperIntegration
 integration = GatekeeperIntegration()
 status = integration.get_status()
 metrics = integration.get_system_metrics()
-```
+```text
 
 ---
 

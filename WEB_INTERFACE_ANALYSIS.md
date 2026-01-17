@@ -58,7 +58,7 @@
 ## Comparison Table
 
 | Feature | Native GUI (Current) | Web Interface (Proposed) |
-|---------|---------------------|-------------------------|
+| --------- | --------------------- | ------------------------- |
 | **Server Required** | ❌ No | ✅ Yes (Flask) |
 | **Network Access** | ❌ Local only | ✅ Remote access |
 | **Multiple Users** | ❌ Single user | ✅ Multiple users |

@@ -9,36 +9,36 @@ The Gatekeeper can scrape the entire world: GitHub repositories, open source doc
 ### Install Dependencies
 ```bash
 pip install requests beautifulsoup4
-```
+```text
 
 ### Basic Usage
 
 #### Scrape a Single GitHub Repository
 ```bash
 python "The Gatekeeper\web_scraper.py" --github microsoft/vscode --integrate
-```
+```text
 
 #### Search GitHub
 ```bash
 python "The Gatekeeper\web_scraper.py" --search "python automation" --integrate
-```
+```text
 
 #### Scrape a Web Page
 ```bash
 python "The Gatekeeper\web_scraper.py" --url https://docs.python.org/ --integrate
-```
+```text
 
 #### Scrape Documentation
 ```bash
 python "The Gatekeeper\web_scraper.py" --docs python numpy pandas --integrate
-```
+```text
 
 ## Mass Scraping
 
 ### Run Mass Scraper
 ```bash
 python "The Gatekeeper\mass_scrape.py"
-```
+```text
 
 This will:
 1. Scrape top GitHub repositories (Python, Automation, AI/ML, Farm/Ag, Solar)
@@ -55,7 +55,7 @@ This will:
 2. Use with scraper:
 ```bash
 python "The Gatekeeper\web_scraper.py" --github owner/repo --token YOUR_TOKEN
-```
+```text
 
 Benefits:
 - Higher rate limit (5000 requests/hour vs 60)
@@ -112,24 +112,24 @@ The scraper includes:
 ### Scrape Multiple Repos
 ```bash
 python "The Gatekeeper\web_scraper.py" --github microsoft/vscode python/cpython numpy/numpy --integrate
-```
+```text
 
 ### Search and Scrape
 ```bash
 python "The Gatekeeper\web_scraper.py" --search "solar battery" --token YOUR_TOKEN --integrate
-```
+```text
 
 ### Comprehensive Scrape
 ```bash
 python "The Gatekeeper\mass_scrape.py"
-```
+```text
 
 ## Integration with Brain
 
 Use `--integrate` flag to automatically add scraped data to the Gatekeeper brain:
 ```bash
 python "The Gatekeeper\web_scraper.py" --github owner/repo --integrate
-```
+```text
 
 The brain will be updated with:
 - Repository information

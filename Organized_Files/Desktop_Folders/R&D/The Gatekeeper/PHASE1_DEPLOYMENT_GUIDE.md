@@ -12,7 +12,7 @@
 ### Minimal Installation (Basic Functionality)
 ```bash
 pip install numpy Pillow
-```
+```text
 
 This provides:
 - ✅ Basic Vector RAG (hash-based embeddings)
@@ -32,7 +32,7 @@ pip install openai anthropic
 
 # Quantum Enhancement
 pip install qiskit qiskit-aer
-```
+```text
 
 ---
 
@@ -59,7 +59,7 @@ for doc in results['documents']:
 
 # Augment query for LLM
 augmented = rag.augment_for_llm("What is Omega?", top_k=5)
-```
+```text
 
 ### 2. Multi-Modal Processing
 
@@ -80,7 +80,7 @@ print(audio.transcription)
 # Process video
 video = processor.process_video("video.mp4", sample_frames=10)
 print(video.summary)
-```
+```text
 
 ### 3. Integrated Usage
 
@@ -100,7 +100,7 @@ audio = omega.process_audio("audio.wav")
 
 # Augmented query
 augmented = omega.augmented_query("query", use_rag=True)
-```
+```text
 
 ---
 
@@ -125,7 +125,7 @@ class OmegaSystemTester:
         
         # Send to multi-LLM fusion
         # ... existing LLM fusion code ...
-```
+```text
 
 ---
 
@@ -167,7 +167,7 @@ class OmegaSystemTester:
 python omega_vector_rag_system.py
 python omega_multimodal_processor.py
 python omega_phase1_integration.py
-```
+```text
 
 ### Expected Output:
 - Vector RAG: Document indexing and search working

@@ -505,7 +505,7 @@
 ## FINAL SCORING BREAKDOWN
 
 | Category | Score | Weight | Weighted Score |
-|----------|-------|--------|----------------|
+| ---------- | ------- | -------- | ---------------- |
 | **Core System Files** | 97.6% | 25% | 24.4% |
 | **8 Hidden Pieces** | 90.1% | 20% | 18.0% |
 | **Additional Features** | 99.0% | 15% | 14.9% |

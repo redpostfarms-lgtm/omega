@@ -25,7 +25,7 @@ Created **`START_CONTROL_PANEL_VISIBLE.py`** that uses `plt.show(block=True)` to
 ### For VISIBLE Window (Recommended):
 ```bash
 python START_CONTROL_PANEL_VISIBLE.py
-```
+```text
 - **Uses**: `plt.show(block=True)`
 - **Window**: Will definitely appear and stay visible
 - **Behavior**: Blocks until window is closed
@@ -34,7 +34,7 @@ python START_CONTROL_PANEL_VISIBLE.py
 ### For Background Updates:
 ```bash
 python START_CONTROL_PANEL_FIXED.py
-```
+```text
 - **Uses**: `plt.show(block=False)` with `plt.pause()`
 - **Window**: Should appear but may have issues
 - **Behavior**: Non-blocking, allows other code to run
@@ -48,7 +48,7 @@ To test which matplotlib backend works on your system:
 
 ```bash
 python TEST_MATPLOTLIB_DISPLAY.py
-```
+```text
 
 This will:
 1. Test TkAgg backend (recommended for Windows)

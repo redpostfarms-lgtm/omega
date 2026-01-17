@@ -92,7 +92,7 @@ These additions complement:
 
 ## Knowledge Base Structure
 
-```
+```text
 LLM Decoding Strategies Knowledge:
 ├── LLM_DECODING_STRATEGIES_2026.md (Comparisons & Decision Guides)
 ├── BEAM_SEARCH_VARIANTS_2026.md (Beam Search Variants Overview)
@@ -107,7 +107,7 @@ LLM Decoding Strategies Knowledge:
         ├── Section 4: Adaptive Alpha (Linear)
         ├── Section 5: Exponential Alpha Ramp
         └── Section 6: Sigmoid-Shaped Alpha Ramp (NEW)
-```
+```text
 
 ## Status
 

@@ -33,13 +33,13 @@ SafePathManager.safe_write_json(data, 'config.json')
 
 # Read JSON with error handling
 data = SafePathManager.safe_read_json('config.json')
-```
+```text
 
 ### Automatic Directory Creation
 ```python
 # Automatically creates parent directories
 SafePathManager.safe_write_file('content', '/path/to/deep/file.txt')
-```
+```text
 
 ### Path Validation
 ```python
@@ -47,14 +47,14 @@ SafePathManager.safe_write_file('content', '/path/to/deep/file.txt')
 if SafePathManager.validate_path('/valid/path'):
     # Safe to use
     SafePathManager.safe_write_file('data', '/valid/path')
-```
+```text
 
 ### Backup Operations
 ```python
 # Automatically creates backup before modifying
 backup_path = SafePathManager.backup_file('important.json')
 # original.json.bak is now created
-```
+```text
 
 ### Platform-Safe Directories
 ```python
@@ -66,7 +66,7 @@ config_dir = SafePathManager.get_config_dir('GatekeeperTools')
 
 # Get temporary directory (safe temp location)
 temp_dir = SafePathManager.get_safe_temp_dir()
-```
+```text
 
 ## Usage Examples
 
@@ -74,10 +74,10 @@ temp_dir = SafePathManager.get_safe_temp_dir()
 ```bash
 # Initialize directory structure
 python safe_path_manager.py
-```
+```text
 
 This creates:
-```
+```text
 ~/.config/GatekeeperTools/
 ├── cache/
 ├── logs/
@@ -90,7 +90,7 @@ This creates:
 ├── logs/
 %APPDATA%\..\Local\GatekeeperTools\
 ├── backups/
-```
+```text
 
 ### Safe Tool Manager Integration
 ```python
@@ -103,7 +103,7 @@ paths = initialize_safe_paths()
 # Use tool manager with safe paths
 manager = ToolAccessManager()
 tools = manager.access_tools_for_project('.')
-```
+```text
 
 ### In Scripts
 ```python
@@ -121,7 +121,7 @@ SafePathManager.safe_write_json(config, config_file)
 config = SafePathManager.safe_read_json(config_file)
 if config is None:
     config = {}  # Use defaults
-```
+```text
 
 ## Error Handling
 
@@ -149,12 +149,12 @@ data = SafePathManager.safe_read_json('/path/to/file.json')
 if data is None:
     data = {}  # Use default
     print("Using default data")
-```
+```text
 
 ## Path Structure
 
 ### Windows
-```
+```text
 C:\Users\{USER}\AppData\Roaming\GatekeeperTools\
 ├── cache\           (tool cache)
 ├── logs\            (operation logs)
@@ -162,10 +162,10 @@ C:\Users\{USER}\AppData\Roaming\GatekeeperTools\
 
 C:\Users\{USER}\AppData\Local\GatekeeperTools\
 └── backups\         (data backups)
-```
+```text
 
 ### macOS/Linux
-```
+```text
 ~/.config/GatekeeperTools/
 ├── cache/           (tool cache)
 ├── logs/            (operation logs)
@@ -173,7 +173,7 @@ C:\Users\{USER}\AppData\Local\GatekeeperTools\
 
 ~/.local/share/GatekeeperTools/
 └── backups/         (data backups)
-```
+```text
 
 ## Why This Matters
 
@@ -200,7 +200,7 @@ SafePathManager.safe_write_json(data, path)
 # ✗ Avoid
 with open(path, 'w') as f:
     json.dump(data, f)
-```
+```text
 
 ### 2. Validate Paths
 ```python
@@ -210,7 +210,7 @@ if SafePathManager.validate_path(user_path):
 
 # ✗ Avoid
 SafePathManager.safe_write_file(content, user_path)  # No validation
-```
+```text
 
 ### 3. Use Platform-Specific Directories
 ```python
@@ -219,7 +219,7 @@ config_dir = SafePathManager.get_config_dir('MyApp')
 
 # ✗ Avoid - Platform-specific
 config_dir = Path.home() / '.config'  # Doesn't exist on Windows
-```
+```text
 
 ### 4. Create Backups for Important Files
 ```python
@@ -230,7 +230,7 @@ backup = SafePathManager.backup_file(important_file)
 # ✗ Avoid
 # Modify without backup
 SafePathManager.safe_write_file(new_content, important_file)
-```
+```text
 
 ## Troubleshooting
 
@@ -265,7 +265,7 @@ cat ~/.config/GatekeeperTools/cache/tool_cache.json
 
 # Logs are accessible
 tail ~/.config/GatekeeperTools/logs/auto_tool_manager.log
-```
+```text
 
 ## Summary
 

@@ -42,7 +42,7 @@ Hidden in Python file comments:
 Run the verification script:
 ```bash
 python "The Gatekeeper\verify_ownership.py"
-```
+```text
 
 This will:
 - Search for all signature files

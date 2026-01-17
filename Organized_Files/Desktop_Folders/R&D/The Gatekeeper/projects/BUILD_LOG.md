@@ -26,7 +26,7 @@
 ### **Installation:**
 ```bash
 pip install pyserial
-```
+```text
 
 ### **Usage:**
 ```bash
@@ -38,7 +38,7 @@ python projects/battery_voltage_monitor.py --port COM4 --interval 10.0
 
 # No display (logging only)
 python projects/battery_voltage_monitor.py --no-display
-```
+```text
 
 ### **Dependencies:**
 - `pyserial` - Serial port communication
@@ -82,7 +82,7 @@ python projects/solar_mppt_controller.py --simulate --algorithm incremental_cond
 
 # Hardware mode (when sensors connected)
 python projects/solar_mppt_controller.py --max-voltage 24.0 --max-current 10.0
-```
+```text
 
 ### **Output:**
 - Real-time MPPT status display
@@ -122,7 +122,7 @@ python projects/farm_automation_hub.py --monitor --interval 60.0
 
 # Generate briefing
 python projects/farm_automation_hub.py --briefing
-```
+```text
 
 ### **Output:**
 - Real-time dashboard display
@@ -164,7 +164,7 @@ python projects/knowledge_web_ui.py --port 8080
 
 # Debug mode
 python projects/knowledge_web_ui.py --debug
-```
+```text
 
 ### **Access:**
 - Web UI: http://localhost:5000
@@ -211,7 +211,7 @@ python projects/drone_flight_controller.py --simulate --home-lat 40.123 --home-l
 python projects/drone_flight_controller.py --simulate --grid \
   --corner1-lat 40.120 --corner1-lon -75.450 \
   --corner2-lat 40.130 --corner2-lon -75.460
-```
+```text
 
 ### **Output:**
 - Flight logs: `Archived/drone_flights/flight_YYYYMMDD_HHMMSS.json`
@@ -251,7 +251,7 @@ python projects/grant_application_automation.py --list
 
 # Check status
 python projects/grant_application_automation.py --status GRANT-20260103-151234
-```
+```text
 
 ### **Output:**
 - Documents: `Archived/grant_applications/grant_*.docx/pdf/json`

@@ -41,7 +41,7 @@
 
 ## 📁 Workspace Structure
 
-```
+```text
 H:\The Gatekeeper\
 ├── .vscode/
 │   └── settings.json          (IDE settings)
@@ -50,7 +50,7 @@ H:\The Gatekeeper\
 ├── omega_control_panel_web.py (Web interface)
 ├── SETUP_ADMIN_USER.py        (Admin setup script)
 └── [all other system files]
-```
+```text
 
 ---
 

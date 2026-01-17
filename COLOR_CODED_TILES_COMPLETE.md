@@ -63,7 +63,7 @@ The tiles are displayed in the **Red section (Main Status)** of the control pane
 < 50°C: White dot
 50-70°C: Amber dot
 70°C+: Deep red dot
-```
+```text
 
 ### Data Sources
 
@@ -78,11 +78,11 @@ The tiles are displayed in the **Red section (Main Status)** of the control pane
 
 The tiles are arranged horizontally in the red section:
 
-```
+```text
 [CPU Tile]  [GPU Tile]  [RAM Tile]
   45.2%       32.1%       68.5%
   48°C        55°C        42°C
-```
+```text
 
 Each tile shows:
 - Usage percentage (large, bold text)

@@ -16,7 +16,7 @@ Comprehensive audit of The Gatekeeper project completed. The project is **signif
 ### File Inventory
 
 | Type | Count | Notes |
-|------|-------|-------|
+| ------ | ------- | ------- |
 | **Python (.py)** | **657** | Core codebase (not 130!) |
 | **Markdown (.md)** | **692** | Extensive documentation |
 | **Batch (.bat)** | **90** | Windows automation scripts |
@@ -46,7 +46,7 @@ structlog>=23.2.0  # Used in omega_logging_config.py, omega_monitoring.py
 
 # Configuration Management (USED IN CODE)
 python-dotenv>=1.0.0  # Used in omega_automation_orchestrator.py
-```
+```text
 
 **Files Using These Dependencies:**
 - `omega_monitoring.py` - Uses `prometheus_client` and `structlog`
@@ -93,7 +93,7 @@ except (ValueError, IOError, OSError) as e:
 except Exception as e:
     logger.error(f"Error: {e}")
     # Handle error
-```
+```text
 
 **Action Required:** Replace all bare `except:` with specific exception types.
 
@@ -131,7 +131,7 @@ pytest>=7.4.0  # Uncomment in requirements.txt
 pytest-asyncio>=0.21.0  # For async testing
 pytest-cov>=4.1.0  # Coverage reporting
 pytest-mock>=3.12.0  # Mocking support
-```
+```text
 
 **Action Required:** Enhance testing framework.
 
@@ -276,7 +276,7 @@ structlog>=23.2.0  # Used in omega_logging_config.py, omega_monitoring.py
 
 # Configuration Management (USED IN CODE - MUST ADD)
 python-dotenv>=1.0.0  # Used in omega_automation_orchestrator.py
-```
+```text
 
 ### Recommended Additions
 
@@ -289,7 +289,7 @@ pytest>=7.4.0  # Uncomment
 pytest-asyncio>=0.21.0  # Async testing
 pytest-cov>=4.1.0  # Coverage
 pytest-mock>=3.12.0  # Mocking
-```
+```text
 
 ### Development Dependencies (Optional)
 
@@ -315,7 +315,7 @@ click>=8.1.7  # CLI framework
 typer>=0.9.0  # Modern CLI
 rich>=13.7.0  # Rich terminal output
 tenacity>=8.2.3  # Retry library
-```
+```text
 
 ---
 

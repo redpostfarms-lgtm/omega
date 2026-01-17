@@ -81,7 +81,7 @@
 
 ### Core System Files
 | Component | Before | After | Status |
-|-----------|-------|-------|--------|
+| ----------- | ------- | ------- | -------- |
 | brain_prime.py | 96% | 98% | ✅ Improved |
 | auto_heal.py | 97% | 98% | ✅ Improved |
 | voice_tuner.py | 100% | 100% | ✅ Maintained |
@@ -94,7 +94,7 @@
 
 ### 8 Hidden Pieces
 | Component | Before | After | Status |
-|-----------|-------|-------|--------|
+| ----------- | ------- | ------- | -------- |
 | battery_oracle.py | 92% | 94% | ✅ Improved |
 | install_offline_wiki.bat | 83% | 85% | ✅ Improved |
 | grant_machine.py | 90% | 92% | ✅ Improved |
@@ -108,7 +108,7 @@
 
 ### Additional Features
 | Component | Before | After | Status |
-|-----------|-------|-------|--------|
+| ----------- | ------- | ------- | -------- |
 | max_out_pipelines.py | 100% | 100% | ✅ Maintained |
 | prompt_bank.py | 100% | 100% | ✅ Maintained |
 | web_scraper.py | 98% | 99% | ✅ Improved |

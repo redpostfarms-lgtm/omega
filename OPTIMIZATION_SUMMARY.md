@@ -69,7 +69,7 @@ Comprehensive audit and optimization of `omega_kitt_ui.py` completed. All critic
 ## Performance Improvements
 
 | Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
+| -------- | -------- | ------- | ------------- |
 | Scanner hold FPS | ~2.5 FPS | 60 FPS | **24x faster** |
 | PerlinNoise2D overhead | 2x creation/frame | 1x creation/total | **~70% reduction** |
 | Vignette init time | 2-5 seconds | <100ms | **20-50x faster** |

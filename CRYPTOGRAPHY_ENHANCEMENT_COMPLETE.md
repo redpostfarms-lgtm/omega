@@ -170,7 +170,7 @@ needs_rotation = manager.check_key_rotation("OPENAI")
 info = manager.get_key_info("OPENAI")
 print(f"Age: {info['age_days']} days")
 print(f"Needs rotation: {info['needs_rotation']}")
-```
+```text
 
 ### Backward Compatibility
 
@@ -181,7 +181,7 @@ from omega_api_keys_enhanced import get_api_key_manager, store_openai_key, get_o
 # Old interface still works
 store_openai_key("sk-...")
 key = get_openai_key()
-```
+```text
 
 ---
 

@@ -112,7 +112,7 @@ pip install scipy numpy
 
 # Voice activity detection
 pip install webrtcvad
-```
+```text
 
 ---
 

@@ -16,57 +16,57 @@ When working in AutoCAD Designs, write to brain using these types:
 ### decision
 **When:** Architectural choices, tool selections, workflow decisions
 **Example:**
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: decision
 - content: "Use FreeCAD for 3D parametric modeling, QCAD for 2D scripting"
 - why: "FreeCAD has best Python API, QCAD has best ECMAScript API"
-```
+```text
 
 ### constraint
 **When:** Standards, rules, limitations that must be followed
 **Example:**
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: constraint
 - content: "Default units: millimeters. All exports must specify units."
 - why: "Prevents unit mismatch errors in cross-platform exchange"
-```
+```text
 
 ### architecture
 **When:** System structure, folder organization, tool relationships
 **Example:**
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: architecture
 - content: "Export pipeline: DXF (2D), STEP (3D), STL (mesh), PDF (docs), SVG (web)"
 - why: "Standardized export formats ensure compatibility"
-```
+```text
 
 ### gotcha
 **When:** Common pitfalls, things that break, unexpected behaviors
 **Example:**
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: gotcha
 - content: "Onshape free plan documents are public. Do not use for proprietary designs."
 - why: "Prevents accidental exposure of confidential work"
-```
+```text
 
 ### milestone
 **When:** Project completion, major achievements, version releases
 **Example:**
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: milestone
 - content: "Unified CAD workspace structure created and operational"
 - date: "2025-12-13"
-```
+```text
 
 ---
 
@@ -85,12 +85,12 @@ Write to MCP brain:
 
 When starting work in AutoCAD Designs, Cursor should query:
 
-```
+```text
 Query MCP brain for:
 - project: AutoCAD_Designs
 - type: constraint | decision | architecture
 Return relevant entries.
-```
+```text
 
 This retrieves:
 - Standards and constraints
@@ -119,37 +119,37 @@ The canonical rules (`.cursor/rules/00-project-truth/RULE.md`) enforce:
 
 After updating `LAYER_STANDARD.json`:
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: constraint
 - content: "Layer standard v1.0: Prefix-suffix convention (A-WALL, M-BOLT, E-WIRE). Colors and lineweights defined in LAYER_STANDARD.json"
 - why: "Ensures consistent layer naming across all projects"
-```
+```text
 
 ### Storing a Tool Decision
 
 After choosing FreeCAD for a specific task:
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: decision
 - content: "Use FreeCAD Python macros for parametric 3D modeling automation"
 - why: "FreeCAD has best Python API for programmatic geometry creation"
-```
+```text
 
 ### Storing a Gotcha
 
 After discovering an export issue:
 
-```
+```text
 Write to MCP brain:
 - project: AutoCAD_Designs
 - type: gotcha
 - content: "STEP export from FreeCAD requires solid geometry. Surfaces fail silently."
 - why: "Prevents export failures without clear error messages"
-```
+```text
 
 ---
 

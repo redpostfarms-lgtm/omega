@@ -8,7 +8,7 @@ Convert a Blueprint JSON file into a QCAD ECMAScript tool.
 
 ## Prompt Structure
 
-```
+```text
 TASK: Generate QCAD ECMAScript script from Blueprint
 
 BLUEPRINT FILE:
@@ -33,5 +33,5 @@ OUTPUT:
 1) Create the QCAD script file
 2) Show build plan (what will be created)
 3) List export commands that will be generated
-```
+```text
 

@@ -54,7 +54,7 @@ List the exact manual test steps:
 
 ## Folder Structure You Must Create/Maintain
 
-```
+```text
 /project-name
 ├── prompts/
 │   ├── BLUEPRINT_TO_3D.md
@@ -69,7 +69,7 @@ List the exact manual test steps:
 ├── logs/
 │   └── TEST_RESULT_TEMPLATE.md
 └── README.md → execution order + results
-```
+```text
 
 ---
 

@@ -39,7 +39,7 @@ git commit -m "Initial commit - Omega System"
 
 # Push to GitHub
 git push -u origin master
-```
+```text
 
 ---
 

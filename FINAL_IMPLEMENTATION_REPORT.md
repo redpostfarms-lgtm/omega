@@ -142,7 +142,7 @@ Successfully implemented **ALL** quick wins from the comprehensive audit. All cr
 To verify new dependencies are in requirements.txt:
 ```bash
 grep -E "prometheus-client|structlog|python-dotenv|pytest" requirements.txt
-```
+```text
 
 ### Files Verification
 
@@ -153,14 +153,14 @@ dir .env.example pytest.ini LICENSE setup.py requirements-dev.txt INSTALL_DEV_DE
 
 # Linux/Mac
 ls -la .env.example pytest.ini LICENSE setup.py requirements-dev.txt INSTALL_DEV_DEPENDENCIES.bat
-```
+```text
 
 ### Code Quality Verification
 
 Check for remaining bare except clauses:
 ```bash
 grep -r "except\s*:" *.py | grep -v "__pycache__" | head -20
-```
+```text
 
 ---
 
@@ -174,7 +174,7 @@ pip install -r requirements.txt
 
 # Or use the batch script (Windows)
 INSTALL_DEPENDENCIES.bat
-```
+```text
 
 ### Development Dependencies
 
@@ -184,7 +184,7 @@ pip install -r requirements-dev.txt
 
 # Or use the batch script (Windows)
 INSTALL_DEV_DEPENDENCIES.bat
-```
+```text
 
 ---
 

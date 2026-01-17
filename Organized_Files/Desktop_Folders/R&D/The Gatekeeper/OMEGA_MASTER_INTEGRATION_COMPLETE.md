@@ -97,7 +97,7 @@ All four enhanced modules that Omega expects are now available:
 ```batch
 cd "The Gatekeeper"
 run_omega.bat
-```
+```text
 
 Or with options:
 ```batch
@@ -105,7 +105,7 @@ run_omega.bat --omega              # Run Omega tests only
 run_omega.bat --quantum-scrub      # Run Quantum Scrub only
 run_omega.bat --full                # Run full analysis
 run_omega.bat --status             # Show status
-```
+```text
 
 ### Python Direct
 
@@ -120,7 +120,7 @@ results = integration.run_full_analysis()
 # Or run individual components
 omega_results = integration.run_omega_tests()
 scrub_results = integration.run_quantum_scrub()
-```
+```text
 
 ### Command Line
 
@@ -129,13 +129,13 @@ python omega_master_integration.py --full
 python omega_master_integration.py --omega
 python omega_master_integration.py --quantum-scrub
 python omega_master_integration.py --status
-```
+```text
 
 ---
 
 ## System Architecture
 
-```
+```text
 Omega Master Integration
 ├── Omega System Tester (deep_system_test.py)
 │   ├── Security Enhanced
@@ -145,7 +145,7 @@ Omega Master Integration
 │
 └── Quantum Worldwide Scrub (quantum_worldwide_scrub.py)
     └── System analysis and comparison
-```
+```text
 
 ---
 
@@ -188,7 +188,7 @@ To verify everything works:
 
 ```bash
 python test_omega_integration.py
-```
+```text
 
 This will test all imports and show which modules are available.
 

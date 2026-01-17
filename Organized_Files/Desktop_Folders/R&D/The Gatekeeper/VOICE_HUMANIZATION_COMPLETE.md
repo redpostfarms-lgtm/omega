@@ -78,12 +78,12 @@ voice = OmegaVoice()
 voice.speak("Hello. I'm Omega, and I sound more human now.")
 voice.speak("How are you? I can have natural pauses and variations.")
 voice.speak("Yeah... I think this is working better.")
-```
+```text
 
 Or use the test script:
 ```bash
 python voice_humanize_simple.py
-```
+```text
 
 ---
 
