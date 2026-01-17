@@ -1,0 +1,6 @@
+services:
+  thegatekeeper:
+    image: thegatekeeper
+    build:
+      context: .
+      dockerfile: ./Dockerfile
