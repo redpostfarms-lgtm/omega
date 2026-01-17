@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-01-16T23:31:32.621719",
+  "analysis_type": "Voice Profile Analysis Only",
+  "status": "COMPLETE",
+  "voice_profiles": {
+    "clip_0001.wav": {
+      "sr": 44100,
+      "duration": 27.21,
+      "centroid_hz": 1527.0,
+      "rolloff_hz": 2454.0,
+      "rms_energy": 0.0333,
+      "zcr_quality": 0.0414,
+      "loudness": "loud",
+      "brightness": "warm"
+    },
+    "omega_downloaded.wav": {
+      "sr": 44100,
+      "duration": 100.52,
+      "centroid_hz": 2139.0,
+      "rolloff_hz": 3689.0,
+      "rms_energy": 0.0049,
+      "zcr_quality": 0.0588,
+      "loudness": "moderate",
+      "brightness": "bright"
+    }
+  },
+  "total_files_analyzed": 2,
+  "next_step": "Run TTS generation when ready",
+  "tts_command": "python omega_dual_voice_blend.py"
+}
