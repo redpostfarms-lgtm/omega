@@ -16,7 +16,7 @@ This module provides local load testing using built-in Python libraries.
 import concurrent.futures
 import time
 import requests
-from typing import Dict, List, Callable
+from typing import Dict, List, Callable, Optional
 from datetime import datetime
 import statistics
 import json

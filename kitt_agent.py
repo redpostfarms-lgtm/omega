@@ -61,7 +61,7 @@ class KITTAgent:
         validated_command = self._validate_command(command)
         
         # Pass to Omega with KITT's endorsement
-        omega_result = await self._relay_to_omega(validated_command, user_context)
+        omega_result = await self._relay_to_omega(validated_command, user_context or {})
         
         # KITT interprets Omega's response for user
         user_friendly_response = self._interpret_omega_response(omega_result)
