@@ -152,6 +152,98 @@ HTML_TEMPLATE = """
             box-shadow: 0 0 25px rgba(153, 51, 255, 0.8);
         }
 
+        /* Mode Tabs - Knight Rider Style */
+        .mode-tabs {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mode-tab {
+            flex: 1;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-tab:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .mode-tab:hover:before {
+            left: 100%;
+        }
+
+        .mode-tab-auto {
+            background: linear-gradient(135deg, #ffaa00 0%, #ff8800 100%);
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.5);
+        }
+
+        .mode-tab-auto:hover {
+            box-shadow: 0 0 30px rgba(255, 170, 0, 0.8);
+            transform: scale(1.02);
+        }
+
+        .mode-tab-auto.active {
+            box-shadow: 0 0 40px rgba(255, 170, 0, 1);
+            animation: glow-yellow 1s ease-in-out infinite;
+        }
+
+        .mode-tab-normal {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .mode-tab-normal:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+            transform: scale(1.02);
+        }
+
+        .mode-tab-normal.active {
+            box-shadow: 0 0 40px rgba(0, 255, 0, 1);
+            animation: glow-green 1s ease-in-out infinite;
+        }
+
+        .mode-tab-pursuit {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .mode-tab-pursuit:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            transform: scale(1.02);
+        }
+
+        .mode-tab-pursuit.active {
+            box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+            animation: glow-red 1s ease-in-out infinite;
+        }
+
+        @keyframes glow-red {
+            0%, 100% { box-shadow: 0 0 40px rgba(255, 0, 0, 1); }
+            50% { box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 80px rgba(255, 0, 0, 0.5); }
+        }
+
         .tab-content {
             display: none;
             grid-column: 1 / -1;
@@ -183,51 +275,67 @@ HTML_TEMPLATE = """
 
         /* Audio Visualizer Display - KITT Voice Box Style */
         .audio-display {
+            display: none; /* Removed from center, now at bottom */
+        }
+
+        .audio-bar {
+            display: none; /* Removed from center, now at bottom */
+        }
+
+        /* KITT Scanner Bar - Fixed at Bottom */
+        .kitt-scanner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
             background: #000;
-            border: 3px solid #ff0000;
-            border-radius: 5px;
-            height: 100px;
-            margin-bottom: 20px;
+            border-top: 2px solid #ff0000;
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 10px 30px;
-            box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
+            gap: 4px;
+            padding: 0 20px;
+            box-shadow: 0 -5px 30px rgba(255, 0, 0, 0.5);
         }
 
-        /* KITT-style scanning effect overlay */
-        .audio-display::before {
+        .kitt-bar {
+            width: 8px;
+            height: 6px;
+            background: linear-gradient(180deg, #ff0000 0%, #990000 100%);
+            border-radius: 1px;
+            transition: all 0.08s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .kitt-bar.active {
+            height: 8px;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 1), 0 0 35px rgba(255, 0, 0, 0.8);
+            background: linear-gradient(180deg, #ff3333 0%, #ff0000 100%);
+        }
+
+        /* KITT scanning effect overlay */
+        .kitt-scanner::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
-            width: 50%;
+            width: 30%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.3), transparent);
-            animation: kitt-scan 2s linear infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.4), transparent);
+            animation: kitt-scan-bottom 2s linear infinite;
+            pointer-events: none;
         }
 
-        @keyframes kitt-scan {
-            0% { left: -100%; }
+        .kitt-scanner.fast::before {
+            animation: kitt-scan-bottom 0.5s linear infinite;
+        }
+
+        @keyframes kitt-scan-bottom {
+            0% { left: -30%; }
             100% { left: 100%; }
-        }
-
-        .audio-bar {
-            width: 12px;
-            background: linear-gradient(180deg, #ff0000 0%, #cc0000 50%, #990000 100%);
-            border-radius: 2px;
-            transition: height 0.08s ease;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-
-        .audio-bar.active {
-            box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 50px rgba(255, 0, 0, 0.8);
-            background: linear-gradient(180deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
         }
 
         /* Control Buttons - Sci-Fi Style */
@@ -754,12 +862,17 @@ HTML_TEMPLATE = """
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Tab Navigation (Purple Section) -->
-        <div class="tab-navigation">
-            <button class="tab-btn active" onclick="switchTab(1)">TAB 1</button>
-            <button class="tab-btn" onclick="switchTab(2)">TAB 2</button>
-            <button class="tab-btn" onclick="switchTab(3)">TAB 3</button>
-            <button class="tab-btn" onclick="switchTab(4)">TAB 4</button>
+        <!-- Mode Tabs (Auto Cruise, Normal Cruise, Pursuit) -->
+        <div class="mode-tabs">
+            <button class="mode-tab mode-tab-auto active" id="mode-auto" onclick="switchMode('auto')">
+                🚀 AUTO CRUISE
+            </button>
+            <button class="mode-tab mode-tab-normal" id="mode-normal" onclick="switchMode('normal')">
+                ⚡ NORMAL CRUISE
+            </button>
+            <button class="mode-tab mode-tab-pursuit" id="mode-pursuit" onclick="switchMode('pursuit')">
+                🎯 PURSUIT MODE
+            </button>
         </div>
 
         <!-- Tab 1 Content (Main Control) -->
@@ -800,25 +913,16 @@ HTML_TEMPLATE = """
             <div class="panel">
                 <div class="panel-title">🎛️ Main Control Interface</div>
                 
-                <!-- Audio Visualizer (Green Box - 3 Bars Only) -->
-                <div class="audio-display" id="audio-display">
-                    <!-- Audio bars will be generated by JavaScript -->
+                <!-- Main content area (KITT visualizer moved to bottom) -->
+                <div style="min-height: 400px; padding: 40px;">
+                    <div style="text-align: center; color: #00ffff; font-size: 1.3em;">
+                        <p style="margin-bottom: 20px;">System operating in <span id="current-mode-display" style="color: #ffaa00; font-weight: bold;">AUTO CRUISE</span> mode</p>
+                        <p style="color: #00ff00; font-size: 1.5em;">● All systems nominal</p>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Main Control Buttons -->
-                <div class="control-buttons">
-                    <button class="btn btn-auto-cruise" id="btn-auto-cruise" onclick="handleMode('auto-cruise')">
-                        🚀 AUTO CRUISE
-                    </button>
-                    <button class="btn btn-normal-cruise" id="btn-normal-cruise" onclick="handleMode('normal-cruise')">
-                        ⚡ NORMAL CRUISE
-                    </button>
-                    <button class="btn btn-pursuit" id="btn-pursuit" onclick="handleMode('pursuit')">
-                        🎯 PURSUIT MODE
-                    </button>
-                </div>
-
-            <div class="panel">
+            <!-- Right Panel: Console & RGB Controls -->
                 <div class="panel-title">📟 System Console</div>
                 
                 <!-- Console Output (Yellow Area) -->
@@ -909,6 +1013,11 @@ HTML_TEMPLATE = """
         </div>
     </div>
 
+    <!-- KITT Scanner Bar - Fixed at Bottom -->
+    <div class="kitt-scanner" id="kitt-scanner">
+        <!-- Scanner bars will be generated by JavaScript -->
+    </div>
+
     <!-- Voice Control (Relocated to bottom right) -->
     <div class="voice-control">
         <div class="voice-status-indicator" id="voice-status-indicator">Ready</div>
@@ -923,61 +1032,105 @@ HTML_TEMPLATE = """
         const socket = io();
         
         // Current mode
-        let currentMode = null;
+        let currentMode = 'auto';
         let voiceActive = false;
 
-        // Initialize audio visualizer bars - KITT style
-        const audioDisplay = document.getElementById('audio-display');
-        const numBars = 10;
-        const bars = [];
+        // Initialize KITT scanner at bottom
+        const kittScanner = document.getElementById('kitt-scanner');
+        const numKittBars = 80;
+        const kittBars = [];
         
-        for (let i = 0; i < numBars; i++) {
+        for (let i = 0; i < numKittBars; i++) {
             const bar = document.createElement('div');
-            bar.className = 'audio-bar';
-            bar.style.height = '30px';
-            audioDisplay.appendChild(bar);
-            bars.push(bar);
+            bar.className = 'kitt-bar';
+            kittScanner.appendChild(bar);
+            kittBars.push(bar);
         }
 
         // KITT-style scanner animation
         let scanPosition = 0;
         let scanDirection = 1;
+        let scanSpeed = 150; // Slowed down from 80ms
+        let scanInterval;
         
-        function animateAudioBars() {
-            bars.forEach((bar, index) => {
+        function animateKittScanner() {
+            kittBars.forEach((bar, index) => {
                 // Distance from scan position
                 const distance = Math.abs(index - scanPosition);
                 
-                // Height based on distance (center is tallest)
-                let height;
+                // Active bars based on distance
                 if (distance === 0) {
-                    height = 70 + Math.random() * 20;
                     bar.classList.add('active');
-                } else if (distance === 1) {
-                    height = 50 + Math.random() * 15;
-                    bar.classList.remove('active');
-                } else if (distance === 2) {
-                    height = 30 + Math.random() * 10;
-                    bar.classList.remove('active');
+                } else if (distance <= 3) {
+                    bar.classList.add('active');
                 } else {
-                    height = 10 + Math.random() * 10;
                     bar.classList.remove('active');
                 }
-                
-                bar.style.height = height + 'px';
             });
             
             // Move scan position
             scanPosition += scanDirection;
-            if (scanPosition >= numBars - 1 || scanPosition <= 0) {
+            if (scanPosition >= numKittBars - 1 || scanPosition <= 0) {
                 scanDirection *= -1;
             }
         }
 
-        // Start KITT animation
-        setInterval(animateAudioBars, 80);
+        // Start KITT scanner animation
+        function startScanner(speed) {
+            if (scanInterval) clearInterval(scanInterval);
+            scanSpeed = speed;
+            scanInterval = setInterval(animateKittScanner, scanSpeed);
+            
+            // Update scanner class for fast animation
+            if (speed < 100) {
+                kittScanner.classList.add('fast');
+            } else {
+                kittScanner.classList.remove('fast');
+            }
+        }
 
-        // Tab switching function
+        // Start with normal speed
+        startScanner(150);
+
+        // Switch mode tabs (Auto, Normal, Pursuit)
+        function switchMode(mode) {
+            // Remove active class from all mode tabs
+            document.querySelectorAll('.mode-tab').forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to selected mode
+            document.getElementById('mode-' + mode).classList.add('active');
+            
+            currentMode = mode;
+            
+            // Update display text
+            const modeDisplay = document.getElementById('current-mode-display');
+            let modeText = '';
+            let modeColor = '';
+            
+            if (mode === 'auto') {
+                modeText = 'AUTO CRUISE';
+                modeColor = '#ffaa00';
+                startScanner(150); // Normal speed
+            } else if (mode === 'normal') {
+                modeText = 'NORMAL CRUISE';
+                modeColor = '#00ff00';
+                startScanner(200); // Slower
+            } else if (mode === 'pursuit') {
+                modeText = 'PURSUIT MODE';
+                modeColor = '#ff0000';
+                startScanner(40); // Fast like Knight Rider in pursuit!
+            }
+            
+            modeDisplay.textContent = modeText;
+            modeDisplay.style.color = modeColor;
+            
+            logConsole(`[MODE] ${modeText} activated`, 'info');
+            
+            // Emit to server
+            socket.emit('mode_change', { mode: mode });
+        }
+
+        // Tab switching function (for additional tabs if needed)
         function switchTab(tabNumber) {
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(content => {
@@ -1056,21 +1209,6 @@ HTML_TEMPLATE = """
             messagesDiv.appendChild(msgDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         });
-
-        // Handle mode selection
-        function handleMode(mode) {
-            // Remove active class from all buttons
-            document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            document.getElementById('btn-' + mode).classList.add('active');
-            
-            currentMode = mode;
-            logConsole(`[MODE] ${mode.toUpperCase().replace('-', ' ')} activated`, 'info');
-            
-            // Emit to server
-            socket.emit('mode_change', { mode: mode });
-        }
 
         // Handle side controls
         function handleSideControl(control) {
@@ -1162,11 +1300,11 @@ HTML_TEMPLATE = """
         function processVoiceCommand(command) {
             // Process voice commands
             if (command.includes('auto cruise') || command.includes('auto mode')) {
-                handleMode('auto-cruise');
+                switchMode('auto');
             } else if (command.includes('normal cruise') || command.includes('normal mode')) {
-                handleMode('normal-cruise');
+                switchMode('normal');
             } else if (command.includes('pursuit') || command.includes('pursuit mode')) {
-                handleMode('pursuit');
+                switchMode('pursuit');
             } else if (command.includes('tab') || command.includes('switch')) {
                 // Extract tab number
                 for (let i = 1; i <= 4; i++) {
