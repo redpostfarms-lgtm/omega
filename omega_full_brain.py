@@ -10,8 +10,10 @@ import asyncio
 import signal
 import sys
 import subprocess
+import time
 from pathlib import Path
 from rate_limiter import GOOGLE_SPEECH_LIMITER
+from omega_monitoring import increment_counter, record_histogram, log_event
 
 # Patch torch.load for PyTorch 2.6+ compatibility with TTS
 try:
@@ -75,6 +77,20 @@ except Exception as e:
     print("   Continuing without emotion detection...")
     emotion_classifier = None  # Make sure it's set to None if failed
 
+# Load advanced emotion detector (wav2vec2 - better accuracy)
+advanced_emotion_detector = None
+try:
+    from omega_emotion_advanced import get_emotion_detector
+    advanced_emotion_detector = get_emotion_detector()
+    if advanced_emotion_detector.available:
+        print("[OK] Advanced emotion detection enabled (wav2vec2)")
+    else:
+        print("[INFO] Advanced emotion detection unavailable - using basic")
+        advanced_emotion_detector = None
+except Exception as e:
+    print(f"[INFO] Advanced emotion detection not loaded: {e}")
+    advanced_emotion_detector = None
+
 def record_audio(duration=5, fs=16000):
     print("Listening...")
     audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
@@ -84,12 +100,28 @@ def record_audio(duration=5, fs=16000):
     return temp_wav
 
 def detect_emotion(wav_file):
-    """Detect emotion from audio file with error handling."""
+    """
+    Detect emotion from audio file with error handling.
+    Uses advanced wav2vec2 model if available, fallback to basic.
+    """
+    # Try advanced detector first (better accuracy)
+    if advanced_emotion_detector is not None:
+        try:
+            result = advanced_emotion_detector.detect_from_file(wav_file)
+            if result and result.confidence > 0.5:
+                print(f"[Advanced] Detected: {result.emotion} ({result.confidence:.1%})")
+                return result.emotion
+        except Exception as e:
+            print(f"Advanced emotion detection error: {e}")
+
+    # Fallback to basic emotion classifier
     if emotion_classifier is None:
         return 'neutral'
     try:
         prediction = emotion_classifier.classify_file(wav_file)
-        return prediction[2].lower() if len(prediction) > 2 else 'neutral'
+        detected = prediction[2].lower() if len(prediction) > 2 else 'neutral'
+        print(f"[Basic] Detected: {detected}")
+        return detected
     except Exception as e:
         print(f"Emotion detection error: {e}")
         return 'neutral'
@@ -150,18 +182,22 @@ def omega_speak(text, emotion="neutral"):
     # Always use voice clone for better quality
     clip_path = Path('clip_0001.wav')
     speaker_wav = str(clip_path) if clip_path.exists() else None
-    
+
     if speaker_wav:
         print(f"[Using voice clone: {clip_path.name} for improved quality]")
     else:
         print("[WARNING] clip_0001.wav not found - using default voice")
-    
+
     # Emotion-aware tone (text only, no emoji to avoid Unicode issues on Windows)
     emotion_prefix = {"happy": "[Happy] ", "angry": "[Angry] ", "sad": "[Sad] ", "neutral": ""}.get(emotion, "")
     text_with_emotion = emotion_prefix + text
-    
+
     try:
         print(f"Generating speech: {text_with_emotion[:50]}...")
+
+        # Start timing TTS generation
+        start_time = time.time()
+
         tts_instance = get_tts()
         tts_instance.tts_to_file(
             text=text_with_emotion,
@@ -169,15 +205,24 @@ def omega_speak(text, emotion="neutral"):
             language='en',
             file_path='response.wav'
         )
-        
+
+        # Record TTS generation metrics
+        duration = time.time() - start_time
+        increment_counter('tts_generation_total')
+        record_histogram('tts_generation_duration', duration)
+        log_event('tts_generation', level='info', duration=duration, emotion=emotion, text_length=len(text))
+
         file_size = Path('response.wav').stat().st_size if Path('response.wav').exists() else 0
-        print(f"[OK] Audio generated: response.wav ({file_size} bytes)")
-        
+        print(f"[OK] Audio generated: response.wav ({file_size} bytes, {duration:.2f}s)")
+
         # Play audio in background without showing media player window
         print("[Playing audio in background - no window will appear]")
         play_audio_background('response.wav')
     except Exception as e:
         print(f"TTS error: {e}")
+        # Record TTS error
+        increment_counter('tts_generation_errors')
+        log_event('tts_error', level='error', error=str(e))
         import traceback
         traceback.print_exc()
 
@@ -185,34 +230,58 @@ async def recognize_speech_async(wav_file):
     """Async speech recognition with rate limiting."""
     # Wait for rate limit if needed
     GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
-    
+
     if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
         wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
         await asyncio.sleep(wait_time)
-    
+
     # Run blocking operation in executor
     loop = asyncio.get_event_loop()
     r = sr.Recognizer()
-    
+
+    # Start timing speech recognition
+    start_time = time.time()
+
     try:
         with sr.AudioFile(wav_file) as source:
             audio = r.record(source)
-        
+
         # Run API call in executor to avoid blocking
         said = await loop.run_in_executor(
             None,
             lambda: r.recognize_google(audio)
         )
-        
+
+        # Record successful recognition metrics
+        duration = time.time() - start_time
+        increment_counter('speech_recognition_total')
+        record_histogram('speech_recognition_duration', duration)
+        log_event('speech_recognition', level='info', duration=duration, text_length=len(said))
+
         GOOGLE_SPEECH_LIMITER.record_success("google_speech")
         return said
     except sr.UnknownValueError:
+        # Record recognition error
+        duration = time.time() - start_time
+        increment_counter('speech_recognition_errors')
+        log_event('speech_recognition_error', level='warning', error='UnknownValueError', duration=duration)
+
         GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise ValueError("Could not understand audio")
     except sr.RequestError as e:
+        # Record API error
+        duration = time.time() - start_time
+        increment_counter('speech_recognition_errors')
+        log_event('speech_recognition_error', level='error', error=f'RequestError: {e}', duration=duration)
+
         GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise ConnectionError(f"API error: {e}")
     except Exception as e:
+        # Record generic error
+        duration = time.time() - start_time
+        increment_counter('speech_recognition_errors')
+        log_event('speech_recognition_error', level='error', error=str(e), duration=duration)
+
         GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
         raise
 

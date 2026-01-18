@@ -3,10 +3,12 @@
 from TTS.api import TTS
 import torch
 import os
+import time
 from pathlib import Path
 import asyncio
 import subprocess
 import sys
+from omega_monitoring import increment_counter, record_histogram, log_event
 
 # Pre-load TTS model on startup (no lazy loading)
 tts = None
@@ -73,26 +75,39 @@ def limit_response_length(text, max_words=30):
 def tts_to_file_optimized(text, speaker_wav=None, output_file='response.wav'):
     """Optimized TTS generation with length limiting."""
     global tts
-    
+
     # Limit response length for faster synthesis
     text = limit_response_length(text, max_words=30)
-    
+
     if tts is None:
         tts = initialize_tts_preload()
-    
+
     clip_path = Path('clip_0001.wav')
     if speaker_wav is None and clip_path.exists():
         speaker_wav = str(clip_path)
-    
+
     try:
+        # Start timing TTS generation
+        start_time = time.time()
+
         tts.tts_to_file(
             text=text,
             speaker_wav=speaker_wav,
             language='en',
             file_path=output_file
         )
+
+        # Record TTS generation metrics
+        duration = time.time() - start_time
+        increment_counter('tts_generation_total')
+        record_histogram('tts_generation_duration', duration)
+        log_event('tts_generation_optimized', level='info', duration=duration, text_length=len(text), output_file=output_file)
+
         return output_file
     except Exception as e:
+        # Record TTS error
+        increment_counter('tts_generation_errors')
+        log_event('tts_error', level='error', error=str(e))
         print(f"[TTS ERROR] {e}")
         raise
 

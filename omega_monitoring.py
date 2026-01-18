@@ -77,9 +77,19 @@ class OmegaMonitor:
                 'omega_tts_generation_total',
                 'Total number of TTS generations'
             )
+            self.prometheus_counters["tts_generation_errors"] = Counter(
+                'omega_tts_generation_errors_total',
+                'Total number of TTS generation errors'
+            )
             self.prometheus_histograms["tts_generation_duration"] = Histogram(
                 'omega_tts_generation_duration_seconds',
                 'TTS generation duration in seconds'
+            )
+
+            # Speech recognition duration metrics
+            self.prometheus_histograms["speech_recognition_duration"] = Histogram(
+                'omega_speech_recognition_duration_seconds',
+                'Speech recognition duration in seconds'
             )
             
             # Voice security metrics

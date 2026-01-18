@@ -1,0 +1,81 @@
+# Gatekeeper System - Enhanced Requirements
+# ==========================================
+# Install: py -3.11 -m pip install -r requirements_enhanced.txt
+
+# === CORE DEPENDENCIES (Required) ===
+
+# Configuration & Scheduling
+pyyaml>=6.0              # Clean config loading
+schedule>=1.2.0          # In-process cron jobs
+
+# Code Quality & Formatting
+black>=24.0.0            # Auto-formatting
+ruff>=0.1.0              # Fast linting (replaces flake8)
+
+# Web Framework (for dashboard/API)
+flask>=3.0.0             # Web server
+gunicorn>=21.2.0         # Production WSGI server (Unix)
+waitress>=2.1.2          # Production WSGI server (Windows)
+
+# Monitoring (already in use)
+prometheus-client>=0.19.0  # Metrics export
+psutil>=5.9.0            # System monitoring
+
+# === NOTIFICATIONS ===
+win10toast>=0.9          # Windows 10 toast notifications (Windows only)
+
+# === OPTIONAL - DATABASE & STORAGE ===
+
+# SQLite is built into Python, but these add features:
+sqlalchemy>=2.0.0        # ORM for structured data storage
+# Alternative: Use built-in sqlite3 module
+
+# === OPTIONAL - FILE WATCHING ===
+watchdog>=3.0.0          # Smart file system monitoring
+
+# === OPTIONAL - TESTING ===
+pytest>=7.4.0            # Test framework
+pytest-asyncio>=0.21.0   # Async test support
+pytest-cov>=4.1.0        # Coverage reporting
+
+# === OPTIONAL - LOCAL LLM INTEGRATION ===
+
+# Ollama Python client (if using Ollama)
+ollama>=0.1.0            # Ollama API client
+
+# Alternative: LiteLLM for multi-model support
+# litellm>=1.0.0         # Unified LLM API
+
+# Langchain for advanced RAG
+langchain>=0.1.0         # LLM application framework
+langchain-community>=0.0.10  # Community integrations
+chromadb>=0.4.0          # Vector database
+sentence-transformers>=2.2.0  # Embeddings
+
+# === OPTIONAL - WEB IDE INTERFACE ===
+voila>=0.5.0             # Jupyter-based web interface
+ipywidgets>=8.1.0        # Interactive widgets
+jupyterlab>=4.0.0        # Full IDE experience
+
+# === EXISTING OMEGA DEPENDENCIES ===
+# (Keep these - already in use)
+
+# TTS & Speech
+TTS>=0.21.0              # Coqui TTS
+speechbrain>=0.5.0       # Emotion recognition
+SpeechRecognition>=3.10.0  # Google Speech API
+sounddevice>=0.4.6       # Audio I/O
+scipy>=1.11.0            # Audio processing
+numpy>=1.24.0            # Numerical operations
+
+# Deep Learning
+torch>=2.0.0             # PyTorch (CPU or CUDA)
+# Note: For GPU, install CUDA-enabled version:
+# py -3.11 -m pip install torch --index-url https://download.pytorch.org/whl/cu118
+
+# API & Networking
+anthropic>=0.18.0        # Claude API
+requests>=2.31.0         # HTTP requests
+
+# Utilities
+python-dotenv>=1.0.0     # Environment variables

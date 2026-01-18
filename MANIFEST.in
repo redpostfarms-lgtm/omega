@@ -1,0 +1,68 @@
+# MANIFEST.in - Package manifest for gatekeeper-omega
+
+# Include all Python files
+include *.py
+recursive-include utils *.py
+recursive-include tests *.py
+
+# Include configuration files
+include requirements*.txt
+include pyproject.toml
+include pytest.ini
+include .pre-commit-config.yaml
+include Dockerfile
+include docker-compose.yml
+include .dockerignore
+
+# Include documentation
+include README*.md
+include LICENSE
+include *.md
+graft docs
+
+# Include config templates
+recursive-include config *.json
+recursive-include config *.yaml
+recursive-include config *.yml
+
+# Include notification templates
+recursive-include notification_templates *.html
+recursive-include notification_templates *.txt
+
+# Include dashboards
+recursive-include dashboards *.json
+
+# Include scripts
+include *.bat
+include *.sh
+
+# Exclude development and build artifacts
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .pytest_cache
+global-exclude .coverage
+global-exclude htmlcov
+global-exclude *.egg-info
+global-exclude dist
+global-exclude build
+
+# Exclude runtime data
+exclude omega_voice/*
+exclude conversations/*
+exclude logs/*
+exclude pretrained_*/*
+exclude *.wav
+exclude *.mp3
+
+# Exclude IDE files
+global-exclude .vscode
+global-exclude .idea
+global-exclude *.swp
+global-exclude *.swo
+global-exclude *~
+
+# Exclude environment files
+exclude .env
+exclude .env.*

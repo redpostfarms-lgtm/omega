@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  # Web IDE Service
+  web-ide:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omega-web-ide
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+      - omega-voice:/app/omega_voice
+      - omega-agents:/app/omega_agents
+      - conversations:/app/conversations
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Omega Voice System (optional, can run separately)
+  omega-voice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omega-voice-system
+    command: python omega_full_brain.py
+    volumes:
+      - ./:/app
+      - omega-voice:/app/omega_voice
+      - omega-agents:/app/omega_agents
+    devices:
+      - /dev/snd:/dev/snd  # Audio device access (Linux)
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    restart: unless-stopped
+    profiles:
+      - voice  # Only start with: docker-compose --profile voice up
+
+  # Ollama Service (Local LLM)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: omega-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    profiles:
+      - llm
+
+  # Prometheus (Monitoring)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: omega-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # Grafana (Visualization)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: omega-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+volumes:
+  omega-voice:
+    driver: local
+  omega-agents:
+    driver: local
+  conversations:
+    driver: local
+  ollama-models:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  default:
+    name: omega-network
+    driver: bridge

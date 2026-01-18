@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py -3.11 -m py_compile:*)",
+      "Bash(python:*)"
+    ]
+  }
+}
