@@ -20,6 +20,15 @@ import io
 import base64
 from pathlib import Path
 
+# Import KITT agent and mesh network
+try:
+    from kitt_agent import kitt_agent
+    from omega_mesh_network import mesh_network
+    MESH_AVAILABLE = True
+except ImportError:
+    MESH_AVAILABLE = False
+    print("[WARNING] KITT agent and mesh network modules not available")
+
 app = Flask(__name__, static_folder='static')
 app.config['SECRET_KEY'] = 'omega-kitt-2026'
 CORS(app)
@@ -69,6 +78,69 @@ def generate_qr():
             'install_url': base_url,
             'status': 'success'
         })
+    except Exception as e:
+        return jsonify({'error': str(e), 'status': 'error'}), 500
+
+@app.route('/api/mesh/status', methods=['GET'])
+def get_mesh_status():
+    """Get fleet mesh network status"""
+    if not MESH_AVAILABLE:
+        return jsonify({'error': 'Mesh network not available', 'status': 'error'}), 503
+    
+    try:
+        status = mesh_network.get_fleet_status()
+        return jsonify({'status': 'success', 'fleet': status})
+    except Exception as e:
+        return jsonify({'error': str(e), 'status': 'error'}), 500
+
+@app.route('/api/mesh/worker/<int:worker_id>/toggle', methods=['POST'])
+def toggle_worker(worker_id):
+    """Toggle worker node on/off"""
+    if not MESH_AVAILABLE:
+        return jsonify({'error': 'Mesh network not available', 'status': 'error'}), 503
+    
+    try:
+        data = request.get_json()
+        enabled = data.get('enabled', True)
+        
+        success = mesh_network.toggle_worker(worker_id, enabled)
+        
+        if success:
+            return jsonify({
+                'status': 'success',
+                'worker_id': worker_id,
+                'enabled': enabled,
+                'message': f'Worker {worker_id} {"enabled" if enabled else "disabled"}'
+            })
+        else:
+            return jsonify({'error': 'Invalid worker ID', 'status': 'error'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e), 'status': 'error'}), 500
+
+@app.route('/api/mesh/initialize', methods=['POST'])
+def initialize_mesh():
+    """Initialize the mesh network"""
+    if not MESH_AVAILABLE:
+        return jsonify({'error': 'Mesh network not available', 'status': 'error'}), 503
+    
+    try:
+        success = mesh_network.initialize_mesh()
+        return jsonify({
+            'status': 'success' if success else 'error',
+            'message': 'Mesh network initialized' if success else 'Initialization failed'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e), 'status': 'error'}), 500
+
+@app.route('/api/kitt/status', methods=['GET'])
+def get_kitt_status():
+    """Get KITT agent status"""
+    if not MESH_AVAILABLE:
+        return jsonify({'error': 'KITT agent not available', 'status': 'error'}), 503
+    
+    try:
+        shield_status = kitt_agent.get_shield_status()
+        return jsonify({'status': 'success', 'kitt': shield_status})
     except Exception as e:
         return jsonify({'error': str(e), 'status': 'error'}), 500
 
@@ -527,6 +599,224 @@ html_content = '''
         .modal-backdrop.active {
             display: block;
         }
+
+        /* Fleet Control Panel */
+        .fleet-panel {
+            position: fixed;
+            right: 20px;
+            top: 120px;
+            width: 350px;
+            background: linear-gradient(135deg, rgba(0, 20, 0, 0.95), rgba(0, 40, 0, 0.95));
+            border: 3px solid #0f0;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .fleet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0f0;
+        }
+
+        .fleet-header h2 {
+            color: #0f0;
+            font-size: 1.5em;
+            text-shadow: 0 0 15px #0f0;
+            margin: 0;
+        }
+
+        .fleet-init-btn {
+            padding: 8px 16px;
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            color: #ff0000;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fleet-init-btn:hover {
+            background: rgba(255, 0, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .fleet-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .fleet-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-label {
+            color: #0f0;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .stat-value {
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .fleet-workers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .fleet-node {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #0f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .fleet-node:hover {
+            background: rgba(0, 50, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .queen-node {
+            border-color: #ff0000;
+            background: rgba(50, 0, 0, 0.7);
+        }
+
+        .queen-node:hover {
+            background: rgba(80, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .node-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .node-icon {
+            font-size: 1.5em;
+        }
+
+        .node-name {
+            color: #0f0;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .queen-node .node-name {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        .node-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .node-status {
+            color: #ff0000;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .worker-status {
+            color: #999;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .worker-status.active {
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        .worker-status.idle {
+            color: #ff0;
+        }
+
+        .worker-status.offline {
+            color: #666;
+        }
+
+        .worker-status.disabled {
+            color: #f00;
+        }
+
+        .node-cpu {
+            color: #0ff;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        .worker-toggle-btn {
+            width: 100%;
+            padding: 8px;
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid #f00;
+            border-radius: 6px;
+            color: #f00;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .worker-toggle-btn.enabled {
+            background: rgba(0, 255, 0, 0.3);
+            border-color: #0f0;
+            color: #0f0;
+        }
+
+        .worker-toggle-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .fleet-legend {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0;
+            border-radius: 8px;
+            color: #ff0;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .fleet-legend p {
+            margin: 5px 0;
+        }
+
+        .fleet-legend p:first-child {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -615,6 +905,118 @@ html_content = '''
             <button class="permission-btn permission-btn-no" onclick="closePermissionModal()">
                 NO
             </button>
+        </div>
+    </div>
+
+    <!-- Fleet Control Panel -->
+    <div class="fleet-panel" id="fleet-panel">
+        <div class="fleet-header">
+            <h2>🐝 OMEGA FLEET MESH</h2>
+            <button class="fleet-init-btn" onclick="initializeMesh()">⚡ SEED MESH</button>
+        </div>
+        
+        <div class="fleet-stats">
+            <div class="fleet-stat">
+                <span class="stat-label">FLEET POWER:</span>
+                <span class="stat-value" id="fleet-power">100%</span>
+            </div>
+            <div class="fleet-stat">
+                <span class="stat-label">ACTIVE WORKERS:</span>
+                <span class="stat-value" id="active-workers-count">0/5</span>
+            </div>
+        </div>
+        
+        <div class="fleet-workers">
+            <!-- Queen Node -->
+            <div class="fleet-node queen-node">
+                <div class="node-header">
+                    <span class="node-icon">👑</span>
+                    <span class="node-name">QUEEN</span>
+                </div>
+                <div class="node-info">
+                    <span class="node-status">FULL THROTTLE</span>
+                    <span class="node-cpu">100%</span>
+                </div>
+            </div>
+            
+            <!-- Worker Nodes 1-5 -->
+            <div class="fleet-node worker-node">
+                <div class="node-header">
+                    <span class="node-icon">🐝</span>
+                    <span class="node-name">WORKER-1</span>
+                </div>
+                <div class="node-info">
+                    <span class="worker-status idle" id="worker-1-status">OFFLINE</span>
+                    <span class="node-cpu" id="worker-1-cpu">0%</span>
+                </div>
+                <button class="worker-toggle-btn disabled" id="worker-1-toggle" onclick="toggleWorker(1, !this.classList.contains('enabled'))">
+                    🔴 OFF
+                </button>
+            </div>
+            
+            <div class="fleet-node worker-node">
+                <div class="node-header">
+                    <span class="node-icon">🐝</span>
+                    <span class="node-name">WORKER-2</span>
+                </div>
+                <div class="node-info">
+                    <span class="worker-status idle" id="worker-2-status">OFFLINE</span>
+                    <span class="node-cpu" id="worker-2-cpu">0%</span>
+                </div>
+                <button class="worker-toggle-btn disabled" id="worker-2-toggle" onclick="toggleWorker(2, !this.classList.contains('enabled'))">
+                    🔴 OFF
+                </button>
+            </div>
+            
+            <div class="fleet-node worker-node">
+                <div class="node-header">
+                    <span class="node-icon">🐝</span>
+                    <span class="node-name">WORKER-3</span>
+                </div>
+                <div class="node-info">
+                    <span class="worker-status idle" id="worker-3-status">OFFLINE</span>
+                    <span class="node-cpu" id="worker-3-cpu">0%</span>
+                </div>
+                <button class="worker-toggle-btn disabled" id="worker-3-toggle" onclick="toggleWorker(3, !this.classList.contains('enabled'))">
+                    🔴 OFF
+                </button>
+            </div>
+            
+            <div class="fleet-node worker-node">
+                <div class="node-header">
+                    <span class="node-icon">🐝</span>
+                    <span class="node-name">WORKER-4</span>
+                </div>
+                <div class="node-info">
+                    <span class="worker-status idle" id="worker-4-status">OFFLINE</span>
+                    <span class="node-cpu" id="worker-4-cpu">0%</span>
+                </div>
+                <button class="worker-toggle-btn disabled" id="worker-4-toggle" onclick="toggleWorker(4, !this.classList.contains('enabled'))">
+                    🔴 OFF
+                </button>
+            </div>
+            
+            <div class="fleet-node worker-node">
+                <div class="node-header">
+                    <span class="node-icon">🐝</span>
+                    <span class="node-name">WORKER-5</span>
+                </div>
+                <div class="node-info">
+                    <span class="worker-status idle" id="worker-5-status">OFFLINE</span>
+                    <span class="node-cpu" id="worker-5-cpu">0%</span>
+                </div>
+                <button class="worker-toggle-btn disabled" id="worker-5-toggle" onclick="toggleWorker(5, !this.classList.contains('enabled'))">
+                    🔴 OFF
+                </button>
+            </div>
+        </div>
+        
+        <div class="fleet-legend">
+            <p>🔴 WORKER RULES:</p>
+            <p>• Only active when screen is BLACK and IDLE</p>
+            <p>• CPU capped at 20% maximum per worker</p>
+            <p>• Silent background processing only</p>
+            <p>• No snooping, no talking back</p>
         </div>
     </div>
 
@@ -1043,7 +1445,105 @@ html_content = '''
                     console.log('[Voices] TTS Fallback loaded:', voices.length, 'voices');
                 };
             }
+            
+            // Initialize mesh network status
+            updateFleetStatus();
+            setInterval(updateFleetStatus, 10000); // Update every 10 seconds
         };
+        
+        // ========================================
+        // FLEET MESH NETWORK CONTROLS
+        // ========================================
+        
+        async function initializeMesh() {
+            console.log('[Mesh] Initializing Omega Fleet Network...');
+            try {
+                const response = await fetch('/api/mesh/initialize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    updateStatus('🐝 FLEET MESH INITIALIZED - 5 WORKERS READY');
+                    updateFleetStatus();
+                } else {
+                    updateStatus('❌ MESH INIT FAILED: ' + data.message);
+                }
+            } catch (error) {
+                console.error('[Mesh] Init error:', error);
+                updateStatus('❌ MESH UNAVAILABLE');
+            }
+        }
+        
+        async function toggleWorker(workerId, enabled) {
+            console.log(`[Mesh] Worker ${workerId} toggle: ${enabled}`);
+            try {
+                const response = await fetch(`/api/mesh/worker/${workerId}/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled })
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    updateStatus(`🐝 WORKER-${workerId}: ${enabled ? 'ONLINE' : 'OFFLINE'}`);
+                    updateFleetStatus();
+                } else {
+                    console.error('[Mesh] Toggle failed:', data.error);
+                }
+            } catch (error) {
+                console.error('[Mesh] Toggle error:', error);
+            }
+        }
+        
+        async function updateFleetStatus() {
+            try {
+                const response = await fetch('/api/mesh/status');
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.fleet) {
+                    const fleet = data.fleet;
+                    
+                    // Update each worker display
+                    for (let i = 1; i <= 5; i++) {
+                        const worker = fleet.workers[i];
+                        const statusEl = document.getElementById(`worker-${i}-status`);
+                        const toggleBtn = document.getElementById(`worker-${i}-toggle`);
+                        const cpuEl = document.getElementById(`worker-${i}-cpu`);
+                        
+                        if (statusEl && worker) {
+                            statusEl.textContent = worker.status.toUpperCase();
+                            statusEl.className = `worker-status ${worker.status}`;
+                            
+                            if (cpuEl) {
+                                cpuEl.textContent = `${(worker.cpu_contribution * 100).toFixed(0)}%`;
+                            }
+                            
+                            if (toggleBtn) {
+                                toggleBtn.textContent = worker.enabled ? '🟢 ON' : '🔴 OFF';
+                                toggleBtn.className = `worker-toggle-btn ${worker.enabled ? 'enabled' : 'disabled'}`;
+                            }
+                        }
+                    }
+                    
+                    // Update fleet power
+                    const fleetPowerEl = document.getElementById('fleet-power');
+                    if (fleetPowerEl) {
+                        const totalPower = (fleet.fleet_power * 100).toFixed(0);
+                        fleetPowerEl.textContent = `${totalPower}%`;
+                    }
+                    
+                    // Update active workers count
+                    const activeCountEl = document.getElementById('active-workers-count');
+                    if (activeCountEl) {
+                        activeCountEl.textContent = `${fleet.active_workers}/${fleet.total_workers}`;
+                    }
+                }
+            } catch (error) {
+                console.error('[Mesh] Status update error:', error);
+            }
+        }
     </script>
 </body>
 </html>
