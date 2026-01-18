@@ -1,0 +1,554 @@
+﻿.\.venv\Scripts\python.exe : --- Logging error ---
+At line:1 char:116
++ ... ing]::UTF8; .\.venv\Scripts\python.exe 
+gate_admin_system.py 2>&1 | Ou ...
++                 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (--- Loggi 
+   ng error ---:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f527' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+400, in main
+    gate = GateAdminSystem()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+122, in __init__
+    self.logger.info("\U0001f527 GATE Admin System 
+initializing...", speak=True)
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f527 GATE Admin System initializing...'
+Arguments: ()
+2026-01-18 03:46:44,369 - GATE - INFO - \U0001f527 
+GATE Admin System initializing...
+2026-01-18 03:46:44,372 - GATE - INFO - ===============
+=============================================
+2026-01-18 03:46:44,373 - GATE - INFO - GATE 
+ADMINISTRATOR SYSTEM ONLINE
+2026-01-18 03:46:44,373 - GATE - INFO - Ready to 
+monitor, fix errors, and manage operations
+2026-01-18 03:46:44,373 - GATE - INFO - ===============
+=============================================
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f680' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+378, in run_diagnostic
+    self.logger.info("\U0001f680 Running GATE 
+diagnostic suite...", speak=True)
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f680 Running GATE diagnostic suite...'
+Arguments: ()
+2026-01-18 03:46:44,373 - GATE - INFO - \U0001f680 
+Running GATE diagnostic suite...
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f50d' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+380, in run_diagnostic
+    self.check_system_errors()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+126, in check_system_errors
+    self.logger.info("\U0001f50d Scanning for system 
+errors...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f50d Scanning for system errors...'
+Arguments: ()
+2026-01-18 03:46:44,374 - GATE - INFO - \U0001f50d 
+Scanning for system errors...
+H:\The Gatekeeper\complete_all_changes.py:506: 
+SyntaxWarning: "\ " is an invalid escape sequence. 
+Such sequences will not work in the future. Did you 
+mean "\\ "? A raw string is also an option.
+  """Complete system migration to H:\ drive"""
+2026-01-18 03:46:44,436 - GATE - ERROR - Syntax error 
+in COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py: unmatched ')'
+2026-01-18 03:46:44,605 - GATE - ERROR - Syntax error 
+in interactive_omega.py: unexpected indent
+2026-01-18 03:46:44,626 - GATE - ERROR - Syntax error 
+in notepad split_recording.py: leading zeros in 
+decimal integer literals are not permitted; use an 0o 
+prefix for octal integers
+2026-01-18 03:46:44,816 - GATE - INFO - Imported 
+existing <module 'comtypes.gen' from 'H:\\The Gatekeepe
+r\\.venv\\Lib\\site-packages\\comtypes\\gen\\__init__.p
+y'>
+2026-01-18 03:46:44,818 - GATE - INFO - Using 
+writeable comtypes cache directory: 'H:\The 
+Gatekeeper\.venv\Lib\site-packages\comtypes\gen'
+2026-01-18 03:46:45,028 - GATE - ERROR - Syntax error 
+in UPDATE_SHORTCUT_ICON.py: 'return' outside function
+2026-01-18 03:46:46,346 - GATE - WARNING - Found 4 
+errors requiring attention
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4e6' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+381, in run_diagnostic
+    self.check_dependencies()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+208, in check_dependencies
+    self.logger.info("\U0001f4e6 Checking 
+dependencies...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4e6 Checking dependencies...'
+Arguments: ()
+2026-01-18 03:46:46,346 - GATE - INFO - \U0001f4e6 
+Checking dependencies...
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\u2705' in position 40: character maps to 
+<undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+381, in run_diagnostic
+    self.check_dependencies()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+227, in check_dependencies
+    self.logger.info(f"\u2705 {len(deps['installed'])} 
+packages installed")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\u2705 158 packages installed'
+Arguments: ()
+2026-01-18 03:46:46,837 - GATE - INFO - \u2705 158 
+packages installed
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4cb' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+382, in run_diagnostic
+    self.git_status()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+236, in git_status
+    self.logger.info("\U0001f4cb Checking git 
+status...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4cb Checking git status...'
+Arguments: ()
+2026-01-18 03:46:46,838 - GATE - INFO - \U0001f4cb 
+Checking git status...
+2026-01-18 03:46:47,057 - GATE - WARNING - Git: 1 
+uncommitted, 4 untracked
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4ca' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+383, in run_diagnostic
+    self.analyze_code_quality()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+165, in analyze_code_quality
+    self.logger.info("\U0001f4ca Analyzing code 
+quality...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4ca Analyzing code quality...'
+Arguments: ()
+2026-01-18 03:46:47,057 - GATE - INFO - \U0001f4ca 
+Analyzing code quality...
+2026-01-18 03:46:48,426 - GATE - INFO - Analyzed 299 
+files, 80907 lines
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f50d' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+385, in run_diagnostic
+    report = self.generate_report()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+348, in generate_report
+    errors = self.check_system_errors()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+126, in check_system_errors
+    self.logger.info("\U0001f50d Scanning for system 
+errors...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f50d Scanning for system errors...'
+Arguments: ()
+2026-01-18 03:46:48,426 - GATE - INFO - \U0001f50d 
+Scanning for system errors...
+H:\The Gatekeeper\complete_all_changes.py:506: 
+SyntaxWarning: "\ " is an invalid escape sequence. 
+Such sequences will not work in the future. Did you 
+mean "\\ "? A raw string is also an option.
+  """Complete system migration to H:\ drive"""
+2026-01-18 03:46:48,473 - GATE - ERROR - Syntax error 
+in COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py: unmatched ')'
+2026-01-18 03:46:48,626 - GATE - ERROR - Syntax error 
+in interactive_omega.py: unexpected indent
+2026-01-18 03:46:48,648 - GATE - ERROR - Syntax error 
+in notepad split_recording.py: leading zeros in 
+decimal integer literals are not permitted; use an 0o 
+prefix for octal integers
+2026-01-18 03:46:49,014 - GATE - ERROR - Syntax error 
+in UPDATE_SHORTCUT_ICON.py: 'return' outside function
+2026-01-18 03:46:50,341 - GATE - WARNING - Found 4 
+errors requiring attention
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4e6' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+385, in run_diagnostic
+    report = self.generate_report()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+353, in generate_report
+    deps = self.check_dependencies()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+208, in check_dependencies
+    self.logger.info("\U0001f4e6 Checking 
+dependencies...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4e6 Checking dependencies...'
+Arguments: ()
+2026-01-18 03:46:50,341 - GATE - INFO - \U0001f4e6 
+Checking dependencies...
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\u2705' in position 40: character maps to 
+<undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+385, in run_diagnostic
+    report = self.generate_report()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+353, in generate_report
+    deps = self.check_dependencies()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+227, in check_dependencies
+    self.logger.info(f"\u2705 {len(deps['installed'])} 
+packages installed")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\u2705 158 packages installed'
+Arguments: ()
+2026-01-18 03:46:50,862 - GATE - INFO - \u2705 158 
+packages installed
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4cb' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+385, in run_diagnostic
+    report = self.generate_report()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+357, in generate_report
+    git_status = self.git_status()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+236, in git_status
+    self.logger.info("\U0001f4cb Checking git 
+status...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4cb Checking git status...'
+Arguments: ()
+2026-01-18 03:46:50,863 - GATE - INFO - \U0001f4cb 
+Checking git status...
+2026-01-18 03:46:51,077 - GATE - WARNING - Git: 1 
+uncommitted, 4 untracked
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\logging\__init__.py", line 1154, in 
+emit
+    stream.write(msg + self.terminator)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4ca' in position 40: character maps 
+to <undefined>
+Call stack:
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+385, in run_diagnostic
+    report = self.generate_report()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+362, in generate_report
+    analysis = self.analyze_code_quality()
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+165, in analyze_code_quality
+    self.logger.info("\U0001f4ca Analyzing code 
+quality...")
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+88, in info
+    self.logger.info(message)
+Message: '\U0001f4ca Analyzing code quality...'
+Arguments: ()
+2026-01-18 03:46:51,077 - GATE - INFO - \U0001f4ca 
+Analyzing code quality...
+2026-01-18 03:46:52,529 - GATE - INFO - Analyzed 299 
+files, 80907 lines
+Traceback (most recent call last):
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+426, in <module>
+    main()
+    ~~~~^^
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+410, in main
+    gate.run_diagnostic()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "H:\The Gatekeeper\gate_admin_system.py", line 
+386, in run_diagnostic
+    print(report)
+    ~~~~~^^^^^^^^
+  File "C:\Users\Drakalich\AppData\Local\Programs\Pytho
+n\Python314\Lib\encodings\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+characters in position 0-59: character maps to 
+<undefined>
