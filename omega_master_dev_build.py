@@ -57,6 +57,13 @@ PHONE_HIERARCHY = {
         "color": "#ffffff",
         "role": "worker",
         "cpu_allocation": 0.2
+    },
+    5: {
+        "name": "TEST_DRONE",
+        "color": "#ffd700",  # Gold
+        "role": "test",
+        "cpu_allocation": 0.2,
+        "test_mode": True
     }
 }
 
@@ -426,7 +433,66 @@ def index():
         }
         .throne { border-color: #ff0000; background: rgba(255,0,0,0.1); }
         .drone { border-color: #0f0; background: rgba(0,255,0,0.05); }
-        .qr-display { max-width: 300px; margin: 20px auto; }
+        .phone-card button {
+            background: #0f0;
+            color: #000;
+            border: 2px solid #0f0;
+            padding: 12px 24px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: monospace;
+            transition: all 0.3s ease;
+        }
+        .phone-card button:hover {
+            background: #00ff00;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #0f0;
+        }
+        .phone-card button:active {
+            transform: scale(0.95);
+        }
+        .qr-display {
+            max-width: 500px;
+            margin: 20px auto;
+            background: #111;
+            padding: 30px;
+            border: 3px solid #0f0;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,255,0,0.5);
+        }
+        .qr-display button {
+            background: #0f0;
+            color: #000;
+            border: 2px solid #0f0;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: monospace;
+        }
+        .qr-display button:hover {
+            background: #00ff00;
+            box-shadow: 0 0 20px #0f0;
+        }
+        #qr-image {
+            border: 5px solid #0f0;
+            border-radius: 10px;
+            background: white;
+            padding: 10px;
+        }
+        #qr-url {
+            word-break: break-all;
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px solid #0f0;
+        }
     </style>
 </head>
 <body>
@@ -468,6 +534,13 @@ def index():
             <p>20% CPU when dark</p>
             <button onclick="showQR(4)">Generate QR</button>
         </div>
+        
+        <div class="phone-card drone" style="border-color: #ffd700; color: #ffd700;">
+            <h3>⭐ PHONE 5: TEST</h3>
+            <p>Test Drone</p>
+            <p>20% CPU | Test Mode</p>
+            <button onclick="showQR(5)">Generate QR</button>
+        </div>
     </div>
     
     <div id="qr-display" class="qr-display" style="display:none;">
@@ -482,23 +555,45 @@ def index():
         let currentPhoneId = 0;
         
         async function showQR(phoneId) {
+            console.log('Generating QR for phone:', phoneId);
             currentPhoneId = phoneId;
-            const response = await fetch(`/api/qr/generate?phone_id=${phoneId}`);
-            const data = await response.json();
             
-            document.getElementById('qr-title').textContent = `Install: ${data.phone_name}`;
-            document.getElementById('qr-image').src = data.qr_code;
-            document.getElementById('qr-url').textContent = data.install_url;
-            document.getElementById('qr-display').style.display = 'block';
+            try {
+                const response = await fetch(`/api/qr/generate?phone_id=${phoneId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('QR data received:', data);
+                
+                document.getElementById('qr-title').textContent = `📱 Install: ${data.phone_name}`;
+                document.getElementById('qr-image').src = data.qr_code;
+                document.getElementById('qr-url').textContent = `🔗 ${data.install_url}`;
+                document.getElementById('qr-display').style.display = 'block';
+                
+                // Scroll to QR code
+                document.getElementById('qr-display').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (error) {
+                console.error('Error generating QR code:', error);
+                alert('Error generating QR code: ' + error.message);
+            }
         }
         
         function downloadUSB() {
+            console.log('Downloading PWA for phone:', currentPhoneId);
             window.location.href = `/api/phone/download_pwa?phone_id=${currentPhoneId}`;
         }
         
         function closeQR() {
+            console.log('Closing QR display');
             document.getElementById('qr-display').style.display = 'none';
         }
+        
+        // Test button click on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('Phone hierarchy control panel loaded');
+            console.log('Available phones:', 6);
+        });
     </script>
 </body>
 </html>
@@ -515,6 +610,7 @@ if __name__ == '__main__':
     print("  💙 Phone 2: BLUE DRONE - 20% CPU when dark")
     print("  ❤️  Phone 3: RED DRONE - 20% CPU when dark")
     print("  🤍 Phone 4: WHITE DRONE - 20% CPU when dark")
+    print("  ⭐ Phone 5: TEST DRONE - 20% CPU | Test Mode")
     print()
     print("Features:")
     print("  • Biometric guest detection")
@@ -529,4 +625,10 @@ if __name__ == '__main__':
     print("🚀 Server starting on http://127.0.0.1:5002")
     print("=" * 80)
     
-    socketio.run(app, host='127.0.0.1', port=5002, debug=False)
+    try:
+        # Use regular Flask app.run instead of socketio.run for better compatibility
+        app.run(host='127.0.0.1', port=5002, debug=False, use_reloader=False, threaded=True)
+    except Exception as e:
+        print(f"Error starting server: {e}")
+        import traceback
+        traceback.print_exc()

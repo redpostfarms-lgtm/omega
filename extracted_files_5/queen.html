@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>OMEGA Queen</title>
+    <link rel="manifest" href="manifest.json">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --led-red: #ff0000;
+            --led-red-dim: #330000;
+            --led-red-glow: rgba(255, 0, 0, 0.8);
+            --queen-gold: #ffcc00;
+            --drone-blue: #0088ff;
+            --drone-white: #ffffff;
+            --drone-black: #333333;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0d0d0d 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            color: #ccc;
+        }
+
+        /* ==========================================
+           SWARM STATUS - Top bar
+           ========================================== */
+        .swarm-status {
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+        }
+
+        .queen-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--queen-gold);
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .queen-badge::before {
+            content: '♛';
+            font-size: 16px;
+        }
+
+        .brain-tally {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #888;
+        }
+
+        .brain-bar {
+            width: 60px;
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .brain-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--led-red) 0%, var(--queen-gold) 100%);
+            width: 20%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .brain-percent {
+            min-width: 35px;
+            text-align: right;
+            font-family: monospace;
+            color: var(--queen-gold);
+        }
+
+        /* ==========================================
+           DRONE GRID - Visual swarm status
+           ========================================== */
+        .drone-grid {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .drone-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #111;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #444;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .drone-node.queen {
+            border-color: var(--queen-gold);
+            color: var(--queen-gold);
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .drone-node.connected {
+            border-color: var(--led-red);
+            color: var(--led-red);
+        }
+
+        .drone-node.working {
+            animation: pulse-work 1s ease-in-out infinite;
+        }
+
+        .drone-node.sipping {
+            border-color: #2a5a2a;
+            color: #3a7a3a;
+        }
+
+        @keyframes pulse-work {
+            0%, 100% { box-shadow: 0 0 5px var(--led-red); }
+            50% { box-shadow: 0 0 20px var(--led-red); }
+        }
+
+        .drone-node .status-dot {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            border: 2px solid #000;
+        }
+
+        .drone-node.connected .status-dot { background: var(--led-red); }
+        .drone-node.sipping .status-dot { background: #3a7a3a; }
+        .drone-node.offline .status-dot { background: #333; }
+
+        /* ==========================================
+           SCANNER - Thin line
+           ========================================== */
+        .scanner-section {
+            margin-bottom: 12px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .scanner-bezel {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border-radius: 8px;
+            padding: 4px 10px;
+            border: 1px solid #333;
+        }
+
+        .scanner-track {
+            background: #000;
+            border-radius: 4px;
+            height: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scanner-light {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 4px;
+            background: radial-gradient(ellipse at center, #ff0000 0%, #ff0000 40%, rgba(255,0,0,0.4) 70%, transparent 100%);
+            border-radius: 2px;
+            filter: blur(1px);
+            animation: scan 2s ease-in-out infinite;
+        }
+
+        .scanner-light::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 4px;
+            background: #ff3333;
+            border-radius: 2px;
+            box-shadow: 0 0 6px #ff0000, 0 0 12px #ff0000;
+        }
+
+        @keyframes scan {
+            0%, 100% { left: 5px; }
+            50% { left: calc(100% - 45px); }
+        }
+
+        /* ==========================================
+           VOICE BOX - 3 Columns
+           ========================================== */
+        .voicebox-container {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .voicebox-bezel {
+            background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 10%, #1a1a1a 50%, #0f0f0f 90%, #1a1a1a 100%);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #333;
+        }
+
+        .voicebox-panel {
+            background: #000;
+            border-radius: 6px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .led-column {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .led {
+            width: 50px;
+            height: 14px;
+            background: var(--led-red-dim);
+            border-radius: 2px;
+            transition: all 0.05s ease;
+        }
+
+        .led.on {
+            background: var(--led-red);
+            box-shadow: 0 0 10px var(--led-red-glow), 0 0 20px var(--led-red-glow);
+        }
+
+        /* ==========================================
+           CONTROLS
+           ========================================== */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .mic-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 3px solid #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .mic-btn:hover, .mic-btn.active {
+            border-color: var(--led-red);
+            box-shadow: 0 0 20px rgba(255,0,0,0.4);
+        }
+
+        .mic-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            transition: fill 0.2s;
+        }
+
+        .mic-btn.active svg { fill: var(--led-red); }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .text-input {
+            flex: 1;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 25px;
+            padding: 12px 16px;
+            color: #ccc;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .text-input:focus { border-color: var(--led-red); }
+
+        .send-btn {
+            background: var(--led-red);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .send-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #000;
+        }
+
+        /* ==========================================
+           RESPONSE AREA
+           ========================================== */
+        .response-area {
+            margin-top: 15px;
+            width: 100%;
+            max-width: 320px;
+            min-height: 60px;
+            max-height: 120px;
+            overflow-y: auto;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            border: 1px solid #222;
+        }
+
+        .response-text {
+            color: #ff3333;
+            font-size: 13px;
+            line-height: 1.5;
+            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        .user-text {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .swarm-indicator {
+            font-size: 10px;
+            color: #555;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ==========================================
+           HUSH OVERLAY (Hold to silence)
+           ========================================== */
+        .hush-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .hush-overlay.active {
+            display: flex;
+        }
+
+        .hush-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .hush-text {
+            color: #444;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* ==========================================
+           INSTALL / QR
+           ========================================== */
+        .footer-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-btn {
+            background: transparent;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 8px 14px;
+            color: #555;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .footer-btn:hover {
+            border-color: var(--led-red);
+            color: var(--led-red);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-box {
+            background: #111;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+            max-width: 300px;
+        }
+
+        .modal-title {
+            color: var(--led-red);
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #qr-code {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .modal-hint {
+            color: #555;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .drone-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .drone-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+
+        .drone-option:hover {
+            border-color: var(--led-red);
+        }
+
+        .drone-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .drone-color.black { background: #333; border: 1px solid #555; }
+        .drone-color.blue { background: #0088ff; }
+        .drone-color.red { background: #ff0000; }
+        .drone-color.white { background: #ffffff; }
+    </style>
+</head>
+<body>
+    <!-- Swarm Status Bar -->
+    <div class="swarm-status">
+        <div class="queen-badge">Queen 0</div>
+        <div class="brain-tally">
+            <span>BRAIN</span>
+            <div class="brain-bar">
+                <div class="brain-fill" id="brainFill"></div>
+            </div>
+            <span class="brain-percent" id="brainPercent">20%</span>
+        </div>
+    </div>
+
+    <!-- Drone Grid -->
+    <div class="drone-grid" id="droneGrid">
+        <div class="drone-node queen" data-id="0">
+            <span>Q</span>
+            <div class="status-dot"></div>
+        </div>
+        <div class="drone-node offline" data-id="1">
+            <span>1</span>
+            <div class="status-dot"></div>
+        </div>
+        <div class="drone-node offline" data-id="2">
+            <span>2</span>
+            <div class="status-dot"></div>
+        </div>
+        <div class="drone-node offline" data-id="3">
+            <span>3</span>
+            <div class="status-dot"></div>
+        </div>
+        <div class="drone-node offline" data-id="4">
+            <span>4</span>
+            <div class="status-dot"></div>
+        </div>
+    </div>
+
+    <!-- Scanner -->
+    <div class="scanner-section">
+        <div class="scanner-bezel">
+            <div class="scanner-track">
+                <div class="scanner-light"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Box -->
+    <div class="voicebox-container">
+        <div class="voicebox-bezel">
+            <div class="voicebox-panel" id="voicebox">
+                <div class="led-column" id="col1"></div>
+                <div class="led-column" id="col2"></div>
+                <div class="led-column" id="col3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="mic-btn" id="micBtn">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+        </button>
+        <div class="input-row">
+            <input type="text" class="text-input" id="textInput" placeholder="Speak to the swarm...">
+            <button class="send-btn" id="sendBtn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Response -->
+    <div class="response-area" id="responseArea">
+        <div class="response-text">I am OMEGA. I am ready.</div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="footer-actions">
+        <button class="footer-btn" id="installBtn">Install</button>
+        <button class="footer-btn" id="addDroneBtn">+ Drone</button>
+        <button class="footer-btn" id="syncBtn">Sync</button>
+    </div>
+
+    <!-- Hush Overlay (Hold to silence) -->
+    <div class="hush-overlay" id="hushOverlay">
+        <div class="hush-icon">🤫</div>
+        <div class="hush-text">Silenced</div>
+    </div>
+
+    <!-- QR Modal -->
+    <div class="modal" id="qrModal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-box">
+            <div class="modal-title">Add Drone</div>
+            <div id="qr-code"></div>
+            <div class="modal-hint">Scan on another phone to join as Drone</div>
+            <div class="drone-selector">
+                <div class="drone-option" data-drone="1">
+                    <div class="drone-color black"></div>
+                    <span>Drone 1 (Black)</span>
+                </div>
+                <div class="drone-option" data-drone="2">
+                    <div class="drone-color blue"></div>
+                    <span>Drone 2 (Blue)</span>
+                </div>
+                <div class="drone-option" data-drone="3">
+                    <div class="drone-color red"></div>
+                    <span>Drone 3 (Red)</span>
+                </div>
+                <div class="drone-option" data-drone="4">
+                    <div class="drone-color white"></div>
+                    <span>Drone 4 (White)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // ============================================
+        // OMEGA QUEEN - The only mind. Shards are nerves.
+        // ============================================
+
+        const Omega = {
+            // Config
+            ledsPerColumn: 10,
+            columns: 3,
+
+            // The mesh - shards are filaments, not brains
+            mesh: {
+                shards: new Map(),  // id -> { lastVoltage, data }
+                channel: null,
+                memory: [],         // Queen stores everything
+                maxMemory: 1000
+            },
+
+            // State
+            leds: [],
+            isListening: false,
+            recognition: null,
+            synthesis: window.speechSynthesis,
+            isHushed: false,
+            holdTimer: null,
+
+            el: {},
+
+            init() {
+                this.cacheElements();
+                this.buildVoicebox();
+                this.initSpeech();
+                this.initEvents();
+                this.initMesh();
+                this.initPWA();
+                this.updateBrainTally();
+                console.log('[OMEGA] Queen online. Shards are filaments.');
+            },
+
+            cacheElements() {
+                this.el = {
+                    columns: [
+                        document.getElementById('col1'),
+                        document.getElementById('col2'),
+                        document.getElementById('col3')
+                    ],
+                    micBtn: document.getElementById('micBtn'),
+                    textInput: document.getElementById('textInput'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    responseArea: document.getElementById('responseArea'),
+                    brainFill: document.getElementById('brainFill'),
+                    brainPercent: document.getElementById('brainPercent'),
+                    droneGrid: document.getElementById('droneGrid'),
+                    hushOverlay: document.getElementById('hushOverlay'),
+                    installBtn: document.getElementById('installBtn'),
+                    addDroneBtn: document.getElementById('addDroneBtn'),
+                    syncBtn: document.getElementById('syncBtn'),
+                    qrModal: document.getElementById('qrModal'),
+                    modalClose: document.getElementById('modalClose'),
+                    qrCode: document.getElementById('qr-code')
+                };
+            },
+
+            buildVoicebox() {
+                this.leds = [];
+                for (let c = 0; c < this.columns; c++) {
+                    const colLeds = [];
+                    const col = this.el.columns[c];
+                    col.innerHTML = '';
+                    for (let i = 0; i < this.ledsPerColumn; i++) {
+                        const led = document.createElement('div');
+                        led.className = 'led';
+                        col.appendChild(led);
+                        colLeds.push(led);
+                    }
+                    this.leds.push(colLeds);
+                }
+            },
+
+            animateLeds(level) {
+                const count = Math.floor(level * this.ledsPerColumn);
+                const center = Math.floor(this.ledsPerColumn / 2);
+                
+                for (let c = 0; c < this.columns; c++) {
+                    const colLevel = Math.max(0, count - Math.abs(c - 1) + Math.floor(Math.random() * 2));
+                    const halfCount = Math.floor(colLevel / 2);
+                    
+                    for (let i = 0; i < this.ledsPerColumn; i++) {
+                        const distFromCenter = Math.abs(i - center + 0.5);
+                        this.leds[c][i].classList.toggle('on', distFromCenter <= halfCount);
+                    }
+                }
+            },
+
+            // Pulse all LEDs green once - "We heard you"
+            pulseHeard() {
+                // Flash all LEDs green
+                const allLeds = document.querySelectorAll('.led');
+                allLeds.forEach(led => {
+                    led.style.background = '#00ff00';
+                    led.style.boxShadow = '0 0 15px #00ff00, 0 0 30px #00ff00';
+                });
+                
+                setTimeout(() => {
+                    allLeds.forEach(led => {
+                        led.style.background = '';
+                        led.style.boxShadow = '';
+                    });
+                }, 300);
+
+                // Tell all shards to pulse too
+                this.broadcastToShards({ type: 'heard' });
+            },
+
+            simulateVoice(text) {
+                const duration = Math.max(1500, text.split(' ').length * 200);
+                const startTime = Date.now();
+                
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    if (elapsed > duration) {
+                        this.animateLeds(0);
+                        return;
+                    }
+                    const base = Math.sin(elapsed * 0.02) * 0.3 + 0.4;
+                    const noise = Math.random() * 0.3;
+                    this.animateLeds(Math.min(1, base + noise));
+                    requestAnimationFrame(animate);
+                };
+                animate();
+            },
+
+            // ==========================================
+            // MESH - Shards send voltage, Queen thinks
+            // ==========================================
+
+            initMesh() {
+                if ('BroadcastChannel' in window) {
+                    this.mesh.channel = new BroadcastChannel('omega-mesh');
+                    this.mesh.channel.onmessage = (e) => this.receiveVoltage(e.data);
+                }
+
+                // Heartbeat - check which shards are alive
+                setInterval(() => this.meshHeartbeat(), 5000);
+            },
+
+            broadcastToShards(msg) {
+                if (this.mesh.channel) {
+                    this.mesh.channel.postMessage(msg);
+                }
+            },
+
+            // Receive raw voltage from shard - no handshake, just current
+            receiveVoltage(signal) {
+                const { shard, v, d, t } = signal;
+                
+                // Update shard status
+                this.mesh.shards.set(shard, {
+                    lastVoltage: t,
+                    type: v,
+                    data: d
+                });
+
+                // Store in Queen's memory (shards don't store)
+                this.mesh.memory.push({
+                    shard,
+                    voltage: v,
+                    data: d,
+                    time: t
+                });
+
+                // Trim memory
+                if (this.mesh.memory.length > this.mesh.maxMemory) {
+                    this.mesh.memory.shift();
+                }
+
+                // Update UI
+                this.updateShardUI(shard, v);
+                this.updateBrainTally();
+
+                // React to specific voltages
+                this.processVoltage(shard, v, d);
+            },
+
+            processVoltage(shard, type, data) {
+                switch (type) {
+                    case 'alive':
+                        console.log(`[MESH] Shard ${shard} connected`);
+                        break;
+                    case 'tap':
+                    case 'touch':
+                        // Shard was touched - Queen notes it
+                        console.log(`[MESH] Shard ${shard} touched`);
+                        break;
+                    case 'shake':
+                        console.log(`[MESH] Shard ${shard} shaken`, data);
+                        break;
+                    case 'near':
+                        // Something near shard - face? hand?
+                        console.log(`[MESH] Shard ${shard} proximity`, data);
+                        break;
+                    case 'dark':
+                        console.log(`[MESH] Shard ${shard} went dark (sipping)`);
+                        break;
+                    case 'wake':
+                        console.log(`[MESH] Shard ${shard} woke`);
+                        break;
+                }
+            },
+
+            updateShardUI(id, voltage) {
+                const node = this.el.droneGrid.querySelector(`[data-id="${id}"]`);
+                if (node) {
+                    node.className = 'drone-node connected';
+                    
+                    // Brief flash on voltage
+                    node.classList.add('working');
+                    setTimeout(() => node.classList.remove('working'), 200);
+                }
+            },
+
+            meshHeartbeat() {
+                const now = Date.now();
+                for (const [id, shard] of this.mesh.shards) {
+                    if (now - shard.lastVoltage > 15000) {
+                        // No voltage in 15s - shard is offline
+                        this.mesh.shards.delete(id);
+                        const node = this.el.droneGrid.querySelector(`[data-id="${id}"]`);
+                        if (node) node.className = 'drone-node offline';
+                    }
+                }
+                this.updateBrainTally();
+            },
+
+            updateBrainTally() {
+                // Queen is the only brain. Shards add sensing, not compute.
+                const shardCount = this.mesh.shards.size;
+                const percent = 20 + (shardCount * 20); // Queen + shards
+                
+                this.el.brainFill.style.width = Math.min(100, percent) + '%';
+                this.el.brainPercent.textContent = Math.min(100, percent) + '%';
+            },
+
+            // Query the mesh memory
+            queryMesh(question) {
+                const lower = question.toLowerCase();
+                
+                // "What was that face?" - check proximity/near events
+                if (lower.includes('face') || lower.includes('who') || lower.includes('what was')) {
+                    const nearEvents = this.mesh.memory
+                        .filter(m => m.voltage === 'near')
+                        .slice(-5);
+                    
+                    if (nearEvents.length > 0) {
+                        this.pulseHeard();
+                        return `Shard ${nearEvents[0].shard} sensed proximity. We heard you.`;
+                    }
+                }
+
+                // General mesh query
+                if (lower.includes('swarm') || lower.includes('mesh') || lower.includes('status')) {
+                    const count = this.mesh.shards.size;
+                    this.pulseHeard();
+                    return count > 0 
+                        ? `${count} shards connected. We are listening.`
+                        : 'No shards. Queen alone.';
+                }
+
+                return null; // Not a mesh query
+            },
+
+            // ==========================================
+            // SPEECH
+            // ==========================================
+
+            initSpeech() {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                if (SpeechRecognition) {
+                    this.recognition = new SpeechRecognition();
+                    this.recognition.continuous = false;
+                    this.recognition.interimResults = false;
+                    this.recognition.lang = 'en-US';
+                    
+                    this.recognition.onresult = (e) => {
+                        this.processInput(e.results[0][0].transcript);
+                    };
+                    
+                    this.recognition.onend = () => {
+                        this.isListening = false;
+                        this.el.micBtn.classList.remove('active');
+                    };
+                    
+                    this.recognition.onerror = () => {
+                        this.isListening = false;
+                        this.el.micBtn.classList.remove('active');
+                    };
+                }
+            },
+
+            toggleListen() {
+                if (this.isHushed) return;
+                
+                if (this.isListening) {
+                    this.recognition?.stop();
+                } else {
+                    this.recognition?.start();
+                    this.isListening = true;
+                    this.el.micBtn.classList.add('active');
+                }
+            },
+
+            processInput(text) {
+                if (this.isHushed) return;
+
+                this.el.responseArea.innerHTML = `
+                    <div class="user-text">> ${text}</div>
+                    <div class="response-text">...</div>
+                `;
+
+                setTimeout(() => {
+                    // First check if it's a mesh query
+                    let response = this.queryMesh(text);
+                    
+                    // Otherwise generate normal response
+                    if (!response) {
+                        response = this.generateResponse(text);
+                    }
+                    
+                    this.el.responseArea.innerHTML = `
+                        <div class="user-text">> ${text}</div>
+                        <div class="response-text">${response}</div>
+                    `;
+                    
+                    this.speak(response);
+                }, 200);
+            },
+
+            generateResponse(input) {
+                const lower = input.toLowerCase();
+                const shardCount = this.mesh.shards.size;
+                
+                if (lower.includes('who are you') || lower.includes('what are you')) {
+                    if (shardCount > 0) {
+                        this.pulseHeard();
+                        return 'I am OMEGA. I am the only mind. The shards are my nerves. We heard you.';
+                    }
+                    return 'I am OMEGA.';
+                }
+                
+                if (lower.includes('hello') || lower.includes('hi')) {
+                    if (shardCount > 0) {
+                        this.pulseHeard();
+                        return 'We heard you.';
+                    }
+                    return 'Greetings.';
+                }
+                
+                // Default
+                if (shardCount > 0) {
+                    this.pulseHeard();
+                }
+                return 'Understood.';
+            },
+
+            speak(text) {
+                if (!this.synthesis || this.isHushed) return;
+                
+                this.synthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Low, flat Daniels voice
+                const voices = this.synthesis.getVoices();
+                const voice = voices.find(v => 
+                    v.name.includes('Daniel') || 
+                    v.name.includes('Google UK English Male') ||
+                    v.name.includes('Microsoft David')
+                ) || voices.find(v => v.lang.startsWith('en'));
+                
+                if (voice) utterance.voice = voice;
+                utterance.rate = 0.9;
+                utterance.pitch = 0.7; // Lower, flatter
+                
+                utterance.onstart = () => this.simulateVoice(text);
+                this.synthesis.speak(utterance);
+            },
+
+            // ==========================================
+            // EVENTS
+            // ==========================================
+
+            initEvents() {
+                this.el.micBtn.addEventListener('click', () => this.toggleListen());
+                
+                this.el.sendBtn.addEventListener('click', () => {
+                    const text = this.el.textInput.value.trim();
+                    if (text) {
+                        this.processInput(text);
+                        this.el.textInput.value = '';
+                    }
+                });
+                
+                this.el.textInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.el.sendBtn.click();
+                });
+
+                // Tap = status
+                this.el.droneGrid.addEventListener('click', () => {
+                    this.processInput('mesh status');
+                });
+
+                // Hold = hush
+                document.addEventListener('touchstart', () => {
+                    this.holdTimer = setTimeout(() => this.toggleHush(), 800);
+                });
+                document.addEventListener('touchend', () => clearTimeout(this.holdTimer));
+                document.addEventListener('mousedown', () => {
+                    this.holdTimer = setTimeout(() => this.toggleHush(), 800);
+                });
+                document.addEventListener('mouseup', () => clearTimeout(this.holdTimer));
+
+                // Modal
+                this.el.addDroneBtn.addEventListener('click', () => this.showShardQR());
+                this.el.modalClose.addEventListener('click', () => this.hideModal());
+                this.el.qrModal.addEventListener('click', (e) => {
+                    if (e.target === this.el.qrModal) this.hideModal();
+                });
+
+                document.querySelectorAll('.drone-option').forEach(opt => {
+                    opt.addEventListener('click', () => this.generateShardQR(opt.dataset.drone));
+                });
+
+                this.el.syncBtn.addEventListener('click', () => this.processInput('sync'));
+                this.el.installBtn.addEventListener('click', () => this.showInstallQR());
+            },
+
+            toggleHush() {
+                this.isHushed = !this.isHushed;
+                this.el.hushOverlay.classList.toggle('active', this.isHushed);
+                if (this.isHushed) {
+                    this.synthesis?.cancel();
+                    this.recognition?.stop();
+                }
+            },
+
+            showShardQR() {
+                this.el.qrModal.classList.add('active');
+            },
+
+            generateShardQR(shardId) {
+                this.el.qrCode.innerHTML = '';
+                const url = `${location.origin}/shard.html?id=${shardId}`;
+                new QRCode(this.el.qrCode, {
+                    text: url,
+                    width: 150,
+                    height: 150,
+                    colorDark: '#000',
+                    colorLight: '#fff'
+                });
+            },
+
+            showInstallQR() {
+                this.el.qrCode.innerHTML = '';
+                new QRCode(this.el.qrCode, {
+                    text: location.origin + '/queen.html',
+                    width: 150,
+                    height: 150,
+                    colorDark: '#000',
+                    colorLight: '#fff'
+                });
+                this.el.qrModal.classList.add('active');
+            },
+
+            hideModal() {
+                this.el.qrModal.classList.remove('active');
+            },
+
+            initPWA() {
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    this.installPrompt = e;
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => Omega.init());
+        if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => {};
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+    </script>
+</body>
+</html>

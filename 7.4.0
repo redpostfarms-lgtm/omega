@@ -1,0 +1,3 @@
+Requirement already satisfied: qrcode[pil] in h:\the gatekeeper\.venv\lib\site-packages (8.2)
+Requirement already satisfied: colorama in h:\the gatekeeper\.venv\lib\site-packages (from qrcode[pil]) (0.4.6)
+Requirement already satisfied: pillow>=9.1.0 in h:\the gatekeeper\.venv\lib\site-packages (from qrcode[pil]) (12.1.0)

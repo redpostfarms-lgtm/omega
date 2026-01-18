@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>OMEGA Shard</title>
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --shard-color: #ff0000;
+            --pulse-green: #00ff00;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Minimal - just a filament */
+        .shard {
+            text-align: center;
+        }
+
+        .shard-id {
+            font-size: 120px;
+            font-weight: 100;
+            color: #1a1a1a;
+            line-height: 1;
+            transition: color 0.1s, text-shadow 0.1s;
+        }
+
+        /* Pulse green when heard */
+        body.heard .shard-id {
+            color: var(--pulse-green);
+            text-shadow: 0 0 50px var(--pulse-green), 0 0 100px var(--pulse-green);
+        }
+
+        /* Dim glow when sensing */
+        body.sensing .shard-id {
+            color: #2a2a2a;
+            text-shadow: 0 0 20px var(--shard-color);
+        }
+
+        /* Current indicator - the filament */
+        .filament {
+            width: 2px;
+            height: 0;
+            background: linear-gradient(180deg, var(--shard-color) 0%, transparent 100%);
+            margin: 20px auto 0;
+            transition: height 0.1s ease;
+            opacity: 0.5;
+        }
+
+        body.voltage .filament {
+            height: 100px;
+            opacity: 1;
+            box-shadow: 0 0 10px var(--shard-color);
+        }
+
+        /* Nothing else visible - it's a whisper */
+        .whisper {
+            position: fixed;
+            bottom: 30px;
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: #111;
+            text-transform: uppercase;
+        }
+
+        /* Shard colors */
+        body[data-shard="1"] { --shard-color: #333333; }
+        body[data-shard="2"] { --shard-color: #0066cc; }
+        body[data-shard="3"] { --shard-color: #cc0000; }
+        body[data-shard="4"] { --shard-color: #cccccc; }
+    </style>
+</head>
+<body data-shard="1">
+    <div class="shard">
+        <div class="shard-id" id="shardId">1</div>
+        <div class="filament" id="filament"></div>
+    </div>
+    <div class="whisper">shard</div>
+
+    <script>
+        // ============================================
+        // OMEGA SHARD - Micro-node filament
+        // Not AI. Not even close. Just voltage.
+        // ============================================
+
+        const Shard = {
+            id: 1,
+            channel: null,
+            
+            // Sensors - what this filament can feel
+            sensors: {
+                motion: null,
+                light: null,
+                proximity: null,
+                orientation: null
+            },
+
+            init() {
+                this.id = parseInt(new URLSearchParams(location.search).get('id')) || 1;
+                document.body.dataset.shard = this.id;
+                document.getElementById('shardId').textContent = this.id;
+                
+                this.connectToQueen();
+                this.initSensors();
+                
+                // Tap = send voltage
+                document.addEventListener('click', () => this.sendVoltage('tap'));
+                document.addEventListener('touchstart', () => this.sendVoltage('touch'));
+            },
+
+            connectToQueen() {
+                if ('BroadcastChannel' in window) {
+                    this.channel = new BroadcastChannel('omega-mesh');
+                    this.channel.onmessage = (e) => this.receiveFromQueen(e.data);
+                    
+                    // Announce filament exists
+                    this.sendVoltage('alive');
+                }
+            },
+
+            // Send raw signal - no processing, just current
+            sendVoltage(type, data = null) {
+                document.body.classList.add('voltage');
+                setTimeout(() => document.body.classList.remove('voltage'), 100);
+
+                if (this.channel) {
+                    this.channel.postMessage({
+                        shard: this.id,
+                        v: type,  // voltage type
+                        d: data,  // raw data
+                        t: Date.now()
+                    });
+                }
+            },
+
+            receiveFromQueen(msg) {
+                if (msg.type === 'heard') {
+                    // Queen acknowledged - pulse green
+                    document.body.classList.add('heard');
+                    setTimeout(() => document.body.classList.remove('heard'), 500);
+                }
+                
+                if (msg.type === 'sense') {
+                    // Queen wants sensor data - send it raw
+                    this.sendSensorData(msg.sensor);
+                }
+            },
+
+            // ==========================================
+            // SENSORS - Just feel, don't think
+            // ==========================================
+
+            initSensors() {
+                // Motion
+                if ('DeviceMotionEvent' in window) {
+                    window.addEventListener('devicemotion', (e) => {
+                        const accel = e.accelerationIncludingGravity;
+                        if (accel && (Math.abs(accel.x) > 15 || Math.abs(accel.y) > 15 || Math.abs(accel.z) > 15)) {
+                            this.sendVoltage('shake', { x: accel.x, y: accel.y, z: accel.z });
+                        }
+                    });
+                }
+
+                // Orientation
+                if ('DeviceOrientationEvent' in window) {
+                    let lastAlpha = null;
+                    window.addEventListener('deviceorientation', (e) => {
+                        if (lastAlpha !== null && Math.abs(e.alpha - lastAlpha) > 45) {
+                            this.sendVoltage('rotate', { a: e.alpha, b: e.beta, g: e.gamma });
+                        }
+                        lastAlpha = e.alpha;
+                    });
+                }
+
+                // Ambient light
+                if ('AmbientLightSensor' in window) {
+                    try {
+                        const sensor = new AmbientLightSensor();
+                        sensor.addEventListener('reading', () => {
+                            this.sendVoltage('light', { lux: sensor.illuminance });
+                        });
+                        sensor.start();
+                    } catch (e) {}
+                }
+
+                // Proximity (face near phone)
+                if ('ProximitySensor' in window) {
+                    try {
+                        const sensor = new ProximitySensor();
+                        sensor.addEventListener('reading', () => {
+                            this.sendVoltage('near', { near: sensor.near });
+                        });
+                        sensor.start();
+                    } catch (e) {}
+                }
+
+                // Visibility change (screen on/off)
+                document.addEventListener('visibilitychange', () => {
+                    this.sendVoltage(document.hidden ? 'dark' : 'wake');
+                });
+
+                // Battery
+                if ('getBattery' in navigator) {
+                    navigator.getBattery().then(battery => {
+                        battery.addEventListener('chargingchange', () => {
+                            this.sendVoltage('power', { charging: battery.charging, level: battery.level });
+                        });
+                    });
+                }
+            },
+
+            sendSensorData(sensorType) {
+                // Queen asked for specific sensor - relay raw
+                document.body.classList.add('sensing');
+                setTimeout(() => document.body.classList.remove('sensing'), 200);
+                
+                // Sensors auto-send via event listeners above
+            }
+        };
+
+        // Just exist. Just feel.
+        document.addEventListener('DOMContentLoaded', () => Shard.init());
+    </script>
+</body>
+</html>
