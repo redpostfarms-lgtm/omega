@@ -56,7 +56,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
-    
+
     // Skip API calls (always use network)
     if (event.request.url.includes('/api/')) {
         event.respondWith(fetch(event.request));
@@ -112,7 +112,7 @@ function fetchAndCache(request) {
 // Push notifications - Fleet status updates
 self.addEventListener('push', (event) => {
     console.log('[OMEGA SW] 🔔 Push notification received');
-    
+
     if (!event.data) return;
 
     const data = event.data.json();
@@ -179,7 +179,7 @@ self.addEventListener('notificationclick', (event) => {
 // Background sync - Sync fleet status and auto-repair
 self.addEventListener('sync', (event) => {
     console.log('[OMEGA SW] 🔄 Background sync triggered:', event.tag);
-    
+
     if (event.tag === 'fleet-status-sync') {
         event.waitUntil(syncFleetStatus());
     } else if (event.tag === 'auto-repair-sync') {
@@ -197,7 +197,7 @@ async function syncFleetStatus() {
         if (response.ok) {
             const data = await response.json();
             console.log('[OMEGA SW] ✅ Fleet status synced:', data);
-            
+
             // Notify if workers changed
             if (data.fleet && data.fleet.active_workers > 0) {
                 self.registration.showNotification('🐝 Fleet Mesh Active', {
@@ -225,7 +225,7 @@ async function runAutoRepair() {
                 await fetch('/api/source-control/auto-commit', { method: 'POST' });
             }
         }
-        
+
         console.log('[OMEGA SW] ✅ Auto-repair complete');
     } catch (error) {
         console.error('[OMEGA SW] ❌ Auto-repair failed:', error);
@@ -240,7 +240,7 @@ async function syncSourceControl() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
-        
+
         if (response.ok) {
             const data = await response.json();
             console.log('[OMEGA SW] ✅ Source control synced:', data);
@@ -253,7 +253,7 @@ async function syncSourceControl() {
 // Periodic background sync (every 30 seconds when idle)
 self.addEventListener('periodicsync', (event) => {
     console.log('[OMEGA SW] ⏰ Periodic sync:', event.tag);
-    
+
     if (event.tag === 'fleet-monitor') {
         event.waitUntil(syncFleetStatus());
     } else if (event.tag === 'auto-repair') {
@@ -264,7 +264,7 @@ self.addEventListener('periodicsync', (event) => {
 // Message handling from main app
 self.addEventListener('message', (event) => {
     console.log('[OMEGA SW] 💬 Message received:', event.data);
-    
+
     if (event.data && event.data.type) {
         switch (event.data.type) {
             case 'SKIP_WAITING':
@@ -286,24 +286,24 @@ self.addEventListener('message', (event) => {
 // Log service worker lifecycle
 console.log('[OMEGA SW] 🔴 KITT Service Worker loaded and ready');
 console.log('[OMEGA SW] Features: Offline, Auto-Repair, Fleet Mesh, Background Sync');                // Clone request for fetch and cache
-                const fetchRequest = event.request.clone();
+const fetchRequest = event.request.clone();
 
-                return fetch(fetchRequest).then((response) => {
-                    // Check if valid response
-                    if (!response || response.status !== 200 || response.type !== 'basic') {
-                        return response;
-                    }
+return fetch(fetchRequest).then((response) => {
+    // Check if valid response
+    if (!response || response.status !== 200 || response.type !== 'basic') {
+        return response;
+    }
 
-                    // Clone response for caching
-                    const responseToCache = response.clone();
+    // Clone response for caching
+    const responseToCache = response.clone();
 
-                    caches.open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
+    caches.open(CACHE_NAME)
+        .then((cache) => {
+            cache.put(event.request, responseToCache);
+        });
 
-                    return response;
-                });
+    return response;
+});
             })
     );
 });
