@@ -1,0 +1,5 @@
+﻿Collecting TTS==0.22.0 (from -r requirements.txt (line 7))
+  Using cached TTS-0.22.0.tar.gz (1.7 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
