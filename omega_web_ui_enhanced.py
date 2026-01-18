@@ -244,10 +244,48 @@ HTML_TEMPLATE = """
             50% { box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 80px rgba(255, 0, 0, 0.5); }
         }
 
+        /* Tab Navigation - Restored */
+        .tab-navigation {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            background: rgba(10, 10, 20, 0.9);
+            border: 2px solid #9933ff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(153, 51, 255, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(153, 51, 255, 0.2);
+            border: 2px solid #9933ff;
+            border-radius: 5px;
+            color: #9933ff;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tab-btn:hover {
+            background: rgba(153, 51, 255, 0.4);
+            box-shadow: 0 0 15px rgba(153, 51, 255, 0.5);
+        }
+
+        .tab-btn.active {
+            background: #9933ff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(153, 51, 255, 0.8);
+        }
+
         .tab-content {
             display: none;
             grid-column: 1 / -1;
-            grid-row: 2 / -1;
         }
 
         .tab-content.active {
@@ -276,16 +314,16 @@ HTML_TEMPLATE = """
         /* Audio Visualizer Display - KITT Voice Box Style */
         .kitt-voice-box {
             background: #000;
-            border: 3px solid #ff0000;
-            border-radius: 8px;
-            height: 120px;
+            border: 4px solid #ff0000;
+            border-radius: 10px;
+            height: 200px;
             margin-bottom: 30px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.3);
+            gap: 30px;
+            padding: 30px 50px;
+            box-shadow: inset 0 0 40px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -298,12 +336,12 @@ HTML_TEMPLATE = """
             left: -100%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.4), transparent);
-            animation: kitt-scan-voice 2s linear infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.5), transparent);
+            animation: kitt-scan-voice 2.5s linear infinite;
         }
 
         .kitt-voice-box.talking::before {
-            animation: kitt-scan-voice 0.3s linear infinite;
+            animation: kitt-scan-voice 0.4s linear infinite;
         }
 
         @keyframes kitt-scan-voice {
@@ -312,36 +350,25 @@ HTML_TEMPLATE = """
         }
 
         .voice-box-bar {
-            width: 80px;
-            background: linear-gradient(180deg, #ff0000 0%, #cc0000 50%, #660000 100%);
-            border-radius: 4px;
-            transition: height 0.1s ease;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.5);
+            width: 100px;
+            background: linear-gradient(180deg, #ff0000 0%, #cc0000 30%, #990000 60%, #660000 100%);
+            border-radius: 5px;
+            transition: height 0.05s ease-out;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.6);
             position: relative;
             z-index: 1;
-            height: 30px;
+            height: 20px;
+            min-height: 20px;
         }
 
         .voice-box-bar.active {
-            box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 50px rgba(255, 0, 0, 0.8);
-            background: linear-gradient(180deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
+            box-shadow: 0 0 35px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.8);
+            background: linear-gradient(180deg, #ff3333 0%, #ff0000 40%, #cc0000 70%, #990000 100%);
         }
 
-        .voice-box-bar.talking {
-            animation: voice-bar-pulse 0.3s ease-in-out infinite;
-        }
-
-        @keyframes voice-bar-pulse {
-            0%, 100% { height: 30px; }
-            50% { height: 80px; }
-        }
-
-        .voice-box-bar:nth-child(2).talking {
-            animation-delay: 0.1s;
-        }
-
-        .voice-box-bar:nth-child(3).talking {
-            animation-delay: 0.2s;
+        /* Center bar is always tallest */
+        .voice-box-bar:nth-child(2) {
+            min-height: 40px;
         }
 
         /* KITT Scanner Bar - Fixed at Bottom */
@@ -924,6 +951,14 @@ HTML_TEMPLATE = """
 
     <!-- Main Container -->
     <div class="container">
+        <!-- Tab Navigation (Purple Section) -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab(1)">TAB 1 - MAIN</button>
+            <button class="tab-btn" onclick="switchTab(2)">TAB 2 - CHAT</button>
+            <button class="tab-btn" onclick="switchTab(3)">TAB 3 - SETTINGS</button>
+            <button class="tab-btn" onclick="switchTab(4)">TAB 4 - DIAGNOSTICS</button>
+        </div>
+
         <!-- Tab 1 Content (Main Control) -->
         <div class="tab-content active" id="tab-1">
             <!-- Left Panel: System Status -->
@@ -1385,8 +1420,11 @@ HTML_TEMPLATE = """
             logConsole('[VOICE] Speech recognition not supported in this browser', 'error');
         }
         
-        // Voice animation for 3 bars
+        // Voice animation for 3 bars - VERTICAL movement like KITT
         let voiceAnimationInterval;
+        let audioContext;
+        let analyser;
+        
         function startVoiceAnimation() {
             const bars = [
                 document.getElementById('voice-bar-1'),
@@ -1394,14 +1432,26 @@ HTML_TEMPLATE = """
                 document.getElementById('voice-bar-3')
             ];
             
-            bars.forEach(bar => bar.classList.add('talking'));
+            bars.forEach(bar => bar.classList.add('active'));
             
+            // Animate bars vertically with varying heights
             voiceAnimationInterval = setInterval(() => {
                 bars.forEach((bar, index) => {
-                    const randomHeight = 30 + Math.random() * 60;
+                    let baseHeight, variation;
+                    
+                    // Center bar is always tallest
+                    if (index === 1) {
+                        baseHeight = 80;
+                        variation = 80;
+                    } else {
+                        baseHeight = 40;
+                        variation = 60;
+                    }
+                    
+                    const randomHeight = baseHeight + Math.random() * variation;
                     bar.style.height = randomHeight + 'px';
                 });
-            }, 100);
+            }, 50); // Fast update for smooth animation
         }
         
         function stopVoiceAnimation() {
@@ -1411,9 +1461,14 @@ HTML_TEMPLATE = """
                 document.getElementById('voice-bar-3')
             ];
             
-            bars.forEach(bar => {
-                bar.classList.remove('talking');
-                bar.style.height = '30px';
+            bars.forEach((bar, index) => {
+                bar.classList.remove('active');
+                // Reset to base heights
+                if (index === 1) {
+                    bar.style.height = '40px';
+                } else {
+                    bar.style.height = '20px';
+                }
             });
             
             if (voiceAnimationInterval) {
@@ -1421,15 +1476,47 @@ HTML_TEMPLATE = """
             }
         }
         
-        // Text-to-Speech function
+        // Text-to-Speech function with Omega voice
         function speak(text) {
             if ('speechSynthesis' in window) {
                 // Cancel any ongoing speech
                 speechSynthesis.cancel();
                 
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 1.0;
-                utterance.pitch = 1.0;
+                
+                // Configure voice for Omega - deep, authoritative
+                const voices = speechSynthesis.getVoices();
+                
+                // Try to find a good voice (prefer UK English male voices for authority)
+                const preferredVoices = [
+                    'Microsoft David - English (United States)',
+                    'Google UK English Male',
+                    'Microsoft Mark - English (United States)',
+                    'Alex',
+                    'Daniel'
+                ];
+                
+                let selectedVoice = null;
+                for (const prefVoice of preferredVoices) {
+                    selectedVoice = voices.find(v => v.name.includes(prefVoice.split(' - ')[0]));
+                    if (selectedVoice) break;
+                }
+                
+                // Fallback to any male English voice
+                if (!selectedVoice) {
+                    selectedVoice = voices.find(v => 
+                        (v.lang.startsWith('en') && (v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('mark')))
+                    );
+                }
+                
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                    console.log('Using voice:', selectedVoice.name);
+                }
+                
+                // Omega voice settings - deep and authoritative
+                utterance.rate = 0.9; // Slightly slower for authority
+                utterance.pitch = 0.8; // Lower pitch for deep voice
                 utterance.volume = 1.0;
                 
                 utterance.onstart = function() {
@@ -1437,7 +1524,7 @@ HTML_TEMPLATE = """
                     startVoiceAnimation();
                     const voiceBox = document.getElementById('kitt-voice-box');
                     voiceBox.classList.add('talking');
-                    logConsole('[TTS] Speaking...', 'info');
+                    logConsole('[OMEGA] Speaking...', 'info');
                 };
                 
                 utterance.onend = function() {
@@ -1445,20 +1532,29 @@ HTML_TEMPLATE = """
                     stopVoiceAnimation();
                     const voiceBox = document.getElementById('kitt-voice-box');
                     voiceBox.classList.remove('talking');
-                    logConsole('[TTS] Speech complete', 'info');
+                    logConsole('[OMEGA] Speech complete', 'info');
                 };
                 
                 utterance.onerror = function(event) {
                     console.error('Speech synthesis error:', event);
                     isTalking = false;
                     stopVoiceAnimation();
+                    logConsole('[OMEGA] Speech error: ' + event.error, 'error');
                 };
                 
                 speechSynthesis.speak(utterance);
             } else {
                 console.error('Speech synthesis not supported');
-                logConsole('[TTS] Text-to-speech not supported', 'error');
+                logConsole('[OMEGA] Text-to-speech not supported', 'error');
             }
+        }
+        
+        // Load voices when available
+        if ('speechSynthesis' in window) {
+            speechSynthesis.onvoiceschanged = function() {
+                const voices = speechSynthesis.getVoices();
+                console.log('Available voices:', voices.map(v => v.name));
+            };
         }
         
         function updateVoiceStatus(text) {

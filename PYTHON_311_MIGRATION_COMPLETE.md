@@ -66,7 +66,7 @@ All packages have been successfully installed in Python 3.11 virtual environment
 
 ### Enhanced UI (Full-Featured)
 - **File**: `omega_web_ui_enhanced.py`
-- **Status**: ✅ Running on http://localhost:5001
+- **Status**: ✅ Running on <http://localhost:5001>
 - **Features**:
   - Real-time WebSocket communication
   - System monitoring dashboard
@@ -97,8 +97,8 @@ commit f3c073a8 - chore: Commit all pending changes for Python 3.11 migration
 ## Next Steps
 
 ### Immediate Actions
-1. **Test the UI**: Open http://localhost:5001 in your browser
-2. **Verify Features**: 
+1. **Test the UI**: Open <http://localhost:5001> in your browser
+2. **Verify Features**:
    - Test mode switching buttons
    - Check system monitoring updates
    - Try voice control interface
