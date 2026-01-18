@@ -1,0 +1,9 @@
+{
+    "ngrok": {
+        "authtoken": "PASTE_YOUR_NGROK_TOKEN_HERE",
+        "enabled": false,
+        "region": "us"
+    },
+    "tunnel_url": null,
+    "last_updated": null
+}
