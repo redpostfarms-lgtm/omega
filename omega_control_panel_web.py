@@ -439,6 +439,13 @@ class OmegaControlPanelWeb:
         # Setup routes
         self._setup_routes()
         
+        # Register Voice & Screenshot Extension
+        try:
+            from omega_voice_screenshot_extension import register_voice_screenshot_extension
+            register_voice_screenshot_extension(self.app)
+        except ImportError:
+            print("[OMEGA] Voice & Screenshot Extension not available")
+        
         # Setup WebSocket events (if available)
         if self.socketio:
             self._setup_socketio()

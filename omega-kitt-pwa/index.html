@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="OMEGA">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <title>OMEGA</title>
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --led-red: #ff0000;
+            --led-red-dim: #330000;
+            --led-red-glow: rgba(255, 0, 0, 0.8);
+            --panel-dark: #0a0a0a;
+            --panel-mid: #1a1a1a;
+            --bezel-dark: #111;
+            --bezel-light: #2a2a2a;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0d0d0d 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ==========================================
+           KITT VOICE BOX - 3 Bar LED Display
+           Authentic VU Meter Style
+           ========================================== */
+
+        .voicebox-container {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        /* Outer bezel - metallic housing */
+        .voicebox-bezel {
+            background: linear-gradient(180deg, 
+                #3a3a3a 0%, 
+                #2a2a2a 10%, 
+                #1a1a1a 50%, 
+                #0f0f0f 90%, 
+                #1a1a1a 100%
+            );
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 
+                0 4px 20px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -1px 0 rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        /* Inner dark panel */
+        .voicebox-panel {
+            background: #000;
+            border-radius: 6px;
+            padding: 15px 20px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Three VERTICAL LED columns */
+        .led-column {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* Individual LED segment - wider than tall for horizontal bar look */
+        .led {
+            width: 50px;
+            height: 14px;
+            background: var(--led-red-dim);
+            border-radius: 2px;
+            transition: all 0.05s ease;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+        }
+
+        .led.on {
+            background: var(--led-red);
+            box-shadow: 
+                0 0 10px var(--led-red-glow),
+                0 0 20px var(--led-red-glow),
+                inset 0 -2px 3px rgba(255,100,100,0.3);
+        }
+
+        /* Brighter center LEDs when on */
+        .led.on.center {
+            box-shadow: 
+                0 0 15px var(--led-red-glow),
+                0 0 30px var(--led-red-glow),
+                0 0 50px rgba(255,0,0,0.4),
+                inset 0 -2px 3px rgba(255,150,150,0.4);
+        }
+
+        /* ==========================================
+           SCANNER BAR - Thin line style
+           ========================================== */
+
+        .scanner-section {
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .scanner-bezel {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border-radius: 8px;
+            padding: 4px 10px;
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.08),
+                0 2px 10px rgba(0,0,0,0.6);
+            border: 1px solid #333;
+        }
+
+        .scanner-track {
+            background: #000;
+            border-radius: 4px;
+            height: 6px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.9);
+        }
+
+        .scanner-light {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 4px;
+            background: radial-gradient(ellipse at center, 
+                #ff0000 0%, 
+                #ff0000 40%,
+                rgba(255,0,0,0.4) 70%,
+                transparent 100%
+            );
+            border-radius: 2px;
+            filter: blur(1px);
+            animation: scan 2s ease-in-out infinite;
+        }
+
+        .scanner-light::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 4px;
+            background: #ff3333;
+            border-radius: 2px;
+            box-shadow: 0 0 6px #ff0000, 0 0 12px #ff0000;
+        }
+
+        @keyframes scan {
+            0%, 100% { left: 5px; }
+            50% { left: calc(100% - 45px); }
+        }
+
+        /* ==========================================
+           CONTROLS
+           ========================================== */
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mic-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 3px solid #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .mic-btn:hover {
+            border-color: #ff0000;
+        }
+
+        .mic-btn.active {
+            border-color: #ff0000;
+            box-shadow: 
+                0 0 20px rgba(255,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .mic-btn.active .mic-icon {
+            fill: #ff0000;
+        }
+
+        .mic-icon {
+            width: 28px;
+            height: 28px;
+            fill: #888;
+            transition: fill 0.2s;
+        }
+
+        /* Text input area */
+        .input-row {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 280px;
+        }
+
+        .text-input {
+            flex: 1;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 25px;
+            padding: 12px 18px;
+            color: #ccc;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .text-input:focus {
+            border-color: #ff0000;
+        }
+
+        .text-input::placeholder {
+            color: #444;
+        }
+
+        .send-btn {
+            background: #ff0000;
+            border: none;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #ff3333;
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
+        }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #000;
+        }
+
+        /* ==========================================
+           CHAT / RESPONSE AREA
+           ========================================== */
+
+        .response-area {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 400px;
+            min-height: 80px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            border: 1px solid #222;
+        }
+
+        .response-text {
+            color: #ff3333;
+            font-size: 14px;
+            line-height: 1.5;
+            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        .user-text {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        /* ==========================================
+           QR / INSTALL
+           ========================================== */
+
+        .install-btn {
+            margin-top: 25px;
+            background: transparent;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .install-btn:hover {
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        /* QR Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #111;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+            max-width: 300px;
+        }
+
+        .modal-title {
+            color: #ff0000;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #qr-code {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .modal-hint {
+            color: #666;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #ff0000;
+        }
+
+        /* Responsive */
+        @media (max-width: 420px) {
+            .led {
+                width: 10px;
+                height: 15px;
+            }
+            
+            .voicebox-bezel {
+                padding: 10px;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scanner Bar - Thin line at top -->
+    <div class="scanner-section">
+        <div class="scanner-bezel">
+            <div class="scanner-track">
+                <div class="scanner-light"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KITT Voice Box - 3 Vertical LED Columns -->
+    <div class="voicebox-container">
+        <div class="voicebox-bezel">
+            <div class="voicebox-panel" id="voicebox">
+                <!-- Column 1 (left): 10 LEDs vertical -->
+                <div class="led-column" id="col1"></div>
+                <!-- Column 2 (center): 10 LEDs vertical -->
+                <div class="led-column" id="col2"></div>
+                <!-- Column 3 (right): 10 LEDs vertical -->
+                <div class="led-column" id="col3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="mic-btn" id="micBtn" aria-label="Voice Input">
+            <svg class="mic-icon" viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+        </button>
+        <div class="input-row">
+            <input type="text" class="text-input" id="textInput" placeholder="Type a message...">
+            <button class="send-btn" id="sendBtn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Response Area -->
+    <div class="response-area" id="responseArea">
+        <div class="response-text">Ready.</div>
+    </div>
+
+    <!-- Install Button -->
+    <button class="install-btn" id="installBtn">Install on Device</button>
+
+    <!-- QR Modal -->
+    <div class="modal" id="qrModal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-box">
+            <div class="modal-title">Install</div>
+            <div id="qr-code"></div>
+            <p class="modal-hint">Scan with camera → Open link → Add to Home Screen</p>
+        </div>
+    </div>
+
+    <!-- QR Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // ============================================
+        // OMEGA - KITT Voice Box PWA
+        // ============================================
+
+        const App = {
+            // Config - 3 vertical columns, 10 LEDs each
+            ledsPerColumn: 10,
+            columns: 3,
+            
+            // State
+            leds: [],
+            audioContext: null,
+            analyser: null,
+            isListening: false,
+            recognition: null,
+            synthesis: window.speechSynthesis,
+            installPrompt: null,
+
+            // Elements
+            el: {},
+
+            init() {
+                this.cacheElements();
+                this.buildVoicebox();
+                this.initAudio();
+                this.initSpeech();
+                this.initEvents();
+                this.initPWA();
+            },
+
+            cacheElements() {
+                this.el = {
+                    columns: [
+                        document.getElementById('col1'),
+                        document.getElementById('col2'),
+                        document.getElementById('col3')
+                    ],
+                    micBtn: document.getElementById('micBtn'),
+                    textInput: document.getElementById('textInput'),
+                    sendBtn: document.getElementById('sendBtn'),
+                    responseArea: document.getElementById('responseArea'),
+                    installBtn: document.getElementById('installBtn'),
+                    qrModal: document.getElementById('qrModal'),
+                    modalClose: document.getElementById('modalClose'),
+                    qrCode: document.getElementById('qr-code')
+                };
+            },
+
+            // Build the 3-column vertical LED voicebox
+            buildVoicebox() {
+                this.leds = [];
+                
+                for (let c = 0; c < this.columns; c++) {
+                    const colLeds = [];
+                    const col = this.el.columns[c];
+                    col.innerHTML = '';
+                    
+                    for (let i = 0; i < this.ledsPerColumn; i++) {
+                        const led = document.createElement('div');
+                        led.className = 'led';
+                        
+                        // Mark center LEDs (middle of column)
+                        const center = this.ledsPerColumn / 2;
+                        if (i >= center - 2 && i <= center + 1) {
+                            led.classList.add('center');
+                        }
+                        
+                        col.appendChild(led);
+                        colLeds.push(led);
+                    }
+                    this.leds.push(colLeds);
+                }
+            },
+
+            // Initialize Web Audio for VU meter
+            initAudio() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.analyser.fftSize = 256;
+                } catch (e) {
+                    console.warn('Web Audio not supported');
+                }
+            },
+
+            // Animate LEDs based on audio level (0-1) - vertical center-out
+            animateLeds(level) {
+                const count = Math.floor(level * this.ledsPerColumn);
+                const center = Math.floor(this.ledsPerColumn / 2);
+                
+                // Light from center outward vertically in each column
+                for (let c = 0; c < this.columns; c++) {
+                    // Slight variation per column for visual interest
+                    const colLevel = Math.max(0, count - Math.abs(c - 1) + Math.floor(Math.random() * 2));
+                    const halfCount = Math.floor(colLevel / 2);
+                    
+                    for (let i = 0; i < this.ledsPerColumn; i++) {
+                        const distFromCenter = Math.abs(i - center + 0.5);
+                        if (distFromCenter <= halfCount) {
+                            this.leds[c][i].classList.add('on');
+                        } else {
+                            this.leds[c][i].classList.remove('on');
+                        }
+                    }
+                }
+            },
+
+            // Simulate voice animation when speaking
+            simulateVoice(text) {
+                const words = text.split(' ').length;
+                const duration = Math.max(1500, words * 200);
+                const startTime = Date.now();
+                
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    if (elapsed > duration) {
+                        this.animateLeds(0);
+                        return;
+                    }
+                    
+                    // Simulate voice pattern - varies with "speech"
+                    const base = Math.sin(elapsed * 0.02) * 0.3 + 0.4;
+                    const noise = Math.random() * 0.3;
+                    const level = Math.min(1, base + noise);
+                    
+                    this.animateLeds(level);
+                    requestAnimationFrame(animate);
+                };
+                
+                animate();
+            },
+
+            // Initialize Speech Recognition
+            initSpeech() {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                
+                if (SpeechRecognition) {
+                    this.recognition = new SpeechRecognition();
+                    this.recognition.continuous = false;
+                    this.recognition.interimResults = false;
+                    this.recognition.lang = 'en-US';
+                    
+                    this.recognition.onresult = (e) => {
+                        const text = e.results[0][0].transcript;
+                        this.processInput(text);
+                    };
+                    
+                    this.recognition.onend = () => {
+                        this.isListening = false;
+                        this.el.micBtn.classList.remove('active');
+                    };
+                    
+                    this.recognition.onerror = () => {
+                        this.isListening = false;
+                        this.el.micBtn.classList.remove('active');
+                    };
+                }
+            },
+
+            // Toggle voice listening
+            toggleListen() {
+                if (!this.recognition) {
+                    this.showResponse('Voice not supported in this browser.');
+                    return;
+                }
+                
+                if (this.isListening) {
+                    this.recognition.stop();
+                } else {
+                    // Resume audio context if suspended
+                    if (this.audioContext?.state === 'suspended') {
+                        this.audioContext.resume();
+                    }
+                    this.recognition.start();
+                    this.isListening = true;
+                    this.el.micBtn.classList.add('active');
+                }
+            },
+
+            // Process user input
+            processInput(text) {
+                // Show user input
+                this.el.responseArea.innerHTML = `
+                    <div class="user-text">> ${text}</div>
+                    <div class="response-text">Processing...</div>
+                `;
+                
+                // Generate response (replace with real AI backend)
+                setTimeout(() => {
+                    const response = this.generateResponse(text);
+                    this.showResponse(response);
+                    this.speak(response);
+                }, 300);
+            },
+
+            // Simple response generator (placeholder)
+            generateResponse(input) {
+                const lower = input.toLowerCase();
+                
+                if (lower.includes('hello') || lower.includes('hi')) {
+                    return 'Hello. How may I assist you?';
+                }
+                if (lower.includes('name')) {
+                    return 'I am OMEGA. I am at your service.';
+                }
+                if (lower.includes('status') || lower.includes('how are you')) {
+                    return 'All systems are functioning normally.';
+                }
+                if (lower.includes('time')) {
+                    return `The current time is ${new Date().toLocaleTimeString()}.`;
+                }
+                if (lower.includes('thank')) {
+                    return 'You are welcome.';
+                }
+                
+                return `Understood: "${input}". Standing by for further instructions.`;
+            },
+
+            // Show response in UI
+            showResponse(text) {
+                const existing = this.el.responseArea.querySelector('.user-text');
+                const userHtml = existing ? existing.outerHTML : '';
+                
+                this.el.responseArea.innerHTML = `
+                    ${userHtml}
+                    <div class="response-text">${text}</div>
+                `;
+            },
+
+            // Text-to-speech with LED animation
+            speak(text) {
+                if (!this.synthesis) return;
+                
+                this.synthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Find a suitable voice
+                const voices = this.synthesis.getVoices();
+                const voice = voices.find(v => 
+                    v.name.includes('Daniel') || 
+                    v.name.includes('Google UK English Male') ||
+                    v.name.includes('Microsoft David')
+                ) || voices.find(v => v.lang.startsWith('en'));
+                
+                if (voice) utterance.voice = voice;
+                utterance.rate = 0.95;
+                utterance.pitch = 0.85;
+                
+                utterance.onstart = () => this.simulateVoice(text);
+                
+                this.synthesis.speak(utterance);
+            },
+
+            // Event listeners
+            initEvents() {
+                this.el.micBtn.addEventListener('click', () => this.toggleListen());
+                
+                this.el.sendBtn.addEventListener('click', () => {
+                    const text = this.el.textInput.value.trim();
+                    if (text) {
+                        this.processInput(text);
+                        this.el.textInput.value = '';
+                    }
+                });
+                
+                this.el.textInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.el.sendBtn.click();
+                    }
+                });
+                
+                this.el.installBtn.addEventListener('click', () => this.showQR());
+                this.el.modalClose.addEventListener('click', () => this.hideQR());
+                this.el.qrModal.addEventListener('click', (e) => {
+                    if (e.target === this.el.qrModal) this.hideQR();
+                });
+            },
+
+            // PWA install
+            initPWA() {
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    this.installPrompt = e;
+                });
+                
+                // Auto-prompt if ?install=true
+                if (location.search.includes('install=true')) {
+                    setTimeout(() => {
+                        if (this.installPrompt) {
+                            this.installPrompt.prompt();
+                        }
+                    }, 1000);
+                }
+            },
+
+            showQR() {
+                this.el.qrModal.classList.add('active');
+                
+                if (!this.el.qrCode.hasChildNodes()) {
+                    const url = location.origin + location.pathname + '?install=true';
+                    new QRCode(this.el.qrCode, {
+                        text: url,
+                        width: 180,
+                        height: 180,
+                        colorDark: '#000',
+                        colorLight: '#fff'
+                    });
+                }
+            },
+
+            hideQR() {
+                this.el.qrModal.classList.remove('active');
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => App.init());
+
+        // Load voices
+        if (window.speechSynthesis) {
+            speechSynthesis.onvoiceschanged = () => {};
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>
