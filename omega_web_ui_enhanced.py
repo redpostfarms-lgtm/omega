@@ -181,26 +181,53 @@ HTML_TEMPLATE = """
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
-        /* Audio Visualizer Display - Compact 3-Bar Version */
+        /* Audio Visualizer Display - KITT Voice Box Style */
         .audio-display {
             background: #000;
-            border: 3px solid #00ff00;
+            border: 3px solid #ff0000;
             border-radius: 5px;
-            height: 80px;
+            height: 100px;
             margin-bottom: 20px;
             display: flex;
-            align-items: flex-end;
-            justify-content: space-evenly;
-            padding: 10px 40px;
-            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.3);
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 30px;
+            box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* KITT-style scanning effect overlay */
+        .audio-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.3), transparent);
+            animation: kitt-scan 2s linear infinite;
+        }
+
+        @keyframes kitt-scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .audio-bar {
-            width: 60px;
-            background: linear-gradient(180deg, #00ff00 0%, #00ff88 50%, #00ffff 100%);
-            border-radius: 4px;
-            transition: height 0.15s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+            width: 12px;
+            background: linear-gradient(180deg, #ff0000 0%, #cc0000 50%, #990000 100%);
+            border-radius: 2px;
+            transition: height 0.08s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .audio-bar.active {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 50px rgba(255, 0, 0, 0.8);
+            background: linear-gradient(180deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
         }
 
         /* Control Buttons - Sci-Fi Style */
@@ -615,15 +642,17 @@ HTML_TEMPLATE = """
             transform: scale(1.05);
         }
 
-        /* Voice Control */
+        /* Voice Control - Relocated to side */
         .voice-control {
-            margin-top: 20px;
-            text-align: center;
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            z-index: 1000;
         }
 
         .voice-btn {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: radial-gradient(circle, #ff0000 0%, #cc0000 100%);
             border: 4px solid #ffd700;
@@ -632,7 +661,6 @@ HTML_TEMPLATE = """
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
             font-size: 2em;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
@@ -645,11 +673,43 @@ HTML_TEMPLATE = """
         .voice-btn.active {
             animation: voice-pulse 1s ease-in-out infinite;
             background: radial-gradient(circle, #00ff00 0%, #00cc00 100%);
+            border-color: #00ff00;
+        }
+
+        .voice-btn.listening {
+            animation: voice-listening 0.5s ease-in-out infinite;
+            background: radial-gradient(circle, #00ff00 0%, #00aa00 100%);
+            border-color: #00ff00;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 1);
         }
 
         @keyframes voice-pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes voice-listening {
+            0%, 100% { box-shadow: 0 0 40px rgba(0, 255, 0, 1); }
+            50% { box-shadow: 0 0 60px rgba(0, 255, 0, 1), 0 0 80px rgba(0, 255, 0, 0.5); }
+        }
+
+        .voice-status-indicator {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            color: #00ffff;
+            white-space: nowrap;
+            display: none;
+        }
+
+        .voice-control:hover .voice-status-indicator {
+            display: block;
         }
 
         /* Responsive Design */
@@ -758,17 +818,6 @@ HTML_TEMPLATE = """
                     </button>
                 </div>
 
-                <!-- Voice Control -->
-                <div class="voice-control">
-                    <div class="panel-title" style="font-size: 1em; margin-bottom: 10px;">Voice Control</div>
-                    <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
-                        🎤
-                    </button>
-                    <div id="voice-status" style="margin-top: 10px; color: #00ffff;">Ready</div>
-                </div>
-            </div>
-
-            <!-- Right Panel: Console & RGB Controls -->
             <div class="panel">
                 <div class="panel-title">📟 System Console</div>
                 
@@ -860,6 +909,14 @@ HTML_TEMPLATE = """
         </div>
     </div>
 
+    <!-- Voice Control (Relocated to bottom right) -->
+    <div class="voice-control">
+        <div class="voice-status-indicator" id="voice-status-indicator">Ready</div>
+        <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
+            🎤
+        </button>
+    </div>
+
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
         // Initialize Socket.IO
@@ -869,27 +926,56 @@ HTML_TEMPLATE = """
         let currentMode = null;
         let voiceActive = false;
 
-        // Initialize audio visualizer bars (only 3 bars now)
+        // Initialize audio visualizer bars - KITT style
         const audioDisplay = document.getElementById('audio-display');
-        const numBars = 3;
+        const numBars = 10;
+        const bars = [];
+        
         for (let i = 0; i < numBars; i++) {
             const bar = document.createElement('div');
             bar.className = 'audio-bar';
-            bar.style.height = '20px';
+            bar.style.height = '30px';
             audioDisplay.appendChild(bar);
+            bars.push(bar);
         }
 
-        // Animate audio visualizer
+        // KITT-style scanner animation
+        let scanPosition = 0;
+        let scanDirection = 1;
+        
         function animateAudioBars() {
-            const bars = document.querySelectorAll('.audio-bar');
             bars.forEach((bar, index) => {
-                const randomHeight = Math.random() * 60 + 10;
-                bar.style.height = randomHeight + 'px';
+                // Distance from scan position
+                const distance = Math.abs(index - scanPosition);
+                
+                // Height based on distance (center is tallest)
+                let height;
+                if (distance === 0) {
+                    height = 70 + Math.random() * 20;
+                    bar.classList.add('active');
+                } else if (distance === 1) {
+                    height = 50 + Math.random() * 15;
+                    bar.classList.remove('active');
+                } else if (distance === 2) {
+                    height = 30 + Math.random() * 10;
+                    bar.classList.remove('active');
+                } else {
+                    height = 10 + Math.random() * 10;
+                    bar.classList.remove('active');
+                }
+                
+                bar.style.height = height + 'px';
             });
+            
+            // Move scan position
+            scanPosition += scanDirection;
+            if (scanPosition >= numBars - 1 || scanPosition <= 0) {
+                scanDirection *= -1;
+            }
         }
 
-        // Start animation
-        setInterval(animateAudioBars, 150);
+        // Start KITT animation
+        setInterval(animateAudioBars, 80);
 
         // Tab switching function
         function switchTab(tabNumber) {
@@ -992,25 +1078,105 @@ HTML_TEMPLATE = """
             socket.emit('side_control', { control: control });
         }
 
-        // Toggle voice control
+        // Voice recognition setup
+        let recognition = null;
+        let isListening = false;
+        
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+            
+            recognition.onstart = function() {
+                console.log('Voice recognition started');
+                isListening = true;
+                const voiceBtn = document.getElementById('voice-btn');
+                const statusIndicator = document.getElementById('voice-status-indicator');
+                voiceBtn.classList.add('listening');
+                statusIndicator.textContent = 'Listening...';
+                statusIndicator.style.borderColor = '#00ff00';
+                statusIndicator.style.color = '#00ff00';
+                logConsole('[VOICE] Listening...', 'info');
+            };
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                console.log('Recognized:', transcript);
+                logConsole(`[VOICE] Recognized: "${transcript}"`, 'info');
+                
+                // Send to server
+                socket.emit('voice_command', { command: transcript });
+                
+                // Process voice commands
+                processVoiceCommand(transcript.toLowerCase());
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('Voice recognition error:', event.error);
+                logConsole(`[VOICE] Error: ${event.error}`, 'error');
+                isListening = false;
+                const voiceBtn = document.getElementById('voice-btn');
+                voiceBtn.classList.remove('listening');
+                updateVoiceStatus('Ready');
+            };
+            
+            recognition.onend = function() {
+                console.log('Voice recognition ended');
+                isListening = false;
+                const voiceBtn = document.getElementById('voice-btn');
+                voiceBtn.classList.remove('listening');
+                updateVoiceStatus('Ready');
+            };
+        }
+        
+        function updateVoiceStatus(text) {
+            const statusIndicator = document.getElementById('voice-status-indicator');
+            statusIndicator.textContent = text;
+            if (text === 'Ready') {
+                statusIndicator.style.borderColor = '#00ffff';
+                statusIndicator.style.color = '#00ffff';
+            }
+        }
+        
         function toggleVoice() {
-            const voiceBtn = document.getElementById('voice-btn');
-            const voiceStatus = document.getElementById('voice-status');
+            if (!recognition) {
+                logConsole('[VOICE] Speech recognition not supported in this browser', 'error');
+                alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
+                return;
+            }
             
-            voiceActive = !voiceActive;
-            
-            if (voiceActive) {
-                voiceBtn.classList.add('active');
-                voiceStatus.textContent = 'Listening...';
-                voiceStatus.style.color = '#00ff00';
-                logConsole('[VOICE] Voice recognition activated', 'info');
-                socket.emit('voice_control', { active: true });
+            if (isListening) {
+                recognition.stop();
             } else {
-                voiceBtn.classList.remove('active');
-                voiceStatus.textContent = 'Ready';
-                voiceStatus.style.color = '#00ffff';
-                logConsole('[VOICE] Voice recognition deactivated', 'info');
-                socket.emit('voice_control', { active: false });
+                try {
+                    recognition.start();
+                } catch (e) {
+                    console.error('Error starting recognition:', e);
+                    logConsole('[VOICE] Error starting recognition', 'error');
+                }
+            }
+        }
+        
+        function processVoiceCommand(command) {
+            // Process voice commands
+            if (command.includes('auto cruise') || command.includes('auto mode')) {
+                handleMode('auto-cruise');
+            } else if (command.includes('normal cruise') || command.includes('normal mode')) {
+                handleMode('normal-cruise');
+            } else if (command.includes('pursuit') || command.includes('pursuit mode')) {
+                handleMode('pursuit');
+            } else if (command.includes('tab') || command.includes('switch')) {
+                // Extract tab number
+                for (let i = 1; i <= 4; i++) {
+                    if (command.includes(i.toString()) || command.includes(['one', 'two', 'three', 'four'][i-1])) {
+                        switchTab(i);
+                        break;
+                    }
+                }
+            } else {
+                logConsole(`[VOICE] Command not recognized: "${command}"`, 'warning');
             }
         }
 
@@ -1159,6 +1325,17 @@ def handle_chat_message(data):
     
     emit('console_update', {
         'message': f'[CHAT] User: {message}',
+        'type': 'info'
+    }, broadcast=True)
+
+@socketio.on('voice_command')
+def handle_voice_command(data):
+    """Handle voice command from user"""
+    command = data.get('command', '')
+    logger.info(f"Voice command received: {command}")
+    
+    emit('console_update', {
+        'message': f'[VOICE] Command: {command}',
         'type': 'info'
     }, broadcast=True)
 
