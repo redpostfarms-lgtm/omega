@@ -1,0 +1,16 @@
+{
+  "agent": "GATE",
+  "timestamp": "2026-01-18T03:39:48.961157",
+  "capabilities": {
+    "coding": 78.25,
+    "security": 93.1111111111111,
+    "web_scraping": 83.33333333333334,
+    "api": 100.0,
+    "system": 80.0
+  },
+  "dependencies": {
+    "critical": 80.0,
+    "optional": 71.42857142857143
+  },
+  "overall": 86.9388888888889
+}
