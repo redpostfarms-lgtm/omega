@@ -96,7 +96,7 @@ Auto-repair cleared everything else
 ```
 
 ### Services Running
-- ✅ Omega PWA on http://localhost:5001
+- ✅ Omega PWA on <http://localhost:5001>
 - ✅ Auto-repair monitoring (stopped for now, can restart anytime)
 
 ### Generated Assets
@@ -248,6 +248,6 @@ curl http://localhost:5001/api/mesh/status
 
 ---
 
-**Open the web interface now**: http://localhost:5001
+**Open the web interface now**: <http://localhost:5001>
 
 **Click "⚡ SEED MESH"** to initialize your fleet!
