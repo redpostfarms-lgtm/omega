@@ -21,7 +21,7 @@
 ## 🚀 How to Use
 
 ### Step 1: Open the Web Interface
-Browser already open at: **http://localhost:5001**
+Browser already open at: **<http://localhost:5001>**
 
 Look for the **🐝 OMEGA FLEET MESH** panel on the right side
 
@@ -146,7 +146,7 @@ GET  /api/kitt/status              # Get KITT shield status
 - ✅ KITT Agent installed ([kitt_agent.py](kitt_agent.py))
 - ✅ Mesh Network deployed ([omega_mesh_network.py](omega_mesh_network.py))
 - ✅ PWA with fleet control ([omega_pwa_kitt_ui.py](omega_pwa_kitt_ui.py))
-- ✅ Server running on http://localhost:5001
+- ✅ Server running on <http://localhost:5001>
 - ✅ Browser open and ready
 - ✅ Complete documentation ([KITT_MESH_NETWORK_GUIDE.md](KITT_MESH_NETWORK_GUIDE.md))
 

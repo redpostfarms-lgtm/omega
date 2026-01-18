@@ -1,54 +1,291 @@
-// Omega Control Panel - Service Worker
-// Enables offline functionality, background sync, and idle CPU optimization
+// OMEGA KITT - Service Worker
+// Knight Industries Two Thousand - Enhanced PWA with Fleet Mesh support
+// Provides: Offline functionality, auto-repair, background worker coordination
 
-const CACHE_NAME = 'omega-kitt-v1';
-const urlsToCache = [
+const CACHE_NAME = 'omega-kitt-fleet-v1';
+const ASSETS_TO_CACHE = [
     '/',
+    '/manifest.json',
     '/static/manifest.json',
     '/static/icons/icon-192x192.png',
-    '/static/icons/icon-512x512.png'
+    '/static/icons/icon-512x512.png',
+    '/static/audio/kitt_voice.wav'
 ];
 
-// Install service worker and cache resources
+// Install event - cache core assets
 self.addEventListener('install', (event) => {
-    console.log('[Service Worker] Installing...');
+    console.log('[OMEGA SW] ⚡ Installing KITT Service Worker...');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                console.log('[Service Worker] Caching app shell');
-                return cache.addAll(urlsToCache);
+                console.log('[OMEGA SW] 💾 Caching essential assets');
+                return cache.addAll(ASSETS_TO_CACHE).catch((err) => {
+                    console.warn('[OMEGA SW] ⚠️ Some assets failed to cache:', err);
+                });
+            })
+            .then(() => {
+                console.log('[OMEGA SW] ✅ Installation complete');
+                return self.skipWaiting();
             })
     );
 });
 
-// Activate service worker and clean old caches
+// Activate event - clean old caches and take control
 self.addEventListener('activate', (event) => {
-    console.log('[Service Worker] Activating...');
+    console.log('[OMEGA SW] 🔴 Activating KITT Service Worker...');
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('[Service Worker] Deleting old cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
+        caches.keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames
+                        .filter((name) => name !== CACHE_NAME && name.startsWith('omega'))
+                        .map((name) => {
+                            console.log('[OMEGA SW] 🗑️ Deleting old cache:', name);
+                            return caches.delete(name);
+                        })
+                );
+            })
+            .then(() => {
+                console.log('[OMEGA SW] ✅ Activation complete - Taking control');
+                return self.clients.claim();
+            })
     );
 });
 
-// Fetch event - offline-first strategy
+// Fetch event - offline-first strategy with network fallback
 self.addEventListener('fetch', (event) => {
+    // Skip non-GET requests
+    if (event.request.method !== 'GET') return;
+    
+    // Skip API calls (always use network)
+    if (event.request.url.includes('/api/')) {
+        event.respondWith(fetch(event.request));
+        return;
+    }
+
     event.respondWith(
         caches.match(event.request)
-            .then((response) => {
-                // Cache hit - return cached response
-                if (response) {
-                    return response;
+            .then((cachedResponse) => {
+                if (cachedResponse) {
+                    // Return cached version, update in background
+                    fetchAndCache(event.request);
+                    return cachedResponse;
                 }
 
-                // Clone request for fetch and cache
+                // Not in cache - fetch from network
+                return fetch(event.request)
+                    .then((networkResponse) => {
+                        // Cache valid responses
+                        if (networkResponse && networkResponse.status === 200) {
+                            const responseToCache = networkResponse.clone();
+                            caches.open(CACHE_NAME)
+                                .then((cache) => {
+                                    cache.put(event.request, responseToCache);
+                                });
+                        }
+                        return networkResponse;
+                    })
+                    .catch(() => {
+                        // Network failed - return offline page for navigation
+                        if (event.request.mode === 'navigate') {
+                            return caches.match('/');
+                        }
+                    });
+            })
+    );
+});
+
+// Background fetch and cache update
+function fetchAndCache(request) {
+    fetch(request)
+        .then((response) => {
+            if (response && response.status === 200) {
+                caches.open(CACHE_NAME)
+                    .then((cache) => cache.put(request, response));
+            }
+        })
+        .catch(() => {
+            // Silent fail for background updates
+        });
+}
+
+// Push notifications - Fleet status updates
+self.addEventListener('push', (event) => {
+    console.log('[OMEGA SW] 🔔 Push notification received');
+    
+    if (!event.data) return;
+
+    const data = event.data.json();
+    const options = {
+        body: data.body || 'OMEGA has a message',
+        icon: '/static/icons/icon-192x192.png',
+        badge: '/static/icons/icon-72x72.png',
+        vibrate: [200, 100, 200, 100, 200],
+        data: {
+            url: data.url || '/',
+            timestamp: Date.now()
+        },
+        actions: [
+            {
+                action: 'open',
+                title: 'Open OMEGA',
+                icon: '/static/icons/icon-96x96.png'
+            },
+            {
+                action: 'dismiss',
+                title: 'Dismiss',
+                icon: '/static/icons/icon-96x96.png'
+            }
+        ],
+        requireInteraction: data.important || false,
+        tag: data.tag || 'omega-notification',
+        renotify: true
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(
+            data.title || '🔴 OMEGA KITT',
+            options
+        )
+    );
+});
+
+// Notification clicks
+self.addEventListener('notificationclick', (event) => {
+    console.log('[OMEGA SW] 👆 Notification clicked');
+    event.notification.close();
+
+    if (event.action === 'dismiss') {
+        return;
+    }
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window', includeUncontrolled: true })
+            .then((clientList) => {
+                // Focus existing window
+                for (const client of clientList) {
+                    if (client.url.includes(event.notification.data.url) && 'focus' in client) {
+                        return client.focus();
+                    }
+                }
+                // Open new window
+                if (clients.openWindow) {
+                    return clients.openWindow(event.notification.data.url);
+                }
+            })
+    );
+});
+
+// Background sync - Sync fleet status and auto-repair
+self.addEventListener('sync', (event) => {
+    console.log('[OMEGA SW] 🔄 Background sync triggered:', event.tag);
+    
+    if (event.tag === 'fleet-status-sync') {
+        event.waitUntil(syncFleetStatus());
+    } else if (event.tag === 'auto-repair-sync') {
+        event.waitUntil(runAutoRepair());
+    } else if (event.tag === 'source-control-sync') {
+        event.waitUntil(syncSourceControl());
+    }
+});
+
+// Sync fleet mesh status
+async function syncFleetStatus() {
+    console.log('[OMEGA SW] 🐝 Syncing fleet mesh status...');
+    try {
+        const response = await fetch('/api/mesh/status');
+        if (response.ok) {
+            const data = await response.json();
+            console.log('[OMEGA SW] ✅ Fleet status synced:', data);
+            
+            // Notify if workers changed
+            if (data.fleet && data.fleet.active_workers > 0) {
+                self.registration.showNotification('🐝 Fleet Mesh Active', {
+                    body: `${data.fleet.active_workers} workers contributing compute power`,
+                    icon: '/static/icons/icon-192x192.png',
+                    tag: 'fleet-status'
+                });
+            }
+        }
+    } catch (error) {
+        console.error('[OMEGA SW] ❌ Fleet sync failed:', error);
+    }
+}
+
+// Run auto-repair checks
+async function runAutoRepair() {
+    console.log('[OMEGA SW] 🔧 Running auto-repair checks...');
+    try {
+        // Check source control status
+        const scResponse = await fetch('/api/source-control/status');
+        if (scResponse.ok) {
+            const scData = await scResponse.json();
+            if (scData.uncommitted_changes > 0) {
+                console.log('[OMEGA SW] 📝 Auto-committing changes...');
+                await fetch('/api/source-control/auto-commit', { method: 'POST' });
+            }
+        }
+        
+        console.log('[OMEGA SW] ✅ Auto-repair complete');
+    } catch (error) {
+        console.error('[OMEGA SW] ❌ Auto-repair failed:', error);
+    }
+}
+
+// Sync source control (auto-commit)
+async function syncSourceControl() {
+    console.log('[OMEGA SW] 📝 Syncing source control...');
+    try {
+        const response = await fetch('/api/source-control/auto-commit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('[OMEGA SW] ✅ Source control synced:', data);
+        }
+    } catch (error) {
+        console.error('[OMEGA SW] ❌ Source control sync failed:', error);
+    }
+}
+
+// Periodic background sync (every 30 seconds when idle)
+self.addEventListener('periodicsync', (event) => {
+    console.log('[OMEGA SW] ⏰ Periodic sync:', event.tag);
+    
+    if (event.tag === 'fleet-monitor') {
+        event.waitUntil(syncFleetStatus());
+    } else if (event.tag === 'auto-repair') {
+        event.waitUntil(runAutoRepair());
+    }
+});
+
+// Message handling from main app
+self.addEventListener('message', (event) => {
+    console.log('[OMEGA SW] 💬 Message received:', event.data);
+    
+    if (event.data && event.data.type) {
+        switch (event.data.type) {
+            case 'SKIP_WAITING':
+                self.skipWaiting();
+                break;
+            case 'FLEET_UPDATE':
+                syncFleetStatus();
+                break;
+            case 'AUTO_REPAIR':
+                runAutoRepair();
+                break;
+            case 'CLEAR_CACHE':
+                caches.delete(CACHE_NAME);
+                break;
+        }
+    }
+});
+
+// Log service worker lifecycle
+console.log('[OMEGA SW] 🔴 KITT Service Worker loaded and ready');
+console.log('[OMEGA SW] Features: Offline, Auto-Repair, Fleet Mesh, Background Sync');                // Clone request for fetch and cache
                 const fetchRequest = event.request.clone();
 
                 return fetch(fetchRequest).then((response) => {

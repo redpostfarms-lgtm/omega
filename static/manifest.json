@@ -1,12 +1,13 @@
 {
-    "name": "Omega Control Panel - KITT Interface",
-    "short_name": "Omega KITT",
-    "description": "The Gatekeeper's Omega AI - Knight Rider inspired interface with full voice control and system integration",
-    "start_url": "/",
+    "name": "OMEGA - Knight Industries Two Thousand AI",
+    "short_name": "OMEGA KITT",
+    "description": "Omniscient Modular Enhanced Guardian AI - KITT agent intermediary with Omega fleet mesh network. Full voice control, distributed computing, and authentic Knight Rider interface.",
+    "start_url": "/?source=pwa",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#ff0000",
     "orientation": "any",
+    "scope": "/",
     "icons": [
         {
             "src": "/static/icons/icon-72x72.png",
@@ -64,48 +65,60 @@
         "storage",
         "notifications",
         "background-sync",
-        "wake-lock"
+        "wake-lock",
+        "persistent-storage"
     ],
     "categories": [
         "productivity",
         "utilities",
-        "ai"
-    ],
-    "screenshots": [
-        {
-            "src": "/static/screenshots/desktop.png",
-            "sizes": "1920x1080",
-            "type": "image/png",
-            "form_factor": "wide"
-        },
-        {
-            "src": "/static/screenshots/mobile.png",
-            "sizes": "750x1334",
-            "type": "image/png",
-            "form_factor": "narrow"
-        }
+        "ai",
+        "voice-assistant"
     ],
     "shortcuts": [
         {
-            "name": "Voice Command",
+            "name": "Test KITT Voice",
             "short_name": "Voice",
-            "description": "Activate voice control",
-            "url": "/?voice=on",
+            "description": "Hear authentic KITT voice",
+            "url": "/?action=test-voice",
             "icons": [
                 {
-                    "src": "/static/icons/voice-icon.png",
+                    "src": "/static/icons/icon-96x96.png",
                     "sizes": "96x96"
                 }
             ]
         },
         {
-            "name": "Agent Council",
-            "short_name": "Council",
-            "description": "Summon agent council",
-            "url": "/?council=open",
+            "name": "Fleet Mesh Status",
+            "short_name": "Fleet",
+            "description": "View worker bee status",
+            "url": "/?action=fleet-status",
             "icons": [
                 {
-                    "src": "/static/icons/council-icon.png",
+                    "src": "/static/icons/icon-96x96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Seed Mesh Network",
+            "short_name": "Seed",
+            "description": "Initialize fleet workers",
+            "url": "/?action=seed-mesh",
+            "icons": [
+                {
+                    "src": "/static/icons/icon-96x96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "KITT Shield Status",
+            "short_name": "Shield",
+            "description": "Check KITT protection",
+            "url": "/?action=kitt-status",
+            "icons": [
+                {
+                    "src": "/static/icons/icon-96x96.png",
                     "sizes": "96x96"
                 }
             ]
@@ -116,5 +129,7 @@
             "protocol": "web+omega",
             "url": "/handler?command=%s"
         }
-    ]
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false
 }
