@@ -283,7 +283,7 @@ def generate_install_qr():
     # Generate QR code with HIGH error correction
     qr = qrcode.QRCode(
         version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        error_correction=qrcode.ERROR_CORRECT_H,
         box_size=10,
         border=4,
     )
@@ -296,7 +296,7 @@ def generate_install_qr():
     
     # Convert to base64
     buffer = io.BytesIO()
-    img.save(buffer, format='PNG')
+    img.save(buffer, 'PNG')
     buffer.seek(0)
     img_str = base64.b64encode(buffer.getvalue()).decode()
     

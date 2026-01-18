@@ -69,7 +69,7 @@ def generate_qr():
         
         # Convert to base64
         buffer = io.BytesIO()
-        img.save(buffer, format='PNG')
+        img.save(buffer, 'PNG')
         buffer.seek(0)
         img_str = base64.b64encode(buffer.getvalue()).decode()
         

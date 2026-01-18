@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>OMEGA Drone</title>
     <link rel="manifest" href="manifest-drone.json">
-    
+
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        :root {
-            --led-red: #ff0000;
-            --drone-color: #ff0000; /* Changes based on drone ID */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        html, body {
+        :root {
+            --led-red: #ff0000;
+            --drone-color: #ff0000;
+            /* Changes based on drone ID */
+        }
+
+        html,
+        body {
             height: 100%;
             overflow: hidden;
             touch-action: manipulation;
@@ -98,7 +108,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .status-ring.connected {
@@ -123,9 +135,17 @@
             margin-bottom: 10px;
         }
 
-        .status-text.connected { color: var(--drone-color); }
-        .status-text.sipping { color: #3a6a3a; }
-        .status-text.working { color: #ffaa00; }
+        .status-text.connected {
+            color: var(--drone-color);
+        }
+
+        .status-text.sipping {
+            color: #3a6a3a;
+        }
+
+        .status-text.working {
+            color: #ffaa00;
+        }
 
         /* Compute indicator */
         .compute-bar {
@@ -149,8 +169,17 @@
         }
 
         @keyframes compute-pulse {
-            0%, 100% { width: 20%; opacity: 0.5; }
-            50% { width: 80%; opacity: 1; }
+
+            0%,
+            100% {
+                width: 20%;
+                opacity: 0.5;
+            }
+
+            50% {
+                width: 80%;
+                opacity: 1;
+            }
         }
 
         /* Connection info */
@@ -176,7 +205,9 @@
             background: #333;
         }
 
-        .queen-dot.connected { background: #ffcc00; }
+        .queen-dot.connected {
+            background: #ffcc00;
+        }
 
         /* Wake button (hidden when sipping) */
         .wake-btn {
@@ -223,14 +254,29 @@
         }
 
         /* Drone colors */
-        body[data-drone="1"] { --drone-color: #333333; }
-        body[data-drone="2"] { --drone-color: #0088ff; }
-        body[data-drone="3"] { --drone-color: #ff0000; }
-        body[data-drone="4"] { --drone-color: #ffffff; }
+        body[data-drone="1"] {
+            --drone-color: #333333;
+        }
 
-        body[data-drone="1"] .drone-id { color: #666; text-shadow: 0 0 20px #333; }
+        body[data-drone="2"] {
+            --drone-color: #0088ff;
+        }
+
+        body[data-drone="3"] {
+            --drone-color: #ff0000;
+        }
+
+        body[data-drone="4"] {
+            --drone-color: #ffffff;
+        }
+
+        body[data-drone="1"] .drone-id {
+            color: #666;
+            text-shadow: 0 0 20px #333;
+        }
     </style>
 </head>
+
 <body data-drone="1">
     <div class="sip-indicator"></div>
 
@@ -332,7 +378,7 @@
                 if ('BroadcastChannel' in window) {
                     this.channel = new BroadcastChannel('omega-swarm');
                     this.channel.onmessage = (e) => this.handleQueenMessage(e.data);
-                    
+
                     // Announce ourselves
                     this.announceOnline();
                 }
@@ -397,7 +443,7 @@
 
                 // Simulate processing (in real app, this would be actual compute)
                 const startTime = Date.now();
-                
+
                 // Simulate work with varying duration
                 const workDuration = 500 + Math.random() * 1000;
                 await this.simulateWork(workDuration);
@@ -423,7 +469,7 @@
                         const elapsed = Date.now() - startTime;
                         const progress = Math.min(100, (elapsed / duration) * 100);
                         this.el.computeFill.style.width = progress + '%';
-                        
+
                         if (elapsed < duration) {
                             requestAnimationFrame(animate);
                         } else {
@@ -495,7 +541,7 @@
 
             updateStatus(status) {
                 this.status = status;
-                
+
                 // Update UI
                 this.el.statusRing.className = 'status-ring ' + status;
                 this.el.statusText.className = 'status-text ' + status;
@@ -552,8 +598,9 @@
 
         // Register service worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+            navigator.serviceWorker.register('sw.js').catch(() => { });
         }
     </script>
 </body>
+
 </html>

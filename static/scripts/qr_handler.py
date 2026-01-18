@@ -41,7 +41,7 @@ def drone_qr(drone_id):
     
     # Generate QR code
     qr_img = qrcode.make(install_url, 
-                         error_correction=qrcode.constants.ERROR_CORRECT_H,
+                         error_correction=qrcode.ERROR_CORRECT_H,
                          box_size=10,
                          border=4)
     

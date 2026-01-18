@@ -57,7 +57,7 @@ class OmegaLocalLoadTester:
                 'timestamp': datetime.now().isoformat()
             }
     
-    def run_load_test(self, total_requests: int = 100, duration_seconds: int = None) -> Dict:
+    def run_load_test(self, total_requests: int = 100, duration_seconds: Optional[int] = None) -> Dict:
         """
         Run load test with concurrent users
         

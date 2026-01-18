@@ -39,7 +39,7 @@ class KITTAgent:
         print("[KITT] Shield protocols active. I am ready to assist.")
         return True
     
-    async def process_user_command(self, command: str, user_context: Dict = None) -> Dict:
+    async def process_user_command(self, command: str, user_context: Optional[Dict] = None) -> Dict:
         """
         Process user command through KITT interface
         KITT acts as intermediary, validates, then passes to Omega

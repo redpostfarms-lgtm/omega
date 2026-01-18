@@ -411,7 +411,7 @@ class GateAgent:
             import ctypes
             return ctypes.windll.shell32.IsUserAnAdmin() != 0
         except:
-            return os.getuid() == 0 if hasattr(os, 'getuid') else False
+            return os.getuid() == 0 if hasattr(os, 'getuid') else False  # type: ignore[attr-defined]
 
 def main():
     gate = GateAgent()

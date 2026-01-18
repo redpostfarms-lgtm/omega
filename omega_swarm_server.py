@@ -85,7 +85,7 @@ def generate_qr():
         else:
             install_url = f"http://{host}/drone?id={phone_id}"
         
-        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.ERROR_CORRECT_H, box_size=10, border=4)
         qr.add_data(install_url)
         qr.make(fit=True)
         
@@ -93,7 +93,7 @@ def generate_qr():
         img = qr.make_image(fill_color=phone_color, back_color="#000000")
         
         buffer = io.BytesIO()
-        img.save(buffer, format='PNG')
+        img.save(buffer, 'PNG')
         buffer.seek(0)
         img_str = base64.b64encode(buffer.getvalue()).decode()
         

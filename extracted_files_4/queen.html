@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>OMEGA Queen</title>
     <link rel="manifest" href="manifest.json">
-    
+
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         :root {
             --led-red: #ff0000;
             --led-red-dim: #330000;
@@ -22,7 +30,8 @@
             --drone-black: #333333;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             overflow-x: hidden;
             touch-action: manipulation;
@@ -148,8 +157,15 @@
         }
 
         @keyframes pulse-work {
-            0%, 100% { box-shadow: 0 0 5px var(--led-red); }
-            50% { box-shadow: 0 0 20px var(--led-red); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px var(--led-red);
+            }
+
+            50% {
+                box-shadow: 0 0 20px var(--led-red);
+            }
         }
 
         .drone-node .status-dot {
@@ -163,9 +179,17 @@
             border: 2px solid #000;
         }
 
-        .drone-node.connected .status-dot { background: var(--led-red); }
-        .drone-node.sipping .status-dot { background: #3a7a3a; }
-        .drone-node.offline .status-dot { background: #333; }
+        .drone-node.connected .status-dot {
+            background: var(--led-red);
+        }
+
+        .drone-node.sipping .status-dot {
+            background: #3a7a3a;
+        }
+
+        .drone-node.offline .status-dot {
+            background: #333;
+        }
 
         /* ==========================================
            SCANNER - Thin line
@@ -197,7 +221,7 @@
             transform: translateY(-50%);
             width: 40px;
             height: 4px;
-            background: radial-gradient(ellipse at center, #ff0000 0%, #ff0000 40%, rgba(255,0,0,0.4) 70%, transparent 100%);
+            background: radial-gradient(ellipse at center, #ff0000 0%, #ff0000 40%, rgba(255, 0, 0, 0.4) 70%, transparent 100%);
             border-radius: 2px;
             filter: blur(1px);
             animation: scan 2s ease-in-out infinite;
@@ -217,8 +241,15 @@
         }
 
         @keyframes scan {
-            0%, 100% { left: 5px; }
-            50% { left: calc(100% - 45px); }
+
+            0%,
+            100% {
+                left: 5px;
+            }
+
+            50% {
+                left: calc(100% - 45px);
+            }
         }
 
         /* ==========================================
@@ -290,9 +321,10 @@
             flex-shrink: 0;
         }
 
-        .mic-btn:hover, .mic-btn.active {
+        .mic-btn:hover,
+        .mic-btn.active {
             border-color: var(--led-red);
-            box-shadow: 0 0 20px rgba(255,0,0,0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
         }
 
         .mic-btn svg {
@@ -302,7 +334,9 @@
             transition: fill 0.2s;
         }
 
-        .mic-btn.active svg { fill: var(--led-red); }
+        .mic-btn.active svg {
+            fill: var(--led-red);
+        }
 
         .input-row {
             display: flex;
@@ -321,7 +355,9 @@
             outline: none;
         }
 
-        .text-input:focus { border-color: var(--led-red); }
+        .text-input:focus {
+            border-color: var(--led-red);
+        }
 
         .send-btn {
             background: var(--led-red);
@@ -353,7 +389,7 @@
             max-height: 120px;
             overflow-y: auto;
             padding: 12px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             border: 1px solid #222;
         }
@@ -362,7 +398,7 @@
             color: #ff3333;
             font-size: 13px;
             line-height: 1.5;
-            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
 
         .user-text {
@@ -436,14 +472,16 @@
         .modal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
 
-        .modal.active { display: flex; }
+        .modal.active {
+            display: flex;
+        }
 
         .modal-box {
             background: #111;
@@ -515,12 +553,25 @@
             border-radius: 50%;
         }
 
-        .drone-color.black { background: #333; border: 1px solid #555; }
-        .drone-color.blue { background: #0088ff; }
-        .drone-color.red { background: #ff0000; }
-        .drone-color.white { background: #ffffff; }
+        .drone-color.black {
+            background: #333;
+            border: 1px solid #555;
+        }
+
+        .drone-color.blue {
+            background: #0088ff;
+        }
+
+        .drone-color.red {
+            background: #ff0000;
+        }
+
+        .drone-color.white {
+            background: #ffffff;
+        }
     </style>
 </head>
+
 <body>
     <!-- Swarm Status Bar -->
     <div class="swarm-status">
@@ -580,16 +631,17 @@
 
     <!-- Controls -->
     <div class="controls">
-        <button class="mic-btn" id="micBtn">
+        <button class="mic-btn" id="micBtn" title="Voice Command" aria-label="Voice Command">
             <svg viewBox="0 0 24 24">
-                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                <path
+                    d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
             </svg>
         </button>
         <div class="input-row">
             <input type="text" class="text-input" id="textInput" placeholder="Speak to the swarm...">
-            <button class="send-btn" id="sendBtn">
+            <button class="send-btn" id="sendBtn" title="Send Command" aria-label="Send Command">
                 <svg viewBox="0 0 24 24">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                 </svg>
             </button>
         </div>
@@ -727,11 +779,11 @@
             animateLeds(level) {
                 const count = Math.floor(level * this.ledsPerColumn);
                 const center = Math.floor(this.ledsPerColumn / 2);
-                
+
                 for (let c = 0; c < this.columns; c++) {
                     const colLevel = Math.max(0, count - Math.abs(c - 1) + Math.floor(Math.random() * 2));
                     const halfCount = Math.floor(colLevel / 2);
-                    
+
                     for (let i = 0; i < this.ledsPerColumn; i++) {
                         const distFromCenter = Math.abs(i - center + 0.5);
                         this.leds[c][i].classList.toggle('on', distFromCenter <= halfCount);
@@ -742,7 +794,7 @@
             simulateVoice(text) {
                 const duration = Math.max(1500, text.split(' ').length * 200);
                 const startTime = Date.now();
-                
+
                 const animate = () => {
                     const elapsed = Date.now() - startTime;
                     if (elapsed > duration) {
@@ -849,7 +901,7 @@
                     }
                 }
                 this.swarm.totalCompute = total;
-                
+
                 const percent = Math.min(100, total);
                 this.el.brainFill.style.width = percent + '%';
                 this.el.brainPercent.textContent = percent + '%';
@@ -892,16 +944,16 @@
                     this.recognition.continuous = false;
                     this.recognition.interimResults = false;
                     this.recognition.lang = 'en-US';
-                    
+
                     this.recognition.onresult = (e) => {
                         this.processInput(e.results[0][0].transcript);
                     };
-                    
+
                     this.recognition.onend = () => {
                         this.isListening = false;
                         this.el.micBtn.classList.remove('active');
                     };
-                    
+
                     this.recognition.onerror = () => {
                         this.isListening = false;
                         this.el.micBtn.classList.remove('active');
@@ -911,7 +963,7 @@
 
             toggleListen() {
                 if (this.isHushed) return;
-                
+
                 if (this.isListening) {
                     this.recognition?.stop();
                 } else {
@@ -931,17 +983,17 @@
 
                 // Try to distribute to swarm
                 const distributed = this.distributeQuery(text);
-                
+
                 setTimeout(() => {
                     const response = this.generateResponse(text);
                     const droneCount = this.swarm.drones.size;
-                    
+
                     this.el.responseArea.innerHTML = `
                         <div class="user-text">> ${text}</div>
                         <div class="response-text">${response}</div>
                         ${droneCount > 0 ? `<div class="swarm-indicator">⚡ Processed by ${droneCount + 1} nodes</div>` : ''}
                     `;
-                    
+
                     this.speak(response);
                 }, 300);
             },
@@ -949,7 +1001,7 @@
             generateResponse(input) {
                 const lower = input.toLowerCase();
                 const droneCount = this.swarm.drones.size;
-                
+
                 if (lower.includes('who are you') || lower.includes('what are you')) {
                     if (droneCount > 0) {
                         return `I am OMEGA. I am faster now. I am many. ${droneCount + 1} minds, one voice.`;
@@ -962,28 +1014,28 @@
                 if (lower.includes('hello') || lower.includes('hi')) {
                     return 'Greetings. The swarm awaits your command.';
                 }
-                
+
                 return `Understood. ${droneCount > 0 ? 'The swarm processes.' : 'Standing by.'}`;
             },
 
             speak(text) {
                 if (!this.synthesis || this.isHushed) return;
-                
+
                 this.synthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                
+
                 // Daniel voice - steel tone
                 const voices = this.synthesis.getVoices();
-                const voice = voices.find(v => 
-                    v.name.includes('Daniel') || 
+                const voice = voices.find(v =>
+                    v.name.includes('Daniel') ||
                     v.name.includes('Google UK English Male') ||
                     v.name.includes('Microsoft David')
                 ) || voices.find(v => v.lang.startsWith('en'));
-                
+
                 if (voice) utterance.voice = voice;
                 utterance.rate = 0.95;
                 utterance.pitch = 0.8;
-                
+
                 utterance.onstart = () => this.simulateVoice(text);
                 this.synthesis.speak(utterance);
             },
@@ -994,7 +1046,7 @@
 
             initEvents() {
                 this.el.micBtn.addEventListener('click', () => this.toggleListen());
-                
+
                 this.el.sendBtn.addEventListener('click', () => {
                     const text = this.el.textInput.value.trim();
                     if (text) {
@@ -1002,7 +1054,7 @@
                         this.el.textInput.value = '';
                     }
                 });
-                
+
                 this.el.textInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') this.el.sendBtn.click();
                 });
@@ -1055,7 +1107,7 @@
             toggleHush() {
                 this.isHushed = !this.isHushed;
                 this.el.hushOverlay.classList.toggle('active', this.isHushed);
-                
+
                 if (this.isHushed) {
                     this.synthesis?.cancel();
                     this.recognition?.stop();
@@ -1105,14 +1157,15 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => Omega.init());
-        
+
         if (window.speechSynthesis) {
-            speechSynthesis.onvoiceschanged = () => {};
+            speechSynthesis.onvoiceschanged = () => { };
         }
 
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+            navigator.serviceWorker.register('sw.js').catch(() => { });
         }
     </script>
 </body>
+
 </html>
