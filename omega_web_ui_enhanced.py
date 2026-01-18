@@ -110,7 +110,56 @@ HTML_TEMPLATE = """
             padding: 20px;
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto auto 1fr;
             gap: 20px;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            background: rgba(10, 10, 20, 0.9);
+            border: 2px solid #9933ff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(153, 51, 255, 0.3);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(153, 51, 255, 0.2);
+            border: 2px solid #9933ff;
+            border-radius: 5px;
+            color: #9933ff;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tab-btn:hover {
+            background: rgba(153, 51, 255, 0.4);
+            box-shadow: 0 0 15px rgba(153, 51, 255, 0.5);
+        }
+
+        .tab-btn.active {
+            background: #9933ff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(153, 51, 255, 0.8);
+        }
+
+        .tab-content {
+            display: none;
+            grid-column: 1 / -1;
+            grid-row: 2 / -1;
+        }
+
+        .tab-content.active {
+            display: contents;
         }
 
         /* Panel Base Style */
@@ -132,26 +181,26 @@ HTML_TEMPLATE = """
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
-        /* Audio Visualizer Display */
+        /* Audio Visualizer Display - Compact 3-Bar Version */
         .audio-display {
             background: #000;
-            border: 3px solid #ff0000;
+            border: 3px solid #00ff00;
             border-radius: 5px;
-            height: 200px;
+            height: 80px;
             margin-bottom: 20px;
             display: flex;
             align-items: flex-end;
-            justify-content: space-around;
-            padding: 10px;
-            box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.3);
+            justify-content: space-evenly;
+            padding: 10px 40px;
+            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
         .audio-bar {
-            width: 8px;
-            background: linear-gradient(180deg, #ff0000 0%, #ff6600 50%, #ffff00 100%);
-            border-radius: 2px;
-            transition: height 0.1s ease;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            width: 60px;
+            background: linear-gradient(180deg, #00ff00 0%, #00ff88 50%, #00ffff 100%);
+            border-radius: 4px;
+            transition: height 0.15s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
         }
 
         /* Control Buttons - Sci-Fi Style */
@@ -348,13 +397,13 @@ HTML_TEMPLATE = """
         /* Console Output */
         .console {
             background: #000;
-            border: 2px solid #00ff00;
+            border: 2px solid #ffff00;
             border-radius: 5px;
             padding: 15px;
-            height: 300px;
+            height: 250px;
             overflow-y: auto;
             font-size: 0.9em;
-            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
+            box-shadow: inset 0 0 20px rgba(255, 255, 0, 0.1);
         }
 
         .console-line {
@@ -373,6 +422,197 @@ HTML_TEMPLATE = """
 
         .console-line.info {
             color: #00ffff;
+        }
+
+        /* RGB Controls */
+        .rgb-controls {
+            background: rgba(10, 10, 20, 0.9);
+            border: 2px solid #0088ff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 136, 255, 0.3);
+            margin-top: 20px;
+        }
+
+        .rgb-title {
+            color: #0088ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #0088ff;
+            padding-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
+        }
+
+        .rgb-slider-group {
+            margin-bottom: 15px;
+        }
+
+        .rgb-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .rgb-label-text {
+            font-weight: bold;
+        }
+
+        .rgb-label-value {
+            color: #00ffff;
+        }
+
+        .rgb-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .rgb-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .rgb-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .rgb-slider.red::-webkit-slider-thumb {
+            background: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .rgb-slider.red::-moz-range-thumb {
+            background: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        .rgb-slider.green::-webkit-slider-thumb {
+            background: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+
+        .rgb-slider.green::-moz-range-thumb {
+            background: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+
+        .rgb-slider.blue::-webkit-slider-thumb {
+            background: #0088ff;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.8);
+        }
+
+        .rgb-slider.blue::-moz-range-thumb {
+            background: #0088ff;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.8);
+        }
+
+        .rgb-preview {
+            width: 100%;
+            height: 60px;
+            border: 2px solid #0088ff;
+            border-radius: 5px;
+            margin-top: 15px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Chat Box */
+        .chat-container {
+            background: rgba(10, 10, 20, 0.9);
+            border: 2px solid #ffff00;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+
+        .chat-title {
+            color: #ffff00;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ffff00;
+            padding-bottom: 8px;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            background: #000;
+            border: 1px solid #ffff00;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.1);
+        }
+
+        .chat-message {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .chat-message.user {
+            color: #00ffff;
+            text-align: right;
+        }
+
+        .chat-message.system {
+            color: #ffff00;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffff00;
+            border-radius: 5px;
+            padding: 10px;
+            color: #ffff00;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
+
+        .chat-send-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ffff00 0%, #ffaa00 100%);
+            border: 2px solid #ffff00;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
+            transform: scale(1.05);
         }
 
         /* Voice Control */
@@ -454,87 +694,168 @@ HTML_TEMPLATE = """
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Left Panel: System Status -->
-        <div class="panel">
-            <div class="panel-title">⚡ System Status</div>
-            
-            <div class="status-grid">
-                <div class="status-item">
-                    <div class="status-label">CPU</div>
-                    <div class="status-value" id="cpu-status">--</div>
+        <!-- Tab Navigation (Purple Section) -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab(1)">TAB 1</button>
+            <button class="tab-btn" onclick="switchTab(2)">TAB 2</button>
+            <button class="tab-btn" onclick="switchTab(3)">TAB 3</button>
+            <button class="tab-btn" onclick="switchTab(4)">TAB 4</button>
+        </div>
+
+        <!-- Tab 1 Content (Main Control) -->
+        <div class="tab-content active" id="tab-1">
+            <!-- Left Panel: System Status -->
+            <div class="panel">
+                <div class="panel-title">⚡ System Status</div>
+                
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-label">CPU</div>
+                        <div class="status-value" id="cpu-status">--</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Memory</div>
+                        <div class="status-value" id="memory-status">--</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Disk</div>
+                        <div class="status-value" id="disk-status">--</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Network</div>
+                        <div class="status-value" id="network-status">ONLINE</div>
+                    </div>
                 </div>
-                <div class="status-item">
-                    <div class="status-label">Memory</div>
-                    <div class="status-value" id="memory-status">--</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Disk</div>
-                    <div class="status-value" id="disk-status">--</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Network</div>
-                    <div class="status-value" id="network-status">ONLINE</div>
+
+                <!-- Side Controls (Left) -->
+                <div class="side-controls" style="margin-top: 30px;">
+                    <button class="side-btn side-btn-blue" onclick="handleSideControl('AIR')">AIR</button>
+                    <button class="side-btn side-btn-blue" onclick="handleSideControl('OIL')">OIL</button>
+                    <button class="side-btn side-btn-pink" onclick="handleSideControl('P1')">P1</button>
+                    <button class="side-btn side-btn-pink" onclick="handleSideControl('P2')">P2</button>
                 </div>
             </div>
 
-            <!-- Side Controls (Left) -->
-            <div class="side-controls" style="margin-top: 30px;">
-                <button class="side-btn side-btn-blue" onclick="handleSideControl('AIR')">AIR</button>
-                <button class="side-btn side-btn-blue" onclick="handleSideControl('OIL')">OIL</button>
-                <button class="side-btn side-btn-pink" onclick="handleSideControl('P1')">P1</button>
-                <button class="side-btn side-btn-pink" onclick="handleSideControl('P2')">P2</button>
+            <!-- Center Panel: Main Controls -->
+            <div class="panel">
+                <div class="panel-title">🎛️ Main Control Interface</div>
+                
+                <!-- Audio Visualizer (Green Box - 3 Bars Only) -->
+                <div class="audio-display" id="audio-display">
+                    <!-- Audio bars will be generated by JavaScript -->
+                </div>
+
+                <!-- Main Control Buttons -->
+                <div class="control-buttons">
+                    <button class="btn btn-auto-cruise" id="btn-auto-cruise" onclick="handleMode('auto-cruise')">
+                        🚀 AUTO CRUISE
+                    </button>
+                    <button class="btn btn-normal-cruise" id="btn-normal-cruise" onclick="handleMode('normal-cruise')">
+                        ⚡ NORMAL CRUISE
+                    </button>
+                    <button class="btn btn-pursuit" id="btn-pursuit" onclick="handleMode('pursuit')">
+                        🎯 PURSUIT MODE
+                    </button>
+                </div>
+
+                <!-- Voice Control -->
+                <div class="voice-control">
+                    <div class="panel-title" style="font-size: 1em; margin-bottom: 10px;">Voice Control</div>
+                    <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
+                        🎤
+                    </button>
+                    <div id="voice-status" style="margin-top: 10px; color: #00ffff;">Ready</div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Console & RGB Controls -->
+            <div class="panel">
+                <div class="panel-title">📟 System Console</div>
+                
+                <!-- Console Output (Yellow Area) -->
+                <div class="console" id="console">
+                    <div class="console-line info">[SYSTEM] Omega Control Panel initialized</div>
+                    <div class="console-line">[OK] All systems nominal</div>
+                    <div class="console-line info">[INFO] Awaiting commands...</div>
+                </div>
+
+                <!-- RGB Controls (Blue Area) -->
+                <div class="rgb-controls">
+                    <div class="rgb-title">🎨 RGB Controls</div>
+                    
+                    <div class="rgb-slider-group">
+                        <div class="rgb-label">
+                            <span class="rgb-label-text" style="color: #ff0000;">RED</span>
+                            <span class="rgb-label-value" id="rgb-r-value">128</span>
+                        </div>
+                        <input type="range" min="0" max="255" value="128" class="rgb-slider red" id="rgb-r" oninput="updateRGB()">
+                    </div>
+
+                    <div class="rgb-slider-group">
+                        <div class="rgb-label">
+                            <span class="rgb-label-text" style="color: #00ff00;">GREEN</span>
+                            <span class="rgb-label-value" id="rgb-g-value">128</span>
+                        </div>
+                        <input type="range" min="0" max="255" value="128" class="rgb-slider green" id="rgb-g" oninput="updateRGB()">
+                    </div>
+
+                    <div class="rgb-slider-group">
+                        <div class="rgb-label">
+                            <span class="rgb-label-text" style="color: #0088ff;">BLUE</span>
+                            <span class="rgb-label-value" id="rgb-b-value">128</span>
+                        </div>
+                        <input type="range" min="0" max="255" value="128" class="rgb-slider blue" id="rgb-b" oninput="updateRGB()">
+                    </div>
+
+                    <div class="rgb-preview" id="rgb-preview"></div>
+                </div>
+
+                <!-- Side Controls (Right) -->
+                <div class="side-controls" style="margin-top: 20px;">
+                    <button class="side-btn side-btn-blue" onclick="handleSideControl('S1')">S1</button>
+                    <button class="side-btn side-btn-blue" onclick="handleSideControl('S2')">S2</button>
+                    <button class="side-btn side-btn-red" onclick="handleSideControl('P3')">P3</button>
+                    <button class="side-btn side-btn-red" onclick="handleSideControl('P4')">P4</button>
+                </div>
             </div>
         </div>
 
-        <!-- Center Panel: Main Controls -->
-        <div class="panel">
-            <div class="panel-title">🎛️ Main Control Interface</div>
-            
-            <!-- Audio Visualizer -->
-            <div class="audio-display" id="audio-display">
-                <!-- Audio bars will be generated by JavaScript -->
-            </div>
-
-            <!-- Main Control Buttons -->
-            <div class="control-buttons">
-                <button class="btn btn-auto-cruise" id="btn-auto-cruise" onclick="handleMode('auto-cruise')">
-                    🚀 AUTO CRUISE
-                </button>
-                <button class="btn btn-normal-cruise" id="btn-normal-cruise" onclick="handleMode('normal-cruise')">
-                    ⚡ NORMAL CRUISE
-                </button>
-                <button class="btn btn-pursuit" id="btn-pursuit" onclick="handleMode('pursuit')">
-                    🎯 PURSUIT MODE
-                </button>
-            </div>
-
-            <!-- Voice Control -->
-            <div class="voice-control">
-                <div class="panel-title" style="font-size: 1em; margin-bottom: 10px;">Voice Control</div>
-                <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">
-                    🎤
-                </button>
-                <div id="voice-status" style="margin-top: 10px; color: #00ffff;">Ready</div>
+        <!-- Tab 2 Content (Chat Interface) -->
+        <div class="tab-content" id="tab-2">
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-title">💬 Communication Center</div>
+                
+                <!-- Chat Box (Yellow Area) -->
+                <div class="chat-container">
+                    <div class="chat-title">Text Chat</div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-message system">[SYSTEM] Chat interface ready</div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Type message here..." onkeypress="handleChatKeypress(event)">
+                        <button class="chat-send-btn" onclick="sendChatMessage()">SEND</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Right Panel: Console & Controls -->
-        <div class="panel">
-            <div class="panel-title">📟 System Console</div>
-            
-            <!-- Console Output -->
-            <div class="console" id="console">
-                <div class="console-line info">[SYSTEM] Omega Control Panel initialized</div>
-                <div class="console-line">[OK] All systems nominal</div>
-                <div class="console-line info">[INFO] Awaiting commands...</div>
+        <!-- Tab 3 Content (Additional Features) -->
+        <div class="tab-content" id="tab-3">
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-title">⚙️ Advanced Settings</div>
+                <div style="padding: 20px; text-align: center; color: #00ffff; font-size: 1.2em;">
+                    Additional features will be added here
+                </div>
             </div>
+        </div>
 
-            <!-- Side Controls (Right) -->
-            <div class="side-controls">
-                <button class="side-btn side-btn-blue" onclick="handleSideControl('S1')">S1</button>
-                <button class="side-btn side-btn-blue" onclick="handleSideControl('S2')">S2</button>
-                <button class="side-btn side-btn-red" onclick="handleSideControl('P3')">P3</button>
-                <button class="side-btn side-btn-red" onclick="handleSideControl('P4')">P4</button>
+        <!-- Tab 4 Content (Diagnostics) -->
+        <div class="tab-content" id="tab-4">
+            <div class="panel" style="grid-column: 1 / -1;">
+                <div class="panel-title">🔧 System Diagnostics</div>
+                <div style="padding: 20px; text-align: center; color: #00ffff; font-size: 1.2em;">
+                    Diagnostic tools will be added here
+                </div>
             </div>
         </div>
     </div>
@@ -548,13 +869,13 @@ HTML_TEMPLATE = """
         let currentMode = null;
         let voiceActive = false;
 
-        // Initialize audio visualizer bars
+        // Initialize audio visualizer bars (only 3 bars now)
         const audioDisplay = document.getElementById('audio-display');
-        const numBars = 30;
+        const numBars = 3;
         for (let i = 0; i < numBars; i++) {
             const bar = document.createElement('div');
             bar.className = 'audio-bar';
-            bar.style.height = '10px';
+            bar.style.height = '20px';
             audioDisplay.appendChild(bar);
         }
 
@@ -562,13 +883,93 @@ HTML_TEMPLATE = """
         function animateAudioBars() {
             const bars = document.querySelectorAll('.audio-bar');
             bars.forEach((bar, index) => {
-                const randomHeight = Math.random() * 180 + 20;
+                const randomHeight = Math.random() * 60 + 10;
                 bar.style.height = randomHeight + 'px';
             });
         }
 
         // Start animation
-        setInterval(animateAudioBars, 100);
+        setInterval(animateAudioBars, 150);
+
+        // Tab switching function
+        function switchTab(tabNumber) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById('tab-' + tabNumber).classList.add('active');
+            
+            // Add active class to clicked button
+            document.querySelectorAll('.tab-btn')[tabNumber - 1].classList.add('active');
+            
+            logConsole(`[TAB] Switched to Tab ${tabNumber}`, 'info');
+        }
+
+        // RGB Controls
+        function updateRGB() {
+            const r = document.getElementById('rgb-r').value;
+            const g = document.getElementById('rgb-g').value;
+            const b = document.getElementById('rgb-b').value;
+            
+            document.getElementById('rgb-r-value').textContent = r;
+            document.getElementById('rgb-g-value').textContent = g;
+            document.getElementById('rgb-b-value').textContent = b;
+            
+            const preview = document.getElementById('rgb-preview');
+            preview.style.background = `rgb(${r}, ${g}, ${b})`;
+            preview.style.boxShadow = `inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(${r}, ${g}, ${b}, 0.5)`;
+            
+            // Emit to server
+            socket.emit('rgb_change', { r: parseInt(r), g: parseInt(g), b: parseInt(b) });
+        }
+
+        // Initialize RGB preview
+        updateRGB();
+
+        // Chat functions
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                const messagesDiv = document.getElementById('chat-messages');
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'chat-message user';
+                msgDiv.textContent = `[USER] ${message}`;
+                messagesDiv.appendChild(msgDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                
+                // Emit to server
+                socket.emit('chat_message', { message: message });
+                
+                input.value = '';
+                
+                logConsole(`[CHAT] Message sent: ${message}`, 'info');
+            }
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        // Socket event handlers
+        socket.on('chat_response', function(data) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message system';
+            msgDiv.textContent = `[OMEGA] ${data.message}`;
+            messagesDiv.appendChild(msgDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
 
         // Handle mode selection
         function handleMode(mode) {
@@ -728,6 +1129,36 @@ def handle_voice_control(data):
     logger.info(f"Voice control: {'activated' if active else 'deactivated'}")
     emit('console_update', {
         'message': f'[SERVER] Voice recognition {"enabled" if active else "disabled"}',
+        'type': 'info'
+    }, broadcast=True)
+
+@socketio.on('rgb_change')
+def handle_rgb_change(data):
+    """Handle RGB color change"""
+    r = data.get('r', 0)
+    g = data.get('g', 0)
+    b = data.get('b', 0)
+    logger.info(f"RGB changed to: R={r}, G={g}, B={b}")
+    emit('console_update', {
+        'message': f'[RGB] Color set to RGB({r}, {g}, {b})',
+        'type': 'info'
+    }, broadcast=True)
+
+@socketio.on('chat_message')
+def handle_chat_message(data):
+    """Handle chat message from user"""
+    message = data.get('message', '')
+    logger.info(f"Chat message received: {message}")
+    
+    # Echo response (you can add AI processing here)
+    response = f"Message received: {message}"
+    
+    emit('chat_response', {
+        'message': response
+    })
+    
+    emit('console_update', {
+        'message': f'[CHAT] User: {message}',
         'type': 'info'
     }, broadcast=True)
 
