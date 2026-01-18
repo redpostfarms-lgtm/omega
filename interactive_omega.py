@@ -26,12 +26,12 @@ def record_user_input(duration=5, sample_rate=16000):
     temp_file = f"temp_input_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav"
     wavfile.write(temp_file, sample_rate, audio.flatten())
     
-            # Save conversation segment
-            conv_file = CONVERSATIONS_DIR / f"conv_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav"
-            wavfile.write(str(conv_file), sample_rate, audio.flatten())
-            print(f"[Saved conversation segment: {conv_file.name}]")
-            
-            return temp_file, conv_file
+    # Save conversation segment
+    conv_file = CONVERSATIONS_DIR / f"conv_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav"
+    wavfile.write(str(conv_file), sample_rate, audio.flatten())
+    print(f"[Saved conversation segment: {conv_file.name}]")
+    
+    return temp_file, conv_file
 
 async def recognize_speech(wav_file):
     """Recognize speech from audio file."""

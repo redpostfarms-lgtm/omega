@@ -362,7 +362,7 @@ class SystemDiagnostics:
             "1. USB communication is working (software sees devices)"
         )
         hw_info["critical_findings"].append(
-            "2. Command format is correct (software accepts commands)")
+            "2. Command format is correct (software accepts commands)"
         )
         hw_info["critical_findings"].append(
             "3. Physical connection or hardware firmware issue likely"

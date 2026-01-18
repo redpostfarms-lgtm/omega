@@ -80,7 +80,7 @@ Write-Host "Icon updated successfully"
 if __name__ == "__main__":
     if sys.platform != 'win32':
         print("[ERROR] This script is for Windows only")
-        return
+        sys.exit(1)
     
     success = update_shortcut_icon()
     
