@@ -38,6 +38,11 @@ def service_worker():
     """Serve service worker"""
     return send_from_directory('static', 'sw.js')
 
+@app.route('/static/audio/kitt_voice.wav')
+def kitt_audio():
+    """Serve KITT voice audio file"""
+    return send_from_directory('static/audio', 'kitt_voice.wav')
+
 @app.route('/api/generate_qr', methods=['GET'])
 def generate_qr():
     """Generate QR code for PWA installation"""
@@ -882,45 +887,104 @@ html_content = '''
             }
         }
 
-        // Omega TTS
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
+        // KITT Audio Player - Uses authentic KITT audio file
+        let kittAudio = null;
+        let audioInitialized = false;
+        
+        function initKITTAudio() {
+            if (!audioInitialized) {
+                kittAudio = new Audio('/static/audio/kitt_voice.wav');
+                kittAudio.volume = 1.0;
                 
-                const utterance = new SpeechSynthesisUtterance(text);
-                const voices = speechSynthesis.getVoices();
-                
-                const preferredVoices = ['Microsoft David', 'Microsoft Mark', 'Google US English Male'];
-                let selectedVoice = null;
-                for (const prefVoice of preferredVoices) {
-                    selectedVoice = voices.find(v => v.name.includes(prefVoice));
-                    if (selectedVoice) break;
-                }
-                
-                if (selectedVoice) utterance.voice = selectedVoice;
-                utterance.rate = 0.85;
-                utterance.pitch = 0.75;
-                utterance.volume = 1.0;
-                
-                utterance.onstart = () => {
+                kittAudio.onplay = () => {
+                    console.log('[KITT Audio] Playing authentic KITT voice');
                     startVoiceAnimation();
                     document.getElementById('kitt-voice-box').style.boxShadow = 
                         '0 0 60px rgba(255, 0, 0, 1.0), inset 0 0 40px rgba(255, 0, 0, 0.3)';
+                    updateStatus('🔴 KITT VOICE ACTIVE', true);
                 };
                 
-                utterance.onend = () => {
+                kittAudio.onended = () => {
+                    console.log('[KITT Audio] Playback complete');
                     stopVoiceAnimation();
                     document.getElementById('kitt-voice-box').style.boxShadow = 
                         '0 0 40px rgba(255, 0, 0, 0.8), inset 0 0 30px rgba(255, 0, 0, 0.2)';
+                    updateStatus('🟢 KITT READY');
                 };
                 
-                speechSynthesis.speak(utterance);
+                kittAudio.onerror = (e) => {
+                    console.error('[KITT Audio] Error loading KITT voice file:', e);
+                    updateStatus('⚠️ KITT AUDIO ERROR - USING TTS FALLBACK');
+                };
+                
+                audioInitialized = true;
+            }
+        }
+        
+        // Play KITT Audio
+        function playKITTAudio() {
+            initKITTAudio();
+            
+            if (kittAudio) {
+                kittAudio.currentTime = 0; // Reset to start
+                kittAudio.play().catch((error) => {
+                    console.error('[KITT Audio] Playback failed:', error);
+                    updateStatus('❌ AUDIO PLAYBACK BLOCKED - CLICK TEST VOICE AGAIN');
+                    // Browser may block autoplay, user needs to interact first
+                });
             }
         }
 
-        // Test Voice
+        // TTS Fallback (if KITT audio fails)
+        function speak(text) {
+            // First try to play authentic KITT audio
+            playKITTAudio();
+            
+            // Fallback to Web Speech API if audio fails
+            setTimeout(() => {
+                if (!audioInitialized || kittAudio.error) {
+                    console.log('[TTS Fallback] Using Web Speech API');
+                    if ('speechSynthesis' in window) {
+                        speechSynthesis.cancel();
+                        
+                        const utterance = new SpeechSynthesisUtterance(text);
+                        const voices = speechSynthesis.getVoices();
+                        
+                        const preferredVoices = ['Microsoft David', 'Microsoft Mark', 'Google US English Male'];
+                        let selectedVoice = null;
+                        for (const prefVoice of preferredVoices) {
+                            selectedVoice = voices.find(v => v.name.includes(prefVoice));
+                            if (selectedVoice) break;
+                        }
+                        
+                        if (selectedVoice) utterance.voice = selectedVoice;
+                        utterance.rate = 0.85;
+                        utterance.pitch = 0.75;
+                        utterance.volume = 1.0;
+                        
+                        utterance.onstart = () => {
+                            startVoiceAnimation();
+                            document.getElementById('kitt-voice-box').style.boxShadow = 
+                                '0 0 60px rgba(255, 0, 0, 1.0), inset 0 0 40px rgba(255, 0, 0, 0.3)';
+                        };
+                        
+                        utterance.onend = () => {
+                            stopVoiceAnimation();
+                            document.getElementById('kitt-voice-box').style.boxShadow = 
+                                '0 0 40px rgba(255, 0, 0, 0.8), inset 0 0 30px rgba(255, 0, 0, 0.2)';
+                        };
+                        
+                        speechSynthesis.speak(utterance);
+                    }
+                }
+            }, 100);
+        }
+
+        // Test Voice - Play authentic KITT audio
         function testVoice() {
-            speak('Omega systems operational. Guardian protocols active. Knight Rider power engaged.');
+            console.log('[Test Voice] Initiating KITT audio test');
+            updateStatus('🎤 TESTING KITT VOICE...');
+            playKITTAudio();
         }
 
         // Status Updates
@@ -967,11 +1031,16 @@ html_content = '''
             updateStatus('🚀 OMEGA KITT INTERFACE READY');
             console.log('[Omega] PWA KITT Interface initialized');
             
-            // Load voices
+            // Preload KITT audio
+            initKITTAudio();
+            console.log('[KITT Audio] Authentic KITT voice loaded from J:\\audio files\\kit.wav');
+            updateStatus('🔴 AUTHENTIC KITT VOICE LOADED - CLICK TEST VOICE');
+            
+            // Load voices (fallback)
             if ('speechSynthesis' in window) {
                 speechSynthesis.onvoiceschanged = () => {
                     const voices = speechSynthesis.getVoices();
-                    console.log('[Voices] Loaded:', voices.length, 'voices');
+                    console.log('[Voices] TTS Fallback loaded:', voices.length, 'voices');
                 };
             }
         };
