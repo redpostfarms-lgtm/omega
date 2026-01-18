@@ -152,7 +152,7 @@ HTML_TEMPLATE = """
             box-shadow: 0 0 25px rgba(153, 51, 255, 0.8);
         }
 
-        /* Mode Tabs - Knight Rider Style */
+        /* Mode Tabs - Knight Rider Style - Below Voice Box */
         .mode-tabs {
             grid-column: 1 / -1;
             display: flex;
@@ -162,8 +162,8 @@ HTML_TEMPLATE = """
 
         .mode-tab {
             flex: 1;
-            padding: 20px 30px;
-            font-size: 1.3em;
+            padding: 15px 25px;
+            font-size: 1.1em;
             font-weight: bold;
             text-transform: uppercase;
             border: none;
@@ -171,7 +171,7 @@ HTML_TEMPLATE = """
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             position: relative;
             overflow: hidden;
         }
@@ -274,12 +274,74 @@ HTML_TEMPLATE = """
         }
 
         /* Audio Visualizer Display - KITT Voice Box Style */
-        .audio-display {
-            display: none; /* Removed from center, now at bottom */
+        .kitt-voice-box {
+            background: #000;
+            border: 3px solid #ff0000;
+            border-radius: 8px;
+            height: 120px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 20px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .audio-bar {
-            display: none; /* Removed from center, now at bottom */
+        /* KITT-style scanning effect overlay */
+        .kitt-voice-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.4), transparent);
+            animation: kitt-scan-voice 2s linear infinite;
+        }
+
+        .kitt-voice-box.talking::before {
+            animation: kitt-scan-voice 0.3s linear infinite;
+        }
+
+        @keyframes kitt-scan-voice {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        .voice-box-bar {
+            width: 80px;
+            background: linear-gradient(180deg, #ff0000 0%, #cc0000 50%, #660000 100%);
+            border-radius: 4px;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            height: 30px;
+        }
+
+        .voice-box-bar.active {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 50px rgba(255, 0, 0, 0.8);
+            background: linear-gradient(180deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
+        }
+
+        .voice-box-bar.talking {
+            animation: voice-bar-pulse 0.3s ease-in-out infinite;
+        }
+
+        @keyframes voice-bar-pulse {
+            0%, 100% { height: 30px; }
+            50% { height: 80px; }
+        }
+
+        .voice-box-bar:nth-child(2).talking {
+            animation-delay: 0.1s;
+        }
+
+        .voice-box-bar:nth-child(3).talking {
+            animation-delay: 0.2s;
         }
 
         /* KITT Scanner Bar - Fixed at Bottom */
@@ -862,19 +924,6 @@ HTML_TEMPLATE = """
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Mode Tabs (Auto Cruise, Normal Cruise, Pursuit) -->
-        <div class="mode-tabs">
-            <button class="mode-tab mode-tab-auto active" id="mode-auto" onclick="switchMode('auto')">
-                🚀 AUTO CRUISE
-            </button>
-            <button class="mode-tab mode-tab-normal" id="mode-normal" onclick="switchMode('normal')">
-                ⚡ NORMAL CRUISE
-            </button>
-            <button class="mode-tab mode-tab-pursuit" id="mode-pursuit" onclick="switchMode('pursuit')">
-                🎯 PURSUIT MODE
-            </button>
-        </div>
-
         <!-- Tab 1 Content (Main Control) -->
         <div class="tab-content active" id="tab-1">
             <!-- Left Panel: System Status -->
@@ -911,14 +960,32 @@ HTML_TEMPLATE = """
 
             <!-- Center Panel: Main Controls -->
             <div class="panel">
-                <div class="panel-title">🎛️ Main Control Interface</div>
+                <div class="panel-title">🎛️ KITT Voice Interface</div>
                 
-                <!-- Main content area (KITT visualizer moved to bottom) -->
-                <div style="min-height: 400px; padding: 40px;">
-                    <div style="text-align: center; color: #00ffff; font-size: 1.3em;">
-                        <p style="margin-bottom: 20px;">System operating in <span id="current-mode-display" style="color: #ffaa00; font-weight: bold;">AUTO CRUISE</span> mode</p>
-                        <p style="color: #00ff00; font-size: 1.5em;">● All systems nominal</p>
-                    </div>
+                <!-- KITT Voice Box with 3 Bars -->
+                <div class="kitt-voice-box" id="kitt-voice-box">
+                    <div class="voice-box-bar" id="voice-bar-1"></div>
+                    <div class="voice-box-bar" id="voice-bar-2"></div>
+                    <div class="voice-box-bar" id="voice-bar-3"></div>
+                </div>
+
+                <!-- Mode Tabs (Under Voice Box) -->
+                <div class="mode-tabs">
+                    <button class="mode-tab mode-tab-auto active" id="mode-auto" onclick="switchMode('auto')">
+                        🚀 AUTO CRUISE
+                    </button>
+                    <button class="mode-tab mode-tab-normal" id="mode-normal" onclick="switchMode('normal')">
+                        ⚡ NORMAL CRUISE
+                    </button>
+                    <button class="mode-tab mode-tab-pursuit" id="mode-pursuit" onclick="switchMode('pursuit')">
+                        🎯 PURSUIT MODE
+                    </button>
+                </div>
+
+                <!-- Status Display -->
+                <div style="padding: 20px; text-align: center; color: #00ffff; font-size: 1.2em;">
+                    <p style="margin-bottom: 10px;">Mode: <span id="current-mode-display" style="color: #ffaa00; font-weight: bold;">AUTO CRUISE</span></p>
+                    <p style="color: #00ff00;">● All systems nominal</p>
                 </div>
             </div>
 
@@ -1219,6 +1286,33 @@ HTML_TEMPLATE = """
         // Voice recognition setup
         let recognition = null;
         let isListening = false;
+        let isTalking = false;
+        let micPermissionGranted = false;
+        
+        // Check microphone permission on load
+        async function checkMicPermission() {
+            try {
+                if (navigator.permissions && navigator.permissions.query) {
+                    const result = await navigator.permissions.query({ name: 'microphone' });
+                    micPermissionGranted = (result.state === 'granted');
+                    console.log('Microphone permission:', result.state);
+                    
+                    result.onchange = () => {
+                        micPermissionGranted = (result.state === 'granted');
+                        console.log('Microphone permission changed:', result.state);
+                    };
+                } else {
+                    // Browser doesn't support permission API, assume granted
+                    micPermissionGranted = true;
+                }
+            } catch (e) {
+                console.log('Permission check not supported, assuming granted');
+                micPermissionGranted = true;
+            }
+        }
+        
+        // Check permissions on load
+        checkMicPermission();
         
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1232,11 +1326,17 @@ HTML_TEMPLATE = """
                 isListening = true;
                 const voiceBtn = document.getElementById('voice-btn');
                 const statusIndicator = document.getElementById('voice-status-indicator');
+                const voiceBox = document.getElementById('kitt-voice-box');
+                
                 voiceBtn.classList.add('listening');
+                voiceBox.classList.add('talking');
                 statusIndicator.textContent = 'Listening...';
                 statusIndicator.style.borderColor = '#00ff00';
                 statusIndicator.style.color = '#00ff00';
                 logConsole('[VOICE] Listening...', 'info');
+                
+                // Animate voice bars
+                startVoiceAnimation();
             };
             
             recognition.onresult = function(event) {
@@ -1249,24 +1349,116 @@ HTML_TEMPLATE = """
                 
                 // Process voice commands
                 processVoiceCommand(transcript.toLowerCase());
+                
+                // Speak response
+                speak(`Command received: ${transcript}`);
             };
             
             recognition.onerror = function(event) {
                 console.error('Voice recognition error:', event.error);
                 logConsole(`[VOICE] Error: ${event.error}`, 'error');
                 isListening = false;
+                stopVoiceAnimation();
                 const voiceBtn = document.getElementById('voice-btn');
+                const voiceBox = document.getElementById('kitt-voice-box');
                 voiceBtn.classList.remove('listening');
+                voiceBox.classList.remove('talking');
                 updateVoiceStatus('Ready');
+                
+                if (event.error === 'not-allowed') {
+                    alert('Microphone access denied. Please allow microphone access in your browser settings.');
+                }
             };
             
             recognition.onend = function() {
                 console.log('Voice recognition ended');
                 isListening = false;
+                stopVoiceAnimation();
                 const voiceBtn = document.getElementById('voice-btn');
+                const voiceBox = document.getElementById('kitt-voice-box');
                 voiceBtn.classList.remove('listening');
+                voiceBox.classList.remove('talking');
                 updateVoiceStatus('Ready');
             };
+        } else {
+            console.error('Speech recognition not supported');
+            logConsole('[VOICE] Speech recognition not supported in this browser', 'error');
+        }
+        
+        // Voice animation for 3 bars
+        let voiceAnimationInterval;
+        function startVoiceAnimation() {
+            const bars = [
+                document.getElementById('voice-bar-1'),
+                document.getElementById('voice-bar-2'),
+                document.getElementById('voice-bar-3')
+            ];
+            
+            bars.forEach(bar => bar.classList.add('talking'));
+            
+            voiceAnimationInterval = setInterval(() => {
+                bars.forEach((bar, index) => {
+                    const randomHeight = 30 + Math.random() * 60;
+                    bar.style.height = randomHeight + 'px';
+                });
+            }, 100);
+        }
+        
+        function stopVoiceAnimation() {
+            const bars = [
+                document.getElementById('voice-bar-1'),
+                document.getElementById('voice-bar-2'),
+                document.getElementById('voice-bar-3')
+            ];
+            
+            bars.forEach(bar => {
+                bar.classList.remove('talking');
+                bar.style.height = '30px';
+            });
+            
+            if (voiceAnimationInterval) {
+                clearInterval(voiceAnimationInterval);
+            }
+        }
+        
+        // Text-to-Speech function
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                utterance.onstart = function() {
+                    isTalking = true;
+                    startVoiceAnimation();
+                    const voiceBox = document.getElementById('kitt-voice-box');
+                    voiceBox.classList.add('talking');
+                    logConsole('[TTS] Speaking...', 'info');
+                };
+                
+                utterance.onend = function() {
+                    isTalking = false;
+                    stopVoiceAnimation();
+                    const voiceBox = document.getElementById('kitt-voice-box');
+                    voiceBox.classList.remove('talking');
+                    logConsole('[TTS] Speech complete', 'info');
+                };
+                
+                utterance.onerror = function(event) {
+                    console.error('Speech synthesis error:', event);
+                    isTalking = false;
+                    stopVoiceAnimation();
+                };
+                
+                speechSynthesis.speak(utterance);
+            } else {
+                console.error('Speech synthesis not supported');
+                logConsole('[TTS] Text-to-speech not supported', 'error');
+            }
         }
         
         function updateVoiceStatus(text) {
@@ -1279,6 +1471,8 @@ HTML_TEMPLATE = """
         }
         
         function toggleVoice() {
+            console.log('Toggle voice clicked');
+            
             if (!recognition) {
                 logConsole('[VOICE] Speech recognition not supported in this browser', 'error');
                 alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
@@ -1286,13 +1480,27 @@ HTML_TEMPLATE = """
             }
             
             if (isListening) {
+                console.log('Stopping recognition...');
                 recognition.stop();
             } else {
+                console.log('Starting recognition...');
                 try {
                     recognition.start();
                 } catch (e) {
                     console.error('Error starting recognition:', e);
-                    logConsole('[VOICE] Error starting recognition', 'error');
+                    logConsole(`[VOICE] Error: ${e.message}`, 'error');
+                    
+                    // If already started, stop and restart
+                    if (e.message && e.message.includes('already started')) {
+                        recognition.stop();
+                        setTimeout(() => {
+                            try {
+                                recognition.start();
+                            } catch (e2) {
+                                console.error('Error restarting:', e2);
+                            }
+                        }, 100);
+                    }
                 }
             }
         }
