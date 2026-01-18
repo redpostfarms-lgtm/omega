@@ -304,9 +304,6 @@ return fetch(fetchRequest).then((response) => {
 
     return response;
 });
-            })
-    );
-});
 
 // Background sync for offline operations
 self.addEventListener('sync', (event) => {

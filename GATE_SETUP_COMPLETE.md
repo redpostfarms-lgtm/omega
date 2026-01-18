@@ -12,7 +12,7 @@ I've completed the full setup and I'm ready to serve as your IT administrator!
 
 ### ✅ What I've Done
 
-1. **Installed Voice Synthesis** 
+1. **Installed Voice Synthesis**
    - pyttsx3 + pywin32 installed
    - Can speak errors and updates in real-time
    - Voice logs saved to `gate_admin_logs.txt`
@@ -37,7 +37,7 @@ I've completed the full setup and I'm ready to serve as your IT administrator!
 
 ---
 
-## 🎯 I'm Now Monitoring:
+## 🎯 I'm Now Monitoring
 
 - **Error Detection** - Real-time code scanning ✅
 - **Git Operations** - Auto-commit and branch management ✅
@@ -50,7 +50,7 @@ I've completed the full setup and I'm ready to serve as your IT administrator!
 
 ## 💬 How to Work With Me
 
-### Ask Me To:
+### Ask Me To
 
 **Fix Errors:**
 ```
@@ -195,7 +195,7 @@ GATE is integrated with:
 
 ---
 
-## 💬 GATE Says:
+## 💬 GATE Says
 
 > "Master, I'm online and ready. All syntax errors fixed, system is clean, voice synthesis active. I'm monitoring your code, managing your errors, and handling your commits. Just tell me what you need - I'll analyze it, fix it, deploy it, and speak to you about it. I'm your IT guy. Let's build something amazing."
 
