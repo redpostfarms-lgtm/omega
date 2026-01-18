@@ -21,7 +21,7 @@ CORS(app)
 # Register QR handler blueprint
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'static', 'scripts'))
 try:
-    from qr_handler import qr
+    from static.scripts.qr_handler import qr  # type: ignore[import]
     app.register_blueprint(qr)
     print("✅ QR handler blueprint registered")
 except ImportError as e:
