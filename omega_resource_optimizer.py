@@ -4,12 +4,13 @@ Enforces 60% GPU + 40% CPU processing strategy to minimize RAM usage
 Keeps memory usage below 85% threshold by shifting compute to GPU/CPU
 """
 
-import psutil
-import subprocess
 import json
-from pathlib import Path
+import subprocess
 from datetime import datetime
-from typing import Dict, Any
+from pathlib import Path
+from typing import Any, Dict
+
+import psutil
 
 
 class OmegaResourceOptimizer:

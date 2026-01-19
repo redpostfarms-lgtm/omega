@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "default_voice": "azz",
+  "voices": {
+    "azz": {
+      "name": "AZZ",
+      "description": "Primary voice profile for Omega system",
+      "path": "H:\\The Gatekeeper\\voices\\azz",
+      "sample": "H:\\The Gatekeeper\\voices\\azz\\azz.wav",
+      "enabled": true,
+      "backend": "azure",
+      "azure_voice": "en-US-AvaMultilingualNeural",
+      "features": {
+        "pitch": "medium",
+        "rate": 1.0,
+        "volume": 1.0,
+        "emotion": "neutral"
+      },
+      "use_cases": [
+        "azure",
+        "omega",
+        "general"
+      ]
+    }
+  },
+  "routing_rules": {
+    "azure": "azz",
+    "omega": "azz",
+    "default": "azz"
+  }
+}
