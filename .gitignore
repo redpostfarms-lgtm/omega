@@ -147,6 +147,9 @@ node_modules/
 # Organized Files (large archived directories)
 Organized_Files/
 
+# Swarm data and generated files
+omega_swarm/
+
 # External projects and dependencies
 llama.cpp/
 extracted_files*/
