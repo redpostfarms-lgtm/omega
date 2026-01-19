@@ -15,11 +15,11 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     if platform.system() != "Windows":
         return None
     
-    # Try psutil sensors_temperatures (works on some Windows systems)
+    # Try psutil sensors_temperatures (works on Linux, limited on Windows)
     try:
         import psutil
         if hasattr(psutil, 'sensors_temperatures'):
-            temps = psutil.sensors_temperatures()
+            temps = psutil.sensors_temperatures()  # type: ignore[attr-defined]
             # Look for CPU temperature in various sensor names
             for name, entries in temps.items():
                 name_lower = name.lower()
@@ -27,6 +27,24 @@ def get_cpu_temperature_wmi() -> Optional[float]:
                     for entry in entries:
                         if entry.current and entry.current > 0:
                             return round(entry.current, 1)
+    except Exception:
+        pass
+    
+    # NEW: Try getting CPU temp via Windows Performance Counters
+    try:
+        import subprocess
+        result = subprocess.run(
+            ['powershell', '-Command', 
+             'Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace "root/wmi" | Select-Object -First 1 -ExpandProperty CurrentTemperature'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            temp_kelvin = float(result.stdout.strip()) / 10.0
+            temp_celsius = temp_kelvin - 273.15
+            if 0 < temp_celsius < 150:  # Sanity check
+                return round(temp_celsius, 1)
     except Exception:
         pass
     

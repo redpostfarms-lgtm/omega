@@ -75,7 +75,7 @@ try:
         os.environ['PYTHONNET_PYDLL'] = python_dll
         print(f"  Python DLL: {python_dll}")
     
-    import clr  # pythonnet
+    import clr  # pythonnet  # type: ignore[import-untyped]
     
     # Add LibreHardwareMonitor DLL path - try multiple locations
     libre_hw_paths = [
@@ -92,8 +92,8 @@ try:
     
     if libre_hw_path:
         sys.path.append(libre_hw_path)
-        clr.AddReference("LibreHardwareMonitorLib")
-        from LibreHardwareMonitor.Hardware import Computer
+        clr.AddReference("LibreHardwareMonitorLib")  # type: ignore[attr-defined]
+        from LibreHardwareMonitor.Hardware import Computer  # type: ignore[import-not-found]
         LIBRE_HW_AVAILABLE = True
         print(f"✓ LibreHardwareMonitor integration enabled")
         print(f"  DLL path: {libre_hw_path}")
@@ -269,11 +269,11 @@ class OmegaHardwareMonitor:
         
         # Fallback methods when LibreHardwareMonitor is unavailable
         if cpu.temperature is None:
-            # Try psutil sensors (Linux-like)
+            # Try psutil sensors (Linux-like, rarely works on Windows)
             try:
                 import psutil
                 if hasattr(psutil, "sensors_temperatures"):
-                    temps = psutil.sensors_temperatures()
+                    temps = psutil.sensors_temperatures()  # type: ignore[attr-defined]
                     if temps:
                         # Try common temperature sensor names
                         for sensor_name in ['coretemp', 'k10temp', 'zenpower', 'cpu_thermal']:
@@ -286,6 +286,25 @@ class OmegaHardwareMonitor:
                                     break
             except:
                 pass
+            
+            # NEW: Try PowerShell WMI query for CPU temperature
+            if cpu.temperature is None:
+                try:
+                    result = subprocess.run(
+                        ['powershell', '-Command', 
+                         'Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace "root/wmi" | Select-Object -First 1 -ExpandProperty CurrentTemperature'],
+                        capture_output=True,
+                        text=True,
+                        timeout=5
+                    )
+                    if result.returncode == 0 and result.stdout.strip():
+                        temp_kelvin = float(result.stdout.strip()) / 10.0
+                        temp_celsius = temp_kelvin - 273.15
+                        if 0 < temp_celsius < 150:
+                            cpu.temperature = round(temp_celsius, 1)
+                            cpu.package_temp = cpu.temperature
+                except:
+                    pass
             
             # Fallback to WMI
             if cpu.temperature is None:

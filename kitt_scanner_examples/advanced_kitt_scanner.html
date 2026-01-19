@@ -209,11 +209,14 @@
             border-radius: 3px;
             outline: none;
             -webkit-appearance: none;
+            appearance: none;
         }
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
+            appearance: none;
+            /* Standard property */
             width: 18px;
             height: 18px;
             background: #ff0000;
@@ -287,18 +290,18 @@
 
             <div class="control-group">
                 <label class="control-label">Speed: <span id="speedValue">50</span>%</label>
-                <input type="range" id="speedControl" min="10" max="100" value="50">
+                <input type="range" id="speedControl" min="10" max="100" value="50" title="Animation speed control">
                 <div class="value-display"><span id="speedMs">50</span>ms</div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Trail Length: <span id="trailValue">8</span></label>
-                <input type="range" id="trailControl" min="3" max="20" value="8">
+                <input type="range" id="trailControl" min="3" max="20" value="8" title="LED trail length control">
             </div>
 
             <div class="control-group">
                 <label class="control-label">Pattern Mode</label>
-                <select id="patternSelect">
+                <select id="patternSelect" title="Select animation pattern">
                     <option value="classic">Classic Bounce</option>
                     <option value="sweep">Single Sweep</option>
                     <option value="dual">Dual Scanner</option>
@@ -309,12 +312,12 @@
 
             <div class="control-group">
                 <label class="control-label">Intensity: <span id="intensityValue">100</span>%</label>
-                <input type="range" id="intensityControl" min="30" max="100" value="100">
+                <input type="range" id="intensityControl" min="30" max="100" value="100" title="LED brightness control">
             </div>
 
             <div class="control-group">
                 <label class="control-label">Color Scheme</label>
-                <select id="colorSelect">
+                <select id="colorSelect" title="Select LED color theme">
                     <option value="red">Classic Red</option>
                     <option value="blue">Cool Blue</option>
                     <option value="green">Matrix Green</option>
