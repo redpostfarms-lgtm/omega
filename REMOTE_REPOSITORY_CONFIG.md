@@ -46,7 +46,7 @@ git push -u omega complete-system-2026-01-17
 
 1. ⚠️ **Organization is `redpostfarms-lgtm` NOT `redpostfarms`**
 2. ⚠️ **Repository name is lowercase `omega` NOT `Omega`**
-3. ✅ Omega Codespace URL: https://urban-palm-tree-wrpp57x5gwrg2vrx.github.dev/
+3. ✅ Omega Codespace URL: <https://urban-palm-tree-wrpp57x5gwrg2vrx.github.dev/>
 4. ✅ All 19,336 objects successfully uploaded (4,350 files compressed)
 
 ### GATE Protocol Integration
