@@ -59,7 +59,7 @@ class CDriveManager:
         with open(self.config_file, "w") as f:
             json.dump(self.config, f, indent=4)
 
-    def log(self, message):
+    def log(self, message: str) -> None:
         """Log cleanup activity"""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"[{timestamp}] {message}\n"
@@ -84,7 +84,7 @@ class CDriveManager:
         space = self.get_drive_space()
         return space["free_gb"] < self.min_free_gb
 
-    def clean_directory(self, path_str, recursive=True):
+    def clean_directory(self, path_str: str, recursive: bool = True) -> int:
         """Clean a directory"""
         path = Path(path_str)
 
@@ -182,7 +182,7 @@ class CDriveManager:
         self.log(f"Cleaned old logs: {freed_mb} MB")
         return total_freed
 
-    def find_large_files(self, min_size_gb=1):
+    def find_large_files(self, min_size_gb: float = 1) -> list:
         """Find large files on C: drive"""
         self.log(f"Searching for files over {min_size_gb}GB...")
 
@@ -232,7 +232,7 @@ class CDriveManager:
         freed = round(final_space["free_gb"] - initial_space["free_gb"], 2)
 
         self.log("=" * 60)
-        self.log(f"✅ CLEANUP COMPLETE")
+        self.log("✅ CLEANUP COMPLETE")
         self.log(f"Free space: {initial_space['free_gb']} GB → {final_space['free_gb']} GB")
         self.log(f"Space freed: {freed} GB")
         self.log("=" * 60)
@@ -299,7 +299,7 @@ def main():
 
     if args.check:
         space = manager.get_drive_space()
-        print(f"\n💾 C: DRIVE STATUS")
+        print("\n💾 C: DRIVE STATUS")
         print("=" * 60)
         print(f"Total: {space['total_gb']} GB")
         print(f"Used: {space['used_gb']} GB")
