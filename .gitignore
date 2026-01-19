@@ -60,20 +60,31 @@ api_keys_backups/
 
 # User directories (Windows)
 AppData/
+Application Data/
 Contacts/
+Cookies/
 Desktop/
 Documents/
 Downloads/
 Favorites/
 Links/
+Local Settings/
 Music/
+My Documents/
+NetHood/
 OneDrive/
 Pictures/
+PrintHood/
+Recent/
 Saved Games/
 Searches/
+SendTo/
+Start Menu/
+Templates/
 Videos/
 3D Objects/
 Muse Hub/
+Temporary Internet Files/
 NTUSER.DAT*
 ntuser.dat*
 ntuser.ini
