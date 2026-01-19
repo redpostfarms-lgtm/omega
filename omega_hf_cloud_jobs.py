@@ -3,10 +3,9 @@ Hugging Face Cloud Jobs Integration Module
 Provides utilities for running Omega system tasks on Hugging Face cloud infrastructure
 """
 
-import os
 import subprocess
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 
 
 class HuggingFaceJobsManager:
@@ -106,7 +105,7 @@ class HuggingFaceJobsManager:
             return None
 
     def run_scheduled_job(
-        self, cron_schedule: str, image: str, command: List[str], **kwargs
+        self, cron_schedule: str, image: str, command: List[str], **kwargs: Any
     ) -> Optional[str]:
         """
         Schedule a recurring job with cron syntax
@@ -123,7 +122,7 @@ class HuggingFaceJobsManager:
         cmd = [self.hf_cli, "jobs", "scheduled", "run", cron_schedule]
 
         if kwargs.get("flavor"):
-            cmd.extend(["--flavor", kwargs["flavor"]])
+            cmd.extend(["--flavor", str(kwargs["flavor"])])
 
         cmd.append(image)
         cmd.extend(command)
