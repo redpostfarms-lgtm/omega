@@ -28,6 +28,7 @@ webrtcvad  # Voice Activity Detection for hands-free mode (optional but recommen
 # Async and Utilities
 aiofiles  # Async file I/O for non-blocking operations
 aiohttp  # Async HTTP client for web scraping and API calls
+websockets>=12.0  # WebSocket protocol for swarm heartbeat system
 # asyncio  # Built-in, listed for reference only
 
 # Monitoring & Metrics
