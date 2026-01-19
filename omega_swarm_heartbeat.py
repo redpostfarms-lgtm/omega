@@ -22,10 +22,12 @@ if TYPE_CHECKING:
 else:
     # Runtime imports
     try:
+        import websockets
         from websockets.server import WebSocketServerProtocol, serve
         from websockets.client import WebSocketClientProtocol, connect
     except ImportError:
         # Fallback if websockets not installed
+        websockets = None  # type: ignore
         WebSocketServerProtocol = Any  # type: ignore
         WebSocketClientProtocol = Any  # type: ignore
         serve = None  # type: ignore
@@ -136,7 +138,8 @@ class SwarmQueen:
                         status = {d.drone_id: d.to_dict() for d in self.drones.values()}
                     await websocket.send(json.dumps({"type": "swarm_status", "drones": status}))
 
-        except websockets.exceptions.ConnectionClosed:
+        except Exception:
+            # Catch all exceptions including ConnectionClosed
             pass
         finally:
             if drone_id:
@@ -162,7 +165,7 @@ class SwarmQueen:
                         print(f"[Swarm] Failed to ping {drone_id}: {e}")
 
                 # Check for dead drones
-                dead_drones = []
+                dead_drones: List[DroneStatus] = []
                 for drone_id, status in self.drones.items():
                     if not status.is_alive() and status.status != "dead":
                         status.status = "dead"
@@ -278,7 +281,8 @@ class SwarmDrone:
                             # Queen commands git sync
                             print("[Swarm] Queen commands: git sync")
 
-            except (websockets.exceptions.ConnectionClosed, ConnectionRefusedError) as e:
+            except (ConnectionRefusedError, Exception) as e:
+                # Catch ConnectionRefusedError and all websockets exceptions
                 print(f"[Swarm] Connection lost: {e}")
                 await asyncio.sleep(5)  # Retry after 5 seconds
 
