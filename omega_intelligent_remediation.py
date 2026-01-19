@@ -3,13 +3,11 @@ Intelligent Security Remediation System
 Quarantines actual threats while preserving legitimate operations
 """
 
-import os
-import sys
 import json
 import shutil
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Set
+from pathlib import Path
+from typing import Any, Dict, List
 
 
 class IntelligentRemediator:
@@ -50,16 +48,17 @@ class IntelligentRemediator:
             "malicious_urls": ["pastebin.com", "bit.ly", "suspicious"],
         }
 
-    def load_scan_results(self) -> Dict:
+    def load_scan_results(self) -> Dict[str, Any]:
         """Load forensic scan results"""
         if not self.report_file.exists():
             print("[ERROR] Scan report not found. Run omega_forensic_security.py first.")
             return {}
 
         with open(self.report_file, "r") as f:
-            return json.load(f)
+            result: Dict[str, Any] = json.load(f)
+            return result
 
-    def is_false_positive(self, threat: Dict, file_content: str) -> bool:
+    def is_false_positive(self, threat: Dict[str, Any], file_content: str) -> bool:
         """Determine if a threat is a false positive"""
         threat_type = threat.get("type", "")
         function = threat.get("function", "")
@@ -96,12 +95,12 @@ class IntelligentRemediator:
 
         return False
 
-    def is_real_threat(self, threat: Dict, file_content: str) -> bool:
+    def is_real_threat(self, threat: Dict[str, Any], file_content: str) -> bool:
         """Identify actual security threats"""
         context = threat.get("context", "").lower()
 
         # Check for actual dangerous patterns
-        for pattern_type, patterns in self.dangerous_patterns.items():
+        for _pattern_type, patterns in self.dangerous_patterns.items():
             if any(danger in context for danger in patterns):
                 return True
 
@@ -120,9 +119,9 @@ class IntelligentRemediator:
 
         return False
 
-    def analyze_file(self, file_result: Dict) -> Dict:
+    def analyze_file(self, file_result: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze a single file for real threats"""
-        file_path = Path(file_result["file"])
+        file_path = Path(str(file_result["file"]))
 
         if not file_path.exists():
             return {"status": "missing", "action": "skip"}
@@ -130,11 +129,11 @@ class IntelligentRemediator:
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
-        except:
+        except Exception:
             return {"status": "unreadable", "action": "skip"}
 
-        real_threats = []
-        false_positives = []
+        real_threats: List[Dict[str, Any]] = []
+        false_positives: List[Dict[str, Any]] = []
 
         for threat in file_result.get("threats", []):
             if self.is_real_threat(threat, content):
@@ -146,7 +145,7 @@ class IntelligentRemediator:
                 threat["review_needed"] = True
                 real_threats.append(threat)
 
-        analysis = {
+        analysis: Dict[str, Any] = {
             "file": str(file_path),
             "real_threats": real_threats,
             "false_positives": false_positives,
@@ -156,22 +155,23 @@ class IntelligentRemediator:
 
         return analysis
 
-    def create_safe_version(self, file_path: Path, threats: List[Dict]) -> bool:
+    def create_safe_version(self, file_path: Path, threats: List[Dict[str, Any]]) -> bool:
         """Create a safe version of a file with threats removed"""
         try:
             with open(file_path, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+                lines: List[str] = f.readlines()
 
             # Track modified lines
-            modified_lines = set()
+            modified_lines: set[int] = set()
 
             for threat in threats:
                 line_num = threat.get("line", 0)
                 if 0 < line_num <= len(lines):
-                    modified_lines.add(line_num - 1)
+                    idx = line_num - 1
+                    modified_lines.add(idx)
                     # Comment out the threat
-                    original = lines[line_num - 1]
-                    lines[line_num - 1] = f"# SECURITY-DISABLED: {original}"
+                    original_line: str = lines[idx]  # type: ignore[assignment]
+                    lines[idx] = f"# SECURITY-DISABLED: {original_line}"
 
             # Save safe version
             safe_file = self.safe_dir / file_path.name
@@ -179,7 +179,7 @@ class IntelligentRemediator:
                 f.writelines(lines)
 
             # Create a report
-            report = {
+            report: Dict[str, Any] = {
                 "original_file": str(file_path),
                 "safe_version": str(safe_file),
                 "modified_lines": sorted(modified_lines),
@@ -197,7 +197,7 @@ class IntelligentRemediator:
             print(f"[ERROR] Failed to create safe version: {e}")
             return False
 
-    def quarantine_file(self, file_path: Path, analysis: Dict) -> bool:
+    def quarantine_file(self, file_path: Path, analysis: Dict[str, Any]) -> bool:
         """Move a file to quarantine with analysis report"""
         try:
             # Copy file to quarantine
@@ -240,8 +240,8 @@ class IntelligentRemediator:
             "safe_versions_created": 0,
         }
 
-        files_needing_review = []
-        files_to_quarantine = []
+        files_needing_review: List[Dict[str, Any]] = []
+        files_to_quarantine: List[Dict[str, Any]] = []
 
         # Analyze each high-risk file
         for file_result in results.get("high_risk_files", []):
@@ -342,7 +342,7 @@ class IntelligentRemediator:
         print("=" * 80)
 
         # Save final report
-        report = {
+        report: Dict[str, Any] = {
             "timestamp": datetime.now().isoformat(),
             "statistics": stats,
             "files_quarantined": [a["file"] for a in files_to_quarantine],

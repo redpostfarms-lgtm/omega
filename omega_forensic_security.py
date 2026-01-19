@@ -4,17 +4,12 @@ Deep security scan for logic bombs, backdoors, and malicious code
 Protects against hidden shutdown mechanisms and security threats
 """
 
-import os
-import sys
 import ast
-import re
 import json
-import base64
-import hashlib
-from pathlib import Path
-from typing import Dict, List, Tuple, Set
+import re
 from datetime import datetime
-import subprocess
+from pathlib import Path
+from typing import Any, Dict, List
 
 
 class ForensicSecurityAnalyzer:
@@ -95,11 +90,11 @@ class ForensicSecurityAnalyzer:
             r"http[s]?://(?!(?:localhost|127\.0\.0\.1|api\.))",  # External URLs
         ]
 
-    def scan_file(self, file_path: Path) -> Dict:
+    def scan_file(self, file_path: Path) -> Dict[str, Any]:
         """Deep scan of single file"""
         print(f"[*] Scanning: {file_path.name}")
 
-        result = {
+        result: Dict[str, Any] = {
             "file": str(file_path),
             "threats": [],
             "suspicious": [],
@@ -160,9 +155,9 @@ class ForensicSecurityAnalyzer:
 
         return result
 
-    def _check_dangerous_functions(self, content: str, filename: str) -> List[Dict]:
+    def _check_dangerous_functions(self, content: str, filename: str) -> List[Dict[str, Any]]:
         """Check for dangerous function calls"""
-        threats = []
+        threats: List[Dict[str, Any]] = []
 
         for func in self.dangerous_functions:
             pattern = re.escape(func) + r"\s*\("
@@ -205,9 +200,9 @@ class ForensicSecurityAnalyzer:
 
         return threats
 
-    def _check_shutdown_patterns(self, content: str) -> List[Dict]:
+    def _check_shutdown_patterns(self, content: str) -> List[Dict[str, Any]]:
         """Check for shutdown/destruction patterns"""
-        threats = []
+        threats: List[Dict[str, Any]] = []
 
         for pattern in self.shutdown_patterns:
             matches = list(re.finditer(pattern, content, re.IGNORECASE))
@@ -231,9 +226,9 @@ class ForensicSecurityAnalyzer:
 
         return threats
 
-    def _check_time_bombs(self, content: str) -> List[Dict]:
+    def _check_time_bombs(self, content: str) -> List[Dict[str, Any]]:
         """Check for time-based triggers"""
-        suspicious = []
+        suspicious: List[Dict[str, Any]] = []
 
         # Look for time-based conditionals
         time_conditionals = re.finditer(
@@ -263,9 +258,9 @@ class ForensicSecurityAnalyzer:
 
         return suspicious
 
-    def _check_obfuscation(self, content: str) -> List[Dict]:
+    def _check_obfuscation(self, content: str) -> List[Dict[str, Any]]:
         """Check for code obfuscation"""
-        warnings = []
+        warnings: List[Dict[str, Any]] = []
 
         for pattern in self.obfuscation_patterns:
             matches = list(re.finditer(pattern, content))
@@ -288,9 +283,9 @@ class ForensicSecurityAnalyzer:
 
         return warnings
 
-    def _check_network_activity(self, content: str, filename: str) -> List[Dict]:
+    def _check_network_activity(self, content: str, filename: str) -> List[Dict[str, Any]]:
         """Check for network connections"""
-        warnings = []
+        warnings: List[Dict[str, Any]] = []
 
         # Skip known network files
         if filename in ["omega_web_researcher.py", "omega_api.py", "gate_enhanced_system.py"]:
@@ -318,9 +313,9 @@ class ForensicSecurityAnalyzer:
 
         return warnings
 
-    def _ast_analysis(self, content: str, filename: str) -> List[Dict]:
+    def _ast_analysis(self, content: str, filename: str) -> List[Dict[str, Any]]:
         """AST-based analysis for hidden logic"""
-        threats = []
+        threats: List[Dict[str, Any]] = []
 
         try:
             tree = ast.parse(content)
@@ -369,14 +364,14 @@ class ForensicSecurityAnalyzer:
                                                 }
                                             )
 
-        except:
+        except Exception:
             pass
 
         return threats
 
-    def _check_hardcoded_credentials(self, content: str) -> List[Dict]:
+    def _check_hardcoded_credentials(self, content: str) -> List[Dict[str, Any]]:
         """Check for hardcoded passwords/tokens"""
-        warnings = []
+        warnings: List[Dict[str, Any]] = []
 
         # Patterns for credentials
         cred_patterns = [
@@ -410,7 +405,7 @@ class ForensicSecurityAnalyzer:
 
         return warnings
 
-    def scan_all_files(self) -> Dict:
+    def scan_all_files(self) -> Dict[str, Any]:
         """Scan all Python files in project"""
         print("\n" + "=" * 70)
         print("OMEGA FORENSIC SECURITY SCAN")
@@ -422,7 +417,7 @@ class ForensicSecurityAnalyzer:
 
         print(f"[*] Found {len(python_files)} Python files to scan\n")
 
-        results = {
+        results: Dict[str, Any] = {
             "scan_time": datetime.now().isoformat(),
             "total_files": len(python_files),
             "files_scanned": [],
@@ -467,7 +462,7 @@ class ForensicSecurityAnalyzer:
 
         return results
 
-    def _save_report(self, results: Dict):
+    def _save_report(self, results: Dict[str, Any]) -> None:
         """Save detailed security report"""
         report_file = (
             self.project_root
@@ -479,7 +474,7 @@ class ForensicSecurityAnalyzer:
 
         print(f"\n[+] Detailed report saved: {report_file.name}")
 
-    def _display_summary(self, results: Dict):
+    def _display_summary(self, results: Dict[str, Any]) -> None:
         """Display security scan summary"""
         summary = results["summary"]
 
@@ -554,7 +549,7 @@ class ThreatRemediator:
             print(f"[!] Failed to quarantine {file_path.name}: {e}")
             return False
 
-    def create_safe_version(self, file_path: Path, threats: List[Dict]) -> bool:
+    def create_safe_version(self, file_path: Path, threats: List[Dict[str, Any]]) -> bool:
         """Create sanitized version of file"""
         try:
             with open(file_path, "r", encoding="utf-8") as f:
