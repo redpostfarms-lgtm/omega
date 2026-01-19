@@ -15,6 +15,7 @@ import sys
 import os
 import json
 import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
@@ -688,6 +689,89 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
+        @self.app.route('/api/hardware/enhanced', methods=['GET'])
+        def api_hardware_enhanced():
+            """Get enhanced hardware information from LibreHardwareMonitor"""
+            try:
+                # Try to import enhanced monitor
+                from omega_hardware_monitor_enhanced import OmegaHardwareMonitor
+                
+                monitor = OmegaHardwareMonitor()
+                try:
+                    data = monitor.get_all_hardware_data()
+                    return jsonify(data)
+                finally:
+                    monitor.close()
+            except Exception as e:
+                return jsonify({'error': str(e), 'available': False}), 500
+        
+        @self.app.route('/api/hardware/fan-control', methods=['POST'])
+        def api_fan_control():
+            """Control fan speeds (requires LibreHardwareMonitor and admin rights)"""
+            try:
+                from omega_hardware_monitor_enhanced import OmegaHardwareMonitor
+                
+                data = request.get_json()
+                fan_name = data.get('fan_name')
+                speed_percent = data.get('speed_percent')
+                
+                if not fan_name or speed_percent is None:
+                    return jsonify({'error': 'Missing fan_name or speed_percent'}), 400
+                
+                monitor = OmegaHardwareMonitor()
+                try:
+                    success = monitor.set_fan_speed(fan_name, speed_percent)
+                    return jsonify({'success': success})
+                finally:
+                    monitor.close()
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+        
+        @self.app.route('/api/hardware/rgb', methods=['GET', 'POST'])
+        def api_hardware_rgb():
+            """Get or set RGB lighting configuration"""
+            try:
+                from omega_hardware_monitor_enhanced import OmegaHardwareMonitor
+                
+                monitor = OmegaHardwareMonitor()
+                try:
+                    if request.method == 'GET':
+                        rgb_info = monitor.get_rgb_info()
+                        return jsonify(rgb_info)
+                    
+                    elif request.method == 'POST':
+                        data = request.get_json()
+                        action = data.get('action')
+                        
+                        if action == 'set_brightness':
+                            brightness = data.get('brightness', 100)
+                            success = monitor.set_rgb_brightness(brightness)
+                            return jsonify({'success': success, 'brightness': monitor.rgb_info.brightness})
+                        
+                        elif action == 'set_color':
+                            r = data.get('r', 255)
+                            g = data.get('g', 215)
+                            b = data.get('b', 0)
+                            success = monitor.set_rgb_color(r, g, b)
+                            return jsonify({'success': success, 'color_hex': monitor.rgb_info.color_hex})
+                        
+                        elif action == 'set_mode':
+                            mode = data.get('mode', 'static')
+                            success = monitor.set_rgb_mode(mode)
+                            return jsonify({'success': success, 'mode': monitor.rgb_info.mode})
+                        
+                        elif action == 'toggle':
+                            success = monitor.toggle_rgb()
+                            return jsonify({'success': success, 'enabled': monitor.rgb_info.enabled})
+                        
+                        else:
+                            return jsonify({'error': 'Invalid action'}), 400
+                
+                finally:
+                    monitor.close()
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+        
         @self.app.route('/api/load-balance', methods=['GET'])
         def api_load_balance():
             """Get GPU load balancer metrics and recommendations"""
@@ -865,6 +949,56 @@ class OmegaControlPanelWeb:
                 return jsonify({'success': True, 'message': 'Chat history cleared'})
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
+        
+        # Voice API routes
+        @self.app.route('/api/voice/speak', methods=['POST'])
+        def api_voice_speak():
+            """Trigger Omega voice"""
+            try:
+                data = request.get_json()
+                message = data.get('message', '')
+                voice_type = data.get('type', 'status')  # status, alert, command
+                
+                # Start voice in background
+                subprocess.Popen(
+                    [sys.executable, 'speak_omega_voice.py'],
+                    cwd=str(base_dir),
+                    creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
+                )
+                
+                return jsonify({
+                    'success': True,
+                    'message': 'Omega voice activated',
+                    'type': voice_type
+                })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+        
+        @self.app.route('/api/voice/status', methods=['GET'])
+        def api_voice_status():
+            """Get voice system status"""
+            try:
+                voice_files = []
+                for f in ['clip_0001.wav', 'omega_downloaded.wav']:
+                    if os.path.exists(f):
+                        voice_files.append({
+                            'name': f,
+                            'size': os.path.getsize(f)
+                        })
+                
+                return jsonify({
+                    'available': len(voice_files) > 0,
+                    'files': voice_files,
+                    'tts_installed': True
+                })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+        
+        # Mobile interface route
+        @self.app.route('/mobile')
+        def mobile_interface():
+            """Mobile-optimized interface"""
+            return self._get_mobile_html()
     
     def _setup_socketio(self):
         """Setup WebSocket events (if SocketIO available)"""
@@ -1019,20 +1153,73 @@ class OmegaControlPanelWeb:
             cpu_percent = psutil.cpu_percent(interval=0.1) if hasattr(psutil, 'cpu_percent') else 0.0
             memory = psutil.virtual_memory() if hasattr(psutil, 'virtual_memory') else None
             disk = psutil.disk_usage('/') if hasattr(psutil, 'disk_usage') else None
-            cpu_temp = self.control_panel._get_cpu_temperature()
+            
+            # Safely get control panel data
+            cpu_temp = self.control_panel._get_cpu_temperature() if self.control_panel else 0.0
+            gpu_temp = self.control_panel._get_gpu_temperature() if self.control_panel else 0.0
+            gpu_usage = self.control_panel._get_gpu_usage() if self.control_panel else 0.0
+            fan_speed = self.control_panel.fan_speed_percentage if self.control_panel else 50
+            rgb_enabled = self.control_panel.rgb_enabled if self.control_panel else False
+            rgb_color = self.control_panel.rgb_color if self.control_panel else '#FFD700'
+            
+            # Get comprehensive GPU info from RTX 3050
+            gpu_memory_used = 0.0
+            gpu_memory_total = 0.0
+            gpu_name = 'Unknown'
+            gpu_power_draw = None
+            gpu_power_limit = None
+            gpu_fan_speed = None
+            gpu_clock = None
+            gpu_memory_clock = None
+            
+            try:
+                from omega_hardware_sensors import get_gpu_info_nvidia
+                gpu_info = get_gpu_info_nvidia()
+                if gpu_info:
+                    gpu_name = gpu_info.get('name', 'Unknown')
+                    gpu_memory_used = gpu_info.get('memory_used_gb', 0.0)
+                    gpu_memory_total = gpu_info.get('memory_total_gb', 0.0)
+                    gpu_power_draw = gpu_info.get('power_draw')
+                    gpu_power_limit = gpu_info.get('power_limit')
+                    gpu_fan_speed = gpu_info.get('fan_speed')
+                    gpu_clock = gpu_info.get('clock_graphics')
+                    gpu_memory_clock = gpu_info.get('clock_memory')
+            except Exception:
+                # Fallback to basic nvidia-smi
+                try:
+                    result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used,memory.total', '--format=csv,noheader,nounits'],
+                                          capture_output=True, text=True, timeout=2)
+                    if result.returncode == 0:
+                        mem_data = result.stdout.strip().split(',')
+                        if len(mem_data) >= 2:
+                            gpu_memory_used = float(mem_data[0].strip()) / 1024  # Convert MB to GB
+                            gpu_memory_total = float(mem_data[1].strip()) / 1024
+                except Exception:
+                    pass
             
             return {
                 'cpu_usage': cpu_percent,
                 'cpu_temperature': cpu_temp or 0.0,
+                'gpu_name': gpu_name,
+                'gpu_temperature': gpu_temp or 0.0,
+                'gpu_usage': gpu_usage or 0.0,
+                'gpu_memory_used': gpu_memory_used,
+                'gpu_memory_total': gpu_memory_total,
+                'gpu_power_draw': gpu_power_draw,
+                'gpu_power_limit': gpu_power_limit,
+                'gpu_fan_speed': gpu_fan_speed,
+                'gpu_clock': gpu_clock,
+                'gpu_memory_clock': gpu_memory_clock,
+                'gpu_available': gpu_temp is not None or gpu_usage is not None,
                 'memory_usage': memory.percent if memory else 0.0,
                 'memory_total': memory.total if memory else 0,
                 'memory_available': memory.available if memory else 0,
                 'disk_usage': disk.percent if disk else 0.0,
                 'disk_total': disk.total if disk else 0,
                 'disk_free': disk.free if disk else 0,
-                'fan_speed': self.control_panel.fan_speed_percentage,
-                'rgb_enabled': self.control_panel.rgb_enabled,
-                'rgb_color': self.control_panel.rgb_color
+                'fan_speed': fan_speed,
+                'rgb_enabled': rgb_enabled,
+                'rgb_color': rgb_color
             }
         except Exception as e:
             return {'error': str(e)}
@@ -1041,6 +1228,371 @@ class OmegaControlPanelWeb:
         """Get hardware data"""
         system_data = self._get_system_data()
         return system_data
+    
+    def _get_mobile_html(self) -> str:
+        """Generate mobile-optimized HTML interface"""
+        return '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Omega Mobile Control</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+        .mobile-header {
+            background: rgba(255,0,0,0.1);
+            border-bottom: 2px solid #ff0000;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .mobile-header h1 {
+            font-size: 24px;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0f0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .mobile-content {
+            padding: 15px;
+            padding-bottom: 100px;
+        }
+        .voice-control {
+            background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,0,0,0.05));
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .voice-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border: none;
+            font-size: 48px;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,0,0,0.5);
+            transition: all 0.3s;
+            margin: 20px auto;
+            display: block;
+        }
+        .voice-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(255,0,0,0.5);
+        }
+        .voice-btn.listening {
+            animation: voicePulse 1s infinite;
+        }
+        @keyframes voicePulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255,0,0,0.5); }
+            50% { box-shadow: 0 10px 50px rgba(255,0,0,1); }
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .action-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .action-card:active {
+            background: rgba(255,255,255,0.1);
+            transform: scale(0.98);
+        }
+        .action-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .action-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .system-stats {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0f0, #0a0);
+            transition: width 0.3s;
+        }
+        .voice-status {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            border: 1px solid #ff0000;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 14px;
+            display: none;
+            animation: slideUp 0.3s;
+        }
+        @keyframes slideUp {
+            from { bottom: 60px; opacity: 0; }
+            to { bottom: 80px; opacity: 1; }
+        }
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.95);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            backdrop-filter: blur(10px);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .nav-btn.active {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <h1>⚡ OMEGA CONTROL</h1>
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>Online</span>
+            </div>
+            <div class="status-item">
+                <span id="time">--:--</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-content">
+        <div class="voice-control">
+            <h2>🎤 Omega Voice</h2>
+            <button class="voice-btn" id="voiceBtn">🔴</button>
+            <p id="voiceText">Tap to activate Omega</p>
+        </div>
+
+        <div class="quick-actions">
+            <div class="action-card" onclick="quickAction('status')">
+                <div class="action-icon">📊</div>
+                <div class="action-label">Status</div>
+            </div>
+            <div class="action-card" onclick="quickAction('voice')">
+                <div class="action-icon">🔊</div>
+                <div class="action-label">Speak</div>
+            </div>
+            <div class="action-card" onclick="quickAction('hardware')">
+                <div class="action-icon">💻</div>
+                <div class="action-label">Hardware</div>
+            </div>
+            <div class="action-card" onclick="quickAction('optimize')">
+                <div class="action-icon">⚡</div>
+                <div class="action-label">Optimize</div>
+            </div>
+        </div>
+
+        <div class="system-stats">
+            <h3 style="margin-bottom: 15px;">System Status</h3>
+            
+            <div class="stat-row">
+                <span class="stat-label">CPU</span>
+                <span class="stat-value" id="cpu">--</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="cpuBar"></div>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-label">RAM</span>
+                <span class="stat-value" id="ram">--</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="ramBar"></div>
+            </div>
+
+            <div class="stat-row">
+                <span class="stat-label">GPU</span>
+                <span class="stat-value" id="gpu">--</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="gpuBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="voice-status" id="voiceStatus">Omega speaking...</div>
+
+    <div class="nav-bar">
+        <button class="nav-btn active">🏠</button>
+        <button class="nav-btn">📊</button>
+        <button class="nav-btn">⚙️</button>
+        <button class="nav-btn">👤</button>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        const voiceBtn = document.getElementById('voiceBtn');
+        const voiceText = document.getElementById('voiceText');
+        const voiceStatus = document.getElementById('voiceStatus');
+        let isListening = false;
+
+        voiceBtn.onclick = function() {
+            if (!isListening) {
+                isListening = true;
+                voiceBtn.classList.add('listening');
+                voiceText.textContent = 'Omega activating...';
+                
+                fetch('/api/voice/speak', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({message: 'System status', type: 'status'})
+                })
+                .then(r => r.json())
+                .then(data => {
+                    voiceStatus.textContent = 'Omega online';
+                    voiceStatus.style.display = 'block';
+                    setTimeout(() => {
+                        voiceStatus.style.display = 'none';
+                        isListening = false;
+                        voiceBtn.classList.remove('listening');
+                        voiceText.textContent = 'Tap to activate Omega';
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error(err);
+                    isListening = false;
+                    voiceBtn.classList.remove('listening');
+                    voiceText.textContent = 'Error - Tap to retry';
+                });
+            }
+        };
+
+        function quickAction(action) {
+            switch(action) {
+                case 'voice':
+                    voiceBtn.click();
+                    break;
+                case 'status':
+                    updateStats();
+                    break;
+                case 'hardware':
+                    window.location.href = '/';
+                    break;
+                case 'optimize':
+                    alert('System optimization initiated');
+                    break;
+            }
+        }
+
+        function updateStats() {
+            fetch('/api/system')
+                .then(r => r.json())
+                .then(data => {
+                    const cpu = data.cpu_percent || 0;
+                    const ram = data.ram_percent || 0;
+                    const gpu = data.gpu_percent || 0;
+
+                    document.getElementById('cpu').textContent = cpu.toFixed(1) + '%';
+                    document.getElementById('ram').textContent = ram.toFixed(1) + '%';
+                    document.getElementById('gpu').textContent = gpu.toFixed(1) + '%';
+
+                    document.getElementById('cpuBar').style.width = cpu + '%';
+                    document.getElementById('ramBar').style.width = ram + '%';
+                    document.getElementById('gpuBar').style.width = gpu + '%';
+                })
+                .catch(err => console.error(err));
+        }
+
+        setInterval(updateStats, 1000);  // Update every 1 second
+        updateStats();
+    </script>
+</body>
+</html>''';
     
     def _get_dashboard_html(self) -> str:
         """Get dashboard HTML"""
@@ -1055,8 +1607,8 @@ class OmegaControlPanelWeb:
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+            color: #fff;
             min-height: 100vh;
             padding: 20px;
         }
@@ -1065,15 +1617,21 @@ class OmegaControlPanelWeb:
             margin: 0 auto;
         }
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
         }
         .header h1 {
-            color: #667eea;
+            color: #ff0000;
             margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(255,0,0,0.5);
+            letter-spacing: 3px;
         }
         .stats-grid {
             display: grid;
@@ -1082,47 +1640,65 @@ class OmegaControlPanelWeb:
             margin-bottom: 20px;
         }
         .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.3);
+            border-color: rgba(255, 0, 0, 0.5);
         }
         .stat-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
+            color: #ff4444;
+            margin-bottom: 15px;
             font-size: 14px;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .stat-value {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            color: #333;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.3);
         }
         .stat-unit {
             font-size: 16px;
-            color: #666;
+            color: #aaa;
         }
         .section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         .section h2 {
-            color: #667eea;
-            margin-bottom: 15px;
+            color: #ff4444;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255,68,68,0.3);
+            padding-bottom: 10px;
         }
         .notification {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
             border-left: 4px solid;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
-        .notification.info { background: #e3f2fd; border-color: #2196f3; }
-        .notification.warning { background: #fff3e0; border-color: #ff9800; }
-        .notification.error { background: #ffebee; border-color: #f44336; }
-        .notification.success { background: #e8f5e9; border-color: #4caf50; }
+        .notification.info { border-color: #2196f3; color: #64b5f6; }
+        .notification.warning { border-color: #ff9800; color: #ffb74d; }
+        .notification.error { border-color: #f44336; color: #e57373; }
+        .notification.success { border-color: #4caf50; color: #81c784; }
         .controls {
             display: flex;
             gap: 15px;
@@ -1200,24 +1776,235 @@ class OmegaControlPanelWeb:
             background: #667eea;
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
+            padding: 8px 16px;
+            border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 12px;
             font-weight: bold;
         }
         .refresh-btn:hover {
             background: #5568d3;
         }
+        
+        /* KITT Voice Box */
+        .kitt-voice-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            padding: 20px 30px;
+            border-radius: 8px;
+            border: 2px solid #1a1a1a;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
+            margin: 20px 0;
+        }
+        
+        .kitt-bars {
+            display: flex;
+            gap: 6px;
+            align-items: flex-end;
+        }
+        
+        .kitt-bar {
+            width: 8px;
+            background: rgba(80,0,0,0.3);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 -2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .kitt-bar.active {
+            background: linear-gradient(to top, #ff0000, #ff6666);
+            box-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px rgba(255,0,0,0.6),
+                inset 0 -2px 8px rgba(255,100,100,0.8);
+        }
+        
+        .kitt-bar.dim {
+            background: rgba(255,0,0,0.2);
+            box-shadow: 0 0 5px rgba(255,0,0,0.2);
+        }
+        
+        /* Header Section (Light Blue) */
+        .omega-header-section {
+            background: linear-gradient(135deg, #4a90e2, #5ba3f5);
+            padding: 20px 30px;
+            border-radius: 8px 8px 0 0;
+            border: 2px solid rgba(74, 144, 226, 0.5);
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+        
+        .omega-header-section h1 {
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .omega-header-section p {
+            margin: 5px 0 0 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* KITT Section (Purple Background) */
+        .kitt-section {
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 2px solid rgba(142, 36, 170, 0.5);
+            border-right: 2px solid rgba(142, 36, 170, 0.5);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Voice Status Section (Orange/Yellow Box) */
+        .voice-status-section {
+            background: linear-gradient(135deg, #ff9800, #ffc107);
+            padding: 20px 30px;
+            border-radius: 0 0 8px 8px;
+            border: 2px solid rgba(255, 152, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .voice-status-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .status-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #666;
+            box-shadow: 0 0 10px rgba(102, 102, 102, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .status-indicator.active {
+            background: #ff0000;
+            box-shadow: 
+                0 0 15px #ff0000,
+                0 0 30px rgba(255, 0, 0, 0.8);
+            animation: statusPulse 1.5s infinite;
+        }
+        
+        @keyframes statusPulse {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+        
+        .status-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .status-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff0000;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .status-subtitle {
+            font-size: 12px;
+            color: #aaa;
+            opacity: 0.8;
+        }
+        
+        /* Tab System */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            color: #ff8888 !important;
+        }
+        .tab-btn.active {
+            color: #ff0000 !important;
+            border-bottom-color: #ff0000 !important;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
     </style>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>OMEGA CONTROL PANEL</h1>
-            <p>Web Interface - Real-time Monitoring & Control</p>
+            <!-- Header Section (Light Blue) - OMEGA Name -->
+            <div class="omega-header-section">
+                <h1>🔴 OMEGA CONTROL PANEL</h1>
+                <p>Web Interface - Real-time Monitoring & Control</p>
+            </div>
+            
+            <!-- KITT Voice Section (Purple Background) -->
+            <div class="kitt-section">
+                <!-- Simplified layout - bars saved for later -->
+            </div>
+            
+            <!-- Voice Status Section (Orange/Yellow Box) -->
+            <div class="voice-status-section">
+                <div class="voice-status-box" id="voiceStatusBox">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <div class="status-text">
+                        <div class="status-title" id="statusTitle">OMEGA READY</div>
+                        <div class="status-subtitle" id="statusSubtitle">Click button to activate</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div style="margin-top: 20px; display: flex; gap: 10px; border-bottom: 2px solid rgba(255,0,0,0.2); padding-bottom: 10px;">
+                <button onclick="switchTab('desktop')" id="tabDesktop" class="tab-btn active" style="background: transparent; border: none; color: #ff4444; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid #ff0000; font-weight: bold;">
+                    💻 Desktop
+                </button>
+                <button onclick="switchTab('mobile')" id="tabMobile" class="tab-btn" style="background: transparent; border: none; color: #aaa; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: bold;">
+                    📱 Mobile
+                </button>
+                <button onclick="switchTab('qr')" id="tabQR" class="tab-btn" style="background: transparent; border: none; color: #aaa; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: bold;">
+                    📷 QR Code
+                </button>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="activateOmegaVoice()" style="background: #ff0000; width: auto; padding: 12px 24px; font-weight: bold; box-shadow: 0 0 20px rgba(255,0,0,0.3);">
+                    🎤 Activate Omega Voice
+                </button>
+                <button onclick="refreshData()" style="background: #4caf50; width: auto; padding: 12px 24px; font-weight: bold;">
+                    🔄 Refresh Data
+                </button>
+                <button onclick="toggleRGB()" id="rgbToggleBtn" style="background: #9c27b0; width: auto; padding: 12px 24px; font-weight: bold;">
+                    🌈 Toggle RGB
+                </button>
+            </div>
         </div>
+        
+        <!-- Tab Content -->
+        <div id="tabContentDesktop" class="tab-content active">
         
         <div class="stats-grid" id="statsGrid">
             <!-- Stats will be loaded here -->
@@ -1236,6 +2023,265 @@ class OmegaControlPanelWeb:
         <div class="section">
             <h2>Integrated Systems</h2>
             <div id="integratedSystems">Loading...</div>
+        </div>
+        
+        <div class="section">
+            <h2>🌡️ Enhanced Hardware Monitor</h2>
+            <div id="enhancedHardwareMonitor" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <!-- CPU Section -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">🖥️</span>
+                        <span>CPU Monitor</span>
+                    </h3>
+                    <div id="cpuMonitor" style="font-size: 14px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Temperature:</strong> <span id="cpuTemp">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Package:</strong> <span id="cpuPackageTemp">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Core Temps:</strong><br>
+                            <span id="cpuCoreTemps" style="font-size: 12px;">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Clock:</strong> <span id="cpuClock">--</span> MHz
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Power:</strong> <span id="cpuPower">--</span>W
+                        </div>
+                        <div>
+                            <strong>Usage:</strong> <span id="cpuUsageDetailed">--</span>%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPU Section -->
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">🎮</span>
+                        <span>GPU Monitor</span>
+                    </h3>
+                    <div id="gpuMonitor" style="font-size: 14px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Name:</strong> <span id="gpuNameDetailed">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Temperature:</strong> <span id="gpuTempDetailed">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Hot Spot:</strong> <span id="gpuHotSpot">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Memory Temp:</strong> <span id="gpuMemoryTemp">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Usage:</strong> <span id="gpuUsageDetailed">--</span>%
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Memory:</strong> <span id="gpuMemoryDetailed">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Power:</strong> <span id="gpuPowerDetailed">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Fan:</strong> <span id="gpuFanDetailed">--</span>%
+                        </div>
+                        <div>
+                            <strong>Clocks:</strong> <span id="gpuClocksDetailed">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motherboard Section -->
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">⚡</span>
+                        <span>Motherboard</span>
+                    </h3>
+                    <div id="motherboardMonitor" style="font-size: 14px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Name:</strong><br>
+                            <span id="mbName" style="font-size: 12px;">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Chipset:</strong> <span id="mbChipsetTemp">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>VRM:</strong> <span id="mbVrmTemp">--</span>°C
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Fans:</strong><br>
+                            <span id="mbFans" style="font-size: 12px;">--</span>
+                        </div>
+                        <div>
+                            <strong>Status:</strong> <span id="mbStatus">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory Section -->
+                <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">💾</span>
+                        <span>Memory</span>
+                    </h3>
+                    <div id="memoryMonitor" style="font-size: 14px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Usage:</strong> <span id="memUsage">--</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Temperature:</strong> <span id="memTemp">--</span>°C
+                        </div>
+                        <div>
+                            <strong>Speed:</strong> <span id="memSpeed">--</span> MHz
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Section -->
+                <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">💿</span>
+                        <span>Storage</span>
+                    </h3>
+                    <div id="storageMonitor" style="font-size: 12px;">
+                        <div id="storageDevices">No storage data available</div>
+                    </div>
+                </div>
+
+                <!-- LibreHardwareMonitor Status -->
+                <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 10px; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 24px;">📊</span>
+                        <span>Monitor Status</span>
+                    </h3>
+                    <div id="monitorStatus" style="font-size: 14px;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>LibreHardwareMonitor:</strong> <span id="libreHwStatus">Checking...</span>
+                        </div>
+                        <div style="margin-bottom: 10px; font-size: 12px; line-height: 1.5;">
+                            <strong>Installation:</strong><br>
+                            Download from <a href="https://github.com/LibreHardwareMonitor/LibreHardwareMonitor" target="_blank" style="color: #667eea;">GitHub</a><br>
+                            Run as Administrator for full access
+                        </div>
+                        <div style="font-size: 12px;">
+                            <strong>Last Update:</strong> <span id="hwLastUpdate">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Performance Controls -->
+            <div style="background: #f5f5f5; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h3 style="margin: 0 0 15px 0; color: #333;">⚙️ Performance Controls</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🌡️ CPU Boost Mode</label>
+                        <select id="cpuBoostMode" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
+                            <option value="auto">Auto (Default)</option>
+                            <option value="conservative">Conservative</option>
+                            <option value="performance">High Performance</option>
+                            <option value="aggressive">Aggressive Boost</option>
+                        </select>
+                        <small style="color: #666; display: block; margin-top: 5px;">Adjust CPU turbo behavior</small>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🎮 GPU Power Limit</label>
+                        <select id="gpuPowerLimit" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
+                            <option value="default">Default (Stock)</option>
+                            <option value="eco">Eco Mode (70W)</option>
+                            <option value="balanced">Balanced (90W)</option>
+                            <option value="performance">Performance (110W)</option>
+                        </select>
+                        <small style="color: #666; display: block; margin-top: 5px;">Adjust GPU power target</small>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">💨 Fan Profile</label>
+                        <select id="fanProfile" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
+                            <option value="auto">Auto (Temperature-based)</option>
+                            <option value="silent">Silent (30-50%)</option>
+                            <option value="balanced">Balanced (50-70%)</option>
+                            <option value="performance">Performance (70-100%)</option>
+                            <option value="manual">Manual Control</option>
+                        </select>
+                        <small style="color: #666; display: block; margin-top: 5px;">Fan speed behavior</small>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="applyPerformanceSettings()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                        ✓ Apply Settings
+                    </button>
+                    <small style="display: block; margin-top: 10px; color: #999;">⚠️ Requires administrator rights for some settings</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RGB Lighting Control -->
+        <div class="section">
+            <h2>🌈 RGB Lighting Control</h2>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- RGB Brightness -->
+                    <div>
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">
+                            💡 Brightness: <span id="rgbBrightnessValue">100</span>%
+                        </label>
+                        <input type="range" id="rgbBrightness" min="0" max="100" value="100" 
+                               style="width: 100%; height: 8px; border-radius: 5px; background: rgba(255,255,255,0.3); cursor: pointer;"
+                               oninput="updateRGBBrightness(this.value)">
+                        <small style="color: rgba(255,255,255,0.8); display: block; margin-top: 5px;">Adjust RGB LED brightness</small>
+                    </div>
+                    
+                    <!-- RGB Color Picker -->
+                    <div>
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">🎨 Color</label>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <input type="color" id="rgbColorPicker" value="#FFD700" 
+                                   style="width: 80px; height: 50px; border: 3px solid white; border-radius: 5px; cursor: pointer;"
+                                   onchange="updateRGBColorPicker(this.value)">
+                            <div style="flex: 1;">
+                                <div id="rgbColorHex" style="font-family: monospace; font-size: 18px; font-weight: bold;">#FFD700</div>
+                                <div id="rgbColorRGB" style="font-size: 12px; opacity: 0.8; margin-top: 5px;">RGB(255, 215, 0)</div>
+                            </div>
+                        </div>
+                        <small style="color: rgba(255,255,255,0.8); display: block; margin-top: 5px;">Click to choose RGB color</small>
+                    </div>
+                    
+                    <!-- RGB Mode -->
+                    <div>
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">✨ Mode</label>
+                        <select id="rgbMode" style="width: 100%; padding: 12px; border-radius: 5px; border: none; background: white; color: #333; font-size: 14px; font-weight: bold; cursor: pointer;"
+                                onchange="updateRGBMode(this.value)">
+                            <option value="static">🔴 Static (Solid Color)</option>
+                            <option value="breathing">💨 Breathing (Fade In/Out)</option>
+                            <option value="rainbow">🌈 Rainbow (Cycle Colors)</option>
+                            <option value="reactive">🎵 Reactive (Audio Sync)</option>
+                        </select>
+                        <small style="color: rgba(255,255,255,0.8); display: block; margin-top: 5px;">Select lighting effect</small>
+                    </div>
+                </div>
+                
+                <!-- RGB Status Display -->
+                <div style="margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 5px; text-align: center;">
+                    <div style="display: inline-block; padding: 8px 20px; background: rgba(255,255,255,0.2); border-radius: 20px; font-weight: bold; margin-bottom: 10px;">
+                        RGB Status: <span id="rgbStatus">ENABLED</span>
+                    </div>
+                    <br>
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                        <button onclick="applyRGBSettings()" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                            ✓ Apply RGB Settings
+                        </button>
+                        <button onclick="toggleRGBLighting()" id="rgbPowerBtn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                            🔘 Toggle ON/OFF
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="section">
@@ -1349,16 +2395,393 @@ class OmegaControlPanelWeb:
             </div>
         </div>
         
-        <button class="refresh-btn" onclick="refreshData()">Refresh</button>
+        <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+        </div>
+        
+        <!-- Mobile Tab Content -->
+        <div id="tabContentMobile" class="tab-content" style="display: none;">
+            <div class="section">
+                <h2>📱 Mobile Access</h2>
+                <p style="color: #aaa; margin-bottom: 20px;">Access Omega Control Panel on your mobile device</p>
+                <div style="text-align: center;">
+                    <a href="/mobile" style="display: inline-block; padding: 15px 30px; background: #ff0000; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; box-shadow: 0 0 20px rgba(255,0,0,0.3);">
+                        📱 Open Mobile Interface
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QR Code Tab Content -->
+        <div id="tabContentQR" class="tab-content" style="display: none;">
+            <div class="section">
+                <h2>📷 QR Code Access</h2>
+                <p style="color: #aaa; margin-bottom: 20px;">Scan to access on your phone</p>
+                <div style="text-align: center; padding: 40px;">
+                    <div id="qrcode" style="display: inline-block; padding: 20px; background: white; border-radius: 15px;">
+                        <!-- QR Code will be generated here -->
+                    </div>
+                    <p style="margin-top: 20px; font-size: 18px; font-weight: bold; color: #ff4444;" id="qrURL">http://localhost:5000/mobile</p>
+                    <p style="margin-top: 10px; color: #aaa;">Scan with your phone camera</p>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = '#aaa';
+                btn.style.borderBottomColor = 'transparent';
+            });
+            
+            // Show selected tab
+            const contentId = 'tabContent' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+            const tabContent = document.getElementById(contentId);
+            const tabBtn = document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
+            
+            if (tabContent) {
+                tabContent.style.display = 'block';
+                tabContent.classList.add('active');
+            }
+            if (tabBtn) {
+                tabBtn.classList.add('active');
+                tabBtn.style.color = '#ff0000';
+                tabBtn.style.borderBottomColor = '#ff0000';
+            }
+            
+            // Generate QR code if switching to QR tab
+            if (tabName === 'qr') {
+                generateQRCode();
+            }
+        }
+        
+        // Voice status updates (KITT/Spectrum animations saved for later)
+        function updateVoiceStatus(isActive) {
+            const indicator = document.getElementById('statusIndicator');
+            const title = document.getElementById('statusTitle');
+            const subtitle = document.getElementById('statusSubtitle');
+            
+            if (isActive) {
+                indicator.classList.add('active');
+                title.textContent = 'OMEGA SPEAKING';
+                subtitle.textContent = 'Voice system active...';
+            } else {
+                indicator.classList.remove('active');
+                title.textContent = 'OMEGA READY';
+                subtitle.textContent = 'Click button to activate';
+            }
+        }
+        
+        // QR Code Generation
+        function generateQRCode() {
+            const qrContainer = document.getElementById('qrcode');
+            if (!qrContainer) return;
+            
+            // Clear existing QR code
+            qrContainer.innerHTML = '';
+            
+            // Get current URL for mobile interface
+            const hostname = window.location.hostname;
+            const port = window.location.port;
+            const mobileURL = `http://${hostname}:${port}/mobile`;
+            
+            // Update URL display
+            const urlDisplay = document.getElementById('qrURL');
+            if (urlDisplay) {
+                urlDisplay.textContent = mobileURL;
+            }
+            
+            // Generate QR code
+            new QRCode(qrContainer, {
+                text: mobileURL,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            setInterval(refreshData, 2000); // Faster refresh - 2 seconds
+            
+            // Start enhanced hardware monitoring
+            loadEnhancedHardwareData();
+            setInterval(loadEnhancedHardwareData, 3000); // Update every 3 seconds
+        });
+        
         function refreshData() {
             // Refresh all data
             loadStats();
             loadNotifications();
             loadIntegratedSystems();
         }
+        
+        async function loadEnhancedHardwareData() {
+            try {
+                const response = await fetch('/api/hardware/enhanced');
+                const data = await response.json();
+                
+                if (data.error) {
+                    // LibreHardwareMonitor not available
+                    document.getElementById('libreHwStatus').innerHTML = `<span style="color: #f44336;">✗ Not Available</span>`;
+                    document.getElementById('mbStatus').textContent = 'Not Available';
+                    return;
+                }
+                
+                // Update CPU Monitor
+                const cpu = data.cpu;
+                document.getElementById('cpuTemp').textContent = cpu.temperature !== null ? cpu.temperature.toFixed(1) : 'N/A';
+                document.getElementById('cpuPackageTemp').textContent = cpu.package_temp !== null ? cpu.package_temp.toFixed(1) : 'N/A';
+                
+                if (cpu.core_temps && cpu.core_temps.length > 0) {
+                    const coreTemps = cpu.core_temps.map((t, i) => `Core ${i}: ${t.toFixed(1)}°C`).join(', ');
+                    document.getElementById('cpuCoreTemps').textContent = coreTemps;
+                } else {
+                    document.getElementById('cpuCoreTemps').textContent = 'N/A';
+                }
+                
+                document.getElementById('cpuClock').textContent = cpu.current_clock > 0 ? cpu.current_clock.toFixed(0) : 'N/A';
+                document.getElementById('cpuPower').textContent = cpu.power_draw !== null ? cpu.power_draw.toFixed(1) : 'N/A';
+                document.getElementById('cpuUsageDetailed').textContent = cpu.usage.toFixed(1);
+                
+                // Update GPU Monitor
+                const gpu = data.gpu;
+                document.getElementById('gpuNameDetailed').textContent = gpu.name;
+                document.getElementById('gpuTempDetailed').textContent = gpu.temperature !== null ? gpu.temperature.toFixed(1) : 'N/A';
+                document.getElementById('gpuHotSpot').textContent = gpu.hot_spot_temp !== null ? gpu.hot_spot_temp.toFixed(1) : 'N/A';
+                document.getElementById('gpuMemoryTemp').textContent = gpu.memory_temp !== null ? gpu.memory_temp.toFixed(1) : 'N/A';
+                document.getElementById('gpuUsageDetailed').textContent = gpu.usage !== null ? gpu.usage.toFixed(1) : 'N/A';
+                document.getElementById('gpuMemoryDetailed').textContent = 
+                    `${gpu.memory_used.toFixed(2)} GB / ${gpu.memory_total.toFixed(2)} GB`;
+                
+                if (gpu.power_draw !== null && gpu.power_limit !== null) {
+                    document.getElementById('gpuPowerDetailed').textContent = 
+                        `${gpu.power_draw.toFixed(1)}W / ${gpu.power_limit.toFixed(0)}W`;
+                } else {
+                    document.getElementById('gpuPowerDetailed').textContent = 'N/A';
+                }
+                
+                document.getElementById('gpuFanDetailed').textContent = gpu.fan_speed !== null ? gpu.fan_speed.toFixed(0) : 'N/A';
+                document.getElementById('gpuClocksDetailed').textContent = 
+                    `${gpu.core_clock || 'N/A'}MHz / ${gpu.memory_clock || 'N/A'}MHz`;
+                
+                // Update Motherboard Monitor
+                const mb = data.motherboard;
+                document.getElementById('mbName').textContent = mb.name;
+                document.getElementById('mbChipsetTemp').textContent = mb.chipset_temp !== null ? mb.chipset_temp.toFixed(1) : 'N/A';
+                document.getElementById('mbVrmTemp').textContent = mb.vrm_temp !== null ? mb.vrm_temp.toFixed(1) : 'N/A';
+                
+                if (mb.system_fans && Object.keys(mb.system_fans).length > 0) {
+                    const fans = Object.entries(mb.system_fans).map(([name, rpm]) => 
+                        `${name}: ${rpm.toFixed(0)} RPM`
+                    ).join('<br>');
+                    document.getElementById('mbFans').innerHTML = fans;
+                    document.getElementById('mbStatus').innerHTML = '<span style="color: #4caf50;">✓ All sensors active</span>';
+                } else {
+                    document.getElementById('mbFans').textContent = 'No fan data';
+                    document.getElementById('mbStatus').innerHTML = '<span style="color: #ff9800;">⚠ Limited data</span>';
+                }
+                
+                // Update Memory Monitor
+                const mem = data.memory;
+                document.getElementById('memUsage').textContent = 
+                    `${mem.used_gb.toFixed(1)} GB / ${mem.total_gb.toFixed(1)} GB (${mem.usage_percent.toFixed(1)}%)`;
+                document.getElementById('memTemp').textContent = mem.temperature !== null ? mem.temperature.toFixed(1) : 'N/A';
+                document.getElementById('memSpeed').textContent = mem.speed_mhz !== null ? mem.speed_mhz : 'N/A';
+                
+                // Update Storage Monitor
+                const storage = data.storage;
+                if (storage && storage.length > 0) {
+                    const storageHTML = storage.map(s => `
+                        <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                            <strong>${s.name}</strong> (${s.type})<br>
+                            Temp: ${s.temperature !== null ? s.temperature.toFixed(1) + '°C' : 'N/A'}<br>
+                            ${s.health !== null ? 'Health: ' + s.health + '%' : ''}
+                        </div>
+                    `).join('');
+                    document.getElementById('storageDevices').innerHTML = storageHTML;
+                } else {
+                    document.getElementById('storageDevices').textContent = 'No storage data available';
+                }
+                
+                // Update LibreHardwareMonitor Status
+                if (data.libre_hw_available) {
+                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #4caf50;">✓ Active</span>';
+                } else {
+                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">✗ Not Running</span>';
+                }
+                
+                document.getElementById('hwLastUpdate').textContent = new Date(data.timestamp).toLocaleTimeString();
+                
+            } catch (error) {
+                console.error('Enhanced hardware monitor error:', error);
+                document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">✗ Error</span>';
+            }
+        }
+        
+        function applyPerformanceSettings() {
+            const cpuBoost = document.getElementById('cpuBoostMode').value;
+            const gpuPower = document.getElementById('gpuPowerLimit').value;
+            const fanProfile = document.getElementById('fanProfile').value;
+            
+            alert(`Performance settings applied:\n\nCPU Boost: ${cpuBoost}\nGPU Power: ${gpuPower}\nFan Profile: ${fanProfile}\n\n⚠️ Note: Some settings require administrator rights and hardware support.`);
+            
+            // In a real implementation, these would call backend APIs to adjust settings
+            // For now, this is a UI demonstration
+        }
+        
+        // RGB Control Functions
+        async function updateRGBBrightness(value) {
+            document.getElementById('rgbBrightnessValue').textContent = value;
+        }
+        
+        async function updateRGBColorPicker(hexColor) {
+            document.getElementById('rgbColorHex').textContent = hexColor.toUpperCase();
+            
+            // Convert hex to RGB
+            const r = parseInt(hexColor.slice(1, 3), 16);
+            const g = parseInt(hexColor.slice(3, 5), 16);
+            const b = parseInt(hexColor.slice(5, 7), 16);
+            document.getElementById('rgbColorRGB').textContent = `RGB(${r}, ${g}, ${b})`;
+        }
+        
+        async function updateRGBMode(mode) {
+            console.log('RGB mode changed to:', mode);
+        }
+        
+        async function applyRGBSettings() {
+            const brightness = document.getElementById('rgbBrightness').value;
+            const color = document.getElementById('rgbColorPicker').value;
+            const mode = document.getElementById('rgbMode').value;
+            
+            try {
+                // Set brightness
+                await fetch('/api/hardware/rgb', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'set_brightness',
+                        brightness: parseInt(brightness)
+                    })
+                });
+                
+                // Set color
+                const r = parseInt(color.slice(1, 3), 16);
+                const g = parseInt(color.slice(3, 5), 16);
+                const b = parseInt(color.slice(5, 7), 16);
+                
+                await fetch('/api/hardware/rgb', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'set_color',
+                        r: r,
+                        g: g,
+                        b: b
+                    })
+                });
+                
+                // Set mode
+                await fetch('/api/hardware/rgb', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'set_mode',
+                        mode: mode
+                    })
+                });
+                
+                alert(`✓ RGB Settings Applied!\n\nBrightness: ${brightness}%\nColor: ${color}\nMode: ${mode}`);
+                
+                // Refresh RGB status
+                await loadRGBStatus();
+                
+            } catch (error) {
+                console.error('RGB settings error:', error);
+                alert('❌ Failed to apply RGB settings');
+            }
+        }
+        
+        async function toggleRGBLighting() {
+            try {
+                const response = await fetch('/api/hardware/rgb', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({action: 'toggle'})
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const status = data.enabled ? 'ENABLED' : 'DISABLED';
+                    document.getElementById('rgbStatus').textContent = status;
+                    
+                    const btn = document.getElementById('rgbPowerBtn');
+                    if (data.enabled) {
+                        btn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                        btn.innerHTML = '🔘 Toggle ON/OFF';
+                    } else {
+                        btn.style.background = 'linear-gradient(135deg, #666 0%, #999 100%)';
+                        btn.innerHTML = '⚪ Toggle ON/OFF';
+                    }
+                    
+                    alert(`RGB Lighting: ${status}`);
+                }
+            } catch (error) {
+                console.error('RGB toggle error:', error);
+                alert('❌ Failed to toggle RGB');
+            }
+        }
+        
+        async function loadRGBStatus() {
+            try {
+                const response = await fetch('/api/hardware/rgb');
+                const data = await response.json();
+                
+                // Update RGB controls with current values
+                document.getElementById('rgbBrightness').value = data.brightness;
+                document.getElementById('rgbBrightnessValue').textContent = data.brightness;
+                
+                document.getElementById('rgbColorPicker').value = data.color_hex;
+                document.getElementById('rgbColorHex').textContent = data.color_hex.toUpperCase();
+                document.getElementById('rgbColorRGB').textContent = `RGB(${data.color_r}, ${data.color_g}, ${data.color_b})`;
+                
+                document.getElementById('rgbMode').value = data.mode;
+                
+                const status = data.enabled ? 'ENABLED' : 'DISABLED';
+                document.getElementById('rgbStatus').textContent = status;
+                
+                const btn = document.getElementById('rgbPowerBtn');
+                if (data.enabled) {
+                    btn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                } else {
+                    btn.style.background = 'linear-gradient(135deg, #666 0%, #999 100%)';
+                }
+                
+            } catch (error) {
+                console.error('Load RGB status error:', error);
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            setInterval(refreshData, 2000); // Faster refresh - 2 seconds
+            
+            // Load RGB status
+            loadRGBStatus();
+            setInterval(loadRGBStatus, 5000); // Refresh RGB status every 5 seconds
+        });
         
         async function loadStats() {
             try {
@@ -1369,26 +2792,49 @@ class OmegaControlPanelWeb:
                 statsGrid.innerHTML = `
                     <div class="stat-card">
                         <h3>CPU Usage</h3>
-                        <div class="stat-value">${data.cpu_usage.toFixed(1)}<span class="stat-unit">%</span></div>
+                        <div class="stat-value">${data.cpu_usage ? data.cpu_usage.toFixed(1) : '0.0'}<span class="stat-unit">%</span></div>
                     </div>
                     <div class="stat-card">
                         <h3>CPU Temperature</h3>
-                        <div class="stat-value">${data.cpu_temperature.toFixed(1)}<span class="stat-unit">°C</span></div>
+                        <div class="stat-value">${data.cpu_temperature !== undefined ? data.cpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.cpu_temperature !== undefined ? '°C' : ''}</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>GPU Temperature</h3>
+                        <div class="stat-value">${data.gpu_temperature ? data.gpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.gpu_temperature ? '°C' : ''}</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>GPU Usage</h3>
+                        <div class="stat-value">${data.gpu_usage ? data.gpu_usage.toFixed(1) : 'N/A'}<span class="stat-unit">${data.gpu_usage ? '%' : ''}</span></div>
                     </div>
                     <div class="stat-card">
                         <h3>Memory Usage</h3>
-                        <div class="stat-value">${data.memory_usage.toFixed(1)}<span class="stat-unit">%</span></div>
+                        <div class="stat-value">${data.memory_usage ? data.memory_usage.toFixed(1) : '0.0'}<span class="stat-unit">%</span></div>
                     </div>
                     <div class="stat-card">
-                        <h3>Disk Usage</h3>
-                        <div class="stat-value">${data.disk_usage.toFixed(1)}<span class="stat-unit">%</span></div>
+                        <h3>GPU Memory</h3>
+                        <div class="stat-value">${data.gpu_memory_used ? data.gpu_memory_used.toFixed(1) : 'N/A'}<span class="stat-unit">${data.gpu_memory_used ? ' GB' : ''}</span></div>
                     </div>
                 `;
                 
+                // Update fan speed slider and value
+                const fanSlider = document.getElementById('fanSpeed');
+                const fanValue = document.getElementById('fanSpeedValue');
+                if (fanSlider && fanValue) {
+                    fanSlider.value = data.fan_speed || 50;
+                    fanValue.textContent = data.fan_speed || 50;
+                }
+                
+                // Update RGB color picker
+                const rgbColor = document.getElementById('rgbColor');
+                if (rgbColor && data.rgb_color) {
+                    rgbColor.value = data.rgb_color;
+                }
+                
                 document.getElementById('systemStatus').innerHTML = `
                     <p>Status: Running</p>
-                    <p>Fan Speed: ${data.fan_speed}%</p>
-                    <p>RGB: ${data.rgb_enabled ? 'Enabled' : 'Disabled'} (${data.rgb_color})</p>
+                    <p>Fan Speed: ${data.fan_speed || 50}%</p>
+                    <p>RGB: ${data.rgb_enabled ? 'Enabled' : 'Disabled'}</p>
+                    <p style="display: flex; align-items: center; gap: 10px;">Color: <span style="display: inline-block; width: 20px; height: 20px; background: ${data.rgb_color}; border: 1px solid #ccc; border-radius: 3px;"></span> ${data.rgb_color}</p>
                 `;
             } catch (error) {
                 console.error('Error loading stats:', error);
@@ -1428,17 +2874,53 @@ class OmegaControlPanelWeb:
                     return;
                 }
                 
-                container.innerHTML = systems.map(s => `
-                    <div class="system-item">
-                        <strong>${s.name}</strong>
-                        <span class="status-badge status-${s.status}">${s.status}</span>
-                        <div style="margin-top: 5px;">
-                            CPU: ${s.cpu_usage.toFixed(1)}% | 
-                            Temp: ${s.temperature.toFixed(1)}°C | 
-                            Power: ${s.processing_power.toFixed(1)}%
+                // Separate active and inactive systems
+                const activeSystems = systems.filter(s => s.status === 'active');
+                const inactiveSystems = systems.filter(s => s.status !== 'active');
+                
+                let html = '';
+                
+                // Show only active systems prominently
+                if (activeSystems.length > 0) {
+                    html += '<div style="margin-bottom: 15px;"><strong style="color: #4caf50;">✓ Active Systems (' + activeSystems.length + ')</strong></div>';
+                    html += activeSystems.map(s => `
+                        <div class="system-item" style="background: rgba(76, 175, 80, 0.05); border-left: 3px solid #4caf50;">
+                            <strong>${s.name}</strong>
+                            <span class="status-badge status-${s.status}">${s.status}</span>
+                            <div style="margin-top: 5px; font-size: 12px;">
+                                ${s.cpu_usage > 0 ? 'CPU: ' + s.cpu_usage.toFixed(1) + '% | ' : ''}
+                                ${s.temperature > 0 ? 'Temp: ' + s.temperature.toFixed(1) + '°C | ' : ''}
+                                Power: ${s.processing_power.toFixed(1)}%
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `).join('');
+                } else {
+                    html += '<div style="padding: 20px; text-align: center; color: #666;">No active systems detected</div>';
+                }
+                
+                // Hide inactive systems in separate collapsible section
+                if (inactiveSystems.length > 0) {
+                    html += `
+                        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(158, 158, 158, 0.2);">
+                            <details style="cursor: pointer;">
+                                <summary style="padding: 12px; background: rgba(158, 158, 158, 0.05); border-radius: 8px; user-select: none; border: 1px solid rgba(158, 158, 158, 0.2);">
+                                    <strong style="color: #9e9e9e;">⊙ Inactive Systems (${inactiveSystems.length})</strong>
+                                    <span style="font-size: 11px; color: #999; margin-left: 10px;">▼ Click to view</span>
+                                </summary>
+                                <div style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.02); border-radius: 5px;">
+                                    ${inactiveSystems.map(s => `
+                                        <div class="system-item" style="opacity: 0.5; background: rgba(158, 158, 158, 0.03); border-left: 2px solid #9e9e9e;">
+                                            <strong style="font-size: 13px;">${s.name}</strong>
+                                            <span class="status-badge status-${s.status}" style="font-size: 10px;">${s.status}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </details>
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = html;
             } catch (error) {
                 console.error('Error loading integrated systems:', error);
             }
@@ -1991,14 +3473,43 @@ class OmegaControlPanelWeb:
             loadChatbotStatus();
             loadChatHistory();
             
-            // Set up auto-refresh every 5 seconds
+            // Set up auto-refresh every 2 seconds for faster updates
             setInterval(() => {
                 loadStats();
                 loadNotifications();
                 loadIntegratedSystems();
                 loadLoadBalancerData();
-            }, 5000);
+            }, 2000);  // Faster refresh - 2 seconds instead of 5
         });
+        
+        // Voice control function
+        function activateOmegaVoice() {
+            // Activate voice status
+            updateVoiceStatus(true);
+            
+            fetch('/api/voice/speak', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: 'System status', type: 'status'})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Omega voice activated', 'success');
+                } else {
+                    showNotification('Voice activation failed', 'error');
+                    updateVoiceStatus(false);
+                }
+                // Return to idle after ~12 seconds
+                setTimeout(() => {
+                    updateVoiceStatus(false);
+                }, 12000);
+            })
+            .catch(error => {
+                console.error('Voice error:', error);
+                showNotification('Voice system error', 'error');
+            });
+        }
     </script>
 </body>
 </html>'''

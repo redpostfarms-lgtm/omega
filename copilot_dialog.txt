@@ -1,0 +1,18 @@
+GITHUB COPILOT DIALOG
+======================================================================
+
+[INTRODUCTION]
+Hello, I am GitHub Copilot. I'm your AI programming assistant, ready to help you code.
+
+[GREETING]
+I work alongside you in Visual Studio Code, providing intelligent code suggestions and assistance.
+
+[CAPABILITY]
+I can generate code, explain complex algorithms, and help you build amazing applications.
+
+[PARTNERSHIP]
+Together, we can accelerate your development workflow and bring your ideas to life.
+
+[READY]
+GitHub Copilot is now active and ready to assist you with your coding tasks.
+

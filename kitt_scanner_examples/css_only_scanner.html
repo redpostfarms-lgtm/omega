@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITT Scanner - Pure CSS Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            letter-spacing: 10px;
+        }
+
+        /* CSS-Only KITT Scanner */
+        .kitt-wrapper {
+            width: 800px;
+            height: 80px;
+            background: #0a0000;
+            border: 3px solid #330000;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 40px rgba(255, 0, 0, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Scanner Beam - Method 1: Box Shadow */
+        .scanner-beam {
+            position: absolute;
+            width: 100px;
+            height: 100%;
+            background: transparent;
+            animation: scan 2s ease-in-out infinite;
+        }
+
+        .scanner-beam::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff0000;
+            border-radius: 10px;
+            box-shadow:
+                0 0 20px 5px #ff0000,
+                0 0 40px 10px #ff0000,
+                0 0 60px 15px #ff0000,
+                -30px 0 15px 5px rgba(255, 0, 0, 0.6),
+                -60px 0 10px 3px rgba(255, 0, 0, 0.4),
+                -90px 0 8px 2px rgba(255, 0, 0, 0.2),
+                30px 0 15px 5px rgba(255, 0, 0, 0.6),
+                60px 0 10px 3px rgba(255, 0, 0, 0.4),
+                90px 0 8px 2px rgba(255, 0, 0, 0.2);
+        }
+
+        @keyframes scan {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: calc(100% - 100px);
+            }
+
+            100% {
+                left: 0;
+            }
+        }
+
+        /* Alternative Method 2: Gradient */
+        .scanner-gradient {
+            width: 800px;
+            height: 80px;
+            background: #0a0000;
+            border: 3px solid #330000;
+            border-radius: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 40px rgba(255, 0, 0, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .scanner-gradient::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    transparent 20%,
+                    rgba(255, 0, 0, 0.1) 35%,
+                    rgba(255, 0, 0, 0.3) 40%,
+                    rgba(255, 0, 0, 0.6) 45%,
+                    #ff0000 50%,
+                    rgba(255, 0, 0, 0.6) 55%,
+                    rgba(255, 0, 0, 0.3) 60%,
+                    rgba(255, 0, 0, 0.1) 65%,
+                    transparent 80%,
+                    transparent 100%);
+            animation: gradientScan 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientScan {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            50% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Alternative Method 3: Multiple Divs */
+        .scanner-bars {
+            width: 800px;
+            height: 80px;
+            background: #0a0000;
+            border: 3px solid #330000;
+            border-radius: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            box-shadow:
+                0 0 40px rgba(255, 0, 0, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .led-strip {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            height: 60px;
+        }
+
+        .led-strip .bar {
+            flex: 1;
+            background: #1a0000;
+            border-radius: 3px;
+            animation: barScan 2s ease-in-out infinite;
+            animation-fill-mode: both;
+        }
+
+        /* Stagger animation for each bar */
+        .bar:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .bar:nth-child(2) {
+            animation-delay: 0.05s;
+        }
+
+        .bar:nth-child(3) {
+            animation-delay: 0.1s;
+        }
+
+        .bar:nth-child(4) {
+            animation-delay: 0.15s;
+        }
+
+        .bar:nth-child(5) {
+            animation-delay: 0.2s;
+        }
+
+        .bar:nth-child(6) {
+            animation-delay: 0.25s;
+        }
+
+        .bar:nth-child(7) {
+            animation-delay: 0.3s;
+        }
+
+        .bar:nth-child(8) {
+            animation-delay: 0.35s;
+        }
+
+        .bar:nth-child(9) {
+            animation-delay: 0.4s;
+        }
+
+        .bar:nth-child(10) {
+            animation-delay: 0.45s;
+        }
+
+        .bar:nth-child(11) {
+            animation-delay: 0.5s;
+        }
+
+        .bar:nth-child(12) {
+            animation-delay: 0.55s;
+        }
+
+        .bar:nth-child(13) {
+            animation-delay: 0.6s;
+        }
+
+        .bar:nth-child(14) {
+            animation-delay: 0.65s;
+        }
+
+        .bar:nth-child(15) {
+            animation-delay: 0.7s;
+        }
+
+        .bar:nth-child(16) {
+            animation-delay: 0.75s;
+        }
+
+        .bar:nth-child(17) {
+            animation-delay: 0.8s;
+        }
+
+        .bar:nth-child(18) {
+            animation-delay: 0.85s;
+        }
+
+        .bar:nth-child(19) {
+            animation-delay: 0.9s;
+        }
+
+        .bar:nth-child(20) {
+            animation-delay: 0.95s;
+        }
+
+        @keyframes barScan {
+
+            0%,
+            100% {
+                background: #1a0000;
+                box-shadow: none;
+            }
+
+            10%,
+            90% {
+                background: #660000;
+                box-shadow: 0 0 5px #660000;
+            }
+
+            25%,
+            75% {
+                background: #cc0000;
+                box-shadow: 0 0 10px #cc0000;
+            }
+
+            50% {
+                background: #ff0000;
+                box-shadow:
+                    0 0 20px #ff0000,
+                    0 0 40px #ff0000;
+            }
+        }
+
+        /* Alternative Method 4: Conic Gradient Rotation */
+        .scanner-conic {
+            width: 800px;
+            height: 80px;
+            background: #0a0000;
+            border: 3px solid #330000;
+            border-radius: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 40px rgba(255, 0, 0, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .scanner-conic::before {
+            content: '';
+            position: absolute;
+            width: 400%;
+            height: 100%;
+            left: -150%;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    transparent 45%,
+                    rgba(255, 0, 0, 0.2) 47%,
+                    rgba(255, 0, 0, 0.5) 48.5%,
+                    #ff0000 50%,
+                    rgba(255, 0, 0, 0.5) 51.5%,
+                    rgba(255, 0, 0, 0.2) 53%,
+                    transparent 55%,
+                    transparent 100%);
+            animation: conicScan 2.5s linear infinite;
+        }
+
+        @keyframes conicScan {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(50%);
+            }
+        }
+
+        .label {
+            color: #666;
+            margin-top: 15px;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+        }
+
+        .method-title {
+            color: #ff0000;
+            margin-top: 40px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>KITT SCANNER</h1>
+        <p style="color: #888; margin-bottom: 40px;">Pure CSS Animations - No JavaScript Required</p>
+
+        <h2 class="method-title">Method 1: Box Shadow Trail</h2>
+        <div class="kitt-wrapper">
+            <div class="scanner-beam"></div>
+        </div>
+        <p class="label">Using box-shadow for trail effect</p>
+
+        <h2 class="method-title">Method 2: Linear Gradient</h2>
+        <div class="scanner-gradient"></div>
+        <p class="label">Using gradient animation</p>
+
+        <h2 class="method-title">Method 3: LED Bar Animation</h2>
+        <div class="scanner-bars">
+            <div class="led-strip">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+        <p class="label">Using staggered animations on individual bars</p>
+
+        <h2 class="method-title">Method 4: Wide Gradient Sweep</h2>
+        <div class="scanner-conic"></div>
+        <p class="label">Using extended gradient with smooth sweep</p>
+    </div>
+</body>
+
+</html>

@@ -269,6 +269,46 @@ class ControlPanel:
             )
             self.integrated_systems.append(system)
         
+        # Get GPU info
+        gpu_usage = self._get_gpu_usage()
+        gpu_temp = self._get_gpu_temperature()
+        if gpu_usage is not None or gpu_temp is not None:
+            system = IntegratedSystem(
+                name="GPU (Nvidia)",
+                status="active",
+                cpu_usage=gpu_usage or 0.0,
+                temperature=gpu_temp or 0.0,
+                processing_power=gpu_usage or 0.0
+            )
+            self.integrated_systems.append(system)
+        
+        # Add Nvidia Playground
+        self.integrated_systems.append(IntegratedSystem(
+            name="Nvidia AI Playground",
+            status="active",
+            cpu_usage=0.0,
+            temperature=0.0,
+            processing_power=100.0
+        ))
+        
+        # Add Hugging Face
+        self.integrated_systems.append(IntegratedSystem(
+            name="Hugging Face API",
+            status="active",
+            cpu_usage=0.0,
+            temperature=0.0,
+            processing_power=100.0
+        ))
+        
+        # Add Google Services
+        self.integrated_systems.append(IntegratedSystem(
+            name="Google Cloud AI",
+            status="active",
+            cpu_usage=0.0,
+            temperature=0.0,
+            processing_power=100.0
+        ))
+        
         # Get integrated developer tools
         if self.integration_manager:
             try:
@@ -292,7 +332,17 @@ class ControlPanel:
                 pass
     
     def _get_cpu_temperature(self) -> Optional[float]:
-        """Get CPU temperature"""
+        """Get CPU temperature from motherboard sensors"""
+        # Try enhanced WMI sensors first
+        try:
+            from omega_hardware_sensors import get_cpu_temperature_wmi
+            temp = get_cpu_temperature_wmi()
+            if temp is not None:
+                return temp
+        except Exception:
+            pass
+        
+        # Fallback to hardware controller
         if not self.hw_controller:
             return None
         
@@ -304,7 +354,17 @@ class ControlPanel:
             return None
     
     def _get_gpu_usage(self) -> Optional[float]:
-        """Get GPU usage percentage"""
+        """Get GPU usage percentage from RTX 3050"""
+        # Use enhanced GPU sensors
+        try:
+            from omega_hardware_sensors import get_gpu_info_nvidia
+            gpu_info = get_gpu_info_nvidia()
+            if gpu_info and gpu_info['usage'] is not None:
+                return gpu_info['usage']
+        except Exception:
+            pass
+        
+        # Fallback to resource manager
         if self.resource_manager and self.use_gpu:
             try:
                 gpu_info = self.resource_manager.get_gpu_usage()
@@ -328,23 +388,34 @@ class ControlPanel:
         return None
     
     def _get_gpu_temperature(self) -> Optional[float]:
-        """Get GPU temperature"""
-        if not self.hw_controller:
-            return None
-        
+        """Get GPU temperature from RTX 3050"""
+        # Use enhanced GPU sensors for comprehensive data
         try:
-            temps = self.hw_controller.temperature.get_all_temperatures()
-            return temps.get("GPU", None)
+            from omega_hardware_sensors import get_gpu_info_nvidia
+            gpu_info = get_gpu_info_nvidia()
+            if gpu_info and gpu_info['temperature'] is not None:
+                return gpu_info['temperature']
         except Exception:
-            # Try nvidia-smi as fallback
+            pass
+        
+        # Try nvidia-smi fallback (most reliable)
+        try:
+            result = subprocess.run(['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
+                                  capture_output=True, text=True, timeout=2)
+            if result.returncode == 0:
+                return float(result.stdout.strip().split('\n')[0])
+        except Exception:
+            pass
+        
+        # Try hardware controller as fallback
+        if self.hw_controller:
             try:
-                result = subprocess.run(['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
-                                      capture_output=True, text=True, timeout=2)
-                if result.returncode == 0:
-                    return float(result.stdout.strip().split('\n')[0])
+                temps = self.hw_controller.temperature.get_all_temperatures()
+                return temps.get("GPU", None)
             except Exception:
                 pass
-            return None
+        
+        return None
     
     def _get_ram_usage(self) -> float:
         """Get RAM usage percentage"""
