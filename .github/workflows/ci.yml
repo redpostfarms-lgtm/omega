@@ -55,9 +55,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-          cache-dependency-path: |  
-            requirements.txt
-            requirements_enhanced.txt
+          cache-dependency-path: '**/requirements*.txt'
 
       - name: Install system dependencies (Ubuntu)
         if: runner. os == 'Linux'
@@ -66,12 +64,13 @@ jobs:
           sudo apt-get install -y ffmpeg libsndfile1
 
       - name: Install Python dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-asyncio pytest-cov pytest-xdist
           if [ -f requirements_enhanced.txt ]; then
             pip install -r requirements_enhanced.txt || pip install -r requirements.txt
-          else
+          elif [ -f requirements.txt ]; then
             pip install -r requirements.txt
           fi
 
@@ -97,20 +96,19 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
-        with: 
+        with:
           python-version: '3.11'
           cache: 'pip'
-          cache-dependency-path: |
-            requirements.txt
-            requirements_enhanced.txt
+          cache-dependency-path: '**/requirements*.txt'
 
       - name: Install dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-asyncio
           if [ -f requirements_enhanced.txt ]; then
             pip install -r requirements_enhanced.txt || pip install -r requirements.txt
-          else
+          elif [ -f requirements.txt ]; then
             pip install -r requirements.txt
           fi
 

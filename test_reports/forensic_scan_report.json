@@ -1,0 +1,3300 @@
+{
+  "secrets": [
+    {
+      "type": "password",
+      "file": "complete_all_changes.py",
+      "line": 437,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "complete_all_changes.py",
+      "line": 609,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "CRYPTOGRAPHY_ENHANCEMENT_COMPLETE.md",
+      "line": 152,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "CRYPTOGRAPHY_INTEGRATION_SUMMARY.md",
+      "line": 179,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md",
+      "line": 1646,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md",
+      "line": 1692,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md",
+      "line": 1862,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md",
+      "line": 2082,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "DIVERSE_BEAM_SEARCH_CODE_EXAMPLES_2026.md",
+      "line": 2292,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "FINAL_COMPREHENSIVE_STATUS.md",
+      "line": 56,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "fix_github_setup.py",
+      "line": 137,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "GITHUB_AUTH_COMPLETE.md",
+      "line": 16,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "GITHUB_SETUP_FINAL.md",
+      "line": 22,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "MANUAL_TOKEN_SETUP.md",
+      "line": 3,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "MANUAL_TOKEN_SETUP.md",
+      "line": 21,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "omega_developer_integrations.py",
+      "line": 314,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "omega_developer_integrations.py",
+      "line": 359,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010429.json",
+      "line": 239,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010429.json",
+      "line": 8597,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010429.json",
+      "line": 7598,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010429.json",
+      "line": 14372,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010442.json",
+      "line": 239,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010442.json",
+      "line": 8597,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010442.json",
+      "line": 7598,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "SECURITY_FORENSIC_REPORT_20260119_010442.json",
+      "line": 14372,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "STORE_ADMIN_API_KEY.py",
+      "line": 18,
+      "severity": "HIGH"
+    },
+    {
+      "type": "api_key",
+      "file": "STORE_API_KEY.py",
+      "line": 18,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "store_github_token.py",
+      "line": 43,
+      "severity": "HIGH"
+    },
+    {
+      "type": "github_token",
+      "file": "store_github_token.py",
+      "line": 43,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "docs\\ADMIN_AUTH.md",
+      "line": 21,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py",
+      "line": 821,
+      "severity": "HIGH"
+    },
+    {
+      "type": "token",
+      "file": "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py",
+      "line": 821,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\demo_all_tools.py",
+      "line": 169,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\ENHANCEMENTS_COMPLETE.md",
+      "line": 80,
+      "severity": "HIGH"
+    },
+    {
+      "type": "password",
+      "file": "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\report_generator.py",
+      "line": 232,
+      "severity": "HIGH"
+    }
+  ],
+  "quality_metrics": {
+    "total_files": 706,
+    "python_files": 706,
+    "total_lines": 192160,
+    "code_lines": 149694,
+    "comment_lines": 10996,
+    "blank_lines": 31470,
+    "todos": 19,
+    "fixmes": 6
+  },
+  "dependencies": {
+    "requirements_files": [
+      "requirements-dev.txt",
+      "requirements.txt",
+      "requirements_enhanced.txt",
+      "requirements_gatekeeper.txt",
+      "requirements_migrate.txt",
+      "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\requirements.txt",
+      "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\requirements_enhanced.txt"
+    ],
+    "dependencies": [
+      "-r requirements.txt",
+      "pytest>=7.4.0  # Testing framework",
+      "pytest-asyncio>=0.21.0  # Async testing support",
+      "pytest-cov>=4.1.0  # Coverage reporting",
+      "pytest-mock>=3.12.0  # Mocking support",
+      "pytest-xdist>=3.5.0  # Parallel test execution",
+      "pytest-timeout>=2.2.0  # Test timeout support",
+      "bandit>=1.7.5  # Security linter",
+      "safety>=2.3.5  # Dependency vulnerability scanning",
+      "pip-audit>=2.6.1  # Alternative dependency scanner",
+      "mypy>=1.7.0  # Static type checking",
+      "types-requests>=2.31.0  # Type stubs for requests",
+      "black>=23.12.0  # Code formatter",
+      "isort>=5.13.0  # Import sorting",
+      "flake8>=7.0.0  # Linting",
+      "pylint>=3.0.3  # Advanced linting",
+      "click>=8.1.7  # CLI framework",
+      "typer>=0.9.0  # Modern CLI framework",
+      "rich>=13.7.0  # Rich terminal output",
+      "tenacity>=8.2.3  # Professional retry library",
+      "sphinx>=7.2.6  # Documentation generator",
+      "sphinx-rtd-theme>=2.0.0  # Read the Docs theme",
+      "ipython>=8.18.0  # Enhanced Python REPL",
+      "ipdb>=0.13.13  # Enhanced debugger",
+      "pre-commit>=3.6.0  # Git pre-commit hooks",
+      "TTS==0.22.0  # Pinned for compatibility with Python 3.11",
+      "transformers>=4.21.0,<4.36.0  # Required by TTS 0.22.0 (BeamSearchScorer support)",
+      "torch==2.5.1  # Compatible with TTS and torchcodec",
+      "torchaudio==2.5.1  # Must match PyTorch version",
+      "torchcodec  # Required for audio decoding in TTS",
+      "sounddevice",
+      "numpy",
+      "scipy",
+      "speechbrain",
+      "SpeechRecognition",
+      "faster-whisper  # Fast offline speech recognition (<1s latency, optional but recommended)",
+      "librosa",
+      "noisereduce",
+      "pydub",
+      "soundfile",
+      "webrtcvad  # Voice Activity Detection for hands-free mode (optional but recommended)",
+      "aiofiles  # Async file I/O for non-blocking operations",
+      "aiohttp  # Async HTTP client for web scraping and API calls",
+      "websockets>=12.0  # WebSocket protocol for swarm heartbeat system",
+      "prometheus-client>=0.19.0  # Metrics collection (used in omega_monitoring.py)",
+      "structlog>=23.2.0  # Structured logging (used in omega_logging_config.py, omega_monitoring.py)",
+      "python-dotenv>=1.0.0  # Environment variables (used in omega_automation_orchestrator.py)",
+      "beautifulsoup4>=4.12.0  # HTML/XML parsing (used by planetary_search, web_scraper)",
+      "pytest>=7.4.0  # Testing framework (uncommented - used in tests)",
+      "pytest-asyncio>=0.21.0  # Async testing support",
+      "pytest-cov>=4.1.0  # Coverage reporting",
+      "pytest-mock>=3.12.0  # Mocking support",
+      "outlines>=0.0.1  # For JSON schema, regex constraints, structured generation",
+      "pydantic>=2.0.0  # For JSON schema definitions (required by outlines)",
+      "mauve-text>=0.1.0  # For MAUVE evaluation metric",
+      "datasets>=2.0.0  # For evaluation datasets",
+      "accelerate>=0.20.0  # For distributed/accelerated inference",
+      "matplotlib>=3.5.0  # For sigmoid curve plotting",
+      "plotly>=5.0.0  # For interactive visualizations",
+      "pandas>=1.3.0  # For data manipulation (optional but useful)",
+      "pyjwt[crypto]>=2.8.0  # For JWT token generation/verification",
+      "redis>=4.0.0  # For JWKS caching (optional but recommended)",
+      "requests>=2.28.0  # For HTTP requests (JWKS fetching)",
+      "tqdm>=4.64.0  # For progress bars in training/evaluation",
+      "WMI  # Windows Management Instrumentation (Windows only)",
+      "psutil>=5.9.0  # System and process utilities (cross-platform)",
+      "pyautogui>=0.9.54  # GUI automation and text input simulation",
+      "pynput>=1.7.6  # Input simulation (keyboard/mouse)",
+      "psutil>=5.9.0  # Already listed above - used for process monitoring and VPN system",
+      "dnspython>=2.3.0  # DNS operations for leak protection and testing (optional but recommended)",
+      "cryptography>=41.0.0  # Secure API key encryption and storage (required for API key manager)",
+      "Pillow>=10.0.0  # Image processing for boot logo creation (required for boot logo)",
+      "openrgb-python>=0.2.0  # RGB lighting control (optional but recommended for full RGB spectrum control)",
+      "pygame>=2.1.0  # Knight Rider dashboard UI (required for omega_kitt_ui.py)",
+      "pyaudio>=0.2.11  # Real-time microphone input for audio visualization (required for omega_kitt_ui.py)",
+      "TTS==0.22.0  # Pinned for compatibility with Python 3.11",
+      "transformers>=4.21.0,<4.36.0  # Required by TTS 0.22.0 (BeamSearchScorer support)",
+      "torch==2.5.1  # Compatible with TTS and torchcodec",
+      "torchaudio==2.5.1  # Must match PyTorch version",
+      "torchcodec  # Required for audio decoding in TTS",
+      "sounddevice",
+      "numpy",
+      "scipy",
+      "speechbrain",
+      "SpeechRecognition",
+      "faster-whisper  # Fast offline speech recognition (<1s latency, optional but recommended)",
+      "librosa",
+      "noisereduce",
+      "pydub",
+      "soundfile",
+      "webrtcvad  # Voice Activity Detection for hands-free mode (optional but recommended)",
+      "aiofiles  # Async file I/O for non-blocking operations",
+      "aiohttp  # Async HTTP client for web scraping and API calls",
+      "prometheus-client>=0.19.0  # Metrics collection (used in omega_monitoring.py)",
+      "structlog>=23.2.0  # Structured logging (used in omega_logging_config.py, omega_monitoring.py)",
+      "python-dotenv>=1.0.0  # Environment variables (used in omega_automation_orchestrator.py)",
+      "beautifulsoup4>=4.12.0  # HTML/XML parsing (used by planetary_search, web_scraper)",
+      "pytest>=7.4.0  # Testing framework (uncommented - used in tests)",
+      "pytest-asyncio>=0.21.0  # Async testing support",
+      "pytest-cov>=4.1.0  # Coverage reporting",
+      "pytest-mock>=3.12.0  # Mocking support",
+      "outlines>=0.0.1  # For JSON schema, regex constraints, structured generation",
+      "pydantic>=2.0.0  # For JSON schema definitions (required by outlines)",
+      "mauve-text>=0.1.0  # For MAUVE evaluation metric",
+      "datasets>=2.0.0  # For evaluation datasets",
+      "accelerate>=0.20.0  # For distributed/accelerated inference",
+      "matplotlib>=3.5.0  # For sigmoid curve plotting",
+      "plotly>=5.0.0  # For interactive visualizations",
+      "pandas>=1.3.0  # For data manipulation (optional but useful)",
+      "pyjwt[crypto]>=2.8.0  # For JWT token generation/verification",
+      "redis>=4.0.0  # For JWKS caching (optional but recommended)",
+      "requests>=2.28.0  # For HTTP requests (JWKS fetching)",
+      "tqdm>=4.64.0  # For progress bars in training/evaluation",
+      "WMI  # Windows Management Instrumentation (Windows only)",
+      "psutil>=5.9.0  # System and process utilities (cross-platform)",
+      "pyautogui>=0.9.54  # GUI automation and text input simulation",
+      "pynput>=1.7.6  # Input simulation (keyboard/mouse)",
+      "psutil>=5.9.0  # Already listed above - used for process monitoring and VPN system",
+      "dnspython>=2.3.0  # DNS operations for leak protection and testing (optional but recommended)",
+      "cryptography>=41.0.0  # Secure API key encryption and storage (required for API key manager)",
+      "Pillow>=10.0.0  # Image processing for boot logo creation (required for boot logo)",
+      "openrgb-python>=0.2.0  # RGB lighting control (optional but recommended for full RGB spectrum control)",
+      "pygame>=2.1.0  # Knight Rider dashboard UI (required for omega_kitt_ui.py)",
+      "pyaudio>=0.2.11  # Real-time microphone input for audio visualization (required for omega_kitt_ui.py)",
+      "numpy>=1.21.0",
+      "psutil>=5.8.0",
+      "pygame>=2.1.0",
+      "pyaudio>=0.2.11",
+      "pywin32>=301; sys_platform == \"win32\"",
+      "pillow>=9.0.0",
+      "requests>=2.28.0",
+      "pyyaml>=6.0",
+      "jsonschema>=4.0.0",
+      "Flask-Migrate>=4.0.0",
+      "Flask-SQLAlchemy>=3.0.0",
+      "pyttsx3>=2.90",
+      "numpy>=1.24.0",
+      "speech_recognition>=3.10.0",
+      "requests>=2.31.0",
+      "beautifulsoup4>=4.12.0",
+      "scrapy>=2.11.0  # Production-grade scraping framework",
+      "lxml>=5.1.0  # Faster HTML parser (5-10x faster)",
+      "httpx>=0.25.0  # Modern async HTTP client",
+      "vosk>=0.3.45  # Offline speech-to-text",
+      "pyaudio>=0.2.11  # Required for Vosk audio input",
+      "speechbrain>=0.5.16  # Advanced voiceprint biometrics",
+      "torch>=2.0.0  # Required for SpeechBrain (PyTorch)",
+      "torchaudio>=2.0.0  # Required for SpeechBrain audio processing",
+      "edge-tts>=6.1.0  # Microsoft Edge TTS (free, no API key)",
+      "chromadb>=0.4.22  # Vector database for semantic search",
+      "sentence-transformers>=2.3.1  # Text embeddings for better search",
+      "llama-cpp-python>=0.2.0  # Local LLM runtime for fusion models",
+      "transformers>=4.35.0  # HuggingFace transformers (for model loading)",
+      "googletrans==4.0.0rc1  # Google Translate API (free tier)",
+      "deep-translator>=1.11.4  # Alternative translation library",
+      "continue-dev>=0.1.0  # Cursor-level code editing",
+      "open-webui>=1.0.0  # Local AI interface",
+      "firecrawl-py>=1.0.0  # Advanced web scraping",
+      "scrapy-playwright>=0.0.1  # JavaScript rendering for scraping",
+      "onnxruntime>=1.16.0  # Required for Piper TTS",
+      "pyserial>=3.5  # Serial port communication for battery monitoring",
+      "paho-mqtt>=1.6.0  # MQTT client for IoT sensors (REAL sensor integration)",
+      "smbus>=2.0.0  # I2C interface (Linux/Raspberry Pi) - REAL I2C sensors",
+      "spidev>=3.6  # SPI interface (Linux/Raspberry Pi) - REAL SPI sensors",
+      "adafruit-circuitpython-dht>=3.7.0  # DHT22/DHT11 temperature/humidity sensors (REAL)",
+      "flask>=3.0.0  # Web framework for knowledge base UI",
+      "redis>=5.0.0  # Redis for sensor data caching",
+      "pillow>=10.0.0  # Image processing for pest/disease detection",
+      "opencv-python>=4.8.0  # Computer vision for real image analysis",
+      "ultralytics>=8.0.0  # YOLO models for real pest/disease detection",
+      "deepface>=0.0.79  # Face analysis and vitals",
+      "psutil>=5.9.0  # CPU, RAM monitoring",
+      "GPUtil>=1.4.0  # GPU monitoring",
+      "wmi>=1.5.1  # Windows hardware info (Windows only)",
+      "python-docx>=1.1.0  # Word document creation",
+      "PyPDF2>=3.0.0  # PDF processing",
+      "pdfplumber>=0.10.0  # Better PDF parsing",
+      "pytest>=8.0.0  # Testing framework",
+      "pytest-cov>=4.1.0  # Code coverage",
+      "pybluez>=0.23  # Bluetooth for BLE vitals (Linux) / pywin32 for Windows",
+      "pyttsx3>=2.90  # Text-to-speech (already listed)",
+      "psutil>=5.9.0  # For hardware monitoring (CPU, RAM)",
+      "GPUtil>=1.4.0  # For GPU monitoring",
+      "wmi>=1.5.1  # For Windows hardware info",
+      "python-docx>=1.1.0  # For Word document creation",
+      "PyPDF2>=3.0.0  # For PDF processing",
+      "pdfplumber>=0.10.0  # Better PDF parsing",
+      "unittest-xml-reporting>=3.2.0  # For test reports",
+      "pyttsx3>=2.90",
+      "numpy>=1.24.0",
+      "speech_recognition>=3.10.0",
+      "requests>=2.31.0",
+      "beautifulsoup4>=4.12.0",
+      "psutil>=5.9.0  # For hardware monitoring (CPU, RAM)",
+      "GPUtil>=1.4.0  # For GPU monitoring",
+      "wmi>=1.5.1  # For Windows hardware info",
+      "python-docx>=1.1.0  # For Word document creation",
+      "PyPDF2>=3.0.0  # For PDF processing",
+      "pdfplumber>=0.10.0  # Better PDF parsing",
+      "unittest-xml-reporting>=3.2.0  # For test reports",
+      "scrapy>=2.11.0  # Production-grade scraping framework (reduces failures 20-30%)",
+      "lxml>=5.1.0  # Faster HTML parser (5-10x faster than BeautifulSoup)",
+      "httpx>=0.25.0  # Modern async HTTP client",
+      "scrapegraphai>=1.0.0  # AI-driven scraper with graph logic (optional, for self-healing scraping)",
+      "vosk>=0.3.45  # Offline speech-to-text (download models: https://alphacephei.com/vosk/models)",
+      "pyaudio>=0.2.11  # Required for Vosk audio input",
+      "speechbrain>=0.5.16  # Advanced voiceprint biometrics",
+      "torch>=2.0.0  # Required for SpeechBrain (PyTorch)",
+      "torchaudio>=2.0.0  # Required for SpeechBrain audio processing",
+      "TTS>=0.22.0  # Better text-to-speech (Coqui TTS)",
+      "chromadb>=0.4.22  # Vector database for semantic search",
+      "sentence-transformers>=2.3.1  # Text embeddings for better search",
+      "crewai>=0.28.0  # Multi-agent framework",
+      "langchain>=0.1.0  # Agent orchestration",
+      "langchain-community>=0.0.20  # LangChain community integrations",
+      "playwright>=1.40.0  # Browser automation (requires: playwright install)",
+      "readability-lxml>=0.8.1  # Article extraction",
+      "pySMART>=1.2  # Disk health (SMART) monitoring",
+      "nvidia-ml-py>=12.535.133  # Advanced NVIDIA GPU monitoring",
+      "reportlab>=4.0.7  # PDF generation",
+      "weasyprint>=60.2  # HTML to PDF conversion",
+      "markdown>=3.5.1  # Markdown processing",
+      "cryptography>=42.0.0  # Encryption/decryption",
+      "keyring>=25.0.0  # Secure credential storage",
+      "pytest>=8.0.0  # Better testing framework",
+      "pytest-cov>=4.1.0  # Code coverage",
+      "python-dotenv>=1.0.0  # Environment variable management",
+      "llama-cpp-python>=0.2.0  # Local LLM runtime (download models from HuggingFace)",
+      "neuralprophet>=1.0.0  # Time series forecasting (enhance battery_oracle.py, solar_forecaster.py)",
+      "readability-lxml>=0.8.1  # Article extraction (clean content from web pages)"
+    ]
+  },
+  "file_integrity": {
+    "ACTIVATE_PARTNERS_STATUS.py": {
+      "hash": "88764e520b92058875ada23ee2575728a61159ce17a2428425619255ada7319b",
+      "size": 2008
+    },
+    "ai_council.py": {
+      "hash": "4ac51ff24864d0c916fe840b9b3edc6c15f7ede2171afd574bb5883a4622d3ea",
+      "size": 18437
+    },
+    "analyze_voices_only.py": {
+      "hash": "daf0271c080f4dd91b69d08309122eedbae8b072fa10d55561f6cc22a64df7e3",
+      "size": 4310
+    },
+    "APPLY_CUDA_OPTIMIZATIONS.py": {
+      "hash": "8919a857758348f40be1f742ea519c6a97a2ea5a570c7d7e36ee8636b98e583d",
+      "size": 5071
+    },
+    "audio_resource_finder.py": {
+      "hash": "18d3efbe68d84ca4dad415605cf431b0ab31cf24206e57f1425206ebb344d9e8",
+      "size": 7772
+    },
+    "AUTO_CONFIGURE_NEW_HARDWARE.py": {
+      "hash": "158d8d15a47ba835ae8db79af4c4ab5e1f9c0a290c95077f3de441d461e2328d",
+      "size": 2392
+    },
+    "AUTO_LAUNCH_UI.py": {
+      "hash": "614c4f1a16694e843f181fcf4affa67ef252834267f1f13b10068fabfc313614",
+      "size": 1588
+    },
+    "AUTO_OPTIMIZE_APPS.py": {
+      "hash": "5b3cf577c59afa0b2a9c14060fa61a9bd54f10ca40427434fd76873aca11e3c2",
+      "size": 8680
+    },
+    "AUTO_SELECT_AND_OPTIMIZE.py": {
+      "hash": "65ca3400fd643e3e379aea774b0bd1e42073b434b74f927c57a33940a0175508",
+      "size": 7786
+    },
+    "AUTO_SETUP_INTEGRATIONS.py": {
+      "hash": "0dd9b8af49a8d89ce9369e83a1fda8d4f455cda5c911df75489eb77a2cd9cf67",
+      "size": 4152
+    },
+    "auto_tool_launcher.py": {
+      "hash": "c13006fd24cd15e93eeb3b673ffcce52e7fdc08dd2627a63e9e416b12e034e83",
+      "size": 5198
+    },
+    "auto_tool_manager.py": {
+      "hash": "1e91aa46df71128bda536d90894415a288894337b8b16d7d3059d3514538d62e",
+      "size": 16381
+    },
+    "CHECK_INTEGRATION_STATUS.py": {
+      "hash": "9f1f05c5571b98047ad5bbe5459864adea3308ee5c9b8cb39a6229b99bc126e9",
+      "size": 1595
+    },
+    "CHECK_REMAINING_OPTIMIZATIONS.py": {
+      "hash": "649c6422a5654cefbdfa86670b1134580c24066f830307f1ea6b696b28618f94",
+      "size": 7205
+    },
+    "check_voice_status.py": {
+      "hash": "b8240bbe1333bf68f39db70bace88fcba9b5d9b8ed20272379f9bca43d777643",
+      "size": 2135
+    },
+    "CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py": {
+      "hash": "8222439ae954953665dddc116999a6ab2b3f57fca244b46fcd3ce8e0cdb4ebec",
+      "size": 12633
+    },
+    "complete_all_changes.py": {
+      "hash": "5086d09b4f14d8d305e8f996383318cfcaefeb0391c46fa236700ff7c7f25e69",
+      "size": 22461
+    },
+    "COMPLETE_CONVERSATION_ANALYSIS.py": {
+      "hash": "099a938886f103bc48b3bec901b26985a1738f8a0a2fdcb0d0e8bfbffcc5ca59",
+      "size": 12536
+    },
+    "complete_omega_speech_demo.py": {
+      "hash": "97ed65815973315fb18be87b8b1e1bf68d65f984387329008e75334281793184",
+      "size": 10103
+    },
+    "COMPLETE_SYSTEM_REVIEW_AND_PRIORITIZATION.py": {
+      "hash": "94123a7085f4f40fdde738cf9d4be3f57d5a578e52202f4786db2dd242c655cd",
+      "size": 11269
+    },
+    "COMPLETE_UI_OPTIMIZATION_AND_INTEGRATION.py": {
+      "hash": "6ce3482d33d71c27e85e6601db8a590cec6b882b02fd08168ce976caf74b0668",
+      "size": 4377
+    },
+    "comprehensive_codebase_audit.py": {
+      "hash": "d553a5d4ef145ef04aaf7bc5ee0bcced9696176974bf60bf2beb2c5c732ecb9d",
+      "size": 13341
+    },
+    "COMPREHENSIVE_DEEP_FIX.py": {
+      "hash": "7ec1e948098bee7ed92e3a0d641e5089ff954ea7139769e01671dcf4cd6a55a2",
+      "size": 12711
+    },
+    "COMPREHENSIVE_DESKTOP_CLEANUP.py": {
+      "hash": "375090758c1327773cca9301073a8131ce5ea8ad88da6215f971affafdf484d6",
+      "size": 13661
+    },
+    "COMPREHENSIVE_DESKTOP_CLEANUP_FIXED.py": {
+      "hash": "375090758c1327773cca9301073a8131ce5ea8ad88da6215f971affafdf484d6",
+      "size": 13661
+    },
+    "COMPREHENSIVE_RESEARCH_AND_OPTIMIZATION.py": {
+      "hash": "c4ade2f91d7222c3d363f0a042a5562d8a26e097ae844a04b25083931367870b",
+      "size": 21066
+    },
+    "COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py": {
+      "hash": "4eb985961c70c4e26c08a858ba4e95187446981bd817a598fd867e19177c7ffa",
+      "size": 17890
+    },
+    "CONTROL_PANEL_DEBUG_SANDBOX.py": {
+      "hash": "378657a7ae75d673412da1203c8d558f686b6357675dec7a194690701dcd1b39",
+      "size": 9361
+    },
+    "CONTROL_PANEL_FIX_AGENT_SYSTEM.py": {
+      "hash": "a533ad56bdc6058d0b730504fa31d693e81c5b48f6e921beb2c3e845424b53a4",
+      "size": 10452
+    },
+    "conversation_recorder.py": {
+      "hash": "e56f622cf3c3afd8b1f97a5b8b01c7932316e442e8387a9e6b77c2d660b2fe74",
+      "size": 6140
+    },
+    "COPY_UI_SCREENSHOTS.py": {
+      "hash": "1997e8be2a0b1559e574a499eddf1e4a386c6781f05d7057d5bc1813737dd945",
+      "size": 3224
+    },
+    "CREATE_DESKTOP_SHORTCUT.py": {
+      "hash": "41694cf3edbf532f5fdf64a1d5a0bd098153b00107797baef811420442e18835",
+      "size": 7759
+    },
+    "create_omega_boot_logo.py": {
+      "hash": "24c4f103ac7214d1782d503858f0e297369b760d7d48044c4a85b73789d12e42",
+      "size": 1472
+    },
+    "CREATE_OMEGA_ICON.py": {
+      "hash": "5ea6566aed038596eb8ede2aeb58c5476011d88734475886b78dbed885f898b5",
+      "size": 3320
+    },
+    "cryptography_research.py": {
+      "hash": "b2c012253d7417bb170f733d1a9fe65b3988341667b6efa9f22dd6d0274a7d74",
+      "size": 9377
+    },
+    "cursor_forensic_request.py": {
+      "hash": "f592a34e816100c00638318f10e7e044b56653cd16df1106a5fd242d6682670a",
+      "size": 693
+    },
+    "c_drive_manager.py": {
+      "hash": "fdda4b00f9e3430007a0001cd17aa52d98228f31b77d5a4d29039132daf1d2a3",
+      "size": 11823
+    },
+    "DEEP_CODE_SCAN_AND_REPAIR.py": {
+      "hash": "3e661b5780653014b8c2daf60736488a570a8b4047f906408f8ee0b9368fa5e1",
+      "size": 7644
+    },
+    "DEEP_DIVE_SCAN_AND_OPTIMIZE.py": {
+      "hash": "e3f37de481d386bcdec623d6b601c609f28a7e5c70cf0ae2e80d5dfa2c8a4123",
+      "size": 15051
+    },
+    "deep_scan_gatekeeper.py": {
+      "hash": "c80681be14b2291ea4000eaf7fb5909a69e36d6f76de91ac3f747a7a41e009e8",
+      "size": 9965
+    },
+    "deep_worldwide_scrub.py": {
+      "hash": "17b9c3b3e70b93d422fcf9d9b0fb69379e5950a879aea1c5bc171e6408f82ad8",
+      "size": 17664
+    },
+    "denoise_all.py": {
+      "hash": "6e320819a33bad265b73e41695286f83d582e481816017efadfd235cc94819c9",
+      "size": 1229
+    },
+    "deploy.py": {
+      "hash": "74da866beeeecba6e41bdb0e6b7c92b7f799f66f88a6051c33f2cde06c77d6a2",
+      "size": 6194
+    },
+    "DIAGNOSE_UI_ISSUE.py": {
+      "hash": "e88a7d3145bc540d32950b7efd2e249cd019a68ec473187e3fc2c5c8c41f2aba",
+      "size": 5289
+    },
+    "ENABLE_M2_DRIVE.py": {
+      "hash": "e1396434f3cd32fc92c379ac2835f31b2bebab576982199676d6185989a3bfe3",
+      "size": 943
+    },
+    "ENHANCED_CONTROL_PANEL_DEBUG.py": {
+      "hash": "84d09cd778c711717b8bdf4f62176eb42318ea9a19c3b7585eb9813a3efd5f6f",
+      "size": 12758
+    },
+    "enhance_omega_voice.py": {
+      "hash": "223c868e7aa2fee1a821f28828b38cc667d83b326f98c995a00aeddaa1703069",
+      "size": 4414
+    },
+    "EXECUTE_AUTO_OPTIMIZE.py": {
+      "hash": "4db36942acb14e98f99c6ae330aa732fc711cd8a6d5878720d5552460ecf36d5",
+      "size": 1171
+    },
+    "FINAL_INSTALLATION_CHECK.py": {
+      "hash": "467b16733bbe5236eef242504f8d30c3230c9fbcb612190acf5170dcf5c69abe",
+      "size": 10265
+    },
+    "FINAL_SYSTEM_OPTIMIZATION_ANALYZER.py": {
+      "hash": "00dfff1f5122673117c6f367e782aa09fc850b06b376bdf28e5e9ba45f083497",
+      "size": 32759
+    },
+    "FIX_ADVANCED_MARKDOWN_ERRORS.py": {
+      "hash": "07939d4f60a86927c1085c8ef19f495599ed229fbf0e09a1053d02fbc80e8f90",
+      "size": 7371
+    },
+    "FIX_ALL_MARKDOWN_ERRORS.py": {
+      "hash": "1a003fe71165743fd377f4a3b74ba8c0f43b83164d3f1c935571eae4fb19b9e5",
+      "size": 3782
+    },
+    "FIX_ALL_MD_COMPREHENSIVE.py": {
+      "hash": "7979b21ee51e85505ff599af7a98343ca1a4560e4bbbcf57b302d5c0f4c7e7c5",
+      "size": 3776
+    },
+    "FIX_AND_ENHANCE_CONTROL_PANEL.py": {
+      "hash": "7f69d16f8706ccfc9516c27fd02597e2b48424a71024d8f86aaeadb80d75e279",
+      "size": 3405
+    },
+    "FIX_AND_IMPROVE_CONTROL_PANEL_UI.py": {
+      "hash": "cba66a41d38ce36ac9aac0024a6685c3746a255e4ddaf35183ca640c2777517d",
+      "size": 6535
+    },
+    "fix_and_launch.py": {
+      "hash": "69f7eced83002168a1e286cbea10c0ee5a881e703ef0d36901755964d9c05316",
+      "size": 1486
+    },
+    "FIX_ASUS_BIOS_LOGO.py": {
+      "hash": "935551fdced9e4749236b3c768b35afb4d9cc6bf4105e32024b092134995c333",
+      "size": 10582
+    },
+    "FIX_CONTROL_PANEL_DISPLAY.py": {
+      "hash": "71eb16333604edffc2e2cdca31e075e0249dffd0981ee9260121570c63602453",
+      "size": 8289
+    },
+    "FIX_CONTROL_PANEL_DISPLAY_REAL.py": {
+      "hash": "c6e43c0677cb24fc885369719543fd6f105df477086bc6c677653f9ae9b0b794",
+      "size": 4642
+    },
+    "fix_github_setup.py": {
+      "hash": "65e2a8d2ac2ceab96d3c80558ef36116ac6c97d8aaae40b363491c02e6b3c642",
+      "size": 7782
+    },
+    "FIX_PYTHON_IMPORTS_COMPREHENSIVE.py": {
+      "hash": "c814bd7f00eb15d7e6e507f7a497962f0ca75ab47d2d077774d71c760540c1f0",
+      "size": 7013
+    },
+    "FULL_INTEGRATION_SCAN_AND_OPTIMIZATION.py": {
+      "hash": "155328876354d2e29ed60db40ceb1d6be591d83beb6e2573abdf644512beeb10",
+      "size": 10593
+    },
+    "gatekeeper_admin_helper.py": {
+      "hash": "9879772d08718a7016accf9af433aa223cd852816e41fdb180c3039e8c52d70f",
+      "size": 10409
+    },
+    "gatekeeper_completion_analysis.py": {
+      "hash": "5dabe2a181f7fc3ff479a62d0f000cc03868739ce5842248392cb1e68e751399",
+      "size": 16722
+    },
+    "gatekeeper_enhanced_monitoring.py": {
+      "hash": "fb077ee7a40ca3d75105fac51483921b707b771065ae3627d971a643b6281508",
+      "size": 11976
+    },
+    "gatekeeper_error_handler.py": {
+      "hash": "147c1b9d757c406944d7ec66c2f426b1e96285a906b1d97936901f1b4a24fa43",
+      "size": 22674
+    },
+    "gatekeeper_file_manager.py": {
+      "hash": "ddc955ca367fe859902dca2bae97f796e12b94ed3a1d685e464f022c4de6e9d2",
+      "size": 17690
+    },
+    "gatekeeper_file_manager_web.py": {
+      "hash": "8d112c764cebb99d26f4a27faf97a9fd23bde9c2c881064a98328514e0c560c5",
+      "size": 9794
+    },
+    "gatekeeper_forensic_analysis.py": {
+      "hash": "1de345274edb4e66c50a3e2069a273f23377893f6bf1936bbce6db9c968474f9",
+      "size": 14071
+    },
+    "gatekeeper_omega_bridge.py": {
+      "hash": "25c1f619155624bc9dcca286f34ee34df8371d33c93e0c54e4f632fb8013aa16",
+      "size": 11890
+    },
+    "gatekeeper_quantum_file_manager.py": {
+      "hash": "dc24cff7a25d4c12c513b63a8aaf1879cdb5618d35b81eaabb26c774d3ba4dea",
+      "size": 15142
+    },
+    "gatekeeper_quantum_file_manager_web.py": {
+      "hash": "cf3ced1a2d491391bdd9782e56279a97073868cafaea8c04c1c4abbeb8c19467",
+      "size": 9757
+    },
+    "GATEKEEPER_SYSTEM_BRIDGE.py": {
+      "hash": "ab87c1216dd4a031472282781d851050f4966dbdd78ed0884a1e9f2ebb13e963",
+      "size": 15266
+    },
+    "gatekeeper_system_health_monitor.py": {
+      "hash": "0beab17a7e7d6ee78242e47a6dc5391437aa39ee7a8c65063ed7371a532e3b3c",
+      "size": 14801
+    },
+    "gatekeeper_threat_simulation.py": {
+      "hash": "ffd6cae9d580dab453139f12a492a9ac909d615be053afe4d21499d4d3b4602e",
+      "size": 10978
+    },
+    "gatekeeper_wazuh_integration.py": {
+      "hash": "6cf7c8b084a0f020e90722a25fc73365123c6abe50b9c52edfd3d18eacc028ba",
+      "size": 17514
+    },
+    "gate_admin_system.py": {
+      "hash": "e86952d5cb2c9930ed6f1b7662f891e10906293b79f82cf556638a71288aafab",
+      "size": 14508
+    },
+    "gate_agent.py": {
+      "hash": "2c8377b1f55b9f512247864df1184be307bb46373db2861edc337fdfc979ad32",
+      "size": 17847
+    },
+    "gate_auth_system.py": {
+      "hash": "196578539943ea165ab311259f76360c5f513e1aea114f86087592c253e1e434",
+      "size": 5158
+    },
+    "gate_enhanced_system.py": {
+      "hash": "27c72938dcab230d30aed3be53e450ad78183b18b0e14f35497675a3d02ffc9a",
+      "size": 17549
+    },
+    "generate_copilot_voice.py": {
+      "hash": "3dd36fbf55282df9531b27206870ccc400bca0b7644644ac5bd10fcb0ae05775",
+      "size": 4288
+    },
+    "generate_copilot_voice_v2.py": {
+      "hash": "9dd7d505857729c951f8840f28c8fc89a060747ac648821f6f10dca3ba47178b",
+      "size": 2380
+    },
+    "generate_status_report.py": {
+      "hash": "80b6899da1e93d62af7e17e54db5289c742431bd7b1fb1c494f6d31d37c11009",
+      "size": 3499
+    },
+    "ghost_swarm_protocol.py": {
+      "hash": "1b41e1bb95172406e73c707a164302bfcf2accba6d1329b797bd16de94fa8679",
+      "size": 25909
+    },
+    "GRID_BEAM_SEARCH_FROM_SCRATCH.py": {
+      "hash": "ef883eaa625714584da146758398d71520e5106aabe96d1745e4a6ccc4c80050",
+      "size": 11742
+    },
+    "hands_free_omega.py": {
+      "hash": "3e6fa3972a3d5b961fe42e85e9bbe07da393a08e6ded415f0039eac890addae4",
+      "size": 19200
+    },
+    "hands_free_omega_optimized.py": {
+      "hash": "60274de9e0d5b9e9b40e4e1a703e5033c6d02ba63c1c5f49e4d32270d9ab8bf3",
+      "size": 26265
+    },
+    "IMPLEMENT_ALL_IMPROVEMENTS.py": {
+      "hash": "64457d00b959594788c1df4a56c099044928411737e482e476c4e6f7c8f64fdf",
+      "size": 6669
+    },
+    "IMPLEMENT_PRIORITY_FIXES_AND_IMPROVEMENTS.py": {
+      "hash": "d99ee1891b6e6cceb1d2d4dc6db8737a0fba0acf716552f1892ca375aeb2f28e",
+      "size": 4619
+    },
+    "improvement_cycle_manager.py": {
+      "hash": "4bb0010c3a33095806e9a20f0ba37c58581570e01fe4fccbe32054ce51020bba",
+      "size": 6232
+    },
+    "IMPROVE_MOTHERBOARD_POWER.py": {
+      "hash": "1741aec33840e1ed214c0b2e2e79f3a18f75394a122e91a3521216281b664b69",
+      "size": 5196
+    },
+    "INSTALLATION_SEQUENCE.py": {
+      "hash": "1dc2b6f9ce753bba5bc5dfc2d83370afbffbe2eb7cf28e419d733fdbb14fb414",
+      "size": 7279
+    },
+    "INSTALL_ALL_DEPENDENCIES.py": {
+      "hash": "ab271372a70b79138784f1cb5b63513e509e5caef63c72727912f0a39a9650a1",
+      "size": 8905
+    },
+    "install_optional_dependencies.py": {
+      "hash": "cf39bf47f70b3fff5d2164a49b5aefb3f2ead4223d441d3b3ae233e9c5b72b91",
+      "size": 5374
+    },
+    "install_wazuh_dependencies.py": {
+      "hash": "4503ce7b20493fb25db7e2910b03f2f9865ee85dbda4a6ab389c9639688835b0",
+      "size": 5603
+    },
+    "INTEGRATE_RELATIONSHIP_SYSTEM.py": {
+      "hash": "c52fc01eaf3a819d68353f15bf9549005e8aabcedbbc5439511dbef2e4db1d19",
+      "size": 7395
+    },
+    "interactive_omega.py": {
+      "hash": "18aafb216381013ff62c7cf3304d8aa1df8042e256d2f7e80781472ac5429a06",
+      "size": 9057
+    },
+    "ITERATIVE_CONTROL_PANEL_FIX.py": {
+      "hash": "1dc57fdc44035db7116f8a101f5eb3e154ad5299e3bcbf99407871cd6bec20cc",
+      "size": 16139
+    },
+    "kitt_agent.py": {
+      "hash": "5d74d776c5440febbd693e03933b86758b1aa97a93c9f54446596e5db7e9c2e0",
+      "size": 6814
+    },
+    "kitt_scanner_effect.py": {
+      "hash": "ce3edd935885e8051f1b1df9dcd414c82a24b875214e5272099eca6ca9fbbdfa",
+      "size": 8177
+    },
+    "KNOWLEDGE_GAP_ANALYSIS.py": {
+      "hash": "1a616b8e85b4381307f54b08d5b9d80a7e9c499975d119c9c444c6b35f62fb22",
+      "size": 23584
+    },
+    "language_improver.py": {
+      "hash": "6a9607393c835a17d96ea332eaf0612ba52232492880c68dcdbee2c30e0cd394",
+      "size": 6293
+    },
+    "LEARN_MISSING_KNOWLEDGE.py": {
+      "hash": "0f4806ab55e4d2dcf882529522d17cfd0e9958c6704d6a05dca4fc213d4d2d87",
+      "size": 12637
+    },
+    "list_mics.py": {
+      "hash": "de0acc5f181fffe27ae4768f8147378ca5054680707229ede9da66c7aaa2865f",
+      "size": 50
+    },
+    "manage_authorized_voices.py": {
+      "hash": "e5ead184a402fd0a4aab358821bfc4c5f5d322adde072332fb91db51580b1fe0",
+      "size": 3339
+    },
+    "MONITOR_UI_ACTIVATION.py": {
+      "hash": "90819de1859b8f4879005404f8cebb00841e04035360f60413bab2e3fedf77a0",
+      "size": 6607
+    },
+    "notepad split_recording.py": {
+      "hash": "347772ea5a54c924c9d5bfb947538c0b570ad2d38206c21ed32d58e551e4eee1",
+      "size": 672
+    },
+    "omega.py": {
+      "hash": "d5f603b72bef20563bd24cfe98e9aa3f082c254386dceee1da2c088185fdd53b",
+      "size": 2701
+    },
+    "OMEGAVPN_SETUP.py": {
+      "hash": "e88f970bd4f0e263060f9a4b3efa7d174bd00f4b703a0b2edd2e419210283d5b",
+      "size": 6734
+    },
+    "omega_adaptive_improvements.py": {
+      "hash": "b862ed8ce1d251930926280a3fa73e8a17979c28d3b346247cdc16acde2ad00f",
+      "size": 11375
+    },
+    "omega_advanced_installer.py": {
+      "hash": "3e4f6f8587599ef565ea632e22b3bcfd8e8cbda4ea25d7d3004b225d50d7bc02",
+      "size": 11712
+    },
+    "omega_agent_council.py": {
+      "hash": "02f014fed01e7a3629806cfbee1ae534e032e0e42b15e8d1eea73c09c7c07a29",
+      "size": 15468
+    },
+    "omega_ai_apps_integration.py": {
+      "hash": "659f6bdcd6c4e641fc11d5825a7170051b804b0032a999603107ee5645a7f519",
+      "size": 16097
+    },
+    "omega_ai_bridge.py": {
+      "hash": "823336a0e15657038874412f947356c4796ebb9bb50f639d82b4bcd7f04eb495",
+      "size": 2245
+    },
+    "omega_ai_extras.py": {
+      "hash": "526369335425d793617f38ceae0750cf2729ee698530e47a446a32e098da012a",
+      "size": 3948
+    },
+    "omega_api.py": {
+      "hash": "a1387f31c6beb251fbba5f70e16799b472dd12e80ce4f7194d96b432c7972ab8",
+      "size": 3785
+    },
+    "omega_api_keys.py": {
+      "hash": "7d8f0ffb3622abfa4e848fd2384261f16170de24b1e17870b8a5ccbb1df9cfe0",
+      "size": 4940
+    },
+    "omega_api_keys_admin.py": {
+      "hash": "a8be973543f84b3ccf273a9678102d118589d4b5d2e1dbcba95fc5402ef92f00",
+      "size": 2272
+    },
+    "omega_api_keys_enhanced.py": {
+      "hash": "2ec9976a2f76d3a419e364ea6ec7de3803bd7d5ad29efb4c821801b5affc9669",
+      "size": 13807
+    },
+    "omega_apps_manager.py": {
+      "hash": "39b3bae2bc78e4669ae05c141ba0b52311361a03dffc1eb3228142ae58ffe69b",
+      "size": 8184
+    },
+    "OMEGA_AUTOMATIC_DEEP_SEARCH.py": {
+      "hash": "f8f8e078511e36fea2aaedb0409e1da236f5d1fc84e03b3ce60e22ba35f6d2fc",
+      "size": 4583
+    },
+    "omega_automation_orchestrator.py": {
+      "hash": "4a74741193d0eb1ab85d2219ffc308d138a09b71c72e8f6ad6f30e0422002e21",
+      "size": 13096
+    },
+    "OMEGA_AUTONOMOUS_IMPLEMENTATION.py": {
+      "hash": "ee909cde54b1a86eeae619245aaa783b1547376530e8a10b26b27e63d99eb824",
+      "size": 9294
+    },
+    "omega_auto_integration_monitor.py": {
+      "hash": "ecb0082006483ca2b38159ffa16c5654be2668b196d62a41aaaecd0c674df205",
+      "size": 7303
+    },
+    "omega_auto_repair.py": {
+      "hash": "84740976f40a0f6403529cb0f0db26ee4f399102bf380c1f74c534ebcf453bd7",
+      "size": 9461
+    },
+    "omega_auto_sync.py": {
+      "hash": "977869e19814b8113e91db1a37f60ef9ec760ab2eecf2c82c9bc13ef980b1c6c",
+      "size": 6178
+    },
+    "omega_bios_integration.py": {
+      "hash": "0fe0635572f90d36770e4d51fdbed4fe603878afc051d173cba9141ca3d4daf9",
+      "size": 17507
+    },
+    "omega_boot_logo.py": {
+      "hash": "160c5c6a74f5afb5a2236f23452ff751471e562e5d7d01279db28bc59a4cf8bb",
+      "size": 2694
+    },
+    "omega_chatbot_analyzer.py": {
+      "hash": "fc9886674077a7e318df035bb7c098b6a2853726ca1796a453132fb5a00556a0",
+      "size": 18706
+    },
+    "omega_code_optimizer.py": {
+      "hash": "d1e2ec485383dac088a584a470c8f0165170d17ad0053af0ec1d23768bcf369b",
+      "size": 10345
+    },
+    "omega_combined_final.py": {
+      "hash": "60f5bd40f2404abc0bc15ea40d09ebb98f1603968a90e98dd8d0089a59dd08ab",
+      "size": 10671
+    },
+    "omega_comprehensive_hardware.py": {
+      "hash": "6f62ec271c1434c6fa5595611af9216948bbe9dab2bfc93c5f9d9fd3b6ed27e9",
+      "size": 20045
+    },
+    "omega_confidence_calibration.py": {
+      "hash": "077b1e306e0164b2ecc6069726fcc48518bb5398954cdb8639d00c36fae8d3e4",
+      "size": 6627
+    },
+    "OMEGA_CONFIG_OPTIMIZED.py": {
+      "hash": "9411928dcd2d10a1d240122ad874f652e5f64e7ee61245df99d28ee747d588cc",
+      "size": 3950
+    },
+    "omega_context_summarization.py": {
+      "hash": "faf3abbb3d89c6d18f8fe40198d56016e8caba5f891e5d5332b25ec55f64de42",
+      "size": 6097
+    },
+    "omega_continuous_monitor.py": {
+      "hash": "c6e8884c861192193224c874dbcb32c7d024e177eeb95ffe0992d5f35b947ee1",
+      "size": 13363
+    },
+    "omega_control_panel.py": {
+      "hash": "437635082be9c8761b117821d0db71a40b34508c8f617ecfa3929e8b0646671e",
+      "size": 53121
+    },
+    "omega_control_panel_buttons.py": {
+      "hash": "1912b87cf804d993cd9830bcbb6e085d93a347a6edeb8f3a4f9fb7661ff727d5",
+      "size": 8171
+    },
+    "omega_control_panel_buttons_integration.py": {
+      "hash": "a204e04bcbc7a70dce6e4fe17d22be4fab5a8025ffb2de49756a093f716d0853",
+      "size": 4468
+    },
+    "omega_control_panel_cache.py": {
+      "hash": "13ab6760e7272df8c0cae8ac639116b531fb2ed7aea177b79816d356eced6123",
+      "size": 2365
+    },
+    "omega_control_panel_web.py": {
+      "hash": "b0cda4c69d18e25f6f464a0d8cf9f4c4f78f12d1636918f0273992fec1815b3b",
+      "size": 159672
+    },
+    "omega_core.py": {
+      "hash": "529582a8d34af9458310638b6f166f9ecb54384b6eb2f74612a0df091f9738b4",
+      "size": 12502
+    },
+    "omega_credentials.py": {
+      "hash": "7ea6f24ff63d7537c5fa1e2e769ae9e49987a5d9f1bb38eeec105b099cdfb47d",
+      "size": 1801
+    },
+    "omega_deep_dive.py": {
+      "hash": "15488d390dd01dbcd33ede4ebd678fb2a47280dc7596f1b78c17d05b8f0395e9",
+      "size": 14894
+    },
+    "omega_developer_integrations.py": {
+      "hash": "5cdba25408ff713215c5acaa6fa691779a92c1d3222e1aebfc76e994fc3806d4",
+      "size": 15613
+    },
+    "omega_dev_tools.py": {
+      "hash": "1cce69230c50f0025f653328d59dd9dc4bbeaae07c8a4b1efe18c8a9dc787205",
+      "size": 2980
+    },
+    "omega_download_manager.py": {
+      "hash": "cfe95ec1e45b6fb95a591d6750ffd4f36528f4ebb5ec1ab93cfae9fd2523b464",
+      "size": 8408
+    },
+    "omega_dual_voice_blend.py": {
+      "hash": "04a529b0ce50a15d3826d05e0be7fe424eaf889efedc3d82ed2c4141984b506d",
+      "size": 6431
+    },
+    "omega_educational_agents.py": {
+      "hash": "9db4a6b72abb1e51660c6cf87026d44b448099331086141079168ca3d153779f",
+      "size": 16591
+    },
+    "omega_educational_system.py": {
+      "hash": "bf805d9cdc4ee444814889176afdf19aef16fd27a1b2aa7a966a5274af5d6e9f",
+      "size": 32522
+    },
+    "omega_education_launcher.py": {
+      "hash": "2fb079e8f80a73d3d27171b2d94773c7ffddc8ee4e288145175c98dca8eea019",
+      "size": 3979
+    },
+    "omega_education_system.py": {
+      "hash": "981f0e46f857c545ee829a8d913b1194b7f529561ae2b64d53eb645850d1d630",
+      "size": 16779
+    },
+    "omega_enhanced_research_system.py": {
+      "hash": "5a3021f52837a6965e0d27ae3b0cb51cd44c6b0336b62b7f74b75508a3f8c218",
+      "size": 10716
+    },
+    "omega_final_integration.py": {
+      "hash": "521ec2b53190a4718a4614bf565d3f0a33d1bbcc0b0775e370bbb00edca9d8d6",
+      "size": 15965
+    },
+    "omega_final_integration_safe.py": {
+      "hash": "2d9ad24f0539b5c1bd1edf79da9299bc7496d280093a50a57ba0f65f4ac2003a",
+      "size": 7697
+    },
+    "omega_final_no_emotion.py": {
+      "hash": "29876e7706bfb15cf4d68f31d168ee4c1febaef34f36e24c08683b3695219609",
+      "size": 5524
+    },
+    "OMEGA_FINAL_SETUP.py": {
+      "hash": "c17bfc4bcf32baec8823f7619d0f11ed0701eeb33bb48a662ee1a46c2c2abd1c",
+      "size": 8724
+    },
+    "omega_fix_agents.py": {
+      "hash": "f69a6a03d637a78696499f66b1078b673256512e15a941b6a50b9a5f1e04232e",
+      "size": 8361
+    },
+    "omega_forensic_security.py": {
+      "hash": "b7753cac3fda4c8cf1645436cd85c5ec03a926683d4fd6df53fa325cec8d0a3d",
+      "size": 22673
+    },
+    "omega_full_brain.py": {
+      "hash": "7067e42498d23b7219fe2a9e11d141ca4c6cd4d6f7b9cd1d5c81398edbf72247",
+      "size": 2269
+    },
+    "omega_gpu_load_balancer.py": {
+      "hash": "68de2cccd20b0cd82e4d55bf0eab41e817b8ccb27271774a4875960506b12920",
+      "size": 12451
+    },
+    "omega_hardware_monitor_enhanced.py": {
+      "hash": "0d511c3fbebaef1926bef069839dfa321affb2816aa56173285cf7c4f044c665",
+      "size": 24211
+    },
+    "omega_hardware_sensors.py": {
+      "hash": "48f602a9bf18ea3bd1640ac222590ab87eba2a8dae692ea019be8a0779170244",
+      "size": 7730
+    },
+    "omega_hf_cloud_jobs.py": {
+      "hash": "449515ed2186be10adde111f15d462c8c80cc460cf96a634ed431d845549e737",
+      "size": 9269
+    },
+    "omega_intelligent_chatbot.py": {
+      "hash": "1bbaaffbcd9f9ea8436f7823b1923ccab4c5a469b3ab2c2d62d30c53198cb1e4",
+      "size": 15565
+    },
+    "omega_intelligent_remediation.py": {
+      "hash": "495ed9584919aa80f9d5dcdf1c43fb633f72b6859d030e2ee29c5d6d2c02b127",
+      "size": 13435
+    },
+    "omega_intent_recognition.py": {
+      "hash": "0f6271521920bb78e00c904b2c45fb42c883ce6ab8a3e408e84fb1773a574593",
+      "size": 8537
+    },
+    "omega_introduce.py": {
+      "hash": "1e9eeaecd1db1631ed52f56fa5e785f185f5528b8bf46ef23c1a483219dd3699",
+      "size": 1545
+    },
+    "omega_kitt_ui.py": {
+      "hash": "4cf006ced5c4ab5a87d3726cd2da6a54b7330dced7934e41aa15a11d1a7e373d",
+      "size": 21791
+    },
+    "omega_knowledge_assessment.py": {
+      "hash": "d322b099352fc9603a4f977a13b6a593dca9448595772fcfa6c33c7a9520044b",
+      "size": 17697
+    },
+    "OMEGA_LANGCHAIN_INTEGRATION.py": {
+      "hash": "1c676d827326c40cd42e206a5d02035df5b02b58fe331e4e7e9afd3fc4175f39",
+      "size": 5738
+    },
+    "omega_language_enhancer.py": {
+      "hash": "b0edc332be29580c0065a14b448d9a01f4ff92ef774d06136803b4215b4d303c",
+      "size": 4128
+    },
+    "omega_launcher.py": {
+      "hash": "e83c95616ebcd2b1a93c069a831b39d746af94f5779606f21e2430d274726979",
+      "size": 3746
+    },
+    "omega_learning_swarm.py": {
+      "hash": "4096c5b91616c701e01c5d54efa6da2b64511568e2002e14f49771bbccdd1c01",
+      "size": 5015
+    },
+    "omega_local_load_testing.py": {
+      "hash": "1a66e54d797e4ad28b7cbac59c1fc17465c7ab0ebd0467070c7de15116fbc32d",
+      "size": 7212
+    },
+    "omega_logging_config.py": {
+      "hash": "36510f7a8a80700e193410c1d9262882fb52ff5d31500938277b24c79c5a40f1",
+      "size": 2695
+    },
+    "omega_master_dev_build.py": {
+      "hash": "32ff459e6bd504462f85c3990d5b582515a0c70d265b0a1250cd818cd2b9ed90",
+      "size": 19880
+    },
+    "omega_master_integrator.py": {
+      "hash": "1b774ef3bffb9c40bca8bc9034a3e3ef5f93aa49dd6862a0cde52950371564f8",
+      "size": 14541
+    },
+    "omega_mesh_network.py": {
+      "hash": "c8f4e52749e89e16ca418cce17fdc1154664a7603d7961bc713742e9da0ab85d",
+      "size": 7417
+    },
+    "omega_monitoring.py": {
+      "hash": "d4c681acbbf22177b2bfb82f45353757dbc5664fd9232c4d2f4ba66b5b51e4b0",
+      "size": 9069
+    },
+    "omega_ner_system.py": {
+      "hash": "7798e6c1038bd41090bb182fe8ff40d74ff8f41bd30952d04a07a41f498757a9",
+      "size": 8768
+    },
+    "omega_network_security.py": {
+      "hash": "1fad900d61ae334894d9cb0aee2be135b879a69d4c77338d1cab96c3c64a30df",
+      "size": 12002
+    },
+    "omega_nvidia_integration.py": {
+      "hash": "b442060f19b74f23048dff7730e891547f24d7d3b8d46fc49d4d015c97637843",
+      "size": 5985
+    },
+    "omega_openai_integration.py": {
+      "hash": "4f2feb20ac32880ad731d0c964c3c6fb596a66e9c12cea4e119b11361992f2d2",
+      "size": 5813
+    },
+    "omega_operational_startup.py": {
+      "hash": "24ace784cabe3cc964be6661c37906e81789da1111bbd8f704bd2654eeb64357",
+      "size": 8804
+    },
+    "omega_optimized_speech.py": {
+      "hash": "75909cd4cecbde91ee8b300bfc46fa82f663cc7b0af2fe6942efbe6356aef394",
+      "size": 22507
+    },
+    "omega_optimized_tts.py": {
+      "hash": "084dd8d8bf8c52a2a087f34bfd21cbc4a70cfced89ed031643f5c87f0a2b06ab",
+      "size": 3776
+    },
+    "omega_oui_lookup.py": {
+      "hash": "b9e39c1bdd0f59976696b90f9464ee7ff96dd8acca1dc2b4520cc5a3dc2f6639",
+      "size": 13255
+    },
+    "omega_package_scanner.py": {
+      "hash": "6e90954c02e334b99afe78f5ff9f73bd5c5047904eeaba20f0459e5e56c91078",
+      "size": 20127
+    },
+    "omega_production_preparation.py": {
+      "hash": "acab7d8e1fd7cadf6bb21cc1ffb52b97ee1ab3e6a3f0dc00a988ddd4fc5b9c40",
+      "size": 14977
+    },
+    "omega_pwa_kitt_ui.py": {
+      "hash": "5434ec609a76db4d560802f5a05d4d8fd0bea3063fbc21baa64ec41cd9416235",
+      "size": 54437
+    },
+    "omega_quantum_enhanced.py": {
+      "hash": "4d604e53fb3dc62a88a044c61715ae969554d466d473f3aa0bc5f511889d08c6",
+      "size": 3502
+    },
+    "omega_quantum_idle_optimizer.py": {
+      "hash": "ae3011d49624ade8459ed9fdfd151aad9f27169b6ebff7a96248e691d677b871",
+      "size": 16873
+    },
+    "omega_quick_start.py": {
+      "hash": "296c3d938624b76b7dce3b1f31d445af099c753fe7579f5496baed6232b46d4d",
+      "size": 1119
+    },
+    "omega_quick_test.py": {
+      "hash": "aff674b74c283e01ae8b8cdf7413efcad7ad70df174fc66f2f0c9dec5bec9305",
+      "size": 2361
+    },
+    "OMEGA_RAG_SYSTEM.py": {
+      "hash": "3e0a95eacb37dbd73bb24b90ac291879c049cf78a4fd2bb5406934310d951a59",
+      "size": 7828
+    },
+    "omega_relationship_council.py": {
+      "hash": "440219d32ed072c3d241832d7c51c1939691f2d9ae85cce28ad499287cf7061d",
+      "size": 13484
+    },
+    "omega_relationship_system.py": {
+      "hash": "9bcfefa55d89b6005358966c5385b7bc2fe8aff26874855a45aa0e393f729f63",
+      "size": 18828
+    },
+    "omega_relationship_voice.py": {
+      "hash": "03e895a154a79d186c4ad618ebb0bde5b6f10366141a2dba09c20c47f945aef6",
+      "size": 1955
+    },
+    "omega_resource_manager.py": {
+      "hash": "a6917a091d50624be17bf981ccaf8fb2a37a042a33954055905a374716ba61bb",
+      "size": 11758
+    },
+    "omega_resource_optimized_components.py": {
+      "hash": "1da4d99324e180fbce4574308a4fd6ef0d8339893e47f87174b984ee5ce057f4",
+      "size": 7251
+    },
+    "omega_resource_optimizer.py": {
+      "hash": "d25f36942179f85a05cd94a5be3f5d0bb4e180a29eb5cf212e8c90d0218e4f8c",
+      "size": 9049
+    },
+    "omega_say_hello.py": {
+      "hash": "7e345641f7f55ab5ebf6bbe26ff9e349da3550cad858fda33898aa8f3f8b92ab",
+      "size": 757
+    },
+    "omega_scalability_enhanced.py": {
+      "hash": "f5758db9e7fe63a887808c2fccb726c7ee3c4c612491e8af3c6e42f11ca1d4e1",
+      "size": 4488
+    },
+    "omega_scanner_integration.py": {
+      "hash": "729cf4aedd4f8e5a33d2360bcb24c8612d52d2180cffc1e80e49f28d28b8421f",
+      "size": 6279
+    },
+    "omega_scan_integration.py": {
+      "hash": "846ad86ae786d354c28cc3cba9860acd665cab7ec5acd728293bd3e1ae9dd7e3",
+      "size": 23356
+    },
+    "omega_security_enhanced.py": {
+      "hash": "3a20ba4e4cf9d7cd5460fa7c44d3f3be803b0aaebc726d22056e653f3b337199",
+      "size": 5906
+    },
+    "omega_simple_final.py": {
+      "hash": "6f82f30a5083dd8a329032f0e426ea2fb154bcc1d6c0c8a3877289dd0c15ed53",
+      "size": 5545
+    },
+    "omega_slang_processor.py": {
+      "hash": "b8f5962f4759c93ebaffa32d4ccaf2cb2cba5f150c1c69083a119d0efd381c9f",
+      "size": 21398
+    },
+    "omega_slang_processor_optimized.py": {
+      "hash": "1a42d96bb21e3781e3a4403efcb27846dfc7d33fad01d3fa8c35d06cb0dcbfa3",
+      "size": 8866
+    },
+    "omega_smart_integrator.py": {
+      "hash": "4fb7a05ae5f856ced448bc723b457d6256cb9d3e2849affbdc081ae3e6c8a5f9",
+      "size": 21971
+    },
+    "omega_speech_with_claude.py": {
+      "hash": "f0c235eec1310dd0e2577e591070d3dbf7fb495e629f2ede2f7c025ff3b9d073",
+      "size": 10434
+    },
+    "omega_speed_enhanced.py": {
+      "hash": "177acd63f4c295218e0cc6b53af7454350787ea38438eef861400fe113d2c7b4",
+      "size": 2221
+    },
+    "omega_startup_optimizer.py": {
+      "hash": "fecb0eb65818a3fec11611a277389211ce8c6fc7c04b40f6933d85ccf4f4e725",
+      "size": 27230
+    },
+    "omega_swarm_heartbeat.py": {
+      "hash": "f0bb1cd53cb6daab6c639a2d4e6f6571ffb3f2aa728056a59b99f95d0975ebf7",
+      "size": 11612
+    },
+    "omega_swarm_integrated.py": {
+      "hash": "1d8e28f46f13759e1857e92501b18033898ff76e89a1f911abce7fab45729f0f",
+      "size": 18266
+    },
+    "omega_swarm_server.py": {
+      "hash": "f5b476f5c0205514136885fc58b398ed3a181b7394e0075359b4a81c6f566e99",
+      "size": 11687
+    },
+    "omega_system_access.py": {
+      "hash": "6d59eb0b3e09d55e7fab0f8c8f49c0ba8118470a3fe94d238e31bb488f89a2f0",
+      "size": 8094
+    },
+    "omega_system_audit.py": {
+      "hash": "c1d1492c65bf1ddfb2c1a27527feaab8ba72fe08270f1269ef2ced0895c854e2",
+      "size": 15001
+    },
+    "omega_system_monitor.py": {
+      "hash": "d9ad3dda9e8d070de8952467d01b0f23b1d7c0da3a82d0ee7e02c88fb41a7069",
+      "size": 21451
+    },
+    "omega_system_resource_manager.py": {
+      "hash": "71ae470a6c0aa8c1535e1882203f151b2c743a145ca04c82e743f2a97af2f1ea",
+      "size": 4707
+    },
+    "omega_system_status.py": {
+      "hash": "01faf8e6f65d788636e333ce8fa39021dbcf3ce7304af9a81644399d0e8f5723",
+      "size": 3417
+    },
+    "omega_training_session.py": {
+      "hash": "d8c7e00754535c7915c90b2c464ef2bd9966ebb893181c3d5c075801b11fdf16",
+      "size": 8179
+    },
+    "OMEGA_UI_LAUNCHER.py": {
+      "hash": "a0fd5ac19d117dfefdc531e0b470cefb77a893a736646b51e7a3ab70d9be06ac",
+      "size": 1707
+    },
+    "omega_user_storage.py": {
+      "hash": "1f1986801b33d5d0ae6cb7bcecc38d12663e92971d6fd85eacff4f1e0c556d66",
+      "size": 7731
+    },
+    "omega_vector_db.py": {
+      "hash": "af497e0517e0c8559037daac4e9e53d359f4548a86cedcbcc2b63f1a2be863df",
+      "size": 9576
+    },
+    "omega_voice_active.py": {
+      "hash": "de6f8d27ea6830601efe2953adca4de487e2e07860723aae605ce55c4eef4b4b",
+      "size": 10588
+    },
+    "omega_voice_analysis.py": {
+      "hash": "7fa589591ad64f4d4426b8ba191511a29ac1f3727b7efd889e61b44fcab75f32",
+      "size": 3874
+    },
+    "omega_voice_analysis_simple.py": {
+      "hash": "aa24d926d75747106cee4bbab3854d275cbef2696831f141f5e49c7b6ceda05a",
+      "size": 4770
+    },
+    "omega_voice_api.py": {
+      "hash": "41a4b9180469d0e5592e839db9783092207bb14bca5904d628e3b9b75a7e9e19",
+      "size": 8905
+    },
+    "omega_voice_auto.py": {
+      "hash": "a97a2f48b194748fdf48b9fe707d8a469df9efb9f2b316836e752ac07b32425c",
+      "size": 4366
+    },
+    "omega_voice_demo.py": {
+      "hash": "204439368d576f6556479f03ae39d7da012d16cc8e89f4ee62819db4468219a2",
+      "size": 7732
+    },
+    "omega_voice_player.py": {
+      "hash": "1b9b439159f816cb3220e9d5d2f8a86bcf9dd24b542f12fd6e21b9c9e16b5882",
+      "size": 10069
+    },
+    "omega_voice_screenshot_extension.py": {
+      "hash": "f244fc05a4eef0856b94b672ccbeaf102ae12ab7af93a92e4fe7b43f8a5f0c89",
+      "size": 26663
+    },
+    "omega_voice_test_simple.py": {
+      "hash": "e47db66c45ef9bda1cb3ce1fe4ff482f58586dbfd4fbc5e64225a9fd60c7683d",
+      "size": 3906
+    },
+    "omega_voice_wake.py": {
+      "hash": "a4d51f5102dc3a87f90731d711b429bbeb759bf8c77c7352968871261d03e65c",
+      "size": 9649
+    },
+    "omega_vpn_enhanced.py": {
+      "hash": "40dacf3a4a9a7a7b8b057bf690ab009d9fa41179e8d331085b03f4ae4266e8c4",
+      "size": 14845
+    },
+    "omega_vpn_system.py": {
+      "hash": "3a61397b1b9634ade9918fb144cd0b6ce7aaa8811578b88e58e030750056f9f8",
+      "size": 20902
+    },
+    "OMEGA_WEB_LAUNCHER.py": {
+      "hash": "fb7f24295caf991470bb2b4777cb34ad0be8e505d21df0186fcc20122df21ae1",
+      "size": 895
+    },
+    "omega_web_researcher.py": {
+      "hash": "e98d7984023dca03ec76931f8281c82aa96c8ba14861575595dd21b731ec4fb2",
+      "size": 11469
+    },
+    "omega_web_ui_enhanced.py": {
+      "hash": "25137e19ba32eb97e2eeddf4bd65c19ccfcaa7a412f799267c0d7b2331776680",
+      "size": 62232
+    },
+    "omega_web_ui_simple.py": {
+      "hash": "3d53a8fed3b16e5aee05b562b292af3e11a73660bbf72ce61a456299d1263d6f",
+      "size": 18076
+    },
+    "omega_web_ui_simple_enhanced.py": {
+      "hash": "1c2ef551c99239969c570052d2e8fec3273fa21668f88ee2690fe995858d3d08",
+      "size": 18259
+    },
+    "omega_web_ui_v2_enhanced.py": {
+      "hash": "96daabc3ce9b94944d2249ee7d88126b20a8adeb816e350037d0260ee3d804b8",
+      "size": 30851
+    },
+    "omega_windows_power.py": {
+      "hash": "a1b93fd3fa22d2885a8b444496547bda6b0ef2423ccc748a5ecfe8b4f4057320",
+      "size": 15619
+    },
+    "omega_windows_power_optimized.py": {
+      "hash": "a52df786eee03aae7076cc069fcb2c95d019b1bd72db0973695b69586fbafff8",
+      "size": 6462
+    },
+    "OPTIMIZE_AND_FIX_REDUNDANCIES.py": {
+      "hash": "dc384712150a62fa3ba79d29ee23635f0af435b2eee54c7ff1264d0436230caa",
+      "size": 10483
+    },
+    "OPTIMIZE_CUDA_FOR_OMEGA.py": {
+      "hash": "99c76c3d27e59827a4f439457478ca6e549d16037715b9f9c98386ffb1c5ec60",
+      "size": 6946
+    },
+    "OPTIMIZE_SCRIPTS_CONSOLIDATE.py": {
+      "hash": "57b3becaa8117377d9fb9b27ef6edcfa525e1cb30c8867466e361c7bdec71b6a",
+      "size": 4038
+    },
+    "OPTIMIZE_STARTUP.py": {
+      "hash": "bb56f5b799ce383d651ed0c8ad7bca56ca1a6d3287205f007eae4eb4fb40610a",
+      "size": 3063
+    },
+    "OPTIMIZE_UI_QUANTUM_SCRUB.py": {
+      "hash": "ad1aa1fef02ad0ec68fcd67568469c3e44519f55cde7944aa06545e977a36643",
+      "size": 15343
+    },
+    "phone_ui_simple.py": {
+      "hash": "d4923ad4aca91fcacbe253f9eca75179ebc5995978b48d4923a89feacd3cbff6",
+      "size": 8300
+    },
+    "play_copilot_voice.py": {
+      "hash": "9fff05ba501bc2c7813ff126d36f9937c4f2189b9c6e1c639c772549c3d3b563",
+      "size": 1554
+    },
+    "play_original_voices.py": {
+      "hash": "b5acdcec8ac154a3239d798ff417f16749da201a52cdb73fee6c1ec5faeb3b35",
+      "size": 3227
+    },
+    "play_voice_manual.py": {
+      "hash": "eb976363a9b353407421d57eabc66cee8350b61987a0079b6c8c35a1704f0dd3",
+      "size": 2211
+    },
+    "PREPARE_PRODUCTION.py": {
+      "hash": "15955c50a23ef91be1d84894cb08cd089d90323539efa93820353c43d89c903f",
+      "size": 3164
+    },
+    "quantum_armor_optimized.py": {
+      "hash": "7cf9b8ce4c791f919f6a875e95449df5365e5299aabbabdc27af158d78e299b3",
+      "size": 15132
+    },
+    "quantum_armor_v1.py": {
+      "hash": "648d93e79bea760046c89f5c511a3a6674768fa849ca92f626f9454ba34bb6cd",
+      "size": 5607
+    },
+    "QUANTUM_ENHANCED_FILE_MANAGER.py": {
+      "hash": "9874f7828e832b88fa91ae4722b4c34c369b5d2cc4c48ec0464ca5edd7ff642b",
+      "size": 17652
+    },
+    "quantum_huggingface_research.py": {
+      "hash": "bd2c17d223de6a78c9996708adc1a2ad74e7846c0a39fea27ec0270b86aa98f4",
+      "size": 9964
+    },
+    "QUANTUM_MASTER_ENHANCEMENT.py": {
+      "hash": "ddbb000fae0f5b5df84b83b4a6dccb1d1a68a20b096c87b1343c8ec0273cf5cd",
+      "size": 24775
+    },
+    "QUANTUM_OPERATIONAL_SCRUB.py": {
+      "hash": "2afec82f5209dab6db289d57aa603a81faefda4b2c16549a607d8e97c6857fb6",
+      "size": 17865
+    },
+    "quantum_self_repair.py": {
+      "hash": "386a3f93e48519eb129f9b369e3cbf055726c5d57e503a114f5ad6c70384e2b3",
+      "size": 2363
+    },
+    "quantum_web_research.py": {
+      "hash": "9527238c64bcc7aa15d8f39784799f1115c68b4ade1dd9851204aabfdfabd6a3",
+      "size": 12807
+    },
+    "QUANTUM_WORLDWIDE_SCRUB.py": {
+      "hash": "22a63232a9ed98722cf5b4b7a066b676db195a8677d6787e9358431a26aa7ac1",
+      "size": 22796
+    },
+    "QUANTUM_WORLDWIDE_SCRUB_VISUAL_STUDIO.py": {
+      "hash": "1c168e77d3da23664e1d902658b9270ca0236e9f4a63ba72690ddc8170a6c34e",
+      "size": 18792
+    },
+    "QUICK_AUTO_OPTIMIZE.py": {
+      "hash": "63c6844d105e8554acf5bc138b59bf3aeb543b5e15ba43f22cc718b98de74c97",
+      "size": 1022
+    },
+    "quick_clone.py": {
+      "hash": "ed42804d0b1c217f68dc2d83a7d31762b464235fe6316761c9d5359aafa11787",
+      "size": 767
+    },
+    "quick_code_check.py": {
+      "hash": "7fe93309b93af8bb6fd4a462e16cea6a94775cd95fff400b862803b82ac14472",
+      "size": 2775
+    },
+    "QUICK_DIAGNOSTICS.py": {
+      "hash": "d899d6c1513e918ac6dbb24586061f5d574c207acc3497a05103a79822096455",
+      "size": 5250
+    },
+    "quick_tts_test.py": {
+      "hash": "92b2e4104b69e0f155688d19c6605d4c475b2a116c2b9d7e4e54d1f4093b581b",
+      "size": 1622
+    },
+    "rate_limiter.py": {
+      "hash": "69285cf7c5a3b5472c468f137d17f1a60b408996ebb1ae0b7adcdcd02fa6df97",
+      "size": 7207
+    },
+    "REPAIR_OMEGA_ICONS.py": {
+      "hash": "12a4350e2cd25693b3ff38f15176129418b61c7c6b85bb088db5a97632b0ac7a",
+      "size": 6495
+    },
+    "RESEARCH_AND_FIX_UI_ISSUE.py": {
+      "hash": "d640fab375dd73aa5b0d89c5a637a2187fb7cc6afe8c500ddbf8c6d8c9242cb2",
+      "size": 7340
+    },
+    "RESEARCH_ASUS_BIOS_LOGO.py": {
+      "hash": "963e497e99cd4711076286fe4f100d1d3714830107812c5515643fb1a48e6c44",
+      "size": 16972
+    },
+    "RGB_QUICK_REFERENCE.py": {
+      "hash": "fed46dfb8402e0fc11ac0fbdd52c847a3bda3820c80f0048db95821ff14fe5ab",
+      "size": 20056
+    },
+    "rgb_setup_and_diagnostics.py": {
+      "hash": "b8e3392dd4a8fe3ec31a7cfc6f067d4e71ed604e5e4c088562c932c153dc2756",
+      "size": 24572
+    },
+    "RUN_ALL_SETUP_AND_CHECKS.py": {
+      "hash": "85bc9bf73573ae034a3f75053feb8bcf22ae6b235838614d65e1b9c6afae6267",
+      "size": 5276
+    },
+    "run_comprehensive_tests.py": {
+      "hash": "7439e7fcc716570b2fec01fb0d8afa9f18cb6dcdfb9449e5cdf427a5c838fb25",
+      "size": 10090
+    },
+    "run_full_analysis_for_marc.py": {
+      "hash": "24dffcd62cd8248856f4884f0646aca5ee6e7e2d7ec41ba5071713a5436d46f4",
+      "size": 2633
+    },
+    "run_speech_test.py": {
+      "hash": "423711d04f5cde1a2038746c3c280da1cdd7625356d337c876097b76dab32bf4",
+      "size": 5726
+    },
+    "safe_path_manager.py": {
+      "hash": "adf0bf84aa15ee8507c4bbee364ea8eacf6b0a4738cf743940a69f3c2405d356",
+      "size": 9369
+    },
+    "SCAN_FOR_ISSUES.py": {
+      "hash": "bf61b20eda94c544469708c4a4e5125d5a3d3ace2f69492bc57d2c63c55453e8",
+      "size": 5650
+    },
+    "SCHEDULE_SHUTDOWN_AND_WAKE.py": {
+      "hash": "a5048ce33b148ac85e72f3278f0adee68ac41a5712a0dc7ceaed45412b990622",
+      "size": 1496
+    },
+    "setup.py": {
+      "hash": "9f6f2c02ca71aaa67f2771e974e127836016bfda395714bf65b83267ee8b6b8d",
+      "size": 1852
+    },
+    "SETUP_ADMIN_USER.py": {
+      "hash": "971fb2781538f2d4d81fda857524c125c6dc6ab464fcc1cf35370762855bd7df",
+      "size": 2571
+    },
+    "setup_complete.py": {
+      "hash": "fe60991ced606b0678e78a8d71c577547f4d99ef4297e24908582fcb247a3bdb",
+      "size": 4861
+    },
+    "SETUP_DEVELOPER_INTEGRATIONS.py": {
+      "hash": "a382f1f953a8068ef6e577eabc202cec0475b2c6707a9de5632bee9289f9e500",
+      "size": 7195
+    },
+    "SETUP_DOWNLOADS_LOCATION.py": {
+      "hash": "7dc8cde61ad3e681d28dff79bdc99296df656c985c3f363f35f88adbc512aba0",
+      "size": 4456
+    },
+    "setup_github_token.py": {
+      "hash": "383e40644907916491a310c0608c18cd4c62276cdde6169afb08de6a56ba7dfa",
+      "size": 4084
+    },
+    "SETUP_OMEGA_ICONS.py": {
+      "hash": "518351b01e0c136bfb99636ce90a035deb657d674dbed11efef2ac053e41e2e7",
+      "size": 4090
+    },
+    "setup_tunnel.py": {
+      "hash": "7f4dcecfa07ec3e5e2182e7beb11767c4aff0510b6fa662f47c541dc648a4718",
+      "size": 6479
+    },
+    "SETUP_VPN.py": {
+      "hash": "1216bb294613dff572e93a7bef8e4a53687b69580799737fa67ca1549142413d",
+      "size": 7045
+    },
+    "SET_PARTNERS_STATUS.py": {
+      "hash": "9cefa94c572748cfe2308c4ea12afe777f4009ee0988f11799f330273862e243",
+      "size": 1874
+    },
+    "SET_RGB_COLOR.py": {
+      "hash": "458af63062fcd2c2fa7bdc5db23374c55d71c5affe0c088c3f6f092a8f70c158",
+      "size": 1120
+    },
+    "show_consolidation_status.py": {
+      "hash": "0345dfb124c32ecfdfeb66e472b1791815173589d13c42a689d48b46c20d228c",
+      "size": 2158
+    },
+    "SHUTDOWN_AND_WAKE_COMPLETE.py": {
+      "hash": "68531055ec155369e2fb2c2854fbe518755eafe973cde5ad00e71530cb86f84d",
+      "size": 2329
+    },
+    "SIMPLE_DIAGNOSTIC.py": {
+      "hash": "dfe6ecfa7c52c10c2ea5705988e7ed418070e3b0131a4502b0590338db476b9a",
+      "size": 6669
+    },
+    "SIMPLE_TEST.py": {
+      "hash": "c3632527d3022e144efc56262f7de7bce9d018598a5565f2e4f24d019aa63076",
+      "size": 3901
+    },
+    "speak_copilot_voice.py": {
+      "hash": "7c0b7258a9a61fe71cacfa437022fa50b217fbc84b65f3ff1c4c41394fdda00f",
+      "size": 1939
+    },
+    "speak_gate_voice.py": {
+      "hash": "45932cd9555e7d3221f660690185491282af82fd3bf5579ecef8f1fe9250fb53",
+      "size": 9417
+    },
+    "speak_omega_voice.py": {
+      "hash": "4e935bb9d2b2d8f8243d4550bf268a7fb8fe52344148b73abe02f70bc5a0a220",
+      "size": 6106
+    },
+    "START_CONTROL_PANEL.py": {
+      "hash": "033673cae0bea85559eabb393c82eec992e4f7743cad342b2906557223a3cb12",
+      "size": 754
+    },
+    "START_CONTROL_PANEL_FIXED.py": {
+      "hash": "c235b146456b21d95bc1f72b40680931ee1d2783808d26e56730a2db92a88645",
+      "size": 1714
+    },
+    "START_CONTROL_PANEL_VISIBLE.py": {
+      "hash": "8acdcaff4e2f2f4d395b3c9bb3379eeb83ca318842d05ce8cdf94ed1c1f5067c",
+      "size": 2766
+    },
+    "STORE_ADMIN_API_KEY.py": {
+      "hash": "c6265112e7e413cfcb6fe718b5632f543152a07cfae5d0951f52c468b01fd891",
+      "size": 2472
+    },
+    "STORE_API_KEY.py": {
+      "hash": "c9e41234ab9d768620095daad759787c1f9d26be0c040946b9681354ef6271c3",
+      "size": 1880
+    },
+    "store_github_token.py": {
+      "hash": "a384082ae7d8ba62cbc47b47418acf29c3ef602c2b52ca8e77dff44f69ca9fae",
+      "size": 2531
+    },
+    "STREAMING_TTS_IMPLEMENTATION.py": {
+      "hash": "55d55936dca6acf349f67a86e4e1b5b16a64c6aad7e433a0575c690495498a8a",
+      "size": 4854
+    },
+    "TEST_CONTROL_PANEL_DISPLAY.py": {
+      "hash": "d6cf6c7261bfc2c59429a9518125aa67ed557eaf8a21a155628d690908e8df03",
+      "size": 1660
+    },
+    "test_cpu_temp.py": {
+      "hash": "9c250d9b1c570e181a2b5b3b0ef72366fa7bb9b9e329d269af49b018ff10329d",
+      "size": 1529
+    },
+    "test_gpu.py": {
+      "hash": "3aa862182a5188f0eb11f2b8410b0a73a0a411b7129cb4f8edc34d61d8dad802",
+      "size": 763
+    },
+    "test_gs_protocol.py": {
+      "hash": "7b507e2daae176cd8b8c9402e4de83f4c24414ed19cd1b5bcdc8defb061db7b9",
+      "size": 6013
+    },
+    "test_html_load.py": {
+      "hash": "b83eb8b3bd946e063c0f460780a87d9ba03c58142c1120c044108f353a330164",
+      "size": 1226
+    },
+    "test_integration.py": {
+      "hash": "bda0caef7a9f34c15b0bb4c4742b304c0b17bb2acf1a7c177ffd58903ce10136",
+      "size": 8406
+    },
+    "TEST_LAUNCHER_NOW.py": {
+      "hash": "48fb17be9c735ab4e976ec48ce8f2d2148a3a50d9dc8f41a97aac900035d17c3",
+      "size": 2939
+    },
+    "test_llm_decoding_integration.py": {
+      "hash": "7b602839d3c806ea4c24bec766340f7a1d204afd5f2edbe822bc7f4d81a34c82",
+      "size": 5535
+    },
+    "TEST_MATPLOTLIB_DISPLAY.py": {
+      "hash": "660a21ce5b2f12ef7f6d6b86d8a9120c212c32f1893068dfa86a840bd97d1d3e",
+      "size": 3160
+    },
+    "test_mini.py": {
+      "hash": "78a631e84f0c274a0a3fe19367422580d9412185106d3fb5dee4f2cbad6795ab",
+      "size": 499
+    },
+    "test_omega_performance.py": {
+      "hash": "75dd39ae72d0c038c3cfe4c12d86ed3f9ad027e1fd19a4784a0deab41d93e8d2",
+      "size": 11433
+    },
+    "test_openai_api.py": {
+      "hash": "564d5ce5fc8818b8a8363db260350d220787da7bec27eeb44e190744ceb96b1a",
+      "size": 5167
+    },
+    "test_phone_ui.py": {
+      "hash": "6ff58fe95a20553e98e027a881162929bc68d99f86ef5b59cb0029fa22e7ba91",
+      "size": 996
+    },
+    "test_rgb_system.py": {
+      "hash": "8b3d20779bd98e4ffddb7b0280c26da5bc85b3ca25e4bfba7ae8287bd5ca7185",
+      "size": 2367
+    },
+    "TEST_SECURITY_SYSTEM.py": {
+      "hash": "a90e8ac4e3753e90ad3ec2e9d5ba270ede4e22d2f795ae4949f61ff70497ce57",
+      "size": 1951
+    },
+    "test_server.py": {
+      "hash": "1f4abe6f55d2ea8135eed7369442372207fdf81c3ef0b0e328a0e6649019da8f",
+      "size": 452
+    },
+    "test_server_simple.py": {
+      "hash": "0908adf692458a59d5d4dcb333d2fa70962bf5cc90fd6b685531389a63413968",
+      "size": 1387
+    },
+    "test_slang_processor.py": {
+      "hash": "d54a199ed9ae7c2c44ab4b529ce17358e99f394cf10a4297b0fbca38cf759840",
+      "size": 2097
+    },
+    "test_system.py": {
+      "hash": "94db0e9fe99b75d1569b6db9cf56b4f708aeb189caeebcd7dbb3a0301ff6bb21",
+      "size": 6973
+    },
+    "test_tts_fix.py": {
+      "hash": "15ce37b2b1eb6cf3ab44dae25015589fe4b8edfd5a9281fc22ac11da8deda0bb",
+      "size": 1739
+    },
+    "test_voice_system.py": {
+      "hash": "b9c0f44079340290bc079698c23870435708443aa0793fbc220b11e3b6cd0253",
+      "size": 3132
+    },
+    "tool_access_manager.py": {
+      "hash": "535c551c5d49df271dadc3aea676266fb6051a332cf7d469bb3e5ce84a72ca47",
+      "size": 9962
+    },
+    "TRACE_ACTIVATION_SEQUENCE.py": {
+      "hash": "c018993979bf0ce2953952c973393e1a702adfe0a3719e4e535578108c166c0f",
+      "size": 3394
+    },
+    "UPDATE_OMEGA_LOGO_DESIGN.py": {
+      "hash": "7b7089723de58d9a172fea42cffa7ca34eae6bafec3f48b2c3ddb4e99cdbe7b0",
+      "size": 4707
+    },
+    "UPDATE_SHORTCUT_ICON.py": {
+      "hash": "cd83f700169617e7d90ac3858f604a586e425acd0c3e9daa41ac0c714bc3e5c9",
+      "size": 2765
+    },
+    "verify_all_systems.py": {
+      "hash": "5a20b87fcb8a395270444fed58f7124ed61447f8605565eafb2578219943bec2",
+      "size": 5255
+    },
+    "VERIFY_COPY.py": {
+      "hash": "8717c1b206f168238308d56e69748521c9cdb83d980b114a9f369d202d9b9495",
+      "size": 527
+    },
+    "verify_dependencies.py": {
+      "hash": "bb586734c2434ee36d88fe068087953790ae0a6909f8b28ae2aa8447335beb24",
+      "size": 12098
+    },
+    "VERIFY_INSTALLATIONS.py": {
+      "hash": "b56efce5a0cedb9464e6f6feb485ba2583be6fd706cfa76428d54b848730bd13",
+      "size": 5131
+    },
+    "voice_improvement_analyzer.py": {
+      "hash": "942c683159dabad9fda564cc3cbf0ff2d017e2e515895853b06bc39ee2d0328a",
+      "size": 6376
+    },
+    "voice_security_system.py": {
+      "hash": "9272ced28a0d70832ca2455c159f3994faace7feb57080169c587603ad6f3a6f",
+      "size": 11840
+    },
+    "VPN_ALWAYS_ON.py": {
+      "hash": "f1a5a3b408305d4caf038fa0935e57bd45e587181894f5bca26264f51374e7ea",
+      "size": 4348
+    },
+    "VPN_BROWSER_INTEGRATION.py": {
+      "hash": "641c1044a7fc5017a43b0466cf39e1da7653fdb1541e0b8c7437c96e110a8fce",
+      "size": 6641
+    },
+    "WHISPER_CALIBRATION_AND_CONFIDENCE.py": {
+      "hash": "dd8100a774ea9955fe12d536780b39a61dabdaccbcd10a70c63d0a6bc8d27c67",
+      "size": 6508
+    },
+    "omega-kitt-pwa\\generate_icons.py": {
+      "hash": "226e76e1d09349a1468d680cc4b0710a8616f39e5cc661ac2d3ec587321c8e66",
+      "size": 2722
+    },
+    "omega-kitt-pwa\\server.py": {
+      "hash": "cb4292e8de3cf7c602707039db8f8a7aecee67b5239238b2c6ddef7b3a1727be",
+      "size": 2516
+    },
+    "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\06_AutoCAD_Automation\\freecad\\macros\\_macro_template.py": {
+      "hash": "332386e55b9aedc4052d85137b068d9359ab93aca3f37d116e419a9ca101bc21",
+      "size": 6296
+    },
+    "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\08_CAD_Orchestrator\\builds\\freecad\\battery_holder_18650.py": {
+      "hash": "abfe4ecb1ad56feb91c8c862cc2e7f444ecf13acd4c57263898715cc53218ddd",
+      "size": 6878
+    },
+    "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\08_CAD_Orchestrator\\builds\\freecad\\battery_holder_18650_techdraw.py": {
+      "hash": "167806255d887362d7ae1b817319839fed84459327cc5a093e1cec7aa6a6556c",
+      "size": 9674
+    },
+    "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\08_CAD_Orchestrator\\builds\\freecad\\parametric_box_with_lid.py": {
+      "hash": "357f335c41345d6f405edcff4d5fe8dcd98a26e20c659875334d4b8be5f28759",
+      "size": 8335
+    },
+    "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\08_CAD_Orchestrator\\builds\\freecad\\parametric_box_with_lid_techdraw.py": {
+      "hash": "caa7974b4e48ee068bff7d37194e77886151440e1d7499ff49655b6ab2353a4f",
+      "size": 7680
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\add_sap_knowledge.py": {
+      "hash": "a9c0c96a01b1bb7ea4961221ba39e306c67c13abf7d34ad48ef526be568f70ff",
+      "size": 5482
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_anonymous.py": {
+      "hash": "ba53cb6a2952d7ebd6aa58f75c7cc83919e64e984007947237dfc313ec16f3aa",
+      "size": 21343
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_chess.py": {
+      "hash": "d105313cf6425909cd123b4678a06f9769d8e4ca0bee94ac105f19520febb1c3",
+      "size": 16547
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_codereview.py": {
+      "hash": "a14dc84ed65351cac98f3b42dc7724a7e505d3fa6e872045efafc7f5781aa2e4",
+      "size": 17967
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_code_generator.py": {
+      "hash": "0cc0949a79454a64ecdd9b57c24cd4ec63bd63b14402fd8f3bca4cce29c5eac7",
+      "size": 11528
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_dashboard.py": {
+      "hash": "2cf6cc23026270912efcb6e68750a6015bd16ce347538b9007d61a8e1f2ba04f",
+      "size": 12909
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_episodic_memory.py": {
+      "hash": "e800ba7b3e14974a26ddc24c5958924c7e2d295114c88f70df88447f49912949",
+      "size": 9242
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_error_recovery.py": {
+      "hash": "313dec3cd48ad2e489c8e22b54534e72170890dd4201607d07da97f7a8b84332",
+      "size": 13936
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_hub.py": {
+      "hash": "7115023d0a16e60ca6a165ddb82edd1a9b76257003b96653c8c8c304a74daed1",
+      "size": 11922
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_integration.py": {
+      "hash": "b425d2cc1c698d47e4a8eaed97a6e2fcd4f13a15b8f2b4b60d5352b4ca937cdd",
+      "size": 10288
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_messaging.py": {
+      "hash": "35fc317a1566180d4d3158963945558cb624695dae6fe8f70fc8b9a8e314a028",
+      "size": 8691
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_observability.py": {
+      "hash": "a7079b6d23842c854c5e8cb053bcfac09edf09b62fa15273df9f905d5342455e",
+      "size": 5768
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_organizer.py": {
+      "hash": "58de4d8b2d0ccb3c5a64300f3f93c1194dbfc46ece88ee9ccbac8437a154a0c2",
+      "size": 7015
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_prompt_engineer.py": {
+      "hash": "3b6e67a990dbff5d4376c679ccd3b13746a283812a831ffcbb5fcd6be15feaea",
+      "size": 4916
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_quantum_optimizer.py": {
+      "hash": "6342984998529c7cb77fea6c7955fee35ea270315195c751c1434bafe049d4d9",
+      "size": 9496
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_reasoning.py": {
+      "hash": "f7f771463dd937c4d695d14ac26c49647519c124f08ae10d52d9c6153b9ab0a9",
+      "size": 17378
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_streaming.py": {
+      "hash": "85dd5df43d4b33639a12df8e242b7c1fd17b1e14eef5ef4183e751e4f366aba1",
+      "size": 2050
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_swarm_isolated.py": {
+      "hash": "3d0a5c922ae3fddb5b7f927ccc72350520fcb4fcfd0e0a3d6d66b265b565acb7",
+      "size": 13103
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_tasks.py": {
+      "hash": "0d9ac5a20c83ab2580a646ca7b0c08e2eaac097edcfa351fb8c7a552adc2ae9f",
+      "size": 11621
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_tester.py": {
+      "hash": "51b5c5722ebdc92c47cc38d3ea961780d791181be1db5c6cec469bbd9abb6e0d",
+      "size": 5359
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_tools.py": {
+      "hash": "88c627e28b2d34d0a31c50abb7de283b46e73f8f2690097572bc18893f84f042",
+      "size": 11549
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_vector_memory.py": {
+      "hash": "6d3b7dbcd27dadad3df80024fb275ca3e022de01e4110cc8406c717f04de3b57",
+      "size": 9416
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\baseline_gen.py": {
+      "hash": "61b6352774d8735e8d5e35dce4b1ab31d4e0a2f54009c33bec1fca420e6a16e1",
+      "size": 1646
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\checkers_display.py": {
+      "hash": "eb380826159615677ecb71b210a5ca6b031d1a384dca515f9db2bab314f389bf",
+      "size": 943
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\dashboard_usb.py": {
+      "hash": "9172928d6fc07f57c8b27b0676d1f616dc465829d505e89faed92e5c20f3da1a",
+      "size": 8686
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\demo_quantum.py": {
+      "hash": "0e581a71bf673b860b46356030c7b87f2c583b44cc3f0f7c093038174ffab587",
+      "size": 3854
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\diagnostic_engine.py": {
+      "hash": "71b6b08060837e4152c6b7419e8ec1171c9b5e538a688e5d3354dc957dae4df0",
+      "size": 8493
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_adaptive_learner.py": {
+      "hash": "325920cf803cdbdf59aa12309457839e1345abb762c9d718ece15740fed142ba",
+      "size": 6073
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_banter_engine.py": {
+      "hash": "fc6f1a7a1a835ecaed485c2ef2c354795020dc6936a47a3127c796053de5ca2f",
+      "size": 14654
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_checkers_game.py": {
+      "hash": "e70dc265d033f9d824cb040755d767c17f45e6ae555c319f77f565392af924c1",
+      "size": 14527
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_chess_engine_optimized.py": {
+      "hash": "cb882ba04c152df946cb759b42234e3ce9368a39428792bdb9fd10979c9dbc76",
+      "size": 5855
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_chess_game.py": {
+      "hash": "dc4912f0e574b5ebe3947539534b7e65fc19e0d362a6f758430a8e5856d598df",
+      "size": 12200
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_diagnostic_wake_word.py": {
+      "hash": "dc70d6940ead3dba0bbdc9a4de151830b47d0a870f4f748065c13cda2d5ab1f4",
+      "size": 3323
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_difficulty_system.py": {
+      "hash": "3f9320ddc7bc3db0c1d3823222484d338bb5824059f8d70f2db2404c47f570c2",
+      "size": 17162
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_dynamic_game_loader.py": {
+      "hash": "798f3c78ad0bbee2183b3af7cf9c71a47817b06cf1d51d2d182badd96603e603",
+      "size": 9464
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_framework.py": {
+      "hash": "f8adc21be515feeaaff20c458146de969e4bbdd855ab26b0d0a09e90c9ee8886",
+      "size": 21936
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_game_engine.py": {
+      "hash": "0e428b46f8f8264df51d9ea0fc594bdf72dc55378a94c1b3e05e836a5fbae826",
+      "size": 23427
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_go_game.py": {
+      "hash": "cddfe1fb679aed97d54fb558c6fe5575d59cee7e015b12f74e50203a1a9181d3",
+      "size": 10649
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_integrated_system.py": {
+      "hash": "ee23fc9c01d7fc70a4643514b7d8fda7e6c36e96a2f157f69b60b814ebb1d469",
+      "size": 9325
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_mahjong_game.py": {
+      "hash": "1f79a75d2202757149cc6dc8979a1998eaa139f428c7c652dbe04657a684d7a0",
+      "size": 9815
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_main.py": {
+      "hash": "8104f54b1b6f63a7bba9dc433ffeee423a1caa203f19dac018f773bf9fc29a4c",
+      "size": 5429
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_mode_switcher.py": {
+      "hash": "88dbe6cc57e418793d2d5b455b7e552c371af8b0ea7b9ee50f4d7699d1f6e890",
+      "size": 4064
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_performance_optimizer.py": {
+      "hash": "92371633ca7b869da4c2557c7913f48da033e3efc88b10ae5db15b0076438a53",
+      "size": 6916
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_shogi_game.py": {
+      "hash": "7b4c7adb30fe625fe73005f106c95dd69222aef804bbe8aee99da2d31273bb4f",
+      "size": 13220
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_state_manager.py": {
+      "hash": "6c7e4724327ca61cd6dab3995ed13ce5708094fd29b5deefd1bbe5b87dc9f9ac",
+      "size": 4850
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_teaching_mode.py": {
+      "hash": "ea5fbfe776953458fad15543fc9440d8633f95d43cd06fc36e0abd43e334fb87",
+      "size": 6572
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_visual_checkers.py": {
+      "hash": "cfab749b702a0cdc7112641089e7d28e7ed25bea1e0271afad4d3d1d51b3f55a",
+      "size": 17267
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_voice_command.py": {
+      "hash": "ae30946451e6a7b857ea97bc093bb12dae19cb3255414207e317e183dea04260",
+      "size": 4034
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\elara_voice_system.py": {
+      "hash": "f561723a12edc468245e254255050c02df924506bf44c6847464c597ca50bf64",
+      "size": 2441
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_crop_planning.py": {
+      "hash": "07d1a0fde762dce37f21324d6e30e1a66f1a4643b391745099741e6f01d4ab5e",
+      "size": 2316
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_data_export.py": {
+      "hash": "c4710254f4d8863203f79742b0775c336a939190aa49df5e39ed63229055c014",
+      "size": 2525
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_financial.py": {
+      "hash": "6971e82bb9a30f68bd50167240ae90b0cdcae983d7ebac86c918f30f00758a8c",
+      "size": 2778
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_harvest_tracking.py": {
+      "hash": "614430ee41440c85759678195154e53e0a67352162b467999152e3067ebc9179",
+      "size": 2533
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_inventory.py": {
+      "hash": "bd3fbd516afa45dbbf3c0a17491512f4a7f8a27647eed55840e4116e66eecfbc",
+      "size": 2649
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_mobile_access.py": {
+      "hash": "d8b7da501a5a2e3b97ea357e207bf76b9e6bb8306aeb11f7c9a8518ceeea0bf7",
+      "size": 2265
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\farm_reporting.py": {
+      "hash": "c36ff8afd3338c0b5a2638dcf0bcb01365fd47ed896e4cba0400b4d4e394c5dc",
+      "size": 2085
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\integrate_all.py": {
+      "hash": "a71a55599ac0fbe48d6835b9f1d59f52083d668b759367c8bb5f02468ba1c910",
+      "size": 4120
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\knowledge_daily_notes.py": {
+      "hash": "acbbc094f3dc8e1adc7f83fb5045ace57b1da2b138d55495d704836f034c28db",
+      "size": 2494
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\knowledge_links.py": {
+      "hash": "3cad26e1aa89f0db523e65f9cbadbd181b0d214005f6be7abbbb84207e3a0569",
+      "size": 4628
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\knowledge_tags.py": {
+      "hash": "905365852a8bcff1027adbab7104f43ea61abc1e6bd16ef9cae9e50675a87d86",
+      "size": 4223
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\knowledge_templates.py": {
+      "hash": "9a9e531c832b7c4fcd266933df33e8765ca4bde14dfdb23fe22470d7b00b147e",
+      "size": 3059
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\knowledge_versioning.py": {
+      "hash": "604ff56fc68290de36cf50a4c50771208c979af20a61fc1e41817cf4c0eb7d67",
+      "size": 3378
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\master_quantum_scrub.py": {
+      "hash": "0a84d9d1b0bac5b8db08005411bf3aa44c0b729459a3e30a8f1c6d66b56d420b",
+      "size": 36359
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\morning_startup.py": {
+      "hash": "a4bb6878176471db586d258dd82196d8bdb8320dcab2e600c1d0599b0510f3e6",
+      "size": 3640
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\play_checkers.py": {
+      "hash": "d63f5106f85c6fe78194dc78aa14dc4eb6b3cea9e29c37c72df4db0ba8c15d96",
+      "size": 3970
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\play_shogi_teaching.py": {
+      "hash": "29db5ebce9e4ab6b9238a748404deefa567a93beb0833d1fc2f14951e7704647",
+      "size": 3890
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\quantize_helper.py": {
+      "hash": "9b603ffd7b11fea278f8ff978d55352713e4b568381f1c9eac3403548d68c3c5",
+      "size": 2913
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\quantum_full_scan.py": {
+      "hash": "8076d2c5bc5de17596a16a0d6f7e852720920d275d3c4b6405ded902a529f87f",
+      "size": 11052
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\quantum_worldwide_scrub.py": {
+      "hash": "e834a9ef49ff1b120f3b755de7ff582704d7c5e81af28428e6941016dd1781f6",
+      "size": 22434
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\setup_worldmemory_storage.py": {
+      "hash": "bcb1d763bfc7c4c5bad3f99868c01101f3122f5de2f30adaadd361cae44e138d",
+      "size": 4303
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\strategy_core_converter.py": {
+      "hash": "f02d83304b2d19eb61907e8798757327be0f09406ff5367904a9ef0f19738f23",
+      "size": 12864
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\strategy_integration.py": {
+      "hash": "701279e8647c0b470c8fb7b095cf3aa9488c232488e1aa2c8fd6be4a7578813b",
+      "size": 5439
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\swarm_breeding.py": {
+      "hash": "6cdf856afbd17f65ffb7f14e0b69dbba95fa4dce6cfe9f2a468739adaf48e0c0",
+      "size": 10162
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\swarm_control.py": {
+      "hash": "8f83fc5c1335b840f5ec599f189123657e7831573f9d339b97224c92cf9cd7c2",
+      "size": 2506
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\system_scan_full.py": {
+      "hash": "d39b1e24bc016cb9a576147e3b6286473a064e2c033dad73372797290b853593",
+      "size": 11089
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\system_scan_workspace.py": {
+      "hash": "1daf6c395eadf3efcc4a802247321021955aa2e3dc3a115e5316e605b36fd250",
+      "size": 4133
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test.py": {
+      "hash": "03d8f0e44bb735a762f361cca33854ea8d780200d2356d01bbf7d74b87211823",
+      "size": 454
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_difficulty_system.py": {
+      "hash": "2155cbbbbae6373cdd8d856543e37eb1caf214aee24902f5589f5b6be0269183",
+      "size": 2642
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_elara_systems.py": {
+      "hash": "3843991f3c596a0a4ff05880dad2ea01ca26f0dd92a0876dd1a4bd2b79459a38",
+      "size": 1929
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_farmhub_quantum.py": {
+      "hash": "80ca7c2fad862b32750d9add4c6a9824bf6ad2e38d6a2a3488522d64bf100045",
+      "size": 3118
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_quantum_quick.py": {
+      "hash": "94fce3d3cd75937f27dd610f3b4ce1bebf3b1cf987184fe7c558e15450174413",
+      "size": 788
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_shadows.py": {
+      "hash": "03949079c6c75f2669b99b4972e4454dd5958f237a92942b52b4d01985ba7eb2",
+      "size": 1127
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\test_swarm.py": {
+      "hash": "3491c1fdd88c8d0eedffc725fed8ed05460b87ddfd8f24e3a7d414593adb7347",
+      "size": 478
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\usb_adaptor.py": {
+      "hash": "d5c607222e7c858a6154a10f6349354ab4a9a0be785025ab5fee751ea8ae08ef",
+      "size": 17871
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\usb_fusion_complete.py": {
+      "hash": "8dc72ba387dfda4524e95c1e067e14a541da3d8a8bff2e24001d58de470e22fd",
+      "size": 1990
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\verify_upgrades.py": {
+      "hash": "56330ee2a6dde882ce10cfde259d453eb2c48146415b438d78dc9f935297d78e",
+      "size": 1677
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\voice_adaptive.py": {
+      "hash": "13b085a28f82bf6f07ca1624b56026c3b530431ae3d4cd17337002db829e9644",
+      "size": 23644
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\WorldMemory.py": {
+      "hash": "add93dbc602998c9797bfa9c7e76f2c68a6de6454fb46bcc2695feab9f673d45",
+      "size": 33916
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\agent_generated_code\\agent_001_improvement_0.py": {
+      "hash": "06cfad8d46cb709cc5473641050da294712f38382ba5d3884f12bbcaac947cd6",
+      "size": 443
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\project\\test.py": {
+      "hash": "03d8f0e44bb735a762f361cca33854ea8d780200d2356d01bbf7d74b87211823",
+      "size": 454
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\scripts\\agent_chatbot.py": {
+      "hash": "6b0b131d3e9ac246e4337e47268796a598d46f7e0bc43393e0a7859e084d05c5",
+      "size": 16523
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\scripts\\agent_forge.py": {
+      "hash": "ed784c9d5326942141721e5ff77a4157c4dc18abc9049cfee3f94ad348538f25",
+      "size": 38119
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\scripts\\agent_forge_example.py": {
+      "hash": "30e6697b0f9972bf9a20f5ed011bea94e55bfd0fd51f5f72c9f62a23bd97f44f",
+      "size": 1748
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\agent_protection.py": {
+      "hash": "3e54589064f3a0513314ecdf71fa14b13d0d910b4de5a2948c18682c57ac15b1",
+      "size": 8288
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\anti_tag.py": {
+      "hash": "e738711a952fd727667c9df4dcf725b7277d5b009794be88acfc92d6655f81f8",
+      "size": 8218
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\babel_onnx.py": {
+      "hash": "11b150649e94dee4194b5bd9ac7d28472cf75dd3904c84ab58198305cd3c558e",
+      "size": 8981
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\bait_farm.py": {
+      "hash": "488ed1dce22ad6094844bba8f032ce6f7f406d103321113a2eeeb5156aaeedeb",
+      "size": 8814
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\setup.py": {
+      "hash": "484609a18b6a111a67e0857fd5a3b12f19bb77cd17a0cd43e6a613d932f2445a",
+      "size": 1824
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\stonewall_core.py": {
+      "hash": "352af65e62b9983d0e60c9ef093d96612d163710da2657d7911680d49452a0b2",
+      "size": 16763
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\trace_bait.py": {
+      "hash": "3aad7a693378a783468db8566b5819dfdf2510ccd761018a29988c30d0ce0a78",
+      "size": 8472
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\__init__.py": {
+      "hash": "6da601e680305088b50546792792b37bec168e57f11fb3583185cebde6cb8da2",
+      "size": 772
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\stonewall\\babel\\medical\\implant_mods.py": {
+      "hash": "14c3c39d802a903ed265f499913efb6f08319ae3958a67ba90f4380a1bc00467",
+      "size": 8070
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\swarm_offspring\\rho_zeta_0.0.py": {
+      "hash": "9dd1103e89510c9642deb2939ace586aec78314a6b4dca3275a46497448d6993",
+      "size": 268
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\add_copyright.py": {
+      "hash": "03db1cfd51ab54ef321040cf8879f67c663bc86c4bd779346c7b58a21836a461",
+      "size": 2212
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\add_omega_copyright.py": {
+      "hash": "2a96e74f876b4c1f5cee06044698e15f57ff2b06f2201a85b91eb62beab0c600",
+      "size": 3749
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\adjust_omega_voice_smooth.py": {
+      "hash": "dfa171fa11466b4903349a94e3582846d7a8a3fb092ca33976e3c22b5f4e55da",
+      "size": 9640
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_aqua.py": {
+      "hash": "464c9a978e371450e63258d5e81a4efe7d1d721aa366e15e4b14dd04056e3be8",
+      "size": 18863
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_communication.py": {
+      "hash": "6c23097ef8a3faa99777e216e952d5e410865ead0e7badcbb7aa219918fe6518",
+      "size": 8601
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_council.py": {
+      "hash": "04f82aa95a07447b0829997c42fec29f42bb5ba7c9120eabfe7ef3084b5a88a5",
+      "size": 7702
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_council_v2.py": {
+      "hash": "867ce139f5b321e1326294c66711838b0bf143746931d1d23fabd9e8771d4775",
+      "size": 18676
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_doc.py": {
+      "hash": "0c3628550b0a43d3c00bb9d7aab84c85d9b400b7194b44c41fd886c4870a0086",
+      "size": 11784
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_drone_builder.py": {
+      "hash": "d06978ee136ef8dc27fb184bb3b1516a35f630da893dfe67bb901ca9778511a7",
+      "size": 21291
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_drone_course_tester.py": {
+      "hash": "fb570f130ca621c0cdc543af2446d1091e166fdfc0029367552cdc9cf4e27dca",
+      "size": 22421
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_error_recovery.py": {
+      "hash": "a348bd0dd62b3f2bf2d63d019f5cd20caf8c5bb6985bf81e5f4fa6a2b2230c7f",
+      "size": 7445
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_langchain_bridge.py": {
+      "hash": "802e9ccbc97ff45bfd84aeb7c3ce757978d0eb54d195cee96f9e65be436363fb",
+      "size": 5446
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_multi_coordinator.py": {
+      "hash": "89142426b5af1621872c325ca7890629f6c6d64ed4b97e10abd88435c49f774d",
+      "size": 9011
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_task_decomposition.py": {
+      "hash": "1fb2187dacc4abe9c9e0cd370bece7c15c60ec6af3d8475160e61864af06445a",
+      "size": 8703
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_tool_use.py": {
+      "hash": "7803905ef7c2e5707e456e5564c23720232da4e2c922a2a2a73803b77df0bcfb",
+      "size": 6792
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\agent_vector_store.py": {
+      "hash": "b8da984434cb8cce27cec8fa5277055bfd31a4ddef76f616fcc6d8a56102eff1",
+      "size": 6527
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\apply_human_voice.py": {
+      "hash": "9bb2e9e80b6ea3a1ce71d530a867d504261ca455c444ba3e3c3e5e96095c515b",
+      "size": 3625
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\async_http_client.py": {
+      "hash": "e1f8c51efc1d02cb651577feaf62094ac856ce3542f1d797e95b4e9dd2f3bfa1",
+      "size": 6927
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\auto_heal.py": {
+      "hash": "2a441d4a5e9c883b6bc2a16eba02d50df9339ae67c21847169b1fe4bf833da51",
+      "size": 7069
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\battery_oracle.py": {
+      "hash": "cba2b4642bbc794ebabb7f5f94510f3ad47ca21fea90f3fa85c73a7ff4b24490",
+      "size": 12117
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\brain_prime.py": {
+      "hash": "7d90d9da714575e961032aca334fa26dd17b5926829ad7ceadb24ccf1a2cc13e",
+      "size": 14907
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\build_system.py": {
+      "hash": "e6d3f1c89fa9b165ff73deb87bf72b7ce2fdf9adffb26502f5469797b411e33f",
+      "size": 7033
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\chess_replay.py": {
+      "hash": "15517b3f3a3c8919fe7903056f0aa78e4092313d6c75565692facacba1bbaf37",
+      "size": 8537
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\claude_think_layer.py": {
+      "hash": "26fddfc427ccd8255a038b7b98ac93a8c92be4e94aed93af091a059c5396feaf",
+      "size": 4082
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\create_primary_voice_audio.py": {
+      "hash": "0d9bedf68dfde7c14c312df00486d5f05f5d6c38a4ab2d1b21a47b17b1b1a35b",
+      "size": 7556
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\create_system_white_page.py": {
+      "hash": "16f14ed4f57d590e55e8084982c2a0dacbe70a21a5f71b585602fd4f4675e258",
+      "size": 11802
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\curriculum_registration_system.py": {
+      "hash": "8f3695fe8d317133f4a4aa07987b7505957ccfa61d569f2500ca93f05e33fab8",
+      "size": 7955
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deepseek_medical_layer.py": {
+      "hash": "ada422fa4a2dc58d8d0f939bdee8fab74703f6ea8ad0c46351098a7bb4d272e0",
+      "size": 6544
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_audit_2026.py": {
+      "hash": "2863c2135001da577c1d96d22fae3542327e61036024aaeff79dc0b196ddfdd8",
+      "size": 19213
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py": {
+      "hash": "44c4f70c245e005d424d37fe2f3ee44873893add4c1e20ffb9372766b7e28fd3",
+      "size": 62085
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\defensive_security_scanner.py": {
+      "hash": "1a22ecc9c27a2d5e85478a8a7e35fae7c4da7dcde09a242f912db401a62c5a68",
+      "size": 11326
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\demo_all_tools.py": {
+      "hash": "e87a06b2189460bbc2832bc4aa6b990cf66a9b0720d1250512037ff86253699e",
+      "size": 8815
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\drone_brain.py": {
+      "hash": "aed5e6db22f1a92c1cd1642b56956191cca883892fd80d3b325fb6b4bd523d61",
+      "size": 5284
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\drone_design_calculator.py": {
+      "hash": "b877e7efbba02fdc6522cc2232e77b940b04552862ce62b42bf72ffc1f3f9c25",
+      "size": 22085
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\drone_game_sandbox.py": {
+      "hash": "12dbb43044d5610c41611f877b18a8d8a217cae89679bd59a51d693c2c73a6b6",
+      "size": 33045
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\execution_test.py": {
+      "hash": "3e483e5c9d97188e9e013153bda29feb7aee28f8ff304c1a901dfe3ded6346bc",
+      "size": 9851
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmOS_2026.py": {
+      "hash": "3fc3394dfd2b6e1ca75e7315b1e8df7fe4b200eacb358b34136572bd71063f07",
+      "size": 25487
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\farm_api.py": {
+      "hash": "0869944ae662b6ac884caff0f58b54f444a0d20b6d38044fc4556817cf9e0a97",
+      "size": 7410
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\farm_sensor_integration.py": {
+      "hash": "773171100196892fc9b632acdf270f3f45de54a639cf8b73189cde5f33e42ae5",
+      "size": 16556
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\game_hub.py": {
+      "hash": "5f352b890965df511e13b786948886a895f70c7ef0075f59397ff0b7cfe7e791",
+      "size": 13530
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\game_hub_final.py": {
+      "hash": "2ecfd82a51394d2de2089d0ff365afc5ac8b094e82848353743c426b75327a66",
+      "size": 29432
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\gatekeeper_fusion.py": {
+      "hash": "bc52d231487b9198eb743ced31f3a6fe72fc3f8ce1525ad0f4b563204d4a7b2d",
+      "size": 10477
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\grant_machine.py": {
+      "hash": "b924ed8521d002a50fdc905111ec0946a9f3d62770e6c6dd7eaf2458c7755893",
+      "size": 5125
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\grok_truth_filter.py": {
+      "hash": "20dfe2da29e11bcc70440aed4028669694d810391287c84d77c5e7e25237ce46",
+      "size": 2809
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\hardware_scan.py": {
+      "hash": "0204536f2123bc2124be4a5edabab96a6fe0464dd7c610dad29ab9809e5c8ec0",
+      "size": 10704
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\hive_auto.py": {
+      "hash": "b14c5f8dc4bad26b4e8884e64a804490418e4a83c3cf719b9cd1fa3a5662e3d5",
+      "size": 12133
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\hive_hib.py": {
+      "hash": "f8dbdac74f9fb3d8c764dfa4a8b4ae750efcc6cbfc79d4d22f2dd58571c3cf15",
+      "size": 12023
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\hive_hibernation_final.py": {
+      "hash": "7486cc43eead99e316dba2ceb21eb5ac23ba52cf411efe906b2b187cf32ba054",
+      "size": 16368
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\improve_all_quality.py": {
+      "hash": "b9f765cfe5ba9b2caafa5da7e0b8acdabaa0141fc4d5178050c68ea5b397cff1",
+      "size": 2261
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\knowledge_collaboration.py": {
+      "hash": "8d6536600846462a96686e2bbb66586b35af09114a1a5438f785a73cefed9222",
+      "size": 5545
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\knowledge_mobile_api.py": {
+      "hash": "52141e27c21f3eebc2adab76253bb2b4dca4996a21aa97e73b5dffca533bdc7b",
+      "size": 6484
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\knowledge_plugins.py": {
+      "hash": "6739606d7c00748c6d481c237f73d5d5edb958bdcbc2e4efa83c48c5d91373b0",
+      "size": 4635
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_sweeper.py": {
+      "hash": "b565c18c74525e0abc289bb4cd942942b2032220bd0daa1575663c24b9f6668d",
+      "size": 8316
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_sweeper_complete_setup.py": {
+      "hash": "6bd857371f21962ec225361e46e849efc324f6ebe366b81f16d80c369adf8219",
+      "size": 4295
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_sweeper_test_run.py": {
+      "hash": "e8573d7348a713b6c8666521851836e8369519ed47daa2a20a3b6a3654279c90",
+      "size": 8953
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_sweeper_test_setup.py": {
+      "hash": "e91cae17390868ce4d1a92668bfa65226a7cf8ac13547c6ad59a1e00dbc56115",
+      "size": 9139
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_sweeper_wallet_generator.py": {
+      "hash": "f8ba50091e385d9c53bcc0af03304465cd9411be5b9504cac81e070562a6d8a4",
+      "size": 4308
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_wallet_access.py": {
+      "hash": "1e2a05e07acfcba24868adf2f30eb3b3c3d833af66c7c2dce35f65dbc437f894",
+      "size": 5834
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\limbo_wallet_quick_access.py": {
+      "hash": "e5d6727b3371a5a0fd3d9defddc0bc97869399255f7b8d49bac1ddc0a897c746",
+      "size": 8694
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\mass_scrape.py": {
+      "hash": "02e10bc28e5b4a0e95eae0c7cbf6c89bf821e492d8cf5f92b9565f79ee036385",
+      "size": 9058
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\max_out_pipelines.py": {
+      "hash": "5c9e58c666ae24a88f470ee2d07821ad0d28b10708b62104440d2b256fa9b1b7",
+      "size": 6302
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\modulate_and_mix_omega_voice.py": {
+      "hash": "8a1b4ce28663af8cf52d0c4321a877d7fe5455c56ed4c9971487ac32263b1cda",
+      "size": 14671
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\morning_briefing.py": {
+      "hash": "be21bbb8363f3cd7be0800e728f6c36de35f16590f074e7447f4210f4cbba386",
+      "size": 5827
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\natural_remedies_database.py": {
+      "hash": "94e67e5b0b62d04da977676e2c321d2e788507fc9deba2ed48694bad04f1a78c",
+      "size": 21808
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_70b_merge.py": {
+      "hash": "34eae5899aec3043a542a0e616ac97b148e0bb5eb16e1a93d8905ad7b36c8eae",
+      "size": 4554
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_70b_prepare_dataset.py": {
+      "hash": "953580c821e64b6b293a42dbe1e9182ff3c866e5b538a9eb2aca0265dee32a82",
+      "size": 11027
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_70b_server.py": {
+      "hash": "0b3684bb43b08b3d33bf2cfbb3f3b0bdee67690d90b9b7de5690c32ac2173342",
+      "size": 9639
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_70b_train.py": {
+      "hash": "7138ba127f7d19bfc6542e946e6cf99eb0a6dc5522608a8de6187e5e3aba00e3",
+      "size": 6488
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_70b_voice_integration.py": {
+      "hash": "95efa0de408a56a4a2129d9d7da471a5341ab1419312a76b281f73ff6c1f7e34",
+      "size": 7715
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_autonomous_agent.py": {
+      "hash": "b59abbb35247dc87c9897e93b08b9659e94a7f2cad13a12942309043ddafb666",
+      "size": 16053
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_autonomous_core.py": {
+      "hash": "cad98fd1c0bd33b908962571d00002db4f3416f3ef49bcee2141561d1caa33f9",
+      "size": 13728
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_code_sandbox.py": {
+      "hash": "23521ddf2de822aa5aeb8b8fd20cfca1e7d1a4c5ff2804d765dccfdf23cebe71",
+      "size": 10772
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_complete_integration.py": {
+      "hash": "a3f8abf1af17ce80c78c4627e84f4ca2d85c0fb4e15c43df3ba1411bdb357fec",
+      "size": 6448
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_complete_real.py": {
+      "hash": "f35694a7ef4893ea16c604f9c1446f5554de81d71d3d3d5bce14189ecec2953c",
+      "size": 10210
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_comprehensive_test.py": {
+      "hash": "2280b85823629b86c9f4395fbeca5a55f12a23918cbde96f1ce2443cad8d3b3e",
+      "size": 10392
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_continuous_voice_learner.py": {
+      "hash": "4a0523dc9ed83c9aab8f0bcbed3bfd14b9cec14d2da5adc9cf31f02ef53aa1b5",
+      "size": 17832
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_free_tts_apis.py": {
+      "hash": "fcc481253d98d2bc9eec92823692eecc0caca25119ffc7dfce7b01ea2cfc4627",
+      "size": 10785
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_integration.py": {
+      "hash": "f3f8a9ea560b6ca5fc90f9338f7c16fd068cbfedca06515cdf5fa2115782a4ff",
+      "size": 2237
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_introduce_and_record.py": {
+      "hash": "963245701c71537c274db27a30f0bbcae334bbccee3fc194cc2ddb60f3c6153c",
+      "size": 10428
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_introduction.py": {
+      "hash": "88b2ac1d4a4f332e39df7023ad933ef7f4f9a685fda40dc2016982ee432ddb4d",
+      "size": 6446
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_llm_core.py": {
+      "hash": "b402c9b8e04495c54286351bbc0f2e1c918036634e248033bbf5ce6210d465b2",
+      "size": 6967
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_location_legal.py": {
+      "hash": "b3b75fd62c491969b82546f4d21e410f8f81f5dcf4fbbbfc8542f68f333eeb8c",
+      "size": 6195
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_master_integration.py": {
+      "hash": "50b939272fbe23330affd67eca74d29956bc3350db12c36395b92d99172a2f6e",
+      "size": 9063
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_master_system.py": {
+      "hash": "07c7e38e277a3487151bde11c8cf6b108c1b28bd7c53d6be014b1ea003d94234",
+      "size": 6357
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_master_upgrade.py": {
+      "hash": "568ba08023c08184b0dd5ebf506efb47f91b51f25b9dbf1a2651165fa170852b",
+      "size": 29462
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_multimodal_core.py": {
+      "hash": "9aa59b9dc74e418095f542f9f56a7dcbfa9aecc631ec84586968653d3ec82f13",
+      "size": 10470
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_multimodal_processor.py": {
+      "hash": "79289da4b1dd1f182a88d5e819c86df63f8f5be45c1174a7702a39993c108c22",
+      "size": 17875
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_multi_agent_collaboration.py": {
+      "hash": "6bf242e4f0dd80114120c150c30e6f344a21c3432dfd764a61ccc1c07fe8bc88",
+      "size": 15628
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_performance_real.py": {
+      "hash": "9cf0cdadd0955ce9d0e2708665dcccdfae5ee6bf889239b0a1db02463c37bf2d",
+      "size": 6540
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_phase1_integration.py": {
+      "hash": "fac7893c9674bb087d01f5e50c6cf1ff26be07669370e20fae976a6977a162a9",
+      "size": 6531
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_phase2_integration.py": {
+      "hash": "fd4ee699adc5c9ab5f8ab436365901d05a898fff15fd44af98b37176f7a65858",
+      "size": 6493
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_phase3_integration.py": {
+      "hash": "521ff77f8defccddc7eece0bad4f53a31e5e63b0c3ee9179fe1b5708742d27a7",
+      "size": 5722
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_quantum_enhanced.py": {
+      "hash": "367a5a351f54e665ea4c798923f3c9280020ec925fd65eb3c0f686733cffe81f",
+      "size": 6257
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_quantum_ml.py": {
+      "hash": "bd207f42084e705b3e2715f1be210a05449f69f405a6cc10801f6a982266e011",
+      "size": 19143
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_quantum_path_planning.py": {
+      "hash": "baeb67980cb2ef630fd3c7fd166c62b41e273d4d33360e3f4d896dff1a0ecd63",
+      "size": 20837
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_reasoning_enhanced.py": {
+      "hash": "8a9c4a06c6c3c8fbd2e4e18d304b11c06e2d7d2776c643697e6334b9f4b85e8e",
+      "size": 9345
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_record_voice.py": {
+      "hash": "e8e49e4c441e6df42960c94d6bebbec7c8505f4b6a65f8310c5115cb7614247d",
+      "size": 1349
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_scalability_enhanced.py": {
+      "hash": "4cab35954988ffa68bcbdebfb050060ff9677b37318f9b8d4c11cbf3b333539a",
+      "size": 4375
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_security_enhanced.py": {
+      "hash": "8f1cadd42133f4dcc6fe416dff7ec8ce51e6436f575047a2659d7c831201f06e",
+      "size": 4803
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_security_real.py": {
+      "hash": "81ef5b31b92303149568eb6dc1d0380b9e09fd09bd9cde0aca7714a8e080fc48",
+      "size": 6509
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_self_autopsy.py": {
+      "hash": "60996edfc454ed4d377b9fe79d1719d655d9b9b275cfc19e4b4b8ca5c6950930",
+      "size": 27317
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_soundboard.py": {
+      "hash": "4dc8827b94a11c4ef1883ed768836a245b01c70dc129fbbeef46fd24eb49b3f6",
+      "size": 36787
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_soundboard_fixes.py": {
+      "hash": "1498db01eec7dce8bcd6f59df0b835a9a977911b2ef31cd3d4703f65ac44e3d9",
+      "size": 4631
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_speed_enhanced.py": {
+      "hash": "585b8a9bd005ce61162f7b58d9c37f12e0035f461bf09f856d6bd768a8741762",
+      "size": 4011
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_status.py": {
+      "hash": "aa6d7084410ef8c3405bb89237b6a251a2c2cda4d864a6d805accc33c4861fbb",
+      "size": 14769
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_ultimate_real.py": {
+      "hash": "43d7457c4c020775eb72157de347f22f44f89561463b73aea14c82ba0d419d26",
+      "size": 13804
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_v5_swarm.py": {
+      "hash": "b9710fc6a4c583fff059f5aa7825911ae5e1d8bf7bdf3da22d77666f0bb375ad",
+      "size": 19287
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_v5_swarm_config.py": {
+      "hash": "4e1b90a62ee3c1641da3b0362fdf641ba7e282c79de40089d700aafabfa32680",
+      "size": 5411
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_v5_swarm_run.py": {
+      "hash": "5154589405946e71b4383468b3c3f91941958b408a02a9dbd766071212140b9a",
+      "size": 4228
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_v5_swarm_setup.py": {
+      "hash": "7f15eb46e7873b2eb8b1fa90bb281ec1a691eadc71cadeb06a3a0b112752214c",
+      "size": 5252
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_vector_rag_system.py": {
+      "hash": "3ca53ddd54ed5a883510398ad2d780e4801a350385e54ae5aea43d22f052c637",
+      "size": 17442
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_verify_all_real.py": {
+      "hash": "586ddbcef740632c9a34b6104f04323801ce333d2cb35a7a7d143514eb22b1b9",
+      "size": 8388
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice.py": {
+      "hash": "20c0a805735763de279f0f64a01d2294ceb22c249201e43b2b4e8509a2606d96",
+      "size": 22191
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_collector.py": {
+      "hash": "2aecd0f4b3bd932fab0fc2971fc6d20f372542942791809658b4731cb9e05fa3",
+      "size": 21445
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_learner.py": {
+      "hash": "c03932c8bae4661ef0b836cdfa04a0c0b9367a538963af459670aa89a746e43f",
+      "size": 18830
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_modulator.py": {
+      "hash": "d43970c0a0fcbe2a43a0ba3cc26018415f0d7cda92f41868d16680b2e28a132a",
+      "size": 21057
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_multilang_real.py": {
+      "hash": "98c561b33e558ea0bada915fe66307fcabc2bef63142ec01ea103cc81992d1dc",
+      "size": 6656
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_recorder.py": {
+      "hash": "b9392045750aaf1346e44e5e90f34c2cf89e35670de151aace533efb26c93ad0",
+      "size": 21678
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_simulator.py": {
+      "hash": "27ffbfa0243aa96d4e7f03d8834de2db827d4dad4f52095bc287c61d284ec5e1",
+      "size": 14933
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\omega_voice_test.py": {
+      "hash": "9ec971e5f7161f8261dfa1ea4f8fbd47feb7361463c7d4ac0c13b14fa1ef922a",
+      "size": 2651
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\performance_optimizer_gpu.py": {
+      "hash": "a36e18bdf7e0aa4fc3da1a147c603da76b1e04c3d4ad0ab7d658b43f075fa1c0",
+      "size": 7500
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\planetary_search.py": {
+      "hash": "722f4bd3a57c29b030b9bf217cd06e35aaf65313ba7cfa9d06d25d3b935e546f",
+      "size": 19704
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\play_chess_ai_vs_ai.py": {
+      "hash": "8f45193dce6bc86cc379800b30b4d2037e9fa29e445ad7556c928180333cbfe8",
+      "size": 1225
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\process_audio_clips.py": {
+      "hash": "70b723e7af3b9d223bb7126bd39045d2b0f5011c7164187b8fc9dc0f762569f1",
+      "size": 1591
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\process_status_checker.py": {
+      "hash": "3361923af91d6a2ad04f65509f9fb7a8bde131872fd590f68bbe3401cf5bbdda",
+      "size": 19376
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\prompt_bank.py": {
+      "hash": "7894578fbfd2cc529230ab53fae79d67d7b7577ee795d06c08e1d770a8a29cf1",
+      "size": 2784
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quality_improvements.py": {
+      "hash": "fe67dfcbd3e8c8f82912cadd9b323468c5f8c0b81248d95b1b8c7892dd6ccde4",
+      "size": 7839
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\QUANTUM_100_PERCENT_ANALYSIS.py": {
+      "hash": "8bbede979ee86c26fb081f4db981cf1bade6ff12201ba7e44390d4f92ed84734",
+      "size": 9360
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\QUANTUM_100_PERCENT_UPGRADE.py": {
+      "hash": "dc5b403a889e785a106785dc3b5081774f6648f1e8bfae47bb656ca7b4a54f65",
+      "size": 5463
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_100_percent_upgrade_2026.py": {
+      "hash": "479962fb0b70da3cb300521e14683e00ae355511593acd9211d80ebc38f174db",
+      "size": 16071
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_deep_audit_2026.py": {
+      "hash": "d45da1dfa850e3a01f00dc3a9d48f72b6d2db2e63afc6909041e792215d82b73",
+      "size": 26579
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_gap_research_comprehensive.py": {
+      "hash": "0742d315dc6f1d91f72e5e744884e33a806f314cb868c741124665a544e7da40",
+      "size": 26087
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_master_100_percent.py": {
+      "hash": "b9a41bb80883f11e0cc65ebc081c4bea252fa5b4013b8bff7cc5455dc8dff849",
+      "size": 4026
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_self_repair.py": {
+      "hash": "58b12c2b7912c35ef379bd9d2f21b1aa2f94929001ae1b141cf369ec7958d86f",
+      "size": 2363
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_voice_collector.py": {
+      "hash": "5b79294cb15d5c963e8ed7d894f01ebe045b99c6ffeb531cdf34a073fe1f195e",
+      "size": 8116
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_worldwide_gap_research.py": {
+      "hash": "3a5470008914114a629b32906bc1bf8c375ac42bba6d9f1e8e32db0cbbe41a63",
+      "size": 18193
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\quantum_worldwide_school.py": {
+      "hash": "425d28a33bc80c24d14119bc9b22015243294b1bba2a8cac8980f69eda10ceaf",
+      "size": 7997
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\report_generator.py": {
+      "hash": "51438a5b48cd63672d073d5e520ef6d8e345cbcc361b90e2a78cd8ed8f545bbc",
+      "size": 8151
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\run_agent_course_tests.py": {
+      "hash": "7bd1c2e82d89acb336190f5042f66a77e7198547f1813e930780544dafa2c331",
+      "size": 10586
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\sandbox_interactive.py": {
+      "hash": "29883e7a70981b40f51b37b3872c3e00bb3b66d3cb1b5442591dd5e6ed141569",
+      "size": 5143
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\sandbox_realworld_enhanced.py": {
+      "hash": "7bc9c3bc5b4c3ba2306a2e89e1628bc514753226c9c4ff6d1ecd077e49dfe44e",
+      "size": 11575
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\sandbox_realworld_v1.py": {
+      "hash": "17c815dd5bb56f5e41d625162c352576da18e47b7c7c944db5b3aef004682fbc",
+      "size": 26880
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\scorched_earth.py": {
+      "hash": "b68a0491215ada3740ca354ffe6552f6bb3189f25253cefad8dc0de08431a453",
+      "size": 8951
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\self_learn.py": {
+      "hash": "64cd317066ec2709e92bf9fe31bd4334116f4bcbec83e1eba7f9e9442e9b71b9",
+      "size": 16051
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\show_live_adjustments.py": {
+      "hash": "1a041b73cd6a06f47e38aaf5c1f3c4644aa77c20f46139bf65f5285c7e83db23",
+      "size": 3961
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\solar_forecaster.py": {
+      "hash": "ccdc6dae513fbd1a41696ba1be199f6149c9de151a655507ee5a56b96c27843a",
+      "size": 5154
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\stress_test_fixed_2026.py": {
+      "hash": "df6a3e5fee990d1030c10e54aff7f973a34dc7fb01adfd1e0cbc0edf9c3f3268",
+      "size": 13393
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\stress_test_master_2026.py": {
+      "hash": "d4026128ce01ab3798896ee7550a39b568dbbb72a4b90fabeb6c77439b1e5955",
+      "size": 25517
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\stress_test_simple_2026.py": {
+      "hash": "bed5a5cc8771a4e074f66e671320002ab744f01e96f8b74c75448ac14b19f64e",
+      "size": 8298
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\system_analysis.py": {
+      "hash": "28e9fe7f8e5abb0a0849e6afbcdb4a4f4fc9e0f1f8042e5b2a2e18a68f6dfe3c",
+      "size": 13803
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\system_simulation.py": {
+      "hash": "0480dd47f07f1063756bc0bd50ed150966ff33ce779e0c2132a7ce3d9988d861",
+      "size": 21107
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\system_upgrade_to_97.py": {
+      "hash": "b9f567a9793f078d1211e86d0e287c9d1300097f9ba60acf0b6481e85ec2e1ba",
+      "size": 4463
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_chess_ai.py": {
+      "hash": "b4db09a8829b2cc311ed3adf8d40cd99753fd048849b14d5b0a9b122551a77bc",
+      "size": 3715
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_farmos_2026.py": {
+      "hash": "b15d78455bc2b2aaac023af55bb4d8014260fde87d70ce37e08e1a29ad51b70b",
+      "size": 6385
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_omega_integration.py": {
+      "hash": "96b2b59babf9c930b9070ca3e04f64d6326e6ec99e467a8f4ffea089e54ef2f9",
+      "size": 1745
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_quantum_100_upgrade.py": {
+      "hash": "90d91bf9273a51619d0e4cf2b989e96b5e13d5d33fb59a1240f6af52c8a88f78",
+      "size": 17955
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_realworld_enhanced.py": {
+      "hash": "e06cd1b35cdc63549c04c3e794476d3c652a2290577aa350e74c07dc71b3242d",
+      "size": 1349
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_real_systems.py": {
+      "hash": "40e98c7166e7f9d9cea6797385b8d4cd1777bcf939cfa20dceae96afb63acf55",
+      "size": 3345
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_suite.py": {
+      "hash": "f97cc64c81e135acdfaf5f5c2ce24e8ba3622f1fb5dee4b429b9772367a052e4",
+      "size": 12660
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\test_voice_modulation_live.py": {
+      "hash": "1c10b0819fb30110f16e7e0503c813382bd73fd3da12784476cbdbd5d6e221aa",
+      "size": 10423
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\verify_ownership.py": {
+      "hash": "7f9db6e899f7efd3fa6194cdec459e823e293bd527e62a27a10ad7f510708d13",
+      "size": 3726
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\verify_realworld_real.py": {
+      "hash": "d3f3e78a9508be0713525054ab6b24f34a86a91a13388f8018b9059cc05f3d75",
+      "size": 9488
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\verify_swarm_config.py": {
+      "hash": "926cc80de382c08fd6d392432e5971348c088b31538f56a063647e63baa06edb",
+      "size": 476
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\verify_system.py": {
+      "hash": "6314e395ba9317c1053ac64c990c5563f01e9cc2f4f09d84e5ad4881935e895f",
+      "size": 5560
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\village_knowledge.py": {
+      "hash": "148428c1015bf810d55af89e9b190207c04827e72bbbefbb0fbb0d02b95b06f2",
+      "size": 7851
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voiceprint_auth.py": {
+      "hash": "e857f835b5e8a6735dcfdf46da0c1a82094aa6dd223e98679abf4eca5a95a87d",
+      "size": 5787
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_core_v2_compile.py": {
+      "hash": "d0c86387fd09c921df42eef29aaa079c498fbefcdd7cac78b549f8d73d470ffa",
+      "size": 21398
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_core_v2_llm_integration.py": {
+      "hash": "086cfa892a74dc778ca6bb0f04e529f871d759f28567fc782da711234a631f81",
+      "size": 6523
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_core_v2_test.py": {
+      "hash": "2244b2348c49c732652e6dba9fe98458ce6f1abcd428c201a7b2b9e9d87eeafd",
+      "size": 4870
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_humanization_test.py": {
+      "hash": "756bbe6bc4c4021d0937b37c629ec1a9b5229afac23bcb12e4642f813f95621e",
+      "size": 13409
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_humanize_simple.py": {
+      "hash": "16bae0da1f5f5788dd5b48a040077d586d5eddb69ebca07b186c51fade37180c",
+      "size": 3801
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_intent.py": {
+      "hash": "f611f9400a3faf63c7437fbbb07cd751b091c066e478294f134402b68fdbcd25",
+      "size": 3690
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_listener.py": {
+      "hash": "c2efa2339068bb1eb5cd8081cbb1a1c956c4cd1515faecc7eed79a7350e5f699",
+      "size": 30782
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_listener_improved.py": {
+      "hash": "0393296c9b8dd2df70c7d93f2f841d1b0c91a5b658426914ed1131e285fc4462",
+      "size": 20133
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_multilang.py": {
+      "hash": "ebda414017a860f2a10138933af7b6fd15c2339ef17cfef9bce2120858d787e4",
+      "size": 3935
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_noise_cancel.py": {
+      "hash": "b4b9f09be48a8267315550ed47e8397cdd139ca196f4af3d296b0beeece00b58",
+      "size": 1935
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_skills.py": {
+      "hash": "accce32f0160830afdd3f4bace56373a3ae7d1eda41cb32c6dd7ac42d77bdd52",
+      "size": 3598
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_stt_offline.py": {
+      "hash": "d4bc72507c114908ccbcd74b865e852116f3da71c4f8d6b5dc87226dd734ca6b",
+      "size": 3711
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_tts_offline.py": {
+      "hash": "91059089ca21304c5467c1b8713e98cd02f1746f66ffe6df9f1c1cd4f6df8eff",
+      "size": 2789
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\voice_tuner.py": {
+      "hash": "7367c81e267a80876ef723cb8e84a26b59c48fec73487f0358dfe3db196486f5",
+      "size": 5650
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\web_scraper.py": {
+      "hash": "78f7cc023f79827b18b5402a09ea999a0d6c77b383b18434a888a5f23b45247f",
+      "size": 13010
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\weekly_growth.py": {
+      "hash": "9c521521d27e440723df174d64e6e7fb6b00ccbee8dbf8fe67b7c1f1789c40d5",
+      "size": 4913
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\weekly_school.py": {
+      "hash": "43d04d6669848cc75276230797609e58af5113812c6b82df2991ba1c407e3e32",
+      "size": 7611
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\white_page.py": {
+      "hash": "84248b375659d4ab576276578c9fdb7f7e654edc2107a26fdc6a718c698edab2",
+      "size": 11046
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\911_call.py": {
+      "hash": "01a043c58986bc9cae1f0fa3d680d057028345199279330920c2e8e1770daad6",
+      "size": 1465
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\Apothecary.py": {
+      "hash": "559c7abc107c367a13a23d35048c55650d885355712af5198d97af9165ae9f9c",
+      "size": 20506
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\FarmHub_2026_Final.py": {
+      "hash": "0d0700244c12b4597467c754e377a8f8c77fb369bbcd3da5b59b2c6594da2dc2",
+      "size": 8841
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\FeedMaster.py": {
+      "hash": "36116cafcb927219d698d0711d11ad12b17f8d18a3cbd76f6fdcf0d1d94a9879",
+      "size": 18087
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\master_farmhub.py": {
+      "hash": "04ea0e23711c25c1c4f9f1270ff6f3c40a786e78666462f2f247a21eb3d91b6e",
+      "size": 29074
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\medical_core_final_2026.py": {
+      "hash": "7d17a4b4ec963a2cde2c7c6f175ade336b3df644735aedab02bc638edd42c218",
+      "size": 20855
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\plant_animal_recognition.py": {
+      "hash": "f8bddc644c8a14ae2079c811f88acdcce2455c3cbf1e3ebee31a147f66638805",
+      "size": 13891
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\self_diagnose.py": {
+      "hash": "7eb8282a399dc66db462d774495553fb2875cf3fd80acb4afdb7c57fceba8a37",
+      "size": 1656
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\sensor_hub.py": {
+      "hash": "5eb486d4a5b2398ca78844214b0870ccdb2115446b7e0ed18d583d96f0c559eb",
+      "size": 26004
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\test_wormfeedcalc.py": {
+      "hash": "0b0f84055c1856207b431d4724e736bc9182222fc485644eb5778af490d9c1df",
+      "size": 602
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\voice_interface.py": {
+      "hash": "bf9da6fc7bf141862d420b9a13f507e08011121121b47cc536e3a2d3d397631e",
+      "size": 1510
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\WormFeedCalc.py": {
+      "hash": "59b0778ea410a13eb7f35ae757cc04d70858cda3ce319db114bd8e52ac020a6c",
+      "size": 15654
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\FarmHub\\WormFeedCalc_Pro.py": {
+      "hash": "286656f32b068c9c9449b6c832a3a0d8b9313ed3d2d0b73a3b4b0afe60004b64",
+      "size": 15614
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\18650_megapack.py": {
+      "hash": "4ee3873dfe6b26190e854fb6f9ee162fae27db214c84ac9912706bd9f26d4f0a",
+      "size": 3601
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\Bob.py": {
+      "hash": "b94b23441ea709073f92c48e3148877349656a078a230a55f00ec4c68c578ee2",
+      "size": 25725
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\fpsf_colorado.py": {
+      "hash": "9c39b8ea3e1b3a99bfeee9ccb0338ff0cf6cdcd5e253b6efa631497293a54cb4",
+      "size": 2945
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\irrigation_40ac.py": {
+      "hash": "8d410cfd73da89599ebf43088eaac356ae587b8408f13eaabe1d7ff4cdfdac79",
+      "size": 2932
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\pole_barn_30x60.py": {
+      "hash": "31589b1c3cf4c57fb788b450ec2d41ae7613f7409816f31a62f17cfe48bf2bf4",
+      "size": 4120
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Farm_Engineer\\solar_ground_mount.py": {
+      "hash": "59c81b860f67bd0591a66886f8d279737fe57940f3f5bebabcb277e85cd6a157",
+      "size": 2817
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\fill_forms.py": {
+      "hash": "484bb924bd14dac8f411d95b96ae5944501d22368bfa2f5d5f82c890416ce719",
+      "size": 2044
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\Harriet.py": {
+      "hash": "eeb3c1c5705841a4b588ba3578da3f192fab32dca7e261ffda03108c04ae8a60",
+      "size": 17986
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\Harriet_v2.py": {
+      "hash": "9b3b024007197393ee3d6ff6796688a37f413e211e7fd96c5ea6d6d62107596f",
+      "size": 19663
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\payroll_co_2026.py": {
+      "hash": "97546fcb63428e5966af43402e7266f3bc52e418d920bb331e1e2eaa922369c6",
+      "size": 2940
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\term_packet.py": {
+      "hash": "ee4320555c4b1b9d806e0c1fccf93072f31a2698ff184b818119f7168ff8b44f",
+      "size": 1683
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\HR\\voiceprint_setup.py": {
+      "hash": "9d2322934bf7bc69e4cc24d94df3e5b4b27925a8889f5604c369cb9a5ba698d1",
+      "size": 2260
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\advanced_weather_system.py": {
+      "hash": "9ce7c618099eb66422986a0f7880d45b047e95437c45124d09de892824f021ca",
+      "size": 20955
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\battery_voltage_monitor.py": {
+      "hash": "01527b9edd121af100205ea2ae50723163bf1a2a7a13014120f0440e65df1e65",
+      "size": 11403
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\drone_flight_controller.py": {
+      "hash": "8ffc4791b314915d9444cee867ace76ce0bf6909d73fc446c924eaa49a706c13",
+      "size": 27839
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\farm_automation_hub.py": {
+      "hash": "0e3fa9ca1f9c363c7d4931a3eebee1b86317c781fce357ba804725a17f758b01",
+      "size": 25005
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\grant_application_automation.py": {
+      "hash": "1da0b2f7dfff1571d2c8c4135971ecd459603cc78b277dff9f917a950a5e07fa",
+      "size": 11052
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\hello_gatekeeper.py": {
+      "hash": "8c7e00305206536547500612fbe9ef7967eaa5cb46f3f57e71991122c2e5ac77",
+      "size": 1289
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\iot_sensor_hub.py": {
+      "hash": "6816467159bff51f9c2990824b330a0d5438d77615995c1bb21e50a5b4a3570a",
+      "size": 14711
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\irrigation_automation.py": {
+      "hash": "26dde22846dd4e7be4d919691692f1911cbe3b7d673cfe857d1def425e29f4da",
+      "size": 20297
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\knowledge_web_ui.py": {
+      "hash": "1f9afe899d66df6051075c5941b17f7e91722bc4a87e041805b5c1619411c60e",
+      "size": 14321
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\market_intelligence.py": {
+      "hash": "2b8f4cc3c0ee3c00768a0ea61937e97b06cb3c12cf19bdfacec32e4639304f32",
+      "size": 36092
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\market_intelligence_v2.py": {
+      "hash": "c744137d588a36f7c7141d87bcd8ad58a9986f7d90e5256752fcbd2bf04a3be1",
+      "size": 8318
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\pest_disease_detection.py": {
+      "hash": "1432155934d6360a854c037dc51ee01575f0b206a736b2d53df0bfa626f9a7b5",
+      "size": 37829
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\precision_agriculture.py": {
+      "hash": "a4d9811f913c9b70d10a366f6506c9cf9fcc70f81465319372456dc63de6ae29",
+      "size": 12943
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\quantum_optimization.py": {
+      "hash": "3c2ace892cd4e3f8893d2488524c2a27f3c0de3775de2385938db8ac23ee20de",
+      "size": 14897
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\soilgrids_integration.py": {
+      "hash": "7094f3e121dd7981c9603e430f63614465081019edc7ffcb6724dd44b10b3f19",
+      "size": 4947
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\solar_mppt_controller.py": {
+      "hash": "a1f0507bcf7e99c0933f14fb9677c1db9a2ebf59b41145947840585f121074c8",
+      "size": 16329
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\village_farm_hub.py": {
+      "hash": "2b5ea7127fc9712091f4a3bc3485848e3deed66058e7a5f1f1eebae77b27994f",
+      "size": 4375
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\water_purification_system.py": {
+      "hash": "ce5f9d9beb15f642fc3756437adb5b82f375e395be1f90ae120eac8640a342ad",
+      "size": 10563
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\ChatbotLogistics.py": {
+      "hash": "f028669b30b105f4e4054bfcbbe96462250a1663f5341018de5831efe61aa21d",
+      "size": 20198
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\code_quality_improvements_2026.py": {
+      "hash": "ed6e6078106eed7ec8b407269c979292eff5b34698c855b035f7c4d3fcb0c070",
+      "size": 2666
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\Marketing_Playbook.py": {
+      "hash": "76752956b02819c9c3d4f8fbcd0413df0640630a453875129229c1a901a60e81",
+      "size": 7400
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\PriceMaster.py": {
+      "hash": "66c618c3df2c760e45bfbeaa4cfc6e3cc2fe076f9283c4b05702cb1f3e711005",
+      "size": 14092
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\QuantumSalesBot.py": {
+      "hash": "8a77e4dd20294e8498c2fe49dd0fef2c46ecb60336d538305961622f479f8784",
+      "size": 15361
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\QuickPitch.py": {
+      "hash": "33a55afc19add5112e2079a9253d5171b3c27285e58e0ced18d34a5c8b848b2d",
+      "size": 1466
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\SalesHub.py": {
+      "hash": "e17bab38f87335cc3967a274284442f2a3f8fd24b7696b6bf9cf42ad5217e876",
+      "size": 15986
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\sales_audit_fix_2026.py": {
+      "hash": "b08dc7e70eb76e69864f1456c05629c25d96cf78593d7bbefa3eda4589dadc42",
+      "size": 4034
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\sales_system_audit_2026.py": {
+      "hash": "94ec8623dffdc9354c1eb0b413104867e02cec5f6e92bce119665691ffb8d15e",
+      "size": 16368
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\sales_system_upgrade_95.py": {
+      "hash": "6e2a4075097b0f9ead7b2d08ba3a5259a7f1dc87bb0443ca3bc65b10ab9eac67",
+      "size": 6418
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\Sales\\sales_utils.py": {
+      "hash": "3162c22e7bd901159bfa14318ff5766ba905e3a4b5d8bc14ed000ab0f9c71e87",
+      "size": 6294
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\conftest.py": {
+      "hash": "11620d3cdec4dc926f8530837b7047f729ff87cb5b2ca03cda7b082b0153e1b1",
+      "size": 1248
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\test_auto_heal.py": {
+      "hash": "de6dacec501399f8dae1ff4a5c4ddc06ee6ac424e37378b116dddbbcd4cc368b",
+      "size": 2311
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\test_battery_oracle.py": {
+      "hash": "e36444d9073660c64a8712cba3ae035721a08745ff14956293a7c7b4301895a5",
+      "size": 2509
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\test_brain_prime.py": {
+      "hash": "6d7adec4eda637d50ed9a292e3be6d4eaa4e828726d29a8734fc3f57b33ef8ec",
+      "size": 2525
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\test_integration.py": {
+      "hash": "0a22dffa30bea4e93128ec07fd81a57286525eb83cea1676fbda791f919ac992",
+      "size": 3628
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\test_voiceprint_auth.py": {
+      "hash": "ef3e74e8f9b4cbd7de1aae79dae73a98d527cdb6e8529ad5b91df3ed73a3a5f0",
+      "size": 2602
+    },
+    "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\tests\\__init__.py": {
+      "hash": "af17813ee0cf28b5f5f139b86726bc51818663bc0b74024491a3f88ba4bd1103",
+      "size": 81
+    },
+    "scripts\\generate_secure_password.py": {
+      "hash": "ee1168376b1c62244bba6c35ce4427b3fbc5e1262da1d91e903033524296efee",
+      "size": 351
+    },
+    "static\\scripts\\qr_handler.py": {
+      "hash": "73b7bc4aed8c3553a89b064f7713a0a50500ebf082e3cdae75bd2096b11b3ea8",
+      "size": 2024
+    },
+    "tests\\test_basic.py": {
+      "hash": "a103817bb41e08dabffb65e7d47192403868a1884967c49517d39f8138ae4848",
+      "size": 930
+    },
+    "tests\\test_forensics_integrity.py": {
+      "hash": "c0556829dab80ab9212ec657e863a433097f89412da245d9ca15e6305db09e42",
+      "size": 10522
+    },
+    "tests\\test_integration_suite.py": {
+      "hash": "4f175b3bdef40da39322e9ef300962154b2a83b06448c4a2aaf82fe9ae03728e",
+      "size": 10041
+    },
+    "tests\\test_resource_monitor.py": {
+      "hash": "0e43bc34ac9f9c8fff5f0351138f0a10e3a0bc9c14483748bf287a817d7505f3",
+      "size": 14664
+    },
+    "tests\\__init__.py": {
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "wazuh\\test_wazuh_rules.py": {
+      "hash": "1b715e5d1bc535a8e70a1f5e91107730bd613850c48a4e673571af0336faf479",
+      "size": 6894
+    }
+  },
+  "summary": {
+    "secret_count": 35,
+    "high_severity_issues": 35,
+    "total_python_files": 706,
+    "total_code_lines": 149694,
+    "dependency_count": 230
+  }
+}

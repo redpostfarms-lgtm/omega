@@ -1,0 +1,101 @@
+{
+  "timestamp": 1768848064.7296102,
+  "system_info": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+  },
+  "cpu": {
+    "usage_percent": 39.8,
+    "cores": 12,
+    "limit": 80.0,
+    "within_limit": true
+  },
+  "memory": {
+    "usage_percent": 83.9,
+    "used_gb": 13.240741729736328,
+    "total_gb": 15.78769302368164,
+    "limit": 70.0,
+    "within_limit": false
+  },
+  "gpu": {
+    "available": true,
+    "count": 1,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 3050",
+        "utilization_percent": 6.0,
+        "memory_used_mb": 1158.0,
+        "memory_total_mb": 6144.0,
+        "temperature_c": 34.0
+      }
+    ],
+    "limit": 90.0
+  },
+  "disk": {
+    "usage_percent": 88.3
+  },
+  "processes": {
+    "total": 432,
+    "ai_related": [
+      {
+        "pid": 1568,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 1.248233421099494
+      },
+      {
+        "pid": 9084,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.00012081237138012912
+      },
+      {
+        "pid": 11984,
+        "name": "NVIDIA Overlay.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.20238488453599232
+      },
+      {
+        "pid": 14048,
+        "name": "NVIDIA Overlay.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.04873571061474409
+      },
+      {
+        "pid": 14104,
+        "name": "NVIDIA Overlay.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.08826551853032234
+      },
+      {
+        "pid": 14124,
+        "name": "NVIDIA Overlay.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.015488146010932553
+      },
+      {
+        "pid": 15220,
+        "name": "NVIDIA Overlay.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 0.12390516808746042
+      },
+      {
+        "pid": 44004,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_percent": 9.66498971041033e-05
+      }
+    ],
+    "ai_count": 8
+  },
+  "violations": {
+    "memory": true
+  },
+  "health_status": "EXCEEDED_LIMITS",
+  "averages": {
+    "cpu_percent": 42.4,
+    "memory_percent": 83.85
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "directories": {
+    "existing": [
+      "Organized_Files\\Desktop_Folders\\R&D\\swarm_sandboxes\\mahjong_agent_1767345448",
+      ".mvn\\wrapper",
+      "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\03_Tools\\installers",
+      "Organized_Files\\Desktop_Folders\\R&D\\games",
+      "Organized_Files\\Desktop_Folders\\AutoCAD Designs\\07_Brain_Link",
+      "Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\projects\\farm_os_starter",
+      "agent_drone_builds",
+      "Organized_Files\\Desktop_Folders\\R&D\\swarm_sandboxes\\chess_agent_1767345448",
+      "models\\tts",
+      "omega_voice",
+      "omega-vscode-extension\\out",
+      "docs\\fixes",
+      "Organized_Files\\Desktop_Folders\\R&D\\games\\rules",
+      "Organized_Files\\Desktop_Folders\\R&D\\scripts",
+      "config\\profiles",
+      "data\\cache",
+      "__pycache__",
+      "BIOS_Logo_Solution",
+      "htmlcov",
+      "models"
+    ],
+    "missing": [
+      "data/models",
+      "config/system",
+      "models/embeddings",
+      "output/exports",
+      "backups/config",
+      "backups/data",
+      "backups/sessions",
+      "logs",
+      "logs/system",
+      "logs/security",
+      "logs/performance",
+      "static/css",
+      "templates",
+      "templates/web",
+      "templates/reports"
+    ]
+  },
+  "modules": {
+    "utilities": [
+      "ACTIVATE_PARTNERS_STATUS.py",
+      "ai_council.py",
+      "analyze_standalone_requirements.py",
+      "APPLY_CUDA_OPTIMIZATIONS.py",
+      "AUTO_CONFIGURE_NEW_HARDWARE.py",
+      "AUTO_LAUNCH_UI.py",
+      "AUTO_OPTIMIZE_APPS.py",
+      "AUTO_SELECT_AND_OPTIMIZE.py",
+      "AUTO_SETUP_INTEGRATIONS.py",
+      "auto_tool_launcher.py"
+    ],
+    "ai_ml": [
+      "analyze_voices_only.py",
+      "check_voice_status.py",
+      "complete_omega_speech_demo.py",
+      "enhance_omega_voice.py",
+      "generate_copilot_voice.py",
+      "generate_copilot_voice_v2.py",
+      "omega_dual_voice_blend.py",
+      "omega_optimized_speech.py",
+      "omega_optimized_tts.py",
+      "omega_relationship_voice.py"
+    ],
+    "system_monitoring": [
+      "audio_resource_finder.py",
+      "omega_auto_integration_monitor.py",
+      "omega_continuous_monitor.py",
+      "omega_educational_system.py",
+      "omega_education_system.py",
+      "omega_enhanced_research_system.py",
+      "omega_hardware_monitor_enhanced.py",
+      "omega_monitoring.py",
+      "omega_ner_system.py",
+      "omega_relationship_system.py"
+    ],
+    "core": [
+      "gatekeeper_admin_helper.py",
+      "gatekeeper_completion_analysis.py",
+      "gatekeeper_enhanced_monitoring.py",
+      "gatekeeper_error_handler.py",
+      "gatekeeper_file_manager.py",
+      "gatekeeper_file_manager_web.py",
+      "gatekeeper_forensic_analysis.py",
+      "gatekeeper_omega_bridge.py",
+      "gatekeeper_quantum_file_manager.py",
+      "gatekeeper_quantum_file_manager_web.py"
+    ],
+    "authentication": [
+      "manage_authorized_voices.py",
+      "omega_credentials.py",
+      "omega_training_session.py"
+    ],
+    "integrations": [
+      "omega_ai_apps_integration.py",
+      "omega_ai_bridge.py",
+      "omega_api.py",
+      "omega_api_keys.py",
+      "omega_api_keys_admin.py",
+      "omega_api_keys_enhanced.py",
+      "omega_bios_integration.py",
+      "omega_control_panel_buttons_integration.py",
+      "omega_developer_integrations.py",
+      "omega_final_integration.py"
+    ],
+    "testing": [
+      "test_cpu_temp.py",
+      "test_gpu.py",
+      "test_gs_protocol.py",
+      "test_html_load.py",
+      "test_mini.py",
+      "test_omega_performance.py",
+      "test_phone_ui.py",
+      "test_server.py",
+      "test_server_simple.py",
+      "test_slang_processor.py"
+    ]
+  },
+  "dependencies": {
+    "core": [
+      "cryptography>=41.0.0  # Secure API key encryption and storage (required for API key manager)",
+      "psutil>=5.8.0",
+      "psutil>=5.9.0  # Already listed above - used for process monitoring and VPN system",
+      "psutil>=5.9.0  # System and process utilities (cross-platform)",
+      "python-dotenv>=1.0.0  # Environment variables (used in omega_automation_orchestrator.py)",
+      "structlog>=23.2.0  # Structured logging (used in omega_logging_config.py, omega_monitoring.py)",
+      "websockets>=12.0  # WebSocket protocol for swarm heartbeat system"
+    ],
+    "ai_ml": [
+      "TTS==0.22.0  # Pinned for compatibility with Python 3.11",
+      "speechbrain",
+      "torch==2.5.1  # Compatible with TTS and torchcodec",
+      "transformers>=4.21.0,<4.36.0  # Required by TTS 0.22.0 (BeamSearchScorer support)"
+    ],
+    "web": [],
+    "dev": [
+      "black>=23.12.0  # Code formatter",
+      "mypy>=1.7.0  # Static type checking",
+      "pytest-asyncio>=0.21.0  # Async testing support",
+      "pytest>=7.4.0  # Testing framework",
+      "pytest>=7.4.0  # Testing framework (uncommented - used in tests)"
+    ],
+    "optional": [
+      "-r requirements.txt",
+      "Flask-Migrate>=4.0.0",
+      "Flask-SQLAlchemy>=3.0.0",
+      "Pillow>=10.0.0  # Image processing for boot logo creation (required for boot logo)",
+      "SpeechRecognition",
+      "WMI  # Windows Management Instrumentation (Windows only)",
+      "accelerate>=0.20.0  # For distributed/accelerated inference",
+      "aiofiles  # Async file I/O for non-blocking operations",
+      "aiohttp  # Async HTTP client for web scraping and API calls",
+      "bandit>=1.7.5  # Security linter",
+      "beautifulsoup4>=4.12.0  # HTML/XML parsing (used by planetary_search, web_scraper)",
+      "click>=8.1.7  # CLI framework",
+      "datasets>=2.0.0  # For evaluation datasets",
+      "dnspython>=2.3.0  # DNS operations for leak protection and testing (optional but recommended)",
+      "faster-whisper  # Fast offline speech recognition (<1s latency, optional but recommended)"
+    ]
+  },
+  "services": {
+    "Required": [
+      "NVIDIA GPU (optional but recommended for AI acceleration)",
+      "Internet connection (for initial setup and model downloads)"
+    ],
+    "Optional": [
+      "GitHub (for integration features)",
+      "Gmail API (for email integration)",
+      "Redis (for caching)",
+      "PostgreSQL (for data persistence)"
+    ]
+  },
+  "core_modules": [
+    "omega_core.py",
+    "gate_admin_auth.py",
+    "resource_controller.py",
+    "run_comprehensive_tests.py"
+  ]
+}

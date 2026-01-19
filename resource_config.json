@@ -1,12 +1,88 @@
 {
-    "last_updated": "2026-01-19T10:17:29.304784",
-    "strategy": {
-        "gpu_target_percent": 60,
-        "cpu_target_percent": 40,
-        "ram_cache_limit_mb": 512,
-        "memory_threshold_percent": 85,
-        "aggressive_cleanup_threshold": 80
+  "last_updated": "2026-01-19T10:17:29.304784",
+  "resource_limits": {
+    "cpu_percent": 80.0,
+    "memory_percent": 70.0,
+    "gpu_percent": 90.0,
+    "description": "Maximum resource allocation percentages for AI processing"
+  },
+  "ai_components": {
+    "text_to_speech": {
+      "enabled": true,
+      "cpu_priority": "normal",
+      "memory_limit_gb": 4.0,
+      "gpu_enabled": true,
+      "description": "TTS engine resource allocation"
     },
-    "gpu_available": false,
-    "status": "active"
+    "speech_recognition": {
+      "enabled": true,
+      "cpu_priority": "high",
+      "memory_limit_gb": 2.0,
+      "gpu_enabled": true,
+      "description": "Speech recognition (Whisper) resource allocation"
+    },
+    "language_model": {
+      "enabled": true,
+      "cpu_priority": "normal",
+      "memory_limit_gb": 8.0,
+      "gpu_enabled": true,
+      "description": "LLM inference resource allocation"
+    },
+    "monitoring": {
+      "enabled": true,
+      "cpu_priority": "low",
+      "memory_limit_gb": 0.5,
+      "gpu_enabled": false,
+      "description": "System monitoring resource allocation"
+    }
+  },
+  "performance_profiles": {
+    "maximum_performance": {
+      "cpu_percent": 95.0,
+      "memory_percent": 85.0,
+      "gpu_percent": 95.0,
+      "description": "Maximum performance - use all available resources"
+    },
+    "balanced": {
+      "cpu_percent": 70.0,
+      "memory_percent": 60.0,
+      "gpu_percent": 80.0,
+      "description": "Balanced - moderate resource usage"
+    },
+    "power_saver": {
+      "cpu_percent": 40.0,
+      "memory_percent": 40.0,
+      "gpu_percent": 50.0,
+      "description": "Power saver - minimal resource usage"
+    },
+    "background": {
+      "cpu_percent": 20.0,
+      "memory_percent": 30.0,
+      "gpu_percent": 30.0,
+      "description": "Background mode - very low resource usage"
+    }
+  },
+  "active_profile": "balanced",
+  "monitoring": {
+    "interval_seconds": 5,
+    "log_metrics": true,
+    "alert_on_limit_exceeded": true,
+    "auto_throttle": true,
+    "description": "Monitoring and auto-throttling settings"
+  },
+  "gpu_settings": {
+    "prefer_gpu": true,
+    "fallback_to_cpu": true,
+    "gpu_memory_fraction": 0.8,
+    "description": "GPU usage preferences"
+  },
+  "legacy_strategy": {
+    "gpu_target_percent": 60,
+    "cpu_target_percent": 40,
+    "ram_cache_limit_mb": 512,
+    "memory_threshold_percent": 85,
+    "aggressive_cleanup_threshold": 80
+  },
+  "gpu_available": false,
+  "status": "active"
 }

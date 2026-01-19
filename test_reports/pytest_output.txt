@@ -1,0 +1,443 @@
+STDOUT:
+[1m============================= test session starts =============================[0m
+platform win32 -- Python 3.11.9, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Drakalich\.claude-worktrees\The Gatekeeper\infallible-diffie
+configfile: pytest.ini (WARNING: ignoring pytest config in pyproject.toml!)
+plugins: anyio-4.12.1, dash-3.3.0, langsmith-0.6.2, asyncio-1.3.0, cov-7.0.0, mock-3.15.1, timeout-2.4.0, typeguard-4.4.4
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+[1mcollecting ... [0mcollected 25 items / 1 deselected / 24 selected
+
+tests/test_basic.py::test_import_omega [32mPASSED[0m[32m                            [  4%][0m
+tests/test_basic.py::test_basic_math [32mPASSED[0m[33m                              [  8%][0m
+tests/test_basic.py::test_python_version [32mPASSED[0m[33m                          [ 12%][0m
+tests/test_basic.py::test_integration_placeholder [32mPASSED[0m[33m                 [ 16%][0m
+tests/test_basic.py::test_gpu_placeholder [32mPASSED[0m[33m                         [ 20%][0m
+tests/test_basic.py::test_audio_placeholder [32mPASSED[0m[33m                       [ 25%][0m
+tests/test_forensics_integrity.py::test_no_exposed_secrets [31mFAILED[0m[31m        [ 29%][0m
+tests/test_forensics_integrity.py::test_code_quality_metrics [32mPASSED[0m[31m      [ 33%][0m
+tests/test_forensics_integrity.py::test_dependency_scan [32mPASSED[0m[31m           [ 37%][0m
+tests/test_forensics_integrity.py::test_file_integrity_check [32mPASSED[0m[31m      [ 41%][0m
+tests/test_forensics_integrity.py::test_full_forensic_scan [31mFAILED[0m[31m        [ 45%][0m
+tests/test_integration_suite.py::test_async_operations [32mPASSED[0m[31m            [ 50%][0m
+tests/test_integration_suite.py::test_file_operations [32mPASSED[0m[31m             [ 54%][0m
+tests/test_integration_suite.py::test_import_system [32mPASSED[0m[31m               [ 58%][0m
+tests/test_integration_suite.py::test_configuration_files [32mPASSED[0m[31m         [ 62%][0m
+tests/test_integration_suite.py::test_test_infrastructure [32mPASSED[0m[31m         [ 66%][0m
+tests/test_integration_suite.py::test_full_integration_suite [32mPASSED[0m[31m      [ 70%][0m
+tests/test_resource_monitor.py::test_cpu_detection [32mPASSED[0m[31m                [ 75%][0m
+tests/test_resource_monitor.py::test_memory_detection [32mPASSED[0m[31m             [ 79%][0m
+tests/test_resource_monitor.py::test_gpu_detection [32mPASSED[0m[31m                [ 83%][0m
+tests/test_resource_monitor.py::test_current_metrics [32mPASSED[0m[31m              [ 87%][0m
+tests/test_resource_monitor.py::test_ai_process_detection [32mPASSED[0m[31m         [ 91%][0m
+tests/test_resource_monitor.py::test_resource_limit_adjustment [32mPASSED[0m[31m    [ 95%][0m
+tests/test_resource_monitor.py::test_full_resource_report [32mPASSED[0m[31m         [100%][0m[31m[1m
+ERROR: Coverage failure: total of 1 is less than fail-under=70
+[0m
+
+================================== FAILURES ===================================
+[31m[1m___________________________ test_no_exposed_secrets ___________________________[0m
+[1m[31mtests\test_forensics_integrity.py[0m:236: in test_no_exposed_secrets
+    [0m[94massert[39;49;00m [96mlen[39;49;00m(real_secrets) == [94m0[39;49;00m, [33mf[39;49;00m[33m"[39;49;00m[33mFound [39;49;00m[33m{[39;49;00m[96mlen[39;49;00m(real_secrets)[33m}[39;49;00m[33m potential exposed secrets[39;49;00m[33m"[39;49;00m[90m[39;49;00m
+[1m[31mE   AssertionError: Found 21 potential exposed secrets[0m
+[1m[31mE   assert 21 == 0[0m
+[1m[31mE    +  where 21 = len([{'type': 'password', 'file': 'complete_all_changes.py', 'line': 437, 'severity': 'HIGH'}, {'type': 'password', 'file': 'complete_all_changes.py', 'line': 609, 'severity': 'HIGH'}, {'type': 'token', 'file': 'fix_github_setup.py', 'line': 137, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'omega_developer_integrations.py', 'line': 314, 'severity': 'HIGH'}, {'type': 'token', 'file': 'omega_developer_integrations.py', 'line': 359, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 239, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 8597, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 7598, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 14372, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 239, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 8597, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 7598, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 14372, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'STORE_ADMIN_API_KEY.py', 'line': 18, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'STORE_API_KEY.py', 'line': 18, 'severity': 'HIGH'}, {'type': 'token', 'file': 'store_github_token.py', 'line': 43, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'store_github_token.py', 'line': 43, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py', 'line': 821, 'severity': 'HIGH'}, {'type': 'token', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py', 'line': 821, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\demo_all_tools.py', 'line': 169, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\report_generator.py', 'line': 232, 'severity': 'HIGH'}])[0m
+---------------------------- Captured stdout call -----------------------------
+\n\u26a0\ufe0f  SECURITY WARNING: Potential secrets detected:\n  \u2022 password in complete_all_changes.py:437\n  \u2022 password in complete_all_changes.py:609\n  \u2022 token in fix_github_setup.py:137\n  \u2022 api_key in omega_developer_integrations.py:314\n  \u2022 token in omega_developer_integrations.py:359\n  \u2022 api_key in SECURITY_FORENSIC_REPORT_20260119_010429.json:239\n  \u2022 api_key in SECURITY_FORENSIC_REPORT_20260119_010429.json:8597\n  \u2022 github_token in SECURITY_FORENSIC_REPORT_20260119_010429.json:7598\n  \u2022 github_token in SECURITY_FORENSIC_REPORT_20260119_010429.json:14372\n  \u2022 api_key in SECURITY_FORENSIC_REPORT_20260119_010442.json:239
+[31m[1m___________________________ test_full_forensic_scan ___________________________[0m
+[1m[31mtests\test_forensics_integrity.py[0m:298: in test_full_forensic_scan
+    [0m[94massert[39;49;00m ([90m[39;49;00m
+[1m[31mE   AssertionError: High severity security issues detected[0m
+[1m[31mE   assert 35 == 0[0m
+---------------------------- Captured stdout call -----------------------------
+\U0001f50d Starting Forensic Scan...\n  \u2192 Scanning for exposed secrets...\n  \u2192 Analyzing code quality...\n  \u2192 Scanning dependencies...\n  \u2192 Generating integrity hashes...\n\n\u2705 Forensic Scan Complete!\n  \u2022 Report saved to: C:\\Users\\Drakalich\\.claude-worktrees\\The Gatekeeper\\infallible-diffie\\forensic_scan_report.json\n\n\U0001f4cb Summary:\n  \u2022 secret_count: 35\n  \u2022 high_severity_issues: 35\n  \u2022 total_python_files: 706\n  \u2022 total_code_lines: 149694\n  \u2022 dependency_count: 230
+[33m============================== warnings summary ===============================[0m
+tests/test_basic.py::test_import_omega
+  C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\generic.py:441: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+    _torch_pytree._register_pytree_node(
+
+tests/test_basic.py::test_import_omega
+tests/test_basic.py::test_import_omega
+  C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\generic.py:309: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+    _torch_pytree._register_pytree_node(
+
+tests/test_basic.py::test_import_omega
+  C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\TTS\tts\layers\xtts\xtts_manager.py:5: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+    self.speakers = torch.load(speaker_file_path)
+
+tests/test_basic.py::test_import_omega
+  C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\TTS\utils\io.py:54: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+    return torch.load(f, map_location=map_location, **kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.11.9-final-0 _______________
+
+Name                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------
+ACTIVATE_PARTNERS_STATUS.py                       42     42     0%   8-63
+APPLY_CUDA_OPTIMIZATIONS.py                       97     97     0%   8-144
+AUTO_CONFIGURE_NEW_HARDWARE.py                    50     50     0%   8-72
+AUTO_LAUNCH_UI.py                                 36     36     0%   8-56
+AUTO_OPTIMIZE_APPS.py                            143    143     0%   9-269
+AUTO_SELECT_AND_OPTIMIZE.py                      121    121     0%   9-232
+AUTO_SETUP_INTEGRATIONS.py                        83     83     0%   8-126
+CHECK_INTEGRATION_STATUS.py                       39     39     0%   8-51
+CHECK_REMAINING_OPTIMIZATIONS.py                 103    103     0%   8-184
+CLEAN_AND_ORGANIZE_OMEGA_DESKTOP.py              180    180     0%   8-341
+COMPLETE_CONVERSATION_ANALYSIS.py                 73     73     0%   8-371
+COMPLETE_SYSTEM_REVIEW_AND_PRIORITIZATION.py      74     74     0%   8-289
+COMPLETE_UI_OPTIMIZATION_AND_INTEGRATION.py       79     79     0%   8-130
+COMPREHENSIVE_DEEP_FIX.py                        151    151     0%   8-358
+COMPREHENSIVE_DESKTOP_CLEANUP.py                 227    227     0%   9-389
+COMPREHENSIVE_DESKTOP_CLEANUP_FIXED.py           227    227     0%   9-389
+COMPREHENSIVE_RESEARCH_AND_OPTIMIZATION.py       138    138     0%   9-553
+COMPREHENSIVE_SYSTEM_DIAGNOSTICS.py              256    256     0%   9-430
+CONTROL_PANEL_DEBUG_SANDBOX.py                   149    149     0%   9-284
+CONTROL_PANEL_FIX_AGENT_SYSTEM.py                166    166     0%   8-303
+COPY_UI_SCREENSHOTS.py                            72     72     0%   8-103
+CREATE_DESKTOP_SHORTCUT.py                       112    112     0%   8-213
+CREATE_OMEGA_ICON.py                              73     73     0%   8-113
+DEEP_CODE_SCAN_AND_REPAIR.py                     127    127     0%   9-233
+DEEP_DIVE_SCAN_AND_OPTIMIZE.py                   206    206     0%   8-383
+DIAGNOSE_UI_ISSUE.py                             119    119     0%   8-158
+ENABLE_M2_DRIVE.py                                23     23     0%   8-39
+ENHANCED_CONTROL_PANEL_DEBUG.py                  186    186     0%   8-352
+EXECUTE_AUTO_OPTIMIZE.py                          27     27     0%   3-45
+FINAL_INSTALLATION_CHECK.py                      173    173     0%   8-271
+FINAL_SYSTEM_OPTIMIZATION_ANALYZER.py            379    379     0%   11-820
+FIX_ADVANCED_MARKDOWN_ERRORS.py                  132    132     0%   5-217
+FIX_ALL_MARKDOWN_ERRORS.py                        65     65     0%   5-116
+FIX_ALL_MD_COMPREHENSIVE.py                       71     71     0%   5-116
+FIX_AND_ENHANCE_CONTROL_PANEL.py                  44     44     0%   8-75
+FIX_AND_IMPROVE_CONTROL_PANEL_UI.py               40     40     0%   8-179
+FIX_ASUS_BIOS_LOGO.py                             61     61     0%   8-352
+FIX_CONTROL_PANEL_DISPLAY.py                     135    135     0%   8-268
+FIX_CONTROL_PANEL_DISPLAY_REAL.py                 87     87     0%   9-160
+FIX_PYTHON_IMPORTS_COMPREHENSIVE.py              105    105     0%   10-250
+FULL_INTEGRATION_SCAN_AND_OPTIMIZATION.py        144    144     0%   8-273
+GATEKEEPER_SYSTEM_BRIDGE.py                      203    203     0%   20-498
+GRID_BEAM_SEARCH_FROM_SCRATCH.py                 126    126     0%   9-254
+IMPLEMENT_ALL_IMPROVEMENTS.py                     74     74     0%   8-205
+IMPLEMENT_PRIORITY_FIXES_AND_IMPROVEMENTS.py      40     40     0%   8-125
+IMPROVE_MOTHERBOARD_POWER.py                      69     69     0%   8-164
+INSTALLATION_SEQUENCE.py                          51     51     0%   8-208
+INSTALL_ALL_DEPENDENCIES.py                      162    162     0%   7-255
+INTEGRATE_RELATIONSHIP_SYSTEM.py                  87     87     0%   8-174
+ITERATIVE_CONTROL_PANEL_FIX.py                   238    238     0%   9-457
+KNOWLEDGE_GAP_ANALYSIS.py                        193    193     0%   8-611
+LEARN_MISSING_KNOWLEDGE.py                        78     78     0%   8-280
+MONITOR_UI_ACTIVATION.py                         140    140     0%   8-182
+OMEGAVPN_SETUP.py                                131    131     0%   7-168
+OMEGA_AUTOMATIC_DEEP_SEARCH.py                    48     48     0%   7-125
+OMEGA_AUTONOMOUS_IMPLEMENTATION.py               138    138     0%   8-259
+OMEGA_CONFIG_OPTIMIZED.py                         59     59     0%   7-113
+OMEGA_FINAL_SETUP.py                             187    187     0%   6-239
+OMEGA_LANGCHAIN_INTEGRATION.py                   110    110     0%   7-164
+OMEGA_RAG_SYSTEM.py                              151    151     0%   7-211
+OMEGA_UI_LAUNCHER.py                              45     45     0%   8-62
+OMEGA_WEB_LAUNCHER.py                             24     24     0%   7-36
+OPTIMIZE_AND_FIX_REDUNDANCIES.py                 151    151     0%   8-270
+OPTIMIZE_CUDA_FOR_OMEGA.py                       142    142     0%   8-202
+OPTIMIZE_SCRIPTS_CONSOLIDATE.py                   60     60     0%   8-116
+OPTIMIZE_STARTUP.py                               65     65     0%   8-94
+OPTIMIZE_UI_QUANTUM_SCRUB.py                     208    208     0%   9-395
+PREPARE_PRODUCTION.py                             64     64     0%   8-98
+QUANTUM_ENHANCED_FILE_MANAGER.py                 271    271     0%   18-526
+QUANTUM_MASTER_ENHANCEMENT.py                    365    365     0%   23-685
+QUANTUM_OPERATIONAL_SCRUB.py                     272    272     0%   8-481
+QUANTUM_WORLDWIDE_SCRUB.py                       275    275     0%   20-607
+QUANTUM_WORLDWIDE_SCRUB_VISUAL_STUDIO.py          99     99     0%   9-572
+QUICK_AUTO_OPTIMIZE.py                            29     29     0%   5-39
+QUICK_DIAGNOSTICS.py                             121    121     0%   5-164
+REPAIR_OMEGA_ICONS.py                            104    104     0%   8-189
+RESEARCH_AND_FIX_UI_ISSUE.py                     147    147     0%   8-217
+RESEARCH_ASUS_BIOS_LOGO.py                       129    129     0%   9-435
+RGB_QUICK_REFERENCE.py                            25     25     0%   14-592
+RUN_ALL_SETUP_AND_CHECKS.py                      103    103     0%   8-143
+SCAN_FOR_ISSUES.py                                94     94     0%   8-165
+SCHEDULE_SHUTDOWN_AND_WAKE.py                     33     33     0%   8-53
+SETUP_ADMIN_USER.py                               57     57     0%   8-82
+SETUP_DEVELOPER_INTEGRATIONS.py                  141    141     0%   8-185
+SETUP_DOWNLOADS_LOCATION.py                       55     55     0%   8-147
+SETUP_OMEGA_ICONS.py                              77     77     0%   8-140
+SETUP_VPN.py                                     140    140     0%   8-183
+SET_PARTNERS_STATUS.py                            43     43     0%   8-65
+SET_RGB_COLOR.py                                  19     19     0%   8-38
+SHUTDOWN_AND_WAKE_COMPLETE.py                     48     48     0%   8-79
+SIMPLE_DIAGNOSTIC.py                             164    164     0%   8-217
+SIMPLE_TEST.py                                    67     67     0%   3-118
+START_CONTROL_PANEL.py                            22     22     0%   8-35
+START_CONTROL_PANEL_FIXED.py                      47     47     0%   8-68
+START_CONTROL_PANEL_VISIBLE.py                    68     68     0%   8-94
+STORE_ADMIN_API_KEY.py                            41     41     0%   8-69
+STORE_API_KEY.py                                  40     40     0%   8-60
+STREAMING_TTS_IMPLEMENTATION.py                   92     92     0%   8-141
+TEST_CONTROL_PANEL_DISPLAY.py                     43     43     0%   8-66
+TEST_LAUNCHER_NOW.py                              71     71     0%   8-102
+TEST_MATPLOTLIB_DISPLAY.py                        83     83     0%   8-117
+TEST_SECURITY_SYSTEM.py                           44     44     0%   8-66
+TRACE_ACTIVATION_SEQUENCE.py                      76     76     0%   8-102
+UPDATE_OMEGA_LOGO_DESIGN.py                       64     64     0%   11-141
+UPDATE_SHORTCUT_ICON.py                           62     62     0%   8-99
+VERIFY_COPY.py                                    13     13     0%   2-15
+VERIFY_INSTALLATIONS.py                          132    132     0%   4-177
+VPN_ALWAYS_ON.py                                  90     90     0%   8-123
+VPN_BROWSER_INTEGRATION.py                       125    125     0%   8-192
+WHISPER_CALIBRATION_AND_CONFIDENCE.py             79     79     0%   9-161
+ai_council.py                                    224    224     0%   14-477
+analyze_voices_only.py                            71     71     0%   7-128
+audio_resource_finder.py                          64     64     0%   3-206
+auto_tool_launcher.py                             82     82     0%   7-166
+auto_tool_manager.py                             250    250     0%   7-484
+c_drive_manager.py                               200    200     0%   6-344
+check_voice_status.py                             41     41     0%   5-73
+complete_all_changes.py                          231    231     0%   7-775
+complete_omega_speech_demo.py                    148    148     0%   7-254
+comprehensive_codebase_audit.py                  171    171     0%   8-352
+conversation_recorder.py                          98     98     0%   3-155
+create_omega_boot_logo.py                         33     33     0%   8-49
+cryptography_research.py                          67     67     0%   8-256
+cursor_forensic_request.py                         5      5     0%   5-27
+deep_scan_gatekeeper.py                          132    132     0%   8-266
+deep_worldwide_scrub.py                          206    206     0%   14-434
+denoise_all.py                                    31     31     0%   2-42
+deploy.py                                        130    130     0%   10-219
+enhance_omega_voice.py                            80     80     0%   7-127
+fix_github_setup.py                              156    156     0%   8-230
+gate_admin_system.py                             223    223     0%   7-426
+gate_agent.py                                    289    289     0%   7-464
+gate_enhanced_system.py                          312    312     0%   6-527
+gatekeeper_admin_helper.py                       159    159     0%   9-308
+gatekeeper_completion_analysis.py                243    243     0%   8-421
+gatekeeper_enhanced_monitoring.py                161    161     0%   9-328
+gatekeeper_error_handler.py                      292    292     0%   9-629
+gatekeeper_file_manager.py                       325    325     0%   6-512
+gatekeeper_file_manager_web.py                   125    125     0%   6-290
+gatekeeper_forensic_analysis.py                  168    168     0%   9-395
+gatekeeper_omega_bridge.py                       183    183     0%   14-333
+gatekeeper_quantum_file_manager.py               209    209     0%   6-421
+gatekeeper_quantum_file_manager_web.py           105    105     0%   6-263
+gatekeeper_system_health_monitor.py              214    214     0%   8-441
+gatekeeper_threat_simulation.py                  118    118     0%   9-290
+gatekeeper_wazuh_integration.py                  182    182     0%   17-531
+generate_copilot_voice.py                         73     73     0%   7-123
+generate_copilot_voice_v2.py                      41     41     0%   6-72
+generate_status_report.py                        102    102     0%   4-148
+ghost_swarm_protocol.py                          383    383     0%   9-661
+hands_free_omega.py                              255    255     0%   3-396
+hands_free_omega_optimized.py                    356    356     0%   3-562
+improvement_cycle_manager.py                      93     93     0%   3-150
+install_optional_dependencies.py                  86     86     0%   7-159
+install_wazuh_dependencies.py                     90     90     0%   19-150
+interactive_omega.py                             127    127     0%   3-208
+kitt_agent.py                                     77     77     0%   10-181
+kitt_scanner_effect.py                           113    113     0%   9-231
+language_improver.py                              81     81     0%   3-149
+list_mics.py                                       2      2     0%   1-2
+manage_authorized_voices.py                       67     67     0%   3-89
+notepad split_recording.py                         6      6     0%   2-9
+omega.py                                          44     27    39%   35-61, 64-81
+omega_adaptive_improvements.py                   167    167     0%   1-284
+omega_advanced_installer.py                      153    153     0%   7-396
+omega_agent_council.py                           226    226     0%   1-390
+omega_ai_apps_integration.py                     112    112     0%   6-462
+omega_ai_bridge.py                                32     32     0%   6-73
+omega_ai_extras.py                                50     50     0%   6-135
+omega_api.py                                      49     49     0%   8-119
+omega_api_keys.py                                 95     95     0%   7-150
+omega_api_keys_admin.py                           41     41     0%   7-76
+omega_api_keys_enhanced.py                       215    215     0%   7-354
+omega_apps_manager.py                            143    143     0%   6-245
+omega_auto_integration_monitor.py                119    119     0%   7-206
+omega_auto_repair.py                             174    174     0%   15-269
+omega_auto_sync.py                                95     95     0%   9-187
+omega_automation_orchestrator.py                 245    245     0%   5-380
+omega_bios_integration.py                        246    246     0%   10-454
+omega_boot_logo.py                                33     33     0%   7-61
+omega_chatbot_analyzer.py                        103    103     0%   6-527
+omega_code_optimizer.py                          184    184     0%   7-276
+omega_combined_final.py                          185    185     0%   1-288
+omega_comprehensive_hardware.py                  333    333     0%   13-539
+omega_confidence_calibration.py                  100    100     0%   7-177
+omega_context_summarization.py                    93     93     0%   7-170
+omega_continuous_monitor.py                      218    218     0%   7-384
+omega_control_panel.py                           762    762     0%   13-1206
+omega_control_panel_buttons.py                   133    133     0%   7-231
+omega_control_panel_buttons_integration.py        63     63     0%   7-105
+omega_control_panel_cache.py                      55     55     0%   7-74
+omega_control_panel_web.py                       765    765     0%   13-3551
+omega_core.py                                    245    245     0%   16-405
+omega_credentials.py                              27     27     0%   6-62
+omega_deep_dive.py                               203    203     0%   7-415
+omega_dev_tools.py                                46     46     0%   6-101
+omega_developer_integrations.py                  129    129     0%   7-401
+omega_download_manager.py                        145    145     0%   7-246
+omega_dual_voice_blend.py                        118    118     0%   6-186
+omega_education_launcher.py                       90     90     0%   5-106
+omega_education_system.py                        102    102     0%   7-414
+omega_educational_agents.py                      164    164     0%   8-429
+omega_educational_system.py                      119    119     0%   10-731
+omega_enhanced_research_system.py                140    140     0%   7-292
+omega_final_integration.py                       229    229     0%   6-414
+omega_final_integration_safe.py                  123    123     0%   6-226
+omega_final_no_emotion.py                        126    126     0%   1-174
+omega_fix_agents.py                              126    126     0%   4-230
+omega_forensic_security.py                       280    280     0%   7-611
+omega_full_brain.py                               47     47     0%   2-72
+omega_gpu_load_balancer.py                       168    168     0%   8-357
+omega_hardware_monitor_enhanced.py               465    465     0%   20-637
+omega_hardware_sensors.py                        133    133     0%   8-213
+omega_hf_cloud_jobs.py                           137    137     0%   6-277
+omega_intelligent_chatbot.py                     234    234     0%   7-444
+omega_intelligent_remediation.py                 206    206     0%   6-370
+omega_intent_recognition.py                      127    127     0%   7-221
+omega_introduce.py                                32     32     0%   1-49
+omega_kitt_ui.py                                 467    467     0%   16-651
+omega_knowledge_assessment.py                    258    258     0%   10-494
+omega_language_enhancer.py                        62     62     0%   7-105
+omega_launcher.py                                 66     66     0%   6-115
+omega_learning_swarm.py                           67     67     0%   1-123
+omega_local_load_testing.py                       74     74     0%   15-194
+omega_logging_config.py                           44     44     0%   7-90
+omega_master_dev_build.py                        164    164     0%   10-612
+omega_master_integrator.py                       101    101     0%   6-458
+omega_mesh_network.py                            108    108     0%   10-214
+omega_monitoring.py                              128    128     0%   7-240
+omega_ner_system.py                              122    122     0%   7-243
+omega_network_security.py                        216    216     0%   7-357
+omega_nvidia_integration.py                       72     72     0%   7-166
+omega_openai_integration.py                       88     88     0%   7-181
+omega_operational_startup.py                     164    164     0%   8-225
+omega_optimized_speech.py                        313    313     0%   1-444
+omega_optimized_tts.py                            79     79     0%   1-119
+omega_oui_lookup.py                              201    201     0%   15-376
+omega_package_scanner.py                         159    159     0%   7-588
+omega_production_preparation.py                  207    207     0%   13-404
+omega_pwa_kitt_ui.py                             113    113     0%   13-1574
+omega_quantum_enhanced.py                         66     66     0%   12-121
+omega_quantum_idle_optimizer.py                  273    273     0%   7-511
+omega_quick_start.py                              26     26     0%   5-37
+omega_quick_test.py                               47     47     0%   5-81
+omega_relationship_council.py                     74     74     0%   1-218
+omega_relationship_system.py                     203    203     0%   8-389
+omega_relationship_voice.py                       33     33     0%   7-60
+omega_resource_manager.py                        193    193     0%   8-329
+omega_resource_optimized_components.py           140    140     0%   7-186
+omega_resource_optimizer.py                      131    131     0%   7-265
+omega_say_hello.py                                13     13     0%   1-25
+omega_scalability_enhanced.py                     79     79     0%   12-148
+omega_scan_integration.py                        334    334     0%   14-578
+omega_scanner_integration.py                      88     88     0%   7-196
+omega_security_enhanced.py                       102    102     0%   12-199
+omega_simple_final.py                            127    127     0%   1-171
+omega_slang_processor.py                          98     98     0%   11-558
+omega_slang_processor_optimized.py                50     50     0%   7-161
+omega_smart_integrator.py                        308    308     0%   7-616
+omega_speech_with_claude.py                      155    155     0%   6-287
+omega_speed_enhanced.py                           47     47     0%   12-86
+omega_startup_optimizer.py                       358    358     0%   11-650
+omega_swarm_heartbeat.py                         205    205     0%   7-323
+omega_swarm_integrated.py                        118    118     0%   6-567
+omega_swarm_server.py                            103    103     0%   6-348
+omega_system_access.py                           117    117     0%   6-262
+omega_system_monitor.py                          252    252     0%   7-560
+omega_system_resource_manager.py                  88     88     0%   8-127
+omega_system_status.py                            61     61     0%   6-103
+omega_training_session.py                        154    154     0%   5-198
+omega_user_storage.py                            125    125     0%   7-207
+omega_vector_db.py                               158    158     0%   7-255
+omega_voice_active.py                            190    190     0%   7-303
+omega_voice_analysis.py                           77     77     0%   6-121
+omega_voice_analysis_simple.py                    75     75     0%   6-137
+omega_voice_api.py                               140    140     0%   6-273
+omega_voice_auto.py                               83     83     0%   7-129
+omega_voice_demo.py                              155    155     0%   6-238
+omega_voice_player.py                            189    189     0%   6-275
+omega_voice_screenshot_extension.py               32     32     0%   13-758
+omega_voice_test_simple.py                        87     87     0%   6-131
+omega_voice_wake.py                              193    193     0%   7-257
+omega_vpn_enhanced.py                            237    237     0%   7-425
+omega_vpn_system.py                              377    377     0%   7-571
+omega_web_researcher.py                           97     97     0%   7-304
+omega_web_ui_enhanced.py                          99     99     0%   16-1818
+omega_web_ui_simple.py                            58     58     0%   6-543
+omega_web_ui_simple_enhanced.py                   43     43     0%   11-547
+omega_web_ui_v2_enhanced.py                       66     66     0%   11-885
+omega_windows_power.py                           270    270     0%   7-373
+omega_windows_power_optimized.py                 120    120     0%   7-170
+phone_ui_simple.py                                51     51     0%   5-224
+play_copilot_voice.py                             38     38     0%   6-60
+play_original_voices.py                           62     62     0%   7-108
+play_voice_manual.py                              45     45     0%   7-74
+quantum_armor_optimized.py                       220    220     0%   9-421
+quantum_armor_v1.py                              101    101     0%   2-126
+quantum_huggingface_research.py                   51     51     0%   6-246
+quantum_self_repair.py                            49     49     0%   11-84
+quantum_web_research.py                           57     57     0%   3-301
+quick_clone.py                                    16     16     0%   2-29
+quick_code_check.py                               57     57     0%   8-89
+quick_tts_test.py                                 45     45     0%   3-63
+rate_limiter.py                                   97     97     0%   15-209
+rgb_setup_and_diagnostics.py                     278    278     0%   16-769
+run_comprehensive_tests.py                       160    160     0%   9-285
+run_full_analysis_for_marc.py                     60     60     0%   6-85
+run_speech_test.py                               106    106     0%   7-172
+safe_path_manager.py                             166    166     0%   7-271
+setup.py                                          13     13     0%   8-29
+setup_complete.py                                 98     98     0%   6-166
+setup_github_token.py                             84     84     0%   8-120
+setup_tunnel.py                                  126    126     0%   6-187
+show_consolidation_status.py                      47     47     0%   9-74
+speak_copilot_voice.py                            33     33     0%   7-59
+speak_gate_voice.py                              126    126     0%   9-257
+speak_omega_voice.py                              97     97     0%   8-164
+store_github_token.py                             41     41     0%   5-73
+test_cpu_temp.py                                  32     32     0%   7-49
+test_gpu.py                                       15     15     0%   3-21
+test_gs_protocol.py                              103    103     0%   7-177
+test_html_load.py                                 29     29     0%   3-40
+test_integration.py                              157    157     0%   9-268
+test_llm_decoding_integration.py                 110    110     0%   9-186
+test_mini.py                                      14     14     0%   4-22
+test_omega_performance.py                        152    152     0%   3-303
+test_openai_api.py                               103    103     0%   8-166
+test_phone_ui.py                                  25     25     0%   3-38
+test_rgb_system.py                                53     53     0%   4-74
+test_server.py                                    11     11     0%   3-16
+test_server_simple.py                             34     34     0%   4-46
+test_slang_processor.py                           40     40     0%   4-60
+test_system.py                                   120    120     0%   10-231
+test_tts_fix.py                                   43     43     0%   2-57
+test_voice_system.py                              54     54     0%   7-91
+tests\__init__.py                                  0      0   100%
+tests\test_basic.py                               24      3    88%   10-12, 35
+tests\test_forensics_integrity.py                155     18    88%   83-84, 103, 125-126, 142-143, 153, 162-163, 305-317
+tests\test_integration_suite.py                  157     29    82%   41-43, 66-68, 95-97, 104-105, 125-126, 144-145, 152-154, 190, 285-300
+tests\test_resource_monitor.py                   198     34    83%   47, 119-124, 167, 170, 175, 204-205, 317-318, 385-387, 392-419
+tool_access_manager.py                           177    177     0%   7-282
+verify_all_systems.py                             90     90     0%   16-165
+verify_dependencies.py                           232    232     0%   7-349
+voice_improvement_analyzer.py                     69     69     0%   3-162
+voice_security_system.py                         151    151     0%   3-294
+----------------------------------------------------------------------------
+TOTAL                                          43662  43195     1%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+[31m[1mFAIL Required test coverage of 70% not reached. Total coverage: 1.07%
+[0m[36m[1m=========================== short test summary info ===========================[0m
+[31mFAILED[0m tests/test_forensics_integrity.py::[1mtest_no_exposed_secrets[0m - AssertionError: Found 21 potential exposed secrets
+assert 21 == 0
+ +  where 21 = len([{'type': 'password', 'file': 'complete_all_changes.py', 'line': 437, 'severity': 'HIGH'}, {'type': 'password', 'file': 'complete_all_changes.py', 'line': 609, 'severity': 'HIGH'}, {'type': 'token', 'file': 'fix_github_setup.py', 'line': 137, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'omega_developer_integrations.py', 'line': 314, 'severity': 'HIGH'}, {'type': 'token', 'file': 'omega_developer_integrations.py', 'line': 359, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 239, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 8597, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 7598, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010429.json', 'line': 14372, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 239, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 8597, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 7598, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'SECURITY_FORENSIC_REPORT_20260119_010442.json', 'line': 14372, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'STORE_ADMIN_API_KEY.py', 'line': 18, 'severity': 'HIGH'}, {'type': 'api_key', 'file': 'STORE_API_KEY.py', 'line': 18, 'severity': 'HIGH'}, {'type': 'token', 'file': 'store_github_token.py', 'line': 43, 'severity': 'HIGH'}, {'type': 'github_token', 'file': 'store_github_token.py', 'line': 43, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py', 'line': 821, 'severity': 'HIGH'}, {'type': 'token', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\deep_system_test.py', 'line': 821, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\demo_all_tools.py', 'line': 169, 'severity': 'HIGH'}, {'type': 'password', 'file': 'Organized_Files\\Desktop_Folders\\R&D\\The Gatekeeper\\report_generator.py', 'line': 232, 'severity': 'HIGH'}])
+[31mFAILED[0m tests/test_forensics_integrity.py::[1mtest_full_forensic_scan[0m - AssertionError: High severity security issues detected
+assert 35 == 0
+[31m===== [31m[1m2 failed[0m, [32m22 passed[0m, [33m1 deselected[0m, [33m5 warnings[0m[31m in 108.97s (0:01:48)[0m[31m ======[0m
+
+
+STDERR:
+C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\coverage\report_core.py:107: CoverageWarning: Couldn't parse Python file 'C:\Users\Drakalich\.claude-worktrees\The Gatekeeper\infallible-diffie\fix_and_launch.py' (couldnt-parse); see https://coverage.readthedocs.io/en/7.13.1/messages.html#warning-couldnt-parse
+  coverage._warn(msg, slug="couldnt-parse")
+C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\coverage\report_core.py:107: CoverageWarning: Couldn't parse Python file 'C:\Users\Drakalich\.claude-worktrees\The Gatekeeper\infallible-diffie\gate_auth_system.py' (couldnt-parse); see https://coverage.readthedocs.io/en/7.13.1/messages.html#warning-couldnt-parse
+  coverage._warn(msg, slug="couldnt-parse")
+C:\Users\Drakalich\AppData\Local\Programs\Python\Python311\Lib\site-packages\coverage\report_core.py:107: CoverageWarning: Couldn't parse Python file 'C:\Users\Drakalich\.claude-worktrees\The Gatekeeper\infallible-diffie\omega_system_audit.py' (couldnt-parse); see https://coverage.readthedocs.io/en/7.13.1/messages.html#warning-couldnt-parse
+  coverage._warn(msg, slug="couldnt-parse")
