@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega User Storage - Persistent User Authentication Storage
 ===========================================================
@@ -26,14 +25,12 @@ class UserStorage:
             try:
                 with open(self.storage_file, 'r') as f:
                     self.users = json.load(f)
-                # Fix any placeholder passwords
                 self._fix_placeholder_passwords()
             except Exception as e:
                 print(f"Error loading users: {e}")
                 self.users = {}
                 self._initialize_default_users()
         else:
-            # Initialize with default admin user if file doesn't exist
             self._initialize_default_users()
     
     def _fix_placeholder_passwords(self):
@@ -56,7 +53,6 @@ class UserStorage:
         try:
             with open(self.storage_file, 'w') as f:
                 json.dump(self.users, f, indent=2)
-            # Set restrictive permissions (Unix-like systems)
             try:
                 os.chmod(self.storage_file, 0o600)
             except (OSError, AttributeError):
@@ -114,7 +110,6 @@ class UserStorage:
         if username not in self.users:
             return False
         
-        # Use 'is not None' check to allow empty strings to update password
         if password is not None:
             self.users[username]['password'] = generate_password_hash(password)
         if role is not None:
@@ -154,7 +149,6 @@ class UserStorage:
     def ensure_admin_exists(self) -> bool:
         """Ensure admin user exists and is properly configured"""
         if 'admin' not in self.users:
-            # Create admin user
             self.users['admin'] = {
                 'password': generate_password_hash('admin2026'),
                 'role': 'admin',
@@ -163,7 +157,6 @@ class UserStorage:
             }
             return self._save_users()
         else:
-            # Ensure admin has correct role and valid password hash
             needs_save = False
             if self.users['admin'].get('role') != 'admin':
                 self.users['admin']['role'] = 'admin'
@@ -171,7 +164,6 @@ class UserStorage:
             if not self.users['admin'].get('active', True):
                 self.users['admin']['active'] = True
                 needs_save = True
-            # Update password if it's a placeholder
             if 'placeholder' in str(self.users['admin'].get('password', '')):
                 self.users['admin']['password'] = generate_password_hash('admin2026')
                 needs_save = True
@@ -179,7 +171,6 @@ class UserStorage:
                 return self._save_users()
         return True
 
-# Global instance
 _user_storage = None
 
 def get_user_storage() -> UserStorage:
@@ -191,7 +182,6 @@ def get_user_storage() -> UserStorage:
     return _user_storage
 
 if __name__ == "__main__":
-    # Test and initialize user storage
     print("=" * 80)
     print("OMEGA USER STORAGE - ADMIN SETUP")
     print("=" * 80)
@@ -199,13 +189,11 @@ if __name__ == "__main__":
     
     storage = get_user_storage()
     
-    # Ensure admin exists
     print("Ensuring admin user exists...")
     storage.ensure_admin_exists()
     print("✅ Admin user configured")
     print()
     
-    # List users
     print("Stored users:")
     users = storage.list_users()
     for username, data in users.items():

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Context Summarization
 ============================
@@ -11,7 +10,6 @@ from typing import List, Dict, Optional, Any
 import json
 from datetime import datetime
 
-# Try to import LangChain
 try:
     from langchain.memory import ConversationSummaryMemory
     from langchain.llms.base import LLM
@@ -29,7 +27,6 @@ class ContextSummarizer:
         self.summary_file = summary_file or (self.base_dir / "conversation_summaries.json")
         self.memory = None
         
-        # Initialize LangChain memory if available
         if LANGCHAIN_AVAILABLE:
             try:
                 self.memory = ConversationSummaryMemory(
@@ -57,9 +54,7 @@ class ContextSummarizer:
         if not conversation_turns:
             return ""
         
-        # Simple extractive summarization: take first and last turns
         if len(conversation_turns) <= 2:
-            # Short conversation, return as-is
             summary_parts = []
             for turn in conversation_turns:
                 if turn.get("user"):
@@ -68,15 +63,12 @@ class ContextSummarizer:
                     summary_parts.append(f"Assistant: {turn['assistant']}")
             return " ".join(summary_parts)
         
-        # Long conversation: summarize key points
         summary_parts = []
         
-        # Include first turn
         first_turn = conversation_turns[0]
         if first_turn.get("user"):
             summary_parts.append(f"User started: {first_turn['user'][:100]}")
         
-        # Include middle turns (every Nth turn)
         if len(conversation_turns) > 4:
             step = len(conversation_turns) // 3
             for i in range(step, len(conversation_turns) - step, step):
@@ -84,14 +76,12 @@ class ContextSummarizer:
                 if turn.get("user"):
                     summary_parts.append(f"User: {turn['user'][:50]}...")
         
-        # Include last turn
         last_turn = conversation_turns[-1]
         if last_turn.get("user"):
             summary_parts.append(f"User recently: {last_turn['user'][:100]}")
         
         summary = " | ".join(summary_parts)
         
-        # Truncate if too long
         if len(summary) > max_length:
             summary = summary[:max_length] + "..."
         
@@ -114,7 +104,6 @@ class ContextSummarizer:
         if len(conversation_turns) <= max_turns:
             return conversation_turns
         
-        # Keep first turn and last (max_turns - 1) turns
         truncated = [conversation_turns[0]] + conversation_turns[-(max_turns - 1):]
         return truncated
     
@@ -131,16 +120,13 @@ class ContextSummarizer:
         if len(conversation_turns) <= self.max_turns:
             return "", conversation_turns
         
-        # Summarize older turns
         older_turns = conversation_turns[:-self.max_turns]
         summary = self.summarize_context(older_turns)
         
-        # Keep recent turns
         recent_turns = conversation_turns[-self.max_turns:]
         
         return summary, recent_turns
 
-# Global context summarizer instance
 _context_summarizer = None
 
 def get_context_summarizer(max_turns: int = 10) -> ContextSummarizer:

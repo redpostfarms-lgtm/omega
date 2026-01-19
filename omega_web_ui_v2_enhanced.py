@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Enhanced Web UI v2 - With Full Integration
 - 3-bar KITT voice box (AUTHENTIC Season 2-4 Knight Rider design - 600x250px)
@@ -20,7 +19,6 @@ app.config['SECRET_KEY'] = 'omega-secret-2026'
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Import Omega systems
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
@@ -119,7 +117,6 @@ html_content = '''
         }
 
         /* Chat Panel */
-        #chat-messages {
             height: calc(100% - 100px);
             overflow-y: auto;
             margin-bottom: 15px;
@@ -172,7 +169,6 @@ html_content = '''
         }
 
         /* Console */
-        #console {
             height: 100%;
             overflow-y: auto;
             font-size: 0.9em;
@@ -257,7 +253,6 @@ html_content = '''
         }
         
         /* Center bar is taller (authentic KITT design) */
-        #voice-bar-center {
             height: 60px;
         }
 
@@ -827,10 +822,8 @@ def omega_conversation():
         user_message = data.get('message', '')
         history = data.get('history', [])
         
-        # Simple conversational response (can integrate full brain later)
         response = f"I understand: '{user_message}'. My full knowledge systems are integrating. I'm analyzing your request within the context of our conversation history."
         
-        # Add knowledge base context
         if 'knowledge' in user_message.lower() or 'know' in user_message.lower():
             response += " I have access to The Gatekeeper's complete knowledge repository."
         

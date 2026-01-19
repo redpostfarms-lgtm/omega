@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega API Wrapper for Visual Studio Application
 ================================================
@@ -11,7 +10,6 @@ from pathlib import Path
 from typing import Dict, List, Any
 import json
 
-# Add current directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
@@ -97,7 +95,6 @@ class OmegaAPI:
         self.panel._update_integrated_systems()
         self.panel._scan_process_improvements()
 
-# Create global instance for easy access
 _omega_api_instance = None
 
 def get_omega_api() -> OmegaAPI:
@@ -108,7 +105,6 @@ def get_omega_api() -> OmegaAPI:
     return _omega_api_instance
 
 if __name__ == "__main__":
-    # Test the API
     try:
         api = OmegaAPI()
         print("Omega API initialized successfully!")

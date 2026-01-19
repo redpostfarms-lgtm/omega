@@ -1,0 +1,212 @@
+"""
+Omega Auto-Integration Monitor
+Automatically detects new package installations and integrates them
+Runs continuously to monitor for new software
+"""
+
+import os
+import sys
+import json
+import time
+import subprocess
+from pathlib import Path
+from typing import Dict, List, Set
+from datetime import datetime
+import importlib.metadata
+
+# Import the smart integrator
+from omega_smart_integrator import OmegaSmartIntegrator
+
+
+class PackageMonitor:
+    """Monitors for new package installations"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.known_packages_file = self.project_root / "omega_known_packages.json"
+        self.integrator = OmegaSmartIntegrator()
+        self.known_packages = self._load_known_packages()
+        
+    def _load_known_packages(self) -> Set[str]:
+        """Load list of already-known packages"""
+        if self.known_packages_file.exists():
+            with open(self.known_packages_file, 'r') as f:
+                data = json.load(f)
+                return set(data.get('packages', []))
+        return set()
+    
+    def _save_known_packages(self):
+        """Save updated list of known packages"""
+        data = {
+            'packages': sorted(list(self.known_packages)),
+            'last_updated': datetime.now().isoformat(),
+            'total_count': len(self.known_packages)
+        }
+        with open(self.known_packages_file, 'w') as f:
+            json.dump(data, f, indent=2)
+    
+    def get_installed_packages(self) -> Set[str]:
+        """Get all currently installed packages"""
+        packages = set()
+        for dist in importlib.metadata.distributions():
+            packages.add(dist.metadata['Name'])
+        return packages
+    
+    def detect_new_packages(self) -> List[str]:
+        """Detect newly installed packages"""
+        current_packages = self.get_installed_packages()
+        new_packages = current_packages - self.known_packages
+        
+        if new_packages:
+            print(f"\n[+] Detected {len(new_packages)} new package(s):")
+            for pkg in sorted(new_packages):
+                print(f"    - {pkg}")
+        
+        return list(new_packages)
+    
+    def auto_integrate_new_packages(self):
+        """Automatically integrate newly detected packages"""
+        new_packages = self.detect_new_packages()
+        
+        if not new_packages:
+            return []
+        
+        print(f"\n[*] Auto-integrating {len(new_packages)} new package(s)...")
+        
+        results = []
+        for package in new_packages:
+            try:
+                print(f"\n{'='*70}")
+                print(f"[*] Auto-integrating: {package}")
+                print('='*70)
+                
+                result = self.integrator.analyze_and_integrate_package(package)
+                results.append(result)
+                
+                # Add to known packages
+                self.known_packages.add(package)
+                
+            except Exception as e:
+                print(f"[!] Error integrating {package}: {e}")
+        
+        # Save updated known packages
+        self._save_known_packages()
+        
+        return results
+    
+    def run_continuous_monitor(self, check_interval: int = 300):
+        """Run continuous monitoring for new packages"""
+        print("\n[*] Omega Auto-Integration Monitor Started")
+        print(f"[*] Check interval: {check_interval} seconds")
+        print(f"[*] Known packages: {len(self.known_packages)}")
+        print("[*] Monitoring for new installations...")
+        
+        try:
+            while True:
+                # Check for new packages
+                results = self.auto_integrate_new_packages()
+                
+                if results:
+                    print(f"\n[+] Integrated {len(results)} new package(s)")
+                
+                # Wait before next check
+                print(f"\n[*] Next check in {check_interval} seconds...")
+                time.sleep(check_interval)
+                
+        except KeyboardInterrupt:
+            print("\n\n[*] Monitor stopped by user")
+    
+    def initialize_known_packages(self):
+        """Initialize known packages list with current installations"""
+        print("[*] Initializing known packages list...")
+        
+        current_packages = self.get_installed_packages()
+        self.known_packages = current_packages
+        self._save_known_packages()
+        
+        print(f"[+] Initialized with {len(self.known_packages)} packages")
+
+
+class AutoIntegrationConfig:
+    """Configuration for auto-integration behavior"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.config_file = self.project_root / "omega_auto_integration_config.json"
+        self.config = self._load_config()
+    
+    def _load_config(self) -> Dict:
+        """Load configuration"""
+        if self.config_file.exists():
+            with open(self.config_file, 'r') as f:
+                return json.load(f)
+        
+        # Default configuration
+        return {
+            'enabled': True,
+            'check_interval': 300,  # 5 minutes
+            'auto_optimize': True,
+            'remove_bloat': True,
+            'remove_home_paths': True,
+            'skip_packages': [
+                'pip', 'setuptools', 'wheel',  # Core tools
+                'Windows-curses',  # Windows-specific
+            ],
+            'priority_packages': [
+                'numpy', 'pandas', 'scikit-learn',  # Data science
+                'requests', 'aiohttp', 'httpx',  # HTTP
+                'fastapi', 'flask', 'django',  # Web frameworks
+                'pytorch', 'tensorflow',  # ML
+            ]
+        }
+    
+    def save_config(self):
+        """Save configuration"""
+        with open(self.config_file, 'w') as f:
+            json.dump(self.config, f, indent=2)
+    
+    def should_integrate(self, package_name: str) -> bool:
+        """Check if package should be auto-integrated"""
+        if package_name in self.config['skip_packages']:
+            return False
+        return True
+    
+    def is_priority_package(self, package_name: str) -> bool:
+        """Check if package is high priority"""
+        return package_name in self.config['priority_packages']
+
+
+def main():
+    """Main execution"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Omega Auto-Integration Monitor')
+    parser.add_argument('--monitor', action='store_true', help='Run continuous monitoring')
+    parser.add_argument('--check-now', action='store_true', help='Check for new packages once')
+    parser.add_argument('--initialize', action='store_true', help='Initialize known packages list')
+    parser.add_argument('--interval', type=int, default=300, help='Check interval in seconds')
+    
+    args = parser.parse_args()
+    
+    monitor = PackageMonitor()
+    
+    if args.initialize:
+        monitor.initialize_known_packages()
+    
+    elif args.check_now:
+        monitor.auto_integrate_new_packages()
+    
+    elif args.monitor:
+        monitor.run_continuous_monitor(check_interval=args.interval)
+    
+    else:
+        print("\n[*] Omega Auto-Integration Monitor")
+        print("\nUsage:")
+        print("  python omega_auto_integration_monitor.py --initialize")
+        print("  python omega_auto_integration_monitor.py --check-now")
+        print("  python omega_auto_integration_monitor.py --monitor")
+        print("  python omega_auto_integration_monitor.py --monitor --interval 600")
+
+
+if __name__ == '__main__':
+    main()

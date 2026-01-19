@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Control Panel Buttons
 ============================
@@ -26,12 +25,10 @@ class ControlPanelButtons:
         self.buttons = {}
         self.callbacks = {}
         
-        # Button states
         self.push_to_talk_active = False
         self.muted = False
         self.volume_level = 0.8  # 0.0 to 1.0
         
-        # Callbacks (set externally)
         self.on_push_to_talk = None
         self.on_enter = None
         self.on_mute_toggle = None
@@ -125,14 +122,11 @@ class ControlPanelButtons:
         ax_volume.set_facecolor('#E0E0E0')
         ax_volume.axis('off')
         
-        # Volume label
         ax_volume.text(0.5, 0.75, 'Volume', ha='center', va='top', fontsize=9, fontweight='bold')
         
-        # Volume level display
         volume_text = ax_volume.text(0.5, 0.5, f'{int(self.volume_level * 100)}%', 
                                      ha='center', va='center', fontsize=10, fontweight='bold')
         
-        # Volume buttons
         ax_vol_down = self.fig.add_axes([position[0] + 0.02, position[1], 0.06, 0.25])
         button_vol_down = Button(ax_vol_down, '−', color='#9E9E9E', hovercolor='#757575')
         
@@ -169,35 +163,28 @@ class ControlPanelButtons:
         Args:
             base_position_y: Y position for buttons (in axes coordinates)
         """
-        # Calculate positions relative to axes_section
         ax = self.axes_section
         bbox = ax.get_position()
         
-        # Convert to figure coordinates
         fig_width = bbox.width
         fig_height = bbox.height
         fig_x0 = bbox.x0
         fig_y0 = bbox.y0
         
-        # Button dimensions (in figure coordinates)
         button_width = 0.15 * fig_width
         button_height = 0.4 * fig_height
         button_y = fig_y0 + base_position_y * fig_height
         spacing = 0.05 * fig_width
         
-        # Push to Talk button
         x1 = fig_x0 + 0.1 * fig_width
         self.create_push_to_talk_button((x1, button_y, button_width, button_height))
         
-        # Enter button
         x2 = x1 + button_width + spacing
         self.create_enter_button((x2, button_y, button_width * 0.8, button_height))
         
-        # Mute button
         x3 = x2 + button_width * 0.8 + spacing
         self.create_mute_button((x3, button_y, button_width * 0.7, button_height))
         
-        # Volume control
         x4 = x3 + button_width * 0.7 + spacing
         vol_width = min(0.2 * fig_width, fig_x0 + fig_width - x4 - 0.05 * fig_width)
         self.create_volume_control((x4, button_y, vol_width, button_height))

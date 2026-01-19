@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Slang and Terminology Processor
 ====================================
@@ -143,7 +142,6 @@ class SlangProcessor:
     def _load_historical_slang(self) -> Dict[str, Dict]:
         """Load historical slang by period"""
         return {
-            # Medieval
             "huzzah": {
                 "meaning": "Exclamation of joy",
                 "context": SlangContext.HISTORICAL,
@@ -165,7 +163,6 @@ class SlangProcessor:
                 "formality": FormalityLevel.FORMAL,
                 "example": "Prithee, tell me more"
             },
-            # 19th Century
             "bully": {
                 "meaning": "Excellent!",
                 "context": SlangContext.HISTORICAL,
@@ -194,7 +191,6 @@ class SlangProcessor:
                 "formality": FormalityLevel.INFORMAL,
                 "example": "We'd better skedaddle"
             },
-            # 20th Century
             "cool": {
                 "meaning": "Excellent/Approved",
                 "context": SlangContext.HISTORICAL,
@@ -235,7 +231,6 @@ class SlangProcessor:
     def _load_language_arts_slang(self) -> Dict[str, Dict]:
         """Load language arts slang and terminology"""
         return {
-            # Literary terms
             "metaphor": {
                 "meaning": "Implied comparison",
                 "context": SlangContext.LANGUAGE_ARTS,
@@ -260,7 +255,6 @@ class SlangProcessor:
                 "formality": FormalityLevel.INFORMAL,
                 "example": "This character is a Gary Stu"
             },
-            # Fanfiction terms
             "canon": {
                 "meaning": "Official material",
                 "context": SlangContext.LANGUAGE_ARTS,
@@ -297,7 +291,6 @@ class SlangProcessor:
                 "formality": FormalityLevel.INFORMAL,
                 "example": "This is pure fluff"
             },
-            # Writing terms
             "wip": {
                 "meaning": "Work In Progress",
                 "context": SlangContext.LANGUAGE_ARTS,
@@ -443,7 +436,6 @@ class SlangProcessor:
         detected = []
         text_lower = text.lower()
         
-        # Check all slang dictionaries
         all_slang = {
             **self.coding_slang,
             **self.historical_slang,
@@ -452,7 +444,6 @@ class SlangProcessor:
         }
         
         for term, info in all_slang.items():
-            # Simple word boundary matching
             pattern = r'\b' + re.escape(term) + r'\b'
             if re.search(pattern, text_lower, re.IGNORECASE):
                 detected.append((term, info))
@@ -463,7 +454,6 @@ class SlangProcessor:
         """Get meaning of a slang term"""
         term_lower = term.lower()
         
-        # Search in specific context if provided
         if context == SlangContext.CODING:
             return self.coding_slang.get(term_lower)
         elif context == SlangContext.HISTORICAL:
@@ -473,7 +463,6 @@ class SlangProcessor:
         elif context == SlangContext.INTERNET:
             return self.internet_slang.get(term_lower)
         
-        # Search all contexts
         all_slang = {
             **self.coding_slang,
             **self.historical_slang,
@@ -494,7 +483,6 @@ class SlangProcessor:
         if not term_formality:
             return True  # Assume appropriate if no formality specified
         
-        # Formality hierarchy
         formality_order = [
             FormalityLevel.VERY_FORMAL,
             FormalityLevel.FORMAL,
@@ -506,19 +494,16 @@ class SlangProcessor:
         term_index = formality_order.index(term_formality)
         required_index = formality_order.index(formality_level)
         
-        # Allow same or more informal
         return term_index >= required_index
     
     def suggest_alternatives(self, term: str, target_formality: FormalityLevel) -> List[str]:
         """Suggest more formal/informal alternatives"""
-        # This is a simplified version - could be expanded
         alternatives = []
         meaning = self.get_meaning(term)
         
         if not meaning:
             return alternatives
         
-        # Simple synonym mapping (could be expanded)
         synonym_map = {
             "bug": ["error", "issue", "defect"],
             "cool": ["excellent", "great", "wonderful"],
@@ -554,22 +539,18 @@ class SlangProcessor:
         return explanation
 
 
-# Example usage
 if __name__ == "__main__":
     processor = SlangProcessor()
     
-    # Test detection
     text = "There's a bug in the code, we need to debug it. LGTM, ship it!"
     detected = processor.detect_slang(text)
     print("Detected slang:")
     for term, info in detected:
         print(f"  - {term}: {info['meaning']}")
     
-    # Test explanation
     print("\nExplanation of 'bug':")
     print(processor.explain_slang("bug"))
     
-    # Test appropriateness
     print("\nIs 'bug' appropriate for formal context?")
     print(processor.is_appropriate("bug", FormalityLevel.FORMAL, SlangContext.CODING))
     

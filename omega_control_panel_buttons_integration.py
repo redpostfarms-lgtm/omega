@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Control Panel Buttons Integration Helper
 =========================================
@@ -17,7 +16,6 @@ def create_buttons_in_control_panel(control_panel):
     
     fig = control_panel.fig
     
-    # Push to Talk button in yellow section (bottom left)
     ax_yellow = control_panel.ax_yellow
     bbox_yellow = ax_yellow.get_position()
     ax_ptt = fig.add_axes([bbox_yellow.x0 + 0.1 * bbox_yellow.width, 
@@ -25,7 +23,6 @@ def create_buttons_in_control_panel(control_panel):
                            0.35 * bbox_yellow.width, 0.35 * bbox_yellow.height])
     button_ptt = Button(ax_ptt, 'Push to\nTalk', color='#4CAF50', hovercolor='#45a049')
     
-    # Enter button in blue section (bottom middle)
     ax_blue = control_panel.ax_blue
     bbox_blue = ax_blue.get_position()
     ax_enter = fig.add_axes([bbox_blue.x0 + 0.25 * bbox_blue.width,
@@ -33,7 +30,6 @@ def create_buttons_in_control_panel(control_panel):
                              0.5 * bbox_blue.width, 0.35 * bbox_blue.height])
     button_enter = Button(ax_enter, 'Enter', color='#2196F3', hovercolor='#1976D2')
     
-    # Mute button in orange section (bottom right)
     ax_orange = control_panel.ax_orange
     bbox_orange = ax_orange.get_position()
     ax_mute = fig.add_axes([bbox_orange.x0 + 0.1 * bbox_orange.width,
@@ -41,7 +37,6 @@ def create_buttons_in_control_panel(control_panel):
                             0.35 * bbox_orange.width, 0.35 * bbox_orange.height])
     button_mute = Button(ax_mute, 'Mute', color='#FF9800', hovercolor='#F57C00')
     
-    # Volume control in orange section (next to mute)
     ax_vol_label = fig.add_axes([bbox_orange.x0 + 0.5 * bbox_orange.width,
                                  bbox_orange.y0 + 0.15 * bbox_orange.height,
                                  0.15 * bbox_orange.width, 0.15 * bbox_orange.height])
@@ -58,19 +53,16 @@ def create_buttons_in_control_panel(control_panel):
                               0.12 * bbox_orange.width, 0.25 * bbox_orange.height])
     button_vol_up = Button(ax_vol_up, '+', color='#9E9E9E', hovercolor='#757575')
     
-    # Store buttons
     control_panel.button_ptt = button_ptt
     control_panel.button_enter = button_enter
     control_panel.button_mute = button_mute
     control_panel.button_vol_down = button_vol_down
     control_panel.button_vol_up = button_vol_up
     
-    # Button states
     control_panel.push_to_talk_active = False
     control_panel.muted = False
     control_panel.volume_level = 0.8
     
-    # Set up callbacks
     def on_ptt_press(event):
         control_panel.push_to_talk_active = True
         button_ptt.color = '#66BB6A'
@@ -82,7 +74,6 @@ def create_buttons_in_control_panel(control_panel):
         fig.canvas.draw()
     
     def on_enter_click(event):
-        # Enter button action
         pass
     
     def on_mute_click(event):
@@ -103,7 +94,6 @@ def create_buttons_in_control_panel(control_panel):
         control_panel.volume_level = min(1.0, control_panel.volume_level + 0.1)
         fig.canvas.draw()
     
-    # Connect callbacks
     button_ptt.on_clicked(lambda event: None)
     button_ptt.on_pressed = on_ptt_press
     button_ptt.on_released = on_ptt_release

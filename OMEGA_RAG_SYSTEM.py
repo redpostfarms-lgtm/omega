@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega RAG System
 ================
@@ -11,7 +10,6 @@ from typing import Dict, List, Any, Optional, Tuple
 import json
 from datetime import datetime
 
-# Try to import vector database libraries
 try:
     import numpy as np
     from sklearn.feature_extraction.text import TfidfVectorizer
@@ -67,7 +65,6 @@ class SimpleRAGSystem:
     def load_knowledge_base(self):
         """Load knowledge base from file"""
         if not self.knowledge_base_path.exists():
-            # Create empty knowledge base
             self.documents = []
             self._save_knowledge_base()
             return
@@ -116,7 +113,6 @@ class SimpleRAGSystem:
         texts = [doc['text'] for doc in self.documents]
         
         if self.use_embeddings and self.embeddings_model:
-            # Use embeddings
             try:
                 self.document_embeddings = self.embeddings_model.encode(texts)
                 print(f"[RAG] Indexed {len(texts)} documents with embeddings")
@@ -126,7 +122,6 @@ class SimpleRAGSystem:
                 self._initialize_tfidf()
                 self._index_documents()
         elif self.vectorizer and VECTOR_DB_AVAILABLE:
-            # Use TF-IDF
             try:
                 self.vectorizer.fit(texts)
                 print(f"[RAG] Indexed {len(texts)} documents with TF-IDF")
@@ -140,7 +135,6 @@ class SimpleRAGSystem:
         
         try:
             if self.use_embeddings and self.embeddings_model and len(self.document_embeddings) > 0:
-                # Use embeddings for retrieval
                 query_embedding = self.embeddings_model.encode([query])
                 similarities = cosine_similarity(query_embedding, self.document_embeddings)[0]
                 top_indices = np.argsort(similarities)[-top_k:][::-1]
@@ -153,7 +147,6 @@ class SimpleRAGSystem:
                     })
                 return results
             elif self.vectorizer and VECTOR_DB_AVAILABLE:
-                # Use TF-IDF for retrieval
                 texts = [doc['text'] for doc in self.documents]
                 query_vector = self.vectorizer.transform([query])
                 doc_vectors = self.vectorizer.transform(texts)

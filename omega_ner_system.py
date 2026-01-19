@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Named Entity Recognition and Slot Filling
 ================================================
@@ -12,7 +11,6 @@ from typing import Dict, List, Optional, Tuple, Any
 import json
 from datetime import datetime
 
-# Try to import spaCy
 try:
     import spacy
     SPACY_AVAILABLE = True
@@ -30,7 +28,6 @@ class NERSystem:
         self.nlp = None
         self.slot_definitions = {}
         
-        # Initialize spaCy
         if SPACY_AVAILABLE:
             try:
                 self.nlp = spacy.load("en_core_web_sm")
@@ -41,13 +38,11 @@ class NERSystem:
             except Exception as e:
                 print(f"[NER] Error loading spaCy model: {e}")
         
-        # Load slot definitions
         self.load_slot_definitions()
     
     def load_slot_definitions(self):
         """Load slot definitions"""
         if not self.slot_file.exists():
-            # Create default slot definitions
             self.slot_definitions = {
                 "time": {
                     "description": "Time specification",
@@ -128,7 +123,6 @@ class NERSystem:
         """
         entities = {}
         
-        # Use spaCy if available
         if self.nlp:
             try:
                 doc = self.nlp(text)
@@ -137,7 +131,6 @@ class NERSystem:
                     entity_text = ent.text
                     entity_span = (ent.start_char, ent.end_char)
                     
-                    # Map spaCy labels to our slot types
                     slot_type = self._map_spacy_label(entity_type)
                     if slot_type:
                         if slot_type not in entities:
@@ -151,7 +144,6 @@ class NERSystem:
             except Exception as e:
                 print(f"[NER] Error extracting entities with spaCy: {e}")
         
-        # Fallback: regex patterns
         if not entities:
             entities = self._regex_based_extraction(text)
         
@@ -198,14 +190,11 @@ class NERSystem:
         """
         entities = self.extract_entities(text)
         
-        # Convert to slot format
         slots = {}
         for slot_type, entity_list in entities.items():
             if entity_list:
-                # Use first entity found
                 slots[slot_type] = entity_list[0]["text"]
         
-        # Check for required slots
         if required_slots:
             for slot_type in required_slots:
                 if slot_type not in slots:
@@ -213,7 +202,6 @@ class NERSystem:
         
         return slots
 
-# Global NER system instance
 _ner_system = None
 
 def get_ner_system() -> NERSystem:

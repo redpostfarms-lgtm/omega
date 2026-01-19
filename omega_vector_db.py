@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Vector Database Integration
 ==================================
@@ -12,7 +11,6 @@ import json
 from datetime import datetime
 import numpy as np
 
-# Try to import vector databases
 try:
     import chromadb
     from chromadb.config import Settings
@@ -28,7 +26,6 @@ except ImportError:
     FAISS_AVAILABLE = False
     print("[Vector DB] FAISS not available. Install with: pip install faiss-cpu")
 
-# Try to import embeddings
 try:
     from sentence_transformers import SentenceTransformer
     EMBEDDINGS_AVAILABLE = True
@@ -51,7 +48,6 @@ class VectorDatabase:
         self.faiss_index = None
         self.faiss_metadata = []
         
-        # Initialize embeddings
         if EMBEDDINGS_AVAILABLE:
             try:
                 self.embeddings_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -59,7 +55,6 @@ class VectorDatabase:
             except Exception as e:
                 print(f"[Vector DB] Embeddings initialization failed: {e}")
         
-        # Initialize vector database
         if db_type == "chromadb" and CHROMADB_AVAILABLE:
             self._initialize_chromadb()
         elif db_type == "faiss" and FAISS_AVAILABLE:
@@ -86,7 +81,6 @@ class VectorDatabase:
     def _initialize_faiss(self):
         """Initialize FAISS"""
         try:
-            # FAISS index will be created when first document is added
             self.faiss_index = None
             self.faiss_metadata = []
             print("[Vector DB] FAISS initialized (will create index on first add)")
@@ -107,17 +101,13 @@ class VectorDatabase:
             return
         
         try:
-            # Generate embedding
             embedding = self.embeddings_model.encode(text).tolist()
             
-            # Generate document ID if not provided
             if not doc_id:
                 import hashlib
                 doc_id = hashlib.md5(text.encode()).hexdigest()[:16]
             
-            # Add to vector database
             if self.chroma_collection:
-                # ChromaDB
                 self.chroma_collection.add(
                     embeddings=[embedding],
                     documents=[text],
@@ -125,7 +115,6 @@ class VectorDatabase:
                     metadatas=[metadata or {}]
                 )
             elif self.faiss_index is not None:
-                # FAISS
                 embedding_array = np.array([embedding], dtype='float32')
                 self.faiss_index.add(embedding_array)
                 self.faiss_metadata.append({
@@ -134,7 +123,6 @@ class VectorDatabase:
                     "metadata": metadata or {}
                 })
             else:
-                # First document for FAISS - create index
                 if FAISS_AVAILABLE:
                     dimension = len(embedding)
                     self.faiss_index = faiss.IndexFlatL2(dimension)
@@ -165,13 +153,11 @@ class VectorDatabase:
             return []
         
         try:
-            # Generate query embedding
             query_embedding = self.embeddings_model.encode(query).tolist()
             
             results = []
             
             if self.chroma_collection:
-                # ChromaDB search
                 search_results = self.chroma_collection.query(
                     query_embeddings=[query_embedding],
                     n_results=top_k
@@ -185,7 +171,6 @@ class VectorDatabase:
                         "score": 1.0 - search_results['distances'][0][i] if search_results['distances'] else 0.0
                     })
             elif self.faiss_index is not None and len(self.faiss_metadata) > 0:
-                # FAISS search
                 query_array = np.array([query_embedding], dtype='float32')
                 distances, indices = self.faiss_index.search(query_array, top_k)
                 
@@ -209,7 +194,6 @@ class VectorDatabase:
         if self.faiss_index is not None:
             try:
                 faiss.write_index(self.faiss_index, str(self.db_path / "faiss.index"))
-                # Save metadata
                 with open(self.db_path / "faiss_metadata.json", 'w', encoding='utf-8') as f:
                     json.dump(self.faiss_metadata, f, indent=2)
                 print("[Vector DB] FAISS index saved")
@@ -223,7 +207,6 @@ class VectorDatabase:
                 index_path = self.db_path / "faiss.index"
                 if index_path.exists():
                     self.faiss_index = faiss.read_index(str(index_path))
-                    # Load metadata
                     metadata_path = self.db_path / "faiss_metadata.json"
                     if metadata_path.exists():
                         with open(metadata_path, 'r', encoding='utf-8') as f:
@@ -232,7 +215,6 @@ class VectorDatabase:
             except Exception as e:
                 print(f"[Vector DB] Error loading FAISS index: {e}")
 
-# Global vector database instance
 _vector_db = None
 
 def get_vector_db(db_type: str = "chromadb") -> VectorDatabase:
@@ -249,7 +231,6 @@ def main():
     print("=" * 80)
     print()
     
-    # Try ChromaDB first
     if CHROMADB_AVAILABLE:
         db = VectorDatabase(db_type="chromadb")
         print("[OK] Vector database initialized (ChromaDB)")

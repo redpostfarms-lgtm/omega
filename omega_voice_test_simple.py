@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice Quick Test - No TTS Loading
 Just tests voice file availability and plays samples
@@ -72,7 +71,6 @@ def play_audio(file_path):
     print("Press Ctrl+C to stop...\n")
     
     try:
-        # Use Windows Media Player
         subprocess.run(
             ['powershell', '-c', 
              f'(New-Object Media.SoundPlayer "{os.path.abspath(file_path)}").PlaySync()'],
@@ -90,21 +88,18 @@ def play_audio(file_path):
 def main():
     print_header()
     
-    # Check files
     available = check_voice_files()
     
     if not available:
         print(f"{RED}[ERROR] No voice files found!{RESET}\n")
         return
     
-    # Menu
     print(f"{BOLD}Available Options:{RESET}")
     files = list(available.keys())
     for i, (file, desc) in enumerate(available.items(), 1):
         print(f"  {i}. Play {desc} ({file})")
     print(f"  Q. Quit\n")
     
-    # Interactive loop
     while True:
         try:
             choice = input(f"{GREEN}Select option (1-{len(files)}/Q):{RESET} ").strip().upper()

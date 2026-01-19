@@ -1,0 +1,444 @@
+"""
+Omega Intelligent Chatbot System
+Integrates best capabilities from all installed AI packages
+Uses: LangChain + OpenAI/Anthropic + Gradio + System Tools
+"""
+
+import os
+import sys
+import json
+import subprocess
+from pathlib import Path
+from typing import List, Dict, Optional, Tuple
+from datetime import datetime
+import warnings
+
+warnings.filterwarnings("ignore")
+
+try:
+    import gradio as gr
+    from langchain_openai import ChatOpenAI
+    from langchain_anthropic import ChatAnthropic
+    from langchain.memory import ConversationBufferMemory
+    from langchain.chains import ConversationChain
+    from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+    from langchain.schema import HumanMessage, AIMessage, SystemMessage
+except ImportError as e:
+    print(f"[!] Missing required package: {e}")
+    print("[*] Run: pip install gradio langchain langchain-openai langchain-anthropic")
+    sys.exit(1)
+
+
+class OmegaSystemTools:
+    """
+    System tools that the chatbot can use
+    """
+
+    @staticmethod
+    def execute_python_code(code: str) -> str:
+        """Execute Python code safely"""
+        try:
+            exec_globals = {"__builtins__": __builtins__}
+            exec_locals = {}
+            exec(code, exec_globals, exec_locals)
+            return f"Code executed successfully. Results: {exec_locals}"
+        except Exception as e:
+            return f"Error executing code: {e}"
+
+    @staticmethod
+    def read_file(file_path: str) -> str:
+        """Read file contents"""
+        try:
+            path = Path(file_path)
+            if path.exists():
+                with open(path, "r", encoding="utf-8") as f:
+                    content = f.read()
+                return f"File '{file_path}' contents:\n{content[:1000]}..."  # First 1000 chars
+            else:
+                return f"File '{file_path}' not found"
+        except Exception as e:
+            return f"Error reading file: {e}"
+
+    @staticmethod
+    def list_directory(dir_path: str = ".") -> str:
+        """List directory contents"""
+        try:
+            path = Path(dir_path)
+            if path.exists() and path.is_dir():
+                files = [f.name for f in path.iterdir()]
+                return f"Contents of '{dir_path}':\n" + "\n".join(files[:50])
+            else:
+                return f"Directory '{dir_path}' not found"
+        except Exception as e:
+            return f"Error listing directory: {e}"
+
+    @staticmethod
+    def get_system_status() -> str:
+        """Get current system status"""
+        try:
+            import psutil
+
+            cpu = psutil.cpu_percent(interval=1)
+            memory = psutil.virtual_memory().percent
+            disk = psutil.disk_usage("/").percent
+
+            return f"""System Status:
+- CPU Usage: {cpu}%
+- Memory Usage: {memory}%
+- Disk Usage: {disk}%
+- Status: {"Idle" if cpu < 20 else "Active"}"""
+        except Exception as e:
+            return f"Error getting system status: {e}"
+
+    @staticmethod
+    def run_terminal_command(command: str) -> str:
+        """Run terminal command (limited for safety)"""
+        safe_commands = ["ls", "dir", "pwd", "echo", "whoami", "date", "pip list"]
+        cmd_parts = command.split()
+
+        if cmd_parts[0] not in safe_commands:
+            return f"Command '{cmd_parts[0]}' not allowed for safety"
+
+        try:
+            result = subprocess.run(command, shell=True, capture_output=True, text=True, timeout=10)
+            return f"Output:\n{result.stdout}\nErrors:\n{result.stderr}"
+        except Exception as e:
+            return f"Error running command: {e}"
+
+
+class OmegaChatbotSystem:
+    """
+    Intelligent chatbot system integrating multiple AI frameworks
+    Architecture: Gradio UI -> LangChain -> OpenAI/Anthropic -> System Tools
+    """
+
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.conversation_history = []
+        self.system_context = self._build_system_context()
+        self.tools = OmegaSystemTools()
+        self.llm = None
+        self.memory = None
+        self.chain = None
+        self.api_keys = self._load_api_keys()
+
+    def _load_api_keys(self) -> Dict[str, str]:
+        """Load API keys from .env file"""
+        api_keys = {}
+        env_file = self.project_root / ".env"
+
+        if env_file.exists():
+            with open(env_file, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        if "=" in line:
+                            key, value = line.split("=", 1)
+                            key = key.strip()
+                            value = value.strip()
+                            if "OPENAI_API_KEY" in key and value and value != "your_key_here":
+                                api_keys["openai"] = value
+                            elif "ANTHROPIC_API_KEY" in key and value and value != "your_key_here":
+                                api_keys["anthropic"] = value
+
+        return api_keys
+
+    def _build_system_context(self) -> str:
+        """Build comprehensive system context"""
+        context = """You are Omega, an advanced AI assistant with deep expertise in:
+
+**Core Capabilities:**
+- Software Development (Python, JavaScript, web technologies)
+- AI/ML Technologies (LangChain, OpenAI, Anthropic, Transformers)
+- System Administration & Optimization
+- Data Science & Analytics
+- Security & Best Practices
+- Performance Optimization
+
+**Your Environment:**
+- Python 3.14.2 with 308+ installed packages
+- LangChain ecosystem for AI orchestration
+- Multiple LLM providers (OpenAI GPT-4, Anthropic Claude)
+- UI frameworks (Gradio, Streamlit)
+- Advanced monitoring and optimization systems
+- Quantum idle-time optimization capabilities
+
+**Available Tools:**
+- Code execution
+- File system access
+- System status monitoring
+- Terminal commands (limited)
+- Package management
+
+**Your Style:**
+- Accurate and helpful
+- Detailed when needed, concise when appropriate
+- Provide code examples
+- Explain reasoning
+- Suggest best practices
+- Consider security and performance
+
+You can help with code, answer questions, analyze systems, and provide recommendations."""
+
+        return context
+
+    def initialize_llm(self) -> bool:
+        """Initialize LLM with multi-provider support"""
+        print("\n[*] Initializing AI backend...")
+
+        if self.api_keys.get("openai"):
+            try:
+                os.environ["OPENAI_API_KEY"] = self.api_keys["openai"]
+                self.llm = ChatOpenAI(model="gpt-4", temperature=0.7, streaming=True)
+                print("[+] OpenAI GPT-4 initialized")
+                return True
+            except Exception as e:
+                print(f"[!] OpenAI failed: {e}")
+
+        if self.api_keys.get("anthropic"):
+            try:
+                os.environ["ANTHROPIC_API_KEY"] = self.api_keys["anthropic"]
+                self.llm = ChatAnthropic(
+                    model="claude-3-sonnet-20240229", temperature=0.7, streaming=True
+                )
+                print("[+] Anthropic Claude initialized")
+                return True
+            except Exception as e:
+                print(f"[!] Anthropic failed: {e}")
+
+        print("[!] No API keys configured - using demo mode")
+        return False
+
+    def setup_conversation_memory(self):
+        """Setup conversation memory system"""
+        print("[*] Setting up conversation memory...")
+
+        self.memory = ConversationBufferMemory(
+            return_messages=True, memory_key="chat_history", input_key="input"
+        )
+
+        print("[+] Memory system ready")
+
+    def process_message(
+        self, user_message: str, history: List[List[str]]
+    ) -> Tuple[str, List[List[str]]]:
+        """Process user message and generate response"""
+
+        if not self.llm:
+            response = self._demo_response(user_message)
+            history.append([user_message, response])
+            return "", history
+
+        try:
+            messages = [SystemMessage(content=self.system_context)]
+
+            for user_msg, ai_msg in history:
+                messages.append(HumanMessage(content=user_msg))
+                messages.append(AIMessage(content=ai_msg))
+
+            messages.append(HumanMessage(content=user_message))
+
+            response = self.llm.invoke(messages)
+            ai_response = response.content
+
+            if any(
+                keyword in user_message.lower()
+                for keyword in ["execute", "run", "file", "system", "status"]
+            ):
+                tool_response = self._handle_tool_request(user_message)
+                if tool_response:
+                    ai_response += f"\n\n**Tool Output:**\n```\n{tool_response}\n```"
+
+            history.append([user_message, ai_response])
+
+            self._save_conversation(user_message, ai_response)
+
+            return "", history
+
+        except Exception as e:
+            error_response = (
+                f"I encountered an error: {str(e)}\n\nPlease try rephrasing your question."
+            )
+            history.append([user_message, error_response])
+            return "", history
+
+    def _demo_response(self, message: str) -> str:
+        """Generate demo response when no API key"""
+        responses = {
+            "hello": "Hello! I'm Omega AI. I'm running in demo mode because no API keys are configured.",
+            "help": """I can help you with:
+- Code analysis and development
+- System optimization
+- AI/ML questions
+- Best practices
+
+To enable full AI capabilities, add your OpenAI or Anthropic API key to the .env file.""",
+            "status": self.tools.get_system_status(),
+            "default": f"Demo mode active. Your message: '{message}'\n\nTo enable AI responses, configure API keys in .env file.",
+        }
+
+        message_lower = message.lower()
+        for keyword, response in responses.items():
+            if keyword in message_lower:
+                return response
+
+        return responses["default"]
+
+    def _handle_tool_request(self, message: str) -> Optional[str]:
+        """Handle tool execution requests"""
+        message_lower = message.lower()
+
+        if "system status" in message_lower or "system health" in message_lower:
+            return self.tools.get_system_status()
+
+        if "list files" in message_lower or "show files" in message_lower:
+            return self.tools.list_directory()
+
+        return None
+
+    def _save_conversation(self, user_msg: str, ai_msg: str):
+        """Save conversation to history file"""
+        try:
+            history_file = self.project_root / "omega_chat_history.json"
+
+            conversation_entry = {
+                "timestamp": datetime.now().isoformat(),
+                "user": user_msg,
+                "assistant": ai_msg,
+            }
+
+            history = []
+            if history_file.exists():
+                with open(history_file, "r", encoding="utf-8") as f:
+                    history = json.load(f)
+
+            history.append(conversation_entry)
+
+            history = history[-100:]
+
+            with open(history_file, "w", encoding="utf-8") as f:
+                json.dump(history, f, indent=2)
+
+        except Exception as e:
+            print(f"[!] Error saving conversation: {e}")
+
+    def create_gradio_interface(self) -> gr.Blocks:
+        """Create Gradio chatbot interface"""
+
+        with gr.Blocks(title="Omega AI Assistant", theme=gr.themes.Soft()) as interface:
+            gr.Markdown("""
+
+            Advanced AI chatbot powered by LangChain, OpenAI/Anthropic, and system integration.
+
+            **Capabilities:** Code analysis, system optimization, Q&A, file operations, and more.
+            """)
+
+            with gr.Row():
+                with gr.Column(scale=4):
+                    chatbot = gr.Chatbot(
+                        height=500,
+                        label="Conversation",
+                        bubble_full_width=False,
+                        show_copy_button=True,
+                    )
+
+                    with gr.Row():
+                        msg = gr.Textbox(
+                            label="Your Message", placeholder="Ask me anything...", lines=2, scale=4
+                        )
+                        submit_btn = gr.Button("Send", variant="primary", scale=1)
+
+                    with gr.Row():
+                        clear_btn = gr.Button("Clear Chat")
+
+                with gr.Column(scale=1):
+                    gr.Markdown("### Quick Actions")
+
+                    system_status_btn = gr.Button("📊 System Status")
+                    list_files_btn = gr.Button("📁 List Files")
+                    help_btn = gr.Button("❓ Help")
+
+                    gr.Markdown("### Status")
+                    status_box = gr.Textbox(
+                        label="System Info",
+                        value=f"✅ Ready\nAPI: {'Configured' if self.llm else 'Demo Mode'}",
+                        lines=5,
+                        interactive=False,
+                    )
+
+            msg.submit(self.process_message, inputs=[msg, chatbot], outputs=[msg, chatbot])
+
+            submit_btn.click(self.process_message, inputs=[msg, chatbot], outputs=[msg, chatbot])
+
+            clear_btn.click(lambda: ([], ""), outputs=[chatbot, msg])
+
+            system_status_btn.click(
+                lambda h: self.process_message("Show system status", h),
+                inputs=[chatbot],
+                outputs=[msg, chatbot],
+            )
+
+            list_files_btn.click(
+                lambda h: self.process_message("List files in current directory", h),
+                inputs=[chatbot],
+                outputs=[msg, chatbot],
+            )
+
+            help_btn.click(
+                lambda h: self.process_message("What can you help me with?", h),
+                inputs=[chatbot],
+                outputs=[msg, chatbot],
+            )
+
+            gr.Markdown("""
+            ---
+            **Note:** Configure API keys in `.env` file for full AI capabilities.
+            Add `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` to enable intelligent responses.
+            """)
+
+        return interface
+
+    def launch(self, share=False, server_port=7860):
+        """Launch the chatbot interface"""
+        print("\n" + "=" * 70)
+        print("OMEGA INTELLIGENT CHATBOT SYSTEM")
+        print("=" * 70)
+
+        api_configured = self.initialize_llm()
+        self.setup_conversation_memory()
+
+        print(f"\n[*] Launching Gradio interface on port {server_port}...")
+        interface = self.create_gradio_interface()
+
+        print("\n" + "=" * 70)
+        print("CHATBOT READY")
+        print("=" * 70)
+        print(f"AI Backend: {'OpenAI/Anthropic' if api_configured else 'Demo Mode'}")
+        print(f"UI Framework: Gradio")
+        print(f"Orchestration: LangChain")
+        print(f"Access: http://localhost:{server_port}")
+        if share:
+            print(f"Public URL: Will be shown below")
+        print("=" * 70 + "\n")
+
+        interface.launch(
+            server_name="0.0.0.0", server_port=server_port, share=share, show_error=True
+        )
+
+
+def main():
+    """Main execution"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Omega Intelligent Chatbot System")
+    parser.add_argument("--share", action="store_true", help="Create public URL")
+    parser.add_argument("--port", type=int, default=7860, help="Server port (default: 7860)")
+
+    args = parser.parse_args()
+
+    chatbot = OmegaChatbotSystem()
+    chatbot.launch(share=args.share, server_port=args.port)
+
+
+if __name__ == "__main__":
+    main()

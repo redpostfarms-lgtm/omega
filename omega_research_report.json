@@ -1,0 +1,166 @@
+{
+  "timestamp": "2026-01-19T00:25:40.071412",
+  "python_best_practices": [
+    {
+      "category": "AI/ML Development",
+      "recommendations": [
+        "Use langchain-community for extended integrations",
+        "Install langchain-openai for OpenAI integration",
+        "Add langsmith for LangChain debugging",
+        "Use instructor for structured LLM outputs",
+        "Add guidance for constrained generation",
+        "Install vllm for faster LLM inference",
+        "Use llama-index for advanced RAG"
+      ]
+    },
+    {
+      "category": "Data Science",
+      "recommendations": [
+        "Install polars for faster DataFrame operations",
+        "Add seaborn for statistical visualizations",
+        "Use dask for parallel computing",
+        "Install xgboost and lightgbm for ML",
+        "Add optuna for hyperparameter tuning",
+        "Use shap for model interpretability"
+      ]
+    },
+    {
+      "category": "Performance",
+      "recommendations": [
+        "Install uvloop for faster async I/O",
+        "Add orjson for faster JSON parsing",
+        "Use numba for JIT compilation",
+        "Install cython for performance-critical code",
+        "Add multiprocess for better parallelization"
+      ]
+    },
+    {
+      "category": "Development Tools",
+      "recommendations": [
+        "Install rich for beautiful terminal output",
+        "Add typer for CLI applications",
+        "Use loguru for advanced logging",
+        "Install pydantic-settings for config management",
+        "Add watchdog for file system monitoring",
+        "Use pre-commit for git hooks"
+      ]
+    },
+    {
+      "category": "Testing & Quality",
+      "recommendations": [
+        "Install pytest-asyncio for async tests",
+        "Add pytest-cov for coverage reports",
+        "Use hypothesis for property-based testing",
+        "Install locust for load testing",
+        "Add bandit for security scanning"
+      ]
+    },
+    {
+      "category": "Monitoring & Observability",
+      "recommendations": [
+        "Install prometheus-client for metrics",
+        "Add sentry-sdk for error tracking",
+        "Use opentelemetry-api for tracing",
+        "Install psutil for system monitoring",
+        "Add py-spy for profiling"
+      ]
+    }
+  ],
+  "ai_ml_recommendations": [],
+  "performance_tips": [
+    {
+      "area": "Python Runtime",
+      "tips": [
+        "Use PyPy for CPU-intensive tasks",
+        "Enable garbage collection optimization",
+        "Use __slots__ for memory efficiency",
+        "Implement connection pooling",
+        "Use async/await for I/O operations"
+      ]
+    },
+    {
+      "area": "Database",
+      "tips": [
+        "Implement connection pooling",
+        "Use prepared statements",
+        "Add database indexes",
+        "Enable query caching",
+        "Use batch operations"
+      ]
+    },
+    {
+      "area": "AI/ML",
+      "tips": [
+        "Use GPU acceleration with CUDA",
+        "Implement model quantization",
+        "Use batch processing",
+        "Cache embeddings",
+        "Implement streaming for large outputs"
+      ]
+    }
+  ],
+  "security_recommendations": [
+    "Use python-dotenv for environment variables",
+    "Install cryptography for encryption",
+    "Add pyjwt and python-jose for authentication",
+    "Use passlib for password hashing",
+    "Install oauthlib for OAuth implementation",
+    "Add certifi for SSL certificate verification",
+    "Use secrets module for cryptographic randomness",
+    "Install pyotp for two-factor authentication",
+    "Add argon2-cffi for secure password hashing",
+    "Use itsdangerous for signed data"
+  ],
+  "missing_tools": [
+    {
+      "tool": "docker",
+      "description": "Docker CLI",
+      "install_method": "Download Docker Desktop from docker.com"
+    },
+    {
+      "tool": "docker-compose",
+      "description": "Docker Compose",
+      "install_method": "Included with Docker Desktop"
+    },
+    {
+      "tool": "kubectl",
+      "description": "Kubernetes CLI",
+      "install_method": "Install via: choco install kubernetes-cli"
+    },
+    {
+      "tool": "helm",
+      "description": "Kubernetes Package Manager",
+      "install_method": "Install via: choco install kubernetes-helm"
+    },
+    {
+      "tool": "terraform",
+      "description": "Infrastructure as Code",
+      "install_method": "Install via: choco install terraform"
+    },
+    {
+      "tool": "az",
+      "description": "Azure CLI",
+      "install_method": "Install via: winget install Microsoft.AzureCLI"
+    },
+    {
+      "tool": "aws",
+      "description": "AWS CLI",
+      "install_method": "Install via: winget install Amazon.AWSCLI"
+    },
+    {
+      "tool": "gh",
+      "description": "GitHub CLI",
+      "install_method": "Install via: winget install GitHub.cli"
+    },
+    {
+      "tool": "code",
+      "description": "VS Code CLI",
+      "install_method": "Install VS Code from code.visualstudio.com"
+    },
+    {
+      "tool": "npm",
+      "description": "Node Package Manager",
+      "install_method": "Manual installation required"
+    }
+  ]
+}

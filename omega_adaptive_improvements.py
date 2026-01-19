@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Optional But Very Beneficial Improvements for Omega
 import numpy as np
 import json
 from pathlib import Path
@@ -21,12 +19,10 @@ class AdaptiveConfidenceThreshold:
         try:
             audio, sr = librosa.load(audio_file, sr=None, duration=2.0)  # Sample first 2 seconds
             
-            # Calculate metrics
             rms = np.sqrt(np.mean(audio ** 2))
             max_amplitude = np.abs(audio).max()
             zcr = np.mean(np.abs(np.diff(np.sign(audio)))) / 2.0
             
-            # Estimate SNR (rough approximation)
             signal_power = np.mean(audio ** 2)
             noise_estimate = np.percentile(audio ** 2, 10)  # Bottom 10% as noise
             snr_db = 10 * np.log10(signal_power / (noise_estimate + 1e-10)) if noise_estimate > 0 else 20
@@ -49,7 +45,6 @@ class AdaptiveConfidenceThreshold:
         if audio_file:
             metrics = self.calculate_audio_quality(audio_file)
         elif len(self.quality_history) > 0:
-            # Use average of recent history
             metrics = {
                 'snr_db': np.mean([q['snr_db'] for q in self.quality_history]),
                 'rms': np.mean([q['rms'] for q in self.quality_history])
@@ -60,34 +55,23 @@ class AdaptiveConfidenceThreshold:
         snr_db = metrics.get('snr_db', 20)
         rms = metrics.get('rms', 0.3)
         
-        # Adaptive logic:
-        # - High SNR (>30dB): Lower threshold (more lenient, clear audio)
-        # - Medium SNR (20-30dB): Base threshold
-        # - Low SNR (<20dB): Higher threshold (more strict, noisy audio)
-        # - Very low RMS (<0.1): Higher threshold (quiet audio, may be noise)
         
         if snr_db > 30 and rms > 0.15:
-            # Excellent conditions: be more lenient
             threshold = self.base_threshold * 0.75
             reason = f"High SNR ({snr_db:.1f}dB) and good RMS ({rms:.2f})"
         elif snr_db > 25 and rms > 0.12:
-            # Good conditions: slightly more lenient
             threshold = self.base_threshold * 0.9
             reason = f"Good SNR ({snr_db:.1f}dB)"
         elif snr_db < 15 or rms < 0.1:
-            # Poor conditions: be more strict
             threshold = self.base_threshold * 1.4
             reason = f"Low SNR ({snr_db:.1f}dB) or quiet audio (RMS: {rms:.2f})"
         elif snr_db < 20:
-            # Noisy conditions: slightly more strict
             threshold = self.base_threshold * 1.2
             reason = f"Moderate noise (SNR: {snr_db:.1f}dB)"
         else:
-            # Normal conditions: use base threshold
             threshold = self.base_threshold
             reason = f"Normal conditions (SNR: {snr_db:.1f}dB)"
         
-        # Clamp to min/max
         threshold = max(self.min_threshold, min(self.max_threshold, threshold))
         
         if audio_file:  # Only log if we're checking a file
@@ -107,17 +91,14 @@ class AudioQualityAgent:
         try:
             audio, sr = librosa.load(audio_file, sr=None, duration=2.0)
             
-            # Calculate comprehensive metrics
             rms = np.sqrt(np.mean(audio ** 2))
             max_amplitude = np.abs(audio).max()
             zcr = np.mean(np.abs(np.diff(np.sign(audio)))) / 2.0
             
-            # Estimate SNR
             signal_power = np.mean(audio ** 2)
             noise_estimate = np.percentile(audio ** 2, 10)
             snr_db = 10 * np.log10(signal_power / (noise_estimate + 1e-10)) if noise_estimate > 0 else 20
             
-            # Detect clipping
             clipping_ratio = np.sum(np.abs(audio) > 0.95) / len(audio)
             
             metrics = {
@@ -132,7 +113,6 @@ class AudioQualityAgent:
                 'duration': len(audio) / sr
             }
             
-            # Generate feedback
             feedback = []
             quality_score = 100.0
             
@@ -167,7 +147,6 @@ class AudioQualityAgent:
             
             self.quality_log.append(metrics)
             
-            # Keep only last 100 entries
             if len(self.quality_log) > 100:
                 self.quality_log.pop(0)
             
@@ -294,7 +273,6 @@ class PerformanceMonitor:
         print(f"[Performance Monitor] Metrics saved to {metrics_file}")
         return metrics_file
 
-# Global instances (optional improvements)
 adaptive_threshold = AdaptiveConfidenceThreshold()
 audio_quality_agent = AudioQualityAgent()
 performance_monitor = PerformanceMonitor()

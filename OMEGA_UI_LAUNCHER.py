@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega UI Launcher
 =================
@@ -10,20 +9,13 @@ import sys
 import os
 from pathlib import Path
 
-# Add base directory to path
 base_dir = Path(__file__).parent.absolute()
 sys.path.insert(0, str(base_dir))
 
-# Set matplotlib backend before importing
-# Use specific exception handling (ImportError, ValueError) instead of bare except:
-# This allows SystemExit and KeyboardInterrupt to propagate correctly
 try:
     import matplotlib
     matplotlib.use('TkAgg', force=True)
 except (ImportError, ValueError):
-    # ImportError: matplotlib not installed
-    # ValueError: TkAgg backend not available (e.g., no Tkinter)
-    # Continue without setting backend - matplotlib will use its default
     pass
 
 def launch_omega_ui():
@@ -37,7 +29,6 @@ def launch_omega_ui():
         print("Loading cached data for fast startup...")
         print()
         
-        # Import and run control panel
         from omega_control_panel import ControlPanel
         
         panel = ControlPanel()
@@ -50,8 +41,6 @@ def launch_omega_ui():
         print("Press Ctrl+C to exit")
         print()
         
-        # Use the panel's run() method which properly handles the event loop
-        # This keeps the UI open and interactive
         panel.run()
         
     except ImportError as e:

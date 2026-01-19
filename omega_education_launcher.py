@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Educational System Launcher
 """
 Main launcher for Omega's comprehensive educational system.
 Integrates all educational components for 100% proficiency training.
@@ -16,7 +14,6 @@ def main():
     print("=" * 70)
     print()
     
-    # Import educational systems
     try:
         from omega_educational_system import OmegaEducationalSystem
         from omega_hands_on_guide import HandsOnGuide
@@ -30,7 +27,6 @@ def main():
     print("[INITIALIZING] Educational System Components...")
     print()
     
-    # Initialize systems
     print("1. Initializing Educational System...")
     edu_system = OmegaEducationalSystem()
     print("   ✅ Educational modules loaded")
@@ -63,7 +59,6 @@ def main():
             print(f"      Certification: Required")
         print()
     
-    # Generate educational plan
     print("5. Generating Educational Plan...")
     plan = edu_system.generate_educational_plan()
     plan_file = edu_system.save_educational_plan()
@@ -71,7 +66,6 @@ def main():
     print(f"   ✅ Total training hours: {plan['total_hours']}")
     print()
     
-    # Summary
     print("=" * 70)
     print("  EDUCATIONAL SYSTEM READY")
     print("=" * 70)

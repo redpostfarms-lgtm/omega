@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega AI Apps Integration System
 Integrates all installed AI apps to enhance Omega's speech patterns and voice quality
@@ -17,7 +16,6 @@ class OmegaAIAppsIntegration:
         self.config_file = "omega_ai_apps_config.json"
         self.voice_config = "omega_voice/omega_voice_config.json"
         
-        # Detected AI Apps on system
         self.ai_apps = {
             'chatgpt_desktop': {
                 'name': 'OpenAI ChatGPT Desktop',
@@ -131,7 +129,6 @@ class OmegaAIAppsIntegration:
         print("\n[STRATEGY] AI Apps Integration Plan for Omega Speech Enhancement")
         print("=" * 70)
         
-        # Sort by priority
         sorted_apps = sorted(
             [(k, v) for k, v in self.ai_apps.items() if v['status'] == 'installed'],
             key=lambda x: x[1]['priority'],
@@ -149,7 +146,6 @@ class OmegaAIAppsIntegration:
         for app_id, app in sorted_apps:
             capabilities = app['capabilities']
             
-            # Categorize by capability
             if 'voice_synthesis' in capabilities or 'tts' in capabilities:
                 strategy['voice_synthesis'].append(app)
                 print(f"\n[VOICE] {app['name']}")
@@ -260,7 +256,6 @@ class AIAppBridge:
     
     def send_to_chatgpt(self, text, personality_context):
         """Send request to ChatGPT Desktop"""
-        # Use OpenAI API if available
         try:
             import openai
             response = openai.ChatCompletion.create(
@@ -276,7 +271,6 @@ class AIAppBridge:
     
     def send_to_voice_generator(self, text, voice_profile):
         """Send text to AI Voice Generator"""
-        # Create input file
         input_file = Path('ai_apps/voice_gen_input.txt')
         input_file.parent.mkdir(exist_ok=True)
         
@@ -286,7 +280,6 @@ class AIAppBridge:
                 'voice_profile': voice_profile
             }, f)
         
-        # Wait for output
         output_file = Path('ai_apps/voice_gen_output.wav')
         timeout = 30
         start = time.time()
@@ -300,8 +293,6 @@ class AIAppBridge:
     
     def humanize_text(self, text):
         """Send to AI Humanizer"""
-        # Implement humanization logic
-        # This would integrate with the AI Humanizer app
         return text
 '''
         
@@ -348,14 +339,10 @@ class AIAppBridge:
     def create_usage_guide(self):
         """Create guide for using the integration"""
         guide = """
-# Omega AI Apps Integration Guide
 
-## Overview
 This system integrates 9+ installed AI apps to enhance Omega's speech patterns and voice quality.
 
-## How It Works
 
-### 1. Speech Generation Pipeline
 ```
 User Input
   ↓
@@ -370,7 +357,6 @@ AI Voice Generator (synthesize with Omega's voice)
 Audio Output
 ```
 
-### 2. Available AI Apps
 
 **Primary Apps:**
 - **OpenAI ChatGPT Desktop** - Core language model for responses
@@ -385,32 +371,25 @@ Audio Output
 - AZAI ChatBot - Knowledge base
 - AI-fy Studio - Content generation
 
-### 3. Usage
 
 ```python
 from omega_ai_apps_integration import OmegaAIAppsIntegration
 
-# Initialize
 omega_ai = OmegaAIAppsIntegration()
 
-# Check available apps
 omega_ai.check_app_availability()
 
-# Create integration strategy
 strategy = omega_ai.create_integration_strategy()
 
-# Generate speech enhancement pipeline
 pipeline = omega_ai.generate_speech_enhancement_pipeline()
 ```
 
-### 4. Speech Enhancement Process
 
 1. **Generate Response** - Use ChatGPT for natural language
 2. **Humanize** - Process through AI Humanizer
 3. **Add Personality** - Inject Omega characteristics
 4. **Synthesize Voice** - Convert to audio with Omega's voice
 
-### 5. Configuration
 
 Edit `omega_ai_apps_config.json`:
 ```json
@@ -423,14 +402,12 @@ Edit `omega_ai_apps_config.json`:
 }
 ```
 
-### 6. Integration with Existing Omega Systems
 
 This integrates with:
 - `omega_voice_analysis.py` - Voice profiling
 - `omega_dual_voice_blend.py` - Voice blending
 - `omega.py` - Main Omega system
 
-### 7. Next Steps
 
 1. Test each AI app individually
 2. Measure speech quality improvements
@@ -459,22 +436,16 @@ def main():
     
     omega_ai = OmegaAIAppsIntegration()
     
-    # Check what's available
     omega_ai.check_app_availability()
     
-    # Create integration strategy
     strategy = omega_ai.create_integration_strategy()
     
-    # Generate pipeline
     pipeline = omega_ai.generate_speech_enhancement_pipeline()
     
-    # Create communication bridge
     bridge = omega_ai.create_api_bridge_script()
     
-    # Generate config
     config = omega_ai.generate_integration_config()
     
-    # Create guide
     omega_ai.create_usage_guide()
     
     print("\n" + "="*70)

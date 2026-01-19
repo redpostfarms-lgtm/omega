@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Master Dev Build - Phone Hierarchy System
 ================================================
@@ -24,7 +23,6 @@ app.config['SECRET_KEY'] = secrets.token_hex(32)
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Phone hierarchy configuration
 PHONE_HIERARCHY = {
     0: {
         "name": "THRONE",
@@ -67,11 +65,9 @@ PHONE_HIERARCHY = {
     }
 }
 
-# Session management for security
 ACTIVE_SESSIONS = {}
 SESSION_TIMEOUT = timedelta(minutes=10)
 
-# Biometric tracking
 AUTHORIZED_BIOMETRICS = set()
 GUEST_SESSIONS = {}
 
@@ -101,7 +97,6 @@ class PhoneSession:
         self.tutor_grade = grade_level
         self.last_activity = datetime.now()
 
-# ==================== API ENDPOINTS ====================
 
 @app.route('/api/phone/register', methods=['POST'])
 def register_phone():
@@ -113,15 +108,12 @@ def register_phone():
     if phone_id not in PHONE_HIERARCHY:
         return jsonify({'error': 'Invalid phone ID', 'status': 'error'}), 400
     
-    # Create session
     session = PhoneSession(phone_id, biometric_hash)
     ACTIVE_SESSIONS[session.session_id] = session
     
     phone_config = PHONE_HIERARCHY[phone_id]
     
-    # Check if biometric is authorized
     if not session.is_authorized and phone_id == 0:
-        # Throne requires authorization
         return jsonify({
             'status': 'unauthorized',
             'session_id': session.session_id,
@@ -149,11 +141,9 @@ def check_biometric():
     
     session.refresh()
     
-    # Check if authorized
     is_authorized = biometric_hash in AUTHORIZED_BIOMETRICS
     
     if not is_authorized:
-        # Guest detected - offer tutor mode
         return jsonify({
             'status': 'guest_detected',
             'is_authorized': False,
@@ -211,8 +201,6 @@ def homework_ocr():
     
     session.refresh()
     
-    # In production, this would use actual OCR
-    # For now, return mock response
     return jsonify({
         'status': 'success',
         'text_detected': 'Sample math problem: Solve for x: 2x + 5 = 15',
@@ -251,7 +239,6 @@ def download_pwa():
     
     phone_config = PHONE_HIERARCHY[phone_id]
     
-    # Create custom manifest for this phone
     manifest = {
         "name": f"OMEGA {phone_config['name']}",
         "short_name": phone_config['name'],
@@ -260,7 +247,6 @@ def download_pwa():
         "role": phone_config['role']
     }
     
-    # Generate installable bundle
     bundle_data = json.dumps(manifest, indent=2)
     
     return Response(
@@ -276,11 +262,9 @@ def generate_install_qr():
     """Generate QR code for PWA installation with proper URL"""
     phone_id = request.args.get('phone_id', 0, type=int)
     
-    # Get server URL (fixes QR code issue - needs proper host)
     host = request.host
     install_url = f"http://{host}/install?phone_id={phone_id}"
     
-    # Generate QR code with HIGH error correction
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.ERROR_CORRECT_H,
@@ -290,11 +274,9 @@ def generate_install_qr():
     qr.add_data(install_url)
     qr.make(fit=True)
     
-    # Create image with phone color
     phone_color = PHONE_HIERARCHY[phone_id]['color']
     img = qr.make_image(fill_color=phone_color, back_color="#000000")
     
-    # Convert to base64
     buffer = io.BytesIO()
     img.save(buffer, 'PNG')
     buffer.seek(0)
@@ -317,7 +299,6 @@ def wake_hive():
     if biometric_hash not in AUTHORIZED_BIOMETRICS:
         return jsonify({'error': 'Unauthorized', 'status': 'error'}), 403
     
-    # Wake all drones
     for phone_id in range(1, 5):
         socketio.emit('wake_command', {
             'phone_id': phone_id,
@@ -479,13 +460,11 @@ def index():
             background: #00ff00;
             box-shadow: 0 0 20px #0f0;
         }
-        #qr-image {
             border: 5px solid #0f0;
             border-radius: 10px;
             background: white;
             padding: 10px;
         }
-        #qr-url {
             word-break: break-all;
             background: #222;
             padding: 10px;
@@ -626,7 +605,6 @@ if __name__ == '__main__':
     print("=" * 80)
     
     try:
-        # Use regular Flask app.run instead of socketio.run for better compatibility
         app.run(host='127.0.0.1', port=5002, debug=False, use_reloader=False, threaded=True)
     except Exception as e:
         print(f"Error starting server: {e}")

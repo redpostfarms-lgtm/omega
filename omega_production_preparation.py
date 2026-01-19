@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Production Preparation System
 ===================================
@@ -59,7 +58,6 @@ class ProductionPreparator:
         self.analysis_results: List[AnalysisResult] = []
         self.report = ProductionReport()
         
-        # Ignore patterns
         self.ignore_patterns = {
             '__pycache__', '.pyc', '.pyo', '.pyd', '.so',
             'node_modules', '.git', '.venv', 'venv', 'env',
@@ -77,29 +75,24 @@ class ProductionPreparator:
         print(f"Root Directory: {self.root_dir}")
         print()
         
-        # Phase 1: Deep Code Analysis
         print("[PHASE 1] Deep Code Analysis...")
         self.analyze_codebase()
         print(f"  ✅ Analyzed {len(self.analysis_results)} files")
         
-        # Phase 2: Code Optimization
         print("\n[PHASE 2] Code Optimization...")
         optimizations = self.optimize_codebase()
         print(f"  ✅ Applied {len(optimizations)} optimizations")
         
-        # Phase 3: Integration Check
         print("\n[PHASE 3] Integration Verification...")
         integration_status = self.check_integrations()
         self.report.integration_status = integration_status
         print(f"  ✅ Integration check complete")
         
-        # Phase 4: Production Readiness Assessment
         print("\n[PHASE 4] Production Readiness Assessment...")
         readiness = self.assess_production_readiness()
         self.report.production_ready = readiness
         print(f"  ✅ Production ready: {readiness}")
         
-        # Phase 5: Generate Report
         print("\n[PHASE 5] Generating Report...")
         self.generate_report()
         print(f"  ✅ Report generated")
@@ -115,7 +108,6 @@ class ProductionPreparator:
         python_files = list(self.root_dir.rglob("*.py"))
         
         for py_file in python_files:
-            # Skip ignored files
             if any(pattern in str(py_file) for pattern in self.ignore_patterns):
                 continue
             
@@ -135,7 +127,6 @@ class ProductionPreparator:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Parse AST
             try:
                 tree = ast.parse(content, filename=str(file_path))
             except SyntaxError as e:
@@ -147,7 +138,6 @@ class ProductionPreparator:
                 })
                 return result
             
-            # Extract imports
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     for alias in node.names:
@@ -156,17 +146,14 @@ class ProductionPreparator:
                     if node.module:
                         result.imports.append(node.module)
             
-            # Extract functions and classes
             for node in ast.walk(tree):
                 if isinstance(node, ast.FunctionDef):
                     result.functions.append(node.name)
                 elif isinstance(node, ast.ClassDef):
                     result.classes.append(node.name)
             
-            # Check for common issues
             self._check_code_issues(content, tree, result)
             
-            # Calculate complexity and quality
             result.complexity_score = self._calculate_complexity(tree)
             result.quality_score = self._calculate_quality(result)
             
@@ -193,7 +180,6 @@ class ProductionPreparator:
                     "line": i
                 })
         
-        # Check for bare except
         for node in ast.walk(tree):
             if isinstance(node, ast.ExceptHandler):
                 if node.type is None:
@@ -204,7 +190,6 @@ class ProductionPreparator:
                         "line": node.lineno
                     })
         
-        # Check for eval/exec usage
         for node in ast.walk(tree):
             if isinstance(node, ast.Call):
                 if isinstance(node.func, ast.Name):
@@ -216,7 +201,6 @@ class ProductionPreparator:
                             "line": node.lineno
                         })
         
-        # Check for hardcoded credentials (basic)
         if re.search(r'(password|passwd|pwd)\s*=\s*["\'][^"\']+["\']', content, re.IGNORECASE):
             result.issues.append({
                 "type": "security_risk",
@@ -240,7 +224,6 @@ class ProductionPreparator:
         """Calculate code quality score (0-100)"""
         score = 100.0
         
-        # Deduct for issues
         for issue in result.issues:
             if issue["severity"] == "high":
                 score -= 5.0
@@ -249,7 +232,6 @@ class ProductionPreparator:
             else:
                 score -= 0.5
         
-        # Deduct for high complexity
         if result.complexity_score > 50:
             score -= (result.complexity_score - 50) * 0.1
         
@@ -262,12 +244,9 @@ class ProductionPreparator:
         for result in self.analysis_results:
             file_path = Path(result.file_path)
             
-            # Unused imports optimization
             if len(result.imports) > 0:
-                # This would require actual usage analysis
                 pass
             
-            # Complexity reduction suggestions
             if result.complexity_score > 30:
                 optimizations.append({
                     "file": result.file_path,
@@ -276,7 +255,6 @@ class ProductionPreparator:
                     "severity": "medium"
                 })
             
-            # Quality improvement suggestions
             if result.quality_score < 70:
                 optimizations.append({
                     "file": result.file_path,
@@ -301,7 +279,6 @@ class ProductionPreparator:
             "educational_system": False
         }
         
-        # Check for key integration files
         integration_files = {
             "hardware_control": "omega_comprehensive_hardware.py",
             "developer_integrations": "omega_developer_integrations.py",
@@ -328,16 +305,12 @@ class ProductionPreparator:
             if issue.get("severity") == "high"
         )
         
-        # Check integration status
         integrations_ready = sum(
             1 for status in self.report.integration_status.values()
             if status
         )
         
-        # Production ready if:
         # - No critical issues
-        # - At least 70% integrations ready
-        # - Quality score average > 70
         
         avg_quality = sum(r.quality_score for r in self.analysis_results) / max(len(self.analysis_results), 1)
         
@@ -376,7 +349,6 @@ class ProductionPreparator:
         with open(report_file, 'w') as f:
             json.dump(report_data, f, indent=2)
         
-        # Also create markdown report
         md_report = self._generate_markdown_report(report_data)
         md_file = self.report_dir / f"production_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
         with open(md_file, 'w') as f:
@@ -391,14 +363,12 @@ class ProductionPreparator:
 
 **Date:** {report_data['timestamp']}
 
-## Summary
 
 - **Files Analyzed:** {report_data['summary']['files_analyzed']}
 - **Issues Found:** {report_data['summary']['issues_found']}
 - **Optimizations Applied:** {report_data['summary']['optimizations_applied']}
 - **Production Ready:** {'✅ YES' if report_data['summary']['production_ready'] else '❌ NO'}
 
-## Integration Status
 
 """
         for key, status in report_data['integration_status'].items():

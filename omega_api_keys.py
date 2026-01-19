@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega API Keys Manager - Secure API Key Storage
 ===============================================
@@ -21,21 +20,17 @@ class APIKeyManager:
         self.config_file = Path("api_keys_config.json")
         self.master_key_file = Path(".master_key")
         
-        # Initialize encryption
         self._init_encryption()
     
     def _init_encryption(self):
         """Initialize encryption key"""
         if self.master_key_file.exists():
-            # Load existing master key
             with open(self.master_key_file, 'rb') as f:
                 self.master_key = f.read()
         else:
-            # Generate new master key
             self.master_key = Fernet.generate_key()
             with open(self.master_key_file, 'wb') as f:
                 f.write(self.master_key)
-            # Set restrictive permissions (Unix-like systems)
             try:
                 os.chmod(self.master_key_file, 0o600)
             except:
@@ -50,13 +45,10 @@ class APIKeyManager:
     def store_key(self, service: str, api_key: str, description: str = "") -> bool:
         """Store an API key securely"""
         try:
-            # Load existing keys
             keys_data = self._load_keys()
             
-            # Encrypt the API key
             encrypted_key = self.cipher.encrypt(api_key.encode())
             
-            # Store with metadata
             keys_data[service.upper()] = {
                 "encrypted_key": base64.b64encode(encrypted_key).decode(),
                 "description": description,
@@ -64,10 +56,8 @@ class APIKeyManager:
                 "stored": True
             }
             
-            # Save encrypted keys
             self._save_keys(keys_data)
             
-            # Also set as environment variable for immediate use
             os.environ[f"{service.upper()}_API_KEY"] = api_key
             
             return True
@@ -78,12 +68,10 @@ class APIKeyManager:
     def get_key(self, service: str) -> Optional[str]:
         """Retrieve an API key"""
         try:
-            # First try environment variable
             env_key = os.getenv(f"{service.upper()}_API_KEY")
             if env_key:
                 return env_key
             
-            # Then try encrypted storage
             keys_data = self._load_keys()
             service_upper = service.upper()
             
@@ -113,7 +101,6 @@ class APIKeyManager:
         with open(self.keys_file, 'w') as f:
             json.dump(keys_data, f, indent=2)
         
-        # Set restrictive permissions
         try:
             os.chmod(self.keys_file, 0o600)
         except:
@@ -130,7 +117,6 @@ class APIKeyManager:
         key = self.get_key(service)
         return key is not None and len(key) > 0
 
-# Global instance
 _api_key_manager = None
 
 def get_api_key_manager() -> APIKeyManager:
@@ -151,15 +137,12 @@ def get_openai_key() -> Optional[str]:
     return manager.get_key("OPENAI")
 
 if __name__ == "__main__":
-    # Test the API key manager
     manager = get_api_key_manager()
     
-    # Example: Store a test key
     test_key = "sk-test-key-12345"
     if manager.store_key("OPENAI", test_key, "Test OpenAI Key"):
         print("✅ API key stored successfully")
     
-    # Retrieve it
     retrieved = manager.get_key("OPENAI")
     if retrieved == test_key:
         print("✅ API key retrieved successfully")

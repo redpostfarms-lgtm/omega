@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Optimized TTS with streaming and faster model support
 from TTS.api import TTS
 import torch
 import os
@@ -8,7 +6,6 @@ import asyncio
 import subprocess
 import sys
 
-# Pre-load TTS model on startup (no lazy loading)
 tts = None
 USE_STREAMING = True  # Enable streaming for faster perceived latency
 
@@ -19,7 +16,6 @@ def initialize_tts_preload():
         print("[TTS] Pre-loading model (one-time, ~5 seconds)...")
         os.environ['TTS_ACCEPT_TO_S'] = '1'
         
-        # Patch torch.load for PyTorch 2.6+ compatibility
         try:
             original_load = torch.load
             def patched_load(*args, **kwargs):
@@ -31,17 +27,14 @@ def initialize_tts_preload():
             pass
         
         try:
-            # Use GPU quantization if available for faster inference
             device = 'cuda' if torch.cuda.is_available() else 'cpu'
             tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to(device)
             
-            # Apply 8-bit quantization if on GPU and bitsandbytes available
             try:
                 import bitsandbytes as bnb
                 if device == 'cuda':
                     print("[TTS] Applying 8-bit quantization for faster inference...")
                     # Note: Actual quantization would require model-specific implementation
-                    # This is a placeholder for the optimization concept
             except ImportError:
                 pass
             
@@ -55,9 +48,7 @@ def limit_response_length(text, max_words=30):
     """Limit response length to reduce TTS synthesis time."""
     words = text.split()
     if len(words) > max_words:
-        # Try to cut at sentence boundary
         truncated = ' '.join(words[:max_words])
-        # Find last period/exclamation/question mark
         last_punct = max(
             truncated.rfind('.'), 
             truncated.rfind('!'), 
@@ -74,7 +65,6 @@ def tts_to_file_optimized(text, speaker_wav=None, output_file='response.wav'):
     """Optimized TTS generation with length limiting."""
     global tts
     
-    # Limit response length for faster synthesis
     text = limit_response_length(text, max_words=30)
     
     if tts is None:
@@ -99,14 +89,11 @@ def tts_to_file_optimized(text, speaker_wav=None, output_file='response.wav'):
 async def tts_stream_async(text, speaker_wav=None):
     """Streaming TTS - generate and play chunks progressively (experimental)."""
     # Note: Full streaming requires model-specific support
-    # This is a placeholder for the streaming concept
-    # For now, use chunked text processing
     global tts
     
     if tts is None:
         tts = initialize_tts_preload()
     
-    # Split text into sentences for progressive generation
     sentences = text.replace('!', '.').replace('?', '.').split('.')
     sentences = [s.strip() + '.' for s in sentences if s.strip()]
     
@@ -119,16 +106,13 @@ async def tts_stream_async(text, speaker_wav=None):
         tts_to_file_optimized(sentence, speaker_wav, output_file)
         output_files.append(output_file)
         
-        # Play chunk while next is generating (non-blocking)
         from omega_full_brain import play_audio_background
         play_audio_background(output_file)
         
-        # Small delay to allow playback to start
         await asyncio.sleep(0.5)
     
     return output_files
 
-# Initialize on import if running main
 if __name__ == "__main__":
     print("[TTS Optimized] Initializing...")
     initialize_tts_preload()

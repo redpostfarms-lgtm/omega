@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Developer Integrations
 ============================
@@ -74,20 +73,15 @@ class DeveloperIntegrationManager:
                 status=IntegrationStatus.COMPLETE,  # Auto-activated
                 api_key="configured",  # Placeholder for active status
                 integration_code="""
-# NVIDIA API Integration
 from omega_nvidia_integration import get_nvidia_integration, set_nvidia_api_key
 
-# Set API key
 set_nvidia_api_key("YOUR_API_KEY")
 
-# Get integration instance
 nvidia = get_nvidia_integration()
 
-# Generate response
 response = nvidia.generate_response("Hello! How are you?")
 print(response)
 
-# Conversation with history
 messages = [
     {"role": "user", "content": "Hello!"},
     {"role": "assistant", "content": "Hi there! How can I help?"},
@@ -250,22 +244,18 @@ print(response)
         
         tool = self.tools[tool_name]
         
-        # Check if already complete
         if tool.status == IntegrationStatus.COMPLETE:
             return True, f"{tool.name} is already set up"
         
-        # Mark as in progress
         tool.status = IntegrationStatus.IN_PROGRESS
         self.save_config()
         
-        # Open browser for account setup if needed
         if tool.requires_account and not tool.api_key:
             if tool.account_setup_url:
                 print(f"\n[SETUP] Opening {tool.name} account setup page...")
                 print(f"URL: {tool.account_setup_url}")
                 print(f"\n{tool.setup_instructions}")
                 
-                # Open browser
                 try:
                     webbrowser.open(tool.account_setup_url)
                     tool.status = IntegrationStatus.NEEDS_HUMAN
@@ -288,7 +278,6 @@ print(response)
         tool = self.tools[tool_name]
         tool.api_key = api_key
         
-        # Test the API key if possible
         if tool.requires_api_key:
             test_result = self._test_api_key(tool_name, api_key)
             if test_result:
@@ -306,11 +295,9 @@ print(response)
     
     def _test_api_key(self, tool_name: str, api_key: str) -> bool:
         """Test API key (basic validation)"""
-        # Basic validation - check format
         if not api_key or len(api_key) < 10:
             return False
         
-        # Tool-specific validation could be added here
         return True
     
     def generate_integration_code(self, tool_name: str) -> str:
@@ -341,17 +328,13 @@ def query_huggingface(model_name: str, inputs: str):
             return f'''# NVIDIA Developer Playground Integration
 from omega_nvidia_integration import get_nvidia_integration, set_nvidia_api_key
 
-# Set API key
 set_nvidia_api_key("{tool.api_key if tool.api_key else 'YOUR_API_KEY'}")
 
-# Get integration instance
 nvidia = get_nvidia_integration()
 
-# Simple prompt
 response = nvidia.generate_response("Hello! How are you?")
 print(response)
 
-# Conversation with history
 messages = [
     {{"role": "user", "content": "Hello!"}},
     {{"role": "assistant", "content": "Hi there!"}},
@@ -360,7 +343,6 @@ messages = [
 response = nvidia.conversation(messages)
 print(response)
 
-# Advanced usage with custom parameters
 response = nvidia.chat_completion(
     messages=[{{"role": "user", "content": "Explain quantum computing"}}],
     model="meta/llama-4-maverick-17b-128e-instruct",
@@ -376,7 +358,6 @@ import replicate
 
 REPLICATE_API_TOKEN = "{tool.api_key if tool.api_key else 'YOUR_API_TOKEN'}"
 
-# Set API token
 import os
 os.environ["REPLICATE_API_TOKEN"] = REPLICATE_API_TOKEN
 
@@ -410,7 +391,6 @@ def run_replicate_model(model: str, input_data: dict):
             }
         }
 
-# Global singleton
 _integration_manager = None
 
 def get_integration_manager() -> DeveloperIntegrationManager:

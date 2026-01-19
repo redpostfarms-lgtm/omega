@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega System Resource Manager
 ==============================
@@ -9,7 +8,6 @@ Manages CPU, GPU, and RAM resources across all Omega components.
 import sys
 from pathlib import Path
 
-# Import the resource manager
 try:
     from omega_resource_manager import ResourceManager, GradualLoader, get_resource_manager
     RESOURCE_MANAGER_AVAILABLE = True
@@ -17,7 +15,6 @@ except ImportError:
     RESOURCE_MANAGER_AVAILABLE = False
     print("[Warning] Resource manager not available")
 
-# Global resource manager instance
 _system_resource_manager = None
 _system_gradual_loader = None
 
@@ -28,7 +25,6 @@ def get_system_resource_manager() -> ResourceManager:
         if RESOURCE_MANAGER_AVAILABLE:
             _system_resource_manager = get_resource_manager()
         else:
-            # Return None if not available
             return None
     return _system_resource_manager
 
@@ -62,7 +58,6 @@ def load_component_gradually(component_name: str, load_func, *args, **kwargs):
     if gradual_loader:
         return gradual_loader.load_component(component_name, load_func, *args, **kwargs)
     else:
-        # Fallback to immediate load
         return load_func(*args, **kwargs)
 
 def get_optimal_workers(task_complexity: str = "medium") -> int:

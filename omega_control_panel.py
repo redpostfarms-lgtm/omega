@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Control Panel
 ===================
@@ -24,10 +23,8 @@ from dataclasses import dataclass, field
 from collections import deque
 import threading
 
-# Visualization
 try:
     import matplotlib
-    # Try multiple backends for compatibility
     backends = ['TkAgg', 'Qt5Agg', 'Qt4Agg']
     backend_set = False
     for backend in backends:
@@ -36,7 +33,6 @@ try:
             backend_set = True
             break
         except Exception:
-            # Backend not available, try next one
             continue
     if not backend_set:
         matplotlib.use('TkAgg')  # Fallback to default
@@ -49,7 +45,6 @@ except ImportError:
     MATPLOTLIB_AVAILABLE = False
     print("Warning: matplotlib not available. Control panel will use text mode.")
 
-# Hardware and system monitoring
 try:
     import psutil
     PSUTIL_AVAILABLE = True
@@ -68,7 +63,6 @@ try:
 except ImportError:
     INTEGRATION_AVAILABLE = False
 
-# Cache for fast loading
 try:
     from omega_control_panel_cache import ControlPanelCache
     CACHE_AVAILABLE = True
@@ -117,7 +111,6 @@ class ControlPanel:
         self.running = False
         self.update_interval = 2.0  # Update every 2 seconds
         
-        # GPU Load Balancer for optimal resource distribution
         try:
             from omega_gpu_load_balancer import get_load_balancer
             self.load_balancer = get_load_balancer()
@@ -127,7 +120,6 @@ class ControlPanel:
             print(f"[Control Panel] Load Balancer not available: {e}")
             self.load_balancer = None
         
-        # Resource manager for CPU/GPU/RAM optimization
         try:
             from omega_resource_manager import get_resource_manager, GradualLoader
             self.resource_manager = get_resource_manager()
@@ -144,7 +136,6 @@ class ControlPanel:
             self.gradual_loader = None
             self.use_gpu = False
         
-        # Cache for fast loading
         self.cache = None
         if CACHE_AVAILABLE:
             self.cache = ControlPanelCache()
@@ -152,51 +143,40 @@ class ControlPanel:
             if cached_data:
                 print("[Cache] Loading last known data for fast startup...")
         
-        # Hardware controller
         self.hw_controller = None
         if HARDWARE_AVAILABLE:
             try:
                 self.hw_controller = get_hardware_controller()
             except Exception as e:
-                # Hardware controller not available - continue without it
                 pass
         
-        # Developer integrations
         self.integration_manager = None
         if INTEGRATION_AVAILABLE:
             try:
                 from omega_developer_integrations import get_integration_manager
                 self.integration_manager = get_integration_manager()
             except Exception as e:
-                # Integration manager not available - continue without it
                 pass
         
-        # Notifications (yellow section)
         self.notifications: deque = deque(maxlen=20)
         
-        # Integrated systems (green section)
         self.integrated_systems: List[IntegratedSystem] = []
         self._update_integrated_systems()
         
-        # Process improvements (blue section)
         self.process_improvements: List[ProcessImprovement] = []
         self._scan_process_improvements()
         
-        # Optional processes (orange section)
         self.optional_processes: List[OptionalProcess] = []
         self.last_optional_scan = None
         self._scan_optional_processes()
         
-        # Fan speed and RGB state
         self.fan_speed_percentage = 50
         self.rgb_enabled = True
         self.rgb_color = "#FFD700"  # Gold
         
-        # Daily scan scheduler
         self.daily_scan_thread = None
         self._start_daily_scan_scheduler()
         
-        # Matplotlib figure
         self.fig = None
         self.ax_red = None
         self.ax_yellow = None
@@ -218,27 +198,22 @@ class ControlPanel:
             'omega_api_keys_enhanced.py'
         ]
         
-        # Audio monitoring for OIP visual effects
         self.current_audio_file = None
         self.audio_waveform = None
         self.audio_position = 0
         self.speaking = False
         
-        # Audio analysis library
         try:
             import librosa
             self.librosa_available = True
         except ImportError:
             self.librosa_available = False
         
-        # KITT Scanner integration (load gradually)
         self.scanner_integration = None
         self.scanner_available = False
         if self.gradual_loader:
-            # Will be loaded gradually during GUI creation
             pass
         else:
-            # Immediate load
             try:
                 from omega_scanner_integration import OmegaScannerIntegration
                 self.scanner_integration = OmegaScannerIntegration()
@@ -247,7 +222,6 @@ class ControlPanel:
                 self.scanner_integration = None
                 self.scanner_available = False
         
-        # Control buttons state
         self.push_to_talk_active = False
         self.muted = False
         self.volume_level = 0.8  # 0.0 to 1.0
@@ -256,7 +230,6 @@ class ControlPanel:
         """Update list of integrated systems"""
         self.integrated_systems = []
         
-        # Get CPU info
         if PSUTIL_AVAILABLE:
             cpu_percent = psutil.cpu_percent(interval=0.1)
             cpu_temp = self._get_cpu_temperature()
@@ -269,7 +242,6 @@ class ControlPanel:
             )
             self.integrated_systems.append(system)
         
-        # Get GPU info
         gpu_usage = self._get_gpu_usage()
         gpu_temp = self._get_gpu_temperature()
         if gpu_usage is not None or gpu_temp is not None:
@@ -282,7 +254,6 @@ class ControlPanel:
             )
             self.integrated_systems.append(system)
         
-        # Add Nvidia Playground
         self.integrated_systems.append(IntegratedSystem(
             name="Nvidia AI Playground",
             status="active",
@@ -291,7 +262,6 @@ class ControlPanel:
             processing_power=100.0
         ))
         
-        # Add Hugging Face
         self.integrated_systems.append(IntegratedSystem(
             name="Hugging Face API",
             status="active",
@@ -300,7 +270,6 @@ class ControlPanel:
             processing_power=100.0
         ))
         
-        # Add Google Services
         self.integrated_systems.append(IntegratedSystem(
             name="Google Cloud AI",
             status="active",
@@ -309,12 +278,10 @@ class ControlPanel:
             processing_power=100.0
         ))
         
-        # Get integrated developer tools
         if self.integration_manager:
             try:
                 for tool_name, tool in self.integration_manager.tools.items():
                     status = "active" if tool.status.value == "complete" else "inactive"
-                    # Estimate CPU usage (placeholder - would need actual monitoring)
                     cpu_usage = 0.0
                     if status == "active":
                         cpu_usage = 5.0  # Placeholder
@@ -328,12 +295,10 @@ class ControlPanel:
                     )
                     self.integrated_systems.append(system)
             except Exception as e:
-                # Integration error - continue without this system
                 pass
     
     def _get_cpu_temperature(self) -> Optional[float]:
         """Get CPU temperature from motherboard sensors"""
-        # Try enhanced WMI sensors first
         try:
             from omega_hardware_sensors import get_cpu_temperature_wmi
             temp = get_cpu_temperature_wmi()
@@ -342,7 +307,6 @@ class ControlPanel:
         except Exception:
             pass
         
-        # Fallback to hardware controller
         if not self.hw_controller:
             return None
         
@@ -350,12 +314,10 @@ class ControlPanel:
             temps = self.hw_controller.temperature.get_all_temperatures()
             return temps.get("CPU", None)
         except Exception:
-            # Temperature reading failed - return None
             return None
     
     def _get_gpu_usage(self) -> Optional[float]:
         """Get GPU usage percentage from RTX 3050"""
-        # Use enhanced GPU sensors
         try:
             from omega_hardware_sensors import get_gpu_info_nvidia
             gpu_info = get_gpu_info_nvidia()
@@ -364,19 +326,16 @@ class ControlPanel:
         except Exception:
             pass
         
-        # Fallback to resource manager
         if self.resource_manager and self.use_gpu:
             try:
                 gpu_info = self.resource_manager.get_gpu_usage()
                 if gpu_info and 'memory_total_gb' in gpu_info:
-                    # Calculate GPU memory usage percentage
                     if gpu_info['memory_total_gb'] > 0:
                         usage = (gpu_info['memory_allocated_gb'] / gpu_info['memory_total_gb']) * 100
                         return min(usage, 100.0)
             except Exception:
                 pass
         
-        # Try nvidia-smi as fallback
         try:
             result = subprocess.run(['nvidia-smi', '--query-gpu=utilization.gpu', '--format=csv,noheader,nounits'],
                                   capture_output=True, text=True, timeout=2)
@@ -389,7 +348,6 @@ class ControlPanel:
     
     def _get_gpu_temperature(self) -> Optional[float]:
         """Get GPU temperature from RTX 3050"""
-        # Use enhanced GPU sensors for comprehensive data
         try:
             from omega_hardware_sensors import get_gpu_info_nvidia
             gpu_info = get_gpu_info_nvidia()
@@ -398,7 +356,6 @@ class ControlPanel:
         except Exception:
             pass
         
-        # Try nvidia-smi fallback (most reliable)
         try:
             result = subprocess.run(['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader,nounits'],
                                   capture_output=True, text=True, timeout=2)
@@ -407,7 +364,6 @@ class ControlPanel:
         except Exception:
             pass
         
-        # Try hardware controller as fallback
         if self.hw_controller:
             try:
                 temps = self.hw_controller.temperature.get_all_temperatures()
@@ -442,7 +398,6 @@ class ControlPanel:
             return
         
         try:
-            # Check CPU usage
             cpu_percent = psutil.cpu_percent(interval=0.1)
             if cpu_percent > 80:
                 self.process_improvements.append(ProcessImprovement(
@@ -453,7 +408,6 @@ class ControlPanel:
                     description="CPU usage is high. Consider closing unnecessary processes."
                 ))
             
-            # Check memory usage
             memory = psutil.virtual_memory()
             memory_percent = memory.percent
             if memory_percent > 80:
@@ -465,7 +419,6 @@ class ControlPanel:
                     description="Memory usage is high. Consider freeing up memory."
                 ))
             
-            # Check disk usage
             disk_path = os.path.splitdrive(os.getcwd())[0] + os.sep if os.name == 'nt' else '/'
             disk = psutil.disk_usage(disk_path)
             disk_percent = disk.percent
@@ -478,7 +431,6 @@ class ControlPanel:
                     description="Disk space is running low. Consider cleaning up files."
                 ))
             
-            # Check temperature
             cpu_temp = self._get_cpu_temperature()
             if cpu_temp and cpu_temp > 70:
                 self.process_improvements.append(ProcessImprovement(
@@ -495,7 +447,6 @@ class ControlPanel:
         """Scan for optional learning/processes (daily scan)"""
         self.optional_processes = []
         
-        # List of optional improvements
         optional_list = [
             OptionalProcess(
                 name="Adaptive Confidence Thresholds",
@@ -544,7 +495,6 @@ class ControlPanel:
             while self.running:
                 time.sleep(3600)  # Check every hour
                 now = datetime.now()
-                # Run scan at midnight
                 if now.hour == 0 and now.minute < 5:
                     if not self.last_optional_scan or (now - self.last_optional_scan).days >= 1:
                         self._scan_optional_processes()
@@ -563,7 +513,6 @@ class ControlPanel:
         self.fan_speed_percentage = max(0, min(100, percentage))
         if self.hw_controller:
             try:
-                # Set all fans to the same percentage
                 for fan in self.hw_controller.fans.fans:
                     self.hw_controller.fans.set_fan_percentage(fan["fan_id"], self.fan_speed_percentage)
                 self.add_notification(f"Fan speed set to {self.fan_speed_percentage}%", "success")
@@ -607,14 +556,12 @@ class ControlPanel:
         print("=" * 80)
         print()
         
-        # Red section - Main status
         print("[RED SECTION] Main Status")
         print("-" * 80)
         print(f"Status: {'RUNNING' if self.running else 'STOPPED'}")
         print(f"Last Update: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
         
-        # Yellow section - Notifications and Temperature
         print("[YELLOW SECTION] Notifications & Temperature")
         print("-" * 80)
         cpu_temp = self._get_cpu_temperature()
@@ -627,7 +574,6 @@ class ControlPanel:
             print(f"  [{notif.level.upper()}] {notif.message}")
         print()
         
-        # Green section - Integrated Systems
         print("[GREEN SECTION] Integrated Systems")
         print("-" * 80)
         for system in self.integrated_systems:
@@ -635,7 +581,6 @@ class ControlPanel:
             print(f"  CPU: {system.cpu_usage:.1f}% | Temp: {system.temperature:.1f}°C | Power: {system.processing_power:.1f}%")
         print()
         
-        # Blue section - Process Improvements
         print("[BLUE SECTION] Process Improvements Needed")
         print("-" * 80)
         for proc in self.process_improvements:
@@ -643,7 +588,6 @@ class ControlPanel:
             print(f"  {proc.description}")
         print()
         
-        # Orange section - Optional Processes
         print("[ORANGE SECTION] Optional Learning/Processes")
         print("-" * 80)
         for opt in self.optional_processes[:5]:
@@ -660,60 +604,47 @@ class ControlPanel:
             self._create_text_panel()
             return
         
-        # Create figure with grid layout (3 rows, 4 cols)
         self.fig = plt.figure(figsize=(18, 11))
         self.fig.suptitle('OMEGA CONTROL PANEL', fontsize=18, fontweight='bold', color='#1a1a1a')
         gs = GridSpec(3, 4, figure=self.fig, hspace=0.35, wspace=0.35, width_ratios=[1.0, 2.2, 1.1, 2.2])
         
-        # File list section (left column, spans all rows)
         self.ax_files = self.fig.add_subplot(gs[:, 0])
         self.ax_files.set_facecolor('#F0F0F0')
         self.ax_files.set_title('Important Files', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_files.axis('off')
         
-        # OIP section (Omega Introduction Panel - white/grey area, top of column 2)
         self.ax_oip = self.fig.add_subplot(gs[0, 1])
         self.ax_oip.set_facecolor('#FAFAFA')
         self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_oip.axis('off')
         
-        # Red section (top-middle, column 2, row 0, now shifted)
         self.ax_red = self.fig.add_subplot(gs[0, 2])
         self.ax_red.set_facecolor('#FFE5E5')
         self.ax_red.set_title('System Status', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_red.axis('off')
         
-        # Yellow section (top-right)
         self.ax_yellow = self.fig.add_subplot(gs[0, 3])
         self.ax_yellow.set_facecolor('#FFF9E5')
         self.ax_yellow.set_title('Temperature & Controls', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
-        # Green section (middle row, spans columns 1-3)
         self.ax_green = self.fig.add_subplot(gs[1, 1:4])
         self.ax_green.set_facecolor('#E5FFE5')
         self.ax_green.set_title('Integrated Systems - CPU Usage & Processing Power', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
-        # Blue section (bottom-left, column 1)
         self.ax_blue = self.fig.add_subplot(gs[2, 1])
         self.ax_blue.set_facecolor('#E5E5FF')
         self.ax_blue.set_title('Process Improvements Needed', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_blue.axis('off')
         
-        # Orange section (bottom-right, spans columns 2-3)
         self.ax_orange = self.fig.add_subplot(gs[2, 2:4])
         self.ax_orange.set_facecolor('#FFF0E5')
         self.ax_orange.set_title('Optional Learning/Processes (Daily Scan)', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_orange.axis('off')
         
-        # Animation - FuncAnimation will handle updates automatically
         self.ani = FuncAnimation(self.fig, self._update_gui, interval=int(self.update_interval * 1000), blit=False)
         
         # Note: Window will be shown by run() method using plt.show(block=True)
-        # FuncAnimation doesn't need plt.ion() - it works with block=True
-        # plt.ion() can interfere with plt.show(block=True) blocking properly
         
-        # Create control buttons (after window is shown)
-        # Use gradual loading if available
         if self.gradual_loader:
             def load_buttons():
                 self._create_control_buttons()
@@ -730,7 +661,6 @@ class ControlPanel:
         
         fig = self.fig
         
-        # Push to Talk button in yellow section (Notifications - top-right)
         bbox_yellow = self.ax_yellow.get_position()
         ax_ptt = fig.add_axes([bbox_yellow.x0 + 0.05 * bbox_yellow.width,
                                bbox_yellow.y0 + 0.05 * bbox_yellow.height,
@@ -754,7 +684,6 @@ class ControlPanel:
         self.button_ptt.on_pressed = on_ptt_press
         self.button_ptt.on_released = on_ptt_release
         
-        # Enter button in blue section (Process Improvements - bottom-left)
         bbox_blue = self.ax_blue.get_position()
         ax_enter = fig.add_axes([bbox_blue.x0 + 0.25 * bbox_blue.width,
                                  bbox_blue.y0 + 0.05 * bbox_blue.height,
@@ -763,11 +692,9 @@ class ControlPanel:
         
         def on_enter_click(event):
             print("[Control Panel] Enter button pressed")
-            # Enter button action can be implemented here
         
         self.button_enter.on_clicked(on_enter_click)
         
-        # Mute button in orange section (Optional Processes - bottom-right)
         bbox_orange = self.ax_orange.get_position()
         ax_mute = fig.add_axes([bbox_orange.x0 + 0.05 * bbox_orange.width,
                                 bbox_orange.y0 + 0.05 * bbox_orange.height,
@@ -789,10 +716,8 @@ class ControlPanel:
         
         self.button_mute.on_clicked(on_mute_click)
         
-        # Volume control in orange section (next to mute)
         self.volume_level = 0.8
         
-        # Volume label
         ax_vol_label = fig.add_axes([bbox_orange.x0 + 0.45 * bbox_orange.width,
                                      bbox_orange.y0 + 0.15 * bbox_orange.height,
                                      0.15 * bbox_orange.width, 0.15 * bbox_orange.height])
@@ -800,7 +725,6 @@ class ControlPanel:
         self.vol_label_text = ax_vol_label.text(0.5, 0.5, 'Vol', ha='center', va='center',
                                                 fontsize=8, fontweight='bold')
         
-        # Volume display
         ax_vol_display = fig.add_axes([bbox_orange.x0 + 0.45 * bbox_orange.width,
                                        bbox_orange.y0 + 0.05 * bbox_orange.height,
                                        0.15 * bbox_orange.width, 0.1 * bbox_orange.height])
@@ -809,13 +733,11 @@ class ControlPanel:
                                                     ha='center', va='center',
                                                     fontsize=9, fontweight='bold')
         
-        # Volume down button
         ax_vol_down = fig.add_axes([bbox_orange.x0 + 0.62 * bbox_orange.width,
                                     bbox_orange.y0 + 0.1 * bbox_orange.height,
                                     0.12 * bbox_orange.width, 0.25 * bbox_orange.height])
         self.button_vol_down = Button(ax_vol_down, '−', color='#9E9E9E', hovercolor='#757575')
         
-        # Volume up button
         ax_vol_up = fig.add_axes([bbox_orange.x0 + 0.75 * bbox_orange.width,
                                   bbox_orange.y0 + 0.1 * bbox_orange.height,
                                   0.12 * bbox_orange.width, 0.25 * bbox_orange.height])
@@ -838,7 +760,6 @@ class ControlPanel:
     
     def _update_gui(self, frame):
         """Update GUI panels"""
-        # Update data
         self._update_integrated_systems()
         self._scan_process_improvements()
         
@@ -857,10 +778,8 @@ class ControlPanel:
             status = '✓' if exists else '✗'
             bg_color = '#E8F5E9' if exists else '#FFEBEE'
             
-            # Truncate long filenames
             display_name = filename if len(filename) <= 28 else filename[:25] + '...'
             
-            # Add subtle background box for each file
             self.ax_files.add_patch(mpatches.Rectangle((0.02, y_pos - 0.08), 0.96, 0.09,
                                                        facecolor=bg_color, edgecolor=color,
                                                        linewidth=1.5, alpha=0.6,
@@ -871,15 +790,12 @@ class ControlPanel:
                               family='monospace', verticalalignment='top', fontweight='bold')
             y_pos -= 0.12
         
-        # OIP section - Omega Introduction Panel with KITT scanner effect
         self.ax_oip.clear()
         self.ax_oip.set_facecolor('#FAFAFA')
         self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_oip.axis('off')
         
-        # Use KITT scanner if available, otherwise fallback to waveform
         if self.scanner_available and self.scanner_integration and self.scanner_integration.scanner:
-            # Update scanner with audio
             audio_files = ['response.wav', 'omega_intro.wav']
             audio_found = None
             for af in audio_files:
@@ -889,14 +805,12 @@ class ControlPanel:
                     break
             
             if audio_found:
-                # Try to update scanner with audio file, fallback to speech detection if it fails
                 try:
                     self.scanner_integration.update_scanner(
                         audio_file=audio_found,
                         audio_position=0.5  # Current position (can be improved with actual position tracking)
                     )
                 except Exception:
-                    # Fallback to speech detection if scanner update fails
                     self.scanner_integration.update_scanner(
                         speech_active=self.speaking,
                         audio_amplitude=0.7 if self.speaking else 0.0
@@ -907,16 +821,13 @@ class ControlPanel:
                     audio_amplitude=0.7 if self.speaking else 0.0
                 )
             
-            # Render KITT scanner to OIP
             self.scanner_integration.render_to_axes(self.ax_oip, num_bars=16)
         
         else:
-            # Fallback to original waveform visualization
             self.ax_oip.set_facecolor('#FAFAFA')
             self.ax_oip.set_title('Omega Introduction Panel', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
             self.ax_oip.axis('off')
             
-            # Check for audio file and display visual effects
             audio_files = ['response.wav', 'omega_intro.wav']
             audio_found = None
             for af in audio_files:
@@ -930,10 +841,8 @@ class ControlPanel:
                     import librosa
                     import numpy as np
                     
-                    # Load audio for visualization
                     audio, sr = librosa.load(str(audio_found), sr=None, duration=5.0)
                     
-                    # Create waveform visualization (simplified bars for real-time effect)
                     num_bars = 24
                     chunk_size = len(audio) // num_bars
                     bars = []
@@ -945,25 +854,20 @@ class ControlPanel:
                         else:
                             bars.append(0)
                     
-                    # Normalize bars
                     if max(bars) > 0:
                         bars = [b / max(bars) for b in bars]
                     
-                    # Draw bars (vertical equalizer style with gradient)
                     x_positions = np.linspace(0.08, 0.92, num_bars)
                     bar_width = 0.025
                     
                     for i, (x, height) in enumerate(zip(x_positions, bars)):
-                        # Create gradient color based on height and position
                         color_intensity = height
                         color = plt.cm.plasma(color_intensity * 0.7 + 0.3)
                         
-                        # Draw bar with rounded effect
                         bar_height_scaled = height * 0.75
                         self.ax_oip.bar(x, bar_height_scaled, width=bar_width, bottom=0.15, 
                                        color=color, alpha=0.85, edgecolor='white', linewidth=0.5)
                     
-                    # Add pulsing indicator
                     pulse_alpha = 0.5 + 0.5 * np.sin(frame * 0.2)
                     self.ax_oip.text(0.5, 0.05, '● Audio Active', ha='center', va='bottom',
                                     fontsize=10, color='#27AE60', fontweight='bold',
@@ -975,33 +879,27 @@ class ControlPanel:
                                     color='#1976D2', fontweight='bold',
                                     transform=self.ax_oip.transAxes)
             else:
-                # Default display when no audio
                 self.ax_oip.text(0.5, 0.5, 'OIP Ready\n(Awaiting speech)', 
                                 ha='center', va='center', fontsize=11,
                                 bbox=dict(boxstyle='round', facecolor='#FFF3E0', alpha=0.9, edgecolor='#FF9800', linewidth=2),
                                 color='#F57C00', fontweight='bold',
                                 transform=self.ax_oip.transAxes)
         
-        # Red section - Main status with color-coded CPU/GPU/RAM tiles
         self.ax_red.clear()
         self.ax_red.set_facecolor('#FFE5E5')
         self.ax_red.set_title('System Status', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_red.axis('off')
         
-        # Get usage stats
         cpu_usage = psutil.cpu_percent(interval=0.1) if PSUTIL_AVAILABLE else 0.0
         gpu_usage = self._get_gpu_usage() or 0.0
         ram_usage = self._get_ram_usage()
         
-        # Get temperatures
         cpu_temp = self._get_cpu_temperature() or 0.0
         gpu_temp = self._get_gpu_temperature() or 0.0
         ram_temp = self._get_ram_temperature() or 0.0
         
-        # Get frame time for flashing effect
         flash_on = (frame % 30) < 15  # Flash every 30 frames
         
-        # Draw CPU/GPU/RAM tiles with color-coding
         tiles = [
             ('CPU', cpu_usage, cpu_temp),
             ('GPU', gpu_usage, gpu_temp),
@@ -1012,7 +910,6 @@ class ControlPanel:
             x_pos = 0.1 + i * 0.28
             y_pos = 0.75
             
-            # Determine tile color based on usage thresholds
             if usage < 60:
                 tile_color = '#4CAF50'  # Green
                 rim_color = '#4CAF50'
@@ -1023,26 +920,21 @@ class ControlPanel:
                 tile_color = '#FFA500'  # Orange
                 rim_color = '#FFA500'
             else:
-                # 90%+ - red (flashing)
                 tile_color = '#FF0000' if flash_on else '#CC0000'
                 rim_color = '#FF0000'
             
-            # Draw tile background
             rect = mpatches.Rectangle((x_pos - 0.12, y_pos - 0.15), 0.24, 0.3,
                                      facecolor=tile_color, edgecolor=rim_color, linewidth=3,
                                      transform=self.ax_red.transAxes, alpha=0.8)
             self.ax_red.add_patch(rect)
             
-            # Draw usage percentage
             usage_text = f"{name}\n{usage:.1f}%"
             self.ax_red.text(x_pos, y_pos, usage_text, fontsize=11, fontweight='bold',
                            ha='center', va='center', color='white',
                            transform=self.ax_red.transAxes,
                            bbox=dict(boxstyle='round', facecolor='black', alpha=0.3, pad=2))
             
-            # Draw sweat drop icon at 90%+
             if usage >= 90:
-                # Draw sweat drop (simple droplet shape)
                 drop_path = mpatches.Path(
                     [(x_pos + 0.08, y_pos - 0.02),
                      (x_pos + 0.10, y_pos - 0.05),
@@ -1054,7 +946,6 @@ class ControlPanel:
                                          transform=self.ax_red.transAxes, alpha=0.9)
                 self.ax_red.add_patch(drop)
             
-            # Draw temperature dot (white -> amber -> deep red)
             temp_dot_y = y_pos - 0.22
             if temp > 0:
                 if temp < 50:
@@ -1067,12 +958,10 @@ class ControlPanel:
                 temp_dot = mpatches.Circle((x_pos, temp_dot_y), 0.015, color=dot_color,
                                           transform=self.ax_red.transAxes)
                 self.ax_red.add_patch(temp_dot)
-                # Temperature label
                 self.ax_red.text(x_pos, temp_dot_y - 0.04, f"{temp:.0f}°C", fontsize=8,
                                ha='center', va='top', color='black',
                                transform=self.ax_red.transAxes)
         
-        # Status text at bottom
         status_text = f"Status: {'RUNNING' if self.running else 'STOPPED'} | "
         status_text += f"Update: {datetime.now().strftime('%H:%M:%S')}"
         
@@ -1082,15 +971,12 @@ class ControlPanel:
                          bbox=dict(boxstyle='round', facecolor='white', alpha=0.8, pad=5),
                          transform=self.ax_red.transAxes)
         
-        # Yellow section - Notifications, Temperature Pie Chart, Controls
         self.ax_yellow.clear()
         self.ax_yellow.set_facecolor('#FFF9E5')
         self.ax_yellow.set_title('Temperature & Controls', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         
-        # Temperature pie chart
         cpu_temp = self._get_cpu_temperature()
         if cpu_temp:
-            # Create pie chart for temperature ranges
             temp_ranges = ['Normal (<50°C)', 'Warm (50-70°C)', 'Hot (>70°C)']
             if cpu_temp < 50:
                 values = [100, 0, 0]
@@ -1110,7 +996,6 @@ class ControlPanel:
             self.ax_yellow.text(0.5, 0.5, 'Temperature\nNot Available', ha='center', va='center',
                                fontsize=10, bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
         
-        # Add control info
         control_text = f"Fan: {self.fan_speed_percentage}%\n"
         control_text += f"RGB: {'ON' if self.rgb_enabled else 'OFF'}\n"
         control_text += f"Color: {self.rgb_color}"
@@ -1119,7 +1004,6 @@ class ControlPanel:
                            bbox=dict(boxstyle='round', facecolor='white', alpha=0.9, 
                                     edgecolor='#FFA500', linewidth=2, pad=8))
         
-        # Green section - Integrated Systems
         self.ax_green.clear()
         self.ax_green.set_facecolor('#E5FFE5')
         self.ax_green.set_title('Integrated Systems - CPU Usage & Processing Power', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
@@ -1136,7 +1020,6 @@ class ControlPanel:
             bars1 = self.ax_green.bar([i - width/2 for i in x], cpu_usages, width, label='CPU Usage (%)', color='#4CAF50')
             bars2 = self.ax_green.bar([i + width/2 for i in x], processing_powers, width, label='Processing Power (%)', color='#2196F3')
             
-            # Add temperature annotations
             for i, (sys, temp) in enumerate(zip(systems, temps)):
                 if temp > 0:
                     self.ax_green.text(i, max(cpu_usages[i], processing_powers[i]) + 5,
@@ -1153,28 +1036,17 @@ class ControlPanel:
             self.ax_green.text(0.5, 0.5, 'No integrated systems found', ha='center', va='center',
                               fontsize=12, bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
         
-        # Blue section - Process Improvements
         self.ax_blue.clear()
         self.ax_blue.set_facecolor('#E5E5FF')
         self.ax_blue.set_title('Process Improvements Needed', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_blue.axis('off')
         
         if self.process_improvements:
-            # Calculate spacing to fit all items within visible area (0.0 to 1.0)
-            # Rectangle: bottom = y_pos - 0.15, height = 0.16, top = y_pos + 0.01
-            # Strategy: First item at y_pos=0.95, last item positioned so its bottom >= 0.05
-            # This ensures all rectangles stay within the visible axis range
             num_items = min(5, len(self.process_improvements))
             if num_items > 1:
-                # First item: y_pos = 0.95, rectangle from 0.80 to 0.96
                 first_y = 0.95
-                # Last item: we want rectangle bottom at 0.05, so y_pos = 0.20
-                # (since rect bottom = y_pos - 0.15, we need y_pos = 0.05 + 0.15 = 0.20)
                 last_y = 0.20  # Ensures last rect bottom = 0.20 - 0.15 = 0.05
-                # Calculate even spacing between items
                 spacing = (first_y - last_y) / (num_items - 1)
-                # Verify: With 5 items, spacing = (0.95 - 0.20) / 4 = 0.1875
-                # This ensures all items fit: last item rect from 0.05 to 0.21 (within bounds)
             else:
                 spacing = 0.16
             
@@ -1183,8 +1055,6 @@ class ControlPanel:
                 priority_color = {'high': '#E74C3C', 'medium': '#F39C12', 'low': '#F1C40F'}.get(proc.priority, '#34495E')
                 improvement_text = f"{proc.name}: {proc.current_percentage:.1f}% → {proc.target_percentage:.1f}%"
                 
-                # Add background box for each improvement
-                # Ensure rectangle stays within visible bounds (y >= 0)
                 rect_bottom = max(0.0, y_pos - 0.15)  # Safety check: never below 0
                 rect_height = min(0.16, 1.0 - rect_bottom)  # Adjust height if near top
                 bg_color = '#FFEBEE' if proc.priority == 'high' else '#FFF3E0' if proc.priority == 'medium' else '#FFFDE7'
@@ -1204,14 +1074,12 @@ class ControlPanel:
                                                    edgecolor='#27AE60', linewidth=2, pad=10),
                              color='#27AE60', fontweight='bold')
         
-        # Orange section - Optional Processes
         self.ax_orange.clear()
         self.ax_orange.set_facecolor('#FFF0E5')
         self.ax_orange.set_title('Optional Learning/Processes (Daily Scan)', fontweight='bold', pad=12, fontsize=11, color='#2c3e50')
         self.ax_orange.axis('off')
         
         if self.optional_processes:
-            # Sort by usefulness score
             sorted_processes = sorted(self.optional_processes, key=lambda x: x.usefulness_score, reverse=True)
             
             y_pos = 0.95
@@ -1219,7 +1087,6 @@ class ControlPanel:
                 score_color = '#27AE60' if opt.usefulness_score > 85 else '#F39C12' if opt.usefulness_score > 70 else '#3498DB'
                 process_text = f"{opt.name} ({opt.usefulness_score:.0f}% useful) [{opt.category}]"
                 
-                # Add subtle background for each process
                 bg_alpha = 0.5 if opt.usefulness_score > 85 else 0.4
                 self.ax_orange.add_patch(mpatches.Rectangle((0.01, y_pos - 0.12), 0.98, 0.13,
                                                             facecolor='white', edgecolor=score_color,
@@ -1232,7 +1099,6 @@ class ControlPanel:
                                    transform=self.ax_orange.transAxes, color='#2c3e50')
                 y_pos -= 0.16
             
-            # Add last scan time
             if self.last_optional_scan:
                 scan_text = f"Last Scan: {self.last_optional_scan.strftime('%Y-%m-%d %H:%M')}"
                 self.ax_orange.text(0.5, 0.02, scan_text, ha='center', fontsize=9, fontweight='bold',
@@ -1254,22 +1120,16 @@ class ControlPanel:
         
         if MATPLOTLIB_AVAILABLE:
             try:
-                # Create the GUI panel (this creates FuncAnimation and shows window)
                 self._create_gui_panel()
                 print("[OK] GUI window created - window should be visible now")
                 print("The window will stay open and remain interactive.")
                 print("Close the window or press Ctrl+C to exit.")
                 print()
                 
-                # FuncAnimation handles the updates, we just need to keep the window open
-                # Using block=True keeps the window open until closed by user
-                # FuncAnimation will continue updating while the window is open
-                # Ensure non-interactive mode for proper blocking
                 plt.ioff()  # Turn off interactive mode to ensure block=True works
                 try:
                     plt.show(block=True)  # Block until window is closed - keeps UI alive
                 except KeyboardInterrupt:
-                    # Handle Ctrl+C during blocking show
                     self.running = False
                     plt.close('all')
             except KeyboardInterrupt:
@@ -1293,7 +1153,6 @@ class ControlPanel:
         """Stop the control panel"""
         self.running = False
         
-        # Save cache before stopping
         if self.cache:
             try:
                 import psutil
@@ -1315,14 +1174,12 @@ class ControlPanel:
             except Exception as e:
                 print(f"[Cache] Failed to save cache: {e}")
         
-        # Stop animation if running
         if hasattr(self, 'ani') and self.ani:
             try:
                 self.ani.event_source.stop()
             except Exception:
                 pass
         
-        # Close matplotlib figures
         if self.fig:
             plt.close('all')
 

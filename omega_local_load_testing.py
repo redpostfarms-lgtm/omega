@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Local Load Testing Alternative
 =====================================
@@ -81,7 +80,6 @@ class OmegaLocalLoadTester:
         
         end_time = time.time()
         
-        # Calculate statistics
         response_times = [r['response_time'] for r in self.results]
         successful_requests = sum(1 for r in self.results if r['success'])
         failed_requests = len(self.results) - successful_requests
@@ -134,7 +132,6 @@ class OmegaLocalLoadTester:
         
         print(f"✓ Results saved to {filename}")
 
-# Alternative Tools Configuration
 LOAD_TESTING_ALTERNATIVES = {
     "locust": {
         "name": "Locust",
@@ -186,15 +183,12 @@ def print_alternatives():
     print(f"\n{'='*70}\n")
 
 if __name__ == "__main__":
-    # Example usage
     print_alternatives()
     
-    # Test Omega Control Panel
     tester = OmegaLocalLoadTester(
         target_url="http://127.0.0.1:5000",
         concurrent_users=5
     )
     
-    # Run test
     results = tester.run_load_test(total_requests=50)
     tester.save_results()

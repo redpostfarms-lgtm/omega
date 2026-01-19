@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Voice Wake System
 ========================
@@ -16,7 +15,6 @@ from typing import Optional, Callable
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Voice recognition imports
 try:
     import speech_recognition as sr
     SPEECH_RECOGNITION_AVAILABLE = True
@@ -35,7 +33,6 @@ try:
 except ImportError:
     POWER_MANAGER_AVAILABLE = False
 
-# Voice security imports
 try:
     from voice_security_system import voice_security
     VOICE_SECURITY_AVAILABLE = True
@@ -56,7 +53,6 @@ class VoiceWakeSystem:
         self.microphone = None
         self.voice_security_enabled = VOICE_SECURITY_AVAILABLE and voice_security is not None
         
-        # Initialize speech recognition
         if SPEECH_RECOGNITION_AVAILABLE:
             try:
                 self.recognizer = sr.Recognizer()
@@ -65,7 +61,6 @@ class VoiceWakeSystem:
                 self.recognizer.pause_threshold = 0.8  # Pause detection
                 self.microphone = sr.Microphone()
                 
-                # Adjust for ambient noise
                 with self.microphone as source:
                     self.recognizer.adjust_for_ambient_noise(source, duration=1)
             except Exception as e:
@@ -73,7 +68,6 @@ class VoiceWakeSystem:
                 self.recognizer = None
                 self.microphone = None
         
-        # Power manager
         self.power_manager = None
         if POWER_MANAGER_AVAILABLE:
             try:
@@ -87,18 +81,14 @@ class VoiceWakeSystem:
             return False, "Windows only"
         
         try:
-            # Enable USB selective suspend (allows USB devices to stay active)
             subprocess.run('powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0', shell=True, capture_output=True)
             subprocess.run('powercfg /SETDCVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0', shell=True, capture_output=True)
             
-            # Allow wake timers
             subprocess.run('powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_SLEEP RTCWAKE 1', shell=True, capture_output=True)
             subprocess.run('powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_SLEEP RTCWAKE 1', shell=True, capture_output=True)
             
-            # Enable wake from USB (HID devices - keyboards, mice, microphones)
             subprocess.run('powercfg /deviceenablewake "USB\\VID_*"', shell=True, capture_output=True)
             
-            # Apply settings
             subprocess.run('powercfg /SETACTIVE SCHEME_CURRENT', shell=True, capture_output=True)
             
             return True, "USB wake enabled"
@@ -117,15 +107,12 @@ class VoiceWakeSystem:
             while self.running:
                 try:
                     with self.microphone as source:
-                        # Listen for audio with timeout
                         audio = self.recognizer.listen(source, timeout=1, phrase_time_limit=3)
                     
                     try:
-                        # Recognize speech using Google (offline options available)
                         text = self.recognizer.recognize_google(audio, language='en-US').lower()
                         print(f"[Voice Wake] Heard: {text}")
                         
-                        # Check for wake phrase
                         if self.wake_phrase in text:
                             print(f"[Voice Wake] WAKE PHRASE DETECTED: '{self.wake_phrase}'")
                             self.wake_system()
@@ -133,14 +120,12 @@ class VoiceWakeSystem:
                                 callback()
                             break  # Stop listening after wake
                     except sr.UnknownValueError:
-                        # Didn't understand audio
                         pass
                     except sr.RequestError as e:
                         print(f"[Voice Wake] Recognition error: {e}")
                         time.sleep(1)
                 
                 except sr.WaitTimeoutError:
-                    # Timeout - continue listening
                     continue
                 except Exception as e:
                     print(f"[Voice Wake] Error: {e}")
@@ -148,7 +133,6 @@ class VoiceWakeSystem:
             
             self.listening = False
         
-        # Start listening thread
         thread = threading.Thread(target=listen_loop, daemon=True)
         thread.start()
         return True, "Listening started"
@@ -157,17 +141,13 @@ class VoiceWakeSystem:
         """Wake system from sleep"""
         try:
             if platform.system() == "Windows":
-                # Send wake signal using keyboard event
-                # This simulates a key press to wake from sleep
                 try:
                     import ctypes
-                    # Send Windows key press to wake system
                     ctypes.windll.user32.keybd_event(0x5B, 0, 0, 0)  # Windows key down
                     time.sleep(0.1)
                     ctypes.windll.user32.keybd_event(0x5B, 0, 2, 0)  # Windows key up
                     print("[Voice Wake] Wake signal sent via keyboard")
                 except:
-                    # Fallback: Use powercfg to resume
                     subprocess.run('powercfg /devicequery wake_programmable', shell=True, capture_output=True)
                     print("[Voice Wake] Attempting to wake system...")
                 
@@ -182,7 +162,6 @@ class VoiceWakeSystem:
         if self.running:
             return False, "Already running"
         
-        # Check voice security status
         if self.voice_security_enabled:
             try:
                 security_status = voice_security.get_security_status()
@@ -194,14 +173,12 @@ class VoiceWakeSystem:
             except Exception as e:
                 print(f"[Voice Wake] Warning: Could not check security status: {e}")
         
-        # Enable USB wake first
         success, msg = self.enable_usb_wake()
         if not success:
             print(f"[Voice Wake] Warning: {msg}")
         
         self.running = True
         
-        # Start listening
         success, msg = self.listen_for_wake_phrase()
         if success:
             return True, "Voice wake system started (voice authentication enabled)"
@@ -219,15 +196,12 @@ class VoiceWakeSystem:
         if not self.power_manager:
             return False, "Power manager not available"
         
-        # Start listening before sleep
         success, msg = self.start_listening()
         if not success:
             return False, f"Failed to start voice wake: {msg}"
         
-        # Give it a moment to initialize
         time.sleep(2)
         
-        # Put system to sleep (USB devices will stay powered)
         print("[Voice Wake] Entering sleep mode... Voice wake is active.")
         success, msg = self.power_manager.sleep()
         

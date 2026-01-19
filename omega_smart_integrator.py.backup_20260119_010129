@@ -1,0 +1,634 @@
+"""
+Omega Smart Integrator - Automatic Software Analysis and Integration
+Analyzes external software, extracts best features, integrates into Omega
+Removes bloat, hardcoded paths, and unnecessary code
+"""
+
+import os
+import sys
+import ast
+import json
+import inspect
+import importlib
+import subprocess
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple, Set
+from datetime import datetime
+import re
+
+class CodeAnalyzer:
+    """Analyzes Python code for useful patterns and features"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        
+    def analyze_package(self, package_name: str) -> Dict:
+        """Deep analysis of installed package"""
+        try:
+            # Import package
+            module = importlib.import_module(package_name)
+            
+            analysis = {
+                'package': package_name,
+                'version': getattr(module, '__version__', 'unknown'),
+                'classes': [],
+                'functions': [],
+                'constants': [],
+                'useful_patterns': [],
+                'bloat_detected': [],
+                'home_paths': [],
+                'optimization_opportunities': []
+            }
+            
+            # Get module file
+            module_file = inspect.getfile(module)
+            module_dir = Path(module_file).parent
+            
+            # Analyze main module
+            self._analyze_module(module, analysis)
+            
+            # Scan for hardcoded paths (bloat)
+            self._find_hardcoded_paths(module_file, analysis)
+            
+            # Identify optimization opportunities
+            self._identify_optimizations(module_file, analysis)
+            
+            return analysis
+            
+        except Exception as e:
+            return {
+                'package': package_name,
+                'error': str(e),
+                'analyzed': False
+            }
+    
+    def _analyze_module(self, module, analysis: Dict):
+        """Extract classes, functions, and patterns from module"""
+        for name, obj in inspect.getmembers(module):
+            # Skip private members
+            if name.startswith('_'):
+                continue
+            
+            # Analyze classes
+            if inspect.isclass(obj):
+                class_info = {
+                    'name': name,
+                    'methods': [m for m in dir(obj) if not m.startswith('_')],
+                    'bases': [b.__name__ for b in obj.__bases__],
+                    'useful': self._is_useful_class(obj)
+                }
+                analysis['classes'].append(class_info)
+            
+            # Analyze functions
+            elif inspect.isfunction(obj):
+                func_info = {
+                    'name': name,
+                    'signature': str(inspect.signature(obj)),
+                    'useful': self._is_useful_function(obj)
+                }
+                analysis['functions'].append(func_info)
+    
+    def _is_useful_class(self, cls) -> bool:
+        """Determine if class has useful features"""
+        useful_patterns = [
+            'optimize', 'cache', 'parallel', 'async', 'queue',
+            'pool', 'manager', 'handler', 'processor', 'analyzer',
+            'monitor', 'scanner', 'detector', 'extractor'
+        ]
+        
+        class_name = cls.__name__.lower()
+        methods = [m.lower() for m in dir(cls) if not m.startswith('_')]
+        
+        # Check class name
+        if any(pattern in class_name for pattern in useful_patterns):
+            return True
+        
+        # Check methods
+        if any(pattern in method for pattern in useful_patterns for method in methods):
+            return True
+        
+        return False
+    
+    def _is_useful_function(self, func) -> bool:
+        """Determine if function has useful features"""
+        useful_patterns = [
+            'optimize', 'improve', 'enhance', 'speedup', 'cache',
+            'parallel', 'async', 'batch', 'process', 'analyze',
+            'extract', 'detect', 'scan', 'monitor'
+        ]
+        
+        func_name = func.__name__.lower()
+        return any(pattern in func_name for pattern in useful_patterns)
+    
+    def _find_hardcoded_paths(self, file_path: str, analysis: Dict):
+        """Find hardcoded home directories and user-specific paths"""
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+            
+            # Patterns for hardcoded paths
+            patterns = [
+                r'["\'](?:/home/[^"\']+|C:\\Users\\[^"\']+)["\']',  # Home directories
+                r'["\'](?:~[^"\']*)["\']',  # Tilde paths
+                r'os\.path\.expanduser\(["\']~[^"\']*["\']\)',  # Expanduser
+                r'Path\.home\(\)',  # Path.home()
+                r'["\'](?:/tmp/|C:\\Temp\\)[^"\']*["\']',  # Temp directories
+            ]
+            
+            for pattern in patterns:
+                matches = re.findall(pattern, content)
+                analysis['home_paths'].extend(matches)
+            
+            analysis['home_paths'] = list(set(analysis['home_paths']))  # Unique
+            
+        except Exception as e:
+            analysis['bloat_detected'].append(f"Error scanning file: {e}")
+    
+    def _identify_optimizations(self, file_path: str, analysis: Dict):
+        """Identify optimization opportunities in code"""
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+            
+            # Check for optimization opportunities
+            checks = {
+                'No caching detected': 'cache' not in content.lower(),
+                'No async/await usage': 'async' not in content.lower() and 'await' not in content.lower(),
+                'No multiprocessing': 'multiprocessing' not in content.lower() and 'threading' not in content.lower(),
+                'Inefficient loops': 'for i in range(len(' in content,
+                'No type hints': '->' not in content and 'typing' not in content.lower(),
+            }
+            
+            for issue, detected in checks.items():
+                if detected:
+                    analysis['optimization_opportunities'].append(issue)
+                    
+        except Exception as e:
+            pass
+
+
+class FeatureExtractor:
+    """Extracts best features from analyzed packages"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.extracted_features_dir = self.project_root / "omega_extracted_features"
+        self.extracted_features_dir.mkdir(exist_ok=True)
+    
+    def extract_useful_code(self, analysis: Dict) -> Dict:
+        """Extract useful code patterns from analysis"""
+        extracted = {
+            'package': analysis.get('package'),
+            'timestamp': datetime.now().isoformat(),
+            'useful_classes': [],
+            'useful_functions': [],
+            'integration_code': []
+        }
+        
+        # Extract useful classes
+        for cls_info in analysis.get('classes', []):
+            if cls_info.get('useful'):
+                extracted['useful_classes'].append(cls_info)
+        
+        # Extract useful functions
+        for func_info in analysis.get('functions', []):
+            if func_info.get('useful'):
+                extracted['useful_functions'].append(func_info)
+        
+        # Generate integration code
+        extracted['integration_code'] = self._generate_integration_code(extracted)
+        
+        # Save extraction
+        self._save_extraction(extracted)
+        
+        return extracted
+    
+    def _generate_integration_code(self, extracted: Dict) -> List[str]:
+        """Generate Python code to integrate extracted features"""
+        code_snippets = []
+        
+        package = extracted['package']
+        
+        # Import statement
+        code_snippets.append(f"# Extracted from {package}")
+        code_snippets.append(f"try:")
+        code_snippets.append(f"    from {package} import (")
+        
+        # Import useful classes
+        for cls_info in extracted['useful_classes']:
+            code_snippets.append(f"        {cls_info['name']},")
+        
+        # Import useful functions
+        for func_info in extracted['useful_functions']:
+            code_snippets.append(f"        {func_info['name']},")
+        
+        code_snippets.append(f"    )")
+        code_snippets.append(f"except ImportError:")
+        code_snippets.append(f"    print('[!] {package} not available')")
+        code_snippets.append("")
+        
+        return code_snippets
+    
+    def _save_extraction(self, extracted: Dict):
+        """Save extracted features to file"""
+        package = extracted['package']
+        filename = f"{package}_extracted.json"
+        filepath = self.extracted_features_dir / filename
+        
+        with open(filepath, 'w') as f:
+            json.dump(extracted, f, indent=2)
+        
+        print(f"[+] Saved extraction: {filename}")
+
+
+class CodeOptimizer:
+    """Optimizes and removes bloat from integrated code"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+    
+    def remove_bloat(self, file_path: Path) -> Dict:
+        """Remove hardcoded paths, unused imports, and bloat"""
+        if not file_path.exists():
+            return {'error': 'File not found'}
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
+        
+        optimized_content = original_content
+        changes = []
+        
+        # Remove hardcoded home paths
+        optimized_content, home_changes = self._remove_home_paths(optimized_content)
+        changes.extend(home_changes)
+        
+        # Remove unused imports
+        optimized_content, import_changes = self._remove_unused_imports(optimized_content)
+        changes.extend(import_changes)
+        
+        # Remove excessive comments/docstrings (keep essential ones)
+        optimized_content, comment_changes = self._optimize_comments(optimized_content)
+        changes.extend(comment_changes)
+        
+        # Check if changes were made
+        if optimized_content != original_content:
+            # Create backup
+            backup_path = file_path.with_suffix(f'.py.backup_{datetime.now().strftime("%Y%m%d_%H%M%S")}')
+            with open(backup_path, 'w', encoding='utf-8') as f:
+                f.write(original_content)
+            
+            # Write optimized version
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(optimized_content)
+            
+            return {
+                'optimized': True,
+                'changes': changes,
+                'backup': str(backup_path),
+                'size_reduction': len(original_content) - len(optimized_content)
+            }
+        
+        return {'optimized': False, 'changes': []}
+    
+    def _remove_home_paths(self, content: str) -> Tuple[str, List[str]]:
+        """Replace hardcoded home paths with dynamic paths"""
+        changes = []
+        
+        # Replace specific home directories with Path.home()
+        patterns = [
+            (r'["\'](?:/home/[^/]+|C:\\Users\\[^\\]+)["\']', 'str(Path.home())'),
+            (r'["\']~["\']', 'str(Path.home())'),
+        ]
+        
+        for pattern, replacement in patterns:
+            matches = re.findall(pattern, content)
+            if matches:
+                content = re.sub(pattern, replacement, content)
+                changes.append(f"Replaced {len(matches)} hardcoded home path(s)")
+        
+        return content, changes
+    
+    def _remove_unused_imports(self, content: str) -> Tuple[str, List[str]]:
+        """Remove unused import statements"""
+        changes = []
+        
+        try:
+            tree = ast.parse(content)
+            
+            # Get all imported names
+            imported_names = set()
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    for alias in node.names:
+                        imported_names.add(alias.asname or alias.name)
+                elif isinstance(node, ast.ImportFrom):
+                    for alias in node.names:
+                        imported_names.add(alias.asname or alias.name)
+            
+            # Get all used names (simple check)
+            used_names = set()
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Name):
+                    used_names.add(node.id)
+            
+            # Find unused imports
+            unused = imported_names - used_names
+            
+            if unused:
+                changes.append(f"Found {len(unused)} potentially unused import(s)")
+                # Note: Actual removal requires more sophisticated AST manipulation
+        
+        except:
+            pass
+        
+        return content, changes
+    
+    def _optimize_comments(self, content: str) -> Tuple[str, List[str]]:
+        """Remove excessive comments while keeping important ones"""
+        changes = []
+        
+        lines = content.split('\n')
+        optimized_lines = []
+        comment_block = []
+        
+        for line in lines:
+            stripped = line.strip()
+            
+            # Keep docstrings
+            if '"""' in line or "'''" in line:
+                optimized_lines.append(line)
+                continue
+            
+            # Keep inline comments with important keywords
+            if '#' in line:
+                important_keywords = ['TODO', 'FIXME', 'NOTE', 'WARNING', 'CRITICAL', 'IMPORTANT']
+                if any(keyword in line.upper() for keyword in important_keywords):
+                    optimized_lines.append(line)
+                elif not stripped.startswith('#'):
+                    # Keep inline comments
+                    optimized_lines.append(line)
+                else:
+                    # Skip standalone comment unless important
+                    changes.append("Removed excessive comment")
+                    continue
+            else:
+                optimized_lines.append(line)
+        
+        return '\n'.join(optimized_lines), changes
+
+
+class OmegaSmartIntegrator:
+    """Main smart integration system"""
+    
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.analyzer = CodeAnalyzer()
+        self.extractor = FeatureExtractor()
+        self.optimizer = CodeOptimizer()
+        self.integration_log = self.project_root / "omega_integration_log.json"
+        self.load_integration_history()
+    
+    def load_integration_history(self):
+        """Load previous integration history"""
+        if self.integration_log.exists():
+            with open(self.integration_log, 'r') as f:
+                self.history = json.load(f)
+        else:
+            self.history = {
+                'integrations': [],
+                'last_updated': None
+            }
+    
+    def save_integration_history(self):
+        """Save integration history"""
+        self.history['last_updated'] = datetime.now().isoformat()
+        with open(self.integration_log, 'w') as f:
+            json.dump(self.history, f, indent=2)
+    
+    def analyze_and_integrate_package(self, package_name: str) -> Dict:
+        """Complete analysis and integration workflow"""
+        print(f"\n[*] Analyzing package: {package_name}")
+        
+        # Step 1: Analyze
+        print("[*] Step 1: Deep analysis...")
+        analysis = self.analyzer.analyze_package(package_name)
+        
+        if analysis.get('error'):
+            print(f"[!] Analysis failed: {analysis['error']}")
+            return analysis
+        
+        # Display findings
+        print(f"[+] Found {len(analysis['classes'])} classes")
+        print(f"[+] Found {len(analysis['functions'])} functions")
+        print(f"[+] Found {len(analysis['home_paths'])} hardcoded paths")
+        print(f"[+] Found {len(analysis['optimization_opportunities'])} optimization opportunities")
+        
+        # Step 2: Extract useful features
+        print("\n[*] Step 2: Extracting useful features...")
+        extracted = self.extractor.extract_useful_code(analysis)
+        print(f"[+] Extracted {len(extracted['useful_classes'])} useful classes")
+        print(f"[+] Extracted {len(extracted['useful_functions'])} useful functions")
+        
+        # Step 3: Generate integration code
+        print("\n[*] Step 3: Generating integration code...")
+        integration_file = self._create_integration_module(extracted)
+        print(f"[+] Created integration module: {integration_file}")
+        
+        # Step 4: Optimize
+        print("\n[*] Step 4: Removing bloat and optimizing...")
+        optimization = self.optimizer.remove_bloat(integration_file)
+        if optimization.get('optimized'):
+            print(f"[+] Optimized: {len(optimization['changes'])} changes")
+            print(f"[+] Size reduction: {optimization['size_reduction']} bytes")
+        
+        # Step 5: Re-analyze and improve
+        print("\n[*] Step 5: Re-analyzing optimized code...")
+        final_check = self._final_analysis(integration_file)
+        
+        # Log integration
+        integration_record = {
+            'package': package_name,
+            'timestamp': datetime.now().isoformat(),
+            'analysis': analysis,
+            'extracted': extracted,
+            'optimization': optimization,
+            'final_check': final_check,
+            'integration_file': str(integration_file)
+        }
+        
+        self.history['integrations'].append(integration_record)
+        self.save_integration_history()
+        
+        print(f"\n[+] Integration complete!")
+        return integration_record
+    
+    def _create_integration_module(self, extracted: Dict) -> Path:
+        """Create integration module from extracted features"""
+        package = extracted['package']
+        filename = f"omega_integrated_{package.replace('-', '_')}.py"
+        filepath = self.project_root / filename
+        
+        code = [
+            f'"""',
+            f'Omega Integration - {package}',
+            f'Auto-generated integration module',
+            f'Extracted and optimized from {package}',
+            f'Generated: {datetime.now().isoformat()}',
+            f'"""',
+            '',
+            'import os',
+            'import sys',
+            'from pathlib import Path',
+            'from typing import Dict, List, Optional, Any',
+            '',
+        ]
+        
+        # Add integration code
+        code.extend(extracted['integration_code'])
+        
+        # Add wrapper class
+        code.extend([
+            '',
+            f'class Omega{package.replace("-", "").title()}Integration:',
+            f'    """Omega integration wrapper for {package}"""',
+            '    ',
+            '    def __init__(self):',
+            '        self.project_root = Path(__file__).parent',
+            '        self.package_name = "{}"'.format(package),
+            '    ',
+            '    def get_available_features(self) -> List[str]:',
+            '        """Get list of available features"""',
+            '        features = []',
+        ])
+        
+        # Add feature methods
+        for cls_info in extracted['useful_classes']:
+            code.append(f"        features.append('{cls_info['name']}')")
+        
+        for func_info in extracted['useful_functions']:
+            code.append(f"        features.append('{func_info['name']}')")
+        
+        code.extend([
+            '        return features',
+            '',
+            '',
+            'if __name__ == "__main__":',
+            f'    integration = Omega{package.replace("-", "").title()}Integration()',
+            '    features = integration.get_available_features()',
+            f'    print(f"[+] Available features: {{len(features)}}")',
+            '    for feature in features:',
+            '        print(f"  - {{feature}}")',
+        ])
+        
+        # Write file
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(code))
+        
+        return filepath
+    
+    def _final_analysis(self, file_path: Path) -> Dict:
+        """Final analysis of optimized code"""
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Check for remaining issues
+        checks = {
+            'hardcoded_paths': len(re.findall(r'["\'](?:/home/|C:\\Users\\)', content)),
+            'has_type_hints': '->' in content or 'typing' in content,
+            'has_docstrings': '"""' in content,
+            'lines_of_code': len(content.split('\n')),
+            'imports_count': content.count('import '),
+        }
+        
+        # Syntax check
+        try:
+            ast.parse(content)
+            checks['syntax_valid'] = True
+        except:
+            checks['syntax_valid'] = False
+        
+        return checks
+    
+    def batch_integrate_packages(self, package_list: List[str]):
+        """Integrate multiple packages"""
+        results = []
+        
+        print(f"\n[*] Batch integrating {len(package_list)} packages...")
+        
+        for i, package in enumerate(package_list, 1):
+            print(f"\n{'='*70}")
+            print(f"[{i}/{len(package_list)}] Processing: {package}")
+            print('='*70)
+            
+            result = self.analyze_and_integrate_package(package)
+            results.append(result)
+        
+        print(f"\n[+] Batch integration complete: {len(results)} packages processed")
+        return results
+    
+    def optimize_all_omega_files(self):
+        """Optimize all existing Omega files"""
+        print("\n[*] Optimizing all Omega files...")
+        
+        omega_files = list(self.project_root.glob("omega*.py"))
+        results = []
+        
+        for file_path in omega_files:
+            print(f"\n[*] Optimizing: {file_path.name}")
+            result = self.optimizer.remove_bloat(file_path)
+            
+            if result.get('optimized'):
+                print(f"[+] Optimized: {len(result['changes'])} changes")
+                results.append({
+                    'file': file_path.name,
+                    'changes': result['changes'],
+                    'size_reduction': result['size_reduction']
+                })
+            else:
+                print(f"[*] No optimization needed")
+        
+        print(f"\n[+] Optimized {len(results)} file(s)")
+        return results
+
+
+def main():
+    """Main execution"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Omega Smart Integrator')
+    parser.add_argument('--package', type=str, help='Package to analyze and integrate')
+    parser.add_argument('--batch', nargs='+', help='Multiple packages to integrate')
+    parser.add_argument('--optimize-all', action='store_true', help='Optimize all Omega files')
+    parser.add_argument('--list-integrations', action='store_true', help='List integration history')
+    
+    args = parser.parse_args()
+    
+    integrator = OmegaSmartIntegrator()
+    
+    if args.package:
+        integrator.analyze_and_integrate_package(args.package)
+    
+    elif args.batch:
+        integrator.batch_integrate_packages(args.batch)
+    
+    elif args.optimize_all:
+        integrator.optimize_all_omega_files()
+    
+    elif args.list_integrations:
+        print("\n[*] Integration History:")
+        for i, integration in enumerate(integrator.history['integrations'], 1):
+            print(f"\n{i}. {integration['package']}")
+            print(f"   Timestamp: {integration['timestamp']}")
+            print(f"   Integration file: {integration['integration_file']}")
+    
+    else:
+        print("\n[*] Omega Smart Integrator")
+        print("\nUsage examples:")
+        print("  python omega_smart_integrator.py --package requests")
+        print("  python omega_smart_integrator.py --batch numpy pandas scikit-learn")
+        print("  python omega_smart_integrator.py --optimize-all")
+        print("  python omega_smart_integrator.py --list-integrations")
+
+
+if __name__ == '__main__':
+    main()

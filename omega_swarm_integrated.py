@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Swarm Integrated Server
 Combines OMEGA Swarm UI with working backend and QR code features
@@ -17,7 +16,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(32)
 CORS(app)
 
-# 6-Phone Swarm Hierarchy
 PHONE_HIERARCHY = {
     0: {"name": "QUEEN", "color": "#ffcc00", "role": "master", "label": "Queen Controller"},
     1: {"name": "BLACK_DRONE", "color": "#333333", "role": "worker", "label": "Drone 1 (Black)"},
@@ -27,7 +25,6 @@ PHONE_HIERARCHY = {
     5: {"name": "TEST_DRONE", "color": "#ffd700", "role": "test", "label": "Drone 5 (TEST)", "test_mode": True}
 }
 
-# Load OMEGA Swarm HTML files
 EXTRACTED_PATH = os.path.join(os.path.dirname(__file__), 'extracted_files_4')
 
 def load_html_file(filename):
@@ -40,7 +37,6 @@ def load_html_file(filename):
         print(f"⚠️ Error loading {filename}: {e}")
         return None
 
-# Load original OMEGA Swarm HTML
 QUEEN_HTML = load_html_file('queen.html')
 DRONE_HTML = load_html_file('drone.html')
 
@@ -54,13 +50,11 @@ def generate_qr():
     
     host = request.host
     
-    # Queen gets queen.html, drones get drone.html
     if phone_id == 0:
         install_url = f"http://{host}/queen"
     else:
         install_url = f"http://{host}/drone?id={phone_id}"
     
-    # Generate QR with phone color
     qr = qrcode.QRCode(version=1, error_correction=qrcode.ERROR_CORRECT_H, box_size=10, border=4)
     qr.add_data(install_url)
     qr.make(fit=True)
@@ -133,7 +127,6 @@ def drone_interface():
     drone_id = request.args.get('id', '1')
     
     if DRONE_HTML:
-        # Inject drone ID into HTML
         html = DRONE_HTML.replace('data-drone="1"', f'data-drone="{drone_id}"')
         html = html.replace('id: 1,', f'id: {drone_id},')
         return html
@@ -265,7 +258,6 @@ def index():
         .phone-card button:active {
             transform: scale(0.95);
         }
-        #qr-display {
             display: none;
             max-width: 500px;
             margin: 40px auto;
@@ -276,14 +268,12 @@ def index():
             box-shadow: 0 0 50px rgba(255, 204, 0, 0.5);
             position: relative;
         }
-        #qr-display h3 {
             text-align: center;
             margin-bottom: 25px;
             font-size: 24px;
             color: #ffcc00;
             text-shadow: 0 0 10px #ffcc00;
         }
-        #qr-image {
             width: 100%;
             max-width: 300px;
             border: 5px solid #ffcc00;
@@ -293,7 +283,6 @@ def index():
             display: block;
             margin: 0 auto 20px;
         }
-        #qr-url {
             word-break: break-all;
             background: #1a1a1a;
             padding: 15px;
@@ -553,7 +542,6 @@ if __name__ == '__main__':
     print("=" * 80)
     print()
     
-    # Check if HTML files exist
     if QUEEN_HTML:
         print("✅ Queen UI loaded successfully")
     else:

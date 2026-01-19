@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Relationship Voice Response
 =================================
@@ -22,7 +21,6 @@ def get_voice_response(text: str, save_file: Optional[str] = None) -> Optional[s
         if save_file is None:
             save_file = 'relationship_response.wav'
         
-        # Generate TTS
         tts.tts_to_file(
             text=text,
             speaker_wav='clip_0001.wav' if Path('clip_0001.wav').exists() else None,
@@ -30,7 +28,6 @@ def get_voice_response(text: str, save_file: Optional[str] = None) -> Optional[s
             file_path=save_file
         )
         
-        # Play in background
         play_audio_background(save_file)
         
         return save_file
@@ -46,7 +43,6 @@ async def speak_relationship_update(message: str):
     try:
         response_file = get_voice_response(message)
         if response_file:
-            # Wait for audio to play (approximately)
             await asyncio.sleep(len(message) * 0.1)  # Rough estimate: 0.1s per character
     except Exception as e:
         print(f"[!] Error speaking update: {e}")
@@ -60,6 +56,5 @@ def acknowledge_partners_status():
     return message
 
 if __name__ == "__main__":
-    # Test voice response
     message = "Hello, this is a test of the relationship voice system."
     get_voice_response(message)

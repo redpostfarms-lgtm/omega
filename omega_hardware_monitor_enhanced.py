@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Enhanced Hardware Monitor with LibreHardwareMonitor Integration
 ======================================================================
@@ -28,25 +27,20 @@ from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime
 
-# Try to import LibreHardwareMonitor via Python.NET
 LIBRE_HW_AVAILABLE = False
 try:
-    # SOLUTION 1: Set Python DLL path explicitly for Python 3.14 compatibility
     import sys
     import os
     from pathlib import Path
     
-    # Find the Python DLL for the current Python installation
     python_dll = None
     python_version = f"{sys.version_info.major}{sys.version_info.minor}"
     
-    # Try to locate python3XX.dll
     possible_dll_names = [
         f"python{python_version}.dll",
         f"python{sys.version_info.major}.dll"
     ]
     
-    # Search in Python installation directory
     python_base = Path(sys.executable).parent
     for dll_name in possible_dll_names:
         dll_path = python_base / dll_name
@@ -54,7 +48,6 @@ try:
             python_dll = str(dll_path)
             break
     
-    # If not found, try system32
     if not python_dll:
         import winreg
         try:
@@ -70,14 +63,12 @@ try:
         except:
             pass
     
-    # Set Runtime.PythonDLL before importing clr
     if python_dll and os.path.exists(python_dll):
         os.environ['PYTHONNET_PYDLL'] = python_dll
         print(f"  Python DLL: {python_dll}")
     
     import clr  # pythonnet  # type: ignore[import-untyped]
     
-    # Add LibreHardwareMonitor DLL path - try multiple locations
     libre_hw_paths = [
         os.path.join(os.environ.get('USERPROFILE', ''), 'LibreHardwareMonitor'),
         r"C:\Program Files\LibreHardwareMonitor",
@@ -109,7 +100,6 @@ except Exception as e:
     print(f"⚠ LibreHardwareMonitor not available: {e}")
     print("  Install from: https://github.com/LibreHardwareMonitor/LibreHardwareMonitor")
 
-# Import existing sensor module
 try:
     from omega_hardware_sensors import get_cpu_temperature_wmi, get_gpu_info_nvidia
 except ImportError:
@@ -230,7 +220,6 @@ class OmegaHardwareMonitor:
         """Get comprehensive CPU information"""
         cpu = CPUInfo()
         
-        # Try LibreHardwareMonitor first
         if self.libre_computer:
             try:
                 for hardware in self.libre_computer.Hardware:
@@ -267,15 +256,12 @@ class OmegaHardwareMonitor:
             except Exception as e:
                 print(f"LibreHardwareMonitor CPU error: {e}")
         
-        # Fallback methods when LibreHardwareMonitor is unavailable
         if cpu.temperature is None:
-            # Try psutil sensors (Linux-like, rarely works on Windows)
             try:
                 import psutil
                 if hasattr(psutil, "sensors_temperatures"):
                     temps = psutil.sensors_temperatures()  # type: ignore[attr-defined]
                     if temps:
-                        # Try common temperature sensor names
                         for sensor_name in ['coretemp', 'k10temp', 'zenpower', 'cpu_thermal']:
                             if sensor_name in temps:
                                 entries = temps[sensor_name]
@@ -287,7 +273,6 @@ class OmegaHardwareMonitor:
             except:
                 pass
             
-            # NEW: Try PowerShell WMI query for CPU temperature
             if cpu.temperature is None:
                 try:
                     result = subprocess.run(
@@ -306,11 +291,9 @@ class OmegaHardwareMonitor:
                 except:
                     pass
             
-            # Fallback to WMI
             if cpu.temperature is None:
                 cpu.temperature = get_cpu_temperature_wmi()
         
-        # Get CPU usage and info from psutil
         try:
             import psutil
             if cpu.usage == 0.0:
@@ -318,7 +301,6 @@ class OmegaHardwareMonitor:
             cpu.cores = psutil.cpu_count(logical=False) or 0
             cpu.threads = psutil.cpu_count(logical=True) or 0
             
-            # Get CPU name from platform
             if cpu.name == "Unknown":
                 try:
                     import platform
@@ -334,7 +316,6 @@ class OmegaHardwareMonitor:
         """Get comprehensive GPU information"""
         gpu = GPUInfo()
         
-        # Try nvidia-smi first (most reliable for NVIDIA)
         nvidia_info = get_gpu_info_nvidia()
         if nvidia_info:
             gpu.name = nvidia_info.get('name', 'Unknown')
@@ -348,7 +329,6 @@ class OmegaHardwareMonitor:
             gpu.core_clock = nvidia_info.get('clock_graphics')
             gpu.memory_clock = nvidia_info.get('clock_memory')
         
-        # Try LibreHardwareMonitor for additional sensors
         if self.libre_computer:
             try:
                 for hardware in self.libre_computer.Hardware:
@@ -387,7 +367,6 @@ class OmegaHardwareMonitor:
                 if hardware.HardwareType.ToString() == "Motherboard":
                     mb.name = hardware.Name
                     
-                    # Get sub-hardware (SuperIO chips)
                     for subhw in hardware.SubHardware:
                         subhw.Update()
                         for sensor in subhw.Sensors:
@@ -424,7 +403,6 @@ class OmegaHardwareMonitor:
         except:
             pass
         
-        # Try LibreHardwareMonitor for temperature
         if self.libre_computer:
             try:
                 for hardware in self.libre_computer.Hardware:
@@ -454,7 +432,6 @@ class OmegaHardwareMonitor:
                     storage = StorageInfo()
                     storage.name = hardware.Name
                     
-                    # Detect type from name
                     name_lower = hardware.Name.lower()
                     if "nvme" in name_lower:
                         storage.type = "NVMe"
@@ -501,10 +478,7 @@ class OmegaHardwareMonitor:
             return False
         
         try:
-            # This requires the control to be writable
-            # Most motherboards require administrator rights
             print(f"Setting {fan_name} to {speed_percent}%")
-            # Implementation depends on motherboard capabilities
             return True
         except Exception as e:
             print(f"Fan control error: {e}")
@@ -588,7 +562,6 @@ def print_hardware_summary(monitor: OmegaHardwareMonitor):
     print("OMEGA ENHANCED HARDWARE MONITOR")
     print("="*70)
     
-    # CPU
     cpu = data['cpu']
     print(f"\n[CPU] {cpu['name']}")
     print(f"  Temperature: {cpu['temperature']}°C (Package: {cpu['package_temp']}°C)")
@@ -599,7 +572,6 @@ def print_hardware_summary(monitor: OmegaHardwareMonitor):
     if cpu['power_draw']:
         print(f"  Power: {cpu['power_draw']:.1f}W")
     
-    # GPU
     gpu = data['gpu']
     print(f"\n[GPU] {gpu['name']}")
     print(f"  Temperature: {gpu['temperature']}°C", end="")
@@ -614,7 +586,6 @@ def print_hardware_summary(monitor: OmegaHardwareMonitor):
         print(f"  Fan Speed: {gpu['fan_speed']}%")
     print(f"  Clocks: Core {gpu['core_clock']}MHz, Memory {gpu['memory_clock']}MHz")
     
-    # Motherboard
     mb = data['motherboard']
     print(f"\n[Motherboard] {mb['name']}")
     if mb['chipset_temp']:
@@ -626,7 +597,6 @@ def print_hardware_summary(monitor: OmegaHardwareMonitor):
         for fan_name, speed in mb['system_fans'].items():
             print(f"    {fan_name}: {speed:.0f} RPM")
     
-    # Memory
     mem = data['memory']
     print(f"\n[Memory]")
     print(f"  Usage: {mem['used_gb']:.1f} GB / {mem['total_gb']:.1f} GB ({mem['usage_percent']:.1f}%)")
@@ -635,7 +605,6 @@ def print_hardware_summary(monitor: OmegaHardwareMonitor):
     if mem['speed_mhz']:
         print(f"  Speed: {mem['speed_mhz']} MHz")
     
-    # Storage
     if data['storage']:
         print(f"\n[Storage]")
         for storage in data['storage']:
@@ -659,7 +628,6 @@ if __name__ == "__main__":
     try:
         print_hardware_summary(monitor)
         
-        # Save to JSON for web interface
         data = monitor.get_all_hardware_data()
         with open('omega_hardware_live.json', 'w') as f:
             json.dump(data, f, indent=2, default=str)

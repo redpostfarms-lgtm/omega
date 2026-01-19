@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega NVIDIA API Integration
 ============================
@@ -127,7 +126,6 @@ class NVIDIAIntegration:
         else:
             raise Exception(f"Unexpected response format: {result}")
 
-# Global instance
 _nvidia_integration = None
 
 def get_nvidia_integration(api_key: Optional[str] = None) -> NVIDIAIntegration:
@@ -136,7 +134,6 @@ def get_nvidia_integration(api_key: Optional[str] = None) -> NVIDIAIntegration:
     if _nvidia_integration is None:
         _nvidia_integration = NVIDIAIntegration(api_key)
     elif api_key:
-        # Update API key if provided
         _nvidia_integration.api_key = api_key
     return _nvidia_integration
 
@@ -149,9 +146,7 @@ def set_nvidia_api_key(api_key: str):
         _nvidia_integration.api_key = api_key
     os.environ["NVIDIA_API_KEY"] = api_key
 
-# Example usage
 if __name__ == "__main__":
-    # Load API key from environment or config
     api_key = os.getenv("NVIDIA_API_KEY")
     
     if not api_key:
@@ -161,7 +156,6 @@ if __name__ == "__main__":
     else:
         nvidia = get_nvidia_integration()
         
-        # Simple prompt
         prompt = "Hello! How are you?"
         print(f"Prompt: {prompt}")
         

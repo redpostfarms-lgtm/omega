@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Intent Recognition
 ========================
@@ -12,7 +11,6 @@ import json
 from datetime import datetime
 import numpy as np
 
-# Try to import sentence-transformers
 try:
     from sentence_transformers import SentenceTransformer
     EMBEDDINGS_AVAILABLE = True
@@ -20,7 +18,6 @@ except ImportError:
     EMBEDDINGS_AVAILABLE = False
     print("[Intent Recognition] sentence-transformers not available. Install with: pip install sentence-transformers")
 
-# Try to import scikit-learn
 try:
     from sklearn.metrics.pairwise import cosine_similarity
     from sklearn.linear_model import LogisticRegression
@@ -41,7 +38,6 @@ class IntentRecognizer:
         self.classifier = None
         self.training_data = []
         
-        # Initialize embeddings model
         if EMBEDDINGS_AVAILABLE:
             try:
                 self.embeddings_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -49,17 +45,14 @@ class IntentRecognizer:
             except Exception as e:
                 print(f"[Intent Recognition] Embeddings initialization failed: {e}")
         
-        # Load intent classes
         self.load_intent_classes()
         
-        # Train classifier if data available
         if self.intent_embeddings:
             self._train_classifier()
     
     def load_intent_classes(self):
         """Load intent class definitions"""
         if not self.intent_file.exists():
-            # Create default intent classes
             self.intent_classes = {
                 "query": {
                     "description": "Ask a question or request information",
@@ -100,7 +93,6 @@ class IntentRecognizer:
                 print(f"[Intent Recognition] Error loading intent classes: {e}")
                 self.intent_classes = {}
         
-        # Generate embeddings for intent classes
         if self.embeddings_model and self.intent_classes:
             self._generate_intent_embeddings()
     
@@ -123,7 +115,6 @@ class IntentRecognizer:
             return
         
         for intent_name, intent_data in self.intent_classes.items():
-            # Use description and examples for embedding
             text = intent_data.get("description", "")
             examples = intent_data.get("examples", [])
             combined_text = f"{text} {' '.join(examples)}"
@@ -139,8 +130,6 @@ class IntentRecognizer:
         if not SKLEARN_AVAILABLE or not self.intent_embeddings:
             return
         
-        # For now, use similarity-based classification
-        # Could be enhanced with a trained classifier
         pass
     
     def recognize_intent(self, text: str, top_k: int = 3) -> List[Tuple[str, float]]:
@@ -157,26 +146,21 @@ class IntentRecognizer:
             List of (intent_name, similarity_score) tuples
         """
         if not self.embeddings_model or not self.intent_embeddings:
-            # Fallback: simple keyword matching
             return self._keyword_based_intent(text, top_k)
         
         try:
-            # Generate embedding for input text
             query_embedding = self.embeddings_model.encode([text])
             
-            # Calculate similarity to each intent
             similarities = {}
             for intent_name, intent_embedding in self.intent_embeddings.items():
                 if SKLEARN_AVAILABLE:
                     similarity = cosine_similarity(query_embedding, [intent_embedding])[0][0]
                 else:
-                    # Manual cosine similarity
                     similarity = np.dot(query_embedding[0], intent_embedding) / (
                         np.linalg.norm(query_embedding[0]) * np.linalg.norm(intent_embedding)
                     )
                 similarities[intent_name] = float(similarity)
             
-            # Sort by similarity
             sorted_intents = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
             return sorted_intents[:top_k]
         except Exception as e:
@@ -200,7 +184,6 @@ class IntentRecognizer:
         sorted_intents = sorted(scores.items(), key=lambda x: x[1], reverse=True)
         return sorted_intents[:top_k]
 
-# Global intent recognizer instance
 _intent_recognizer = None
 
 def get_intent_recognizer() -> IntentRecognizer:

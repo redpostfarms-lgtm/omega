@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Slang Processor - Space-Optimized Version
 ===============================================
@@ -9,15 +8,12 @@ import re
 from typing import Dict, List, Tuple, Optional, Set
 from enum import IntEnum
 
-# Use IntEnum for memory efficiency
 class Context(IntEnum):
     CODING, HISTORICAL, LANGUAGE_ARTS, INTERNET = range(4)
 
 class Formality(IntEnum):
     V_FORMAL, FORMAL, NEUTRAL, INFORMAL, V_INFORMAL = range(5)
 
-# Compact data structure: (meaning, context, formality, example_idx)
-# Examples stored separately to save space
 _EXAMPLES = [
     "There's a bug in the login function", "I need to debug this function",
     "This is a hack but it works", "This kludge will do for now",
@@ -42,9 +38,7 @@ _EXAMPLES = [
     "That's cap", "Bet, I'll do it", "Facts, that's true"
 ]
 
-# Compact slang dictionary: term -> (meaning_idx, context, formality, example_idx)
 _SLANG_DB = {
-    # Coding
     "bug": (0, Context.CODING, Formality.NEUTRAL, 0), "debug": (1, Context.CODING, Formality.NEUTRAL, 1),
     "hack": (2, Context.CODING, Formality.INFORMAL, 2), "kludge": (3, Context.CODING, Formality.INFORMAL, 3),
     "refactor": (4, Context.CODING, Formality.FORMAL, 4), "ship it": (5, Context.CODING, Formality.INFORMAL, 5),
@@ -52,20 +46,17 @@ _SLANG_DB = {
     "pythonic": (8, Context.CODING, Formality.NEUTRAL, 8), "callback hell": (9, Context.CODING, Formality.INFORMAL, 9),
     "lgtm": (10, Context.CODING, Formality.INFORMAL, 10), "wip": (11, Context.CODING, Formality.NEUTRAL, 11),
     "mvp": (12, Context.CODING, Formality.NEUTRAL, 12), "dry": (13, Context.CODING, Formality.NEUTRAL, 13),
-    # Historical
     "huzzah": (14, Context.HISTORICAL, Formality.INFORMAL, 14), "forsooth": (15, Context.HISTORICAL, Formality.FORMAL, 15),
     "prithee": (16, Context.HISTORICAL, Formality.FORMAL, 16), "bully": (17, Context.HISTORICAL, Formality.INFORMAL, 17),
     "dandy": (18, Context.HISTORICAL, Formality.INFORMAL, 18), "humbug": (19, Context.HISTORICAL, Formality.INFORMAL, 19),
     "skedaddle": (20, Context.HISTORICAL, Formality.INFORMAL, 20), "cool": (21, Context.HISTORICAL, Formality.INFORMAL, 21),
     "groovy": (22, Context.HISTORICAL, Formality.INFORMAL, 22), "rad": (23, Context.HISTORICAL, Formality.INFORMAL, 23),
     "awesome": (24, Context.HISTORICAL, Formality.INFORMAL, 24), "dude": (25, Context.HISTORICAL, Formality.INFORMAL, 25),
-    # Language Arts
     "metaphor": (26, Context.LANGUAGE_ARTS, Formality.FORMAL, 26), "simile": (27, Context.LANGUAGE_ARTS, Formality.FORMAL, 27),
     "mary sue": (28, Context.LANGUAGE_ARTS, Formality.INFORMAL, 28), "canon": (29, Context.LANGUAGE_ARTS, Formality.NEUTRAL, 29),
     "headcanon": (30, Context.LANGUAGE_ARTS, Formality.INFORMAL, 30), "shipping": (31, Context.LANGUAGE_ARTS, Formality.INFORMAL, 31),
     "otp": (32, Context.LANGUAGE_ARTS, Formality.INFORMAL, 32), "angst": (33, Context.LANGUAGE_ARTS, Formality.INFORMAL, 33),
     "fluff": (34, Context.LANGUAGE_ARTS, Formality.INFORMAL, 34), "pantser": (35, Context.LANGUAGE_ARTS, Formality.INFORMAL, 35),
-    # Internet
     "lol": (36, Context.INTERNET, Formality.V_INFORMAL, 36), "omg": (37, Context.INTERNET, Formality.V_INFORMAL, 37),
     "tldr": (38, Context.INTERNET, Formality.INFORMAL, 38), "imo": (39, Context.INTERNET, Formality.INFORMAL, 39),
     "fwiw": (40, Context.INTERNET, Formality.INFORMAL, 40), "iirc": (41, Context.INTERNET, Formality.INFORMAL, 41),
@@ -98,7 +89,6 @@ class SlangProcessor:
     """Space-optimized slang processor"""
     
     def __init__(self):
-        # Build reverse lookup for fast access
         self._term_cache: Dict[str, Tuple[int, Context, Formality, int]] = {}
         for term, data in _SLANG_DB.items():
             self._term_cache[term.lower()] = data
@@ -109,7 +99,6 @@ class SlangProcessor:
         text_lower = text.lower()
         words = set(re.findall(r'\b\w+\b', text_lower))
         
-        # Fast set intersection
         found_terms = words.intersection(self._term_cache.keys())
         
         for term in found_terms:
@@ -162,7 +151,6 @@ class SlangProcessor:
         
         return f"{term}: {meaning['meaning']} [{meaning['context']}] ({meaning['formality']})"
 
-# Global singleton for space efficiency
 _slang_processor = None
 
 def get_slang_processor() -> SlangProcessor:

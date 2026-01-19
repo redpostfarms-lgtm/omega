@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Voice Analysis Without TTS Generation
 Tests voice file loading and analysis without requiring FFmpeg
@@ -19,7 +18,6 @@ voice_files = {
 
 voice_profiles = {}
 
-# Phase 1: Load and analyze voice files
 print("\n[PHASE 1] Voice File Analysis")
 print("-" * 70)
 
@@ -35,26 +33,20 @@ try:
         
         print(f"\n  Analyzing: {description} ({voice_file})")
         
-        # Load audio
         y, sr = librosa.load(voice_file, sr=None)
         duration = len(y) / sr
         print(f"    • Sample rate: {sr:,} Hz")
         print(f"    • Duration: {duration:.2f} seconds")
         
-        # Spectral analysis
         centroid = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
         rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)[0]
         
-        # Energy
         rms = librosa.feature.rms(y=y)[0]
         
-        # Voice quality metrics
         zcr = librosa.feature.zero_crossing_rate(y=y)[0]
         
-        # MFCC
         mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
         
-        # Onset strength
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
         voice_profiles[voice_file] = {
@@ -71,7 +63,6 @@ try:
             'onset_strength_mean': float(np.mean(onset_env)),
         }
         
-        # Print metrics
         print(f"    • Brightness (Spectral Centroid): {voice_profiles[voice_file]['centroid_mean']:.0f} Hz")
         print(f"    • Energy (RMS): {voice_profiles[voice_file]['rms_mean']:.4f}")
         print(f"    • Voice Quality (ZCR): {voice_profiles[voice_file]['zcr_mean']:.4f}")
@@ -84,7 +75,6 @@ except Exception as e:
     traceback.print_exc()
     sys.exit(1)
 
-# Phase 2: Voice Comparison
 print("\n\n[PHASE 2] Voice Profile Comparison")
 print("-" * 70)
 
@@ -120,7 +110,6 @@ if len(voice_profiles) == 2:
         'energy_diff': float(abs(profile_0['rms_mean'] - profile_1['rms_mean']))
     }
 
-# Phase 3: Status Report
 print("\n\n[PHASE 3] Analysis Summary")
 print("-" * 70)
 
@@ -133,7 +122,6 @@ report = {
     'next_step': 'Install FFmpeg and run TTS voice generation'
 }
 
-# Save report
 report_file = 'voice_analysis_report.json'
 with open(report_file, 'w') as f:
     json.dump(report, f, indent=2)

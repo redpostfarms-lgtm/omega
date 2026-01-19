@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega System Status Check
 Quick diagnostic tool for all Omega components
@@ -29,12 +28,10 @@ def main():
     print(f"{CYAN}{BOLD}{'OMEGA SYSTEM STATUS':^60}{RESET}")
     print(f"{CYAN}{BOLD}{'='*60}{RESET}\n")
     
-    # Check Python environment
     print(f"{YELLOW}Python Environment:{RESET}")
     venv_path = Path(".venv311/Scripts/python.exe")
     check_status("Python 3.11 venv", venv_path.exists(), str(venv_path))
     
-    # Check key files
     print(f"\n{YELLOW}Core Components:{RESET}")
     files = [
         ("Control Panel Web", "omega_control_panel_web.py"),
@@ -47,7 +44,6 @@ def main():
     for name, filepath in files:
         check_status(name, os.path.exists(filepath), filepath)
     
-    # Check server
     print(f"\n{YELLOW}Web Server:{RESET}")
     try:
         result = subprocess.run(
@@ -63,7 +59,6 @@ def main():
     except:
         check_status("Server on port 5000", False, "Unable to check")
     
-    # Check processes
     print(f"\n{YELLOW}Running Processes:{RESET}")
     try:
         result = subprocess.run(
@@ -78,7 +73,6 @@ def main():
     except:
         check_status("Python processes", False, "Unable to check")
     
-    # Check dependencies
     print(f"\n{YELLOW}Dependencies:{RESET}")
     deps = ["flask", "pyttsx3", "psutil", "GPUtil"]
     for dep in deps:
@@ -93,7 +87,6 @@ def main():
         except:
             check_status(dep, False, "Unable to check")
     
-    # Quick actions
     print(f"\n{CYAN}{BOLD}{'='*60}{RESET}")
     print(f"{CYAN}{BOLD}{'Quick Actions':^60}{RESET}")
     print(f"{CYAN}{BOLD}{'='*60}{RESET}\n")

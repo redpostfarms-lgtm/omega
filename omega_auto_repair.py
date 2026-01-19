@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Auto-Repair System
 ========================
@@ -57,7 +56,6 @@ class OmegaAutoRepair:
         """Auto-commit or stash uncommitted changes"""
         self.log("[Source Control] Checking for uncommitted changes...")
         
-        # Check git status
         success, stdout, _ = self.run_command("git status --porcelain")
         if not success or not stdout.strip():
             return  # No changes or git error
@@ -68,7 +66,6 @@ class OmegaAutoRepair:
         
         self.log(f"[Source Control] Found {len(changes)} uncommitted changes")
         
-        # Try to auto-commit
         self.log("[Source Control] Auto-committing changes...")
         self.run_command("git add -A")
         
@@ -79,7 +76,6 @@ class OmegaAutoRepair:
             self.log(f"[Source Control] ✅ Auto-committed {len(changes)} changes")
             self.repair_count += 1
         else:
-            # If commit fails, stash changes
             self.log("[Source Control] Commit failed, stashing changes...")
             success, _, _ = self.run_command("git stash save 'Auto-repair stash'")
             if success:
@@ -108,7 +104,6 @@ class OmegaAutoRepair:
             self.log(f"[Dependencies] Missing packages: {', '.join(missing)}")
             self.log("[Dependencies] Installing missing packages...")
             
-            # Install via pip
             venv_python = self.workspace / ".venv" / "Scripts" / "python.exe"
             if venv_python.exists():
                 cmd = f'"{venv_python}" -m pip install {" ".join(missing)}'
@@ -132,7 +127,6 @@ class OmegaAutoRepair:
             self.log(f"[Icons] Missing {len(missing)} icon sizes")
             self.log("[Icons] Generating missing icons...")
             
-            # Try to import Pillow and generate
             try:
                 from PIL import Image, ImageDraw, ImageFont
                 
@@ -152,11 +146,9 @@ class OmegaAutoRepair:
         """Create KITT-themed icon"""
         from PIL import Image, ImageDraw
         
-        # Black background
         img = Image.new('RGB', (size, size), (0, 0, 0))
         draw = ImageDraw.Draw(img)
         
-        # Red KITT scanner bars
         bar_height = size // 8
         bar_spacing = size // 12
         bar_width = size - (size // 4)
@@ -169,7 +161,6 @@ class OmegaAutoRepair:
                 fill=(255, 0, 0)
             )
         
-        # Red border
         border_width = max(2, size // 64)
         draw.rectangle(
             [0, 0, size - 1, size - 1],
@@ -181,22 +172,18 @@ class OmegaAutoRepair:
     
     def check_services(self):
         """Verify Omega services are running"""
-        # Check if omega_pwa_kitt_ui.py is running
         success, stdout, _ = self.run_command("tasklist | findstr python.exe")
         
         if success and "python.exe" in stdout.lower():
-            # Python process running
             return
         
         self.log("[Services] Omega PWA not running")
         self.log("[Services] Attempting to restart...")
         
-        # Try to restart
         venv_python = self.workspace / ".venv" / "Scripts" / "python.exe"
         if venv_python.exists():
             script = self.workspace / "omega_pwa_kitt_ui.py"
             if script.exists():
-                # Start in background
                 cmd = f'start /B "" "{venv_python}" "{script}"'
                 success, _, _ = self.run_command(cmd)
                 if success:
@@ -205,14 +192,12 @@ class OmegaAutoRepair:
     
     def validate_config(self):
         """Validate configuration files"""
-        # Check manifest.json
         manifest_file = self.workspace / "static" / "manifest.json"
         if manifest_file.exists():
             try:
                 with open(manifest_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     
-                # Validate required fields
                 required_fields = ['name', 'short_name', 'start_url', 'display', 'icons']
                 for field in required_fields:
                     if field not in data:
@@ -228,7 +213,6 @@ class OmegaAutoRepair:
         start_time = time.time()
         self.repair_count = 0
         
-        # Run all checks and repairs
         self.fix_source_control()
         self.check_dependencies()
         self.check_icons()
@@ -270,10 +254,8 @@ def main():
     
     repair_system = OmegaAutoRepair()
     
-    # Run one immediate cycle
     repair_system.run_repair_cycle()
     
-    # Ask user if they want continuous monitoring
     print()
     response = input("Start continuous monitoring? (y/n): ").strip().lower()
     

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Quick Test - Test all components
 """
@@ -55,7 +54,6 @@ def main():
         results.append((name, run_test(name, cmd)))
         time.sleep(0.5)
     
-    # Summary
     print("\n" + "="*60)
     print("TEST SUMMARY")
     print("="*60 + "\n")

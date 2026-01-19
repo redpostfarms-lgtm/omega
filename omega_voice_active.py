@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Active Voice System
 Alternates between WARM and BRIGHT voices
@@ -14,7 +13,6 @@ from pathlib import Path
 os.environ['TTS_ACCEPT_TO_S'] = '1'
 os.environ['NUMBA_DISABLE_JIT'] = '1'  # Workaround for numba issues
 
-# Colors
 RED = '\033[91m'
 GREEN = '\033[92m'
 YELLOW = '\033[93m'
@@ -116,7 +114,6 @@ class OmegaVoiceSystem:
         self.output_count += 1
         output_file = f"omega_output_{self.output_count:03d}_{self.current_voice}.wav"
         
-        # Display what we're doing
         print(f"{voice_info['color']}[{voice_info['name']}] Synthesizing:{RESET}")
         print(f"  Text: \"{text}\"")
         print(f"  Speaker: {speaker_file}")
@@ -125,7 +122,6 @@ class OmegaVoiceSystem:
         start_time = time.time()
         
         try:
-            # Generate audio
             self.tts.tts_to_file(
                 text=text,
                 speaker_wav=speaker_file,
@@ -156,7 +152,6 @@ class OmegaVoiceSystem:
         print(f"{CYAN}[PLAY] Playing audio...{RESET}")
         
         try:
-            # Use PowerShell to play audio
             abs_path = os.path.abspath(file_path)
             subprocess.run(
                 ['powershell', '-c', 
@@ -230,7 +225,6 @@ class OmegaVoiceSystem:
         
         while True:
             try:
-                # Show current voice
                 voice_info = self.voices[self.current_voice]
                 prompt = f"{voice_info['color']}[{voice_info['name']}]>{RESET} "
                 
@@ -266,16 +260,13 @@ class OmegaVoiceSystem:
         """Main entry point"""
         self.print_header()
         
-        # Check files
         if not self.check_voice_files():
             return
         
-        # Load TTS
         if not self.load_tts():
             print(f"{RED}Cannot continue without TTS model{RESET}\n")
             return
         
-        # Mode selection
         print(f"{CYAN}Select Mode:{RESET}")
         print(f"  1. Alternating Demo (automatic voice switching)")
         print(f"  2. Interactive Mode (manual control)")

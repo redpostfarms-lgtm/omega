@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Hands-On Guidance System with Safety Protocols
 """
 Real-time guidance system for hands-on tasks with:
 - Step-by-step instructions
@@ -56,7 +54,6 @@ class HandsOnGuide:
         
         self.task_status = TaskStatus.PRE_TASK_SAFETY
         
-        # Get safety checklist
         safety_checks = self._get_safety_checks(task_type)
         self.current_task['safety_checks'] = safety_checks
         
@@ -92,7 +89,6 @@ class HandsOnGuide:
                 'check_result': check_result
             }
         
-        # Check if all safety checks passed
         required_checks = self._get_required_checks(self.current_task['task_type'])
         passed_ids = [c['check_id'] for c in self.safety_checks_passed]
         if all(check in passed_ids for check in required_checks):
@@ -128,7 +124,6 @@ class HandsOnGuide:
             'error_prevention': []
         }
         
-        # Add task-specific guidance
         task_type = self.current_task['task_type']
         guidance_data = self._get_task_guidance(task_type)
         
@@ -154,7 +149,6 @@ class HandsOnGuide:
             'recommendations': []
         }
         
-        # Check for common mistakes
         if task_type:
             common_mistakes = self._get_common_mistakes(task_type)
             for mistake in common_mistakes:
@@ -170,7 +164,6 @@ class HandsOnGuide:
                         'context': context
                     })
         
-        # Check safety violations
         safety_violations = self._check_safety_violations(action, task_type)
         if safety_violations:
             error_check['warnings'].extend(safety_violations)
@@ -195,12 +188,10 @@ class HandsOnGuide:
         if not self.current_task:
             return {'error': 'No task to complete'}
         
-        # Post-task safety checks
         post_task_checks = self._get_post_task_checks(self.current_task['task_type'])
         all_checks_passed = True
         
         for check in post_task_checks:
-            # In real implementation, would verify these
             check_result = {
                 'check': check,
                 'passed': True,  # Would be verified
@@ -229,7 +220,6 @@ class HandsOnGuide:
         """Get safety checks for task type."""
         checks = []
         
-        # Base checks
         base_checks = [
             {'id': 'ppe_checked', 'description': 'PPE worn and appropriate', 'required': True},
             {'id': 'work_area_clear', 'description': 'Work area clean and clear', 'required': True},
@@ -237,7 +227,6 @@ class HandsOnGuide:
         ]
         checks.extend(base_checks)
         
-        # Task-specific checks
         if task_type == 'electrical':
             checks.extend([
                 {'id': 'loto_applied', 'description': 'LOTO applied to circuit', 'required': True},
@@ -427,7 +416,6 @@ class HandsOnGuide:
         """Check for safety violations in action."""
         violations = []
         
-        # Check for unsafe actions
         unsafe_keywords = {
             'electrical': ['live', 'energized', 'hot wire'],
             'welding': ['no helmet', 'flammable nearby', 'no ventilation'],
@@ -480,7 +468,6 @@ def main():
     
     guide = HandsOnGuide()
     
-    # Example: Start electrical task
     result = guide.start_task('electrical', 'Install new circuit')
     print(f"[TASK STARTED] {result['message']}")
     print(f"[SAFETY CHECKS] {result['safety_checks_required']} checks required")

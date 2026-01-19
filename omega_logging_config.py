@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Logging Configuration
 ============================
@@ -10,7 +9,6 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-# Try to import structlog
 try:
     import structlog
     STRUCTLOG_AVAILABLE = True
@@ -26,7 +24,6 @@ def configure_logging(log_level: str = "INFO", log_file: Optional[Path] = None):
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         log_file: Optional log file path
     """
-    # Configure standard logging
     numeric_level = getattr(logging, log_level.upper(), logging.INFO)
     logging.basicConfig(
         level=numeric_level,
@@ -37,7 +34,6 @@ def configure_logging(log_level: str = "INFO", log_file: Optional[Path] = None):
         ]
     )
     
-    # Configure structlog if available
     if STRUCTLOG_AVAILABLE:
         processors = [
             structlog.processors.TimeStamper(fmt="iso"),

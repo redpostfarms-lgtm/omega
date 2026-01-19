@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Configuration System - Optimized
 ========================================
@@ -28,10 +27,8 @@ class OmegaConfig:
             except:
                 pass
         
-        # Load from legacy files if exists (for backward compatibility)
         config = {}
         
-        # Load search config
         search_config_file = self.base_dir / "omega_search_config.json"
         if search_config_file.exists():
             try:
@@ -40,7 +37,6 @@ class OmegaConfig:
             except:
                 pass
         
-        # Load autonomy config
         autonomy_config_file = self.base_dir / "omega_autonomous_config.json"
         if autonomy_config_file.exists():
             try:
@@ -49,7 +45,6 @@ class OmegaConfig:
             except:
                 pass
         
-        # Default configuration if no files exist
         if not config:
             config = {
                 "version": "2.0",
@@ -80,7 +75,6 @@ class OmegaConfig:
                 }
             }
         
-        # Save consolidated config
         self.save_config(config)
         return config
     

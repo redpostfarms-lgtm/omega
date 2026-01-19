@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Introduction - Quick introduction and start
 import sys
 import asyncio
 from pathlib import Path
@@ -17,10 +15,8 @@ async def omega_introduce():
     tts = get_tts()
     print("[OK] Omega ready!\n")
     
-    # Check security status
     security_status = voice_security.get_security_status()
     
-    # Simple, natural introduction
     introduction = """Hello, I am Omega. I'm ready to have a conversation with you. Just speak naturally, and I'll listen and respond. Let's begin."""
     
     print("[Omega Introduction]")
@@ -37,14 +33,12 @@ async def omega_introduce():
     print("[Playing introduction in background...]")
     play_audio_background('omega_intro.wav')
     
-    # Wait for audio to play
     await asyncio.sleep(20)
     
     print("\n[OK] Introduction complete!")
     print("\n[Omega is now ready for hands-free conversation]")
     print("[Starting conversation mode...]\n")
     
-    # Now start the full conversation
     from hands_free_omega import hands_free_conversation
     await hands_free_conversation()
 

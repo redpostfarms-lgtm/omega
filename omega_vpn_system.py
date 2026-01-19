@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega VPN System - Comprehensive VPN Integration
 =================================================
@@ -82,7 +81,6 @@ class OpenVPNManager:
                 stderr=subprocess.PIPE
             )
             self.status = VPNStatus.CONNECTING
-            # Wait a moment to check if it started successfully
             time.sleep(2)
             if self.process.poll() is None:
                 self.status = VPNStatus.CONNECTED
@@ -115,7 +113,6 @@ class OpenVPNManager:
         if self.process and self.process.poll() is None:
             self.status = VPNStatus.CONNECTED
         elif self.status == VPNStatus.CONNECTING:
-            # Still connecting
             pass
         else:
             self.status = VPNStatus.DISCONNECTED
@@ -136,7 +133,6 @@ class WireGuardManager:
             return False, f"Config file not found: {config_path}"
         
         try:
-            # Extract interface name from config
             interface_name = self._get_interface_name(config_path)
             
             result = subprocess.run(
@@ -169,7 +165,6 @@ class WireGuardManager:
                     if '=' in line:
                         key, value = line.split('=', 1)
                         if key.strip() == 'Address':
-                            # Use first part of address as interface hint
                             return value.strip().split('/')[0].replace('.', '')
         except:
             pass
@@ -220,7 +215,6 @@ class CloudflareWarpManager:
         """Connect to Cloudflare WARP"""
         try:
             if platform.system() == "Windows":
-                # Cloudflare WARP client on Windows
                 result = subprocess.run(
                     ["warp-cli", "connect"],
                     capture_output=True,
@@ -233,7 +227,6 @@ class CloudflareWarpManager:
                 else:
                     return False, result.stderr
             elif platform.system() == "Linux":
-                # Use warp-cli on Linux
                 result = subprocess.run(
                     ["warp-cli", "connect"],
                     capture_output=True,
@@ -323,15 +316,11 @@ class BrowserVPNIntegrator:
     
     def configure_browser_proxy(self, proxy_host: str, proxy_port: int, browser: str = "chrome") -> bool:
         """Configure browser to use proxy (requires browser restart)"""
-        # This would require browser extension or proxy configuration
-        # For now, we'll return a flag that VPN should be enabled
         self.vpn_enabled = True
         return True
     
     def enable_vpn_on_browser_start(self) -> bool:
         """Enable VPN check on browser startup"""
-        # Create browser extension or startup script
-        # For now, mark as enabled
         self.vpn_enabled = True
         return True
 
@@ -366,9 +355,7 @@ class ComprehensiveVPNManager:
             except:
                 pass
         
-        # Auto-connect on startup if always_on is enabled
         if self.always_on and self.active_provider:
-            # Auto-connect will be handled by browser integration or startup script
             pass
     
     def save_config(self):
@@ -386,7 +373,6 @@ class ComprehensiveVPNManager:
     def connect(self, provider: VPNProvider = VPNProvider.OPENVPN, 
                 config_path: Optional[str] = None) -> Tuple[bool, str]:
         """Connect to VPN"""
-        # Disconnect existing connection first
         if self.active_connection:
             self.disconnect()
         
@@ -405,9 +391,7 @@ class ComprehensiveVPNManager:
                     start_time=datetime.now()
                 )
                 self.save_config()
-                # Enable browser integration
                 self.browser_integrator.enable_vpn_on_browser_start()
-                # Start monitoring for auto-reconnect
                 if self.auto_reconnect:
                     self.start_monitoring()
             return success, message
@@ -426,7 +410,6 @@ class ComprehensiveVPNManager:
                 )
                 self.save_config()
                 self.browser_integrator.enable_vpn_on_browser_start()
-                # Start monitoring for auto-reconnect
                 if self.auto_reconnect:
                     self.start_monitoring()
             return success, message
@@ -442,7 +425,6 @@ class ComprehensiveVPNManager:
                 )
                 self.save_config()
                 self.browser_integrator.enable_vpn_on_browser_start()
-                # Start monitoring for auto-reconnect
                 if self.auto_reconnect:
                     self.start_monitoring()
             return success, message
@@ -482,7 +464,6 @@ class ComprehensiveVPNManager:
         if self.active_provider == VPNProvider.CLOUDFLARE_WARP:
             success, message = self.connect(VPNProvider.CLOUDFLARE_WARP)
         elif self.active_provider == VPNProvider.OPENVPN:
-            # Use saved config path or default
             config_path = getattr(self, 'last_config_path', None)
             success, message = self.connect(VPNProvider.OPENVPN, config_path)
         elif self.active_provider == VPNProvider.WIREGUARD:
@@ -511,13 +492,11 @@ class ComprehensiveVPNManager:
                     print(f"[VPN Monitor] VPN disconnected - reconnecting...")
                     self._reconnect()
                 else:
-                    # Check connection health
                     success, test_result = self.test_connection()
                     if not success:
                         print(f"[VPN Monitor] VPN connection unhealthy - reconnecting...")
                         self._reconnect()
                 
-                # Check every 30 seconds
                 time.sleep(30)
             except Exception as e:
                 print(f"[VPN Monitor] Error: {e}")
@@ -541,7 +520,6 @@ class ComprehensiveVPNManager:
     
     def get_status(self) -> Dict[str, Any]:
         """Get VPN status"""
-        # Check actual connection status
         actual_status = VPNStatus.DISCONNECTED
         if self.active_provider == VPNProvider.OPENVPN:
             actual_status = self.openvpn.get_status()
@@ -570,7 +548,6 @@ class ComprehensiveVPNManager:
     def test_connection(self) -> Tuple[bool, Dict[str, Any]]:
         """Test VPN connection"""
         try:
-            # Test with a simple IP check service
             response = requests.get("https://api.ipify.org?format=json", timeout=10)
             if response.status_code == 200:
                 data = response.json()
@@ -584,7 +561,6 @@ class ComprehensiveVPNManager:
         
         return False, {"status": "connection_test_failed"}
 
-# Global instance
 _vpn_manager = None
 
 def get_vpn_manager() -> ComprehensiveVPNManager:

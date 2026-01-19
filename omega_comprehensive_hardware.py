@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Comprehensive Hardware Control - ASUS B550-Plus
 ======================================================
@@ -24,7 +23,6 @@ from enum import Enum
 from datetime import datetime
 import json
 
-# RGB Color utilities
 try:
     from PIL import Image, ImageColor
     PIL_AVAILABLE = True
@@ -61,7 +59,6 @@ class RGBColor:
                 return cls(rgb[0], rgb[1], rgb[2])
             except:
                 pass
-        # Fallback for common colors
         colors = {
             "red": (255, 0, 0),
             "green": (0, 255, 0),
@@ -86,7 +83,6 @@ class RGBController:
     
     def __init__(self):
         self.system = platform.system()
-        # Use the advanced RGB controller with fallback strategies
         try:
             from omega_rgb_advanced_controller import get_advanced_rgb_controller
             self.advanced_rgb = get_advanced_rgb_controller()
@@ -112,7 +108,6 @@ class RGBController:
                     self.rgb_enabled = True
                 return success
             else:
-                # Fallback when advanced RGB not available
                 self.current_color = color
                 print(f"[RGB] Color set to {color.to_hex()} (no hardware control available)")
                 return False
@@ -165,12 +160,10 @@ class USBPortController:
         
         try:
             if self.system == "Windows":
-                # Use WMI to detect USB ports
                 try:
                     import wmi
                     c = wmi.WMI()
                     
-                    # Get USB controllers
                     controllers = c.Win32_USBController()
                     for idx, controller in enumerate(controllers):
                         port = {
@@ -182,10 +175,8 @@ class USBPortController:
                         }
                         self.usb_ports.append(port)
                     
-                    # Get USB devices
                     devices = c.Win32_USBHub()
                     for device in devices:
-                        # Match device to port
                         for port in self.usb_ports:
                             if device.DeviceID.startswith(port["device_id"].split("\\")[0]):
                                 port["devices"].append({
@@ -193,7 +184,6 @@ class USBPortController:
                                     "device_id": device.DeviceID
                                 })
                 except ImportError:
-                    # Fallback: Use PowerShell
                     try:
                         result = subprocess.run(
                             ["powershell", "-Command",
@@ -220,7 +210,6 @@ class USBPortController:
                     except:
                         pass
             else:
-                # Linux: Use lsusb
                 try:
                     result = subprocess.run(
                         ["lsusb"],
@@ -249,7 +238,6 @@ class USBPortController:
     def enable_usb_port(self, port_id: str) -> Tuple[bool, str]:
         """Enable a USB port"""
         try:
-            # Find port
             port = next((p for p in self.usb_ports if p["port_id"] == port_id), None)
             if not port:
                 return False, f"Port {port_id} not found"
@@ -257,14 +245,10 @@ class USBPortController:
             if port["enabled"]:
                 return True, f"Port {port_id} is already enabled"
             
-            # Enable port (requires admin/root)
             if self.system == "Windows":
-                # Use device manager or WMI
-                # This is complex and may require driver-level access
                 port["enabled"] = True
                 return True, f"Port {port_id} enabled"
             else:
-                # Linux: Use usb_modeswitch or udev
                 port["enabled"] = True
                 return True, f"Port {port_id} enabled"
         
@@ -281,7 +265,6 @@ class USBPortController:
             if not port["enabled"]:
                 return True, f"Port {port_id} is already disabled"
             
-            # Disable port (requires admin/root)
             port["enabled"] = False
             return True, f"Port {port_id} disabled"
         
@@ -313,16 +296,12 @@ class FanController:
         
         try:
             if self.system == "Windows":
-                # Use WMI or hardware monitoring
-                # Fan detection is hardware-specific
-                # Placeholder
                 self.fans = [
                     {"fan_id": "CPU_FAN", "name": "CPU Fan", "speed": 0, "max_speed": 3000},
                     {"fan_id": "SYS_FAN_1", "name": "System Fan 1", "speed": 0, "max_speed": 2000},
                     {"fan_id": "SYS_FAN_2", "name": "System Fan 2", "speed": 0, "max_speed": 2000},
                 ]
             else:
-                # Linux: Use sensors or /sys/class/hwmon
                 try:
                     result = subprocess.run(
                         ["sensors"],
@@ -331,8 +310,6 @@ class FanController:
                         timeout=10
                     )
                     if result.returncode == 0:
-                        # Parse fan speeds from sensors output
-                        # This is hardware-specific
                         pass
                 except:
                     pass
@@ -355,14 +332,12 @@ class FanController:
             if not fan:
                 return False, f"Fan {fan_id} not found"
             
-            # Clamp speed
             max_speed = fan.get("max_speed", 3000)
             if speed > max_speed:
                 speed = max_speed
             if speed < 0:
                 speed = 0
             
-            # Set fan speed (requires admin/root and hardware support)
             fan["speed"] = speed
             return True, f"Fan {fan_id} speed set to {speed} RPM"
         
@@ -393,12 +368,10 @@ class TemperatureMonitor:
         
         try:
             if self.system == "Windows":
-                # Use WMI for temperature
                 try:
                     import wmi
                     c = wmi.WMI(namespace="root\\wmi")
                     
-                    # CPU temperature
                     try:
                         temp_data = c.MSAcpi_ThermalZoneTemperature()
                         for temp in temp_data:
@@ -410,15 +383,11 @@ class TemperatureMonitor:
                 except ImportError:
                     pass
                 
-                # Use psutil as fallback
                 try:
                     import psutil
-                    # psutil doesn't provide CPU temp directly on Windows
-                    # Would need platform-specific libraries
                 except:
                     pass
             else:
-                # Linux: Use sensors
                 try:
                     result = subprocess.run(
                         ["sensors", "-j"],
@@ -429,8 +398,6 @@ class TemperatureMonitor:
                     if result.returncode == 0:
                         import json
                         data = json.loads(result.stdout)
-                        # Parse temperature data
-                        # This is hardware-specific
                 except:
                     pass
         except:
@@ -464,7 +431,6 @@ class ComprehensiveHardwareController:
             try:
                 with open(self.config_file, 'r') as f:
                     config = json.load(f)
-                    # Load RGB color
                     if "rgb_color" in config:
                         hex_color = config["rgb_color"]
                         self.rgb.set_color_hex(hex_color)
@@ -486,10 +452,8 @@ class ComprehensiveHardwareController:
         from omega_bios_integration import get_bios_integration
         
         bios = get_bios_integration()
-        # Re-detect drives
         bios.detect_hard_drives()
         
-        # Enable the M.2 drive
         success, message = bios.enable_hard_drive(drive_id)
         return success, message
     
@@ -541,7 +505,6 @@ class ComprehensiveHardwareController:
             "temperatures": self.temperature.get_all_temperatures()
         }
 
-# Global instance
 _hardware_controller = None
 
 def get_hardware_controller() -> ComprehensiveHardwareController:
@@ -552,7 +515,6 @@ def get_hardware_controller() -> ComprehensiveHardwareController:
     return _hardware_controller
 
 if __name__ == "__main__":
-    # Test the comprehensive hardware controller
     hw = get_hardware_controller()
     
     print("=" * 80)
@@ -560,7 +522,6 @@ if __name__ == "__main__":
     print("=" * 80)
     print()
     
-    # Get status
     status = hw.get_hardware_status()
     print("Hardware Status:")
     print(f"  Motherboard: {status['motherboard']}")

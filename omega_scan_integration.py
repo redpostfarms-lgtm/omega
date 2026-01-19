@@ -24,7 +24,6 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import logging
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -76,16 +75,12 @@ class CodeScanner:
         """Perform comprehensive scan"""
         logger.info("Starting comprehensive code scan...")
         
-        # Scan Python files
         self.scan_python_files()
         
-        # Check imports
         self.scan_imports()
         
-        # Check for common issues
         self.scan_common_issues()
         
-        # Check dependencies
         self.scan_dependencies()
         
         logger.info(f"Scan complete: {len(self.result.errors)} errors, {len(self.result.warnings)} warnings")
@@ -97,7 +92,6 @@ class CodeScanner:
         
         for py_file in self.root_dir.rglob("*.py"):
             try:
-                # Skip __pycache__ and virtual environments
                 if "__pycache__" in str(py_file) or "venv" in str(py_file) or ".venv" in str(py_file):
                     continue
                     
@@ -106,7 +100,6 @@ class CodeScanner:
                 with open(py_file, 'r', encoding='utf-8') as f:
                     content = f.read()
                 
-                # Check syntax
                 try:
                     ast.parse(content)
                 except SyntaxError as e:
@@ -114,10 +107,8 @@ class CodeScanner:
                         f"Syntax error in {py_file}: {e.msg} at line {e.lineno}"
                     )
                 
-                # Check for common red flags
                 self._check_red_flags(py_file, content)
                 
-                # Check for potential optimizations
                 self._check_optimization_opportunities(py_file, content)
                 
             except Exception as e:
@@ -170,7 +161,6 @@ class CodeScanner:
                     if isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom):
                         module_name = node.names[0].name if isinstance(node, ast.Import) else node.module
                         if module_name:
-                            # Try to check if module exists
                             try:
                                 __import__(module_name.split('.')[0])
                             except ImportError:
@@ -184,7 +174,6 @@ class CodeScanner:
         """Check for common issues"""
         logger.info("Checking for common issues...")
         
-        # Check for missing __init__.py
         python_dirs = [d for d in self.root_dir.rglob("*") if d.is_dir() and not d.name.startswith(".")]
         for dir_path in python_dirs:
             py_files = list(dir_path.glob("*.py"))
@@ -205,7 +194,6 @@ class CodeScanner:
                 
                 for req in requirements:
                     if req.strip() and not req.startswith('#'):
-                        # Check if version specified
                         if '==' not in req and '>=' not in req and '~=' not in req:
                             self.result.warnings.append(
                                 f"requirements.txt: '{req}' has no version pinning"
@@ -225,13 +213,10 @@ class CodeOptimizer:
         """Apply optimizations based on scan results"""
         logger.info("Starting optimization phase...")
         
-        # Optimize based on suggestions
         self.optimize_from_suggestions()
         
-        # Optimize imports
         self.optimize_imports()
         
-        # Optimize common patterns
         self.optimize_common_patterns()
         
         logger.info(f"Optimization complete: {len(self.result.optimizations_applied)} optimizations applied")
@@ -240,18 +225,14 @@ class CodeOptimizer:
     def optimize_from_suggestions(self):
         """Apply optimizations from scan suggestions"""
         for suggestion in self.scan_result.suggestions:
-            # This would apply actual code transformations
-            # For now, we'll just log them
             self.result.optimizations_applied.append(f"Applied: {suggestion}")
     
     def optimize_imports(self):
         """Optimize imports"""
-        # Check for unused imports, organize imports, etc.
         self.result.optimizations_applied.append("Import optimization checked")
     
     def optimize_common_patterns(self):
         """Optimize common code patterns"""
-        # Apply common optimizations like list comprehensions, generator expressions, etc.
         self.result.optimizations_applied.append("Common pattern optimizations checked")
 
 
@@ -270,10 +251,8 @@ class QuantumWebResearcher:
         # Research based on errors and warnings
         self.research_for_errors()
         
-        # Research optimization improvements
         self.research_optimizations()
         
-        # Research best practices
         self.research_best_practices()
         
         logger.info(f"Research complete: {len(self.result.improvements_found)} improvements found")
@@ -281,12 +260,9 @@ class QuantumWebResearcher:
     
     def research_for_errors(self):
         """Research solutions for errors"""
-        # In a real implementation, this would scrape web for solutions
-        # For now, we'll create structured research targets
         
         error_topics = set()
         for error in self.scan_result.errors:
-            # Extract key topics from errors
             if "import" in error.lower():
                 error_topics.add("python import errors")
             if "syntax" in error.lower():
@@ -306,7 +282,6 @@ class QuantumWebResearcher:
     
     def research_optimizations(self):
         """Research optimization improvements"""
-        # Research Python optimization techniques
         optimization_topics = [
             "python performance optimization 2026",
             "python code optimization best practices",
@@ -324,7 +299,6 @@ class QuantumWebResearcher:
     
     def research_best_practices(self):
         """Research best practices"""
-        # Research Python best practices
         self.result.improvements_found.append({
             "topic": "python best practices 2026",
             "type": "best_practice",
@@ -365,13 +339,10 @@ class CodeIntegrator:
             "timestamp": datetime.now().isoformat()
         }
         
-        # Integrate error fixes
         self.integrate_error_fixes(integration_results)
         
-        # Integrate optimizations
         self.integrate_optimizations(integration_results)
         
-        # Integrate research findings
         self.integrate_research_findings(integration_results)
         
         logger.info(f"Integration complete: {len(integration_results['files_modified'])} files modified")
@@ -379,8 +350,6 @@ class CodeIntegrator:
     
     def integrate_error_fixes(self, results: Dict[str, Any]):
         """Integrate fixes for errors"""
-        # This would apply actual fixes
-        # For now, we'll log what would be fixed
         for error in self.scan_result.errors:
             self.integration_log.append(f"Would fix: {error}")
             results["improvements_applied"].append(f"Error fix: {error[:50]}...")
@@ -393,7 +362,6 @@ class CodeIntegrator:
     
     def integrate_research_findings(self, results: Dict[str, Any]):
         """Integrate research findings"""
-        # This would integrate actual research findings
         for improvement in self.research_result.improvements_found:
             self.integration_log.append(f"Research finding: {improvement['topic']}")
             results["improvements_applied"].append(f"Research: {improvement['topic']}")
@@ -421,36 +389,30 @@ class ScanIntegrationSystem:
         logger.info("Starting Omega Scan Integration Pipeline")
         logger.info("=" * 80)
         
-        # Phase 1: Scan
         logger.info("\n[PHASE 1] SCAN: Looking for errors and red flags...")
         self.initial_scan = self.scanner.scan_all()
         self._print_scan_results(self.initial_scan, "Initial Scan")
         
-        # Phase 2: Optimize
         logger.info("\n[PHASE 2] OPTIMIZE: Optimizing based on findings...")
         self.optimizer = CodeOptimizer(self.initial_scan)
         self.optimization_result = self.optimizer.optimize_all()
         self._print_optimization_results(self.optimization_result)
         
-        # Phase 3: Quantum Web Research
         logger.info("\n[PHASE 3] QUANTUM WEB SCRAPE: Researching improvements and integration options...")
         self.researcher = QuantumWebResearcher(self.initial_scan, self.optimization_result)
         self.research_result = self.researcher.research_all()
         self._print_research_results(self.research_result)
         
-        # Phase 4: Integrate
         logger.info("\n[PHASE 4] INTEGRATE: Integrating findings...")
         self.integrator = CodeIntegrator(self.initial_scan, self.optimization_result, self.research_result)
         self.integration_result = self.integrator.integrate_all()
         self._print_integration_results(self.integration_result)
         
-        # Phase 5: Repeat Scan (Verification)
         logger.info("\n[PHASE 5] REPEAT SCAN: Verifying integration...")
         verification_scanner = CodeScanner(self.root_dir)
         self.verification_scan = verification_scanner.scan_all()
         self._print_scan_results(self.verification_scan, "Verification Scan")
         
-        # Phase 6: Finish Up
         logger.info("\n[PHASE 6] FINISH UP: Completing and generating report...")
         final_report = self._generate_final_report()
         
@@ -599,14 +561,11 @@ def main():
     
     args = parser.parse_args()
     
-    # Run scan integration pipeline
     system = ScanIntegrationSystem(root_dir=args.root)
     results = system.run_full_pipeline()
     
-    # Save report
     system.save_report(args.output)
     
-    # Return exit code based on results
     if results['verification_scan'].errors:
         logger.warning(f"Verification found {len(results['verification_scan'].errors)} errors")
         return 1

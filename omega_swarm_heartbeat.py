@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Swarm Heartbeat - Global WebSocket Monitoring
 Single source of truth for all drones. Queen pings, drones pong or die.
@@ -20,25 +19,21 @@ if TYPE_CHECKING:
     from websockets.server import WebSocketServerProtocol
     from websockets.client import WebSocketClientProtocol
 else:
-    # Runtime imports
     try:
         import websockets
         from websockets.server import WebSocketServerProtocol, serve
         from websockets.client import WebSocketClientProtocol, connect
     except ImportError:
-        # Fallback if websockets not installed
         websockets = None  # type: ignore
         WebSocketServerProtocol = Any  # type: ignore
         WebSocketClientProtocol = Any  # type: ignore
         serve = None  # type: ignore
         connect = None  # type: ignore
 
-# WebSocket configuration
 HEARTBEAT_PORT = 160
 HEARTBEAT_INTERVAL = 60  # seconds
 DEATH_TIMEOUT = 65  # seconds without pong = dead
 
-# TLS certificate paths
 CERT_FILE = Path("swarm_cert.pem")
 KEY_FILE = Path("swarm_key.pem")
 
@@ -110,7 +105,6 @@ class SwarmQueen:
                     capabilities = data.get("capabilities", [])
 
                     async with self.drone_lock:
-                        # Single source of truth update
                         self.drones[drone_id] = DroneStatus(
                             drone_id=drone_id,
                             name=name,
@@ -133,13 +127,11 @@ class SwarmQueen:
                                 self.drones[drone_id].status = "alive"
 
                 elif msg_type == "status":
-                    # Send swarm status
                     async with self.drone_lock:
                         status = {d.drone_id: d.to_dict() for d in self.drones.values()}
                     await websocket.send(json.dumps({"type": "swarm_status", "drones": status}))
 
         except Exception:
-            # Catch all exceptions including ConnectionClosed
             pass
         finally:
             if drone_id:
@@ -155,7 +147,6 @@ class SwarmQueen:
             await asyncio.sleep(HEARTBEAT_INTERVAL)
 
             async with self.drone_lock:
-                # Send ping to all connected drones
                 ping_msg = json.dumps({"type": "ping", "timestamp": time.time()})
                 
                 for drone_id, ws in list(self.connections.items()):
@@ -164,7 +155,6 @@ class SwarmQueen:
                     except Exception as e:
                         print(f"[Swarm] Failed to ping {drone_id}: {e}")
 
-                # Check for dead drones
                 dead_drones: List[DroneStatus] = []
                 for drone_id, status in self.drones.items():
                     if not status.is_alive() and status.status != "dead":
@@ -172,12 +162,10 @@ class SwarmQueen:
                         dead_drones.append(status)
                         print(f"[Swarm] ☠️  Drone DEAD: {status.name} ({drone_id})")
 
-                # Trigger git sync on death
                 if dead_drones:
                     reason = f"drone {dead_drones[0].name} died"
                     self.trigger_git_sync(reason)
 
-                # Status update
                 alive_count = sum(1 for d in self.drones.values() if d.is_alive())
                 total_count = len(self.drones)
                 print(f"[Swarm] ♥ Heartbeat: {alive_count}/{total_count} drones alive")
@@ -205,11 +193,9 @@ class SwarmQueen:
         self.running = True
         self.generate_tls_cert()
 
-        # Setup TLS context
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         ssl_context.load_cert_chain(CERT_FILE, KEY_FILE)
 
-        # Start heartbeat loop
         self.heartbeat_task = asyncio.create_task(self.heartbeat_loop())
 
         print(f"[Swarm] Queen starting on 0.0.0.0:{HEARTBEAT_PORT}")
@@ -243,7 +229,6 @@ class SwarmDrone:
         """Connect to queen and maintain connection"""
         uri = f"wss://{self.queen_host}:{HEARTBEAT_PORT}"
         
-        # Disable SSL verification for self-signed certs
         ssl_context = ssl.create_default_context()
         ssl_context.check_hostname = False
         ssl_context.verify_mode = ssl.CERT_NONE
@@ -254,7 +239,6 @@ class SwarmDrone:
                     self.websocket = websocket
                     print(f"[Swarm] Connected to queen at {self.queen_host}")
 
-                    # Register with queen
                     await websocket.send(json.dumps({
                         "type": "register",
                         "drone_id": self.drone_id,
@@ -262,7 +246,6 @@ class SwarmDrone:
                         "capabilities": self.capabilities
                     }))
 
-                    # Wait for messages
                     async for message in websocket:
                         data = json.loads(message)
                         msg_type = data.get("type")
@@ -271,18 +254,15 @@ class SwarmDrone:
                             print("[Swarm] Registered with queen")
 
                         elif msg_type == "ping":
-                            # Respond with pong
                             await websocket.send(json.dumps({
                                 "type": "pong",
                                 "drone_id": self.drone_id
                             }))
 
                         elif msg_type == "push":
-                            # Queen commands git sync
                             print("[Swarm] Queen commands: git sync")
 
             except (ConnectionRefusedError, Exception) as e:
-                # Catch ConnectionRefusedError and all websockets exceptions
                 print(f"[Swarm] Connection lost: {e}")
                 await asyncio.sleep(5)  # Retry after 5 seconds
 

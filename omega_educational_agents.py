@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Educational Agents - Agent-assisted learning system
 """
 Educational agents integrated with Omega's agent system:
 - Safety Supervisor Agent
@@ -13,7 +11,6 @@ from datetime import datetime
 from typing import Dict, List, Any
 import json
 
-# Import agent system
 sys.path.insert(0, str(Path(__file__).parent))
 from omega_agent_council import LearningAgent, AgentCouncil
 
@@ -73,10 +70,8 @@ class SafetySupervisorAgent(LearningAgent):
         violations = []
         recommendations = []
         
-        # Check against OSHA standards
         standards = self.osha_standards.get(task_type, [])
         for standard in standards:
-            # Verify compliance (simplified - would check actual compliance)
             if not check_data.get('compliance_verified', False):
                 violations.append({
                     'standard': standard,
@@ -84,7 +79,6 @@ class SafetySupervisorAgent(LearningAgent):
                     'action': f'Ensure compliance with: {standard}'
                 })
         
-        # Check PPE requirements
         required_ppe = self._get_required_ppe(task_type)
         provided_ppe = check_data.get('ppe', [])
         missing_ppe = [p for p in required_ppe if p not in provided_ppe]
@@ -168,7 +162,6 @@ class TechnicalInstructorAgent(LearningAgent):
             'best_practices': []
         }
         
-        # Topic-specific instruction (simplified - would have full knowledge base)
         if 'electrical' in topic.lower():
             instruction['concepts'] = [
                 'Ohm\'s Law (V=IR)',
@@ -212,8 +205,6 @@ class TechnicalInstructorAgent(LearningAgent):
             'common_errors': []
         }
         
-        # Procedure-specific explanations would be loaded from knowledge base
-        # This is a template - would have comprehensive procedure library
         
         return explanation
 
@@ -245,7 +236,6 @@ class HandsOnCoachAgent(LearningAgent):
             'feedback': []
         }
         
-        # Get step-specific guidance
         step_guidance = self._get_step_guidance(task_type, current_step)
         guidance.update(step_guidance)
         
@@ -261,10 +251,8 @@ class HandsOnCoachAgent(LearningAgent):
             'prevention_advice': []
         }
         
-        # Check for common error patterns
         action_lower = action.lower()
         
-        # Error detection patterns
         if 'live' in action_lower and 'electrical' in context.get('task_type', ''):
             detection['potential_errors'].append('Working on live circuit')
             detection['prevention_advice'].append('Always de-energize and verify with meter')
@@ -283,7 +271,6 @@ class HandsOnCoachAgent(LearningAgent):
     
     def _get_step_guidance(self, task_type: str, step: int) -> Dict:
         """Get guidance for specific step."""
-        # This would have comprehensive step-by-step guidance
         return {
             'instructions': [f'Step {step} guidance for {task_type}'],
             'safety_reminders': ['Follow all safety protocols'],
@@ -316,15 +303,12 @@ class QualityInspectorAgent(LearningAgent):
             'approval_status': 'pending'
         }
         
-        # Perform quality checks
         quality_checks = self._perform_quality_checks(task_type, work_data)
         inspection['quality_checks'] = quality_checks
         
-        # Check code compliance
         compliance = self._check_code_compliance(task_type, work_data)
         inspection['code_compliance'] = compliance
         
-        # Identify defects
         defects = self._identify_defects(task_type, work_data)
         inspection['defects'] = defects
         
@@ -394,8 +378,6 @@ class QualityInspectorAgent(LearningAgent):
         """Identify defects in completed work."""
         defects = []
         
-        # This would perform comprehensive defect detection
-        # Simplified for now - would have detailed defect knowledge
         
         return defects
 
@@ -424,7 +406,6 @@ class EducationalAgentCouncil:
         }
         return assistance
 
-# Global educational agent council
 educational_agents = EducationalAgentCouncil()
 
 def main():

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice Modifier
 Adjusts and transforms voice samples with various effects
@@ -64,7 +63,6 @@ class OmegaVoiceModifier:
             shifted = librosa.effects.pitch_shift(audio, sr=sr, n_steps=semitones)
             return shifted
         except:
-            # Fallback: simple resampling (less accurate but works)
             factor = 2 ** (semitones / 12.0)
             indices = np.round(np.arange(0, len(audio), factor))
             indices = indices[indices < len(audio)].astype(int)
@@ -77,14 +75,12 @@ class OmegaVoiceModifier:
             stretched = librosa.effects.time_stretch(audio, rate=factor)
             return stretched
         except:
-            # Fallback: simple resampling
             indices = np.round(np.arange(0, len(audio), factor))
             indices = indices[indices < len(audio)].astype(int)
             return audio[indices]
     
     def add_reverb(self, audio, sr, room_size=0.5):
         """Add reverb effect"""
-        # Simple reverb using delayed copies
         delay_samples = int(0.05 * sr)  # 50ms delay
         reverb = np.zeros(len(audio) + delay_samples * 3)
         
@@ -93,7 +89,6 @@ class OmegaVoiceModifier:
         reverb[delay_samples*2:delay_samples*2+len(audio)] += audio * 0.2 * room_size
         reverb[delay_samples*3:delay_samples*3+len(audio)] += audio * 0.1 * room_size
         
-        # Normalize
         reverb = reverb / np.max(np.abs(reverb))
         return reverb[:len(audio)]
     
@@ -102,21 +97,17 @@ class OmegaVoiceModifier:
         try:
             from scipy import signal
             
-            # Low-pass filter at 250 Hz
             nyquist = sr / 2
             cutoff = 250 / nyquist
             b, a = signal.butter(2, cutoff, btype='low')  # type: ignore[assignment]
             
-            # Check if audio is long enough
             if len(audio) > 20:
                 bass = signal.filtfilt(b, a, audio)
             else:
                 bass = signal.lfilter(b, a, audio)
             
-            # Mix with original (boost bass)
             return audio * 0.6 + bass * 0.4  # type: ignore[operator, return-value]
         except:
-            # Fallback: simple bass boost via FFT
             return audio * 1.1  # Just slightly boost
     
     def apply_treble_boost(self, audio, sr):
@@ -124,21 +115,17 @@ class OmegaVoiceModifier:
         try:
             from scipy import signal
             
-            # High-pass filter at 2000 Hz
             nyquist = sr / 2
             cutoff = 2000 / nyquist
             b, a = signal.butter(2, cutoff, btype='high')  # type: ignore[assignment]
             
-            # Check if audio is long enough
             if len(audio) > 20:
                 treble = signal.filtfilt(b, a, audio)
             else:
                 treble = signal.lfilter(b, a, audio)
             
-            # Mix with original (boost treble)
             return audio * 0.6 + treble * 0.4  # type: ignore[operator, return-value]
         except:
-            # Fallback: simple treble boost
             return audio * 1.1
     
     def make_deeper(self, audio, sr):
@@ -165,13 +152,11 @@ class OmegaVoiceModifier:
         """Create robotic voice effect"""
         print(f"{CYAN}  [1/2] Applying frequency modulation...{RESET}")
         
-        # Ring modulation
         t = np.arange(len(audio)) / sr
         modulator = np.sin(2 * np.pi * 30 * t)  # 30 Hz modulation
         robotic = audio * (0.7 + 0.3 * modulator)
         
         print(f"{CYAN}  [2/2] Adding subtle distortion...{RESET}")
-        # Slight clipping for digital effect
         robotic = np.clip(robotic * 1.2, -1, 1)
         
         return robotic
@@ -196,7 +181,6 @@ class OmegaVoiceModifier:
             
             print(f"{CYAN}  [1/2] Applying smoothing filter...{RESET}")
             
-            # Low-pass filter to remove harsh frequencies
             nyquist = sr / 2
             cutoff = 3000 / nyquist
             b, a = signal.butter(4, cutoff, btype='low')  # type: ignore[assignment, misc]
@@ -211,7 +195,6 @@ class OmegaVoiceModifier:
             
             return smooth
         except:
-            # Fallback: just apply reverb
             return self.add_reverb(audio, sr, room_size=0.2)
     
     def create_variations(self):
@@ -237,23 +220,19 @@ class OmegaVoiceModifier:
             print(f"{MAGENTA}{BOLD}Processing: {voice_key.upper()} ({voice_file}){RESET}")
             print(f"{MAGENTA}{BOLD}{'='*70}{RESET}\n")
             
-            # Load audio
             audio, sr = self.load_audio(voice_file)
             if audio is None:
                 continue
             
-            # Create variations
             for var_name, var_desc, var_func in variations:
                 print(f"{CYAN}[MODIFY] Creating {var_desc}...{RESET}")
                 
                 try:
                     modified = var_func(audio, sr)
                     
-                    # Normalize
                     if np.max(np.abs(modified)) > 0:
                         modified = modified / np.max(np.abs(modified)) * 0.95
                     
-                    # Save
                     output_file = f"omega_voice_{voice_key}_{var_name}.wav"
                     if self.save_audio(modified, sr, output_file):
                         self.modifications.append({
@@ -270,7 +249,6 @@ class OmegaVoiceModifier:
             
             print()
         
-        # Summary
         print(f"{GREEN}{BOLD}{'='*70}{RESET}")
         print(f"{GREEN}{BOLD}{'VOICE MODIFICATION COMPLETE':^70}{RESET}")
         print(f"{GREEN}{BOLD}{'='*70}{RESET}\n")

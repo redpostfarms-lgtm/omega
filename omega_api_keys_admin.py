@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega API Keys - Admin Key Management
 ======================================
@@ -16,12 +15,10 @@ def get_openai_key() -> str:
     """Get OpenAI API key (regular or admin)"""
     manager = get_enhanced_api_key_manager()
     
-    # Try admin key first
     admin_key = manager.get_key("OPENAI_ADMIN")
     if admin_key:
         return admin_key
     
-    # Fall back to regular key
     return manager.get_key("OPENAI")
 
 def store_admin_key(api_key: str) -> bool:
@@ -29,7 +26,6 @@ def store_admin_key(api_key: str) -> bool:
     manager = get_enhanced_api_key_manager()
     return manager.store_key("OPENAI_ADMIN", api_key, "OpenAI Admin API Key")
 
-# Convenience functions
 def get_api_key(prefer_admin: bool = True) -> str:
     """
     Get API key (admin or regular)
@@ -43,24 +39,19 @@ def get_api_key(prefer_admin: bool = True) -> str:
     manager = get_enhanced_api_key_manager()
     
     if prefer_admin:
-        # Try admin key first
         admin_key = manager.get_key("OPENAI_ADMIN")
         if admin_key:
             return admin_key
         
-        # Fall back to regular key
         return manager.get_key("OPENAI")
     else:
-        # Try regular key first
         regular_key = manager.get_key("OPENAI")
         if regular_key:
             return regular_key
         
-        # Fall back to admin key
         return manager.get_key("OPENAI_ADMIN")
 
 if __name__ == "__main__":
-    # Test the admin key functions
     manager = get_enhanced_api_key_manager()
     
     print("API Key Status:")
@@ -79,7 +70,6 @@ if __name__ == "__main__":
         print(f"  Length: {len(regular_key)} characters")
         print(f"  Prefix: {regular_key[:15]}...")
     
-    # Get preferred key
     preferred_key = get_api_key(prefer_admin=True)
     print(f"\nPreferred Key (Admin): {'✅ AVAILABLE' if preferred_key else '❌ NOT AVAILABLE'}")
     

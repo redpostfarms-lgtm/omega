@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Mesh Network - Distributed Computing Fleet Controller
 - Queen node (main device) at full power
@@ -44,7 +43,6 @@ class OmegaMeshNetwork:
             "role": "coordinator"
         }
         
-        # Initialize 5 worker nodes (phones 1-5)
         self.worker_nodes: Dict[int, WorkerNode] = {
             i: WorkerNode(
                 id=i,
@@ -106,7 +104,6 @@ class OmegaMeshNetwork:
         if not worker.enabled:
             return False
         
-        # Screen must be black (off) and no user activity
         if not screen_on and not user_active:
             worker.screen_state = "off"
             worker.status = "active"
@@ -132,7 +129,6 @@ class OmegaMeshNetwork:
         if worker.status != "active" or not worker.enabled:
             return False
         
-        # Silent task assignment - no feedback to device
         task = {
             "task_id": task_data.get("id"),
             "type": task_data.get("type", "compute"),
@@ -186,17 +182,14 @@ class OmegaMeshNetwork:
     async def monitor_fleet(self):
         """Continuous fleet monitoring loop"""
         while self.mesh_active:
-            # Monitor each worker's contribution
             for worker_id, worker in self.worker_nodes.items():
                 if worker.status == "active":
                     worker.last_heartbeat = datetime.now().isoformat()
             
-            # Update fleet power
             self._update_fleet_power()
             
             await asyncio.sleep(5)  # Check every 5 seconds
 
-# Initialize mesh network
 mesh_network = OmegaMeshNetwork()
 
 if __name__ == "__main__":

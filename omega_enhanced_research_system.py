@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Enhanced Research System
 ==============================
@@ -61,7 +60,6 @@ class EnhancedWebScraper:
                                    selectors: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
         """Internal scraping method"""
         try:
-            # Rate limiting
             domain = url.split('/')[2] if '/' in url else url
             if domain in self.rate_limits:
                 last_request = self.rate_limits[domain]
@@ -104,7 +102,6 @@ class EnhancedWebScraper:
         tasks = [scrape_with_limit(url) for url in urls]
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
-        # Convert exceptions to error results
         processed_results = []
         for i, result in enumerate(results):
             if isinstance(result, Exception):
@@ -130,30 +127,24 @@ class QuantumResearcher:
                      max_sources: int = 10) -> ResearchResult:
         """Perform research at specified level"""
         
-        # Check cache
         cache_key = f"{query}_{level.value}"
         if cache_key in self.research_cache:
             cached = self.research_cache[cache_key]
             if (datetime.now() - datetime.fromisoformat(cached['timestamp'])).days < 1:
                 return ResearchResult(**cached)
         
-        # Generate search queries
         search_queries = self._generate_search_queries(query, level)
         
-        # Research from multiple sources
         findings = []
         sources = []
         
         if level == ResearchLevel.QUANTUM:
-            # Quantum: Deep, multi-source, cross-referenced
             findings = await self._quantum_research(query, search_queries, max_sources)
             sources = [f["source"] for f in findings if "source" in f]
         else:
-            # Regular: Standard research
             findings = await self._regular_research(query, search_queries, max_sources)
             sources = [f.get("source", "unknown") for f in findings]
         
-        # Calculate confidence
         confidence = self._calculate_confidence(findings, sources)
         
         result = ResearchResult(
@@ -165,7 +156,6 @@ class QuantumResearcher:
             level=level
         )
         
-        # Cache result
         self.research_cache[cache_key] = {
             "query": result.query,
             "sources": result.sources,
@@ -182,7 +172,6 @@ class QuantumResearcher:
         base_queries = [query]
         
         if level == ResearchLevel.QUANTUM:
-            # Add variations for quantum research
             base_queries.extend([
                 f"{query} 2026",
                 f"{query} best practices",
@@ -201,7 +190,6 @@ class QuantumResearcher:
         """Regular research - single pass"""
         findings = []
         
-        # Simulate research (in real implementation, would use search APIs)
         for sq in search_queries[:max_sources]:
             findings.append({
                 "query": sq,
@@ -218,14 +206,11 @@ class QuantumResearcher:
         """Quantum research - deep, multi-source, cross-referenced"""
         findings = []
         
-        # Phase 1: Initial research
         initial_findings = await self._regular_research(query, search_queries, max_sources)
         findings.extend(initial_findings)
         
-        # Phase 2: Cross-reference
         cross_refs = []
         for finding in initial_findings[:5]:  # Top 5 findings
-            # Generate cross-reference queries
             cross_query = f"{query} {finding.get('finding', '')}"
             cross_refs.append({
                 "query": cross_query,
@@ -237,7 +222,6 @@ class QuantumResearcher:
         
         findings.extend(cross_refs)
         
-        # Phase 3: Validation
         validated = []
         for finding in findings:
             validated.append({
@@ -253,18 +237,14 @@ class QuantumResearcher:
         if not findings:
             return 0.0
         
-        # Base confidence from number of sources
         source_confidence = min(len(set(sources)) / 5.0, 1.0)
         
-        # Average relevance
         relevances = [f.get("relevance", 0.5) for f in findings]
         avg_relevance = sum(relevances) / len(relevances) if relevances else 0.5
         
-        # Validation score (if available)
         validations = [f.get("validation_score", 0.5) for f in findings if "validation_score" in f]
         avg_validation = sum(validations) / len(validations) if validations else 0.5
         
-        # Combined confidence
         confidence = (source_confidence * 0.3 + avg_relevance * 0.4 + avg_validation * 0.3)
         return min(confidence, 1.0)
 
@@ -302,7 +282,6 @@ class ResearchCoordinator:
             ]
         }
 
-# Global singleton
 _research_coordinator = None
 
 def get_research_coordinator() -> ResearchCoordinator:

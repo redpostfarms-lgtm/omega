@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Resource Manager
 ======================
@@ -15,7 +14,6 @@ from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 import json
 
-# Try GPU detection
 try:
     import torch
     TORCH_AVAILABLE = True
@@ -44,17 +42,14 @@ class ResourceManager:
         self.gpu_count = GPU_COUNT
         self.gpu_name = GPU_NAME
         
-        # Resource usage tracking
         self.resource_history = []
         self.loading_patterns = {}
         self.optimal_settings = {}
         
-        # Performance profiles
         self.performance_profile = self._detect_performance_profile()
         
     def _detect_performance_profile(self) -> str:
         """Detect system performance profile"""
-        # CPU cores
         if self.cpu_count >= 8:
             cpu_score = "high"
         elif self.cpu_count >= 4:
@@ -62,7 +57,6 @@ class ResourceManager:
         else:
             cpu_score = "low"
         
-        # RAM
         if self.ram_total >= 16:
             ram_score = "high"
         elif self.ram_total >= 8:
@@ -70,10 +64,8 @@ class ResourceManager:
         else:
             ram_score = "low"
         
-        # GPU
         gpu_score = "high" if self.gpu_available else "low"
         
-        # Overall profile
         if cpu_score == "high" and ram_score == "high" and gpu_score == "high":
             return "high_performance"
         elif cpu_score == "medium" and ram_score == "medium":
@@ -147,15 +139,12 @@ class ResourceManager:
         available_cores = self.cpu_count
         
         if task_complexity == "high":
-            # Use more cores for complex tasks
             workers = min(available_cores - 1, 8)
         elif task_complexity == "medium":
-            # Use fewer cores for medium tasks
             workers = min(available_cores // 2, 4)
         else:
             workers = 1
         
-        # Adjust based on CPU usage
         if cpu_usage > 70:
             workers = max(1, workers // 2)
         
@@ -172,14 +161,12 @@ class ResourceManager:
             "resources": self.get_resource_status()
         })
         
-        # Keep last 20 entries
         if len(self.loading_patterns[component]) > 20:
             self.loading_patterns[component] = self.loading_patterns[component][-20:]
     
     def get_optimal_load_order(self) -> List[str]:
         """Get optimal loading order based on history"""
         if not self.loading_patterns:
-            # Default order
             return [
                 "ui_framework",
                 "caching",
@@ -188,14 +175,12 @@ class ResourceManager:
                 "monitoring"
             ]
         
-        # Sort by average load time (fastest first)
         component_times = {}
         for component, history in self.loading_patterns.items():
             if history:
                 avg_time = sum(h["load_time"] for h in history) / len(history)
                 component_times[component] = avg_time
         
-        # Sort by load time (fastest first)
         sorted_components = sorted(component_times.items(), key=lambda x: x[1])
         return [comp for comp, _ in sorted_components]
     
@@ -238,10 +223,8 @@ class GradualLoader:
         self.base_dir = Path(__file__).parent.absolute()
         self.patterns_file = self.base_dir / ".omega_loading_patterns.json"
         
-        # Load existing patterns
         self.resource_manager.load_loading_patterns(self.patterns_file)
         
-        # Gradual loading settings
         self.gradual_load = True
         self.delay_between_components = 0.1  # Initial delay (will adapt)
         
@@ -250,19 +233,15 @@ class GradualLoader:
         start_time = time.time()
         
         try:
-            # Check if we should delay
             if self.gradual_load:
-                # Use adaptive delay based on CPU usage
                 cpu_usage = self.resource_manager.get_cpu_usage()
                 if cpu_usage > 70:
                     time.sleep(self.delay_between_components * 2)
                 else:
                     time.sleep(self.delay_between_components)
             
-            # Load component
             result = load_func(*args, **kwargs)
             
-            # Track loading time
             load_time = time.time() - start_time
             self.resource_manager.track_loading_time(component_name, load_time)
             
@@ -274,28 +253,23 @@ class GradualLoader:
     
     def load_all_components(self, components: Dict[str, Tuple[callable, tuple, dict]]):
         """Load all components in optimal order"""
-        # Get optimal load order
         optimal_order = self.resource_manager.get_optimal_load_order()
         
-        # Sort components by optimal order
         ordered_components = []
         for comp_name in optimal_order:
             if comp_name in components:
                 ordered_components.append((comp_name, components[comp_name]))
         
-        # Add remaining components
         for comp_name, comp_data in components.items():
             if comp_name not in optimal_order:
                 ordered_components.append((comp_name, comp_data))
         
-        # Load components
         results = {}
         for comp_name, (load_func, args, kwargs) in ordered_components:
             print(f"[Gradual Loader] Loading {comp_name}...")
             result = self.load_component(comp_name, load_func, *args, **kwargs)
             results[comp_name] = result
         
-        # Save patterns
         self.resource_manager.save_loading_patterns(self.patterns_file)
         
         return results
@@ -305,14 +279,12 @@ class GradualLoader:
         if not self.resource_manager.loading_patterns:
             return
         
-        # Calculate average load time
         all_times = []
         for history in self.resource_manager.loading_patterns.values():
             all_times.extend([h["load_time"] for h in history])
         
         if all_times:
             avg_time = sum(all_times) / len(all_times)
-            # Adjust delay based on average time (faster systems need less delay)
             if avg_time < 0.1:
                 self.delay_between_components = 0.05
             elif avg_time < 0.5:

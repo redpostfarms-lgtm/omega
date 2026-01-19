@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Startup Optimizer
 =======================
@@ -35,7 +34,6 @@ class StartupItem:
 class StartupOptimizer:
     """Windows startup optimizer"""
     
-    # Essential Windows services/programs that should NOT be disabled
     ESSENTIAL_WINDOWS_PROGRAMS = {
         'Windows Defender', 'Security Health Service', 'Windows Update',
         'Windows Security', 'Microsoft Windows', 'System',
@@ -48,7 +46,6 @@ class StartupOptimizer:
         'Windows Update', 'Windows Backup', 'Windows Installer',
     }
     
-    # Common non-essential programs (can be safely removed)
     COMMON_NON_ESSENTIAL = {
         'Skype', 'Discord', 'Spotify', 'Steam', 'Epic Games', 'Adobe',
         'iTunes', 'QuickTime', 'Google Update', 'Microsoft Teams',
@@ -64,7 +61,6 @@ class StartupOptimizer:
         'ZoomOpener', 'SkypeHost', 'TeamsMachineInstaller',
     }
     
-    # Windows tracking/telemetry services and programs (REMOVE these)
     TRACKING_SERVICES = {
         'Connected User Experiences and Telemetry', 'DiagTrack', 'dmwappushservice',
         'Windows Error Reporting Service', 'WERSvc', 'WerSvc',
@@ -87,7 +83,6 @@ class StartupOptimizer:
         'Windows Management Instrumentation',  # Keep this - it's essential
     }
     
-    # Tracking keywords (identify tracking software)
     TRACKING_KEYWORDS = {
         'telemetry', 'tracking', 'diagnostic', 'error reporting', 'feedback',
         'customer experience', 'ceip', 'dmwappush', 'diagtrack',
@@ -112,21 +107,16 @@ class StartupOptimizer:
         """Scan all startup items from various locations"""
         self.startup_items = []
         
-        # 1. Registry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
         self._scan_registry_startup(winreg.HKEY_CURRENT_USER,
                                     r"Software\Microsoft\Windows\CurrentVersion\Run")
         
-        # 2. Registry: HKLM\Software\Microsoft\Windows\CurrentVersion\Run
         self._scan_registry_startup(winreg.HKEY_LOCAL_MACHINE,
                                     r"Software\Microsoft\Windows\CurrentVersion\Run")
         
-        # 3. Startup folder
         self._scan_startup_folder()
         
-        # 4. Scheduled tasks (startup tasks)
         self._scan_scheduled_tasks()
         
-        # 5. Services (non-essential services)
         self._scan_services()
         
         return self.startup_items
@@ -188,7 +178,6 @@ class StartupOptimizer:
     def _scan_scheduled_tasks(self):
         """Scan scheduled tasks that run on startup"""
         try:
-            # Get tasks that run at startup or logon
             result = subprocess.run(
                 ['schtasks', '/query', '/fo', 'csv', '/v'],
                 capture_output=True,
@@ -202,13 +191,11 @@ class StartupOptimizer:
                     if not line.strip():
                         continue
                     
-                    # Parse CSV (simple parsing)
                     parts = line.split(',')
                     if len(parts) > 1:
                         task_name = parts[0].strip('"')
                         trigger = parts[4].strip('"') if len(parts) > 4 else ""
                         
-                        # Check if task runs on startup/logon
                         if any(keyword in trigger.lower() for keyword in ['startup', 'logon', 'boot']):
                             essential = self._is_essential(task_name)
                             category = self._categorize_item(task_name, "")
@@ -229,7 +216,6 @@ class StartupOptimizer:
     def _scan_services(self):
         """Scan non-essential services"""
         try:
-            # Get services that are set to auto-start
             result = subprocess.run(
                 ['sc', 'query', 'state=', 'all'],
                 capture_output=True,
@@ -238,7 +224,6 @@ class StartupOptimizer:
             )
             
             # Note: Service scanning is complex, so we'll focus on registry/startup folder
-            # Services require admin privileges and careful handling
         except Exception as e:
             print(f"Warning: Could not scan services: {e}")
     
@@ -255,12 +240,10 @@ class StartupOptimizer:
         name_lower = name.lower()
         path_lower = path.lower()
         
-        # Check tracking services list
         for tracking in self.TRACKING_SERVICES:
             if tracking.lower() in name_lower or tracking.lower() in path_lower:
                 return True
         
-        # Check tracking keywords
         for keyword in self.TRACKING_KEYWORDS:
             if keyword.lower() in name_lower or keyword.lower() in path_lower:
                 return True
@@ -272,24 +255,20 @@ class StartupOptimizer:
         name_lower = name.lower()
         path_lower = path.lower()
         
-        # System category
         if any(system in name_lower for system in ['windows', 'microsoft', 'system', 'security']):
             if not self._is_essential(name):
                 return "microsoft_store"
             return "system"
         
-        # Third-party category
         for non_essential in self.COMMON_NON_ESSENTIAL:
             if non_essential.lower() in name_lower or non_essential.lower() in path_lower:
                 return "third_party"
         
-        # Default to user
         return "user"
     
     def get_non_essential_items(self) -> List[StartupItem]:
         """Get list of non-essential startup items"""
         non_essential = [item for item in self.startup_items if not item.essential]
-        # Sort by category (third_party first, then user, then microsoft_store)
         category_order = {"third_party": 0, "user": 1, "microsoft_store": 2}
         non_essential.sort(key=lambda x: (category_order.get(x.category, 99), x.name))
         return non_essential
@@ -303,7 +282,6 @@ class StartupOptimizer:
         """Remove a startup item completely (delete from registry/folder)"""
         try:
             if item.location.startswith("registry_"):
-                # Extract registry info
                 hkey_str = item.location.replace("registry_", "")
                 hkey = winreg.HKEY_CURRENT_USER if hkey_str == "HKCU" else winreg.HKEY_LOCAL_MACHINE
                 subkey = r"Software\Microsoft\Windows\CurrentVersion\Run"
@@ -321,13 +299,11 @@ class StartupOptimizer:
                     return False, f"Permission denied: Run as administrator to remove {item.name}"
             
             elif item.location == "startup_folder":
-                # Delete item from startup folder (move to backup first)
                 backup_dir = Path("startup_backup")
                 backup_dir.mkdir(exist_ok=True)
                 
                 source = Path(item.path)
                 if source.exists():
-                    # Backup first
                     backup_path = backup_dir / source.name
                     shutil.move(str(source), str(backup_path))
                     item.enabled = False
@@ -338,7 +314,6 @@ class StartupOptimizer:
                     return False, f"{item.name} not found in startup folder"
             
             elif item.location == "scheduled_task":
-                # Delete scheduled task (requires admin)
                 try:
                     result = subprocess.run(
                         ['schtasks', '/delete', '/tn', item.name, '/f'],
@@ -351,7 +326,6 @@ class StartupOptimizer:
                         self.removed_items.append(item)
                         return True, f"✅ Removed scheduled task: {item.name}"
                     else:
-                        # Try disable if delete fails
                         result2 = subprocess.run(
                             ['schtasks', '/change', '/tn', item.name, '/disable'],
                             capture_output=True,
@@ -391,7 +365,6 @@ class StartupOptimizer:
             else:
                 results["skipped"].append({"name": item.name, "message": "Already removed/disabled"})
         
-        # Save removal backup
         self.save_removal_backup()
         
         return results
@@ -416,7 +389,6 @@ class StartupOptimizer:
             else:
                 results["skipped"].append({"name": item.name, "message": "Already removed/disabled"})
         
-        # Save removal backup
         self.save_removal_backup()
         
         return results
@@ -430,13 +402,11 @@ class StartupOptimizer:
             "failed": []
         }
         
-        # Remove tracking first
         print("Removing tracking/telemetry items...")
         tracking_results = self.remove_all_tracking()
         results["tracking_removed"] = tracking_results["removed"]
         results["failed"].extend(tracking_results["failed"])
         
-        # Remove non-essential
         print("Removing non-essential items...")
         non_essential_results = self.remove_all_non_essential()
         results["non_essential_removed"] = non_essential_results["removed"]
@@ -448,7 +418,6 @@ class StartupOptimizer:
     
     def disable_all_non_essential(self) -> Dict[str, Any]:
         """Disable all non-essential startup items (legacy - uses remove now)"""
-        # Use remove instead of disable
         return self.remove_all_non_essential()
     
     def save_backup(self):
@@ -491,8 +460,6 @@ class StartupOptimizer:
             
             for item_data in backup_data.get("disabled_items", []):
                 item = StartupItem(**item_data)
-                # Restore logic would go here (reverse disable operation)
-                # This is complex and would need careful implementation
                 restored += 1
             
             return True, f"Restored {restored} items, {failed} failed"
@@ -503,9 +470,7 @@ class StartupOptimizer:
     def add_omega_to_startup(self, omega_script: Optional[Path] = None) -> Tuple[bool, str]:
         """Add Omega to Windows startup"""
         try:
-            # Determine Omega script path
             if omega_script is None:
-                # Look for common Omega startup scripts
                 current_dir = Path(__file__).parent
                 possible_scripts = [
                     current_dir / "START_HERE.bat",
@@ -528,14 +493,11 @@ class StartupOptimizer:
             if not omega_script.exists():
                 return False, f"Omega script not found: {omega_script}"
             
-            # Create startup folder shortcut/script
             startup_folder = Path(os.getenv("APPDATA")) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
             startup_folder.mkdir(parents=True, exist_ok=True)
             
-            # Create batch file in startup folder
             startup_script = startup_folder / "Omega_Start.bat"
             
-            # Create startup script content
             if omega_script.suffix.lower() == '.py':
                 script_content = f"""@echo off
 REM Omega System - Auto-start on login
@@ -563,7 +525,6 @@ call "{omega_script.name}"
         """Remove Omega from Windows startup"""
         try:
             if self.omega_startup_script is None:
-                # Try to find Omega startup script
                 startup_folder = Path(os.getenv("APPDATA")) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
                 omega_scripts = list(startup_folder.glob("Omega*.bat"))
                 if omega_scripts:
@@ -587,7 +548,6 @@ call "{omega_script.name}"
         enabled_non_essential = [item for item in non_essential if item.enabled]
         disabled_non_essential = [item for item in non_essential if not item.enabled]
         
-        # Check if Omega is in startup
         startup_folder = Path(os.getenv("APPDATA")) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
         omega_in_startup = any("Omega" in item.name for item in self.startup_items if item.location == "startup_folder")
         
@@ -632,7 +592,6 @@ def main():
     print(f"  Omega in startup: {'Yes' if report['omega_in_startup'] else 'No'}")
     print()
     
-    # Show non-essential items
     non_essential = optimizer.get_non_essential_items()
     if non_essential:
         print("Non-essential startup items:")
@@ -643,7 +602,6 @@ def main():
             print(f"  ... and {len(non_essential) - 20} more")
         print()
     
-    # Ask user what to do
     print("Options:")
     print("  1. Disable all non-essential startup items")
     print("  2. Add Omega to startup")

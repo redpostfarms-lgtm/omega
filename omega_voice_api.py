@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice API - Simple Python Interface
 Provides easy-to-use functions for voice synthesis
@@ -12,7 +11,6 @@ import logging
 
 os.environ['TTS_ACCEPT_TO_S'] = '1'
 
-# Configure logging
 logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -50,7 +48,6 @@ class OmegaVoice:
         self.device = None
         self.initialized = False
         
-        # Check voice files
         self.available_voices = self._check_voice_files()
         
         if auto_load:
@@ -120,14 +117,12 @@ class OmegaVoice:
         Returns:
             Path to generated audio file, or None if failed
         """
-        # Ensure model is loaded
         if not self.initialized:
             logger.info("TTS model not loaded, initializing...")
             if not self.initialize():
                 logger.error("Cannot synthesize: TTS initialization failed")
                 return None
         
-        # Validate voice
         if voice not in self.VOICE_PROFILES:
             logger.error(f"Invalid voice: {voice}. Available: {list(self.VOICE_PROFILES.keys())}")
             return None
@@ -136,12 +131,10 @@ class OmegaVoice:
             logger.error(f"Voice file not available: {voice}")
             return None
         
-        # Generate filename
         if save_as is None:
             timestamp = int(time.time())
             save_as = f"omega_voice_{voice}_{timestamp}.wav"
         
-        # Synthesize
         speaker_file = self.VOICE_PROFILES[voice]['file']
         
         logger.info(f"Synthesizing with {voice} voice: '{text[:50]}...'")
@@ -224,7 +217,6 @@ class OmegaVoice:
         return voices
 
 
-# Convenience functions for direct usage
 _omega_instance = None
 
 def get_omega_voice() -> OmegaVoice:
@@ -246,16 +238,13 @@ def speak(text: str, voice: str = "warm", save_as: Optional[str] = None, play: b
     return omega.speak(text, voice, save_as, play)
 
 
-# Example usage
 if __name__ == "__main__":
     print("=" * 70)
     print("OMEGA VOICE API - Example Usage")
     print("=" * 70)
     
-    # Create instance
     omega = OmegaVoice(auto_load=True)
     
-    # List available voices
     print("\nAvailable Voices:")
     for voice in omega.list_voices():
         print(f"\n  {voice['name'].upper()}")
@@ -265,7 +254,6 @@ if __name__ == "__main__":
         if voice['available']:
             print(f"    Size: {voice['size_mb']:.2f} MB")
     
-    # Generate sample
     print("\n" + "=" * 70)
     print("Generating sample audio...")
     print("=" * 70)

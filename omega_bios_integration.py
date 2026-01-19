@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega BIOS Integration - ASUS B550-Plus
 ========================================
@@ -59,10 +58,8 @@ class ASUSB550BIOSIntegration:
         self.gpu_slots: List[GPUSlot] = []
         self.hard_drives: List[HardDrive] = []
         
-        # Load configuration
         self.load_config()
         
-        # Detect hardware
         self.detect_gpus()
         self.detect_hard_drives()
     
@@ -75,7 +72,6 @@ class ASUSB550BIOSIntegration:
             except:
                 self.bios_settings = {}
         else:
-            # Default settings
             self.bios_settings = {
                 "gpu_cross_connect": True,
                 "auto_enable_hard_drives": True,
@@ -94,12 +90,10 @@ class ASUSB550BIOSIntegration:
         
         try:
             if platform.system() == "Windows":
-                # Use WMI to detect GPUs
                 try:
                     import wmi
                     c = wmi.WMI()
                     
-                    # Get GPU devices
                     gpus = c.Win32_VideoController()
                     
                     for idx, gpu in enumerate(gpus):
@@ -113,7 +107,6 @@ class ASUSB550BIOSIntegration:
                         )
                         self.gpu_slots.append(slot)
                 except ImportError:
-                    # Fallback: Use PowerShell
                     try:
                         result = subprocess.run(
                             ["powershell", "-Command", 
@@ -140,7 +133,6 @@ class ASUSB550BIOSIntegration:
                     except:
                         pass
             else:
-                # Linux: Use lspci
                 try:
                     result = subprocess.run(
                         ["lspci", "-nn", "-d", "::0300"],  # VGA controllers
@@ -171,12 +163,10 @@ class ASUSB550BIOSIntegration:
         
         try:
             if platform.system() == "Windows":
-                # Use WMI to detect drives
                 try:
                     import wmi
                     c = wmi.WMI()
                     
-                    # Get physical drives
                     drives = c.Win32_DiskDrive()
                     
                     for idx, drive in enumerate(drives):
@@ -190,7 +180,6 @@ class ASUSB550BIOSIntegration:
                         )
                         self.hard_drives.append(hdd)
                 except ImportError:
-                    # Fallback: Use PowerShell
                     try:
                         result = subprocess.run(
                             ["powershell", "-Command",
@@ -219,7 +208,6 @@ class ASUSB550BIOSIntegration:
                     except:
                         pass
             else:
-                # Linux: Use lsblk
                 try:
                     result = subprocess.run(
                         ["lsblk", "-d", "-o", "NAME,SIZE,MODEL", "-J"],
@@ -256,8 +244,6 @@ class ASUSB550BIOSIntegration:
             if len(self.gpu_slots) < 2:
                 return False, "Need at least 2 GPUs for cross-connect"
             
-            # ASUS B550-Plus specific BIOS settings
-            # Enable both PCIe slots
             settings = {
                 "PCIe_x16_1": "Enabled",
                 "PCIe_x16_2": "Enabled",
@@ -265,7 +251,6 @@ class ASUSB550BIOSIntegration:
                 "PCIe_Lane_Config": "x8/x8"  # Split lanes for dual GPU
             }
             
-            # Apply BIOS settings (requires admin/root)
             success = self._apply_bios_settings(settings)
             
             if success:
@@ -282,7 +267,6 @@ class ASUSB550BIOSIntegration:
     def enable_hard_drive(self, drive_id: str) -> Tuple[bool, str]:
         """Enable a hard drive in BIOS"""
         try:
-            # Find the drive
             drive = next((d for d in self.hard_drives if d.drive_id == drive_id), None)
             if not drive:
                 return False, f"Drive {drive_id} not found"
@@ -290,13 +274,11 @@ class ASUSB550BIOSIntegration:
             if drive.enabled:
                 return True, f"Drive {drive_id} is already enabled"
             
-            # Enable drive in BIOS
             settings = {
                 f"SATA_{drive_id}": "Enabled",
                 f"NVMe_{drive_id}": "Enabled" if "NVMe" in drive.interface else None
             }
             
-            # Remove None values
             settings = {k: v for k, v in settings.items() if v is not None}
             
             success = self._apply_bios_settings(settings)
@@ -333,11 +315,7 @@ class ASUSB550BIOSIntegration:
         """
         try:
             if platform.system() == "Windows":
-                # ASUS motherboard tools
-                # Try ASUS AI Suite or UEFI tools
-                # This is a placeholder - actual implementation depends on ASUS tools
                 
-                # Option 1: Use ASUS AI Suite (if installed)
                 asus_tools = [
                     r"C:\Program Files (x86)\ASUS\AI Suite III\AI Suite III.exe",
                     r"C:\Program Files\ASUS\AI Suite III\AI Suite III.exe"
@@ -345,48 +323,31 @@ class ASUSB550BIOSIntegration:
                 
                 for tool_path in asus_tools:
                     if Path(tool_path).exists():
-                        # Use ASUS tool to apply settings
-                        # This would require ASUS SDK or API
                         print(f"ASUS tool found: {tool_path}")
-                        # Placeholder for actual ASUS tool integration
                         return True
                 
-                # Option 2: Use UEFI/BIOS variables (requires admin)
-                # This is complex and motherboard-specific
-                # Would need to use UEFI runtime services
                 
-                # Option 3: Use WMI/ACPI (limited BIOS access)
                 try:
                     import wmi
                     c = wmi.WMI(namespace="root\\wmi")
-                    # Limited BIOS access via WMI
-                    # Most settings require UEFI/BIOS access
                     return True  # Placeholder
                 except:
                     pass
                 
-                # For now, return True (settings would be applied on next boot)
-                # In production, this would use ASUS-specific tools or UEFI access
                 print("Note: BIOS settings will be applied on next system restart")
                 return True
             
             else:
-                # Linux: Use efibootmgr or UEFI variables
                 try:
-                    # Check if running in UEFI mode
                     result = subprocess.run(
                         ["test", "-d", "/sys/firmware/efi"],
                         timeout=5
                     )
                     
                     if result.returncode == 0:
-                        # UEFI mode - can modify UEFI variables
-                        # This requires root access
-                        # Would use efivar or direct UEFI variable access
                         print("UEFI mode detected - can modify BIOS settings")
                         return True
                     else:
-                        # Legacy BIOS - limited access
                         print("Legacy BIOS mode - limited access")
                         return False
                 except:
@@ -427,21 +388,17 @@ class ASUSB550BIOSIntegration:
     
     def configure_for_new_gpu(self) -> Tuple[bool, str]:
         """Configure BIOS for new GPU installation"""
-        # Re-detect GPUs
         self.detect_gpus()
         
         if len(self.gpu_slots) >= 2:
-            # Enable cross-connect
             return self.enable_gpu_cross_connect()
         else:
             return True, f"Single GPU detected: {self.gpu_slots[0].model if self.gpu_slots else 'None'}"
     
     def configure_for_new_hard_drive(self) -> Tuple[bool, str]:
         """Configure BIOS for new hard drive installation"""
-        # Re-detect hard drives
         self.detect_hard_drives()
         
-        # Auto-enable new drives
         success, enabled = self.auto_enable_new_hard_drives()
         
         if success:
@@ -452,7 +409,6 @@ class ASUSB550BIOSIntegration:
         else:
             return False, "Failed to enable new hard drives"
 
-# Global instance
 _bios_integration = None
 
 def get_bios_integration() -> ASUSB550BIOSIntegration:
@@ -463,7 +419,6 @@ def get_bios_integration() -> ASUSB550BIOSIntegration:
     return _bios_integration
 
 if __name__ == "__main__":
-    # Test the BIOS integration
     bios = get_bios_integration()
     
     print("=" * 80)
@@ -471,7 +426,6 @@ if __name__ == "__main__":
     print("=" * 80)
     print()
     
-    # Get status
     status = bios.get_bios_status()
     print("BIOS Status:")
     print(f"  Motherboard: {status['motherboard']}")
@@ -483,7 +437,6 @@ if __name__ == "__main__":
         print(f"    - {drive['drive_id']}: {drive['model']} ({drive['capacity']}) ({'Enabled' if drive['enabled'] else 'Disabled'})")
     print()
     
-    # Test GPU cross-connect
     if status['gpu_slots'] >= 2:
         print("Configuring GPU cross-connect...")
         success, message = bios.enable_gpu_cross_connect()
@@ -493,7 +446,6 @@ if __name__ == "__main__":
     
     print()
     
-    # Test hard drive auto-enable
     print("Auto-enabling hard drives...")
     success, enabled = bios.auto_enable_new_hard_drives()
     print(f"{'✅' if success else '❌'} {', '.join(enabled)}")

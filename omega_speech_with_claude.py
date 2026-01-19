@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Speech Enhancement with Claude
 Practical implementation using Claude to enhance Omega's speech patterns
@@ -49,23 +48,18 @@ class OmegaSpeechEnhancer:
         print(f"\n[CLAUDE ANALYSIS] Processing: '{user_input}'")
         print("=" * 70)
         
-        # Step 1: Analyze intent
         intent_analysis = self._analyze_intent(user_input)
         print(f"\n[1. INTENT] {intent_analysis}")
         
-        # Step 2: Generate base response
         base_response = self._generate_base_response(user_input, intent_analysis)
         print(f"\n[2. BASE] {base_response}")
         
-        # Step 3: Add Omega personality
         enhanced_response = self._add_omega_personality(base_response)
         print(f"\n[3. ENHANCED] {enhanced_response}")
         
-        # Step 4: Add signature phrase
         final_response = self._add_signature(enhanced_response)
         print(f"\n[4. FINAL] {final_response}")
         
-        # Log enhancement
         self.enhancement_log.append({
             'timestamp': datetime.now().isoformat(),
             'input': user_input,
@@ -109,7 +103,6 @@ class OmegaSpeechEnhancer:
             return "I'm ready to assist. All systems are online and prepared to execute your requirements."
         
         elif 'information' in intent_lower:
-            # Extract key topic from user input
             if 'system' in user_input.lower():
                 return "The Omega system is a comprehensive guardian AI designed for autonomous operation, memory management, and secure oversight."
             else:
@@ -121,15 +114,12 @@ class OmegaSpeechEnhancer:
     def _add_omega_personality(self, base_response):
         """Inject Omega's guardian personality traits"""
         
-        # Make it more authoritative and direct
         enhanced = base_response
         
-        # Add confidence and authority
         if enhanced.startswith("The system"):
             enhanced = enhanced.replace("The system employs", "I employ")
             enhanced = enhanced.replace("The system is", "I am")
         
-        # Make statements more definitive
         enhanced = enhanced.replace("are operational", "are secured and operational")
         enhanced = enhanced.replace("I'm ready", "I stand ready")
         enhanced = enhanced.replace("prepared to execute", "prepared to execute with precision")
@@ -140,7 +130,6 @@ class OmegaSpeechEnhancer:
         """Add Omega's signature phrase"""
         import random
         
-        # 30% chance to add signature phrase
         if random.random() < 0.3:
             signature = random.choice(self.omega_personality['signature_phrases'])
             return f"{signature} {response}"
@@ -200,7 +189,6 @@ class OmegaSpeechEnhancer:
             
             print(f"\n✓ Enhanced response generated")
         
-        # Save samples
         output_file = 'omega_enhanced_speech_samples.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(samples, f, indent=2)
@@ -264,18 +252,14 @@ def main():
     
     enhancer = OmegaSpeechEnhancer()
     
-    # Generate samples
     print("\n[PHASE 1] Generating Enhanced Speech Samples...")
     samples = enhancer.generate_speech_samples()
     
-    # Demonstrate improvement
     print("\n[PHASE 2] Demonstrating Speech Improvements...")
     improvements = enhancer.demonstrate_improvement()
     
-    # Save log
     log_file = enhancer.save_enhancement_log()
     
-    # Summary
     print("\n" + "="*70)
     print("✓ ENHANCEMENT COMPLETE")
     print("="*70)

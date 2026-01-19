@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega PWA KITT Interface - Complete Knight Rider Integration
 - Progressive Web App with native install capability
@@ -20,7 +19,6 @@ import io
 import base64
 from pathlib import Path
 
-# Import KITT agent and mesh network
 try:
     from kitt_agent import kitt_agent
     from omega_mesh_network import mesh_network
@@ -34,7 +32,6 @@ app.config['SECRET_KEY'] = 'omega-kitt-2026'
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Ensure static directory exists
 Path('static/icons').mkdir(parents=True, exist_ok=True)
 
 @app.route('/manifest.json')
@@ -56,18 +53,15 @@ def kitt_audio():
 def generate_qr():
     """Generate QR code for PWA installation"""
     try:
-        # Get the current URL for PWA install
         base_url = request.host_url
         manifest_url = base_url + 'manifest.json'
         
-        # Generate QR code
         qr = qrcode.QRCode(version=1, box_size=10, border=5)
         qr.add_data(base_url)
         qr.make(fit=True)
         
         img = qr.make_image(fill_color="#ff0000", back_color="#000000")
         
-        # Convert to base64
         buffer = io.BytesIO()
         img.save(buffer, 'PNG')
         buffer.seek(0)
@@ -464,7 +458,6 @@ html_content = '''
             background: linear-gradient(180deg, #ff3333, #ff0000, #990000);
         }
 
-        #voice-bar-center {
             height: 60px;
         }
 

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice & Screenshot Extension
 ===================================
@@ -19,7 +18,6 @@ import json
 
 voice_screenshot_bp = Blueprint('voice_screenshot', __name__)
 
-# HTML Template with Voice & Screenshot Tools
 VOICE_SCREENSHOT_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
@@ -175,7 +173,6 @@ VOICE_SCREENSHOT_TEMPLATE = '''
             justify-content: center;
         }
         
-        #screenshotCanvas {
             max-width: 100%;
             max-height: 600px;
             cursor: crosshair;
@@ -712,7 +709,6 @@ def process_voice_command():
     data = request.get_json()
     text = data.get('text', '')
     
-    # Process command through Omega
     response = {
         'status': 'success',
         'response': f'Command received: {text}. Processing through Omega...',
@@ -747,7 +743,6 @@ def analyze_image():
     data = request.get_json()
     image_data = data.get('image', '')
     
-    # In production, this would send to actual Copilot/Vision API
     response = {
         'status': 'success',
         'analysis': 'Image analysis: Code visible on screen. Detected Python code with Flask framework. No obvious errors detected.',

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# PROPRIETARY SOFTWARE - RED POST FARMS, LLC
-# Ω Omega Quantum Enhanced - Hardware Entropy, Quantum Circuit Simulation, RNG Quality
 
 """
 Ω Omega Quantum Enhanced
@@ -24,7 +21,6 @@ class HardwareEntropy:
     @staticmethod
     def get_entropy_bytes(count: int = 32) -> bytes:
         """Get entropy from hardware sources."""
-        # Use os.urandom (uses /dev/urandom on Unix, CryptGenRandom on Windows)
         return os.urandom(count)
     
     @staticmethod
@@ -46,7 +42,6 @@ class QuantumCircuit:
     
     def hadamard(self, qubit: int):
         """Apply Hadamard gate."""
-        # Simplified Hadamard: creates superposition
         new_state = [0.0] * len(self.state)
         for i in range(len(self.state)):
             new_state[i] = self.state[i] / (2 ** 0.5)
@@ -56,7 +51,6 @@ class QuantumCircuit:
     
     def measure(self) -> int:
         """Measure quantum state."""
-        # Use hardware entropy for measurement
         entropy = HardwareEntropy.get_entropy_bytes(4)
         rand = int.from_bytes(entropy, 'big') / (2 ** 32)
         
@@ -97,7 +91,6 @@ class RNGQualityTester:
         if not source_bytes:
             return 0.0
         
-        # Count unique bytes
         unique = len(set(source_bytes))
         entropy = unique / len(source_bytes)
         
@@ -115,17 +108,14 @@ class RNGQualityTester:
         for sample in samples:
             counts[sample] = counts.get(sample, 0) + 1
         
-        # Calculate chi-square statistic
         chi_square = sum(
             ((count - expected) ** 2) / expected
             for count in counts.values()
         )
         
-        # Normalize (lower is better, 0 is perfect)
         return max(0.0, 1.0 - (chi_square / len(samples)))
 
 
-# Global instances
 HARDWARE_ENTROPY = HardwareEntropy()
 CRYPTO_RNG = CryptographicRNG()
 RNG_TESTER = RNGQualityTester()

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Comprehensive Educational System
 """
 Complete educational system to achieve 100% proficiency in:
 - SAT (Reading, Writing, Math)
@@ -54,7 +52,6 @@ class OmegaEducationalSystem:
         self.guidance_systems = {}
         self.agent_assistants = {}
         
-        # Initialize all systems
         self._initialize_osha_standards()
         self._initialize_shop_safety_rules()
         self._initialize_educational_modules()
@@ -200,7 +197,6 @@ class OmegaEducationalSystem:
     def _initialize_educational_modules(self):
         """Initialize comprehensive educational modules."""
         
-        # SAT Modules
         self.modules['sat_reading'] = LearningModule(
             module_id='sat_reading',
             title='SAT Reading Comprehension Mastery',
@@ -270,7 +266,6 @@ class OmegaEducationalSystem:
             certification_needed=False
         )
         
-        # ASVAB Modules
         self.modules['asvab_auto_shop'] = LearningModule(
             module_id='asvab_auto_shop',
             title='Auto Shop Knowledge with OSHA Standards',
@@ -307,7 +302,6 @@ class OmegaEducationalSystem:
             certification_needed=True
         )
         
-        # Trade School Modules
         self.modules['electrician_trade'] = LearningModule(
             module_id='electrician_trade',
             title='Electrician Trade Mastery with Safety',
@@ -600,7 +594,6 @@ class OmegaEducationalSystem:
     
     def get_safety_checklist(self, task_type: str, task: str) -> List[SafetyCheck]:
         """Get safety checklist for specific task."""
-        # This would be expanded with specific task safety checks
         base_checks = []
         
         if task_type == 'electrical':
@@ -656,7 +649,6 @@ class OmegaEducationalSystem:
             guidance['common_mistakes'] = system.get('common_mistakes', [])
             guidance['error_prevention'] = system.get('error_prevention', {})
         
-        # Add agent assistance
         guidance['agent_assistance'] = [
             'Safety Supervisor: Monitoring safety protocols',
             'Technical Instructor: Available for questions',
@@ -683,7 +675,6 @@ class OmegaEducationalSystem:
             plan['modules'][module_id] = asdict(module)
             total_hours += module.duration_hours
             
-            # Add safety training
             if module.hands_on_required:
                 plan['safety_training'][module_id] = {
                     'osha_training_hours': 40,
@@ -725,7 +716,6 @@ def main():
     print(f"[AGENTS] {len(system.agent_assistants)} agent assistants ready")
     print()
     
-    # Generate educational plan
     plan = system.generate_educational_plan()
     plan_file = system.save_educational_plan()
     

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Agent Council - Multi-agent learning and improvement system
 import asyncio
 import json
 import sys
@@ -55,7 +53,6 @@ class LearningAgent:
             'timestamp': datetime.now().isoformat()
         }
         
-        # Process based on role and expertise
         if 'voice' in self.expertise:
             results['insights'].extend(self._analyze_voice_patterns(task_data))
         if 'language' in self.expertise:
@@ -99,13 +96,11 @@ class LearningAgent:
         """Analyze speech recognition performance and accuracy."""
         insights = []
         if 'user_text' in task_data and task_data['user_text']:
-            # Check if recognition was successful
             if task_data['user_text'].lower() in ['i didn\'t catch that', 'could you repeat', 'say again']:
                 insights.append("WARNING: Speech recognition failure detected")
                 insights.append("Recommendation: Check audio quality, adjust thresholds, or enhance preprocessing")
             else:
                 insights.append(f"Speech recognition successful: '{task_data['user_text'][:50]}'")
-                # Analyze recognition quality
                 text_len = len(task_data['user_text'])
                 if text_len < 5:
                     insights.append("Short recognition - may need better VAD sensitivity")
@@ -161,42 +156,36 @@ class AgentCouncil:
     def _initialize_agents(self):
         """Initialize specialized learning agents."""
         if not self.agents:
-            # Voice Analysis Agent
             self.agents['voice_analyst'] = LearningAgent(
                 'voice_analyst',
                 'Voice Pattern Analyst',
                 ['voice', 'audio', 'spectral']
             )
             
-            # Language Quality Agent
             self.agents['language_expert'] = LearningAgent(
                 'language_expert',
                 'Language Quality Expert',
                 ['language', 'vocabulary', 'coherence']
             )
             
-            # Conversation Flow Agent
             self.agents['conversation_coach'] = LearningAgent(
                 'conversation_coach',
                 'Conversation Flow Coach',
                 ['conversation', 'engagement', 'flow']
             )
             
-            # Improvement Strategist Agent
             self.agents['improvement_strategist'] = LearningAgent(
                 'improvement_strategist',
                 'Improvement Strategist',
                 ['improvement', 'optimization', 'strategy']
             )
             
-            # Speech Recognition Specialist Agent
             self.agents['speech_recognition_specialist'] = LearningAgent(
                 'speech_recognition_specialist',
                 'Speech Recognition Specialist',
                 ['speech', 'recognition', 'whisper', 'accuracy']
             )
             
-            # Learning Coordinator Agent
             self.agents['learning_coordinator'] = LearningAgent(
                 'learning_coordinator',
                 'Learning Coordinator',
@@ -234,17 +223,14 @@ class AgentCouncil:
         if not self.learning_queue:
             return []
         
-        # Get unprocessed tasks
         unprocessed = [t for t in self.learning_queue if not t.get('processed', False)]
         if not unprocessed:
             return []
         
         results = []
         
-        # Process tasks in parallel with relevant agents
         tasks = []
         for task in unprocessed:
-            # Assign to relevant agents based on task type
             relevant_agents = self._get_relevant_agents(task['type'])
             
             for agent_id in relevant_agents:
@@ -252,23 +238,19 @@ class AgentCouncil:
                 if agent.state == 'hibernating':
                     agent.wake()
                 
-                # Create async task
                 async def process_task(a, t):
                     loop = asyncio.get_event_loop()
                     return await loop.run_in_executor(None, a.process_learning_task, t['data'])
                 
                 tasks.append(process_task(agent, task))
         
-        # Execute all agent processing in parallel
         if tasks:
             agent_results = await asyncio.gather(*tasks, return_exceptions=True)
             results.extend([r for r in agent_results if isinstance(r, dict)])
             
-            # Mark tasks as processed
             for task in unprocessed:
                 task['processed'] = True
         
-        # Have agents communicate and synthesize findings
         if results:
             synthesized = await self._synthesize_agent_findings(results)
             results.append(synthesized)
@@ -290,10 +272,8 @@ class AgentCouncil:
     
     async def _synthesize_agent_findings(self, results: List[Dict]) -> Dict:
         """Have agents communicate and synthesize their findings."""
-        # Learning coordinator synthesizes all findings
         coordinator = self.agents['learning_coordinator']
         
-        # Agents communicate with coordinator
         communications = []
         for result in results:
             agent_id = result.get('agent_id')
@@ -306,7 +286,6 @@ class AgentCouncil:
                 )
                 communications.append(comm)
         
-        # Coordinator synthesizes
         synthesized = {
             'agent_id': 'learning_coordinator',
             'role': 'Synthesized Findings',
@@ -317,7 +296,6 @@ class AgentCouncil:
             'communications': communications
         }
         
-        # Collect insights and recommendations
         for result in results:
             synthesized['key_insights'].extend(result.get('insights', []))
             synthesized['recommendations'].extend(result.get('recommendations', []))
@@ -356,7 +334,6 @@ class AgentCouncil:
             try:
                 with open(AGENT_STATE_FILE, 'r') as f:
                     state = json.load(f)
-                    # Restore agent states (basic info, full restore handled by _initialize_agents)
                     if 'communication_log' in state:
                         self.communication_log = state['communication_log']
             except Exception as e:
@@ -379,7 +356,6 @@ class AgentCouncil:
             except Exception as e:
                 print(f"Error loading queue: {e}")
 
-# Global agent council instance
 agent_council = AgentCouncil()
 
 async def wake_agents_and_process():
@@ -388,7 +364,6 @@ async def wake_agents_and_process():
     awakened = agent_council.wake_all_agents()
     print(f"[AGENT COUNCIL] Awakened {len(awakened)} agents: {', '.join(awakened)}")
     
-    # Process any queued learning tasks
     if agent_council.learning_queue:
         print(f"[AGENT COUNCIL] Processing {len(agent_council.learning_queue)} queued tasks...")
         results = await agent_council.process_learning_queue()
@@ -412,5 +387,4 @@ if __name__ == "__main__":
     for agent_id, agent_info in status['agents'].items():
         print(f"  - {agent_info['role']} ({agent_id}): {agent_info['state']}")
     
-    # Wake all agents
     asyncio.run(wake_agents_and_process())

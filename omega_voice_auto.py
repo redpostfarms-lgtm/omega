@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice Auto-Player
 Automatically plays and alternates between Omega voices
@@ -71,7 +70,6 @@ def main():
         }
     ]
     
-    # Check files
     print(f"{CYAN}[INIT] Checking voice files...{RESET}\n")
     for voice in voices:
         if os.path.exists(voice['file']):
@@ -89,7 +87,6 @@ def main():
     
     time.sleep(3)
     
-    # Play voices alternating
     rounds = 2
     for round_num in range(1, rounds + 1):
         try:

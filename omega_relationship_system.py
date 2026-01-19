@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Relationship System - Bidirectional Trust Levels
 ======================================================
@@ -54,9 +53,6 @@ class RelationshipLevel(IntEnum):
 @dataclass
 class RelationshipData:
     """Bidirectional relationship data"""
-    # Reasonable initial levels: Start at Acquaintance (basic trust) since we're already working together
-    # Initial trust points: 60 (slightly above Acquaintance threshold of 50)
-    # This reflects that we've already started as a collaborative learning partnership
     user_trust_level: RelationshipLevel = RelationshipLevel.ACQUAINTANCE
     omega_trust_level: RelationshipLevel = RelationshipLevel.ACQUAINTANCE
     mutual_level: RelationshipLevel = RelationshipLevel.ACQUAINTANCE  # Lowest common level
@@ -79,7 +75,6 @@ class RelationshipData:
 class RelationshipSystem:
     """Bidirectional relationship and trust management system"""
     
-    # Trust point requirements for each level
     TRUST_THRESHOLDS = {
         RelationshipLevel.COMRADE: 0,
         RelationshipLevel.ACQUAINTANCE: 50,
@@ -90,7 +85,6 @@ class RelationshipSystem:
         RelationshipLevel.FAMILY: 2500
     }
     
-    # Trust point gains/losses
     TRUST_POINTS = {
         'successful_interaction': 5,
         'collaborative_task': 10,
@@ -108,7 +102,6 @@ class RelationshipSystem:
         self.relationship = RelationshipData()
         self.load_relationship()
         
-        # Initialize trust analysis if not present
         if not self.relationship.trust_analysis:
             self.relationship.trust_analysis = self._initialize_trust_analysis()
             self.save_relationship()
@@ -220,7 +213,6 @@ class RelationshipSystem:
             current_points = self.relationship.omega_trust_points
             current_level = self.relationship.omega_trust_level
         
-        # Check each level from highest to lowest
         for level in reversed(list(RelationshipLevel)):
             if current_points >= self.TRUST_THRESHOLDS[level] and current_level < level:
                 if side.lower() == 'user':
@@ -240,29 +232,22 @@ class RelationshipSystem:
         
         if success:
             self.relationship.successful_interactions += 1
-            # Both sides gain trust for successful interactions
             points = self.TRUST_POINTS.get(interaction_type, self.TRUST_POINTS['successful_interaction'])
             self.add_trust_points('user', points // 2, f"{interaction_type}")
             self.add_trust_points('omega', points // 2, f"{interaction_type}")
             
-            # Update trust analysis (reliability increases with success)
             self._update_trust_analysis('reliability', 0.01, f"Successful {interaction_type}")
         else:
-            # Both sides lose minimal trust for failures
             self.add_trust_points('user', self.TRUST_POINTS['failed_interaction'], "failed interaction")
             self.add_trust_points('omega', self.TRUST_POINTS['failed_interaction'], "failed interaction")
             
-            # Update trust analysis (reliability decreases slightly with failure)
             self._update_trust_analysis('reliability', -0.01, f"Failed {interaction_type}")
         
-        # Periodic trust analysis
         if self.relationship.interactions_count % 10 == 0:
             self._analyze_trust()
     
     def set_partners_status(self, voice_response: bool = True):
         """Set relationship to Partners status based on user's assessment"""
-        # Partners level requires 350 points
-        # Set both sides to Partners level (user-defined status)
         target_points = self.TRUST_THRESHOLDS[RelationshipLevel.PARTNERS]
         
         self.relationship.user_trust_points = target_points
@@ -271,7 +256,6 @@ class RelationshipSystem:
         self.relationship.omega_trust_level = RelationshipLevel.PARTNERS
         self.relationship.update_mutual_level()
         
-        # Record milestone
         milestone = f"[{datetime.now().strftime('%Y-%m-%d')}] Relationship set to Partners status (user-defined)"
         self.relationship.milestones.append(milestone)
         if len(self.relationship.milestones) > 100:
@@ -279,7 +263,6 @@ class RelationshipSystem:
         
         self.save_relationship()
         
-        # Voice response
         if voice_response:
             try:
                 from omega_relationship_voice import acknowledge_partners_status, get_voice_response
@@ -350,7 +333,6 @@ class RelationshipSystem:
             new_score = max(0.0, min(1.0, current + change))  # Clamp between 0 and 1
             self.relationship.trust_analysis['trust_dimensions'][dimension]['score'] = new_score
             
-            # Add observation
             obs = f"[{datetime.now().strftime('%Y-%m-%d')}] {observation} (score: {new_score:.2f})"
             self.relationship.trust_analysis['trust_dimensions'][dimension]['observations'].append(obs)
             if len(self.relationship.trust_analysis['trust_dimensions'][dimension]['observations']) > 50:
@@ -362,10 +344,8 @@ class RelationshipSystem:
         analysis = self.relationship.trust_analysis
         dimensions = analysis['trust_dimensions']
         
-        # Calculate average trust score
         avg_score = sum(d['score'] for d in dimensions.values()) / len(dimensions)
         
-        # Generate insights
         insights = []
         if avg_score > 0.7:
             insights.append("High overall trust - Strong collaborative foundation")
@@ -374,7 +354,6 @@ class RelationshipSystem:
         else:
             insights.append("Developing trust - Early stages of relationship")
         
-        # Identify strongest/weakest dimensions
         sorted_dims = sorted(dimensions.items(), key=lambda x: x[1]['score'], reverse=True)
         strongest = sorted_dims[0][0]
         weakest = sorted_dims[-1][0]
@@ -385,14 +364,12 @@ class RelationshipSystem:
         analysis['analysis_insights'] = insights
         analysis['last_analysis'] = datetime.now().isoformat()
         
-        # Keep learning mode open for continuous improvement
         analysis['learning_mode'] = True
 
 def get_relationship_manager() -> RelationshipSystem:
     """Get or create relationship system instance"""
     return RelationshipSystem()
 
-# Example usage
 if __name__ == "__main__":
     rel = get_relationship_manager()
     

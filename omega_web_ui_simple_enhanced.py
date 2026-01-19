@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Web UI - Simplified Version
 ==================================
@@ -20,7 +19,6 @@ import time
 BASE_DIR = Path(__file__).parent
 IMAGES_DIR = BASE_DIR / "images"
 
-# HTML with embedded everything
 HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">
 <head>

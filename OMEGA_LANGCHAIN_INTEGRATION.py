@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega LangChain Integration
 ============================
@@ -11,7 +10,6 @@ from typing import Dict, List, Any, Optional
 import json
 from datetime import datetime
 
-# Try to import LangChain
 try:
     from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
     from langchain.chains import ConversationChain
@@ -38,15 +36,12 @@ class OmegaLangChainIntegration:
             return False
         
         try:
-            # Initialize memory for conversation context
             self.memory = ConversationBufferMemory(
                 memory_key="chat_history",
                 return_messages=True
             )
             
-            # Initialize conversation chain
             # Note: We'll use a simple prompt template since we don't have an LLM
-            # This is mainly for memory management
             self.initialized = True
             print("[LangChain] LangChain integration initialized")
             return True
@@ -74,7 +69,6 @@ class OmegaLangChainIntegration:
             messages = self.memory.chat_memory.messages
             context = []
             
-            # Get last max_turns conversations
             for i in range(max(0, len(messages) - max_turns * 2), len(messages), 2):
                 if i + 1 < len(messages):
                     context.append({
@@ -93,7 +87,6 @@ class OmegaLangChainIntegration:
         if not context:
             return None
         
-        # Format context for Whisper
         context_text = []
         for turn in context:
             context_text.append(turn.get("human", ""))
@@ -102,7 +95,6 @@ class OmegaLangChainIntegration:
         full_text = ' '.join(context_text)
         words = full_text.split()
         
-        # Limit to max_words
         if len(words) > max_words:
             words = words[-max_words:]
         
@@ -132,7 +124,6 @@ class OmegaLangChainIntegration:
             with open(file_path, 'r', encoding='utf-8') as f:
                 context = json.load(f)
             
-            # Restore to memory
             for turn in context:
                 self.add_to_memory(
                     turn.get("human", ""),

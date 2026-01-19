@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Enhanced Web UI
 =====================
@@ -24,21 +23,17 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import logging
 
-# Setup paths
 BASE_DIR = Path(__file__).parent
 IMAGES_DIR = BASE_DIR / "images"
 
-# Initialize Flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'omega_enhanced_ui_secret_2026'
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# HTML Template with 1980s/90s Sci-Fi Aesthetic
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="en">
@@ -1758,7 +1753,6 @@ def handle_chat_message(data):
     message = data.get('message', '')
     logger.info(f"Chat message received: {message}")
     
-    # Echo response (you can add AI processing here)
     response = f"Message received: {message}"
     
     emit('chat_response', {

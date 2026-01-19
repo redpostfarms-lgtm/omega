@@ -1,0 +1,62 @@
+"""
+Omega System Credentials Manager
+Securely loads and manages system credentials
+"""
+
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+env_path = Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
+
+class OmegaCredentials:
+    """Manages Omega system credentials and configuration"""
+
+    def __init__(self):
+        self.user_email = os.getenv("USER_EMAIL", "redpostfarms@gmail.com")
+        self.git_email = os.getenv("GIT_USER_EMAIL", "redpostfarms@gmail.com")
+        self.git_name = os.getenv("GIT_USER_NAME", "RedPostFarms")
+        self.omega_user = os.getenv("OMEGA_USER", "RedPostFarms")
+
+    @property
+    def email(self):
+        """Get user email"""
+        return self.user_email
+
+    @property
+    def password(self):
+        """Get user password from environment (DO NOT LOG)"""
+        return os.getenv("USER_PASSWORD")
+
+    def get_api_key(self, service: str) -> str:
+        """
+        Get API key for a service
+
+        Args:
+            service: Service name (e.g., 'OPENAI', 'ANTHROPIC', 'HUGGINGFACE')
+
+        Returns:
+            API key if set, None otherwise
+        """
+        return os.getenv(f"{service.upper()}_API_KEY")
+
+    def set_api_key(self, service: str, key: str):
+        """
+        Set API key in environment (runtime only - update .env file manually for persistence)
+
+        Args:
+            service: Service name (e.g., 'OPENAI', 'ANTHROPIC')
+            key: API key value
+        """
+        os.environ[f"{service.upper()}_API_KEY"] = key
+
+
+credentials = OmegaCredentials()
+
+if __name__ == "__main__":
+    print(f"Omega User: {credentials.omega_user}")
+    print(f"Email: {credentials.email}")
+    print(f"Git Config: {credentials.git_name} <{credentials.git_email}>")
+    print("Credentials loaded successfully ✓")

@@ -1,0 +1,330 @@
+{
+  "timestamp": "2026-01-19T00:27:12.124749",
+  "categories": {
+    "ai_ml": {
+      "langchain": {
+        "purpose": "Framework for building LLM applications",
+        "key_features": [
+          "Chains",
+          "Agents",
+          "Memory",
+          "Callbacks",
+          "RAG"
+        ],
+        "best_practices": [
+          "Use LangSmith for debugging",
+          "Implement streaming for better UX",
+          "Use proper memory management",
+          "Cache embeddings for performance",
+          "Use async for concurrent operations"
+        ],
+        "common_patterns": [
+          "RetrievalQA for RAG",
+          "ConversationalRetrievalChain for chat",
+          "Agents for complex workflows",
+          "Custom chains for specific tasks"
+        ]
+      },
+      "transformers": {
+        "purpose": "Hugging Face models and pipelines",
+        "key_features": [
+          "Pre-trained models",
+          "Pipelines",
+          "Tokenizers",
+          "Trainers"
+        ],
+        "best_practices": [
+          "Use pipeline() for simple tasks",
+          "Batch processing for efficiency",
+          "GPU acceleration when available",
+          "Model quantization for deployment",
+          "Cache models locally"
+        ]
+      },
+      "openai": {
+        "purpose": "OpenAI API client",
+        "key_features": [
+          "Chat completions",
+          "Embeddings",
+          "Assistants",
+          "Streaming"
+        ],
+        "best_practices": [
+          "Use streaming for long responses",
+          "Implement rate limiting",
+          "Cache responses when appropriate",
+          "Use async for concurrent requests",
+          "Handle errors gracefully"
+        ]
+      },
+      "vector_databases": {
+        "purpose": "Semantic search and similarity",
+        "tools": [
+          "ChromaDB",
+          "FAISS",
+          "Pinecone",
+          "Weaviate",
+          "Qdrant"
+        ],
+        "best_practices": [
+          "Choose right distance metric (cosine, euclidean)",
+          "Optimize chunk size for your data",
+          "Use metadata filtering",
+          "Implement hybrid search when needed",
+          "Batch upserts for performance"
+        ]
+      }
+    },
+    "data_science": {
+      "pandas": {
+        "purpose": "Data manipulation and analysis",
+        "key_operations": [
+          "read_csv",
+          "groupby",
+          "merge",
+          "pivot",
+          "apply"
+        ],
+        "best_practices": [
+          "Use vectorized operations",
+          "Avoid iterrows(), use apply() or vectorization",
+          "Use category dtype for string columns",
+          "Chain operations for readability",
+          "Use query() for filtering"
+        ],
+        "performance_tips": [
+          "Use read_csv with usecols to load only needed columns",
+          "Use chunksize for large files",
+          "Convert to appropriate dtypes",
+          "Use eval() for complex expressions",
+          "Consider polars for large datasets"
+        ]
+      },
+      "numpy": {
+        "purpose": "Numerical computing",
+        "key_features": [
+          "Arrays",
+          "Broadcasting",
+          "Linear algebra",
+          "Random"
+        ],
+        "best_practices": [
+          "Vectorize operations",
+          "Use broadcasting instead of loops",
+          "Preallocate arrays when possible",
+          "Use views instead of copies",
+          "Use appropriate dtypes"
+        ]
+      },
+      "visualization": {
+        "tools": {
+          "matplotlib": "Static plots",
+          "seaborn": "Statistical visualizations",
+          "plotly": "Interactive plots",
+          "altair": "Declarative visualizations"
+        },
+        "best_practices": [
+          "Choose right plot type for data",
+          "Use consistent color schemes",
+          "Label axes and add titles",
+          "Use appropriate scales",
+          "Make plots accessible"
+        ]
+      },
+      "machine_learning": {
+        "frameworks": [
+          "scikit-learn",
+          "XGBoost",
+          "LightGBM",
+          "CatBoost"
+        ],
+        "workflow": [
+          "1. Data exploration and cleaning",
+          "2. Feature engineering",
+          "3. Train/test split",
+          "4. Model training",
+          "5. Hyperparameter tuning",
+          "6. Model evaluation",
+          "7. Model deployment"
+        ],
+        "best_practices": [
+          "Always split data before any preprocessing",
+          "Use cross-validation",
+          "Handle class imbalance",
+          "Scale features appropriately",
+          "Track experiments with MLflow/W&B"
+        ]
+      }
+    },
+    "web_development": {
+      "fastapi": {
+        "purpose": "Modern async web framework",
+        "key_features": [
+          "Async support",
+          "Auto docs",
+          "Type hints",
+          "Dependency injection"
+        ],
+        "best_practices": [
+          "Use async/await for I/O operations",
+          "Implement proper error handling",
+          "Use dependency injection",
+          "Add middleware for logging/auth",
+          "Use background tasks for long operations",
+          "Implement rate limiting"
+        ],
+        "patterns": [
+          "Router organization",
+          "Dependency injection for DB",
+          "Pydantic models for validation",
+          "Background tasks for async work"
+        ]
+      },
+      "streamlit": {
+        "purpose": "Data apps and dashboards",
+        "key_features": [
+          "Simple API",
+          "Auto-rerun",
+          "Caching",
+          "Components"
+        ],
+        "best_practices": [
+          "Use st.cache_data for data loading",
+          "Use st.cache_resource for models",
+          "Minimize reruns with session_state",
+          "Use columns for layout",
+          "Add loading indicators"
+        ]
+      },
+      "gradio": {
+        "purpose": "ML model demos",
+        "key_features": [
+          "Simple interface",
+          "Multiple inputs",
+          "Examples",
+          "Sharing"
+        ],
+        "best_practices": [
+          "Add example inputs",
+          "Use proper input/output types",
+          "Add descriptions",
+          "Handle errors gracefully",
+          "Use queue for concurrent requests"
+        ]
+      }
+    },
+    "security": {
+      "authentication": {
+        "methods": [
+          "JWT",
+          "OAuth 2.0",
+          "API Keys",
+          "Sessions"
+        ],
+        "best_practices": [
+          "Never store passwords in plain text",
+          "Use bcrypt/argon2 for password hashing",
+          "Implement rate limiting",
+          "Use HTTPS everywhere",
+          "Implement CORS properly",
+          "Validate all inputs",
+          "Use environment variables for secrets"
+        ]
+      },
+      "encryption": {
+        "tools": [
+          "cryptography",
+          "PyJWT",
+          "python-jose"
+        ],
+        "best_practices": [
+          "Use strong encryption algorithms",
+          "Rotate keys regularly",
+          "Never commit secrets to git",
+          "Use secret managers in production",
+          "Implement perfect forward secrecy"
+        ]
+      },
+      "api_security": {
+        "techniques": [
+          "API key authentication",
+          "Rate limiting",
+          "Input validation",
+          "Output encoding",
+          "HTTPS/TLS",
+          "CORS configuration",
+          "Security headers"
+        ],
+        "best_practices": [
+          "Implement rate limiting per endpoint",
+          "Validate and sanitize all inputs",
+          "Use parameterized queries",
+          "Implement proper error handling",
+          "Log security events"
+        ]
+      }
+    },
+    "performance": {
+      "python_optimization": {
+        "techniques": [
+          "Use built-in functions and libraries",
+          "List comprehensions over loops",
+          "Generator expressions for large data",
+          "Use local variables",
+          "Avoid global lookups",
+          "Use __slots__ for classes",
+          "Profile before optimizing"
+        ],
+        "tools": [
+          "cProfile",
+          "line_profiler",
+          "memory_profiler",
+          "py-spy"
+        ]
+      },
+      "async_programming": {
+        "frameworks": [
+          "asyncio",
+          "aiohttp",
+          "httpx",
+          "uvloop"
+        ],
+        "best_practices": [
+          "Use async for I/O-bound operations",
+          "Avoid blocking calls in async functions",
+          "Use asyncio.gather for concurrent tasks",
+          "Implement proper error handling",
+          "Use connection pooling",
+          "Set appropriate timeouts"
+        ]
+      },
+      "caching": {
+        "strategies": [
+          "In-memory",
+          "Redis",
+          "Database",
+          "CDN"
+        ],
+        "best_practices": [
+          "Cache expensive computations",
+          "Use TTL appropriately",
+          "Implement cache invalidation",
+          "Use cache-aside pattern",
+          "Monitor cache hit rates"
+        ]
+      },
+      "database_optimization": {
+        "techniques": [
+          "Use indexes wisely",
+          "Optimize queries",
+          "Use connection pooling",
+          "Batch operations",
+          "Use appropriate data types",
+          "Denormalize when needed",
+          "Implement pagination"
+        ]
+      }
+    }
+  },
+  "completion_score": 95.0
+}

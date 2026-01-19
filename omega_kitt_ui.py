@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 omega_kitt_ui.py - Knight Rider Omega Dashboard (Final 2026 Build)
 ===================================================================
@@ -25,14 +24,12 @@ import math
 import numpy as np
 from pathlib import Path
 
-# Check if surfarray is available (may not be on all systems)
 try:
     import pygame.surfarray
     SURFARRAY_AVAILABLE = True
 except (ImportError, AttributeError):
     SURFARRAY_AVAILABLE = False
 
-# External dependencies (graceful degradation)
 try:
     import pyaudio
     PYAUDIO_AVAILABLE = True
@@ -50,12 +47,10 @@ except ImportError:
 pygame.init()
 pygame.mixer.init()
 
-# Screen setup
 WIDTH, HEIGHT = 1280, 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.NOFRAME)
 pygame.display.set_caption("Omega - KITT Dashboard")
 
-# Colors
 BLACK = (0, 0, 0)
 RED = (220, 40, 40)
 YELLOW = (255, 220, 0)
@@ -65,12 +60,10 @@ GRAY = (30, 30, 40)
 WHITE = (240, 240, 240)
 PEAK_HOLD_COLOR = (255, 255, 180)
 
-# Fonts
 f_small = pygame.font.SysFont("couriernew", 14)
 f_tiny = pygame.font.SysFont("couriernew", 10)
 f_med = pygame.font.SysFont("couriernew", 22, bold=True)
 
-# State
 state_file = Path(__file__).parent / "omega_state.json"
 mute = False
 locked = False
@@ -82,7 +75,6 @@ active_agents = ["Ara", "Drax", "Kael"]
 dormant_agents = ["Vera", "Lorin", "Elowen"]
 file_alerts = []
 
-# Audio / FFT settings
 CHUNK = 1024
 FORMAT = pyaudio.paInt16 if PYAUDIO_AVAILABLE else None
 CHANNELS = 1
@@ -91,7 +83,6 @@ LOG_BINS = 64
 F_MIN = 20.0
 F_MAX = RATE / 2.0
 
-# Generate log-spaced bin centers
 log_freqs = np.logspace(np.log10(F_MIN), np.log10(F_MAX), LOG_BINS)
 bin_edges = np.concatenate(([F_MIN], np.sqrt(log_freqs[:-1] * log_freqs[1:]), [F_MAX]))
 
@@ -105,7 +96,6 @@ spectrum_data = np.zeros(LOG_BINS)
 peak_hold = np.zeros(LOG_BINS)
 peak_decay_timer = np.zeros(LOG_BINS)
 
-# Frequency labels
 FREQUENCY_LABELS = [
     (100, "100 Hz"),
     (200, "200 Hz"),
@@ -116,19 +106,16 @@ FREQUENCY_LABELS = [
     (10000, "10 kHz")
 ]
 
-# Octave frequencies
 OCTAVE_FREQS = [31.25, 62.5, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
 GRID_COLOR_LOW = (180, 20, 20)
 GRID_COLOR_HIGH = (0, 220, 255)
 COLOR_SHIFT_THRESHOLD = 0.35
 
-# Scanner colors
 SCANNER_COLOR_LOW = (220, 40, 40)
 SCANNER_COLOR_HIGH = (0, 220, 255)
 SCANNER_GLOW_WIDTH = 3
 SCANNER_GLOW_INTENSITY = 3
 
-# Pulse/Energy settings
 BASE_PULSE_SPEED = 0.4
 ENERGY_BOOST_FACTOR = 1.5
 MIN_ENERGY_FLOOR = 0.1
@@ -137,19 +124,16 @@ pulse_factor = 1.0
 current_energy = 0.0
 energy_boost = 1.0
 
-# Flash settings
 EXTREME_PEAK_THRESHOLD = 2.0
 FLASH_DURATION = 0.7
 FLASH_WHITE_MIX = 0.45
 flash_timer = 0.0
 flash_intensity = 0.0
 
-# Vignette settings
 VIGNETTE_STRENGTH_BASE = 0.35
 VIGNETTE_STRENGTH_FLASH = 0.90
 vignette_surf = None
 
-# Shake settings (Multi-octave Perlin)
 SHAKE_DURATION = 0.75
 SHAKE_INTENSITY_MAX = 22.0
 SHAKE_SPEED = 9.5
@@ -158,26 +142,20 @@ shake_timer = 0.0
 shake_start_time = 0.0
 shake_offset = (0, 0)
 
-# Scanner hold timer (replaces blocking sleep)
 scanner_hold_timer = 0.0
 SCANNER_HOLD_DURATION = 0.4
 
-# Cached PerlinNoise2D instance (optimization)
 _cached_perlin = None
 
-# Peak reset
 PEAK_RESET_FLASH = 0.0
 FLASH_DURATION_RESET = 0.8
 
-# PyAudio globals (will be set by start_audio_stream)
 p_audio = None
 stream_audio = None
 audio_active = False
 
-# UI buffer for shake
 ui_buffer = pygame.Surface((WIDTH, HEIGHT))
 
-# Multi-octave Perlin Noise Class
 class PerlinNoise2D:
     def __init__(self, seed=42):
         np.random.seed(seed)
@@ -232,7 +210,6 @@ def fbm_2d(x, y, H=0.5, octaves=7, lacunarity=2.0, scale=1.0, seed=42):
 
     return total / max_value
 
-# State management
 def load_state():
     global active_agents, dormant_agents, temp_levels, file_alerts
     if state_file.exists():
@@ -261,7 +238,6 @@ def save_state():
 
 load_state()
 
-# Background save thread
 def auto_save_worker():
     """Background thread for auto-saving state"""
     while True:
@@ -273,7 +249,6 @@ def auto_save_worker():
 
 threading.Thread(target=auto_save_worker, daemon=True).start()
 
-# Audio setup
 def start_audio_stream():
     global p_audio, stream_audio, audio_active
     if not PYAUDIO_AVAILABLE:
@@ -294,7 +269,6 @@ def start_audio_stream():
 
 audio_active = start_audio_stream()
 
-# Vignette creation (optimized)
 def create_vignette(width, height):
     """Create vignette - optimized version"""
     surf = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -302,7 +276,6 @@ def create_vignette(width, height):
     max_r = np.hypot(center_x, center_y)
     
     if SURFARRAY_AVAILABLE:
-        # Fast numpy-based version
         try:
             y_coords, x_coords = np.ogrid[:height, :width]
             dist_from_center = np.sqrt((x_coords - center_x)**2 + (y_coords - center_y)**2)
@@ -314,7 +287,6 @@ def create_vignette(width, height):
         except Exception:
             pass  # Fall through to slower method
     
-    # Fallback: optimized circle drawing (sparse sampling)
     step = max(1, max_r // 200)  # Sample every N pixels instead of every pixel
     for r in range(max_r, 0, -step):
         alpha = int(255 * (r / max_r) ** 2 * VIGNETTE_STRENGTH_BASE)
@@ -325,7 +297,6 @@ def create_vignette(width, height):
 
 vignette_surf = create_vignette(WIDTH, HEIGHT)
 
-# Boot sequence
 def boot_sequence():
     screen.fill(BLACK)
     txt = f_med.render("OMEGA ONLINE", True, GREEN)
@@ -344,14 +315,12 @@ def boot_sequence():
 
 boot_sequence()
 
-# Drawing functions
 def draw_scanlines(surface):
     for y in range(0, HEIGHT, 10):
         pygame.draw.line(surface, (10, 10, 10), (0, y), (WIDTH, y), 1)
 
 def draw_glowing_scanner(surface):
     global scanner_pos, scanner_dir, scanner_hold_timer
-    # Handle hold timer (non-blocking)
     if scanner_hold_timer > 0:
         scanner_hold_timer -= 1/60.0
         return  # Don't move during hold
@@ -361,14 +330,12 @@ def draw_glowing_scanner(surface):
         scanner_dir *= -1
         scanner_hold_timer = SCANNER_HOLD_DURATION  # Start hold timer
 
-    # Core scanner bar
     base_color = pygame.Color(SCANNER_COLOR_LOW).lerp(
         pygame.Color(SCANNER_COLOR_HIGH),
         min(1.0, max(0.0, (energy_boost - COLOR_SHIFT_THRESHOLD) / (2.5 - COLOR_SHIFT_THRESHOLD)))
     )
     pygame.draw.rect(surface, base_color, (scanner_pos, 8, 60, 4))
 
-    # Glow layers
     glow_surf = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
     pulse_brightness = 0.8 + 0.2 * pulse_factor
     pulse_alpha_base = int(80 * pulse_factor * energy_boost)
@@ -396,14 +363,12 @@ def draw_dashed_vertical_line_glow(surface, x, y_start, y_end, dash_length=10, g
     if y_start > y_end:
         y_start, y_end = y_end, y_start
 
-    # Core dashes (steady red)
     y = y_start
     while y < y_end:
         segment_end = min(y + dash_length, y_end)
         pygame.draw.line(surface, GRID_COLOR_LOW, (x, y), (x, segment_end), width)
         y += dash_length + gap_length
 
-    # Pulsing glow with color shift
     glow_surf = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
     pulse_alpha_base = int(70 * pulse_factor)
     pulse_brightness = 0.75 + 0.25 * pulse_factor
@@ -438,7 +403,6 @@ def draw_fft_spectrum(surface):
 
     current_energy = 0.0
 
-    # Check mute first - if muted, skip audio processing
     if mute:
         spectrum_data = np.zeros(LOG_BINS)
         current_energy = 0.0
@@ -472,7 +436,6 @@ def draw_fft_spectrum(surface):
         spectrum_data = np.random.rand(LOG_BINS) * 0.6 + 0.2
         current_energy = np.mean(spectrum_data)
 
-    # Update peak hold
     for i in range(LOG_BINS):
         if spectrum_data[i] > peak_hold[i]:
             peak_hold[i] = spectrum_data[i]
@@ -489,7 +452,6 @@ def draw_fft_spectrum(surface):
             peak_hold.fill(0)
             peak_decay_timer.fill(0)
 
-    # Draw bars
     bar_width = WIDTH // (LOG_BINS + 2)
     for i in range(LOG_BINS):
         x = (i + 1) * bar_width
@@ -502,7 +464,6 @@ def draw_fft_spectrum(surface):
         if h_peak > 0:
             pygame.draw.line(surface, PEAK_HOLD_COLOR, (x, 380 - h_peak), (x + bar_width-4, 380 - h_peak), 2)
 
-        # Peak labels
         if peak_hold[i] > LABEL_THRESHOLD and h_peak > 0:
             db_approx = 20 * np.log10(peak_hold[i] + 1e-8)
             db_text = f"{int(db_approx)} dB" if db_approx > DB_MIN else "< -60 dB"
@@ -512,7 +473,6 @@ def draw_fft_spectrum(surface):
             surface.blit(shadow, (label_rect.x + 1, label_rect.y + 1))
             surface.blit(label, label_rect)
 
-    # Octave grid lines
     spectrum_top = 380 - SPECTRUM_HEIGHT
     spectrum_bottom = 380
 
@@ -542,7 +502,6 @@ def draw_fft_spectrum(surface):
         lbl_rect = lbl.get_rect(midtop=(x_pos, spectrum_bottom + 4))
         surface.blit(lbl, lbl_rect)
 
-    # Frequency axis labels
     label_y = 380 + SPECTRUM_HEIGHT + 20
     for target_hz, text in FREQUENCY_LABELS:
         bin_index = np.argmin(np.abs(log_freqs - target_hz))
@@ -576,7 +535,6 @@ def draw_agents(surface):
         txt = f_tiny.render(name[:3], True, WHITE)
         surface.blit(txt, (WIDTH - 150, 90 + i*45))
 
-# Main loop
 running = True
 clock = pygame.time.Clock()
 
@@ -598,14 +556,12 @@ while running:
                 peak_decay_timer.fill(0)
                 PEAK_RESET_FLASH = FLASH_DURATION_RESET
 
-    # Pulse & energy calculations
     pulse_phase += BASE_PULSE_SPEED / 60.0
     baseline_pulse = 0.7 + 0.3 * np.sin(pulse_phase)
     energy_boost = MIN_ENERGY_FLOOR + (current_energy * ENERGY_BOOST_FACTOR)
     energy_boost = min(energy_boost, 2.5)
     pulse_factor = baseline_pulse * energy_boost
 
-    # Flash trigger
     if energy_boost > EXTREME_PEAK_THRESHOLD and flash_timer <= 0:
         flash_timer = FLASH_DURATION
         flash_intensity = 1.0
@@ -614,7 +570,6 @@ while running:
         flash_timer -= 1/60.0
         flash_intensity = flash_timer / FLASH_DURATION
 
-    # Shake trigger
     if energy_boost > EXTREME_PEAK_THRESHOLD and shake_timer <= 0:
         shake_timer = SHAKE_DURATION
         shake_start_time = time.time()
@@ -639,11 +594,9 @@ while running:
     else:
         shake_offset = (0, 0)
 
-    # Decay peak reset flash
     if PEAK_RESET_FLASH > 0:
         PEAK_RESET_FLASH -= 1/60.0
 
-    # Draw to buffer
     ui_buffer.fill(BLACK)
 
     draw_glowing_scanner(ui_buffer)
@@ -652,14 +605,12 @@ while running:
     draw_agents(ui_buffer)
     draw_scanlines(ui_buffer)
 
-    # Vignette
     if vignette_surf:
         current_vignette_strength = VIGNETTE_STRENGTH_BASE + \
             (VIGNETTE_STRENGTH_FLASH - VIGNETTE_STRENGTH_BASE) * flash_intensity
         vignette_surf.set_alpha(int(255 * current_vignette_strength))
         ui_buffer.blit(vignette_surf, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
 
-    # Flash overlay
     if flash_intensity > 0:
         flash_base = pygame.Color(GRID_COLOR_HIGH)
         flash_color = flash_base.lerp(pygame.Color(255, 255, 255), FLASH_WHITE_MIX)
@@ -673,7 +624,6 @@ while running:
 
         ui_buffer.blit(flash_surf, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
 
-    # Peak reset flash
     if PEAK_RESET_FLASH > 0:
         alpha = int(255 * (PEAK_RESET_FLASH / FLASH_DURATION_RESET))
         txt = f_med.render("PEAKS RESET", True, (255, 255, 255))
@@ -681,19 +631,16 @@ while running:
         txt_surf.set_alpha(alpha)
         ui_buffer.blit(txt_surf, (WIDTH//2 - txt.get_width()//2, 100))
 
-    # Cursor zoom
     if cursor_zoom:
         mx, my = pygame.mouse.get_pos()
         pygame.draw.circle(ui_buffer, (255, 60, 60, 80), (mx, my), 100, 4)
 
-    # Blit buffer to screen with shake
     screen.fill(BLACK)
     screen.blit(ui_buffer, shake_offset)
 
     pygame.display.flip()
     clock.tick(60)
 
-# Cleanup
 if audio_active and stream_audio:
     stream_audio.stop_stream()
     stream_audio.close()

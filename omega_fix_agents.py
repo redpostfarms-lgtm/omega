@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Fix Agents - Automatically fix detected issues
 """
 Agents to automatically fix common issues detected in Omega system.
 """
@@ -42,14 +40,10 @@ class ImportFixAgent(FixAgent):
             
             module_name = issue.get('module', '')
             
-            # Check if already has try/except
             if f'try:' in content and module_name in content:
-                # Find the import line
                 lines = content.split('\n')
                 for i, line in enumerate(lines):
                     if f'import {module_name}' in line or f'from {module_name}' in line:
-                        # Check if it's already in try/except
-                        # Look backwards for try
                         has_try = False
                         for j in range(max(0, i-10), i):
                             if 'try:' in lines[j] and (j < i-1 or 'except' not in lines[j+1]):
@@ -57,7 +51,6 @@ class ImportFixAgent(FixAgent):
                                 break
                         
                         if not has_try:
-                            # Wrap in try/except
                             indent = len(line) - len(line.lstrip())
                             try_block = ' ' * indent + f'try:\n'
                             try_block += line + '\n'
@@ -65,7 +58,6 @@ class ImportFixAgent(FixAgent):
                             try_block += ' ' * indent + f'    print(f"[WARNING] {module_name} not available, feature disabled")\n'
                             try_block += ' ' * indent + f'    {module_name.split(".")[-1].upper()}_AVAILABLE = False\n'
                             
-                            # This is complex - just log the fix needed
                             self.fixes_applied.append({
                                 'issue': issue,
                                 'file': str(file_path),
@@ -100,8 +92,6 @@ class ErrorHandlingFixAgent(FixAgent):
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Find function and add try/except
-            # This is complex AST manipulation - log as manual fix
             self.fixes_applied.append({
                 'issue': issue,
                 'file': str(file_path),
@@ -135,18 +125,13 @@ class CompatibilityFixAgent(FixAgent):
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Check for large-v2 without fallback
             if 'large-v2' in content and 'WhisperModel("large-v2"' in content:
-                # Look for the pattern
                 pattern = r'WhisperModel\("large-v2"[^)]+\)'
                 match = re.search(pattern, content)
                 if match:
-                    # Check if there's a try/except around it
                     start_pos = match.start()
-                    # Look backwards for try
                     before = content[max(0, start_pos-200):start_pos]
                     if 'try:' not in before[-50:]:
-                        # Need to add try/except - log as manual
                         self.fixes_applied.append({
                             'issue': issue,
                             'file': str(file_path),
@@ -172,7 +157,6 @@ class PathFixAgent(FixAgent):
     
     def apply_fix(self, issue: Dict) -> bool:
         """Replace hardcoded paths with Path or os.path.join."""
-        # Log as manual fix - path replacement requires context
         self.fixes_applied.append({
             'issue': issue,
             'file': issue.get('file', ''),
@@ -231,8 +215,6 @@ class SystemFixOrchestrator:
 
 def main():
     """Run fix agents on audit results."""
-    # This would typically load audit results
-    # For now, create a sample run
     print("=" * 70)
     print("  OMEGA FIX AGENTS - READY")
     print("=" * 70)

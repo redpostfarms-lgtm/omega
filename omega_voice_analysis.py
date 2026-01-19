@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Voice Analysis & Improvement Engine
 Analyzes clip_0001.wav and applies it to improve TTS voice cloning
@@ -14,7 +13,6 @@ os.environ['TTS_ACCEPT_TO_S'] = '1'
 print("[*] Omega Voice Analysis & Enhancement System")
 print("=" * 60)
 
-# Step 1: Analyze omega's voice file
 print("\n[PHASE 1] Analyzing Omega's Voice Profile...")
 try:
     import librosa
@@ -27,26 +25,20 @@ try:
     y, sr = librosa.load(voice_file, sr=None)
     print(f"  [OK] Voice loaded: {sr}Hz, {len(y)/sr:.2f}s duration")
     
-    # Analyze voice characteristics
     print("\n  [ANALYZING] Voice Characteristics:")
     
-    # Pitch analysis
     onset_env = librosa.onset.onset_strength(y=y, sr=sr)
     print(f"    - Onset strength: {np.mean(onset_env):.4f}")
     
-    # Spectral centroid (brightness)
     cent = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
     print(f"    - Spectral centroid (brightness): {np.mean(cent):.0f} Hz")
     
-    # RMS Energy (loudness)
     rms = librosa.feature.rms(y=y)[0]
     print(f"    - RMS energy (loudness): {np.mean(rms):.4f}")
     
-    # Zero crossing rate (voice quality)
     zcr = librosa.feature.zero_crossing_rate(y=y)[0]
     print(f"    - Zero crossing rate: {np.mean(zcr):.4f}")
     
-    # MFCC (voice fingerprint)
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
     print(f"    - MFCC mean: {np.mean(mfcc, axis=1)[:5]}")
     
@@ -68,7 +60,6 @@ except Exception as e:
     print(f"  [ERROR] Analysis failed: {e}")
     voice_profile = None
 
-# Step 2: Load TTS and apply voice cloning
 print("\n[PHASE 2] Setting Up Voice Cloning...")
 try:
     from TTS.api import TTS
@@ -80,7 +71,6 @@ try:
     tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to(device)
     print(f"  [OK] TTS model ready")
     
-    # Step 3: Generate voice-cloned response
     print("\n[PHASE 3] Generating Voice-Cloned Response...")
     
     test_text = "I have analyzed my voice profile and optimized my synthesis parameters for perfect voice cloning."

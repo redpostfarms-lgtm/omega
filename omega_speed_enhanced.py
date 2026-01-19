@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# PROPRIETARY SOFTWARE - RED POST FARMS, LLC
-# Ω Omega Speed Enhanced - Async/Await, Caching, Parallelization
 
 """
 Ω Omega Speed Enhanced
@@ -18,7 +15,6 @@ from typing import Any, Callable, Optional, List
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import time
 
-# LRU Cache implementation
 _cache = {}
 _cache_size = 128
 
@@ -33,7 +29,6 @@ def lru_cache(maxsize: int = 128):
             key = str(args) + str(kwargs)
             
             if key in cache:
-                # Move to end (most recently used)
                 cache_order.remove(key)
                 cache_order.append(key)
                 return cache[key]
@@ -41,7 +36,6 @@ def lru_cache(maxsize: int = 128):
             result = func(*args, **kwargs)
             
             if len(cache) >= maxsize:
-                # Remove least recently used
                 oldest = cache_order.pop(0)
                 del cache[oldest]
             
@@ -88,6 +82,5 @@ class ParallelExecutor:
         self.executor.shutdown(wait=True)
 
 
-# Global instances
 CONNECTION_POOL = ConnectionPool()
 PARALLEL_EXECUTOR = ParallelExecutor()

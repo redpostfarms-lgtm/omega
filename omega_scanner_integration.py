@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Scanner Integration
 =========================
@@ -11,7 +10,6 @@ from typing import Optional, List, Tuple
 import numpy as np
 import time
 
-# Add base directory to path
 base_dir = Path(__file__).parent.absolute()
 sys.path.insert(0, str(base_dir))
 
@@ -30,8 +28,6 @@ class OmegaScannerIntegration:
         self.audio_sync = None
         
         if SCANNER_AVAILABLE:
-            # Initialize scanner with Omega colors (red/gold)
-            # Use red for classic KITT effect, or gold for Omega branding
             self.scanner = KITTScannerEffect(
                 num_bars=16,
                 color=(1.0, 0.215, 0.0)  # Orange-red (Omega gold-red blend)
@@ -58,7 +54,6 @@ class OmegaScannerIntegration:
             try:
                 self.audio_sync.update_from_file(audio_file, audio_position)
             except (IOError, OSError, AttributeError, RuntimeError) as e:
-                # Audio sync failed - fallback to manual update
                 self.scanner.update(speech_active, audio_amplitude)
         else:
             self.scanner.update(speech_active, audio_amplitude)
@@ -87,7 +82,6 @@ class OmegaScannerIntegration:
             if i >= num_bars:
                 break
             
-            # Position (normalized, 0.0 to 1.0)
             x_pos = 0.1 + (i / (num_bars - 1) if num_bars > 1 else 0.5) * 0.8
             height = 0.6 * intensity  # Height based on intensity
             width = bar_width
@@ -110,18 +104,14 @@ class OmegaScannerIntegration:
         bars = self.get_scanner_bars(num_bars)
         colors = self.scanner.get_colors()
         
-        # Clear previous bars
         ax.clear()
         ax.set_facecolor('#1a1a1a')  # Dark background (like KITT)
         ax.axis('off')
         
-        # Draw bars
         for i, ((x_pos, height, width, intensity), color) in enumerate(zip(bars, colors)):
-            # Draw bar
             ax.bar(x_pos, height, width=width, bottom=0.2, 
                   color=color, alpha=0.9, edgecolor='none')
         
-        # Add title
         if self.scanner.speaking:
             ax.text(0.5, 0.95, 'Omega Speaking', ha='center', va='top',
                    fontsize=10, fontweight='bold', color='white',
@@ -151,9 +141,7 @@ Integration with omega_control_panel.py:
    self.scanner_integration = OmegaScannerIntegration()
 
 3. Update in _update_gui (OIP section):
-   # Update scanner
    if self.scanner_integration.scanner:
-       # Check for audio file
        audio_files = ['response.wav', 'omega_intro.wav']
        audio_found = None
        for af in audio_files:
@@ -162,21 +150,17 @@ Integration with omega_control_panel.py:
                audio_found = str(audio_path)
                break
        
-       # Update scanner
        if audio_found:
-           # Use audio file for synchronization
            self.scanner_integration.update_scanner(
                audio_file=audio_found,
                audio_position=0.5  # Current position in audio
            )
        else:
-           # Use speech detection
            self.scanner_integration.update_scanner(
                speech_active=self.speaking,
                audio_amplitude=0.5 if self.speaking else 0.0
            )
        
-       # Render scanner to OIP axes
        self.scanner_integration.render_to_axes(self.ax_oip, num_bars=16)
 
 4. Call update_scanner() regularly (in _update_gui or animation callback)

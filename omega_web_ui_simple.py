@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Web UI - Enhanced Voice System Interface
 Complete voice analysis and synthesis platform
@@ -30,10 +29,8 @@ def get_file_size_mb(filename):
         return round(os.path.getsize(filename) / (1024 * 1024), 2)
     return 0
 
-# Load voice profiles
 voice_profiles_data = load_voice_profiles()
 
-# Voice system status with complete data
 voice_system = {
     'running': True,
     'timestamp': datetime.now().isoformat(),
@@ -49,7 +46,6 @@ voice_system = {
     }
 }
 
-# Build voice data from profiles
 if voice_profiles_data and 'voice_profiles' in voice_profiles_data:
     for filename, profile in voice_profiles_data['voice_profiles'].items():
         voice_system['voices'].append({
@@ -65,7 +61,6 @@ if voice_profiles_data and 'voice_profiles' in voice_profiles_data:
             'tone': profile.get('brightness', 'unknown').upper()
         })
 else:
-    # Fallback data
     voice_system['voices'] = [
         {
             'name': 'clip_0001.wav',
@@ -93,7 +88,6 @@ else:
         }
     ]
 
-# HTML Template
 html_template = """
 <!DOCTYPE html>
 <html>

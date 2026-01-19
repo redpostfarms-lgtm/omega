@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# PROPRIETARY SOFTWARE - RED POST FARMS, LLC
-# Ω Omega Scalability Enhanced - Connection Pooling, Rate Limiting, Resource Monitoring
 
 """
 Ω Omega Scalability Enhanced
@@ -19,12 +16,9 @@ from typing import Dict, Optional, Any
 from datetime import datetime, timedelta
 
 
-# RateLimiter moved to rate_limiter.py with exponential backoff
-# Import the enhanced version instead
 try:
     from rate_limiter import ExponentialBackoffRateLimiter as RateLimiter
 except ImportError:
-    # Fallback to simple implementation if rate_limiter not available
     class RateLimiter:
         """Rate limiting for API calls (fallback)."""
         
@@ -39,7 +33,6 @@ except ImportError:
             with self.lock:
                 now = time.time()
                 
-                # Remove old calls
                 while self.calls and self.calls[0] < now - self.time_window:
                     self.calls.popleft()
                 
@@ -97,7 +90,6 @@ class ResourceMonitor:
                 "value": value
             })
             
-            # Keep only last 1000 entries
             if len(self.metrics[metric_name]) > 1000:
                 self.metrics[metric_name].pop(0)
     
@@ -145,14 +137,12 @@ class OfflineMode:
     def process_queue(self):
         """Process queued requests when back online."""
         if not self.offline and self.queue:
-            # Process queue
             processed = self.queue
             self.queue = []
             return processed
         return []
 
 
-# Global instances
 RATE_LIMITER = RateLimiter(max_calls=100, time_window=60)
 RESOURCE_MONITOR = ResourceMonitor()
 OFFLINE_MODE = OfflineMode()

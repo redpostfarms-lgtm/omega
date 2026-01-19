@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice Player - Plays existing voice samples with alternation
 Works without TTS - uses pre-recorded samples
@@ -106,7 +105,6 @@ class OmegaVoicePlayer:
         """Estimate duration from file size"""
         try:
             size_mb = os.path.getsize(file_path) / (1024 * 1024)
-            # Rough estimate: ~1 MB per 10 seconds for 16-bit 22kHz WAV
             seconds = size_mb * 10
             if seconds < 60:
                 return f"{seconds:.0f}s"
@@ -138,7 +136,6 @@ class OmegaVoicePlayer:
                 print(f"{BOLD}ROUND {round_num}/{rounds}{RESET}")
                 print(f"{BOLD}{'='*70}{RESET}\n")
                 
-                # Play WARM voice
                 voice_info = self.voices['warm']
                 self.current_voice = 'warm'
                 print(f"{voice_info['color']}[Voice Sample {round_num*2-1}]{RESET}")
@@ -147,10 +144,8 @@ class OmegaVoicePlayer:
                 if round_num < rounds:
                     time.sleep(2)
                     
-                    # Switch to BRIGHT
                     self.switch_voice()
                     
-                    # Play BRIGHT voice
                     voice_info = self.voices['bright']
                     print(f"{voice_info['color']}[Voice Sample {round_num*2}]{RESET}")
                     self.play_audio(voice_info['file'], voice_info['description'])
@@ -187,7 +182,6 @@ class OmegaVoicePlayer:
                 print(f"{BOLD}[Playback #{count}]{RESET}")
                 self.play_audio(voice_info['file'], voice_info['description'])
                 
-                # Switch for next iteration
                 self.switch_voice()
                 time.sleep(1)
             

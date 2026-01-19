@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Monitoring Infrastructure
 ================================
@@ -13,7 +12,6 @@ from datetime import datetime
 import json
 from collections import defaultdict
 
-# Try to import monitoring libraries
 try:
     from prometheus_client import Counter, Histogram, Gauge, start_http_server
     PROMETHEUS_AVAILABLE = True
@@ -35,7 +33,6 @@ class OmegaMonitor:
         self.base_dir = Path(__file__).parent.absolute()
         self.metrics_file = metrics_file or (self.base_dir / "metrics.json")
         
-        # Metrics storage
         self.metrics = {
             "counters": defaultdict(int),
             "histograms": defaultdict(list),
@@ -43,26 +40,21 @@ class OmegaMonitor:
             "timestamps": defaultdict(list)
         }
         
-        # Prometheus metrics (if available)
         self.prometheus_counters = {}
         self.prometheus_histograms = {}
         self.prometheus_gauges = {}
         
-        # Structured logger (if available)
         self.logger = None
         
-        # Initialize Prometheus metrics
         if PROMETHEUS_AVAILABLE:
             self._initialize_prometheus()
         
-        # Initialize structured logging
         if STRUCTLOG_AVAILABLE:
             self._initialize_logging()
     
     def _initialize_prometheus(self):
         """Initialize Prometheus metrics"""
         try:
-            # Speech recognition metrics
             self.prometheus_counters["speech_recognition_total"] = Counter(
                 'omega_speech_recognition_total',
                 'Total number of speech recognition requests'
@@ -72,7 +64,6 @@ class OmegaMonitor:
                 'Total number of speech recognition errors'
             )
             
-            # TTS metrics
             self.prometheus_counters["tts_generation_total"] = Counter(
                 'omega_tts_generation_total',
                 'Total number of TTS generations'
@@ -82,7 +73,6 @@ class OmegaMonitor:
                 'TTS generation duration in seconds'
             )
             
-            # Voice security metrics
             self.prometheus_counters["voice_verification_total"] = Counter(
                 'omega_voice_verification_total',
                 'Total number of voice verifications'
@@ -92,7 +82,6 @@ class OmegaMonitor:
                 'Total number of authorized voice verifications'
             )
             
-            # Confidence metrics
             self.prometheus_histograms["confidence_scores"] = Histogram(
                 'omega_confidence_scores',
                 'Confidence scores distribution',
@@ -159,7 +148,6 @@ class OmegaMonitor:
             log_func = getattr(self.logger, level, self.logger.info)
             log_func(event, **kwargs)
         else:
-            # Fallback to print
             print(f"[{level.upper()}] {event} {kwargs if kwargs else ''}")
     
     def get_metrics(self) -> Dict[str, Any]:
@@ -198,7 +186,6 @@ class OmegaMonitor:
             except Exception as e:
                 print(f"[Monitoring] Error starting Prometheus server: {e}")
 
-# Global monitor instance
 _monitor = None
 
 def get_monitor() -> OmegaMonitor:

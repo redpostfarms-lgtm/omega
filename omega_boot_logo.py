@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Boot Logo - ASUS B550-Plus
 =================================
@@ -18,7 +17,6 @@ class BootLogoManager:
         self.logo_dir = Path("boot_logo")
         self.logo_dir.mkdir(exist_ok=True)
         
-        # Logo specifications
         self.logo_format = "BMP"  # UEFI typically uses BMP
         self.logo_size = (1024, 768)  # Standard UEFI logo size
         self.logo_colors = {
@@ -31,31 +29,21 @@ class BootLogoManager:
         try:
             from PIL import Image, ImageDraw, ImageFont
             
-            # Create image with black background
             img = Image.new('RGB', self.logo_size, color='black')
             draw = ImageDraw.Draw(img)
             
-            # Gold color (RGB: 255, 215, 0)
             gold = (255, 215, 0)
             
-            # Draw Omega symbol (Ω)
-            # Simple geometric representation
             width, height = self.logo_size
             center_x, center_y = width // 2, height // 2
             
-            # Draw Omega symbol as overlapping circles/arcs
-            # This is a simplified representation
-            # For production, use a proper Omega font/svg
             
-            # Upper arc
             draw.arc([center_x - 200, center_y - 150, center_x + 200, center_y + 50], 
                      start=0, end=180, fill=gold, width=30)
             
-            # Lower arc
             draw.arc([center_x - 200, center_y - 50, center_x + 200, center_y + 150], 
                      start=180, end=360, fill=gold, width=30)
             
-            # Save logo
             logo_path = self.logo_dir / "omega_logo.bmp"
             img.save(logo_path, 'BMP')
             
@@ -86,9 +74,3 @@ class BootLogoManager:
         }
 
 # Note: Actually replacing the boot logo requires:
-# - ASUS AI Suite (with logo upload feature)
-# - UEFI/BIOS access
-# - Logo file in correct format (usually BMP)
-# - Admin/root access
-# This script creates the logo image, but actual replacement
-# requires ASUS-specific tools or UEFI modification

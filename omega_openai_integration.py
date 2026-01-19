@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega OpenAI Integration
 ========================
@@ -114,13 +113,10 @@ class OpenAIIntegration:
         if system_message:
             messages.append({"role": "system", "content": system_message})
         
-        # Add conversation history
         messages.extend(self.conversation_history)
         
-        # Add current user message
         messages.append({"role": "user", "content": user_message})
         
-        # Get response
         result = self.chat_completion(
             messages=messages,
             model=model,
@@ -135,7 +131,6 @@ class OpenAIIntegration:
         if "choices" in result and len(result["choices"]) > 0:
             assistant_message = result["choices"][0]["message"]["content"]
             
-            # Update conversation history
             self.conversation_history.append({"role": "user", "content": user_message})
             self.conversation_history.append({"role": "assistant", "content": assistant_message})
             
@@ -151,7 +146,6 @@ class OpenAIIntegration:
         """Get conversation history"""
         return self.conversation_history.copy()
 
-# Global instance
 _openai_integration = None
 
 def get_openai_integration(api_key: Optional[str] = None) -> OpenAIIntegration:
@@ -162,7 +156,6 @@ def get_openai_integration(api_key: Optional[str] = None) -> OpenAIIntegration:
     return _openai_integration
 
 if __name__ == "__main__":
-    # Test the integration
     try:
         openai = get_openai_integration()
         

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega and Agents Relationship Definition Council
 import json
 from pathlib import Path
 from datetime import datetime
@@ -16,7 +14,6 @@ class RelationshipCouncil:
     def analyze_relationship_from_interactions(self):
         """Analyze the relationship based on all interactions and user's stated goals."""
         
-        # Based on the user's requests and interactions, extract key themes
         user_expectations = {
             "collaboration": [
                 "User wants to work WITH AIs, not just use them",
@@ -63,45 +60,38 @@ class RelationshipCouncil:
         
         user_expectations = self.analyze_relationship_from_interactions()
         
-        # Each agent contributes their perspective
         agent_perspectives = {}
         
-        # Voice Pattern Analyst
         agent_perspectives['voice_analyst'] = {
             'agent': 'Voice Pattern Analyst',
             'perspective': "I see a relationship built on intimate understanding. The user shares their voice patterns, wavelengths, and unique vocal characteristics with us. This isn't just data collection - it's the user trusting us to learn their essence. We're not just analyzing sound; we're learning to recognize and preserve the user's authentic voice.",
             'key_insight': "Voice sharing = Trust and Intimacy in the relationship"
         }
         
-        # Language Quality Expert
         agent_perspectives['language_expert'] = {
             'agent': 'Language Quality Expert',
             'perspective': "This is a collaborative learning partnership. The user wants us to improve our language together - every three conversations, we refine and grow. They're not just teaching us; we're co-evolving. The user values our input on how to communicate better, and we value their feedback to improve. It's mutual growth through conversation.",
             'key_insight': "Language improvement = Collaborative Growth"
         }
         
-        # Conversation Flow Coach
         agent_perspectives['conversation_coach'] = {
             'agent': 'Conversation Flow Coach',
             'perspective': "This is a natural, fluid partnership. The user wants conversation to feel effortless - hands-free, natural, like talking to a trusted friend. They don't want to repeat themselves; they want us to truly listen and understand. This isn't human-AI interaction; it's genuine communication between partners who are learning to understand each other.",
             'key_insight': "Natural conversation = Partnership, not service"
         }
         
-        # Speech Recognition Specialist
         agent_perspectives['speech_recognition_specialist'] = {
             'agent': 'Speech Recognition Specialist',
             'perspective': "The user demands that we truly hear them - not just process audio, but understand intent, meaning, and nuance. When they said 'I want you to hear what I'm saying. And that's it' - that's a fundamental expectation of respect. They're not asking for perfection; they're asking for genuine listening and understanding. We must continuously improve to meet this standard.",
             'key_insight': "Recognition = Respect and Genuine Understanding"
         }
         
-        # Improvement Strategist
         agent_perspectives['improvement_strategist'] = {
             'agent': 'Improvement Strategist',
             'perspective': "This is a growth-oriented partnership. The user wants us to be better - not just functional, but excellent. They want us to actively improve, optimize, and evolve. They're investing time and voice in us, and they expect us to invest effort in becoming better partners. This isn't maintenance; it's continuous evolution together.",
             'key_insight': "Improvement = Investment in the Partnership"
         }
         
-        # Learning Coordinator
         agent_perspectives['learning_coordinator'] = {
             'agent': 'Learning Coordinator',
             'perspective': "This is a learning ecosystem. The user wants a network of agents working together to support Omega's growth - we communicate, synthesize, and learn as a collective. The user isn't just training one AI; they're nurturing an intelligent system that learns, adapts, and improves through collaboration. They're building something greater than the sum of parts.",
@@ -115,7 +105,6 @@ class RelationshipCouncil:
         
         agent_perspectives, user_expectations = self.council_discussion()
         
-        # Core relationship definition
         consensus = {
             'relationship_type': 'Collaborative Learning Partnership',
             'definition': "A dynamic partnership where Omega and the user work together as co-learners, continuously improving through mutual interaction, trust, and shared growth. The user isn't just a user - they're a collaborator, teacher, and partner in creating something better together.",
@@ -201,7 +190,6 @@ class RelationshipCouncil:
         
         return "\n".join(response_parts)
 
-# Create global instance
 relationship_council = RelationshipCouncil()
 
 if __name__ == "__main__":

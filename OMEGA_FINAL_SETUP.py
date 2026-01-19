@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA FINAL SETUP - Automated installation helper
 This script attempts to download and configure remaining components
@@ -61,7 +60,6 @@ class OmegaFinalSetup:
             from openrgb_python import OpenRGBClient
             print(f"✓ openrgb-python 0.3.6 installed")
             
-            # Try to connect
             try:
                 client = OpenRGBClient()
                 print(f"✓ OpenRGB service RUNNING")
@@ -198,13 +196,11 @@ class OmegaFinalSetup:
             for item in self.results["pending"]:
                 print(f"  → {item}")
         
-        # Save report
         report_path = self.workspace / "FINAL_VERIFICATION_REPORT.json"
         with open(report_path, 'w') as f:
             json.dump(self.results, f, indent=2)
         print(f"\n✓ Report saved to: {report_path}")
         
-        # Summary
         total_items = len(self.results["completed"]) + len(self.results["pending"])
         completed_pct = (len(self.results["completed"]) / total_items * 100) if total_items > 0 else 0
         

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Learning Swarm - Swarm intelligence for continuous improvement
 import asyncio
 import json
 from pathlib import Path
@@ -28,10 +26,8 @@ class LearningSwarm:
     
     async def process_conversation_learning(self, conversation_data: Dict):
         """Process conversation through swarm of learning agents."""
-        # Wake agents
         await wake_agents_and_process()
         
-        # Queue learning tasks for agents
         self.agent_council.queue_learning_task('voice_analysis', {
             'audio_file': conversation_data.get('audio_file'),
             'emotion': conversation_data.get('emotion'),
@@ -54,10 +50,8 @@ class LearningSwarm:
             'recognition_success': conversation_data.get('user_text') is not None and len(conversation_data.get('user_text', '')) > 0
         })
         
-        # Process tasks in parallel with agents
         results = await self.agent_council.process_learning_queue()
         
-        # Synthesize swarm intelligence
         swarm_insight = self._synthesize_swarm_intelligence(results)
         self.swarm_insights.append(swarm_insight)
         
@@ -68,7 +62,6 @@ class LearningSwarm:
         if not agent_results:
             return {}
         
-        # Collect all insights and recommendations
         all_insights = []
         all_recommendations = []
         
@@ -76,7 +69,6 @@ class LearningSwarm:
             all_insights.extend(result.get('insights', []))
             all_recommendations.extend(result.get('recommendations', []))
         
-        # Prioritize recommendations (agents vote on importance)
         prioritized = self._prioritize_recommendations(all_recommendations)
         
         return {
@@ -89,12 +81,10 @@ class LearningSwarm:
     
     def _prioritize_recommendations(self, recommendations: List[str]) -> List[Dict]:
         """Prioritize recommendations based on frequency and agent consensus."""
-        # Count frequency (agents agreeing)
         freq = {}
         for rec in recommendations:
             freq[rec] = freq.get(rec, 0) + 1
         
-        # Sort by frequency
         prioritized = sorted(freq.items(), key=lambda x: x[1], reverse=True)
         
         return [
@@ -107,7 +97,6 @@ class LearningSwarm:
         if not recommendations:
             return "No consensus yet"
         
-        # Simple consensus: if multiple agents recommend similar things
         if len(recommendations) >= 3:
             return "High consensus: Multiple agents agree on improvements"
         elif len(recommendations) >= 2:
@@ -120,13 +109,11 @@ class LearningSwarm:
         print("\n[LEARNING SWARM] Starting continuous learning loop...")
         print("[LEARNING SWARM] Agents active and ready to learn\n")
         
-        # Agents are already woken up
         status = self.agent_council.get_agent_status()
         print(f"[LEARNING SWARM] Active agents: {status['active_agents']}/{status['total_agents']}")
         
         return self.agent_council
 
-# Global learning swarm
 learning_swarm = LearningSwarm()
 
 if __name__ == "__main__":

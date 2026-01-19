@@ -1,4 +1,3 @@
-# omega_simple_final.py — Simple Omega with Memory
 from TTS.api import TTS
 import sounddevice as sd
 import numpy as np
@@ -15,10 +14,8 @@ from rate_limiter import GOOGLE_SPEECH_LIMITER
 
 MEMORY_FILE = Path(r'D:\RPF_BRAIN\The Gatekeeper\memory.map')
 
-# Load models
 tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Memory system
 def load_memory():
     """Load memory from file."""
     if MEMORY_FILE.exists():
@@ -40,7 +37,6 @@ def save_memory(data):
 
 memory = load_memory()
 
-# Record audio
 def record(duration=5, fs=16000):
     """Record audio from microphone."""
     print("Listening...")
@@ -54,7 +50,6 @@ def record(duration=5, fs=16000):
         print(f"Recording error: {e}")
         raise
 
-# Speak
 def speak(text):
     """Speak text, non-blocking."""
     try:
@@ -67,7 +62,6 @@ def speak(text):
             language='en',
             file_path='out.wav'
         )
-        # Non-blocking audio playback
         if sys.platform == 'win32':
             os.startfile('out.wav')
         else:
@@ -77,14 +71,12 @@ def speak(text):
 
 async def recognize_speech_async(wav_file):
     """Async speech recognition with rate limiting."""
-    # Wait for rate limit if needed
     GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
     
     if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
         wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
         await asyncio.sleep(wait_time)
     
-    # Run blocking operation in executor
     loop = asyncio.get_event_loop()
     r = sr.Recognizer()
     
@@ -92,7 +84,6 @@ async def recognize_speech_async(wav_file):
         with sr.AudioFile(wav_file) as source:
             audio = r.record(source)
         
-        # Run API call in executor to avoid blocking
         said = await loop.run_in_executor(
             None,
             lambda: r.recognize_google(audio)
@@ -127,22 +118,18 @@ async def process_audio_async():
     
     while running:
         try:
-            # Record audio (blocking, but necessary)
             loop = asyncio.get_event_loop()
             wav = await loop.run_in_executor(None, record)
             
             try:
-                # Speech recognition with rate limiting
                 said = await recognize_speech_async(wav)
                 print(f"You: {said}")
                 
-                # Save to memory
                 memory['heard'].append(said)
                 if len(memory['heard']) > 10:
                     memory['heard'].pop(0)
                 save_memory(memory)
                 
-                # Reply with memory
                 reply = f"I heard: {said}. I remember {len(memory['heard'])} things."
                 if len(memory['heard']) > 1:
                     reply += f" Before that: {memory['heard'][-2]}"
@@ -157,21 +144,18 @@ async def process_audio_async():
                 print(f"API error: {e}")
                 loop = asyncio.get_event_loop()
                 await loop.run_in_executor(None, speak, "API unavailable. Trying again.")
-                # Wait before retry
                 await asyncio.sleep(2)
             except Exception as e:
                 print(f"Error: {e}")
                 loop = asyncio.get_event_loop()
                 await loop.run_in_executor(None, speak, "Error occurred. Speak again.")
             finally:
-                # Clean up temp file
                 if os.path.exists(wav):
                     try:
                         os.remove(wav)
                     except Exception as e:
                         print(f"Cleanup error: {e}")
             
-            # Small delay to prevent tight loop
             await asyncio.sleep(0.1)
             
         except KeyboardInterrupt:

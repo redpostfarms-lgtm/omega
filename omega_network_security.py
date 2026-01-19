@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Network Security System
 ==============================
@@ -55,15 +54,12 @@ class VPNManager:
         """Initialize VPN manager"""
         self.available_protocols = []
         
-        # Check for OpenVPN
         if self._check_command("openvpn"):
             self.available_protocols.append("openvpn")
         
-        # Check for WireGuard
         if self._check_command("wg"):
             self.available_protocols.append("wireguard")
         
-        # Windows: Check for built-in VPN
         if self.system == "Windows":
             self.available_protocols.append("windows_vpn")
     
@@ -101,7 +97,6 @@ class VPNManager:
                 self.active_connection = process
                 return True
             elif protocol == "windows_vpn" and self.system == "Windows":
-                # Windows VPN connection
                 subprocess.run(["rasdial", "VPN_NAME", "USERNAME", "PASSWORD"])
                 return True
         except Exception as e:
@@ -141,10 +136,8 @@ class FirewallManager:
         self.available = False
         
         if self.system == "Windows":
-            # Windows Firewall
             self.available = True
         elif self.system == "Linux":
-            # Check for ufw, iptables, firewalld
             if self._check_command("ufw"):
                 self.backend = "ufw"
                 self.available = True
@@ -232,14 +225,12 @@ class AirGapController:
         
         try:
             if platform.system() == "Windows":
-                # Block all outbound connections
                 subprocess.run(["netsh", "advfirewall", "firewall", "add", "rule",
                               "name=AirGap_BlockAll", "dir=out", "action=block"],
                              check=True)
                 self.active = True
                 return True
             elif platform.system() == "Linux":
-                # Use iptables to block all
                 subprocess.run(["sudo", "iptables", "-A", "OUTPUT", "-j", "DROP"],
                              check=True)
                 self.active = True
@@ -282,16 +273,12 @@ class AttackDetector:
     
     def detect_attack(self, connection: NetworkConnection) -> Optional[SecurityEvent]:
         """Detect potential attack from network connection"""
-        # Simple heuristics - can be expanded
         suspicious_indicators = []
         
-        # Check for suspicious ports
         suspicious_ports = [23, 135, 139, 445, 1433, 3389]  # Common attack vectors
         if connection.remote_port in suspicious_ports:
             suspicious_indicators.append(f"suspicious_port_{connection.remote_port}")
         
-        # Check for rapid connections
-        # (This would require connection tracking)
         
         if suspicious_indicators:
             event = SecurityEvent(
@@ -344,7 +331,6 @@ class SecurityManager:
         attack = self.attack_detector.detect_attack(connection)
         
         if attack:
-            # Auto-response: Enable air-gap and block source
             self.set_security_level(SecurityLevel.AIR_GAP)
             self.firewall.block_connection(connection.remote_addr)
             return True
@@ -361,7 +347,6 @@ class SecurityManager:
             "detected_attacks": len(self.attack_detector.get_detected_attacks())
         }
 
-# Global instance
 _security_manager = None
 
 def get_security_manager() -> SecurityManager:

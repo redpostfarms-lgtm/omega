@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 AI Apps Communication Bridge
 Sends requests to installed AI apps and retrieves responses
@@ -34,7 +33,6 @@ class AIAppBridge:
     
     def send_to_chatgpt(self, text, personality_context):
         """Send request to ChatGPT Desktop"""
-        # Use OpenAI API if available
         try:
             import openai
             response = openai.ChatCompletion.create(
@@ -50,7 +48,6 @@ class AIAppBridge:
     
     def send_to_voice_generator(self, text, voice_profile):
         """Send text to AI Voice Generator"""
-        # Create input file
         input_file = Path('ai_apps/voice_gen_input.txt')
         input_file.parent.mkdir(exist_ok=True)
         
@@ -60,7 +57,6 @@ class AIAppBridge:
                 'voice_profile': voice_profile
             }, f)
         
-        # Wait for output
         output_file = Path('ai_apps/voice_gen_output.wav')
         timeout = 30
         start = time.time()
@@ -74,6 +70,4 @@ class AIAppBridge:
     
     def humanize_text(self, text):
         """Send to AI Humanizer"""
-        # Implement humanization logic
-        # This would integrate with the AI Humanizer app
         return text

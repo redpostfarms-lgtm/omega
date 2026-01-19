@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Control Panel - Web Interface
 ====================================
@@ -21,11 +20,9 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 from threading import Thread, Lock
 
-# Add base directory to path
 base_dir = Path(__file__).parent.absolute()
 sys.path.insert(0, str(base_dir))
 
-# Flask availability
 try:
     from flask import Flask, render_template_string, jsonify, request, session
     from flask_cors import CORS
@@ -34,14 +31,12 @@ except ImportError:
     FLASK_AVAILABLE = False
     print("Flask not installed. Install with: pip install flask flask-cors")
 
-# Flask-Login availability
 try:
     from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
     from werkzeug.security import generate_password_hash, check_password_hash
     LOGIN_AVAILABLE = True
 except ImportError:
     LOGIN_AVAILABLE = False
-    # Provide a fallback UserMixin for when flask-login is not available
     class UserMixin:
         """Fallback UserMixin when flask-login is not installed"""
         @property
@@ -57,7 +52,6 @@ except ImportError:
             return str(self.id)
     print("Flask-Login not installed. Install with: pip install flask-login")
 
-# Flask-SQLAlchemy availability
 try:
     from flask_sqlalchemy import SQLAlchemy
     SQLALCHEMY_AVAILABLE = True
@@ -65,7 +59,6 @@ except ImportError:
     SQLALCHEMY_AVAILABLE = False
     print("Flask-SQLAlchemy not installed. Install with: pip install flask-sqlalchemy")
 
-# Flask-Migrate availability
 try:
     from flask_migrate import Migrate
     MIGRATE_AVAILABLE = True
@@ -73,7 +66,6 @@ except ImportError:
     MIGRATE_AVAILABLE = False
     print("Flask-Migrate not installed. Install with: pip install flask-migrate")
 
-# Import ControlPanel
 try:
     from omega_control_panel import ControlPanel
     CONTROL_PANEL_AVAILABLE = True
@@ -81,14 +73,12 @@ except ImportError:
     CONTROL_PANEL_AVAILABLE = False
     print("omega_control_panel not available")
 
-# WebSocket support (optional)
 try:
     from flask_socketio import SocketIO, emit, disconnect
     SOCKETIO_AVAILABLE = True
 except ImportError:
     SOCKETIO_AVAILABLE = False
 
-# Requests for AI API calls
 try:
     import requests
     REQUESTS_AVAILABLE = True
@@ -96,7 +86,6 @@ except ImportError:
     REQUESTS_AVAILABLE = False
     print("requests not installed. Install with: pip install requests")
 
-# User storage (persistent)
 try:
     from omega_user_storage import get_user_storage
     USER_STORAGE_AVAILABLE = True
@@ -104,7 +93,6 @@ except ImportError:
     USER_STORAGE_AVAILABLE = False
     print("omega_user_storage not available - using demo users")
 
-# User model for authentication
 class User(UserMixin):
     """User model with role-based access control"""
     def __init__(self, id, username, password_hash='', role='viewer'):
@@ -125,10 +113,8 @@ class User(UserMixin):
         """Check password (simple comparison for demo - use hash in production)"""
         if LOGIN_AVAILABLE:
             return check_password_hash(self.password_hash, password)
-        # Fallback: simple comparison (NOT SECURE - for demo only)
         return self.password_hash == password
 
-# Role-based decorators
 from functools import wraps
 
 def role_required(*required_roles):
@@ -195,10 +181,8 @@ def calculate_balance_status(stats: Dict[str, Any], recommendations: List[str]) 
         ram = stats.get('ram', {}).get('percent', 0)
         gpu = stats.get('gpu', {}).get('percent', 0)
         
-        # Calculate overall stress level (0-100)
         stress_level = (cpu + ram + gpu) / 3
         
-        # Determine health status
         if stress_level < 30:
             health = 'optimal'
             color = 'green'
@@ -212,11 +196,9 @@ def calculate_balance_status(stats: Dict[str, Any], recommendations: List[str]) 
             health = 'critical'
             color = 'red'
         
-        # Check if balanced
         variance = max(cpu, ram, gpu) - min(cpu, ram, gpu)
         is_balanced = variance < 30  # Less than 30% difference between components
         
-        # Determine bottleneck
         bottleneck = None
         if cpu > 80:
             bottleneck = 'CPU'
@@ -320,7 +302,6 @@ class MultiAIChatbot:
             
             ai_response = result['choices'][0]['message']['content']
             
-            # Add to chat history
             with self.lock:
                 self.chat_history.append({
                     'role': 'user',
@@ -334,7 +315,6 @@ class MultiAIChatbot:
                     'ai_provider': provider,
                     'timestamp': datetime.now().isoformat()
                 })
-                # Keep last 100 messages
                 if len(self.chat_history) > 100:
                     self.chat_history = self.chat_history[-100:]
             
@@ -389,12 +369,10 @@ class OmegaControlPanelWeb:
         if not CONTROL_PANEL_AVAILABLE:
             raise ImportError("omega_control_panel is required")
         
-        # Initialize Flask app
         self.app = Flask(__name__)
         self.app.config['SECRET_KEY'] = 'omega-secret-key-2026-change-in-production'  # Change in production!
         CORS(self.app)  # Enable CORS for API access
         
-        # Initialize Flask-Login (if available)
         if LOGIN_AVAILABLE:
             self.login_manager = LoginManager()
             self.login_manager.init_app(self.app)
@@ -402,59 +380,46 @@ class OmegaControlPanelWeb:
             
             @self.login_manager.user_loader
             def load_user(user_id):
-                # For demo: create user from stored credentials
-                # In production: load from database
                 return self._get_user_by_id(user_id)
         else:
             self.login_manager = None
         
-        # WebSocket support (optional)
         if SOCKETIO_AVAILABLE:
             self.socketio = SocketIO(self.app, cors_allowed_origins="*", async_mode='threading')
         else:
             self.socketio = None
         
-        # Background status emitter thread
         self.status_emitter_thread = None
         
-        # ControlPanel instance (shared)
         self.control_panel = None
         self.control_panel_lock = Lock()
         
-        # Update thread
         self.update_thread = None
         self.running = False
         
-        # Multi-AI Chatbot
         self.chatbot = MultiAIChatbot()
         
-        # User storage (persistent file-based storage)
         if USER_STORAGE_AVAILABLE:
             self.user_storage = get_user_storage()
-            # Ensure admin user exists and is properly configured
             self.user_storage.ensure_admin_exists()
         else:
             self.user_storage = None
             self._init_demo_users()
         
-        # Setup routes
         self._setup_routes()
         
-        # Register Voice & Screenshot Extension
         try:
             from omega_voice_screenshot_extension import register_voice_screenshot_extension
             register_voice_screenshot_extension(self.app)
         except ImportError:
             print("[OMEGA] Voice & Screenshot Extension not available")
         
-        # Setup WebSocket events (if available)
         if self.socketio:
             self._setup_socketio()
     
     def _init_demo_users(self):
         """Initialize demo users (replace with database in production)"""
         if LOGIN_AVAILABLE:
-            # Demo users - in production, load from database
             self.demo_users = {
                 'admin': {'password': generate_password_hash('admin2026'), 'role': 'admin'},
                 'operator': {'password': generate_password_hash('op2026'), 'role': 'operator'},
@@ -468,7 +433,6 @@ class OmegaControlPanelWeb:
         if not LOGIN_AVAILABLE:
             return None
         
-        # Use persistent storage if available
         if USER_STORAGE_AVAILABLE and self.user_storage:
             user_data = self.user_storage.get_user(user_id)
             if user_data and user_data.get('active', True):
@@ -477,7 +441,6 @@ class OmegaControlPanelWeb:
                           role=user_data.get('role', 'viewer'))
             return None
         
-        # Fallback to demo users
         if hasattr(self, 'demo_users') and user_id in self.demo_users:
             user_data = self.demo_users[user_id]
             return User(id=user_id, username=user_id, password_hash=user_data['password'], role=user_data['role'])
@@ -488,7 +451,6 @@ class OmegaControlPanelWeb:
         if not LOGIN_AVAILABLE:
             return None
         
-        # Use persistent storage if available
         if USER_STORAGE_AVAILABLE and self.user_storage:
             user_data = self.user_storage.get_user(username)
             if user_data and user_data.get('active', True):
@@ -497,7 +459,6 @@ class OmegaControlPanelWeb:
                           role=user_data.get('role', 'viewer'))
             return None
         
-        # Fallback to demo users
         if hasattr(self, 'demo_users') and username in self.demo_users:
             user_data = self.demo_users[username]
             return User(id=username, username=username, password_hash=user_data['password'], role=user_data['role'])
@@ -511,7 +472,6 @@ class OmegaControlPanelWeb:
             """Main dashboard page"""
             return self._get_dashboard_html()
         
-        # Authentication routes
         @self.app.route('/api/login', methods=['POST'])
         def api_login():
             """Login endpoint"""
@@ -693,7 +653,6 @@ class OmegaControlPanelWeb:
         def api_hardware_enhanced():
             """Get enhanced hardware information from LibreHardwareMonitor"""
             try:
-                # Try to import enhanced monitor
                 from omega_hardware_monitor_enhanced import OmegaHardwareMonitor
                 
                 monitor = OmegaHardwareMonitor()
@@ -788,7 +747,6 @@ class OmegaControlPanelWeb:
                             'status': 'Load balancer disabled'
                         }), 503
                     
-                    # Get current load balancer data
                     config = load_balancer.get_balanced_config()
                     stats = load_balancer.get_system_stats()
                     recommendations = load_balancer.get_recommendations()
@@ -874,7 +832,6 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
-        # Chatbot routes
         @self.app.route('/api/chatbot/status', methods=['GET'])
         @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
         def api_chatbot_status():
@@ -950,7 +907,6 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
-        # Voice API routes
         @self.app.route('/api/voice/speak', methods=['POST'])
         def api_voice_speak():
             """Trigger Omega voice"""
@@ -959,7 +915,6 @@ class OmegaControlPanelWeb:
                 message = data.get('message', '')
                 voice_type = data.get('type', 'status')  # status, alert, command
                 
-                # Start voice in background
                 subprocess.Popen(
                     [sys.executable, 'speak_omega_voice.py'],
                     cwd=str(base_dir),
@@ -994,7 +949,6 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
-        # Mobile interface route
         @self.app.route('/mobile')
         def mobile_interface():
             """Mobile-optimized interface"""
@@ -1010,7 +964,6 @@ class OmegaControlPanelWeb:
         def handle_connect():
             """Handle WebSocket connection"""
             print('Client connected to SocketIO')
-            # Send initial status on connect
             try:
                 with self.control_panel_lock:
                     if self.control_panel:
@@ -1055,7 +1008,6 @@ class OmegaControlPanelWeb:
                 with self.control_panel_lock:
                     if self.control_panel:
                         self.control_panel.set_fan_speed(speed)
-                # Broadcast to all clients
                 username = current_user.username if LOGIN_AVAILABLE and current_user.is_authenticated else 'anonymous'
                 self.socketio.emit('fan_update', {
                     'success': True,
@@ -1076,13 +1028,11 @@ class OmegaControlPanelWeb:
                 with self.control_panel_lock:
                     if self.control_panel:
                         if enabled is None:
-                            # Toggle
                             self.control_panel.toggle_rgb()
                         elif color:
                             self.control_panel.set_rgb_color(color)
                         else:
                             self.control_panel.rgb_enabled = enabled
-                # Broadcast to all clients
                 username = current_user.username if LOGIN_AVAILABLE and current_user.is_authenticated else 'anonymous'
                 self.socketio.emit('rgb_update', {
                     'success': True,
@@ -1094,7 +1044,6 @@ class OmegaControlPanelWeb:
             except Exception as e:
                 emit('rgb_update', {'success': False, 'error': str(e)})
         
-        # Start background status emitter
         self._start_status_emitter()
     
     def _start_status_emitter(self):
@@ -1154,7 +1103,6 @@ class OmegaControlPanelWeb:
             memory = psutil.virtual_memory() if hasattr(psutil, 'virtual_memory') else None
             disk = psutil.disk_usage('/') if hasattr(psutil, 'disk_usage') else None
             
-            # Safely get control panel data
             cpu_temp = self.control_panel._get_cpu_temperature() if self.control_panel else 0.0
             gpu_temp = self.control_panel._get_gpu_temperature() if self.control_panel else 0.0
             gpu_usage = self.control_panel._get_gpu_usage() if self.control_panel else 0.0
@@ -1162,7 +1110,6 @@ class OmegaControlPanelWeb:
             rgb_enabled = self.control_panel.rgb_enabled if self.control_panel else False
             rgb_color = self.control_panel.rgb_color if self.control_panel else '#FFD700'
             
-            # Get comprehensive GPU info from RTX 3050
             gpu_memory_used = 0.0
             gpu_memory_total = 0.0
             gpu_name = 'Unknown'
@@ -1185,7 +1132,6 @@ class OmegaControlPanelWeb:
                     gpu_clock = gpu_info.get('clock_graphics')
                     gpu_memory_clock = gpu_info.get('clock_memory')
             except Exception:
-                # Fallback to basic nvidia-smi
                 try:
                     result = subprocess.run(['nvidia-smi', '--query-gpu=memory.used,memory.total', '--format=csv,noheader,nounits'],
                                           capture_output=True, text=True, timeout=2)
@@ -3519,10 +3465,7 @@ class OmegaControlPanelWeb:
         with self.control_panel_lock:
             if not self.control_panel:
                 self.control_panel = ControlPanel(use_gradual_loading=False)
-                # Start background updates (without GUI)
                 self.control_panel.running = True
-                # Don't call run() - we just need the data updates
-                # Instead, manually update in background thread
                 self._start_update_thread()
     
     def _start_update_thread(self):
@@ -3535,7 +3478,6 @@ class OmegaControlPanelWeb:
                 try:
                     with self.control_panel_lock:
                         if self.control_panel:
-                            # Trigger updates
                             self.control_panel._update_integrated_systems()
                             self.control_panel._scan_process_improvements()
                     import time
@@ -3551,10 +3493,8 @@ class OmegaControlPanelWeb:
     
     def run(self):
         """Run the web server"""
-        # Initialize control panel
         self.initialize_control_panel()
         
-        # Start status emitter if SocketIO is available
         if self.socketio and not self.status_emitter_thread:
             self._start_status_emitter()
         

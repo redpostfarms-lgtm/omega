@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Swarm Server - Stable Version
 Serves OMEGA Swarm UI with working backend
@@ -18,7 +17,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(32)
 CORS(app)
 
-# Register QR handler blueprint
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'static', 'scripts'))
 try:
     from static.scripts.qr_handler import qr  # type: ignore[import]
@@ -27,7 +25,6 @@ try:
 except ImportError as e:
     print(f"⚠️  QR handler blueprint not available: {e}")
 
-# 6-Phone Hierarchy
 PHONE_HIERARCHY = {
     0: {"name": "QUEEN", "color": "#ffcc00", "role": "master", "label": "Queen Controller"},
     1: {"name": "BLACK_DRONE", "color": "#333333", "role": "worker", "label": "Drone 1 (Black)"},
@@ -37,7 +34,6 @@ PHONE_HIERARCHY = {
     5: {"name": "TEST_DRONE", "color": "#ffd700", "role": "test", "label": "Drone 5 (TEST)", "test_mode": True}
 }
 
-# Load HTML files at startup
 EXTRACTED_PATH = os.path.join(os.path.dirname(__file__), 'extracted_files_4')
 
 def load_html_file(filename):
@@ -50,7 +46,6 @@ def load_html_file(filename):
         print(f"⚠️ Error loading {filename}: {e}")
         return None
 
-# Load at module level
 QUEEN_HTML = load_html_file('queen.html')
 DRONE_HTML = load_html_file('drone.html')
 
@@ -77,7 +72,6 @@ def generate_qr():
         if phone_id not in PHONE_HIERARCHY:
             return jsonify({'error': 'Invalid phone ID'}), 400
         
-        # Use actual network IP instead of request.host
         host = "10.0.0.26:5002"
         
         if phone_id == 0:

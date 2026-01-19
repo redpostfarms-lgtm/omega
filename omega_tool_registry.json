@@ -1,0 +1,1159 @@
+{
+  "timestamp": "2026-01-19T00:48:35.309677",
+  "total_packages": 373,
+  "cli_tools": {
+    "ai": [
+      {
+        "package": "huggingface-hub",
+        "tool_name": "hf",
+        "entry_point": "huggingface_hub.cli.hf:main",
+        "category": "ai"
+      },
+      {
+        "package": "huggingface-hub",
+        "tool_name": "huggingface-cli",
+        "entry_point": "huggingface_hub.commands.huggingface_cli:main",
+        "category": "ai"
+      },
+      {
+        "package": "huggingface-hub",
+        "tool_name": "tiny-agents",
+        "entry_point": "huggingface_hub.inference._mcp.cli:app",
+        "category": "ai"
+      },
+      {
+        "package": "llama-cloud-services",
+        "tool_name": "llama-parse",
+        "entry_point": "llama_cloud_services.parse.cli.main:parse",
+        "category": "ai"
+      },
+      {
+        "package": "llama-index",
+        "tool_name": "llamaindex-cli",
+        "entry_point": "llama_index.cli.command_line:main",
+        "category": "ai"
+      },
+      {
+        "package": "llama-index-cli",
+        "tool_name": "llamaindex-cli",
+        "entry_point": "llama_index.cli.command_line:main",
+        "category": "ai"
+      },
+      {
+        "package": "llama-index-instrumentation",
+        "tool_name": "llama-index-instrumentation",
+        "entry_point": "llama_index_instrumentation:main",
+        "category": "ai"
+      },
+      {
+        "package": "llama-parse",
+        "tool_name": "llama-parse",
+        "entry_point": "llama_parse.cli.main:parse",
+        "category": "ai"
+      },
+      {
+        "package": "openai",
+        "tool_name": "openai",
+        "entry_point": "openai.cli:main",
+        "category": "ai"
+      }
+    ],
+    "data": [
+      {
+        "package": "jupyterlab",
+        "tool_name": "jlpm",
+        "entry_point": "jupyterlab.jlpmapp:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyterlab",
+        "tool_name": "jupyter-lab",
+        "entry_point": "jupyterlab.labapp:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyterlab",
+        "tool_name": "jupyter-labextension",
+        "entry_point": "jupyterlab.labextensions:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyterlab",
+        "tool_name": "jupyter-labhub",
+        "entry_point": "jupyterlab.labhubapp:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_client",
+        "tool_name": "jupyter-kernel",
+        "entry_point": "jupyter_client.kernelapp:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_client",
+        "tool_name": "jupyter-kernelspec",
+        "entry_point": "jupyter_client.kernelspecapp:KernelSpecApp.launch_instance",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_client",
+        "tool_name": "jupyter-run",
+        "entry_point": "jupyter_client.runapp:RunApp.launch_instance",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_core",
+        "tool_name": "jupyter",
+        "entry_point": "jupyter_core.command:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_core",
+        "tool_name": "jupyter-migrate",
+        "entry_point": "jupyter_core.migrate:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_core",
+        "tool_name": "jupyter-troubleshoot",
+        "entry_point": "jupyter_core.troubleshoot:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter-events",
+        "tool_name": "jupyter-events",
+        "entry_point": "jupyter_events.cli:main",
+        "category": "data"
+      },
+      {
+        "package": "jupyter_server",
+        "tool_name": "jupyter-server",
+        "entry_point": "jupyter_server.serverapp:main",
+        "category": "data"
+      },
+      {
+        "package": "nbclient",
+        "tool_name": "jupyter-execute",
+        "entry_point": "nbclient.cli:main",
+        "category": "data"
+      },
+      {
+        "package": "nbconvert",
+        "tool_name": "jupyter-dejavu",
+        "entry_point": "nbconvert.nbconvertapp:dejavu_main",
+        "category": "data"
+      },
+      {
+        "package": "nbconvert",
+        "tool_name": "jupyter-nbconvert",
+        "entry_point": "nbconvert.nbconvertapp:main",
+        "category": "data"
+      },
+      {
+        "package": "nbformat",
+        "tool_name": "jupyter-trust",
+        "entry_point": "nbformat.sign:TrustNotebookApp.launch_instance",
+        "category": "data"
+      },
+      {
+        "package": "numpy",
+        "tool_name": "f2py",
+        "entry_point": "numpy.f2py.f2py2e:main",
+        "category": "data"
+      },
+      {
+        "package": "numpy",
+        "tool_name": "numpy-config",
+        "entry_point": "numpy._configtool:main",
+        "category": "data"
+      }
+    ],
+    "web": [
+      {
+        "package": "fastapi",
+        "tool_name": "fastapi",
+        "entry_point": "fastapi.cli:main",
+        "category": "web"
+      },
+      {
+        "package": "Flask",
+        "tool_name": "flask",
+        "entry_point": "flask.cli:main",
+        "category": "web"
+      },
+      {
+        "package": "gradio",
+        "tool_name": "gradio",
+        "entry_point": "gradio.cli:cli",
+        "category": "web"
+      },
+      {
+        "package": "gradio",
+        "tool_name": "upload_theme",
+        "entry_point": "gradio.themes.upload_theme:main",
+        "category": "web"
+      },
+      {
+        "package": "streamlit",
+        "tool_name": "streamlit",
+        "entry_point": "streamlit.web.cli:main",
+        "category": "web"
+      }
+    ],
+    "dev": [
+      {
+        "package": "black",
+        "tool_name": "black",
+        "entry_point": "black:patched_main",
+        "category": "dev"
+      },
+      {
+        "package": "black",
+        "tool_name": "blackd",
+        "entry_point": "blackd:patched_main [d]",
+        "category": "dev"
+      },
+      {
+        "package": "mypy",
+        "tool_name": "dmypy",
+        "entry_point": "mypy.dmypy.client:console_entry",
+        "category": "dev"
+      },
+      {
+        "package": "mypy",
+        "tool_name": "mypy",
+        "entry_point": "mypy.__main__:console_entry",
+        "category": "dev"
+      },
+      {
+        "package": "mypy",
+        "tool_name": "mypyc",
+        "entry_point": "mypyc.__main__:main",
+        "category": "dev"
+      },
+      {
+        "package": "mypy",
+        "tool_name": "stubgen",
+        "entry_point": "mypy.stubgen:main",
+        "category": "dev"
+      },
+      {
+        "package": "mypy",
+        "tool_name": "stubtest",
+        "entry_point": "mypy.stubtest:main",
+        "category": "dev"
+      },
+      {
+        "package": "pip",
+        "tool_name": "pip",
+        "entry_point": "pip._internal.cli.main:main",
+        "category": "dev"
+      },
+      {
+        "package": "pip",
+        "tool_name": "pip3",
+        "entry_point": "pip._internal.cli.main:main",
+        "category": "dev"
+      },
+      {
+        "package": "pytest",
+        "tool_name": "py.test",
+        "entry_point": "pytest:console_main",
+        "category": "dev"
+      },
+      {
+        "package": "pytest",
+        "tool_name": "pytest",
+        "entry_point": "pytest:console_main",
+        "category": "dev"
+      }
+    ],
+    "monitoring": [],
+    "utility": [
+      {
+        "package": "alembic",
+        "tool_name": "alembic",
+        "entry_point": "alembic.config:main",
+        "category": "utility"
+      },
+      {
+        "package": "Automat",
+        "tool_name": "automat-visualize",
+        "entry_point": "automat._visualize:tool",
+        "category": "utility"
+      },
+      {
+        "package": "babel",
+        "tool_name": "pybabel",
+        "entry_point": "babel.messages.frontend:main",
+        "category": "utility"
+      },
+      {
+        "package": "charset-normalizer",
+        "tool_name": "normalizer",
+        "entry_point": "charset_normalizer.cli:cli_detect",
+        "category": "utility"
+      },
+      {
+        "package": "comtypes",
+        "tool_name": "clear_comtypes_cache",
+        "entry_point": "comtypes.clear_cache:main",
+        "category": "utility"
+      },
+      {
+        "package": "dask",
+        "tool_name": "dask",
+        "entry_point": "dask.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "debugpy",
+        "tool_name": "debugpy",
+        "entry_point": "debugpy.server.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "debugpy",
+        "tool_name": "debugpy-adapter",
+        "entry_point": "debugpy.adapter.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "distro",
+        "tool_name": "distro",
+        "entry_point": "distro.distro:main",
+        "category": "utility"
+      },
+      {
+        "package": "filetype",
+        "tool_name": "filetype",
+        "entry_point": "filetype.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "fonttools",
+        "tool_name": "fonttools",
+        "entry_point": "fontTools.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "fonttools",
+        "tool_name": "pyftmerge",
+        "entry_point": "fontTools.merge:main",
+        "category": "utility"
+      },
+      {
+        "package": "fonttools",
+        "tool_name": "pyftsubset",
+        "entry_point": "fontTools.subset:main",
+        "category": "utility"
+      },
+      {
+        "package": "fonttools",
+        "tool_name": "ttx",
+        "entry_point": "fontTools.ttx:main",
+        "category": "utility"
+      },
+      {
+        "package": "gql",
+        "tool_name": "gql-cli",
+        "entry_point": "gql.cli:gql_cli",
+        "category": "utility"
+      },
+      {
+        "package": "griffe",
+        "tool_name": "griffe",
+        "entry_point": "griffe:main",
+        "category": "utility"
+      },
+      {
+        "package": "httpx",
+        "tool_name": "httpx",
+        "entry_point": "httpx:main",
+        "category": "utility"
+      },
+      {
+        "package": "identify",
+        "tool_name": "identify-cli",
+        "entry_point": "identify.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "Incremental",
+        "tool_name": "incremental",
+        "entry_point": "incremental.update:_main",
+        "category": "utility"
+      },
+      {
+        "package": "instructor",
+        "tool_name": "instructor",
+        "entry_point": "instructor.cli.cli:app",
+        "category": "utility"
+      },
+      {
+        "package": "invoke",
+        "tool_name": "inv",
+        "entry_point": "invoke.main:program.run",
+        "category": "utility"
+      },
+      {
+        "package": "invoke",
+        "tool_name": "invoke",
+        "entry_point": "invoke.main:program.run",
+        "category": "utility"
+      },
+      {
+        "package": "ipython",
+        "tool_name": "ipython",
+        "entry_point": "IPython:start_ipython",
+        "category": "utility"
+      },
+      {
+        "package": "ipython",
+        "tool_name": "ipython3",
+        "entry_point": "IPython:start_ipython",
+        "category": "utility"
+      },
+      {
+        "package": "json5",
+        "tool_name": "pyjson5",
+        "entry_point": "json5.tool:main",
+        "category": "utility"
+      },
+      {
+        "package": "jsonschema",
+        "tool_name": "jsonschema",
+        "entry_point": "jsonschema.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "litellm",
+        "tool_name": "litellm",
+        "entry_point": "litellm:run_server",
+        "category": "utility"
+      },
+      {
+        "package": "litellm",
+        "tool_name": "litellm-proxy",
+        "entry_point": "litellm.proxy.client.cli:cli",
+        "category": "utility"
+      },
+      {
+        "package": "Mako",
+        "tool_name": "mako-render",
+        "entry_point": "mako.cmd:cmdline",
+        "category": "utility"
+      },
+      {
+        "package": "markdown-it-py",
+        "tool_name": "markdown-it",
+        "entry_point": "markdown_it.cli.parse:main",
+        "category": "utility"
+      },
+      {
+        "package": "nltk",
+        "tool_name": "nltk",
+        "entry_point": "nltk.cli:cli",
+        "category": "utility"
+      },
+      {
+        "package": "nodeenv",
+        "tool_name": "nodeenv",
+        "entry_point": "nodeenv:main",
+        "category": "utility"
+      },
+      {
+        "package": "playwright",
+        "tool_name": "playwright",
+        "entry_point": "playwright.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "plotly",
+        "tool_name": "plotly_get_chrome",
+        "entry_point": "plotly.io._kaleido:plotly_get_chrome",
+        "category": "utility"
+      },
+      {
+        "package": "pre_commit",
+        "tool_name": "pre-commit",
+        "entry_point": "pre_commit.main:main",
+        "category": "utility"
+      },
+      {
+        "package": "Pygments",
+        "tool_name": "pygmentize",
+        "entry_point": "pygments.cmdline:main",
+        "category": "utility"
+      },
+      {
+        "package": "python-dotenv",
+        "tool_name": "dotenv",
+        "entry_point": "dotenv.__main__:cli",
+        "category": "utility"
+      },
+      {
+        "package": "pywin32",
+        "tool_name": "pywin32_postinstall",
+        "entry_point": "win32.scripts.pywin32_postinstall:main",
+        "category": "utility"
+      },
+      {
+        "package": "pywin32",
+        "tool_name": "pywin32_testall",
+        "entry_point": "win32.scripts.pywin32_testall:main",
+        "category": "utility"
+      },
+      {
+        "package": "qrcode",
+        "tool_name": "qr",
+        "entry_point": "qrcode.console_scripts:main",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-decrypt",
+        "entry_point": "rsa.cli:decrypt",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-encrypt",
+        "entry_point": "rsa.cli:encrypt",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-keygen",
+        "entry_point": "rsa.cli:keygen",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-priv2pub",
+        "entry_point": "rsa.util:private_to_public",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-sign",
+        "entry_point": "rsa.cli:sign",
+        "category": "utility"
+      },
+      {
+        "package": "rsa",
+        "tool_name": "pyrsa-verify",
+        "entry_point": "rsa.cli:verify",
+        "category": "utility"
+      },
+      {
+        "package": "Scrapy",
+        "tool_name": "scrapy",
+        "entry_point": "scrapy.cmdline:execute",
+        "category": "utility"
+      },
+      {
+        "package": "Send2Trash",
+        "tool_name": "send2trash",
+        "entry_point": "send2trash.__main__:main",
+        "category": "utility"
+      },
+      {
+        "package": "SpeechRecognition",
+        "tool_name": "sprc",
+        "entry_point": "speech_recognition.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "sympy",
+        "tool_name": "isympy",
+        "entry_point": "isympy:main",
+        "category": "utility"
+      },
+      {
+        "package": "tldextract",
+        "tool_name": "tldextract",
+        "entry_point": "tldextract.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "torch",
+        "tool_name": "torchfrtrace",
+        "entry_point": "tools.flight_recorder.fr_trace:main",
+        "category": "utility"
+      },
+      {
+        "package": "torch",
+        "tool_name": "torchrun",
+        "entry_point": "torch.distributed.run:main",
+        "category": "utility"
+      },
+      {
+        "package": "tqdm",
+        "tool_name": "tqdm",
+        "entry_point": "tqdm.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "transformers",
+        "tool_name": "transformers",
+        "entry_point": "transformers.commands.transformers_cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "transformers",
+        "tool_name": "transformers-cli",
+        "entry_point": "transformers.commands.transformers_cli:main_cli",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "cftp",
+        "entry_point": "twisted.conch.scripts.cftp:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "ckeygen",
+        "entry_point": "twisted.conch.scripts.ckeygen:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "conch",
+        "entry_point": "twisted.conch.scripts.conch:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "mailmail",
+        "entry_point": "twisted.mail.scripts.mailmail:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "pyhtmlizer",
+        "entry_point": "twisted.scripts.htmlizer:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "tkconch",
+        "entry_point": "twisted.conch.scripts.tkconch:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "trial",
+        "entry_point": "twisted.scripts.trial:run",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "twist",
+        "entry_point": "twisted.application.twist._twist:Twist.main",
+        "category": "utility"
+      },
+      {
+        "package": "Twisted",
+        "tool_name": "twistd",
+        "entry_point": "twisted.scripts.twistd:run",
+        "category": "utility"
+      },
+      {
+        "package": "typer",
+        "tool_name": "typer",
+        "entry_point": "typer.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "uvicorn",
+        "tool_name": "uvicorn",
+        "entry_point": "uvicorn.main:main",
+        "category": "utility"
+      },
+      {
+        "package": "virtualenv",
+        "tool_name": "virtualenv",
+        "entry_point": "virtualenv.__main__:run_with_catch",
+        "category": "utility"
+      },
+      {
+        "package": "watchdog",
+        "tool_name": "watchmedo",
+        "entry_point": "watchdog.watchmedo:main [watchmedo]",
+        "category": "utility"
+      },
+      {
+        "package": "watchfiles",
+        "tool_name": "watchfiles",
+        "entry_point": "watchfiles.cli:cli",
+        "category": "utility"
+      },
+      {
+        "package": "websockets",
+        "tool_name": "websockets",
+        "entry_point": "websockets.cli:main",
+        "category": "utility"
+      },
+      {
+        "package": "websocket-client",
+        "tool_name": "wsdump",
+        "entry_point": "websocket._wsdump:main",
+        "category": "utility"
+      },
+      {
+        "package": "wheel",
+        "tool_name": "wheel",
+        "entry_point": "wheel.cli:main",
+        "category": "utility"
+      }
+    ]
+  },
+  "free_extras": {
+    "gradio": [
+      {
+        "tools": [
+          "gradio CLI"
+        ],
+        "features": [
+          "Themes",
+          "Blocks system",
+          "Public sharing"
+        ]
+      }
+    ],
+    "gradio_client": [
+      {
+        "tools": [
+          "gradio CLI"
+        ],
+        "features": [
+          "Themes",
+          "Blocks system",
+          "Public sharing"
+        ]
+      }
+    ],
+    "jupyterlab": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyterlab_pygments": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyterlab_server": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyterlab_widgets": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter_client": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter_core": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter-events": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter-lsp": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter_server": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "jupyter_server_terminals": [
+      {
+        "tools": [
+          "jupyter",
+          "jupyter-lab",
+          "jupyter-notebook"
+        ],
+        "features": [
+          "Extensions",
+          "Kernels",
+          "Widgets"
+        ]
+      }
+    ],
+    "langchain": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-anthropic": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-classic": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-community": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-core": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-huggingface": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "langchain-openai": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      },
+      {
+        "tools": [
+          "openai CLI"
+        ],
+        "features": [
+          "Embeddings",
+          "Assistants API",
+          "Vision API"
+        ]
+      }
+    ],
+    "langchain-text-splitters": [
+      {
+        "tools": [
+          "langchain-cli",
+          "langsmith"
+        ],
+        "features": [
+          "RAG templates",
+          "Agent templates",
+          "LangServe deployment"
+        ]
+      }
+    ],
+    "llama-index-embeddings-openai": [
+      {
+        "tools": [
+          "openai CLI"
+        ],
+        "features": [
+          "Embeddings",
+          "Assistants API",
+          "Vision API"
+        ]
+      }
+    ],
+    "llama-index-llms-openai": [
+      {
+        "tools": [
+          "openai CLI"
+        ],
+        "features": [
+          "Embeddings",
+          "Assistants API",
+          "Vision API"
+        ]
+      }
+    ],
+    "openai": [
+      {
+        "tools": [
+          "openai CLI"
+        ],
+        "features": [
+          "Embeddings",
+          "Assistants API",
+          "Vision API"
+        ]
+      }
+    ],
+    "pip": [
+      {
+        "tools": [
+          "pip",
+          "pip-compile"
+        ],
+        "features": [
+          "Cache",
+          "Wheel building",
+          "Requirements management"
+        ]
+      }
+    ],
+    "pytest": [
+      {
+        "tools": [
+          "pytest"
+        ],
+        "features": [
+          "Fixtures",
+          "Plugins",
+          "Coverage"
+        ]
+      }
+    ],
+    "pytest-asyncio": [
+      {
+        "tools": [
+          "pytest"
+        ],
+        "features": [
+          "Fixtures",
+          "Plugins",
+          "Coverage"
+        ]
+      }
+    ],
+    "sentence-transformers": [
+      {
+        "tools": [
+          "transformers-cli"
+        ],
+        "features": [
+          "Model Hub",
+          "Pipelines",
+          "Tokenizers"
+        ]
+      }
+    ],
+    "streamlit": [
+      {
+        "tools": [
+          "streamlit CLI"
+        ],
+        "features": [
+          "Cloud deployment",
+          "Components",
+          "Secrets management"
+        ]
+      }
+    ],
+    "transformers": [
+      {
+        "tools": [
+          "transformers-cli"
+        ],
+        "features": [
+          "Model Hub",
+          "Pipelines",
+          "Tokenizers"
+        ]
+      }
+    ]
+  },
+  "categories": {
+    "ai_ml": {
+      "description": "AI and Machine Learning tools",
+      "tools": [
+        "langchain-cli",
+        "openai",
+        "transformers-cli",
+        "huggingface-cli"
+      ],
+      "usage": "Enhanced AI capabilities"
+    },
+    "data_science": {
+      "description": "Data analysis and visualization",
+      "tools": [
+        "jupyter",
+        "jupyter-lab",
+        "streamlit",
+        "gradio"
+      ],
+      "usage": "Data exploration and dashboards"
+    },
+    "development": {
+      "description": "Code quality and testing",
+      "tools": [
+        "pytest",
+        "black",
+        "flake8",
+        "mypy",
+        "pip"
+      ],
+      "usage": "Automated code quality checks"
+    },
+    "web": {
+      "description": "Web interfaces and APIs",
+      "tools": [
+        "fastapi",
+        "uvicorn",
+        "gunicorn"
+      ],
+      "usage": "API and web service deployment"
+    },
+    "security": {
+      "description": "Security and encryption",
+      "tools": [
+        "cryptography",
+        "jwt"
+      ],
+      "usage": "Enhanced security features"
+    }
+  },
+  "integration_status": {
+    "omega_intelligent_chatbot.py": "AI/ML tools integrated",
+    "omega_ai_extras.py": "Extended AI capabilities",
+    "omega_dev_tools.py": "Development automation",
+    "omega_continuous_monitor.py": "System monitoring",
+    "omega_quantum_idle_optimizer.py": "Power optimization"
+  }
+}

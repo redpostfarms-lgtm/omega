@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega VPN Enhanced - Privacy-Focused VPN System
 =================================================
@@ -21,7 +20,6 @@ from datetime import datetime
 from pathlib import Path
 import threading
 
-# Import base VPN system
 from omega_vpn_system import (
     VPNProvider, VPNStatus, VPNServer, VPNConnection,
     OpenVPNManager, WireGuardManager, CloudflareWarpManager
@@ -71,18 +69,15 @@ class DNSLeakProtection:
                     text=True,
                     timeout=5
                 )
-                # Parse DNS servers from output
                 dns_servers = []
                 for line in result.stdout.splitlines():
                     if "Configuration" in line or "Statically" in line:
                         continue
-                    # Extract IP addresses
                     parts = line.strip().split()
                     if parts and self._is_ip(parts[0]):
                         dns_servers.append(parts[0])
                 return dns_servers
             else:
-                # Linux: Read /etc/resolv.conf
                 with open("/etc/resolv.conf", 'r') as f:
                     dns_servers = []
                     for line in f:
@@ -106,13 +101,10 @@ class DNSLeakProtection:
         if dns_servers is None:
             dns_servers = self.secure_dns_servers
         
-        # Save original DNS
         self.original_dns = self.get_current_dns()
         
         try:
             if platform.system() == "Windows":
-                # Set DNS for primary interface
-                # This requires admin rights
                 for dns in dns_servers:
                     subprocess.run(
                         ["netsh", "interface", "ip", "set", "dns", "name=\"Wi-Fi\"", 
@@ -122,8 +114,6 @@ class DNSLeakProtection:
                     )
                 return True
             else:
-                # Linux: Update /etc/resolv.conf (requires root)
-                # Use systemd-resolved if available
                 if self._check_command("systemd-resolve"):
                     for dns in dns_servers:
                         subprocess.run(
@@ -139,7 +129,6 @@ class DNSLeakProtection:
     def test_dns_leak(self) -> Tuple[bool, Dict[str, Any]]:
         """Test for DNS leaks"""
         try:
-            # Query a test domain and check which DNS server responds
             try:
                 resolver = dns.resolver.Resolver()
                 resolver.nameservers = ['1.1.1.1']  # Use Cloudflare for test
@@ -147,7 +136,6 @@ class DNSLeakProtection:
                 test_domain = "example.com"
                 answers = resolver.resolve(test_domain, 'A')
                 
-                # Check if query went through expected DNS
                 leak_detected = False
                 dns_used = []
                 
@@ -157,7 +145,6 @@ class DNSLeakProtection:
                     "test_domain": test_domain
                 }
             except ImportError:
-                # dnspython not installed - use socket-based test
                 test_domain = "example.com"
                 try:
                     socket.gethostbyname(test_domain)
@@ -198,14 +185,9 @@ class KillSwitch:
         
         try:
             if self.system == "Windows":
-                # Block all traffic except VPN
-                # This is complex on Windows - would need to identify VPN interface
-                # For now, mark as enabled (full implementation requires VPN interface detection)
                 self.active = True
                 return True
             elif self.system == "Linux":
-                # Use iptables to block all traffic except VPN
-                # Block all OUTPUT except VPN interface
                 subprocess.run(
                     ["sudo", "iptables", "-A", "OUTPUT", "!", "-o", "tun0", "-j", "DROP"],
                     check=True,
@@ -250,7 +232,6 @@ class IPv6LeakProtection:
         """Disable IPv6 to prevent leaks"""
         try:
             if platform.system() == "Windows":
-                # Disable IPv6 on network interfaces
                 subprocess.run(
                     ["netsh", "interface", "ipv6", "set", "global", "randomizeidentifiers=disabled"],
                     capture_output=True,
@@ -258,7 +239,6 @@ class IPv6LeakProtection:
                 )
                 return True
             elif platform.system() == "Linux":
-                # Disable IPv6 (requires root)
                 subprocess.run(
                     ["sudo", "sysctl", "-w", "net.ipv6.conf.all.disable_ipv6=1"],
                     check=True,
@@ -290,8 +270,6 @@ class WebRTCLeakProtection:
     
     def create_browser_config(self, browser: str = "chrome") -> bool:
         """Create browser configuration to prevent WebRTC leaks"""
-        # This would require browser extension or profile modification
-        # For now, provide instructions
         config_instructions = {
             "chrome": "Install extension: WebRTC Leak Prevent",
             "firefox": "Set media.peerconnection.enabled to false in about:config",
@@ -306,17 +284,14 @@ class OptimizedVPNManager:
         self.vpn_name = name
         self.config_file = Path("vpn_config_enhanced.json")
         
-        # Privacy features
         self.dns_leak_protection = DNSLeakProtection()
         self.kill_switch = KillSwitch()
         self.ipv6_protection = IPv6LeakProtection()
         self.webrtc_protection = WebRTCLeakProtection()
         
-        # Base VPN managers
         from omega_vpn_system import ComprehensiveVPNManager
         self.base_vpn = ComprehensiveVPNManager()
         
-        # Privacy settings
         self.config = VPNConfig(
             provider=VPNProvider.CLOUDFLARE_WARP,  # Default
             dns_servers=["1.1.1.1", "1.0.0.1"],  # Cloudflare DNS
@@ -364,26 +339,21 @@ class OptimizedVPNManager:
         if provider is None:
             provider = self.config.provider
         
-        # Enable privacy features before connecting
         if self.config.dns_leak_protection:
             self.dns_leak_protection.set_secure_dns(self.config.dns_servers)
         
         if self.config.ipv6_leak_protection:
             self.ipv6_protection.disable_ipv6()
         
-        # Connect VPN
         success, message = self.base_vpn.connect(provider, config_path)
         
         if success:
-            # Enable kill switch after connection
             if self.config.kill_switch:
                 self.kill_switch.enable()
             
-            # Save configuration
             self.config.provider = provider
             self.save_config()
             
-            # Test DNS leak
             no_leak, leak_result = self.dns_leak_protection.test_dns_leak()
             if not no_leak:
                 print(f"⚠️ DNS leak detected: {leak_result}")
@@ -394,11 +364,9 @@ class OptimizedVPNManager:
     
     def disconnect(self) -> bool:
         """Disconnect VPN (but always-on mode prevents this)"""
-        # Disable kill switch first
         if self.kill_switch.is_enabled():
             self.kill_switch.disable()
         
-        # Re-enable IPv6 if disabled
         if self.config.ipv6_leak_protection:
             self.ipv6_protection.enable_ipv6()
         
@@ -408,7 +376,6 @@ class OptimizedVPNManager:
         """Get enhanced VPN status"""
         base_status = self.base_vpn.get_status()
         
-        # Test DNS leak
         no_leak, leak_result = self.dns_leak_protection.test_dns_leak()
         
         enhanced_status = {
@@ -432,18 +399,15 @@ class OptimizedVPNManager:
         """Optimize VPN connection for performance"""
         optimizations = []
         
-        # Use fastest DNS servers
         optimized_dns = ["1.1.1.1", "1.0.0.1"]  # Cloudflare (fastest)
         if self.config.dns_servers != optimized_dns:
             self.config.dns_servers = optimized_dns
             optimizations.append("DNS servers optimized to Cloudflare (fastest)")
         
-        # Enable DNS over HTTPS for security and speed
         if not self.config.dns_over_https:
             self.config.dns_over_https = True
             optimizations.append("DNS over HTTPS enabled")
         
-        # Save optimized configuration
         self.save_config()
         
         return {
@@ -451,7 +415,6 @@ class OptimizedVPNManager:
             "optimized": True
         }
 
-# Global instance
 _optimized_vpn = None
 
 def get_optimized_vpn(name: str = "OmegaVPN") -> OptimizedVPNManager:

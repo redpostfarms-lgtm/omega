@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega GPU Load Balancer
 =======================
@@ -32,12 +31,10 @@ class GPULoadBalancer:
         self.cpu_count = psutil.cpu_count(logical=True)
         self.ram_total_gb = psutil.virtual_memory().total / (1024**3)
         
-        # Load balancing settings
         self.cpu_threshold = 80  # %
         self.ram_threshold = 75  # %
         self.gpu_threshold = 85  # %
         
-        # Metrics tracking
         self.metrics = {
             'cpu_avg': 0,
             'ram_avg': 0,
@@ -45,11 +42,9 @@ class GPULoadBalancer:
             'decisions': []
         }
         
-        # Resource allocation history
         self.history = []
         self.max_history = 100
         
-        # Load balancing monitoring
         self.monitor_thread = None
         self.monitoring = False
         
@@ -86,7 +81,6 @@ class GPULoadBalancer:
                     'threshold': self.gpu_threshold
                 }
                 
-                # Calculate GPU utilization percentage
                 total_mem = gpu_stats['memory_total_gb']
                 used_mem = gpu_stats['memory_allocated_gb']
                 gpu_stats['percent'] = (used_mem / total_mem * 100) if total_mem > 0 else 0
@@ -106,30 +100,23 @@ class GPULoadBalancer:
         
         stats = self.get_system_stats()
         
-        # Check RAM pressure
         if stats['ram']['percent'] > self.ram_threshold:
-            # High RAM usage, use GPU to reduce memory pressure
             return True
         
-        # Check CPU pressure
         if stats['cpu']['percent'] > self.cpu_threshold:
-            # High CPU usage, offload to GPU
             return True
         
-        # Check if GPU has available memory
         if stats['gpu']['available']:
             gpu_available_gb = (
                 stats['gpu']['memory_total_gb'] - 
                 stats['gpu']['memory_allocated_gb']
             )
             
-            # If task size specified, check if GPU has room
             if task_size_mb > 0:
                 task_size_gb = task_size_mb / 1024
                 if gpu_available_gb < task_size_gb * 2:  # Need 2x for safety margin
                     return False
             
-            # If GPU has reasonable headroom, use it
             if gpu_available_gb > 1.0:  # At least 1GB free
                 return True
         
@@ -145,11 +132,9 @@ class GPULoadBalancer:
         if not stats['gpu']['available']:
             return True
         
-        # Offload if GPU is getting too full
         if stats['gpu']['percent'] > self.gpu_threshold:
             return True
         
-        # Offload if CPU has more headroom
         if (stats['cpu']['percent'] < 40 and 
             stats['gpu']['percent'] > 60):
             return False  # Keep on GPU
@@ -169,24 +154,20 @@ class GPULoadBalancer:
         if not self.gpu_available:
             return distribution
         
-        # Calculate stress levels (0-100)
         cpu_stress = stats['cpu']['percent']
         ram_stress = stats['ram']['percent']
         gpu_stress = stats['gpu']['percent'] if stats['gpu']['available'] else 100
         
-        # High RAM stress: use GPU more
         if ram_stress > 70:
             gpu_ratio = min(0.8, (ram_stress - 50) / 50)
             distribution['cpu'] = 100 * (1 - gpu_ratio)
             distribution['gpu'] = 100 * gpu_ratio
         
-        # High CPU stress: use GPU more
         elif cpu_stress > 70:
             gpu_ratio = min(0.6, (cpu_stress - 50) / 50)
             distribution['cpu'] = 100 * (1 - gpu_ratio)
             distribution['gpu'] = 100 * gpu_ratio
         
-        # Balanced: stay on CPU
         else:
             distribution['cpu'] = 100.0
             distribution['gpu'] = 0.0
@@ -208,7 +189,6 @@ class GPULoadBalancer:
         
         self.metrics['decisions'].append(decision)
         
-        # Keep history
         self.history.append(decision)
         if len(self.history) > self.max_history:
             self.history.pop(0)
@@ -218,7 +198,6 @@ class GPULoadBalancer:
         stats = self.get_system_stats()
         recommendations = []
         
-        # RAM recommendations
         if stats['ram']['percent'] > 85:
             recommendations.append({
                 'priority': 'critical',
@@ -234,7 +213,6 @@ class GPULoadBalancer:
                 'action': 'consider_gpu'
             })
         
-        # CPU recommendations
         if stats['cpu']['percent'] > 85:
             recommendations.append({
                 'priority': 'critical',
@@ -250,7 +228,6 @@ class GPULoadBalancer:
                 'action': 'distribute_load'
             })
         
-        # GPU recommendations
         if stats['gpu']['available']:
             if stats['gpu']['percent'] < 30:
                 recommendations.append({
@@ -284,7 +261,6 @@ class GPULoadBalancer:
             while self.monitoring:
                 try:
                     stats = self.get_system_stats()
-                    # Update running averages
                     self.metrics['cpu_avg'] = stats['cpu']['percent']
                     self.metrics['ram_avg'] = stats['ram']['percent']
                     
@@ -355,7 +331,6 @@ if __name__ == '__main__':
     print("OMEGA GPU LOAD BALANCER")
     print("="*70)
     
-    # Get current status
     config = balancer.get_balanced_config()
     
     print(f"\nStatus: {config['status'].upper()}")

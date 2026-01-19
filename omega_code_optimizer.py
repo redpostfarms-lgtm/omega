@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Code Optimizer - Space and Performance Optimization
 =========================================================
@@ -29,24 +28,19 @@ class CodeOptimizer:
             lines = len(content.splitlines())
             chars = len(content)
         
-        # Check for optimization opportunities
         opportunities = []
         
-        # Long strings that could be constants
         long_strings = re.findall(r'"[^"]{100,}"', content)
         if long_strings:
             opportunities.append(f"Long strings ({len(long_strings)}): Consider extracting to constants")
         
-        # Repeated code patterns
         if content.count("def ") > 20:
             opportunities.append("Many functions: Consider modularization")
         
-        # Large dictionaries/lists
         dict_count = content.count("{")
         if dict_count > 50:
             opportunities.append("Large data structures: Consider external data files")
         
-        # Comments ratio
         comment_lines = len([l for l in content.splitlines() if l.strip().startswith('#')])
         comment_ratio = comment_lines / lines if lines > 0 else 0
         if comment_ratio > 0.4:
@@ -77,7 +71,6 @@ class CodeOptimizer:
                 in_import_block = False
                 other_lines.append(line)
         
-        # Combine imports where possible
         optimized_imports = self._combine_imports(import_lines)
         
         optimized_content = '\n'.join(optimized_imports + other_lines)
@@ -97,7 +90,6 @@ class CodeOptimizer:
             if line.strip() == '':
                 blank_lines.append(line)
             elif line.strip().startswith('from '):
-                # Parse: from module import item1, item2
                 match = re.match(r'from\s+(\S+)\s+import\s+(.+)', line)
                 if match:
                     module, items = match.groups()
@@ -105,15 +97,12 @@ class CodeOptimizer:
                         imports[module] = []
                     imports[module].extend([i.strip() for i in items.split(',')])
             elif line.strip().startswith('import '):
-                # Simple import
                 module = line.strip().replace('import ', '').strip()
                 imports[module] = []
         
-        # Reconstruct combined imports
         result = []
         for module, items in sorted(imports.items()):
             if items:
-                # Remove duplicates and sort
                 unique_items = sorted(set(items))
                 result.append(f"from {module} import {', '.join(unique_items)}")
             else:
@@ -123,18 +112,14 @@ class CodeOptimizer:
     
     def remove_unused_imports(self, content: str) -> Tuple[str, List[str]]:
         """Remove unused imports (basic check)"""
-        # This is a simplified version - full implementation would parse AST
         lines = content.splitlines()
         used_names = set()
         
-        # Find used names (basic pattern matching)
         for line in lines:
             if not line.strip().startswith(('import ', 'from ', '#')):
-                # Extract potential variable/function names
                 words = re.findall(r'\b[a-zA-Z_][a-zA-Z0-9_]*\b', line)
                 used_names.update(words)
         
-        # Check imports
         import_lines = []
         removed = []
         for line in lines:
@@ -168,7 +153,6 @@ class CodeOptimizer:
                     blank_count += 1
                 prev_blank = True
             else:
-                # Remove trailing whitespace
                 optimized.append(line.rstrip())
                 prev_blank = False
         
@@ -185,11 +169,9 @@ class CodeOptimizer:
     
     def extract_constants(self, content: str) -> Tuple[str, List[str]]:
         """Extract long repeated strings to constants"""
-        # Find long strings that appear multiple times
         long_strings = re.findall(r'"[^"]{50,}"', content)
         
         if len(set(long_strings)) < len(long_strings):
-            # Some strings are repeated
             changes = ["Found repeated long strings - consider extracting to constants"]
             return content, changes
         
@@ -207,14 +189,12 @@ class CodeOptimizer:
         optimized_content = original_content
         all_changes = []
         
-        # Apply optimizations
         optimized_content, changes = self.optimize_whitespace(optimized_content)
         all_changes.extend(changes)
         
         optimized_content, changes = self.optimize_imports(optimized_content)
         all_changes.extend(changes)
         
-        # Calculate savings
         optimized_size = len(optimized_content)
         savings = original_size - optimized_size
         savings_pct = (savings / original_size * 100) if original_size > 0 else 0
@@ -228,7 +208,6 @@ class CodeOptimizer:
             "changes": all_changes
         }
         
-        # Write optimized version if significant savings
         if savings > 100 or savings_pct > 1:  # Save if >100 bytes or >1%
             if backup:
                 backup_path = file_path.with_suffix('.py.bak')
@@ -255,7 +234,6 @@ class CodeOptimizer:
         }
         
         for file_path in files:
-            # Skip backup files and __pycache__
             if 'bak' in file_path.name or '__pycache__' in str(file_path):
                 continue
             
@@ -289,7 +267,6 @@ def main():
         else:
             print(f"File not found: {target}")
     else:
-        # Scan current directory
         results = optimizer.scan_and_optimize()
         print(f"Files scanned: {results['files_scanned']}")
         print(f"Files optimized: {results['files_optimized']}")

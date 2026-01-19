@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Voice System - Interactive Demo
 Quick voice synthesis and testing with real-time feedback
@@ -11,7 +10,6 @@ from pathlib import Path
 
 os.environ['TTS_ACCEPT_TO_S'] = '1'
 
-# ANSI color codes for terminal
 RED = '\033[91m'
 GREEN = '\033[92m'
 YELLOW = '\033[93m'
@@ -126,7 +124,6 @@ def interactive_demo(tts, available_voices):
     print(f"{YELLOW}{BOLD}{'INTERACTIVE MODE':^70}{RESET}")
     print(f"{YELLOW}{BOLD}{'='*70}{RESET}\n")
     
-    # Demo phrases
     demo_phrases = [
         "I am Omega. My voice synthesis system is now fully operational.",
         "All systems are online and ready for deployment.",
@@ -160,7 +157,6 @@ def interactive_demo(tts, available_voices):
             print_status("Invalid choice", "WARN")
             continue
         
-        # Voice selection
         print_status("Available voices:", "INFO")
         for i, (file, desc) in enumerate(available_voices.items(), 1):
             print(f"  {i}. {desc} ({file})")
@@ -174,7 +170,6 @@ def interactive_demo(tts, available_voices):
         speaker_file = voices[int(voice_choice) - 1]
         output_file = f"omega_output_{int(time.time())}.wav"
         
-        # Synthesize
         if synthesize_voice(tts, text, speaker_file, output_file):
             play_choice = input(f"{GREEN}Play audio? (Y/n):{RESET} ").strip().upper()
             if play_choice != 'N':
@@ -198,7 +193,6 @@ def quick_demo(tts, available_voices):
 def main():
     print_header()
     
-    # Check files
     available_voices = check_voice_files()
     
     if not available_voices:
@@ -207,7 +201,6 @@ def main():
     
     print()
     
-    # Load model
     tts, device = load_tts_model()
     
     if not tts:
@@ -216,7 +209,6 @@ def main():
     
     print()
     
-    # Mode selection
     print(f"{CYAN}Demo Modes:{RESET}")
     print(f"  {CYAN}1.{RESET} Interactive Mode (custom text & voice selection)")
     print(f"  {CYAN}2.{RESET} Quick Demo (generate samples with all voices)")

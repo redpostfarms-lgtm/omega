@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Enhanced Hardware Sensor Module
 ================================
@@ -15,12 +14,10 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     if platform.system() != "Windows":
         return None
     
-    # Try psutil sensors_temperatures (works on Linux, limited on Windows)
     try:
         import psutil
         if hasattr(psutil, 'sensors_temperatures'):
             temps = psutil.sensors_temperatures()  # type: ignore[attr-defined]
-            # Look for CPU temperature in various sensor names
             for name, entries in temps.items():
                 name_lower = name.lower()
                 if any(keyword in name_lower for keyword in ['cpu', 'core', 'processor', 'package']):
@@ -30,7 +27,6 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     except Exception:
         pass
     
-    # NEW: Try getting CPU temp via Windows Performance Counters
     try:
         import subprocess
         result = subprocess.run(
@@ -48,15 +44,12 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     except Exception:
         pass
     
-    # Try WMI MSAcpi_ThermalZoneTemperature
     try:
         import wmi
         w = wmi.WMI(namespace="root\\WMI")
         
-        # Try MSAcpi_ThermalZoneTemperature (most common)
         temperature_info = w.MSAcpi_ThermalZoneTemperature()
         if temperature_info:
-            # Temperature is in tenths of Kelvin, convert to Celsius
             temp_kelvin = temperature_info[0].CurrentTemperature / 10.0
             temp_celsius = temp_kelvin - 273.15
             if temp_celsius > 0 and temp_celsius < 150:  # Sanity check
@@ -64,7 +57,6 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     except Exception:
         pass
     
-    # Try OpenHardwareMonitor/LibreHardwareMonitor if available
     try:
         import wmi
         w = wmi.WMI(namespace="root\\OpenHardwareMonitor")
@@ -75,7 +67,6 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     except Exception:
         pass
     
-    # Try LibreHardwareMonitor namespace
     try:
         import wmi
         w = wmi.WMI(namespace="root\\LibreHardwareMonitor")
@@ -86,14 +77,11 @@ def get_cpu_temperature_wmi() -> Optional[float]:
     except Exception:
         pass
     
-    # Try alternate WMI methods
     try:
         import wmi
         c = wmi.WMI()
-        # Some motherboards expose temperature through Win32_TemperatureProbe
         for temp_probe in c.Win32_TemperatureProbe():
             if temp_probe.CurrentReading:
-                # Reading is in tenths of degrees Kelvin
                 temp_celsius = (temp_probe.CurrentReading / 10.0) - 273.15
                 if temp_celsius > 0 and temp_celsius < 150:
                     return round(temp_celsius, 1)
@@ -122,7 +110,6 @@ def get_gpu_info_nvidia() -> Dict[str, Any]:
     }
     
     try:
-        # Query comprehensive GPU data
         query_fields = [
             'name',
             'temperature.gpu',
@@ -154,7 +141,6 @@ def get_gpu_info_nvidia() -> Dict[str, Any]:
                 gpu_info['usage'] = float(values[2]) if values[2] != 'N/A' else None
                 gpu_info['memory_usage_percent'] = float(values[3]) if values[3] != 'N/A' else None
                 
-                # Memory in MB
                 memory_used_mb = float(values[4]) if values[4] != 'N/A' else 0
                 memory_total_mb = float(values[5]) if values[5] != 'N/A' else 0
                 
@@ -163,21 +149,17 @@ def get_gpu_info_nvidia() -> Dict[str, Any]:
                 gpu_info['memory_used_gb'] = round(memory_used_mb / 1024, 2)
                 gpu_info['memory_total_gb'] = round(memory_total_mb / 1024, 2)
                 
-                # Calculate memory percentage
                 if memory_total_mb > 0:
                     gpu_info['memory_percent'] = round((memory_used_mb / memory_total_mb) * 100, 1)
                 
-                # Power and fan
                 gpu_info['power_draw'] = float(values[6]) if values[6] != 'N/A' else None
                 gpu_info['power_limit'] = float(values[7]) if values[7] != 'N/A' else None
                 gpu_info['fan_speed'] = float(values[8]) if values[8] != 'N/A' else None
                 
-                # Clock speeds (MHz)
                 gpu_info['clock_graphics'] = float(values[9]) if values[9] != 'N/A' else None
                 gpu_info['clock_memory'] = float(values[10]) if values[10] != 'N/A' else None
                 
     except Exception as e:
-        # Return partial data if available
         pass
     
     return gpu_info
@@ -197,7 +179,6 @@ if __name__ == "__main__":
     print("HARDWARE SENSOR TEST")
     print("=" * 60)
     
-    # Test CPU temperature
     print("\n[CPU Temperature]")
     cpu_temp = get_cpu_temperature_wmi()
     if cpu_temp:
@@ -214,7 +195,6 @@ if __name__ == "__main__":
         print("")
         print("  ℹ️  Your motherboard doesn't expose CPU temp via ACPI/WMI")
     
-    # Test GPU info
     print("\n[GPU Information - GeForce RTX 3050]")
     gpu_info = get_gpu_info_nvidia()
     print(f"  Name: {gpu_info['name']}")

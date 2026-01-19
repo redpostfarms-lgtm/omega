@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega OUI Lookup System
 =======================
@@ -24,12 +23,10 @@ import urllib.request
 import urllib.error
 import time
 
-# OUI Database Configuration
 OUI_CSV_URL = "https://standards-oui.ieee.org/oui/oui.csv"
 OUI_CSV_LOCAL = Path("oui.csv")
 OUI_JSON_CACHE = Path(".oui_cache.json")
 
-# Online API endpoints (fallback)
 MACVENDORS_API = "https://api.macvendors.com"
 MACLOOKUP_API = "https://api.maclookup.app/v2/macs"
 
@@ -60,12 +57,10 @@ class OUILookup:
         self.oui_db: Dict[str, Dict] = {}
         self.cache_loaded = False
         
-        # Load OUI database
         self._load_oui_database()
     
     def _load_oui_database(self):
         """Load OUI database from CSV or cache"""
-        # Try loading from JSON cache first (faster)
         if self.use_cache and OUI_JSON_CACHE.exists():
             try:
                 with OUI_JSON_CACHE.open('r', encoding='utf-8') as f:
@@ -77,11 +72,9 @@ class OUILookup:
             except Exception as e:
                 print(f"[OUI] Cache load failed: {e}, loading from CSV...")
         
-        # Load from CSV
         if self.oui_csv_path.exists():
             try:
                 self._load_from_csv()
-                # Save to cache for next time
                 if self.use_cache:
                     self._save_cache()
             except Exception as e:
@@ -101,18 +94,15 @@ class OUILookup:
             reader = csv.DictReader(f)
             for row in reader:
                 try:
-                    # Extract OUI from Assignment column (format: "00-1A-2B" or "001A2B")
                     assignment = row.get("Assignment", "").strip()
                     if not assignment:
                         continue
                     
-                    # Normalize OUI (remove separators, uppercase)
                     oui = assignment.replace("-", "").replace(":", "").replace(".", "").upper()
                     if len(oui) < 6:
                         continue
                     oui = oui[:6]  # Take first 6 hex digits
                     
-                    # Store vendor information
                     vendor_name = row.get("Organization Name", "").strip()
                     if vendor_name:
                         self.oui_db[oui] = {
@@ -123,7 +113,6 @@ class OUILookup:
                         }
                         oui_count += 1
                 except Exception as e:
-                    # Skip malformed rows
                     continue
         
         print(f"[OUI] Loaded {oui_count} OUIs from CSV")
@@ -148,21 +137,16 @@ class OUILookup:
         Extract OUI (first 6 hex digits) from MAC address.
         Handles multiple formats: 00:1A:2B:3C:4D:5E, 00-1A-2B-3C-4D-5E, 001A.2B3C.4D5E, etc.
         """
-        # Remove all separators and convert to uppercase
         cleaned = ''.join(c for c in mac.upper() if c.isalnum())
         
-        # Validate: must be at least 6 hex digits
         if len(cleaned) < 6:
             return None
         
-        # Check if all characters are valid hex
         if not all(c in '0123456789ABCDEF' for c in cleaned[:6]):
             return None
         
         oui = cleaned[:6]
         
-        # Check if locally administered (U/L bit = 1)
-        # Second LSB of first byte: if bit 1 of first hex digit is set
         first_byte = int(oui[0:2], 16)
         is_locally_administered = bool(first_byte & 0x02)
         
@@ -191,7 +175,6 @@ class OUILookup:
     def _lookup_online_maclookup(self, oui: str) -> Optional[Dict]:
         """Lookup vendor using maclookup.app API"""
         try:
-            # Format OUI with dashes for API
             oui_formatted = f"{oui[0:2]}-{oui[2:4]}-{oui[4:6]}"
             url = f"{MACLOOKUP_API}/{oui_formatted}"
             with urllib.request.urlopen(url, timeout=5) as response:
@@ -217,7 +200,6 @@ class OUILookup:
         Returns:
             VendorInfo object with vendor details
         """
-        # Extract OUI
         oui = self._extract_oui(mac)
         if not oui:
             return VendorInfo(
@@ -226,7 +208,6 @@ class OUILookup:
                 lookup_method="error"
             )
         
-        # Check if locally administered
         is_locally_administered = self._check_locally_administered(mac)
         if is_locally_administered:
             return VendorInfo(
@@ -236,7 +217,6 @@ class OUILookup:
                 lookup_method="local_check"
             )
         
-        # Try local database first
         if self.oui_db and oui in self.oui_db:
             vendor_data = self.oui_db[oui]
             return VendorInfo(
@@ -247,9 +227,7 @@ class OUILookup:
                 lookup_method="local"
             )
         
-        # Try online APIs if enabled
         if use_online:
-            # Try macvendors.com first (simpler)
             vendor = self._lookup_online_macvendors(oui)
             if vendor:
                 return VendorInfo(
@@ -258,7 +236,6 @@ class OUILookup:
                     lookup_method="api_macvendors"
                 )
             
-            # Try maclookup.app (more detailed)
             vendor_data = self._lookup_online_maclookup(oui)
             if vendor_data:
                 return VendorInfo(
@@ -268,7 +245,6 @@ class OUILookup:
                     lookup_method="api_maclookup"
                 )
         
-        # Not found
         return VendorInfo(
             oui=oui,
             vendor_name="Unknown / Unassigned OUI",
@@ -290,7 +266,6 @@ class OUILookup:
         for mac in mac_addresses:
             result = self.lookup(mac, use_online=use_online)
             results.append(result)
-            # Rate limiting for online API (be nice to free services)
             if use_online and result.lookup_method.startswith("api_"):
                 time.sleep(0.1)  # 100ms delay between API calls
         return results
@@ -313,7 +288,6 @@ class OUILookup:
         try:
             urllib.request.urlretrieve(OUI_CSV_URL, self.oui_csv_path)
             print(f"[OUI] Download complete: {self.oui_csv_path}")
-            # Reload database
             self._load_from_csv()
             if self.use_cache:
                 self._save_cache()
@@ -323,7 +297,6 @@ class OUILookup:
             return False
 
 
-# Convenience functions
 _global_lookup = None
 
 def get_oui_lookup() -> OUILookup:
@@ -363,17 +336,14 @@ def lookup_vendor_detailed(mac: str, use_online: bool = True) -> VendorInfo:
     return lookup.lookup(mac, use_online=use_online)
 
 
-# Example usage and testing
 if __name__ == "__main__":
     print("=" * 80)
     print("OMEGA OUI LOOKUP SYSTEM")
     print("=" * 80)
     print()
     
-    # Initialize lookup system
     lookup = OUILookup()
     
-    # Test MAC addresses
     test_macs = [
         "00:1A:2B:3C:4D:5E",      # Dell Inc.
         "00-50-56-AB-CD-EF",      # VMware, Inc.
@@ -393,7 +363,6 @@ if __name__ == "__main__":
             print(f"  └─ Address: {result.company_address}")
     print()
     
-    # Instructions for downloading database
     if not OUI_CSV_LOCAL.exists():
         print("=" * 80)
         print("SETUP INSTRUCTIONS")

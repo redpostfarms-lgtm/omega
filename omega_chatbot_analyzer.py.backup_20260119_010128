@@ -1,0 +1,531 @@
+"""
+Omega Chatbot Package Analyzer
+Analyzes installed AI/chatbot packages and identifies capabilities
+"""
+
+import subprocess
+import json
+from pathlib import Path
+from typing import Dict, List
+import importlib.metadata
+
+
+class ChatbotPackageAnalyzer:
+    """
+    Analyzes installed AI/chatbot packages to understand capabilities
+    """
+
+    def __init__(self):
+        self.project_root = Path(__file__).parent
+        self.analysis_results = {}
+
+    def get_installed_packages(self) -> Dict[str, str]:
+        """Get all installed AI/chatbot related packages"""
+        print("\n[*] Scanning installed AI/Chatbot packages...")
+
+        ai_keywords = [
+            "langchain",
+            "openai",
+            "anthropic",
+            "gradio",
+            "streamlit",
+            "instructor",
+            "llama",
+            "guidance",
+            "litellm",
+            "transformers",
+            "sentence",
+        ]
+
+        packages = {}
+
+        try:
+            result = subprocess.run(
+                ["pip", "list", "--format=json"], capture_output=True, text=True, timeout=30
+            )
+
+            all_packages = json.loads(result.stdout)
+
+            for pkg in all_packages:
+                name = pkg["name"].lower()
+                if any(keyword in name for keyword in ai_keywords):
+                    packages[pkg["name"]] = pkg["version"]
+
+        except Exception as e:
+            print(f"[!] Error scanning packages: {e}")
+
+        return packages
+
+    def analyze_langchain_capabilities(self) -> Dict:
+        """Analyze LangChain ecosystem capabilities"""
+        print("\n[*] Analyzing LangChain Ecosystem...")
+
+        capabilities = {
+            "package": "LangChain",
+            "category": "AI Framework",
+            "use_cases": [
+                "Conversational AI",
+                "RAG (Retrieval Augmented Generation)",
+                "Agent Systems",
+                "Chain-based workflows",
+                "Memory management",
+                "Multi-model support",
+            ],
+            "key_features": {
+                "chains": "Sequential and conditional workflows",
+                "agents": "Autonomous decision-making systems",
+                "memory": "Conversation history and context",
+                "callbacks": "Event tracking and monitoring",
+                "retrievers": "Document search and RAG",
+                "embeddings": "Vector representations",
+                "llms": "Multiple LLM providers (OpenAI, Anthropic, HuggingFace)",
+            },
+            "integration_value": "HIGH",
+            "strengths": [
+                "Comprehensive framework",
+                "Multi-provider support",
+                "Strong RAG capabilities",
+                "Active ecosystem",
+                "Good documentation",
+            ],
+            "use_for": [
+                "Main chatbot framework",
+                "Conversation management",
+                "Document Q&A",
+                "Agent orchestration",
+            ],
+        }
+
+        return capabilities
+
+    def analyze_gradio_capabilities(self) -> Dict:
+        """Analyze Gradio capabilities"""
+        print("\n[*] Analyzing Gradio...")
+
+        capabilities = {
+            "package": "Gradio",
+            "category": "UI Framework",
+            "use_cases": [
+                "Quick web interfaces",
+                "Demo applications",
+                "Interactive chatbots",
+                "File uploads",
+                "Real-time streaming",
+            ],
+            "key_features": {
+                "chatbot": "Built-in chatbot component",
+                "interface": "Simple API for UI creation",
+                "streaming": "Real-time response streaming",
+                "sharing": "Easy deployment and sharing",
+                "themes": "Customizable appearance",
+            },
+            "integration_value": "HIGH",
+            "strengths": [
+                "Fastest UI setup",
+                "Built-in chatbot widget",
+                "Great for demos",
+                "Easy deployment",
+                "Good documentation",
+            ],
+            "use_for": ["Primary chatbot UI", "Quick prototypes", "User interface"],
+        }
+
+        return capabilities
+
+    def analyze_streamlit_capabilities(self) -> Dict:
+        """Analyze Streamlit capabilities"""
+        print("\n[*] Analyzing Streamlit...")
+
+        capabilities = {
+            "package": "Streamlit",
+            "category": "UI Framework",
+            "use_cases": [
+                "Data applications",
+                "Dashboards",
+                "Chat interfaces",
+                "Interactive apps",
+                "Multi-page apps",
+            ],
+            "key_features": {
+                "chat": "Chat UI components (st.chat_message, st.chat_input)",
+                "session_state": "Persistent state management",
+                "caching": "Performance optimization",
+                "widgets": "Rich widget library",
+                "deployment": "Cloud deployment ready",
+            },
+            "integration_value": "HIGH",
+            "strengths": [
+                "Beautiful UIs",
+                "Great for complex apps",
+                "Strong session management",
+                "Excellent caching",
+                "Native chat components",
+            ],
+            "use_for": ["Production chatbot UI", "Complex applications", "Dashboard integration"],
+        }
+
+        return capabilities
+
+    def analyze_openai_capabilities(self) -> Dict:
+        """Analyze OpenAI capabilities"""
+        print("\n[*] Analyzing OpenAI...")
+
+        capabilities = {
+            "package": "OpenAI",
+            "category": "LLM Provider",
+            "use_cases": [
+                "Chat completions",
+                "Assistants",
+                "Embeddings",
+                "Function calling",
+                "Vision",
+            ],
+            "key_features": {
+                "gpt4": "Most capable model",
+                "streaming": "Real-time responses",
+                "functions": "Tool/function calling",
+                "vision": "Image understanding",
+                "embeddings": "Semantic search",
+            },
+            "integration_value": "HIGH",
+            "strengths": [
+                "Industry leading models",
+                "Reliable API",
+                "Great function calling",
+                "Strong reasoning",
+                "Good documentation",
+            ],
+            "use_for": ["Primary LLM backend", "Intelligent responses", "Function/tool execution"],
+        }
+
+        return capabilities
+
+    def analyze_anthropic_capabilities(self) -> Dict:
+        """Analyze Anthropic capabilities"""
+        print("\n[*] Analyzing Anthropic...")
+
+        capabilities = {
+            "package": "Anthropic",
+            "category": "LLM Provider",
+            "use_cases": [
+                "Chat completions",
+                "Long context",
+                "Analysis tasks",
+                "Code generation",
+                "Safe AI",
+            ],
+            "key_features": {
+                "claude": "Claude models (Sonnet, Opus)",
+                "long_context": "Up to 200K tokens",
+                "streaming": "Real-time responses",
+                "tool_use": "Function calling",
+                "safety": "Constitutional AI",
+            },
+            "integration_value": "HIGH",
+            "strengths": [
+                "Long context windows",
+                "Strong reasoning",
+                "Good safety features",
+                "Excellent at analysis",
+                "Reliable API",
+            ],
+            "use_for": [
+                "Alternative/fallback LLM",
+                "Long document analysis",
+                "Complex reasoning tasks",
+            ],
+        }
+
+        return capabilities
+
+    def analyze_instructor_capabilities(self) -> Dict:
+        """Analyze Instructor capabilities"""
+        print("\n[*] Analyzing Instructor...")
+
+        capabilities = {
+            "package": "Instructor",
+            "category": "LLM Enhancement",
+            "use_cases": [
+                "Structured outputs",
+                "Pydantic models",
+                "Type validation",
+                "Retry logic",
+                "Response parsing",
+            ],
+            "key_features": {
+                "structured": "Structured LLM responses",
+                "validation": "Automatic validation",
+                "pydantic": "Pydantic model support",
+                "retry": "Automatic retries",
+                "parsing": "Type-safe parsing",
+            },
+            "integration_value": "MEDIUM",
+            "strengths": [
+                "Type safety",
+                "Structured outputs",
+                "Easy validation",
+                "Good for data extraction",
+                "Reduces parsing errors",
+            ],
+            "use_for": [
+                "Structured data extraction",
+                "API response formatting",
+                "Validated outputs",
+            ],
+        }
+
+        return capabilities
+
+    def analyze_llama_index_capabilities(self) -> Dict:
+        """Analyze LlamaIndex capabilities"""
+        print("\n[*] Analyzing LlamaIndex...")
+
+        capabilities = {
+            "package": "LlamaIndex",
+            "category": "Data Framework",
+            "use_cases": [
+                "Document indexing",
+                "RAG applications",
+                "Knowledge bases",
+                "Data connectors",
+                "Query engines",
+            ],
+            "key_features": {
+                "indexing": "Advanced document indexing",
+                "retrievers": "Multiple retrieval strategies",
+                "connectors": "Data source connectors",
+                "agents": "Query planning agents",
+                "chat_engines": "Context-aware chat",
+            },
+            "integration_value": "MEDIUM",
+            "strengths": [
+                "Excellent RAG",
+                "Many connectors",
+                "Flexible indexing",
+                "Good for knowledge bases",
+                "Strong query engines",
+            ],
+            "use_for": ["Document Q&A", "Knowledge retrieval", "RAG alternative to LangChain"],
+        }
+
+        return capabilities
+
+    def analyze_guidance_capabilities(self) -> Dict:
+        """Analyze Guidance capabilities"""
+        print("\n[*] Analyzing Guidance...")
+
+        capabilities = {
+            "package": "Guidance",
+            "category": "Prompt Engineering",
+            "use_cases": [
+                "Prompt templates",
+                "Constrained generation",
+                "Few-shot learning",
+                "Output control",
+                "Cost optimization",
+            ],
+            "key_features": {
+                "templates": "Powerful templating",
+                "constraints": "Output constraints",
+                "control": "Fine-grained control",
+                "optimization": "Token efficiency",
+                "testing": "Prompt testing",
+            },
+            "integration_value": "LOW",
+            "strengths": [
+                "Great prompt control",
+                "Token optimization",
+                "Constrained outputs",
+                "Good for complex prompts",
+                "Testing capabilities",
+            ],
+            "use_for": [
+                "Advanced prompt engineering",
+                "Output format control",
+                "Cost optimization",
+            ],
+        }
+
+        return capabilities
+
+    def analyze_litellm_capabilities(self) -> Dict:
+        """Analyze LiteLLM capabilities"""
+        print("\n[*] Analyzing LiteLLM...")
+
+        capabilities = {
+            "package": "LiteLLM",
+            "category": "LLM Proxy",
+            "use_cases": [
+                "Multi-provider support",
+                "Load balancing",
+                "Fallback handling",
+                "Cost tracking",
+                "Rate limiting",
+            ],
+            "key_features": {
+                "unified_api": "Single API for all providers",
+                "fallbacks": "Automatic failover",
+                "load_balancing": "Request distribution",
+                "tracking": "Usage and cost tracking",
+                "caching": "Response caching",
+            },
+            "integration_value": "MEDIUM",
+            "strengths": [
+                "Provider flexibility",
+                "Good fallback logic",
+                "Cost optimization",
+                "Easy switching",
+                "Unified interface",
+            ],
+            "use_for": ["Multi-provider strategy", "Reliability improvements", "Cost management"],
+        }
+
+        return capabilities
+
+    def analyze_transformers_capabilities(self) -> Dict:
+        """Analyze Transformers capabilities"""
+        print("\n[*] Analyzing Transformers...")
+
+        capabilities = {
+            "package": "Transformers",
+            "category": "Model Library",
+            "use_cases": [
+                "Local model execution",
+                "Fine-tuning",
+                "Custom models",
+                "Embeddings",
+                "Classification",
+            ],
+            "key_features": {
+                "models": "Thousands of pre-trained models",
+                "pipelines": "Easy-to-use pipelines",
+                "local": "Run models locally",
+                "training": "Fine-tuning support",
+                "hub": "HuggingFace Hub integration",
+            },
+            "integration_value": "MEDIUM",
+            "strengths": [
+                "Local execution",
+                "No API costs",
+                "Privacy",
+                "Offline capability",
+                "Huge model library",
+            ],
+            "use_for": [
+                "Local fallback",
+                "Privacy-sensitive tasks",
+                "Offline operation",
+                "Custom fine-tuned models",
+            ],
+        }
+
+        return capabilities
+
+    def generate_integration_recommendations(self, analyses: List[Dict]) -> Dict:
+        """Generate recommendations for integrating packages"""
+        print("\n[*] Generating Integration Recommendations...")
+
+        recommendations = {
+            "primary_framework": {
+                "choice": "LangChain",
+                "reason": "Most comprehensive, great ecosystem, multi-provider support",
+                "use_for": "Core chatbot logic, conversation management, RAG",
+            },
+            "ui_framework": {
+                "choice": "Gradio",
+                "reason": "Fastest setup, built-in chatbot component, great for demos",
+                "alternative": "Streamlit for production/complex apps",
+                "use_for": "User interface, quick deployment",
+            },
+            "primary_llm": {
+                "choice": "OpenAI",
+                "reason": "Industry leading, reliable, great function calling",
+                "fallback": "Anthropic Claude for long context",
+                "use_for": "Main intelligence backend",
+            },
+            "architecture": {
+                "pattern": "Layered Architecture",
+                "layers": {
+                    "ui": "Gradio (primary) / Streamlit (alternative)",
+                    "orchestration": "LangChain",
+                    "llm": "OpenAI (primary) + Anthropic (fallback) via LiteLLM",
+                    "memory": "LangChain ConversationBufferMemory",
+                    "tools": "LangChain Tools + Custom Functions",
+                    "monitoring": "LangSmith + Custom logging",
+                },
+            },
+            "enhancement_packages": [
+                {"package": "Instructor", "use": "Structured outputs for data extraction"},
+                {"package": "LiteLLM", "use": "Multi-provider failover and cost tracking"},
+                {"package": "LlamaIndex", "use": "Advanced RAG if needed"},
+                {"package": "Transformers", "use": "Local models for privacy/offline"},
+            ],
+            "integration_priority": [
+                "1. Set up LangChain with OpenAI",
+                "2. Create Gradio UI with chatbot component",
+                "3. Add conversation memory",
+                "4. Integrate system tools (file access, code execution)",
+                "5. Add LiteLLM for provider flexibility",
+                "6. Implement RAG for document Q&A",
+                "7. Add monitoring and logging",
+                "8. Optimize with caching and streaming",
+            ],
+        }
+
+        return recommendations
+
+    def run_complete_analysis(self):
+        """Run complete package analysis"""
+        print("\n" + "=" * 70)
+        print("OMEGA CHATBOT PACKAGE ANALYSIS")
+        print("=" * 70)
+
+        # Get installed packages
+        packages = self.get_installed_packages()
+        print(f"\n[+] Found {len(packages)} AI/Chatbot packages")
+
+        # Analyze each major package
+        analyses = []
+        analyses.append(self.analyze_langchain_capabilities())
+        analyses.append(self.analyze_gradio_capabilities())
+        analyses.append(self.analyze_streamlit_capabilities())
+        analyses.append(self.analyze_openai_capabilities())
+        analyses.append(self.analyze_anthropic_capabilities())
+        analyses.append(self.analyze_instructor_capabilities())
+        analyses.append(self.analyze_llama_index_capabilities())
+        analyses.append(self.analyze_guidance_capabilities())
+        analyses.append(self.analyze_litellm_capabilities())
+        analyses.append(self.analyze_transformers_capabilities())
+
+        # Generate recommendations
+        recommendations = self.generate_integration_recommendations(analyses)
+
+        # Save analysis results
+        results = {
+            "timestamp": "2026-01-19",
+            "installed_packages": packages,
+            "capability_analysis": analyses,
+            "integration_recommendations": recommendations,
+        }
+
+        output_file = self.project_root / "omega_chatbot_analysis.json"
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2)
+
+        print("\n" + "=" * 70)
+        print("ANALYSIS COMPLETE")
+        print("=" * 70)
+        print(f"Results saved to: omega_chatbot_analysis.json")
+        print(f"\nRecommended Architecture:")
+        print(f"  UI: {recommendations['ui_framework']['choice']}")
+        print(f"  Framework: {recommendations['primary_framework']['choice']}")
+        print(f"  LLM: {recommendations['primary_llm']['choice']}")
+        print(f"  Fallback: {recommendations['primary_llm']['fallback']}")
+        print("=" * 70 + "\n")
+
+        return results
+
+
+if __name__ == "__main__":
+    analyzer = ChatbotPackageAnalyzer()
+    analyzer.run_complete_analysis()

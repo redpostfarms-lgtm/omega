@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega AI Core - Windows Integration Layer
 ==========================================
@@ -12,7 +11,6 @@ Lightweight, modular Windows AI integration that runs silently in the background
 
 Usage:
     python omega_core.py
-    # Or install as Windows service via NSSM
 """
 
 import os
@@ -24,10 +22,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, Any
 
-# Base directory
 base_dir = Path(__file__).parent.absolute()
 
-# Ollama support
 try:
     import ollama
     OLLAMA_AVAILABLE = True
@@ -35,7 +31,6 @@ except ImportError:
     OLLAMA_AVAILABLE = False
     print("Ollama not installed. Install with: pip install ollama")
 
-# Windows-specific imports
 try:
     import keyboard
     KEYBOARD_AVAILABLE = True
@@ -66,7 +61,6 @@ except ImportError:
     TOAST_AVAILABLE = False
     print("win10toast not installed. Install with: pip install win10toast")
 
-# External AI support
 try:
     import requests
     REQUESTS_AVAILABLE = True
@@ -74,13 +68,11 @@ except ImportError:
     REQUESTS_AVAILABLE = False
     print("requests not installed. Install with: pip install requests")
 
-# === CONFIG ===
 LOCAL_MODEL = os.getenv('OMEGA_LOCAL_MODEL', 'llama3.2:3b')  # e.g., llama3.2:3b or your custom
 WATCH_FOLDER = os.getenv('OMEGA_WATCH_FOLDER', str(Path.home() / 'Desktop'))  # auto-process new files here
 HOTKEY = os.getenv('OMEGA_HOTKEY', 'ctrl+space')  # Global hotkey
 CONFIG_FILE = base_dir / 'omega_core_config.json'
 
-# Load config from file if exists
 if CONFIG_FILE.exists():
     try:
         with open(CONFIG_FILE, 'r') as f:
@@ -93,7 +85,6 @@ if CONFIG_FILE.exists():
 
 TOAST = ToastNotifier() if TOAST_AVAILABLE else None
 
-# External AI configs
 EXTERNAL_AI_CONFIGS = {
     'grok': {
         'api_url': 'https://api.x.ai/v1/chat/completions',
@@ -112,7 +103,6 @@ EXTERNAL_AI_CONFIGS = {
     }
 }
 
-# Global state
 last_clipboard = ""
 running = True
 clipboard_thread = None
@@ -145,7 +135,6 @@ def external_ai(prompt: str, service: str = 'grok') -> str:
     
     try:
         if service == 'claude':
-            # Claude uses different API format
             headers = {
                 'x-api-key': config['api_key'],
                 'anthropic-version': '2023-06-01',
@@ -187,7 +176,6 @@ def office_automate(file_path: str):
         file_ext = os.path.splitext(file_path)[1].lower()
         
         if file_ext in ('.xlsx', '.xls'):
-            # Excel automation
             excel = win32.Dispatch("Excel.Application")
             excel.Visible = False
             excel.DisplayAlerts = False
@@ -196,17 +184,13 @@ def office_automate(file_path: str):
                 wb = excel.Workbooks.Open(os.path.abspath(file_path))
                 sheet = wb.Sheets(1)  # First sheet
                 
-                # Read data from A1
                 data = sheet.Cells(1, 1).Value
                 
                 if data:
-                    # Process with local LLM
                     summary = local_llm(f"Summarize this spreadsheet data: {data}")
                     
-                    # Write summary to B1
                     sheet.Cells(1, 2).Value = f"AI Summary: {summary}"
                     
-                    # Save and close
                     wb.Save()
                     wb.Close()
                     
@@ -222,7 +206,6 @@ def office_automate(file_path: str):
                 excel.Quit()
         
         elif file_ext in ('.docx', '.doc'):
-            # Word automation
             word = win32.Dispatch("Word.Application")
             word.Visible = False
             word.DisplayAlerts = 0
@@ -230,17 +213,13 @@ def office_automate(file_path: str):
             try:
                 doc = word.Documents.Open(os.path.abspath(file_path))
                 
-                # Get first paragraph
                 if doc.Paragraphs.Count > 0:
                     text = doc.Paragraphs(1).Range.Text
                     
-                    # Process with local LLM
                     summary = local_llm(f"Summarize this document: {text[:1000]}")
                     
-                    # Add summary at end
                     doc.Content.InsertAfter(f"\n\nAI Summary: {summary}")
                     
-                    # Save and close
                     doc.Save()
                     doc.Close()
                     
@@ -270,7 +249,6 @@ def on_hotkey():
     if not user_input.strip():
         return
     
-    # Query local LLM
     response = local_llm(f"Answer concisely: {user_input}")
     
     print(f"\nAI: {response}\n")
@@ -293,14 +271,12 @@ def monitor_clipboard():
             try:
                 data = win32clipboard.GetClipboardData()
             except (TypeError, UnicodeDecodeError, OSError) as e:
-                # Clipboard data not text or unavailable - continue
                 data = None
             win32clipboard.CloseClipboard()
             
             if data != last_clipboard and isinstance(data, str) and len(data) > 10:
                 last_clipboard = data
                 
-                # Process with local LLM
                 insight = local_llm(f"Quick insight on this copied text: {data[:500]}")
                 
                 if TOAST:
@@ -324,9 +300,7 @@ class AIFileHandler(FileSystemEventHandler):
             file_path = event.src_path
             file_ext = os.path.splitext(file_path)[1].lower()
             
-            # Only process Office files
             if file_ext in ('.xlsx', '.xls', '.docx', '.doc'):
-                # Small delay to ensure file is fully written
                 time.sleep(1)
                 office_automate(file_path)
 
@@ -409,7 +383,6 @@ def main():
     print("(Press Ctrl+C to stop)")
     print()
     
-    # Setup components
     setup_hotkey()
     setup_clipboard_monitor()
     setup_file_watcher()
@@ -420,7 +393,6 @@ def main():
     print()
     
     try:
-        # Keep main thread alive
         while running:
             time.sleep(1)
     except KeyboardInterrupt:

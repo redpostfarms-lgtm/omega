@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Confidence Calibration
 =============================
@@ -21,7 +20,6 @@ class ConfidenceCalibrator:
         self.bias = 0.0  # Calibration bias
         self.calibrated = False
         
-        # Load calibration data if exists
         self.load_calibration()
     
     def calibrate_confidence(self, confidence: float, use_calibration: bool = True) -> float:
@@ -40,10 +38,8 @@ class ConfidenceCalibrator:
         if not use_calibration or not self.calibrated:
             return confidence
         
-        # Clip confidence to valid range
         confidence = np.clip(confidence, 1e-7, 1.0 - 1e-7)
         
-        # Apply calibration: sigmoid(logit(confidence) + bias)
         try:
             logit_conf = logit(confidence)
             calibrated_logit = logit_conf + self.bias
@@ -71,11 +67,9 @@ class ConfidenceCalibrator:
             validation_confidences = confidences
             validation_labels = true_labels
         
-        # Calculate ECE (Expected Calibration Error) for different bias values
         best_bias = 0.0
         best_ece = float('inf')
         
-        # Search for optimal bias in range [-2, 2]
         for bias_candidate in np.arange(-2.0, 2.1, 0.1):
             ece = self._calculate_ece(validation_confidences, validation_labels, bias_candidate)
             if ece < best_ece:
@@ -85,7 +79,6 @@ class ConfidenceCalibrator:
         self.bias = float(best_bias)
         self.calibrated = True
         
-        # Save calibration
         self.save_calibration()
         
         print(f"[Calibration] Calibration fitted: bias = {self.bias:.3f}, ECE = {best_ece:.3f}")
@@ -96,15 +89,12 @@ class ConfidenceCalibrator:
         if len(confidences) == 0:
             return float('inf')
         
-        # Apply calibration
         calibrated_confidences = [self.calibrate_confidence(c, use_calibration=False) 
                                   for c in confidences]
         calibrated_confidences = [np.clip(c, 1e-7, 1.0 - 1e-7) for c in calibrated_confidences]
         
-        # Apply bias
         calibrated_confidences = [expit(logit(c) + bias) for c in calibrated_confidences]
         
-        # Calculate ECE
         bins = np.linspace(0, 1, n_bins + 1)
         ece = 0.0
         
@@ -151,7 +141,6 @@ class ConfidenceCalibrator:
         except Exception as e:
             print(f"[Calibration] Error loading calibration: {e}")
 
-# Global calibrator instance
 _calibrator = None
 
 def get_calibrator() -> ConfidenceCalibrator:

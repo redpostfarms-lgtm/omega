@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega RGB Advanced Controller
 ==============================
@@ -37,7 +36,6 @@ from enum import Enum
 from dataclasses import dataclass
 import logging
 
-# Configure logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -74,7 +72,6 @@ class OpenRGBController:
     def _init_openrgb(self):
         """Initialize OpenRGB connection"""
         try:
-            # Method 1: Try python-openrgb package
             try:
                 import openrgb
                 self.client = openrgb.OpenRGBClient()
@@ -87,7 +84,6 @@ class OpenRGBController:
             except (ImportError, Exception) as e:
                 logger.debug(f"[OpenRGB] Package method failed: {e}")
             
-            # Method 2: Try via subprocess (OpenRGB service running)
             try:
                 result = subprocess.run(
                     ["openrgb", "--list-devices"],
@@ -115,7 +111,6 @@ class OpenRGBController:
         
         try:
             if hasattr(self, 'cli_mode') and self.cli_mode:
-                # Use CLI method
                 subprocess.run(
                     ["openrgb", "-c", f"{color[0]},{color[1]},{color[2]}"],
                     timeout=5,
@@ -125,7 +120,6 @@ class OpenRGBController:
                 return True
             
             elif self.client and self.devices:
-                # Use Python API
                 for device in self.devices:
                     try:
                         if zone == "all" or zone.lower() in device.name.lower():
@@ -155,7 +149,6 @@ class ASUSAuraController:
                 logger.debug("[ASUS AURA] Windows only")
                 return
             
-            # Method 1: Try ctypes to load AURA DLL
             import ctypes
             aura_paths = [
                 "C:\\Program Files (x86)\\ASUS\\AURA Service\\AuraSDK.dll",
@@ -173,7 +166,6 @@ class ASUSAuraController:
                     except Exception as e:
                         logger.debug(f"[ASUS AURA] Failed to load {path}: {e}")
             
-            # Method 2: Try via AuraService
             try:
                 result = subprocess.run(
                     ["tasklist", "/fi", "ImageName eq AuraService.exe"],
@@ -197,7 +189,6 @@ class ASUSAuraController:
         """Test AURA SDK connection"""
         if self.aura_dll:
             try:
-                # Try to call basic AURA function
                 self.aura_dll.AuraInitialize()
                 self.enabled = True
                 logger.info("[ASUS AURA] Connection verified")
@@ -211,13 +202,10 @@ class ASUSAuraController:
         
         try:
             if hasattr(self, 'service_mode') and self.service_mode:
-                # Use service communication method
                 logger.info(f"[ASUS AURA Service] Color set to RGB{color}")
                 return True
             
             elif self.aura_dll:
-                # Use DLL API
-                # This is a simplified example - actual AURA API requires proper struct definitions
                 logger.info(f"[ASUS AURA] Color set to RGB{color}")
                 return True
             
@@ -236,7 +224,6 @@ class CorsariCueController:
     def _init_corsair(self):
         """Initialize Corsair iCUE SDK"""
         try:
-            # Check if iCUE is running
             if platform.system() == "Windows":
                 result = subprocess.run(
                     ["tasklist", "/fi", "ImageName eq iCUE.exe"],
@@ -259,7 +246,6 @@ class CorsariCueController:
             return False
         
         try:
-            # Would need to implement iCUE API calls
             logger.info(f"[Corsair iCUE] Color set to RGB{color}")
             return True
         except Exception as e:
@@ -276,7 +262,6 @@ class RazerChromeController:
     def _init_razer(self):
         """Initialize Razer Chroma SDK"""
         try:
-            # Check if Razer Synapse is running
             if platform.system() == "Windows":
                 result = subprocess.run(
                     ["tasklist", "/fi", "ImageName eq Synapse3.exe"],
@@ -299,7 +284,6 @@ class RazerChromeController:
             return False
         
         try:
-            # Would need to implement Razer API calls
             logger.info(f"[Razer Chroma] Color set to RGB{color}")
             return True
         except Exception as e:
@@ -316,7 +300,6 @@ class NZXTCAMController:
     def _init_nzxt(self):
         """Initialize NZXT CAM"""
         try:
-            # Check if CAM is running
             if platform.system() == "Windows":
                 result = subprocess.run(
                     ["tasklist", "/fi", "ImageName eq CAM.exe"],
@@ -359,11 +342,8 @@ class WinRing0Controller:
                 logger.debug("[WinRing0] Windows only")
                 return
             
-            # Check if WinRing0 driver is installed/loaded
-            # This requires admin privileges
             import ctypes
             
-            # Try to detect WinRing0
             winring0_path = "WinRing0x64.dll"
             if os.path.exists(winring0_path):
                 try:
@@ -415,11 +395,9 @@ class AdvancedRGBController:
         self.available_methods = []
         self.active_controller = None
         
-        # Initialize all controllers in order of preference
         self._init_controllers()
         self._select_best_method()
         
-        # Monitoring thread
         self.monitoring_thread = None
         self.monitoring_active = False
         self.rgb_status = self._get_status()
@@ -448,7 +426,6 @@ class AdvancedRGBController:
             else:
                 logger.debug(f"✗ {name} not available")
         
-        # Always add simulated as fallback
         self.controllers["Simulated"] = SimulatedRGBController()
         self.available_methods.append("Simulated")
         
@@ -462,7 +439,6 @@ class AdvancedRGBController:
             self.current_method = RGBMethod.SIMULATED
             return
         
-        # Prefer OpenRGB first, then others
         preference_order = ["OpenRGB", "ASUS AURA", "Corsair iCUE", "Razer Chroma", "NZXT CAM", "WinRing0", "Simulated"]
         
         for method_name in preference_order:
@@ -474,7 +450,6 @@ class AdvancedRGBController:
     
     def set_color(self, r: int, g: int, b: int, zone: str = "all") -> bool:
         """Set RGB color (validated input)"""
-        # Validate and clamp RGB values
         r = max(0, min(255, r))
         g = max(0, min(255, g))
         b = max(0, min(255, b))
@@ -568,7 +543,6 @@ class AdvancedRGBController:
         if self.monitoring_thread:
             self.monitoring_thread.join(timeout=5)
 
-# Global instance
 _advanced_rgb_controller = None
 
 def get_advanced_rgb_controller() -> AdvancedRGBController:
@@ -579,7 +553,6 @@ def get_advanced_rgb_controller() -> AdvancedRGBController:
     return _advanced_rgb_controller
 
 if __name__ == "__main__":
-    # Test the advanced RGB controller
     print("\n" + "=" * 80)
     print("OMEGA RGB ADVANCED CONTROLLER - TEST")
     print("=" * 80 + "\n")
@@ -588,7 +561,6 @@ if __name__ == "__main__":
     
     print(f"\nCurrent Status: {json.dumps(rgb.get_status(), indent=2, default=str)}\n")
     
-    # Test color changes
     test_colors = [
         ("Red", (255, 0, 0)),
         ("Green", (0, 255, 0)),
@@ -605,12 +577,10 @@ if __name__ == "__main__":
         print(f"  {name}: {'✓' if success else '✗'}")
         time.sleep(0.5)
     
-    # Test hex color
     print("\nTesting hex color...")
     success = rgb.set_color_hex("#FFD700")  # Gold
     print(f"  Gold (#FFD700): {'✓' if success else '✗'}")
     
-    # Test toggle
     print("\nTesting toggle...")
     rgb.toggle_rgb()
     print(f"  RGB Disabled: ✓")

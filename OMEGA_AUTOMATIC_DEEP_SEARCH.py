@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Automatic Deep Search Configuration
 ==========================================
@@ -11,7 +10,6 @@ from typing import Dict, List, Any
 import json
 from datetime import datetime
 
-# Use optimized config system if available
 try:
     from OMEGA_CONFIG_OPTIMIZED import OmegaConfig, get_config
     CONFIG_SYSTEM_AVAILABLE = True
@@ -24,11 +22,9 @@ class AutomaticDeepSearch:
     def __init__(self):
         self.base_dir = Path(__file__).parent.absolute()
         if CONFIG_SYSTEM_AVAILABLE:
-            # Use optimized config system
             self.config_manager = get_config()
             self.config = self.config_manager.get_search_config()
         else:
-            # Fallback to legacy config
             self.config_file = self.base_dir / "omega_search_config.json"
             self.config = self.load_config()
         
@@ -41,7 +37,6 @@ class AutomaticDeepSearch:
             except:
                 pass
         
-        # Default configuration
         return {
             "automatic_deep_search": True,
             "search_depth": "deepest",
@@ -66,13 +61,11 @@ class AutomaticDeepSearch:
     def save_config(self):
         """Save search configuration"""
         if CONFIG_SYSTEM_AVAILABLE and hasattr(self, 'config_manager'):
-            # Use optimized config system
             search_config = self.config_manager.get_search_config()
             search_config.update(self.config)
             self.config_manager.config['search'] = search_config
             self.config_manager.save_config()
         else:
-            # Fallback to legacy save
             with open(self.config_file, 'w', encoding='utf-8') as f:
                 json.dump(self.config, f, indent=2)
     

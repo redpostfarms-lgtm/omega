@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OMEGA Modified Voice Player
 Plays all modified voice variations
@@ -50,7 +49,6 @@ def main():
     print(f"{RED}{BOLD}{'🔴 OMEGA MODIFIED VOICE PLAYER 🔴':^70}{RESET}")
     print(f"{RED}{BOLD}{'='*70}{RESET}\n")
     
-    # Find modified voice files
     voice_files = glob.glob('omega_voice_*_*.wav')
     
     if not voice_files:
@@ -58,7 +56,6 @@ def main():
         print(f"{YELLOW}Run omega_voice_modifier.py first to create variations.{RESET}\n")
         return
     
-    # Organize by variation
     variations = {}
     for file in sorted(voice_files):
         parts = file.replace('.wav', '').split('_')
@@ -72,7 +69,6 @@ def main():
     
     print(f"{GREEN}Found {len(voice_files)} modified voices:{RESET}\n")
     
-    # Display menu
     var_list = list(variations.keys())
     for i, var in enumerate(var_list, 1):
         files = variations[var]
@@ -90,7 +86,6 @@ def main():
         return
     
     if choice == 'A':
-        # Play all variations
         print(f"{YELLOW}{'='*70}{RESET}")
         print(f"{YELLOW}{BOLD}Playing all voice variations...{RESET}")
         print(f"{YELLOW}Press Ctrl+C to skip{RESET}")
@@ -114,7 +109,6 @@ def main():
                 time.sleep(0.5)
     
     elif choice.isdigit() and 1 <= int(choice) <= len(var_list):
-        # Play specific variation
         var_idx = int(choice) - 1
         variation = var_list[var_idx]
         files = variations[variation]

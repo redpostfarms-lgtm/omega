@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega API Keys Manager - Enhanced Secure API Key Storage
 =========================================================
@@ -29,72 +28,56 @@ class EnhancedAPIKeyManager:
         self.backup_dir = Path("api_keys_backups")
         self.backup_dir.mkdir(exist_ok=True)
         
-        # Encryption methods
         self.primary_method = "fernet"  # Primary: Fernet (authenticated encryption)
         self.backup_method = "aesgcm"  # Backup: AES-GCM
         
-        # Key rotation settings
         self.key_rotation_days = 90  # Rotate keys every 90 days
         self.max_key_versions = 3  # Keep 3 versions of keys
         
-        # Initialize encryption
         self._init_encryption(master_password)
     
     def _init_encryption(self, master_password: Optional[str] = None):
         """Initialize encryption with key derivation"""
         if self.master_key_file.exists():
-            # Load existing master key
             with open(self.master_key_file, 'rb') as f:
                 encrypted_master_key = f.read()
             
             if master_password:
-                # Derive key from password
                 master_key = self._derive_key_from_password(master_password)
                 try:
-                    # Try to decrypt master key
                     cipher = Fernet(master_key)
                     self.master_key = cipher.decrypt(encrypted_master_key)
                 except:
                     raise ValueError("Invalid master password")
             else:
-                # Use stored key directly (for backward compatibility)
                 self.master_key = encrypted_master_key
         else:
-            # Generate new master key
             if master_password:
-                # Derive key from password
                 master_key = self._derive_key_from_password(master_password)
                 self.master_key = Fernet.generate_key()
                 
-                # Encrypt master key with password-derived key
                 cipher = Fernet(master_key)
                 encrypted_master_key = cipher.encrypt(self.master_key)
             else:
-                # Generate random master key
                 self.master_key = Fernet.generate_key()
                 encrypted_master_key = self.master_key
             
-            # Store master key
             with open(self.master_key_file, 'wb') as f:
                 f.write(encrypted_master_key)
             
-            # Set restrictive permissions
             try:
                 os.chmod(self.master_key_file, 0o600)
             except:
                 pass
         
-        # Initialize ciphers
         self.fernet_cipher = Fernet(self.master_key)
         
-        # AES-GCM key (derived from master key)
         aes_key_material = hashlib.sha256(self.master_key).digest()
         self.aesgcm = AESGCM(aes_key_material[:32])  # 32 bytes for AES-256
     
     def _derive_key_from_password(self, password: str, salt: Optional[bytes] = None) -> bytes:
         """Derive encryption key from password using PBKDF2"""
         if salt is None:
-            # Generate salt if not provided
             salt = secrets.token_bytes(16)
         
         kdf = PBKDF2HMAC(
@@ -157,13 +140,10 @@ class EnhancedAPIKeyManager:
                   rotation_enabled: bool = True) -> bool:
         """Store an API key securely with versioning"""
         try:
-            # Load existing keys
             keys_data = self._load_keys()
             
-            # Encrypt the API key
             encrypted_data = self._encrypt_key(api_key, self.primary_method)
             
-            # Get or create service entry
             if service.upper() not in keys_data:
                 keys_data[service.upper()] = {
                     "versions": [],
@@ -175,7 +155,6 @@ class EnhancedAPIKeyManager:
             
             service_data = keys_data[service.upper()]
             
-            # Add new version
             version_data = {
                 "version": len(service_data["versions"]) + 1,
                 "encrypted_key": encrypted_data,
@@ -187,17 +166,13 @@ class EnhancedAPIKeyManager:
             service_data["current_version"] = len(service_data["versions"])
             service_data["updated"] = datetime.now().isoformat()
             
-            # Keep only max_key_versions
             if len(service_data["versions"]) > self.max_key_versions:
                 service_data["versions"] = service_data["versions"][-self.max_key_versions:]
             
-            # Save encrypted keys
             self._save_keys(keys_data)
             
-            # Create backup
             self._create_backup()
             
-            # Set as environment variable for immediate use
             os.environ[f"{service.upper()}_API_KEY"] = api_key
             
             return True
@@ -208,12 +183,10 @@ class EnhancedAPIKeyManager:
     def get_key(self, service: str, version: Optional[int] = None) -> Optional[str]:
         """Retrieve an API key (latest version by default)"""
         try:
-            # First try environment variable
             env_key = os.getenv(f"{service.upper()}_API_KEY")
             if env_key and not version:
                 return env_key
             
-            # Then try encrypted storage
             keys_data = self._load_keys()
             service_upper = service.upper()
             
@@ -224,7 +197,6 @@ class EnhancedAPIKeyManager:
                 if not versions:
                     return None
                 
-                # Get specified version or latest
                 if version:
                     version_data = next((v for v in versions if v["version"] == version), None)
                 else:
@@ -281,7 +253,6 @@ class EnhancedAPIKeyManager:
         with open(self.keys_file, 'w') as f:
             json.dump(keys_data, f, indent=2)
         
-        # Set restrictive permissions
         try:
             os.chmod(self.keys_file, 0o600)
         except:
@@ -297,7 +268,6 @@ class EnhancedAPIKeyManager:
                 import shutil
                 shutil.copy2(self.keys_file, backup_file)
                 
-                # Keep only last 10 backups
                 backups = sorted(self.backup_dir.glob("api_keys_backup_*.json"))
                 if len(backups) > 10:
                     for old_backup in backups[:-10]:
@@ -343,7 +313,6 @@ class EnhancedAPIKeyManager:
         
         return None
 
-# Global instance
 _enhanced_api_key_manager = None
 
 def get_enhanced_api_key_manager(master_password: Optional[str] = None) -> EnhancedAPIKeyManager:
@@ -353,7 +322,6 @@ def get_enhanced_api_key_manager(master_password: Optional[str] = None) -> Enhan
         _enhanced_api_key_manager = EnhancedAPIKeyManager(master_password)
     return _enhanced_api_key_manager
 
-# Backward compatibility
 def get_api_key_manager() -> EnhancedAPIKeyManager:
     """Get API key manager (enhanced version)"""
     return get_enhanced_api_key_manager()
@@ -369,22 +337,18 @@ def get_openai_key(master_password: Optional[str] = None) -> Optional[str]:
     return manager.get_key("OPENAI")
 
 if __name__ == "__main__":
-    # Test the enhanced API key manager
     manager = get_enhanced_api_key_manager()
     
-    # Example: Store a test key
     test_key = "sk-test-key-12345"
     if manager.store_key("OPENAI", test_key, "Test OpenAI Key"):
         print("✅ API key stored successfully")
     
-    # Retrieve it
     retrieved = manager.get_key("OPENAI")
     if retrieved == test_key:
         print("✅ API key retrieved successfully")
     else:
         print("❌ API key retrieval failed")
     
-    # Get key info
     info = manager.get_key_info("OPENAI")
     if info:
         print(f"✅ Key info: {info}")

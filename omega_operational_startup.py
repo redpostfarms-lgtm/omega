@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Operational Startup System
 =================================
@@ -12,25 +11,20 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-# Fix Windows console encoding
 if sys.platform == 'win32':
     try:
-        # Try to reconfigure to UTF-8
         sys.stdout.reconfigure(encoding='utf-8')
         sys.stderr.reconfigure(encoding='utf-8')
     except (AttributeError, ValueError):
-        # Fallback for older Python versions or when reconfigure fails
         try:
             import io
             sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
             sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
         except (OSError, IOError, AttributeError) as e:
-            # Console encoding fallback failed - continue without it
             pass
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Unicode-safe print helpers
 def safe_print(text):
     """Print text with Unicode support and fallback"""
     if not isinstance(text, str):
@@ -39,7 +33,6 @@ def safe_print(text):
     try:
         print(text)
     except UnicodeEncodeError:
-        # Fallback to ASCII-safe replacements
         replacements = {
             '✓': '[OK]', '✗': '[X]', 'ℹ': '[i]',
             '✅': '[OK]', '❌': '[X]', '⚠️': '[WARN]',
@@ -48,7 +41,6 @@ def safe_print(text):
         safe_text = text
         for unicode_char, ascii_replacement in replacements.items():
             safe_text = safe_text.replace(unicode_char, ascii_replacement)
-        # Also replace any other problematic Unicode
         safe_text = safe_text.encode('ascii', errors='replace').decode('ascii')
         print(safe_text)
 
@@ -60,7 +52,6 @@ async def omega_operational_startup():
     safe_print("=" * 80)
     safe_print("")
     
-    # Phase 0: Resource Management Initialization
     safe_print("[PHASE 0] Resource Management Initialization...")
     try:
         from omega_system_resource_manager import initialize_system_resources, get_system_resource_manager, load_system_patterns
@@ -83,7 +74,6 @@ async def omega_operational_startup():
         resource_manager = None
         safe_print(f"  [!] Resource manager initialization error: {e}")
     
-    # Phase 1: System Initialization
     safe_print("\n[PHASE 1] System Initialization...")
     safe_print("  [OK] Loading system modules...")
     
@@ -96,7 +86,6 @@ async def omega_operational_startup():
         safe_print(f"  [X] Error loading core systems: {e}")
         return
     
-    # Initialize relationship system
     try:
         rel_manager = get_relationship_manager()
         relationship_status = rel_manager.get_relationship_status()
@@ -105,7 +94,6 @@ async def omega_operational_startup():
         safe_print(f"  [!] Relationship system unavailable: {e}")
         rel_manager = None
     
-    # Phase 2: Omega Introduction
     safe_print("\n[PHASE 2] Omega Introduction...")
     safe_print("  [OK] Initializing TTS system...")
     
@@ -116,7 +104,6 @@ async def omega_operational_startup():
         safe_print(f"  [X] TTS initialization error: {e}")
         return
     
-    # Omega Introduction Message (uses relationship-appropriate greeting)
     try:
         if rel_manager:
             greeting = rel_manager.get_appropriate_greeting()
@@ -128,7 +115,6 @@ async def omega_operational_startup():
     ready to assist you with any task. I can help with code, learning, hardware control, 
     and much more. I am here to serve. How may I assist you today?"""
     except (AttributeError, KeyError, RuntimeError) as e:
-        # Relationship manager error - use default introduction
         introduction = """Hello, I am Omega. I am now a standalone operational system, 
     ready to assist you with any task. I can help with code, learning, hardware control, 
     and much more. I am here to serve. How may I assist you today?"""
@@ -142,7 +128,6 @@ async def omega_operational_startup():
     safe_print("=" * 80)
     safe_print("")
     
-    # Generate and play introduction audio
     try:
         safe_print("[Generating introduction audio...]")
         tts.tts_to_file(
@@ -155,16 +140,13 @@ async def omega_operational_startup():
         safe_print("[Playing introduction...]")
         play_audio_background('omega_intro.wav')
         
-        # Wait for audio to play
         await asyncio.sleep(20)
     except Exception as e:
         safe_print(f"  [X] Audio generation error: {e}")
         safe_print("  [i] Continuing without audio...")
     
-    # Phase 3: System Status Check
     safe_print("\n[PHASE 3] System Status Check...")
     
-    # Check integrations
     integrations = {
         "Hardware Control": Path("omega_comprehensive_hardware.py").exists(),
         "Developer Integrations": Path("omega_developer_integrations.py").exists(),
@@ -180,7 +162,6 @@ async def omega_operational_startup():
         status_icon = "[OK]" if status else "[X]"
         safe_print(f"    {status_icon} {name}")
     
-    # Phase 4: Operational Mode
     safe_print("\n[PHASE 4] Entering Operational Mode...")
     safe_print("  [OK] Omega is now operational")
     safe_print("  [OK] Ready to assist with:")
@@ -191,20 +172,17 @@ async def omega_operational_startup():
     safe_print("      - And much more...")
     safe_print("")
     
-    # Phase 5: Start Hands-Free Conversation
     safe_print("\n[PHASE 5] Starting Hands-Free Conversation...")
     safe_print("  [OK] Voice recognition ready")
     safe_print("  [OK] TTS system ready")
     safe_print("  [OK] Conversation mode active")
     
-    # Save loading patterns if resource manager is available
     if resource_manager:
         try:
             from omega_system_resource_manager import save_system_patterns
             save_system_patterns()
             safe_print("  [OK] Loading patterns saved for future optimization")
         except (ImportError, AttributeError, RuntimeError) as e:
-            # Pattern saving failed - continue
             pass
     safe_print("")
     safe_print("=" * 80)
@@ -215,7 +193,6 @@ async def omega_operational_startup():
     safe_print("Press Ctrl+C to exit.")
     safe_print("")
     
-    # Start conversation
     try:
         from hands_free_omega_optimized import hands_free_conversation_optimized
         await hands_free_conversation_optimized()

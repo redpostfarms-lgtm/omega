@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Resource-Optimized Components
 ====================================
@@ -9,7 +8,6 @@ import sys
 from pathlib import Path
 from typing import Optional, Any, Callable
 
-# Try to import resource manager
 try:
     from omega_system_resource_manager import (
         get_system_resource_manager,
@@ -31,7 +29,6 @@ def load_tts_gradually():
                 
                 os.environ['TTS_ACCEPT_TO_S'] = '1'
                 
-                # Check GPU availability
                 resource_manager = get_system_resource_manager()
                 use_gpu = resource_manager.can_use_gpu() if resource_manager else False
                 device = 'cuda' if use_gpu else 'cpu'
@@ -46,7 +43,6 @@ def load_tts_gradually():
         
         return load_component_gradually("tts_model", load_tts)
     else:
-        # Fallback to standard loading
         from TTS.api import TTS
         import torch
         import os
@@ -62,7 +58,6 @@ def load_whisper_gradually():
                 from faster_whisper import WhisperModel
                 import torch
                 
-                # Check GPU availability
                 resource_manager = get_system_resource_manager()
                 use_gpu = resource_manager.can_use_gpu() if resource_manager else False
                 device = "cuda" if use_gpu else "cpu"
@@ -74,19 +69,16 @@ def load_whisper_gradually():
                 return model
             except Exception as e:
                 print(f"[Whisper] Error loading model: {e}")
-                # Fallback to CPU
                 try:
                     from faster_whisper import WhisperModel
                     model = WhisperModel("large-v3", device="cpu", compute_type="int8")
                     print("[Whisper] Model loaded on CPU (fallback)")
                     return model
                 except (ImportError, RuntimeError, ValueError) as e:
-                    # CPU fallback failed - re-raise original error
                     raise
         
         return load_component_gradually("whisper_model", load_whisper)
     else:
-        # Fallback to standard loading
         from faster_whisper import WhisperModel
         import torch
         device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -107,7 +99,6 @@ def load_voice_security_gradually():
         
         return load_component_gradually("voice_security", load_voice_security)
     else:
-        # Fallback to standard loading
         from voice_security_system import voice_security
         return voice_security
 
@@ -126,12 +117,10 @@ def load_hardware_controller_gradually():
         
         return load_component_gradually("hardware_controller", load_hardware)
     else:
-        # Fallback to standard loading
         try:
             from omega_comprehensive_hardware import get_hardware_controller
             return get_hardware_controller()
         except (IOError, OSError, PermissionError) as e:
-            # Resource check failed - return None
             return None
 
 def load_developer_integrations_gradually():
@@ -149,12 +138,10 @@ def load_developer_integrations_gradually():
         
         return load_component_gradually("developer_integrations", load_integrations)
     else:
-        # Fallback to standard loading
         try:
             from omega_developer_integrations import get_integration_manager
             return get_integration_manager()
         except (IOError, OSError, PermissionError) as e:
-            # Resource check failed - return None
             return None
 
 def get_optimal_workers_for_task(task_complexity: str = "medium") -> int:

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Quick test - Make Omega say hello
 import sys
 from pathlib import Path
 
@@ -13,7 +11,6 @@ greeting = "Hello! I'm Omega. I'm ready for hands-free conversation. Voice secur
 
 print(f"[Omega] {greeting}\n")
 
-# Generate speech
 tts.tts_to_file(
     text=greeting,
     speaker_wav='clip_0001.wav' if Path('clip_0001.wav').exists() else None,

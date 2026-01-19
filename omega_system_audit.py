@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Comprehensive System Audit and Issue Detection Agent
 """
 Deep scan agent to identify potential issues, breakage flags, and integration problems.
 """
@@ -125,7 +123,6 @@ class SystemAuditAgent:
                                     'severity': 'error'
                                 })
                         elif isinstance(child, ast.Call) and isinstance(child.func, ast.Attribute):
-                            # Check for blocking calls in async functions
                             if is_async and child.func.attr in ['read', 'write', 'sleep']:
                                 if not any(isinstance(parent, (ast.Call, ast.Await)) for parent in ast.walk(node)):
                                     issues.append({
@@ -147,8 +144,7 @@ class SystemAuditAgent:
                 lines = f.readlines()
                 
             for i, line in enumerate(lines, 1):
-                # Check for hardcoded paths
-                if any(keyword in line for keyword in ['/home/', '/tmp/', 'C:\\', 'D:\\']):
+                if any(keyword in line for keyword in [str(Path.home())/tmp/', 'C:\\', 'D:\\']):
                     if '#' not in line or line.index('#') > line.index(keyword):
                         issues.append({
                             'type': 'hardcoded_path',
@@ -157,9 +153,7 @@ class SystemAuditAgent:
                             'severity': 'warning',
                             'content': line.strip()
                         })
-                # Check for path.join issues
                 if 'path.join' in line.lower() or 'pathlib' in line.lower():
-                    # This is usually fine, but flag for review
                     pass
         except Exception as e:
             pass
@@ -169,7 +163,6 @@ class SystemAuditAgent:
         """Check for compatibility issues."""
         issues = []
         
-        # Check Python version
         if sys.version_info < (3, 9):
             issues.append({
                 'type': 'python_version',
@@ -177,7 +170,6 @@ class SystemAuditAgent:
                 'message': f'Python {sys.version_info.major}.{sys.version_info.minor} detected. Requires 3.9+'
             })
         
-        # Check for known problematic patterns
         core_files = [
             'omega_optimized_speech.py',
             'hands_free_omega_optimized.py',
@@ -191,9 +183,7 @@ class SystemAuditAgent:
                     with open(file_path, 'r', encoding='utf-8') as f:
                         content = f.read()
                         
-                    # Check for potential issues
                     if 'large-v2' in content and 'int8' in content:
-                        # Large-v2 with int8 may have compatibility issues
                         if 'fallback' not in content.lower():
                             issues.append({
                                 'type': 'compatibility_risk',
@@ -202,10 +192,8 @@ class SystemAuditAgent:
                                 'message': 'Large-v2 with int8 quantization - ensure fallback is tested'
                             })
                     
-                    # Check for WebRTC VAD frame size issues
                     if 'webrtcvad' in content:
                         if '480' in content or '30' in content:  # 30ms = 480 samples at 16kHz
-                            # This should be fine, but verify
                             pass
                     
                     # Check for missing error handling around critical operations
@@ -232,7 +220,6 @@ class SystemAuditAgent:
         """Check for integration issues between components."""
         issues = []
         
-        # Check if all required modules are importable
         required_modules = [
             'omega_optimized_speech',
             'omega_optimized_tts',
@@ -259,12 +246,9 @@ class SystemAuditAgent:
                     'message': f'Error importing {module_name}: {e}'
                 })
         
-        # Check for circular imports
-        # This is simplified - full analysis would require dependency graph
         try:
             import omega_optimized_speech
             import hands_free_omega_optimized
-            # If we get here, no immediate circular import
         except RecursionError:
             issues.append({
                 'type': 'circular_import',
@@ -286,7 +270,6 @@ class SystemAuditAgent:
         all_issues = []
         all_warnings = []
         
-        # Audit core files
         core_files = [
             'omega_optimized_speech.py',
             'hands_free_omega_optimized.py',

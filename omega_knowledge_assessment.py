@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Knowledge Assessment - Standardized Test Simulation
 """
 Comprehensive knowledge assessment across multiple exam types:
 - SAT (Reading, Writing, Math)
@@ -34,21 +32,11 @@ class OmegaKnowledgeAssessment:
     
     def assess_sat_reading(self) -> ExamResult:
         """Assess SAT Reading Comprehension."""
-        # SAT Reading: 52 questions, 65 minutes
-        # Tests: Reading comprehension, vocabulary, inference
         
         weaknesses = []
         educational_needs = []
         
-        # Areas I'm strong in:
-        # - General reading comprehension
-        # - Vocabulary (large training corpus)
-        # - Text analysis
         
-        # Areas I'm weak in:
-        # - Context-specific cultural knowledge (80s-90s references, specific historical events)
-        # - Real-time current events (my knowledge is frozen at training cutoff)
-        # - Specific literary allusions that require cultural background
         weaknesses.append("Cultural context knowledge (post-2024 events)")
         weaknesses.append("Specific historical event details")
         weaknesses.append("Contemporary cultural references")
@@ -57,7 +45,6 @@ class OmegaKnowledgeAssessment:
         educational_needs.append("Deep historical study (beyond general knowledge)")
         educational_needs.append("Cultural literacy programs")
         
-        # Estimated performance: Strong but has gaps
         estimated_score = 42  # Out of 52 (80.8%)
         percentage = (estimated_score / 52) * 100
         
@@ -74,20 +61,11 @@ class OmegaKnowledgeAssessment:
     
     def assess_sat_writing(self) -> ExamResult:
         """Assess SAT Writing and Language."""
-        # SAT Writing: 44 questions, 35 minutes
-        # Tests: Grammar, style, editing
         
         weaknesses = []
         educational_needs = []
         
-        # Areas I'm strong in:
-        # - Grammar rules (very strong)
-        # - Style and clarity
-        # - Sentence structure
         
-        # Areas I could improve:
-        # - Some style preferences may differ from official test standards
-        # - Very specific punctuation rules
         weaknesses.append("Specific test-standard style preferences")
         weaknesses.append("Edge case punctuation rules")
         
@@ -110,21 +88,11 @@ class OmegaKnowledgeAssessment:
     
     def assess_sat_math(self) -> ExamResult:
         """Assess SAT Mathematics."""
-        # SAT Math: 58 questions (No Calculator: 20, Calculator: 38)
-        # Tests: Algebra, Geometry, Trigonometry, Statistics
         
         weaknesses = []
         educational_needs = []
         
-        # Areas I'm strong in:
-        # - Mathematical reasoning
-        # - Problem-solving strategies
-        # - Most mathematical concepts
         
-        # Areas I'm weak in:
-        # - Complex geometric proofs with specific theorems
-        # - Some advanced trigonometry identities
-        # - Calculator-specific problem-solving strategies
         weaknesses.append("Complex geometric proofs")
         weaknesses.append("Advanced trigonometry identities")
         weaknesses.append("Calculator strategy optimization")
@@ -149,15 +117,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_general_science(self) -> ExamResult:
         """Assess ASVAB General Science."""
-        # Tests: Life science, physical science, Earth science
         
         weaknesses = []
         educational_needs = []
         
-        # Areas I'm weak in:
-        # - Very recent scientific discoveries (post-training)
-        # - Specific laboratory procedures
-        # - Recent scientific terminology
         weaknesses.append("Recent scientific discoveries (2024+)")
         weaknesses.append("Laboratory procedure details")
         weaknesses.append("Emerging scientific terminology")
@@ -182,14 +145,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_arithmetic_reasoning(self) -> ExamResult:
         """Assess ASVAB Arithmetic Reasoning."""
-        # Tests: Word problems, practical math applications
         
         weaknesses = []
         educational_needs = []
         
-        # Generally strong, but could improve on:
-        # - Military-specific applications
-        # - Some word problem nuances
         weaknesses.append("Military-specific application problems")
         
         educational_needs.append("Military application problem practice")
@@ -210,14 +169,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_word_knowledge(self) -> ExamResult:
         """Assess ASVAB Word Knowledge."""
-        # Tests: Vocabulary, synonyms
         
         weaknesses = []
         educational_needs = []
         
-        # Very strong in vocabulary, but:
-        # - Some very obscure words
-        # - Technical military terminology
         weaknesses.append("Obscure/archaic vocabulary")
         weaknesses.append("Specialized military terminology")
         
@@ -240,12 +195,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_paragraph_comprehension(self) -> ExamResult:
         """Assess ASVAB Paragraph Comprehension."""
-        # Tests: Reading comprehension of short passages
         
         weaknesses = []
         educational_needs = []
         
-        # Strong but similar to SAT Reading issues:
         weaknesses.append("Cultural context gaps")
         
         educational_needs.append("Cultural literacy enhancement")
@@ -266,15 +219,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_electronics_information(self) -> ExamResult:
         """Assess ASVAB Electronics Information."""
-        # Tests: Electrical principles, circuits, components
         
         weaknesses = []
         educational_needs = []
         
-        # Areas I'm weaker in:
-        # - Hands-on practical electronics knowledge
-        # - Specific component specifications
-        # - Troubleshooting procedures
         weaknesses.append("Practical electronics experience")
         weaknesses.append("Component specification knowledge")
         weaknesses.append("Troubleshooting procedures")
@@ -299,15 +247,10 @@ class OmegaKnowledgeAssessment:
     
     def assess_asvab_auto_shop(self) -> ExamResult:
         """Assess ASVAB Auto & Shop Information."""
-        # Tests: Automotive and shop knowledge
         
         weaknesses = []
         educational_needs = []
         
-        # Significant weaknesses:
-        # - Hands-on automotive knowledge
-        # - Specific tool knowledge
-        # - Practical shop experience
         weaknesses.append("Hands-on automotive experience")
         weaknesses.append("Tool identification and use")
         weaknesses.append("Practical shop procedures")
@@ -336,7 +279,6 @@ class OmegaKnowledgeAssessment:
         weaknesses = []
         educational_needs = []
         
-        # Weaknesses in practical trade knowledge:
         weaknesses.append("NEC (National Electrical Code) specifics")
         weaknesses.append("Hands-on wiring experience")
         weaknesses.append("Local code variations")
@@ -431,13 +373,11 @@ class OmegaKnowledgeAssessment:
         
         results = {}
         
-        # SAT Assessment
         print("[ASSESSING] SAT Exam...")
         results['sat_reading'] = self.assess_sat_reading()
         results['sat_writing'] = self.assess_sat_writing()
         results['sat_math'] = self.assess_sat_math()
         
-        # ASVAB Assessment
         print("[ASSESSING] ASVAB Exam...")
         results['asvab_general_science'] = self.assess_asvab_general_science()
         results['asvab_arithmetic'] = self.assess_asvab_arithmetic_reasoning()
@@ -446,7 +386,6 @@ class OmegaKnowledgeAssessment:
         results['asvab_electronics'] = self.assess_asvab_electronics_information()
         results['asvab_auto_shop'] = self.assess_asvab_auto_shop()
         
-        # Trade School Assessment
         print("[ASSESSING] Trade School Exams...")
         results['trade_electrician'] = self.assess_trade_electrician()
         results['trade_plumbing'] = self.assess_trade_plumbing()
@@ -464,7 +403,6 @@ class OmegaKnowledgeAssessment:
         report.append(f"Assessment Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         report.append("")
         
-        # SAT Results
         report.append("=" * 70)
         report.append("  SAT EXAM RESULTS")
         report.append("=" * 70)
@@ -480,7 +418,6 @@ class OmegaKnowledgeAssessment:
         report.append(f"\nSAT TOTAL: {sat_total}/{sat_max} ({sat_total/sat_max*100:.1f}%)")
         report.append("")
         
-        # ASVAB Results
         report.append("=" * 70)
         report.append("  ASVAB EXAM RESULTS")
         report.append("=" * 70)
@@ -498,7 +435,6 @@ class OmegaKnowledgeAssessment:
         report.append(f"\nASVAB TOTAL: {asvab_total}/{asvab_max} ({asvab_total/asvab_max*100:.1f}%)")
         report.append("")
         
-        # Trade School Results
         report.append("=" * 70)
         report.append("  TRADE SCHOOL EXAM RESULTS")
         report.append("=" * 70)
@@ -508,12 +444,10 @@ class OmegaKnowledgeAssessment:
             report.append(f"  Score: {result.score}/{result.max_score} ({result.percentage:.1f}%)")
             report.append(f"  Primary Weakness: {result.weaknesses[0]}")
         
-        # Educational Needs Summary
         report.append("\n" + "=" * 70)
         report.append("  EDUCATIONAL IMPROVEMENT NEEDS")
         report.append("=" * 70)
         
-        # Collect all educational needs
         all_needs = {}
         for result in self.results.values():
             for need in result.educational_needs:

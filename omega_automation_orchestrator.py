@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Multi-AI Automation Orchestrator
 Runs silently with elevated privileges via Task Scheduler
@@ -11,7 +10,6 @@ import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-# Configure logging (runs headlessly, log to file)
 log_dir = Path(__file__).parent / "logs"
 log_dir.mkdir(exist_ok=True)
 logging.basicConfig(
@@ -24,7 +22,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Try to import optional dependencies
 try:
     import ollama
     OLLAMA_AVAILABLE = True
@@ -209,7 +206,6 @@ class OmegaOrchestrator:
         self.external_ai = None
         self.office = None
         
-        # Initialize components
         if config.get("local_llm", {}).get("enabled", False):
             llm_config = config["local_llm"]
             self.local_llm = LocalLLMClient(
@@ -239,7 +235,6 @@ class OmegaOrchestrator:
         logger.info(f"Processing task: {task_description}")
         results = {}
         
-        # Step 1: Analyze with local LLM
         if self.local_llm:
             try:
                 local_response = self.local_llm.query(
@@ -251,7 +246,6 @@ class OmegaOrchestrator:
             except Exception as e:
                 logger.error(f"Local LLM failed: {e}")
         
-        # Step 2: Consult external AI
         if self.external_ai:
             try:
                 external_response = self.external_ai.query(
@@ -262,7 +256,6 @@ class OmegaOrchestrator:
             except Exception as e:
                 logger.error(f"External AI failed: {e}")
         
-        # Step 3: Combine results
         if results:
             combined = self._combine_results(results)
             results["combined"] = combined
@@ -288,11 +281,9 @@ class OmegaOrchestrator:
         
         if task_type == "excel":
             def process_excel(wb):
-                # Example: Read cell A1, process with AI, write to B1
                 sheet = wb.Sheets(1)
                 value = sheet.Cells(1, 1).Value
                 
-                # Process with AI
                 if self.local_llm:
                     processed = self.local_llm.query(f"Analyze this data: {value}")
                     sheet.Cells(1, 2).Value = processed
@@ -304,7 +295,6 @@ class OmegaOrchestrator:
         
         elif task_type == "word":
             def process_word(doc):
-                # Example: Get first paragraph, enhance with AI
                 if doc.Paragraphs.Count > 0:
                     text = doc.Paragraphs(1).Range.Text
                     
@@ -332,7 +322,6 @@ def load_config() -> Dict[str, Any]:
         with open(config_file, 'r') as f:
             return json.load(f)
     
-    # Default configuration
     return {
         "local_llm": {
             "enabled": os.getenv("LOCAL_LLM_ENABLED", "false").lower() == "true",
@@ -357,15 +346,12 @@ def main():
     logger.info("Omega Automation Orchestrator starting...")
     
     try:
-        # Load configuration
         config = load_config()
         logger.info("Configuration loaded")
         
-        # Initialize orchestrator
         orchestrator = OmegaOrchestrator(config)
         logger.info("Orchestrator initialized")
         
-        # Process configured tasks
         tasks = config.get("tasks", [])
         if tasks:
             for task in tasks:
@@ -382,7 +368,6 @@ def main():
                 except Exception as e:
                     logger.error(f"Task failed: {e}")
         
-        # Cleanup
         orchestrator.cleanup()
         logger.info("Omega Automation Orchestrator completed")
         

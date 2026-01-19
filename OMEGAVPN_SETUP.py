@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 OmegaVPN Setup - Complete VPN System
 ======================================
@@ -39,7 +38,6 @@ def main():
     print_header()
     print_features()
     
-    # Initialize OmegaVPN
     omegavpn = get_optimized_vpn("OmegaVPN")
     
     print("OmegaVPN Status:")

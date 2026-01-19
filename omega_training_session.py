@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# Omega Training Session - Active Training Demonstration
 """
 Demonstrates Omega's educational system in action.
 Shows training progress, agent assistance, and hands-on guidance.
@@ -27,7 +25,6 @@ def main():
     print("\nTraining Goal: 100% Proficiency on All Standardized Tests")
     print("Current Phase: Phase 1 - Foundation (Week 1)")
     
-    # Phase 1: Safety Certification
     print_section("PHASE 1: FOUNDATION - SAFETY CERTIFICATION")
     
     print_step(1, "Initializing Educational Systems...")
@@ -60,7 +57,6 @@ def main():
     print("   Agent: Setting compliance benchmarks...")
     print("   ✅ Quality standards established")
     
-    # Assessment Baseline
     print_section("CURRENT ASSESSMENT BASELINE")
     print("\nSAT Scores (Target: 100%):")
     print("   Reading:    80.8% (42/52) → Target: 100% (Gap: 19.2%)")
@@ -80,7 +76,6 @@ def main():
     print("   Plumbing:    58.0% (58/100) → Target: 100% (Gap: 42.0%)")
     print("   Welding:     55.0% (55/100) → Target: 100% (Gap: 45.0%)")
     
-    # Training Progress
     print_section("TRAINING PROGRESS")
     
     print("\n✅ Phase 1: Foundation - STARTED")
@@ -101,7 +96,6 @@ def main():
     print("     • AWS Standards study (Welding) - 20 hours")
     print("     • Auto shop theory - 20 hours")
     
-    # Agent Activity
     print_section("AGENT ASSISTANCE STATUS")
     
     print("\n🔵 Safety Supervisor Agent:")
@@ -128,7 +122,6 @@ def main():
     print("   Inspections Performed: 0 (awaiting work completion)")
     print("   Defects Found: 0")
     
-    # System Status
     print_section("SYSTEM STATUS")
     
     print("\n✅ Educational System: OPERATIONAL")
@@ -153,7 +146,6 @@ def main():
     print("   • Safety monitoring active")
     print("   • Quality assurance ready")
     
-    # Next Steps
     print_section("NEXT STEPS")
     
     print("\n📅 Immediate (This Week):")
@@ -174,7 +166,6 @@ def main():
     print("   3. Start hands-on practice (Month 4+)")
     print("   4. Continue toward 100% proficiency")
     
-    # Summary
     print_section("TRAINING SESSION SUMMARY")
     
     print("\n✅ Training Status: ACTIVE")

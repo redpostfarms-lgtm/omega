@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Dual Voice Analysis & Blend System
 Analyzes clip_0001.wav and omega_downloaded.wav, creates optimal voice blend
@@ -21,7 +20,6 @@ voice_files = {
 
 voice_profiles = {}
 
-# Analyze both voice files
 print("\n[PHASE 1] Analyzing Voice Files...")
 try:
     import librosa
@@ -39,20 +37,15 @@ try:
         print(f"    - Sample rate: {sr} Hz")
         print(f"    - Duration: {duration:.2f}s")
         
-        # Spectral analysis
         cent = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
         rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)[0]
         
-        # Energy analysis
         rms = librosa.feature.rms(y=y)[0]
         
-        # Voice characteristics
         zcr = librosa.feature.zero_crossing_rate(y=y)[0]
         
-        # MFCC for voice fingerprint
         mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
         
-        # Onset/amplitude dynamics
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
         profile = {
@@ -88,7 +81,6 @@ except Exception as e:
     traceback.print_exc()
     sys.exit(1)
 
-# Phase 2: Compare and blend voices
 print("\n[PHASE 2] Voice Comparison & Blending Strategy...")
 if len(voice_profiles) >= 2:
     files = list(voice_profiles.keys())
@@ -100,7 +92,6 @@ if len(voice_profiles) >= 2:
     print(f"  Loudness Difference: {abs(v1['rms_mean'] - v2['rms_mean']):.4f}")
     print(f"  Quality Difference: {abs(v1['zcr_mean'] - v2['zcr_mean']):.4f}")
     
-    # Determine optimal blend
     if v1['centroid_mean'] > v2['centroid_mean']:
         bright_file = files[0]
         warm_file = files[1]
@@ -113,7 +104,6 @@ if len(voice_profiles) >= 2:
     print(f"    - Warmth from: {warm_file}")
     print(f"    - Recommended: Use both for different contexts")
 
-# Phase 3: TTS Voice Cloning with both files
 print("\n[PHASE 3] Setting Up Multi-Voice TTS System...")
 try:
     from TTS.api import TTS
@@ -125,7 +115,6 @@ try:
     tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to(device)
     print(f"  [OK] TTS model ready for voice cloning")
     
-    # Generate responses using both voices
     print("\n[PHASE 4] Generating Voice-Cloned Responses...")
     
     test_texts = [

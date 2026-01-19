@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# PROPRIETARY SOFTWARE - RED POST FARMS, LLC
-# Ω Omega Security Enhanced - Input Sanitization, Entropy Killswitch, Sandbox Isolation
 
 """
 Ω Omega Security Enhanced
@@ -46,16 +43,13 @@ class InputSanitizer:
         if not isinstance(user_input, str):
             return str(user_input)
         
-        # Remove null bytes
         sanitized = user_input.replace('\\x00', '')
         
-        # Check for dangerous patterns
         for pattern in InputSanitizer.DANGEROUS_PATTERNS:
             if re.search(pattern, sanitized, re.IGNORECASE):
                 logger.warning(f"Dangerous pattern detected: {pattern}")
                 raise ValueError(f"Potentially dangerous input detected: {pattern}")
         
-        # Limit length
         if len(sanitized) > 10000:
             raise ValueError("Input too long")
         
@@ -68,7 +62,6 @@ class InputSanitizer:
             resolved = Path(path).resolve()
             base = allowed_base.resolve()
             
-            # Ensure path is within allowed base
             if not str(resolved).startswith(str(base)):
                 raise ValueError(f"Path outside allowed base: {path}")
             
@@ -89,12 +82,10 @@ class EntropyKillswitch:
     def check_entropy(self) -> float:
         """Check current system entropy."""
         try:
-            # Use os.urandom for entropy measurement
             sample = os.urandom(32)
             entropy = len(set(sample)) / len(sample)
             self.entropy_history.append(entropy)
             
-            # Keep only last 100 measurements
             if len(self.entropy_history) > 100:
                 self.entropy_history.pop(0)
             
@@ -132,10 +123,8 @@ class SandboxIsolation:
     
     def isolate_execution(self, code: str, timeout: int = 30) -> Dict[str, Any]:
         """Execute code in isolated sandbox."""
-        # Validate code
         InputSanitizer.sanitize_input(code)
         
-        # Create isolated namespace
         isolated_namespace = {
             '__builtins__': {
                 'print': print,
@@ -152,14 +141,12 @@ class SandboxIsolation:
             '__file__': None,
         }
         
-        # Block dangerous operations
         blocked = ['import', 'open', 'eval', 'exec', '__import__']
         for block in blocked:
             if block in code:
                 raise ValueError(f"Blocked operation: {block}")
         
         try:
-            # Compile and execute in isolated namespace
             compiled = compile(code, '<sandbox>', 'exec')
             exec(compiled, isolated_namespace)
             
@@ -198,7 +185,6 @@ class SecurityAuditLogger:
             logger.error(f"Failed to log security event: {e}")
 
 
-# Global security instances
 from pathlib import Path
 _GATE = Path(r'D:\RPF_BRAIN\The Gatekeeper')
 if not _GATE.exists():
@@ -210,5 +196,4 @@ SANITIZER = InputSanitizer()
 KILLSWITCH = EntropyKillswitch()
 AUDIT_LOGGER = SecurityAuditLogger(_GATE / 'omega_security_audit.log')
 
-# Initialize sandbox
 SANDBOX = SandboxIsolation(_GATE / 'omega_sandbox')

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Auto-Sync - Git Batch Wrapper
 Every pending change gets auto-wrapped in one git batch.
@@ -39,7 +38,6 @@ class AutoSync:
     def git_status(self) -> Dict[str, Any]:
         """Get git status as JSON"""
         try:
-            # Get status
             result = subprocess.run(
                 ["git", "status", "--porcelain"],
                 cwd=self.git_root,
@@ -96,15 +94,12 @@ class AutoSync:
         print()
 
         try:
-            # Check if there are changes
             status = self.git_status()
             if status.get("clean") and not force:
                 print("  [OK] No changes to sync - branch already clean")
                 return True
 
-            # Step 1: Add files
             if files:
-                # Sync specific files
                 for file in files:
                     subprocess.run(
                         ["git", "add", file],
@@ -114,7 +109,6 @@ class AutoSync:
                     )
                 print(f"  [1/5] git add {' '.join(files)}")
             else:
-                # Sync all files
                 subprocess.run(
                     ["git", "add", "-A"],
                     cwd=self.git_root,
@@ -123,7 +117,6 @@ class AutoSync:
                 )
                 print("  [1/5] git add -A")
 
-            # Step 2: Commit
             commit_msg = f"sync: swarm healed - {reason}"
             subprocess.run(
                 ["git", "commit", "-m", commit_msg],
@@ -133,7 +126,6 @@ class AutoSync:
             )
             print(f"  [2/5] git commit -m \"{commit_msg}\"")
 
-            # Step 3: Push
             subprocess.run(
                 ["git", "push", "origin", self.branch],
                 cwd=self.git_root,

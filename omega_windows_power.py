@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Omega Windows Power Management
 ===============================
@@ -49,7 +48,6 @@ class WindowsPowerManager:
     def shutdown(self, delay_seconds: int = 0, reason: str = "Omega system shutdown", force: bool = False, optimize: bool = True):
         """Shutdown Windows system - optimized to 5 seconds or less with process spacing"""
         try:
-            # Optimize by spacing out processes to prevent system bogging
             if optimize and delay_seconds > 0:
                 try:
                     import psutil
@@ -57,7 +55,6 @@ class WindowsPowerManager:
                     current_pid = os.getpid()
                     processes_to_close = []
                     
-                    # Get non-essential processes
                     for proc in psutil.process_iter(['pid', 'name']):
                         try:
                             pinfo = proc.info
@@ -69,7 +66,6 @@ class WindowsPowerManager:
                         except (psutil.NoSuchProcess, psutil.AccessDenied):
                             continue
                     
-                    # Close processes with spacing (limit to 10 to avoid overwhelming)
                     for pid in processes_to_close[:10]:
                         try:
                             proc = psutil.Process(pid)
@@ -85,16 +81,11 @@ class WindowsPowerManager:
                 except Exception:
                     pass  # Continue even if optimization fails
             
-            # Force immediate shutdown if requested (5 seconds max)
             if force or delay_seconds == 0:
-                # Use /f to force close applications without waiting
-                # Use /t 0 for immediate shutdown (minimum Windows allows)
                 cmd = f'shutdown /s /f /t 0 /c "{reason}"'
             elif delay_seconds <= 5:
-                # If delay is 5 seconds or less, use force close
                 cmd = f'shutdown /s /f /t {delay_seconds} /c "{reason}"'
             else:
-                # Longer delays don't force close (allows saves)
                 cmd = f'shutdown /s /t {delay_seconds} /c "{reason}"'
             
             subprocess.run(cmd, shell=True, check=True)
@@ -126,7 +117,6 @@ class WindowsPowerManager:
     def sleep(self):
         """Put system to sleep"""
         try:
-            # Windows sleep command
             subprocess.run('rundll32.exe powrprof.dll,SetSuspendState 0,1,0', shell=True, check=True)
             return True, "System entering sleep mode"
         except subprocess.CalledProcessError as e:
@@ -135,7 +125,6 @@ class WindowsPowerManager:
     def hibernate(self):
         """Hibernate system"""
         try:
-            # Windows hibernate command
             subprocess.run('rundll32.exe powrprof.dll,SetSuspendState 1,1,0', shell=True, check=True)
             return True, "System entering hibernate mode"
         except subprocess.CalledProcessError as e:
@@ -154,7 +143,6 @@ class WindowsPowerManager:
             cmd = f'shutdown /s /t {seconds} /c "{reason}"'
             subprocess.run(cmd, shell=True, check=True)
             
-            # Save to config
             schedule_entry = {
                 "type": "shutdown",
                 "time": shutdown_time.isoformat(),
@@ -175,19 +163,15 @@ class WindowsPowerManager:
             if wake_time <= now:
                 return False, "Wake time must be in the future"
             
-            # Create scheduled task for wake-up
             task_name = f"Omega_Wake_{wake_time.strftime('%Y%m%d_%H%M%S')}"
             
-            # Use schtasks to create wake timer
             wake_cmd = f'schtasks /Create /TN "{task_name}" /TR "cmd /c echo Wake" /SC ONCE /ST {wake_time.strftime("%H:%M")} /SD {wake_time.strftime("%m/%d/%Y")} /F'
             subprocess.run(wake_cmd, shell=True, check=True)
             
-            # Enable wake timers in power settings
             subprocess.run('powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_SLEEP RTCWAKE 1', shell=True)
             subprocess.run('powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_SLEEP RTCWAKE 1', shell=True)
             subprocess.run('powercfg /SETACTIVE SCHEME_CURRENT', shell=True)
             
-            # Save to config
             wake_entry = {
                 "type": "wake",
                 "time": wake_time.isoformat(),
@@ -209,11 +193,9 @@ class WindowsPowerManager:
             if sleep_time <= now:
                 return False, "Sleep time must be in the future"
             
-            # Calculate delay
             delta = sleep_time - now
             seconds = int(delta.total_seconds())
             
-            # Create scheduled task
             task_name = f"Omega_Sleep_{sleep_time.strftime('%Y%m%d_%H%M%S')}"
             sleep_script = f'@echo off\ntimeout /t {seconds} /nobreak\nrundll32.exe powrprof.dll,SetSuspendState 0,1,0'
             
@@ -224,7 +206,6 @@ class WindowsPowerManager:
             cmd = f'schtasks /Create /TN "{task_name}" /TR "{script_file.absolute()}" /SC ONCE /ST {sleep_time.strftime("%H:%M")} /SD {sleep_time.strftime("%m/%d/%Y")} /F'
             subprocess.run(cmd, shell=True, check=True)
             
-            # Save to config
             sleep_entry = {
                 "type": "sleep",
                 "time": sleep_time.isoformat(),
@@ -256,7 +237,6 @@ class WindowsPowerManager:
         try:
             subprocess.run(f'schtasks /Delete /TN "{task_name}" /F', shell=True, check=True)
             
-            # Remove from config
             for task_list in ["wake_timers", "sleep_timers"]:
                 self.config[task_list] = [t for t in self.config.get(task_list, []) if t.get("task_name") != task_name]
             self.save_config()
