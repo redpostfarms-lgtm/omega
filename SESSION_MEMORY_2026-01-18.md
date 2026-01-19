@@ -47,7 +47,7 @@
 
 ### Git Configuration
 - **Branch:** complete-system-2026-01-17
-- **Remote:** omega (https://github.com/redpostfarms-lgtm/omega.git)
+- **Remote:** omega (<https://github.com/redpostfarms-lgtm/omega.git>)
 - **Latest Commit:** b0daa556
 - **Sync Status:** ✅ Up-to-date with omega/complete-system-2026-01-17
 - **Working Tree:** Clean (0 pending changes)
@@ -55,7 +55,7 @@
 ### Repository Structure
 - **Primary Repo:** redpostfarms/The-Gatekeeper (origin)
 - **Development Repo:** redpostfarms-lgtm/omega (omega)
-- **GitHub Codespace:** https://urban-palm-tree-wrpp57x5gwrg2vrx.github.dev/
+- **GitHub Codespace:** <https://urban-palm-tree-wrpp57x5gwrg2vrx.github.dev/>
 
 ### Python Environment
 - **Version:** Python 3.14.2
