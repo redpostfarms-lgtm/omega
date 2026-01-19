@@ -180,3 +180,61 @@ datasets/
 omega_swarm/**/*.json
 omega_swarm/omega-swarm/**/*.json
 omega_swarm/report_*.json
+
+# ============== ADDITIONAL OMEGA FILES ==============
+# Docker workspaces
+laughing-mccarthy/
+pedantic-kowalevski/
+The Brave/
+
+# Nested duplicate directories
+The Gatekeeper/
+
+# Temporary test files
+test_*.py
+*_test.py
+scan_files.py
+check-status.ps1
+fix_and_launch.py
+mic_test.py
+emotion_detector.py
+
+# Omega subsystems (temporary/test)
+omega_70b/
+omega_apps/
+omega_brain.py
+omega_brain_emotion.py
+omega_brain_final.py
+omega_brain_memory.py
+omega_master.py
+
+# Integration test files
+test_omega_integration.py
+omega_system.ipynb
+omega_hybrid_llm.ipynb
+notebook.ipynb
+
+# PowerShell scripts (temporary)
+monitor_c_drive.ps1
+ACTIVATE_OMEGA_DOWNLOADS.bat
+CLEANUP_C_DRIVE.bat
+MIGRATE_OMEGA_APPS.ps1
+OPTIMIZE_C_DRIVE.ps1
+
+# Knowledge bases (large data)
+gaming_knowledge/
+
+# SSH documentation
+SSH_KEY_LOCATION.md
+
+# Integration documentation (optional)
+OMEGA_INTEGRATION_COMPLETE.md
+
+# Desktop shortcuts
+Omega_Desktop_Shortcut.lnk
+
+# AI tool caches
+.aitk/
+.aitk-*/
+.claude/
+.claude-*/
