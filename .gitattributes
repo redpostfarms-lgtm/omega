@@ -1,0 +1,75 @@
+# Auto detect text files and normalize line endings to LF
+* text=auto eol=lf
+
+# Explicitly set text files
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.whl binary
+*.egg binary
+*.pyc binary
+*.pyd binary
+*.dll binary
+*.exe binary
+*.so binary
+*.dylib binary
+
+# Archives
+*.7z binary
+*.bz2 binary
+*.rar binary
+*.tar.gz binary
+*.tgz binary
+*.zip binary
+
+# Audio/Video
+*.mp3 binary
+*.mp4 binary
+*.wav binary
+*.avi binary
+*.mov binary
+*.flac binary
+
+# Models and data files
+*.gguf binary
+*.bin binary
+*.pt binary
+*.pth binary
+*.onnx binary
+*.pb binary
+*.h5 binary
+*.safetensors binary
+
+# Jupyter Notebooks - use nbstripout for clean diffs
+*.ipynb text eol=lf
+
+# Linguist language detection
+*.md linguist-detectable
+*.py linguist-detectable
+docs/* linguist-documentation
+examples/* linguist-documentation
+tests/* linguist-vendored=false
+
+# Git LFS tracking (if using LFS)
+*.gguf filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+*.pth filter=lfs diff=lfs merge=lfs -text
