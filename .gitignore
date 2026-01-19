@@ -129,6 +129,11 @@ logs/
 # OUI Cache
 .oui_cache.json
 
+# Cache directories
+.cache/
+.appcat/
+.appcat-config/
+
 # Node modules (if any)
 node_modules/
 
