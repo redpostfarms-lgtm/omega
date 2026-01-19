@@ -136,20 +136,20 @@ class GateVoice:
             voices = engine.getProperty('voices')
             
             print("[GATE] Available voices:")
-            for idx, voice in enumerate(voices):
+            for idx, voice in enumerate(voices):  # type: ignore[arg-type]
                 print(f"  [{idx}] {voice.name}")
             
             # TODO: GATE - Set voice index (0 = first voice, 1 = second, etc.)
             voice_index = 0  # GATE: Change this to your preferred voice!
             
-            if voice_index < len(voices):
-                engine.setProperty('voice', voices[voice_index].id)
+            if voice_index < len(voices):  # type: ignore[arg-type]
+                engine.setProperty('voice', voices[voice_index].id)  # type: ignore[index]
             
             # Apply voice properties
             engine.setProperty('rate', self.voice_config['rate'])
             engine.setProperty('volume', self.voice_config['volume'])
             
-            print(f"[GATE] Using voice: {voices[voice_index].name}")
+            print(f"[GATE] Using voice: {voices[voice_index].name}")  # type: ignore[index]
             print(f"[GATE] Rate: {self.voice_config['rate']} WPM")
             print(f"[GATE] Volume: {self.voice_config['volume']}")
             

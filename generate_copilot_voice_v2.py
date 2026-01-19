@@ -23,16 +23,16 @@ engine = pyttsx3.init()
 # Configure voice settings
 voices = engine.getProperty('voices')
 print(f"{CYAN}Available voices:{RESET}")
-for i, voice in enumerate(voices):
+for i, voice in enumerate(voices):  # type: ignore[arg-type]
     print(f"  {i}: {voice.name}")
 print()
 
 # Select voice (use first available)
-engine.setProperty('voice', voices[0].id)
+engine.setProperty('voice', voices[0].id)  # type: ignore[index]
 engine.setProperty('rate', 165)  # Slightly faster
 engine.setProperty('volume', 1.0)
 
-print(f"{GREEN}Using voice: {voices[0].name}{RESET}\n")
+print(f"{GREEN}Using voice: {voices[0].name}{RESET}\n")  # type: ignore[index]
 
 # My dialog as GitHub Copilot
 copilot_dialog = [

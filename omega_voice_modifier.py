@@ -105,7 +105,7 @@ class OmegaVoiceModifier:
             # Low-pass filter at 250 Hz
             nyquist = sr / 2
             cutoff = 250 / nyquist
-            b, a = signal.butter(2, cutoff, btype='low')
+            b, a = signal.butter(2, cutoff, btype='low')  # type: ignore[assignment]
             
             # Check if audio is long enough
             if len(audio) > 20:
@@ -114,7 +114,7 @@ class OmegaVoiceModifier:
                 bass = signal.lfilter(b, a, audio)
             
             # Mix with original (boost bass)
-            return audio * 0.6 + bass * 0.4
+            return audio * 0.6 + bass * 0.4  # type: ignore[operator, return-value]
         except:
             # Fallback: simple bass boost via FFT
             return audio * 1.1  # Just slightly boost
@@ -127,7 +127,7 @@ class OmegaVoiceModifier:
             # High-pass filter at 2000 Hz
             nyquist = sr / 2
             cutoff = 2000 / nyquist
-            b, a = signal.butter(2, cutoff, btype='high')
+            b, a = signal.butter(2, cutoff, btype='high')  # type: ignore[assignment]
             
             # Check if audio is long enough
             if len(audio) > 20:
@@ -136,7 +136,7 @@ class OmegaVoiceModifier:
                 treble = signal.lfilter(b, a, audio)
             
             # Mix with original (boost treble)
-            return audio * 0.6 + treble * 0.4
+            return audio * 0.6 + treble * 0.4  # type: ignore[operator, return-value]
         except:
             # Fallback: simple treble boost
             return audio * 1.1
@@ -199,7 +199,7 @@ class OmegaVoiceModifier:
             # Low-pass filter to remove harsh frequencies
             nyquist = sr / 2
             cutoff = 3000 / nyquist
-            b, a = signal.butter(4, cutoff, btype='low')
+            b, a = signal.butter(4, cutoff, btype='low')  # type: ignore[assignment, misc]
             
             if len(audio) > 20:
                 smooth = signal.filtfilt(b, a, audio)

@@ -148,7 +148,7 @@ class OmegaVoice:
         start_time = time.time()
         
         try:
-            self.tts.tts_to_file(
+            self.tts.tts_to_file(  # type: ignore[union-attr]
                 text=text,
                 speaker_wav=speaker_file,
                 language='en',

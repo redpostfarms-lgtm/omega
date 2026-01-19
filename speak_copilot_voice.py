@@ -23,9 +23,9 @@ engine = pyttsx3.init()
 
 # Configure voice
 voices = engine.getProperty('voices')
-print(f"{GREEN}Voice: {voices[0].name}{RESET}\n")
+print(f"{GREEN}Voice: {voices[0].name}{RESET}\n")  # type: ignore[index]
 
-engine.setProperty('voice', voices[0].id)
+engine.setProperty('voice', voices[0].id)  # type: ignore[index]
 engine.setProperty('rate', 170)  # Speed
 engine.setProperty('volume', 1.0)  # Volume
 

@@ -78,7 +78,7 @@ try:
     
     # Compress only signals above threshold
     compressed = np.copy(audio_data)
-    compressed[mask] = np.sign(audio_data[mask]) * (
+    compressed[mask] = np.sign(audio_data[mask]) * (  # type: ignore[index]
         threshold_linear + (audio_abs[mask] - threshold_linear) / ratio
     )
     audio_data = compressed
