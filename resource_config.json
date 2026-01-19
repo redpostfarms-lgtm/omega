@@ -1,0 +1,12 @@
+{
+    "last_updated": "2026-01-19T10:17:29.304784",
+    "strategy": {
+        "gpu_target_percent": 60,
+        "cpu_target_percent": 40,
+        "ram_cache_limit_mb": 512,
+        "memory_threshold_percent": 85,
+        "aggressive_cleanup_threshold": 80
+    },
+    "gpu_available": false,
+    "status": "active"
+}

@@ -1,0 +1,112 @@
+{
+    "name": "omega-autopilot",
+    "displayName": "Omega Autopilot",
+    "description": "Auto-loads Omega resource optimizer with brain/memory core and intelligent code completion",
+    "version": "1.0.0",
+    "publisher": "TheGatekeeper",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other",
+        "Machine Learning"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "omega.optimize",
+                "title": "Omega: Run Resource Optimization"
+            },
+            {
+                "command": "omega.status",
+                "title": "Omega: Show System Status"
+            },
+            {
+                "command": "omega.configure",
+                "title": "Omega: Configure GPU/CPU Priority"
+            },
+            {
+                "command": "omega.loadBrain",
+                "title": "Omega: Load Brain & Memory Core"
+            }
+        ],
+        "configuration": {
+            "title": "Omega Autopilot",
+            "properties": {
+                "omega.autoStart": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically start Omega when VS Code opens"
+                },
+                "omega.optimizationInterval": {
+                    "type": "number",
+                    "default": 20,
+                    "description": "Run optimization every N minutes"
+                },
+                "omega.gpuPriority": {
+                    "type": "number",
+                    "default": 60,
+                    "description": "GPU priority percentage (0-100)"
+                },
+                "omega.cpuPriority": {
+                    "type": "number",
+                    "default": 40,
+                    "description": "CPU priority percentage (0-100)"
+                },
+                "omega.ramCacheLimit": {
+                    "type": "number",
+                    "default": 512,
+                    "description": "RAM cache limit in MB"
+                },
+                "omega.memoryThreshold": {
+                    "type": "number",
+                    "default": 85,
+                    "description": "Memory threshold percentage for cleanup"
+                },
+                "omega.pythonPath": {
+                    "type": "string",
+                    "default": "C:\\Users\\Drakalich\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+                    "description": "Path to Python executable"
+                },
+                "omega.optimizerScript": {
+                    "type": "string",
+                    "default": "H:\\The Gatekeeper\\omega_resource_optimizer.py",
+                    "description": "Path to Omega resource optimizer script"
+                },
+                "omega.enableAutocomplete": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable Omega predictive autocomplete"
+                },
+                "omega.showStatusBar": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show resource usage in status bar"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.85.0",
+        "@types/node": "18.x",
+        "@typescript-eslint/eslint-plugin": "^6.13.0",
+        "@typescript-eslint/parser": "^6.13.0",
+        "eslint": "^8.54.0",
+        "typescript": "^5.3.2"
+    },
+    "dependencies": {
+        "systeminformation": "^5.21.20"
+    }
+}

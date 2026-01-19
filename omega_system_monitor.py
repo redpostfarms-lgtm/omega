@@ -5,13 +5,14 @@ Runs every 15-20 minutes and reports to The Gatekeeper
 """
 
 import json
+import shutil
 import subprocess
 import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-import shutil
+from typing import Any, Dict, List, Tuple
+
 import psutil
 
 
@@ -28,7 +29,7 @@ class OmegaSystemMonitor:
         self.dependencies_file = self.base_path / "required_dependencies.json"
 
         # Critical dependencies for The Gatekeeper
-        self.required_dependencies = {
+        self.required_dependencies: Dict[str, List[Any]] = {
             "python_packages": [
                 "openai",
                 "anthropic",
@@ -164,7 +165,7 @@ class OmegaSystemMonitor:
         """Check for Python syntax/import errors in critical files"""
         self.log("🐛 Checking code for errors...")
 
-        errors = {}
+        errors: Dict[str, Dict[str, Any]] = {}
         total_issues = 0
 
         for file_path in self.required_dependencies["critical_paths"]:
@@ -205,7 +206,7 @@ class OmegaSystemMonitor:
 
         try:
             # Check if we're in a Git repository
-            success, output = self.run_command(["git", "rev-parse", "--git-dir"])
+            success, _ = self.run_command(["git", "rev-parse", "--git-dir"])
 
             if not success:
                 return {"status": "NO_REPO", "message": "Not a git repository"}
@@ -213,7 +214,7 @@ class OmegaSystemMonitor:
             # Get status
             success, status_output = self.run_command(["git", "status", "--porcelain"])
 
-            modified_files = []
+            modified_files: List[str] = []
             if success:
                 for line in status_output.strip().split("\n"):
                     if line:
@@ -221,12 +222,12 @@ class OmegaSystemMonitor:
 
             # Get current branch
             success, branch = self.run_command(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-            current_branch = branch.strip() if success else "unknown"
+            current_branch: str = branch.strip() if success else "unknown"
 
             # Get uncommitted changes count
-            uncommitted_count = len(modified_files)
+            uncommitted_count: int = len(modified_files)
 
-            result = {
+            result: Dict[str, Any] = {
                 "status": "OK" if uncommitted_count <= 2 else "TOO_MANY_CHANGES",
                 "current_branch": current_branch,
                 "uncommitted_changes": uncommitted_count,
@@ -285,7 +286,7 @@ class OmegaSystemMonitor:
             cpu_percent = psutil.cpu_percent(interval=1)
             memory = psutil.virtual_memory()
 
-            result = {
+            result: Dict[str, Any] = {
                 "cpu_percent": round(cpu_percent, 2),
                 "ram_total_gb": round(memory.total / (1024**3), 2),
                 "ram_used_gb": round(memory.used / (1024**3), 2),
@@ -311,7 +312,7 @@ class OmegaSystemMonitor:
         """Attempt automatic repairs for detected issues"""
         self.log("🔧 Starting auto-repair...")
 
-        repairs = []
+        repairs: List[Dict[str, Any]] = []
 
         # Install missing Python packages
         if scan_report["python_packages"]["status"] == "ISSUES":
@@ -360,7 +361,7 @@ class OmegaSystemMonitor:
         scan_start = time.time()
 
         # Run all checks
-        report = {
+        report: Dict[str, Any] = {
             "timestamp": datetime.now().isoformat(),
             "scan_duration_seconds": 0,
             "python_packages": self.check_python_packages(),
@@ -490,7 +491,7 @@ class OmegaSystemMonitor:
             dashboard += f"   • Branch: {report['git_status']['current_branch']}\n"
             dashboard += f"   • Uncommitted Changes: {report['git_status']['uncommitted_changes']} (target: ≤2)\n"
             if report["git_status"]["uncommitted_changes"] > 2:
-                dashboard += f"   ⚠️  Too many uncommitted changes!\n"
+                dashboard += "   ⚠️  Too many uncommitted changes!\n"
 
         dashboard += f"""
 💾 DISK SPACE: {report["disk_space"]["status"]}
