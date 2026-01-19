@@ -3,12 +3,11 @@ C: Drive Cleanup & Monitoring System
 Ensures C: drive maintains at least 15GB free space
 """
 
-import os
+import json
 import shutil
 import subprocess
-from pathlib import Path
 from datetime import datetime
-import json
+from pathlib import Path
 
 
 class CDriveManager:
@@ -105,7 +104,7 @@ class CDriveManager:
                         size = item.stat().st_size
                         item.unlink()
                         freed += size
-                    except Exception as e:
+                    except Exception:
                         pass
 
             freed_mb = round(freed / (1024**2), 2)

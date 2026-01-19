@@ -8,7 +8,7 @@ import json
 import shutil
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import List
 
 
 class OmegaDownloadManager:
@@ -164,7 +164,7 @@ class OmegaDownloadManager:
 
         for file in files:
             print(f"\n  {file.name}")
-            if self.move_download(file):
+            if self.move_download(str(file)):
                 moved_count += 1
 
         print(f"\n✅ Imported {moved_count}/{len(files)} files")
