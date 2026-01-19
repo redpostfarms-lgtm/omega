@@ -1,0 +1,144 @@
+╔═══════════════════════════════════════════════════════════════╗
+║     🚀 START HERE - COMPLETE SETUP IN 7 PHASES               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+✅ INSTALLED: Docker Desktop, Ubuntu WSL (downloaded)
+⏳ NEEDED: Enable WSL, Configure, Start Services
+
+─────────────────────────────────────────────────────────────────
+PHASE 1: ENABLE WSL (5 minutes + restart)
+─────────────────────────────────────────────────────────────────
+
+1. Open PowerShell as ADMINISTRATOR
+   Right-click Start → "Terminal (Admin)" or "PowerShell (Admin)"
+
+2. Run this command:
+   wsl --install
+
+3. Wait for installation (2-3 minutes)
+
+4. Restart computer:
+   shutdown /r /t 0
+
+⚠️  SAVE ALL WORK BEFORE RESTARTING!
+
+─────────────────────────────────────────────────────────────────
+PHASE 2: SETUP UBUNTU (After restart - 3 minutes)
+─────────────────────────────────────────────────────────────────
+
+1. Launch Ubuntu
+   Press Windows key → Type "Ubuntu" → Click Ubuntu
+
+2. Create user when prompted:
+   Username: [your-name]
+   Password: [create password]
+
+3. Update Ubuntu:
+   sudo apt update && sudo apt upgrade -y
+   sudo apt install -y git curl wget build-essential
+
+─────────────────────────────────────────────────────────────────
+PHASE 3: START DOCKER DESKTOP (2 minutes)
+─────────────────────────────────────────────────────────────────
+
+1. Launch Docker Desktop
+   Windows key → Type "Docker Desktop" → Click
+
+2. Accept service agreement
+
+3. Wait for GREEN icon in system tray ✅
+
+4. Configure Docker:
+   Settings ⚙️ → General → ✅ Use WSL 2 based engine
+   Settings → Resources → WSL Integration → ✅ Enable Ubuntu
+   Click "Apply & Restart" each time
+
+─────────────────────────────────────────────────────────────────
+PHASE 4: VERIFY (2 minutes)
+─────────────────────────────────────────────────────────────────
+
+In PowerShell:
+  docker --version        (should show Docker version)
+  docker run hello-world  (should say "Hello from Docker!")
+
+In Ubuntu:
+  docker --version        (should work from WSL too)
+
+─────────────────────────────────────────────────────────────────
+PHASE 5: START GATEKEEPER (10-15 min first time)
+─────────────────────────────────────────────────────────────────
+
+In PowerShell:
+  cd "C:\Users\Drakalich\.claude-worktrees\The Gatekeeper\pedantic-kowalevski"
+  .\scripts\utilities\docker-helpers.ps1 dev
+
+Wait for: "✓ Development environment running"
+
+First time downloads ~2GB of images (5-10 min)
+
+─────────────────────────────────────────────────────────────────
+PHASE 6: ACCESS SERVICES (1 minute)
+─────────────────────────────────────────────────────────────────
+
+Open in browser:
+  ✓ http://localhost:8000       → API
+  ✓ http://localhost:8000/docs  → API Documentation
+  ✓ http://localhost:8888       → Jupyter (token: gatekeeper)
+  ✓ http://localhost:3000       → Grafana (admin/gatekeeper)
+  ✓ http://localhost:9090       → Prometheus
+
+─────────────────────────────────────────────────────────────────
+PHASE 7: UPDATE VSCODE (2 minutes)
+─────────────────────────────────────────────────────────────────
+
+1. In VSCode, open settings.json (Ctrl+,)
+
+2. Uncomment these lines (remove //):
+   "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+   "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+
+3. Change these to true:
+   "docker.showExplorer": true,
+   "docker.enableDockerComposeLanguageService": true,
+
+4. Save and reload:
+   Ctrl+Shift+P → "Developer: Reload Window"
+
+5. Container panel should now show running containers ✅
+
+─────────────────────────────────────────────────────────────────
+📊 TIME ESTIMATE: 25-30 minutes total
+─────────────────────────────────────────────────────────────────
+
+Phase 1: WSL Install          5 min  (+ restart)
+Phase 2: Ubuntu Setup          3 min
+Phase 3: Docker Config         2 min
+Phase 4: Verify                2 min
+Phase 5: Build & Start        15 min  (first time only)
+Phase 6: Access Services       1 min
+Phase 7: VSCode Update         2 min
+
+Future startups: ~2 minutes (just start Docker + containers)
+
+─────────────────────────────────────────────────────────────────
+✅ SUCCESS = ALL OF THESE WORK:
+─────────────────────────────────────────────────────────────────
+
+✓ docker --version works
+✓ docker ps shows 5 running containers
+✓ http://localhost:8000/health returns {"status":"healthy"}
+✓ Jupyter Lab opens at http://localhost:8888
+✓ Grafana opens at http://localhost:3000
+✓ VSCode Container panel shows no errors
+
+─────────────────────────────────────────────────────────────────
+🚀 START NOW - PHASE 1:
+─────────────────────────────────────────────────────────────────
+
+1. Open PowerShell as ADMINISTRATOR
+2. Run: wsl --install
+3. Restart computer
+
+📚 Full guide: COMPLETE_STARTUP_GUIDE.md
+
+LET'S GET STARTED! 🎉

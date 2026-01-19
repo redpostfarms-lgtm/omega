@@ -1,0 +1,98 @@
+╔═══════════════════════════════════════════════════════════════╗
+║           DOCKER DESKTOP - QUICK START GUIDE                  ║
+╚═══════════════════════════════════════════════════════════════╝
+
+✅ Docker Desktop is installed!
+
+🚀 NEXT STEPS (Do These Now):
+─────────────────────────────────────────────────────────────────
+
+1. START DOCKER DESKTOP
+   • Press Windows key
+   • Type "Docker Desktop"
+   • Click to launch
+   • Wait for icon in system tray to turn GREEN ✅
+
+2. ACCEPT SERVICE AGREEMENT
+   • Click "Accept" when prompted
+   • Allow admin permissions if asked
+
+3. VERIFY DOCKER IS RUNNING
+   Open PowerShell and run:
+   
+   docker --version
+   
+   Should output: Docker version 27.x.x
+
+4. TEST DOCKER
+   docker run hello-world
+   
+   Should show: "Hello from Docker!"
+
+5. START GATEKEEPER STACK
+   .\scripts\utilities\docker-helpers.ps1 dev
+   
+   Wait 30-60 seconds for services to start
+
+6. ACCESS SERVICES
+   • API:        http://localhost:8000
+   • Jupyter:    http://localhost:8888  (token: gatekeeper)
+   • Grafana:    http://localhost:3000  (admin/gatekeeper)
+   • Prometheus: http://localhost:9090
+
+7. UPDATE VSCODE
+   • Open settings.json
+   • Uncomment Docker lines (see DOCKER_FIRST_RUN.md)
+   • Change docker.showExplorer to true
+   • Reload window (Ctrl+Shift+P → Reload Window)
+
+─────────────────────────────────────────────────────────────────
+⚙️  RECOMMENDED SETTINGS (In Docker Desktop):
+─────────────────────────────────────────────────────────────────
+
+Settings → General:
+  ✅ Use the WSL 2 based engine
+
+Settings → Resources → WSL Integration:
+  ✅ Enable integration with default WSL distro
+  ✅ Enable Ubuntu (if installed)
+
+Settings → Resources → Advanced:
+  CPUs: 4-6
+  Memory: 4-8 GB
+  Swap: 1-2 GB
+
+─────────────────────────────────────────────────────────────────
+🐛 TROUBLESHOOTING:
+─────────────────────────────────────────────────────────────────
+
+Docker won't start?
+  • Update WSL: wsl --update
+  • Restart computer
+  • Check virtualization in BIOS
+
+Icon stays orange/yellow?
+  • Wait 2-3 minutes for first start
+  • Check Docker Desktop logs
+
+Commands not found?
+  • Ensure Docker Desktop is running (green icon)
+  • Restart PowerShell/terminal
+  • Check PATH environment variable
+
+─────────────────────────────────────────────────────────────────
+✅ SUCCESS LOOKS LIKE:
+─────────────────────────────────────────────────────────────────
+
+✓ Green Docker icon in system tray
+✓ docker --version shows version number
+✓ docker ps shows running containers
+✓ Can access http://localhost:8000/health
+✓ Jupyter Lab opens at http://localhost:8888
+✓ VSCode Container panel shows no errors
+
+─────────────────────────────────────────────────────────────────
+
+📚 Full guide: DOCKER_FIRST_RUN.md
+
+START DOCKER DESKTOP NOW! 🚀
