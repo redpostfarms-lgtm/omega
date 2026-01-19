@@ -1,9 +1,0 @@
-{
-  "target": "https://httpbin.org/get",
-  "severity": "medium",
-  "payload": "uesA",
-  "response": "{\n  \"args\": {\n    \"q\": \"uesA\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Python/3.13 aiohttp/3.13.3\", \n    \"X-Amzn-Trace-Id\": \"Root=1-695f649e-12d6e9ea6b0473817242d7fa\"\n  }, \n  \"origin\": \"76.130.232.74\", \n  \"url\": \"https://httpbin.org/get?q=uesA\"\n}\n",
-  "report_text": "Title: XSS in https://httpbin.org/get\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://httpbin.org/get\n\nSteps to Reproduce:\n\n1. Navigate to https://httpbin.org/get\n\n2. Submit payload: uesA...\n\n3. Observe vulnerability\n\n\nProof of Concept:\nuesA\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
-  "timestamp": "2026-01-08T01:02:38.997229"
-}97246"
-}

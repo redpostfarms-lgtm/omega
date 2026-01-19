@@ -1,8 +1,0 @@
-{
-  "target": "https://httpbin.org/get",
-  "severity": "medium",
-  "payload": "=e5t",
-  "response": "{\n  \"args\": {\n    \"q\": \"=e5t\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Python/3.13 aiohttp/3.13.3\", \n    \"X-Amzn-Trace-Id\": \"Root=1-695f2ec5-6632ea6252b17c8318622c54\"\n  }, \n  \"origin\": \"76.130.232.74\", \n  \"url\": \"https://httpbin.org/get?q=%3De5t\"\n}\n",
-  "report_text": "Title: XSS in https://httpbin.org/get\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://httpbin.org/get\n\nSteps to Reproduce:\n\n1. Navigate to https://httpbin.org/get\n\n2. Submit payload: =e5t...\n\n3. Observe vulnerability\n\n\nProof of Concept:\n=e5t\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
-  "timestamp": "2026-01-07T21:12:53.571545"
-}

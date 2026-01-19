@@ -1,8 +1,0 @@
-{
-  "target": "https://httpbin.org/get",
-  "severity": "medium",
-  "payload": "=es3",
-  "response": "{\n  \"args\": {\n    \"q\": \"=es3\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\": \"gzip, deflate\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Python/3.13 aiohttp/3.13.3\", \n    \"X-Amzn-Trace-Id\": \"Root=1-695f3471-3e328ae74a394f3c16c26ad5\"\n  }, \n  \"origin\": \"76.130.232.74\", \n  \"url\": \"https://httpbin.org/get?q=%3Des3\"\n}\n",
-  "report_text": "Title: XSS in https://httpbin.org/get\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://httpbin.org/get\n\nSteps to Reproduce:\n\n1. Navigate to https://httpbin.org/get\n\n2. Submit payload: =es3...\n\n3. Observe vulnerability\n\n\nProof of Concept:\n=es3\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
-  "timestamp": "2026-01-07T21:37:05.976261"
-}

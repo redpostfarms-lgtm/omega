@@ -1,8 +1,0 @@
-{
-  "target": "https://httpbin.org/get",
-  "severity": "medium",
-  "payload": "t%B0",
-  "response": "<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503 Service Temporarily Unavailable</h1></center>\r\n</body>\r\n</html>\r\n",
-  "report_text": "Title: XSS in https://httpbin.org/get\n\nSeverity: medium\nCVSS: 5.0\n\nDescription:\nVulnerability found in https://httpbin.org/get\n\nSteps to Reproduce:\n\n1. Navigate to https://httpbin.org/get\n\n2. Submit payload: t%B0...\n\n3. Observe vulnerability\n\n\nProof of Concept:\nt%B0\n\nImpact:\nUser data exposure / System compromise\n\nSuggested Fix:\nInput validation and sanitization\n\nBounty: $500",
-  "timestamp": "2026-01-07T23:48:26.978519"
-}

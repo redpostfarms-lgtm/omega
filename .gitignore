@@ -172,3 +172,8 @@ extracted_files*/
 models/
 checkpoints/
 datasets/
+
+# Omega Swarm generated data
+omega_swarm/**/*.json
+omega_swarm/omega-swarm/**/*.json
+omega_swarm/report_*.json
