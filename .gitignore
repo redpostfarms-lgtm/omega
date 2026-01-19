@@ -127,3 +127,32 @@ node_modules/
 *.lib
 *.dll
 *.exe
+
+# Organized Files (large archived directories)
+Organized_Files/
+
+# External projects and dependencies
+llama.cpp/
+extracted_files*/
+*_backup/
+
+# Audio and video files (if not needed in git)
+*.mp3
+*.mp4
+*.wav
+*.avi
+*.mov
+*.flac
+
+# Model files (too large for git)
+*.gguf
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# Large data directories
+models/
+checkpoints/
+datasets/
