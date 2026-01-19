@@ -1,0 +1,44 @@
+========================================
+PHASE 4: CONFIGURE DOCKER FOR WSL
+========================================
+
+Docker Desktop is now running, but needs to be configured to use WSL 2.
+
+MANUAL STEPS (Must be done in Docker Desktop GUI):
+
+1. OPEN DOCKER DESKTOP
+   - Click the Docker icon in your system tray
+   - Or search for "Docker Desktop" in Start Menu
+
+2. OPEN SETTINGS
+   - Click the ⚙️ Settings icon (gear icon, top-right)
+
+3. ENABLE WSL 2 ENGINE
+   - Click "General" in the left sidebar
+   - Find "Use the WSL 2 based engine"
+   - ✅ CHECK this box
+   - Click "Apply & Restart"
+   - Wait for Docker to restart (30 seconds)
+
+4. ENABLE WSL INTEGRATION
+   - After Docker restarts, go back to Settings
+   - Click "Resources" in the left sidebar
+   - Click "WSL Integration"
+   - ✅ CHECK "Enable integration with my default WSL distro"
+   - ✅ CHECK "Ubuntu-24.04" (or your Ubuntu version)
+   - Click "Apply & Restart"
+   - Wait for Docker to restart again (30 seconds)
+
+5. VERIFY GREEN ICON
+   - Look for GREEN Docker icon in system tray
+   - This means Docker is fully running
+
+========================================
+AFTER CONFIGURATION IS COMPLETE
+========================================
+
+Run: PHASE-5-VERIFY.bat
+
+This will verify everything is working correctly.
+
+========================================
