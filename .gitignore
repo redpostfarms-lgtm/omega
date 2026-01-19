@@ -180,3 +180,35 @@ datasets/
 omega_swarm/**/*.json
 omega_swarm/omega-swarm/**/*.json
 omega_swarm/report_*.json
+
+# ═══════════════════════════════════════════════════════════════
+# Organized Project Structure Ignores
+# ═══════════════════════════════════════════════════════════════
+
+# Data directories (prevent large file commits)
+data/raw/*.csv
+data/raw/*.parquet
+data/raw/*.json
+data/raw/*.xlsx
+data/processed/*.csv
+data/processed/*.parquet
+data/cache/**/*
+*.pkl
+*.pickle
+
+# Reports (generated files - don't commit visualizations)
+reports/visualizations/*.png
+reports/visualizations/*.pdf
+reports/visualizations/*.html
+reports/visualizations/*.svg
+reports/metrics/*.csv
+reports/metrics/*.json
+reports/logs/*.log
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/cache/.gitkeep
+!reports/visualizations/.gitkeep
+!reports/metrics/.gitkeep
+!reports/logs/.gitkeep

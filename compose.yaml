@@ -1,6 +1,179 @@
+# ═══════════════════════════════════════════════════════════════
+# The Gatekeeper - Docker Compose Configuration
+# ═══════════════════════════════════════════════════════════════
+
+version: '3.8'
+
 services:
-  thegatekeeper:
-    image: thegatekeeper
+  # ──────────────────────────────────────────────────────────────
+  # Main Gatekeeper Application
+  # ──────────────────────────────────────────────────────────────
+  gatekeeper:
+    image: gatekeeper:latest
+    container_name: gatekeeper-app
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.python
+      args:
+        - PYTHON_VERSION=3.11
+    ports:
+      - "8000:8000"      # API server
+      - "8080:8080"      # Web interface
+    environment:
+      - OMEGA_ENV=production
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+      - PROMETHEUS_ENABLED=true
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config:/app/config:ro
+      - gatekeeper-models:/app/models
+    depends_on:
+      - redis
+      - prometheus
+    networks:
+      - gatekeeper-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ──────────────────────────────────────────────────────────────
+  # Redis Cache
+  # ──────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: gatekeeper-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - gatekeeper-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  # ──────────────────────────────────────────────────────────────
+  # Prometheus Metrics
+  # ──────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: gatekeeper-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - gatekeeper-network
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+  # ──────────────────────────────────────────────────────────────
+  # Grafana Dashboards
+  # ──────────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    container_name: gatekeeper-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=gatekeeper
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - prometheus
+    networks:
+      - gatekeeper-network
+    restart: unless-stopped
+
+  # ──────────────────────────────────────────────────────────────
+  # Jupyter Lab (Development)
+  # ──────────────────────────────────────────────────────────────
+  jupyter:
+    image: gatekeeper:latest
+    container_name: gatekeeper-jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=gatekeeper
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./data:/app/data
+      - ./reports:/app/reports
+    networks:
+      - gatekeeper-network
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    restart: unless-stopped
+    profiles:
+      - development
+
+  # ──────────────────────────────────────────────────────────────
+  # PostgreSQL Database (Optional)
+  # ──────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: gatekeeper-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=gatekeeper
+      - POSTGRES_USER=gatekeeper
+      - POSTGRES_PASSWORD=gatekeeper_secure_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - gatekeeper-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gatekeeper"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - database
+
+# ──────────────────────────────────────────────────────────────
+# Volumes
+# ──────────────────────────────────────────────────────────────
+volumes:
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  postgres-data:
+    driver: local
+  gatekeeper-models:
+    driver: local
+
+# ──────────────────────────────────────────────────────────────
+# Networks
+# ──────────────────────────────────────────────────────────────
+networks:
+  gatekeeper-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

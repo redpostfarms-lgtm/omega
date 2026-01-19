@@ -1,0 +1,72 @@
+# ═══════════════════════════════════════════════════════════════
+# Azure Container Apps Deployment Configuration
+# ═══════════════════════════════════════════════════════════════
+
+properties:
+  environmentId: /subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.App/managedEnvironments/{environment-name}
+  configuration:
+    activeRevisionsMode: Single
+    ingress:
+      external: true
+      targetPort: 8000
+      transport: auto
+      traffic:
+        - weight: 100
+          latestRevision: true
+      allowInsecure: false
+    registries:
+      - server: {your-registry}.azurecr.io
+        username: {registry-username}
+        passwordSecretRef: registry-password
+    secrets:
+      - name: registry-password
+        value: {registry-password}
+      - name: redis-password
+        value: {redis-password}
+    dapr:
+      enabled: false
+  template:
+    containers:
+      - name: gatekeeper
+        image: {your-registry}.azurecr.io/gatekeeper:latest
+        resources:
+          cpu: 1.0
+          memory: 2Gi
+        env:
+          - name: OMEGA_ENV
+            value: "production"
+          - name: LOG_LEVEL
+            value: "INFO"
+          - name: REDIS_HOST
+            value: "{redis-host}"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: REDIS_PASSWORD
+            secretRef: redis-password
+        probes:
+          - type: Liveness
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          - type: Readiness
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+    scale:
+      minReplicas: 1
+      maxReplicas: 10
+      rules:
+        - name: http-scale
+          http:
+            metadata:
+              concurrentRequests: "50"
+        - name: cpu-scale
+          custom:
+            type: cpu
+            metadata:
+              type: Utilization
+              value: "70"

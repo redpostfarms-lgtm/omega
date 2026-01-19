@@ -1,0 +1,71 @@
+# ═══════════════════════════════════════════════════════════════
+# Prometheus Configuration for The Gatekeeper
+# ═══════════════════════════════════════════════════════════════
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'gatekeeper-monitor'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  # - "alert_rules.yml"
+  # - "recording_rules.yml"
+
+# Scrape configurations
+scrape_configs:
+  # ──────────────────────────────────────────────────────────────
+  # Prometheus self-monitoring
+  # ──────────────────────────────────────────────────────────────
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # ──────────────────────────────────────────────────────────────
+  # Gatekeeper Application Metrics
+  # ──────────────────────────────────────────────────────────────
+  - job_name: 'gatekeeper'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['gatekeeper:8000']
+        labels:
+          service: 'gatekeeper-api'
+          environment: 'production'
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # ──────────────────────────────────────────────────────────────
+  # Redis Metrics (with redis_exporter)
+  # ──────────────────────────────────────────────────────────────
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+        labels:
+          service: 'redis-cache'
+
+  # ──────────────────────────────────────────────────────────────
+  # Node Exporter (if running)
+  # ──────────────────────────────────────────────────────────────
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'node-exporter'
+
+  # ──────────────────────────────────────────────────────────────
+  # Container Metrics (cAdvisor if running)
+  # ──────────────────────────────────────────────────────────────
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'container-metrics'
