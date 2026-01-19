@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+
+# Virtual environments
+.venv/
+.venv*/
+venv/
+venv*/
+ENV/
+env/
+
+# Logs
+*.log
+*.log.*
+
+# Environment variables
+.env
+.env.local
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Executables
+*.exe
+ngrok.exe
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Large dependencies
+Organized_Files/Desktop_Folders/R&D/llama.cpp/
+
+# Node
+node_modules

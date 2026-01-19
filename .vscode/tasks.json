@@ -1,0 +1,96 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Launch Omega Web UI",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "omega_control_panel_web.py",
+                "--port",
+                "5000"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": false
+            },
+            "isBackground": true,
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "Open Web UI in Browser",
+            "type": "shell",
+            "command": "start",
+            "args": [
+                "http://localhost:5000"
+            ],
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/c",
+                    "start",
+                    "http://localhost:5000"
+                ]
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "🎤 Voice Input Helper",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoExit",
+                "-Command",
+                "Write-Host '🔴 OMEGA VOICE HELPER' -ForegroundColor Red; Write-Host 'Speak and type your command:' -ForegroundColor Green; $voice = Read-Host 'Voice'; Set-Clipboard -Value $voice; Write-Host '✓ Copied! Paste in VS Code (Ctrl+V)' -ForegroundColor Cyan"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true
+            }
+        },
+        {
+            "label": "📸 Screenshot Tool",
+            "type": "shell",
+            "command": "SnippingTool.exe",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "📝 New Voice Note",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "$t=Get-Date -Format 'yyyyMMdd_HHmmss'; $f=\"voice-$t.md\"; \"# Voice Note`n`n**Time**: $(Get-Date)`n`n\" | Out-File $f; code $f"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "📸 New Screenshot Note",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "$t=Get-Date -Format 'yyyyMMdd_HHmmss'; $f=\"screenshot-$t.md\"; \"# Screenshot`n`n**Time**: $(Get-Date)`n`n![](screenshot-$t.png)`n`n**Notes**:`n`n\" | Out-File $f; code $f; Start-Sleep 1; SnippingTool.exe"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent"
+            }
+        }
+    ]
+}

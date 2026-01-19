@@ -1,0 +1,36 @@
+{
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.autofetchPeriod": 180,
+    "github.gitAuthentication": true,
+    "git.credentialHelper": "manager-core",
+    "git.terminalAuthentication": false,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv311/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/node_modules": true
+    },
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/typings"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/node_modules/**": true,
+        "**/.git/**": true
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "warning",
+        "reportMissingModuleSource": "none"
+    },
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false
+}
