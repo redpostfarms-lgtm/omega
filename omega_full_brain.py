@@ -1,70 +1,18 @@
+# omega_full_brain.py — Omega with Voice Cloning + Emotion Recognition (2026)
 from TTS.api import TTS
 import sounddevice as sd
 import numpy as np
 import scipy.io.wavfile as wavfile
 import speech_recognition as sr
 import os
-import torch
-import asyncio
-import signal
-import sys
-import subprocess
-from pathlib import Path
-from rate_limiter import GOOGLE_SPEECH_LIMITER
+from speechbrain.pretrained import EmotionRecognition
 
-try:
-    original_load = torch.load
-    def patched_load(*args, **kwargs):
-        if 'weights_only' not in kwargs:
-            kwargs['weights_only'] = False
-        return original_load(*args, **kwargs)
-    torch.load = patched_load
-except Exception:
-    pass
-
-tts = None
-def get_tts():
-    """Get TTS instance, loading if needed."""
-    global tts
-    if tts is None:
-        print("Loading TTS model (first time will download ~2GB, please wait)...")
-        import os
-        os.environ['TTS_ACCEPT_TO_S'] = '1'
-        
-        try:
-            if torch.load != patched_load:
-                original_load = torch.load
-                def patched_load(*args, **kwargs):
-                    if 'weights_only' not in kwargs:
-                        kwargs['weights_only'] = False
-                    return original_load(*args, **kwargs)
-                torch.load = patched_load
-        except Exception:
-            pass
-        
-        try:
-            tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
-            print("[OK] TTS model loaded successfully")
-        except Exception as e:
-            print(f"[ERROR] Failed to load TTS model: {e}")
-            if 'torchcodec' in str(e).lower() or 'libtorchcodec' in str(e).lower():
-                print("[INFO] This is a PyTorch 2.6+ compatibility issue.")
-                print("      Try: py -3.11 -m pip install 'torch<2.6.0'")
-            raise
-    return tts
-
-emotion_classifier = None
-try:
-    from speechbrain.pretrained import EmotionRecognition
-    emotion_classifier = EmotionRecognition.from_hparams(
-        source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-        savedir="pretrained_emotion"
-    )
-    print("[OK] Emotion detection enabled")
-except Exception as e:
-    print(f"[WARNING] Emotion detection unavailable: {e}")
-    print("   Continuing without emotion detection...")
-    emotion_classifier = None  # Make sure it's set to None if failed
+# Load models (first run downloads ~2 GB total)
+tts = TTS('xtts_v2').to('cuda' if torch.cuda.is_available() else 'cpu')
+emotion_classifier = EmotionRecognition.from_hparams(
+    source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+    savedir="pretrained_emotion"
+)
 
 def record_audio(duration=5, fs=16000):
     print("Listening...")
@@ -75,184 +23,50 @@ def record_audio(duration=5, fs=16000):
     return temp_wav
 
 def detect_emotion(wav_file):
-    """Detect emotion from audio file with error handling."""
-    if emotion_classifier is None:
-        return 'neutral'
-    try:
-        prediction = emotion_classifier.classify_file(wav_file)
-        return prediction[2].lower() if len(prediction) > 2 else 'neutral'
-    except Exception as e:
-        print(f"Emotion detection error: {e}")
-        return 'neutral'
-
-def play_audio_background(wav_file):
-    """Play audio file in background without showing media player window."""
-    if not Path(wav_file).exists():
-        print(f"Audio file not found: {wav_file}")
-        return
-    
-    try:
-        if sys.platform == 'win32':
-            abs_path = str(Path(wav_file).absolute()).replace('\\', '/').replace("'", "''")
-            ps_cmd = '''
-            Add-Type -AssemblyName presentationCore
-            $mediaPlayer = New-Object system.windows.media.mediaplayer
-            $mediaPlayer.open([uri]::new('file:///{0}'))
-            $mediaPlayer.Volume = 1.0
-            $mediaPlayer.Play()
-            $timeout = (Get-Date).AddMinutes(5)
-            while ($mediaPlayer.Position -lt $mediaPlayer.NaturalDuration.TimeSpan -and (Get-Date) -lt $timeout) {{
-                Start-Sleep -Milliseconds 100
-            }}
-            '''.format(abs_path)
-            subprocess.Popen(
-                ['powershell', '-WindowStyle', 'Hidden', '-Command', ps_cmd],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else subprocess.DETACHED_PROCESS
-            )
-        else:
-            import shlex
-            safe_wav_file = shlex.quote(str(Path(wav_file).absolute()))
-            if os.system('which ffplay > /dev/null 2>&1') == 0:
-                os.system(f'ffplay -nodisp -autoexit {safe_wav_file} &')
-            else:
-                os.system(f'play {safe_wav_file} &')
-    except Exception as e:
-        print(f"Background audio playback error: {e}")
-        try:
-            cmd_str = f'start /min "" "{wav_file}"'
-            subprocess.Popen(cmd_str, shell=True, creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0)
-        except Exception:
-            pass
+    prediction = emotion_classifier.classify_file(wav_file)
+    return prediction[2].lower()  # 'angry', 'happy', 'sad', 'neutral'
 
 def omega_speak(text, emotion="neutral"):
-    """Speak text with emotion-aware tone, using voice clone, non-blocking background playback."""
-    clip_path = Path('clip_0001.wav')
-    speaker_wav = str(clip_path) if clip_path.exists() else None
-    
-    if speaker_wav:
-        print(f"[Using voice clone: {clip_path.name} for improved quality]")
+    # Emotion-aware tone
+    if emotion == "happy":
+        text = f"😊 {text} Great news!"
+    elif emotion == "angry":
+        text = f"🔥 {text} Calm down, Wiley."
+    elif emotion == "sad":
+        text = f"😔 {text} I'm here."
     else:
-        print("[WARNING] clip_0001.wav not found - using default voice")
+        text = f"🧠 {text}"
     
-    emotion_prefix = {"happy": "[Happy] ", "angry": "[Angry] ", "sad": "[Sad] ", "neutral": ""}.get(emotion, "")
-    text_with_emotion = emotion_prefix + text
-    
-    try:
-        print(f"Generating speech: {text_with_emotion[:50]}...")
-        tts_instance = get_tts()
-        tts_instance.tts_to_file(
-            text=text_with_emotion,
-            speaker_wav=speaker_wav,  # Always use voice clone if available
-            language='en',
-            file_path='response.wav'
-        )
-        
-        file_size = Path('response.wav').stat().st_size if Path('response.wav').exists() else 0
-        print(f"[OK] Audio generated: response.wav ({file_size} bytes)")
-        
-        print("[Playing audio in background - no window will appear]")
-        play_audio_background('response.wav')
-    except Exception as e:
-        print(f"TTS error: {e}")
-        import traceback
-        traceback.print_exc()
+    tts.tts_to_file(
+        text=text,
+        speaker_wav='clip_0001.wav',
+        language='en',
+        file_path='response.wav'
+    )
+    os.system('start response.wav')
 
-async def recognize_speech_async(wav_file):
-    """Async speech recognition with rate limiting."""
-    GOOGLE_SPEECH_LIMITER.wait_if_needed("google_speech")
-    
-    if not GOOGLE_SPEECH_LIMITER.allow("google_speech"):
-        wait_time = GOOGLE_SPEECH_LIMITER.wait_time("google_speech")
-        await asyncio.sleep(wait_time)
-    
-    loop = asyncio.get_event_loop()
-    r = sr.Recognizer()
-    
+print("OMEGA FULL BRAIN — VOICE + EMOTION — ALWAYS LISTENING")
+while True:
+    wav = record_audio()
     try:
-        with sr.AudioFile(wav_file) as source:
+        # Speech recognition
+        r = sr.Recognizer()
+        with sr.AudioFile(wav) as source:
             audio = r.record(source)
+        said = r.recognize_google(audio)
+        print(f"Wiley: {said}")
         
-        said = await loop.run_in_executor(
-            None,
-            lambda: r.recognize_google(audio)
-        )
+        # Emotion detection
+        emotion = detect_emotion(wav)
+        print(f"Emotion detected: {emotion.upper()}")
         
-        GOOGLE_SPEECH_LIMITER.record_success("google_speech")
-        return said
-    except sr.UnknownValueError:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
-        raise ValueError("Could not understand audio")
-    except sr.RequestError as e:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
-        raise ConnectionError(f"API error: {e}")
+        # Reply with emotion-aware tone
+        reply = f"Gate says: {said}. I feel your {emotion}."
+        omega_speak(reply, emotion)
+        
     except Exception as e:
-        GOOGLE_SPEECH_LIMITER.record_failure("google_speech")
-        raise
-
-
-async def process_audio_async():
-    """Process audio input asynchronously."""
-    running = True
-    
-    def signal_handler(sig, frame):
-        nonlocal running
-        print("\nShutting down gracefully...")
-        running = False
-    
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-    
-    print("OMEGA FULL BRAIN — VOICE + EMOTION — ALWAYS LISTENING")
-    print("Press Ctrl+C to exit")
-    
-    while running:
-        try:
-            loop = asyncio.get_event_loop()
-            wav = await loop.run_in_executor(None, record_audio)
-            
-            try:
-                said = await recognize_speech_async(wav)
-                print(f"Wiley: {said}")
-                
-                emotion = await loop.run_in_executor(None, detect_emotion, wav)
-                print(f"Emotion detected: {emotion.upper()}")
-                
-                reply = f"Gate says: {said}. I feel your {emotion}."
-                await loop.run_in_executor(None, omega_speak, reply, emotion)
-                
-            except ValueError as e:
-                print(f"Recognition error: {e}")
-                loop = asyncio.get_event_loop()
-                await loop.run_in_executor(None, omega_speak, "Couldn't catch that. Speak again.", "neutral")
-            except ConnectionError as e:
-                print(f"API error: {e}")
-                loop = asyncio.get_event_loop()
-                await loop.run_in_executor(None, omega_speak, "API unavailable. Trying again.", "neutral")
-                await asyncio.sleep(2)
-            except Exception as e:
-                print(f"Error: {e}")
-                loop = asyncio.get_event_loop()
-                await loop.run_in_executor(None, omega_speak, "Error occurred. Speak again.", "neutral")
-            finally:
-                if os.path.exists(wav):
-                    try:
-                        os.remove(wav)
-                    except Exception as e:
-                        print(f"Cleanup error: {e}")
-            
-            await asyncio.sleep(0.1)
-            
-        except KeyboardInterrupt:
-            running = False
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-            await asyncio.sleep(1)
-
-
-if __name__ == "__main__":
-    try:
-        asyncio.run(process_audio_async())
-    except KeyboardInterrupt:
-        print("\nShutdown complete.")
+        print(f"Error: {e}")
+        omega_speak("Couldn't catch that. Speak again.")
+    finally:
+        if os.path.exists(wav):
+            os.remove(wav)

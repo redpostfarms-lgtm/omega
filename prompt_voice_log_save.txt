@@ -1,1 +1,0 @@
-After every command, save my spoken line + your reply to Archived/voice_log/YYYY-MM-DD.txt. Format: [10:11 PM] Me: 'time?' You: 'Ten eleven.' No extra text.
