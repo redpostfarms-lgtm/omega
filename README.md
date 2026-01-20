@@ -1,6 +1,24 @@
 # Omega System - Voice AI Assistant
 
-## Quick Start
+## 🌅 **START HERE EVERY MORNING**
+
+### Morning Initialization (NEW!)
+Before starting work each day, run:
+```batch
+MORNING_INIT.bat
+```
+
+This will:
+- ✅ Authenticate all services (Git, GitHub, Docker, Hugging Face)
+- ✅ Initialize system components (Resource Manager, Voice Security)
+- ✅ Check GPU and system health
+- ✅ Generate status report
+
+**See [START_HERE_EVERY_MORNING.md](START_HERE_EVERY_MORNING.md) for details.**
+
+---
+
+## Quick Start (First Time Setup)
 
 ### 1. Install Python 3.11
 Download from: https://www.python.org/downloads/release/python-31111/

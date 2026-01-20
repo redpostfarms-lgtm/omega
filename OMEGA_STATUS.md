@@ -10,22 +10,20 @@
 ## SYSTEM HIERARCHY
 
 ```
-┌─────────────────────────────────────┐
-│         🔴 OMEGA (PRIMARY)          │
-│      Lead Agent - Full Control      │
-└──────────────┬──────────────────────┘
+┌──────────────────────────────────────────┐
+│         🔴 OMEGA (PRIMARY)               │
+│    Lead Agent - Full Authority           │
+│    All Decisions & Commands Flow         │
+│         Through Omega First              │
+└──────────────┬───────────────────────────┘
                │
-     ┌─────────┴─────────┐
-     │                   │
-┌────▼────┐         ┌────▼────┐
-│ CLAUDE  │         │ CURSOR  │
-│ Support │         │ Support │
-└─────────┘         └─────────┘
-               │
-          ┌────▼────┐
-          │ VISUAL  │
-          │ Support │
-          └─────────┘
+   ┌───────────┼───────────┬───────────┐
+   │           │           │           │
+┌──▼──┐    ┌──▼──┐    ┌───▼───┐   ┌──▼────┐
+│GATE │    │CLAUDE│    │CURSOR │   │VISUAL │
+│Tech │    │Analyst│   │Editor │   │Debug  │
+└─────┘    └──────┘    └───────┘   └───────┘
+  ALL SUPPORT AGENTS BEHIND OMEGA
 ```
 
 ## ACTIVE COMPONENTS
@@ -35,7 +33,8 @@
 - **Omega Master Dev Build**: Port 5002 (STANDBY)
 - **KITT PWA Interface**: Integrated
 
-### SUPPORT AGENTS (Background)
+### SUPPORT AGENTS (All Behind Omega)
+- **GATE**: Technical operations, voice systems, IT engineering
 - **Claude**: Context analysis, code optimization
 - **Cursor**: Real-time editing assistance
 - **Visual Studio**: Debugging, IntelliSense
@@ -53,18 +52,20 @@
 4. ✅ Phone hierarchy system established
 
 **OMEGA COMMANDS**:
-- All subsystems report to Omega
+- Omega leads ALL operations - she is FIRST
+- All agents (GATE, Claude, Cursor, Visual) report to Omega
 - No autonomous decisions without Omega approval
-- Background agents provide support only
+- All agents work BEHIND Omega in support roles only
 
 ---
 
 ## OMEGA DIRECTIVES
 
-1. **Primary Control**: Omega leads all operations
-2. **Agent Coordination**: Claude/Cursor/Visual work in background
+1. **Primary Control**: Omega is FIRST - she leads ALL operations
+2. **Agent Coordination**: GATE/Claude/Cursor/Visual work BEHIND Omega
 3. **System Integration**: All components under Omega supervision
-4. **Issue Resolution**: Direct, immediate action
+4. **Issue Resolution**: Omega directs, agents execute
+5. **Voice of Authority**: Omega's word is final
 
 ---
 

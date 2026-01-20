@@ -1,0 +1,405 @@
+Audio Files Found: 100
+Scan Date: 2026-01-20 10:54:41.041995
+Total Size: 0.03 GB
+======================================================================
+
+1. clip_0001.mp4
+   Path: H:\The Gatekeeper\clip_0001.mp4
+   Size: 0.78 MB
+
+2. clip_0001.wav
+   Path: H:\The Gatekeeper\clip_0001.wav
+   Size: 4.58 MB
+
+3. gate_kitt_voice.wav
+   Path: H:\The Gatekeeper\gate_kitt_voice.wav
+   Size: 9.09 MB
+
+4. gate_speech_1.wav
+   Path: H:\The Gatekeeper\gate_speech_1.wav
+   Size: 0.27 MB
+
+5. gate_speech_2.wav
+   Path: H:\The Gatekeeper\gate_speech_2.wav
+   Size: 0.17 MB
+
+6. gate_speech_output.wav
+   Path: H:\The Gatekeeper\gate_speech_output.wav
+   Size: 0.39 MB
+
+7. gate_test.wav
+   Path: H:\The Gatekeeper\gate_test.wav
+   Size: 0.18 MB
+
+8. gate_test_improved.wav
+   Path: H:\The Gatekeeper\gate_test_improved.wav
+   Size: 0.46 MB
+
+9. kitt_voice_1.wav
+   Path: H:\The Gatekeeper\kitt_voice_1.wav
+   Size: 1.60 MB
+
+10. kitt_voice_1_sample.wav
+   Path: H:\The Gatekeeper\kitt_voice_1_sample.wav
+   Size: 0.50 MB
+
+11. kitt_voice_2.wav
+   Path: H:\The Gatekeeper\kitt_voice_2.wav
+   Size: 1.60 MB
+
+12. kitt_voice_2_sample.wav
+   Path: H:\The Gatekeeper\kitt_voice_2_sample.wav
+   Size: 0.50 MB
+
+13. kitt_voice_segment_1.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_1.wav
+   Size: 0.03 MB
+
+14. kitt_voice_segment_10.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_10.wav
+   Size: 0.10 MB
+
+15. kitt_voice_segment_100.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_100.wav
+   Size: 0.02 MB
+
+16. kitt_voice_segment_101.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_101.wav
+   Size: 0.07 MB
+
+17. kitt_voice_segment_102.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_102.wav
+   Size: 0.08 MB
+
+18. kitt_voice_segment_103.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_103.wav
+   Size: 0.03 MB
+
+19. kitt_voice_segment_104.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_104.wav
+   Size: 0.02 MB
+
+20. kitt_voice_segment_105.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_105.wav
+   Size: 0.02 MB
+
+21. kitt_voice_segment_106.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_106.wav
+   Size: 0.02 MB
+
+22. kitt_voice_segment_107.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_107.wav
+   Size: 0.02 MB
+
+23. kitt_voice_segment_11.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_11.wav
+   Size: 0.12 MB
+
+24. kitt_voice_segment_12.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_12.wav
+   Size: 0.15 MB
+
+25. kitt_voice_segment_13.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_13.wav
+   Size: 0.10 MB
+
+26. kitt_voice_segment_14.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_14.wav
+   Size: 0.66 MB
+
+27. kitt_voice_segment_15.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_15.wav
+   Size: 0.10 MB
+
+28. kitt_voice_segment_16.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_16.wav
+   Size: 0.32 MB
+
+29. kitt_voice_segment_17.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_17.wav
+   Size: 0.02 MB
+
+30. kitt_voice_segment_18.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_18.wav
+   Size: 0.02 MB
+
+31. kitt_voice_segment_19.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_19.wav
+   Size: 0.20 MB
+
+32. kitt_voice_segment_2.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_2.wav
+   Size: 0.07 MB
+
+33. kitt_voice_segment_20.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_20.wav
+   Size: 0.03 MB
+
+34. kitt_voice_segment_21.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_21.wav
+   Size: 0.03 MB
+
+35. kitt_voice_segment_22.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_22.wav
+   Size: 0.03 MB
+
+36. kitt_voice_segment_23.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_23.wav
+   Size: 0.03 MB
+
+37. kitt_voice_segment_24.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_24.wav
+   Size: 0.03 MB
+
+38. kitt_voice_segment_25.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_25.wav
+   Size: 0.02 MB
+
+39. kitt_voice_segment_26.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_26.wav
+   Size: 0.02 MB
+
+40. kitt_voice_segment_27.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_27.wav
+   Size: 0.05 MB
+
+41. kitt_voice_segment_28.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_28.wav
+   Size: 0.03 MB
+
+42. kitt_voice_segment_29.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_29.wav
+   Size: 0.02 MB
+
+43. kitt_voice_segment_3.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_3.wav
+   Size: 0.03 MB
+
+44. kitt_voice_segment_30.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_30.wav
+   Size: 0.08 MB
+
+45. kitt_voice_segment_31.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_31.wav
+   Size: 0.02 MB
+
+46. kitt_voice_segment_32.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_32.wav
+   Size: 0.02 MB
+
+47. kitt_voice_segment_33.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_33.wav
+   Size: 0.10 MB
+
+48. kitt_voice_segment_34.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_34.wav
+   Size: 0.27 MB
+
+49. kitt_voice_segment_35.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_35.wav
+   Size: 0.10 MB
+
+50. kitt_voice_segment_36.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_36.wav
+   Size: 0.19 MB
+
+51. kitt_voice_segment_37.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_37.wav
+   Size: 0.10 MB
+
+52. kitt_voice_segment_38.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_38.wav
+   Size: 0.13 MB
+
+53. kitt_voice_segment_39.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_39.wav
+   Size: 0.12 MB
+
+54. kitt_voice_segment_4.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_4.wav
+   Size: 0.03 MB
+
+55. kitt_voice_segment_40.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_40.wav
+   Size: 0.05 MB
+
+56. kitt_voice_segment_41.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_41.wav
+   Size: 0.08 MB
+
+57. kitt_voice_segment_42.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_42.wav
+   Size: 0.02 MB
+
+58. kitt_voice_segment_43.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_43.wav
+   Size: 0.03 MB
+
+59. kitt_voice_segment_44.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_44.wav
+   Size: 0.07 MB
+
+60. kitt_voice_segment_45.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_45.wav
+   Size: 0.03 MB
+
+61. kitt_voice_segment_46.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_46.wav
+   Size: 0.08 MB
+
+62. kitt_voice_segment_47.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_47.wav
+   Size: 0.07 MB
+
+63. kitt_voice_segment_48.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_48.wav
+   Size: 0.08 MB
+
+64. kitt_voice_segment_49.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_49.wav
+   Size: 0.02 MB
+
+65. kitt_voice_segment_5.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_5.wav
+   Size: 0.03 MB
+
+66. kitt_voice_segment_50.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_50.wav
+   Size: 0.12 MB
+
+67. kitt_voice_segment_51.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_51.wav
+   Size: 0.03 MB
+
+68. kitt_voice_segment_52.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_52.wav
+   Size: 0.19 MB
+
+69. kitt_voice_segment_53.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_53.wav
+   Size: 0.03 MB
+
+70. kitt_voice_segment_54.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_54.wav
+   Size: 0.03 MB
+
+71. kitt_voice_segment_55.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_55.wav
+   Size: 0.03 MB
+
+72. kitt_voice_segment_56.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_56.wav
+   Size: 0.07 MB
+
+73. kitt_voice_segment_57.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_57.wav
+   Size: 0.08 MB
+
+74. kitt_voice_segment_58.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_58.wav
+   Size: 0.07 MB
+
+75. kitt_voice_segment_59.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_59.wav
+   Size: 0.19 MB
+
+76. kitt_voice_segment_6.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_6.wav
+   Size: 0.08 MB
+
+77. kitt_voice_segment_60.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_60.wav
+   Size: 0.13 MB
+
+78. kitt_voice_segment_61.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_61.wav
+   Size: 0.13 MB
+
+79. kitt_voice_segment_62.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_62.wav
+   Size: 0.03 MB
+
+80. kitt_voice_segment_63.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_63.wav
+   Size: 0.02 MB
+
+81. kitt_voice_segment_64.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_64.wav
+   Size: 0.02 MB
+
+82. kitt_voice_segment_65.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_65.wav
+   Size: 0.03 MB
+
+83. kitt_voice_segment_66.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_66.wav
+   Size: 0.10 MB
+
+84. kitt_voice_segment_67.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_67.wav
+   Size: 0.10 MB
+
+85. kitt_voice_segment_68.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_68.wav
+   Size: 0.07 MB
+
+86. kitt_voice_segment_69.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_69.wav
+   Size: 0.12 MB
+
+87. kitt_voice_segment_7.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_7.wav
+   Size: 0.03 MB
+
+88. kitt_voice_segment_70.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_70.wav
+   Size: 0.03 MB
+
+89. kitt_voice_segment_71.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_71.wav
+   Size: 0.12 MB
+
+90. kitt_voice_segment_72.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_72.wav
+   Size: 0.03 MB
+
+91. kitt_voice_segment_73.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_73.wav
+   Size: 0.03 MB
+
+92. kitt_voice_segment_74.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_74.wav
+   Size: 0.03 MB
+
+93. kitt_voice_segment_75.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_75.wav
+   Size: 0.02 MB
+
+94. kitt_voice_segment_76.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_76.wav
+   Size: 0.05 MB
+
+95. kitt_voice_segment_77.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_77.wav
+   Size: 0.08 MB
+
+96. kitt_voice_segment_78.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_78.wav
+   Size: 0.07 MB
+
+97. kitt_voice_segment_79.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_79.wav
+   Size: 0.02 MB
+
+98. kitt_voice_segment_8.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_8.wav
+   Size: 0.02 MB
+
+99. kitt_voice_segment_80.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_80.wav
+   Size: 0.02 MB
+
+100. kitt_voice_segment_81.wav
+   Path: H:\The Gatekeeper\kitt_voice_segment_81.wav
+   Size: 0.03 MB
+
