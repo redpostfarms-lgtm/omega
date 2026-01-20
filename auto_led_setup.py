@@ -20,10 +20,12 @@ if openrgb_path.exists():
     print("\nNext steps:")
     print("  1. Run with admin: .\\START_OPENRGB_SERVER.ps1")
     print("  2. Then run: python test_openrgb_red_wave.py")
-    recommended_method: str | None = "openrgb"
+    recommended_method = "openrgb"
 else:
     print("  ✗ OpenRGB not found at expected location")
-    recommended_method: str | None = None
+    recommended_method = None
+
+recommended_method: str | None
 
 # Step 2: Check downloaded LED apps
 print("\n[2] Checking downloaded LED control apps...")
