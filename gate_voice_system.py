@@ -9,6 +9,7 @@ from TTS.api import TTS
 import sounddevice as sd
 import soundfile as sf
 import numpy as np
+from scipy import signal
 
 class GateVoiceSystem:
     """Gate's conversational voice system using KITT voice"""
@@ -23,7 +24,10 @@ class GateVoiceSystem:
         # TTS model for voice cloning
         self.tts = None
         self.model_loaded = False
-        
+
+        # Voice settings
+        self.pitch_shift = 0.25  # Semitones higher
+
         print(f"\n{'='*70}")
         print(f"🚪 {self.agent_name} - {self.full_name}")
         print(f"🎤 Voice: KITT (kitt_voice.wav)")
@@ -87,11 +91,28 @@ class GateVoiceSystem:
                 language="en",
                 file_path=output_path
             )
-            
-            # Play the generated speech
-            print("▶️ Playing audio...")
+
+            # Load and adjust pitch
             data, samplerate = sf.read(output_path)
-            sd.play(data, samplerate)
+
+            # Apply pitch shift (+0.25 semitones = slightly higher pitch)
+            pitch_factor = 2 ** (self.pitch_shift / 12.0)
+            new_length = int(len(data) / pitch_factor)
+
+            # Resample to shift pitch
+            if len(data.shape) == 1:  # Mono
+                data_shifted = signal.resample(data, new_length)
+            else:  # Stereo
+                data_shifted = np.zeros((new_length, data.shape[1]))
+                for channel in range(data.shape[1]):
+                    data_shifted[:, channel] = signal.resample(data[:, channel], new_length)
+
+            # Time-stretch back to original duration to maintain speed
+            data_final = signal.resample(data_shifted, len(data))
+
+            # Play the adjusted speech
+            print("▶️ Playing audio (pitch +0.25)...")
+            sd.play(data_final, samplerate)
             sd.wait()
             
             print("✅ Speech completed\n")
