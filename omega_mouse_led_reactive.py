@@ -27,7 +27,9 @@ try:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     tts = TTS('tts_models/multilingual/multi-dataset/xtts_v2').to(device)
 
-    voice_file = Path('clip_0001.wav')
+    voice_file = Path("omega_voice_best.wav")
+    if not voice_file.exists():
+        voice_file = Path("clip_0001.wav")  # Fallback
     speaker_wav = str(voice_file) if voice_file.exists() else None
 
     tts_available = True
