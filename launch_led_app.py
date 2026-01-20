@@ -34,7 +34,7 @@ if choice == "7":
         print(f"  → Starting {name}...")
         try:
             cmd = f"Start-Process shell:AppsFolder\\{app_id}"
-            subprocess.Popen(["powershell", "-Command", cmd])
+            subprocess.Popen(["powershell", "-Command", cmd])  # noqa: S603
             time.sleep(1)
         except Exception as e:
             print(f"    ✗ Failed: {e}")
@@ -44,7 +44,7 @@ elif choice == "8" or choice == "":
     print("\nLaunching OpenRGB...")
     openrgb_path = r"C:\Users\Drakalich\OpenRGB\OpenRGB Windows 64-bit\OpenRGB.exe"
     try:
-        subprocess.Popen([openrgb_path, "--server"])
+        subprocess.Popen([openrgb_path, "--server"])  # noqa: S603
         print("✓ OpenRGB started in server mode")
         print("\nYou can now:")
         print("  • Use the GUI to set RED color manually")

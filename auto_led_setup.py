@@ -3,7 +3,6 @@ Automated LED Setup - Tests and recommends best control method
 """
 import subprocess
 from pathlib import Path
-import sys
 
 print("\n" + "="*70)
 print("  🎮 AUTOMATED LED CONTROLLER SETUP")
@@ -21,10 +20,10 @@ if openrgb_path.exists():
     print("\nNext steps:")
     print("  1. Run with admin: .\\START_OPENRGB_SERVER.ps1")
     print("  2. Then run: python test_openrgb_red_wave.py")
-    recommended_method = "openrgb"
+    recommended_method: str | None = "openrgb"
 else:
     print("  ✗ OpenRGB not found at expected location")
-    recommended_method = None
+    recommended_method: str | None = None
 
 # Step 2: Check downloaded LED apps
 print("\n[2] Checking downloaded LED control apps...")
