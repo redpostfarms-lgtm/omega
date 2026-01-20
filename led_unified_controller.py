@@ -13,7 +13,7 @@ print("  🎮 UNIFIED LED CONTROLLER")
 print("=" * 70 + "\n")
 
 # Detected LED Apps (from your system)
-LED_APPS = {
+LED_APPS: dict[str, dict[str, object]] = {
     "aura_creator": {
         "name": "Aura Creator",
         "app_id": "B9ECED6F.AURAC",
@@ -69,11 +69,11 @@ LED_APPS = {
 class UnifiedLEDController:
     """Unified interface for controlling LED via multiple apps"""
 
-    def __init__(self):
-        self.active_app = None
+    def __init__(self) -> None:
+        self.active_app: str | None = None
         self.openrgb_path = Path(r"C:\Users\Drakalich\OpenRGB\OpenRGB Windows 64-bit\OpenRGB.exe")
 
-    def detect_best_app(self):
+    def detect_best_app(self) -> str | None:
         """Find the best available app for USB LED control"""
         print("[1] Detecting best LED control method...")
 
@@ -81,7 +81,7 @@ class UnifiedLEDController:
         if self.openrgb_path.exists():
             print(f"  ✓ OpenRGB available: {self.openrgb_path}")
             self.active_app = "openrgb"
-            return True
+            return "openrgb"
 
         # Check for USB-compatible apps
         usb_apps = [app for app, data in LED_APPS.items()
@@ -89,13 +89,13 @@ class UnifiedLEDController:
 
         if usb_apps:
             # Sort by priority
-            usb_apps.sort(key=lambda x: LED_APPS[x]["priority"])
+            usb_apps.sort(key=lambda x: int(LED_APPS[x]["priority"]))  # type: ignore
             self.active_app = usb_apps[0]
             print(f"  ✓ Using: {LED_APPS[self.active_app]['name']}")
-            return True
+            return usb_apps[0]
 
         print("  ✗ No USB-compatible LED apps found")
-        return False
+        return None
 
     def launch_app(self, app_key: str) -> bool:
         """Launch the specified LED control app"""
@@ -107,8 +107,8 @@ class UnifiedLEDController:
         try:
             if "path" in app_data:
                 # Launch via executable path
-                subprocess.Popen([app_data["path"]])
-                print(f"  ✓ Launched: {app_data['name']}")
+                subprocess.Popen([str(app_data["path"])])  # noqa: S603
+                print(f"  ✓ Launched: {str(app_data['name'])}")
             elif "app_id" in app_data:
                 # Launch via AppID
                 cmd = f"Start-Process shell:AppsFolder\\{app_data['app_id']}"
@@ -117,13 +117,13 @@ class UnifiedLEDController:
                     capture_output=True,
                     timeout=5
                 )
-                print(f"  ✓ Launched: {app_data['name']}")
+                print(f"  ✓ Launched: {str(app_data['name'])}")
 
             time.sleep(2)  # Give app time to start
             return True
 
         except Exception as e:
-            print(f"  ✗ Failed to launch {app_data['name']}: {e}")
+            print(f"  ✗ Failed to launch {str(app_data.get('name', 'Unknown'))}: {e}")
             return False
 
     def set_color_via_openrgb(self, red: int, green: int, blue: int) -> bool:
@@ -165,9 +165,10 @@ class UnifiedLEDController:
 
         else:
             # Launch the app and let user control manually
-            print(f"  → Opening {LED_APPS[self.active_app]['name']}...")
-            print("  → Please set RED wave pattern manually in the app")
-            self.launch_app(self.active_app)
+            if self.active_app is not None:
+                print(f"  → Opening {str(LED_APPS[self.active_app]['name'])}...")
+                print("  → Please set RED wave pattern manually in the app")
+                self.launch_app(self.active_app)
 
     def test_all_apps(self):
         """Test launching all detected USB apps"""
@@ -175,7 +176,7 @@ class UnifiedLEDController:
 
         for app_key, app_data in LED_APPS.items():
             if app_data.get("supports_usb", False):
-                print(f"\n  Testing: {app_data['name']}")
+                print(f"\n  Testing: {str(app_data['name'])}")
                 self.launch_app(app_key)
                 time.sleep(1)
 
@@ -198,7 +199,9 @@ def main():
         if choice == "3":
             controller.test_all_apps()
         elif choice == "2":
-            controller.launch_app(controller.active_app)
+            active = controller.active_app
+            if active is not None:
+                controller.launch_app(active)
         else:
             # Default: RED wave
             controller.red_wave_pattern(duration=10)
@@ -207,7 +210,7 @@ def main():
         print("\nAvailable apps (may not support USB):")
         for app_key, app_data in LED_APPS.items():
             if app_key != "openrgb":
-                print(f"  • {app_data['name']} ({app_data['type']})")
+                print(f"  • {str(app_data['name'])} ({str(app_data.get('type', 'unknown'))})")
 
     print("\n" + "=" * 70)
 

@@ -51,7 +51,7 @@ try:
 
         print(f"✓ Found {len(apps_data)} LED control applications:\n")
 
-        detected_apps = []
+        detected_apps: list[dict[str, str]] = []
         for app in apps_data:
             name = app.get("Name", "Unknown")
             app_id = app.get("AppID", "Unknown")
