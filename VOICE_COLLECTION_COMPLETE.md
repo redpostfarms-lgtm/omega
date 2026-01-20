@@ -117,8 +117,6 @@ H:/The Gatekeeper/
 7. **Titan** (Male) - `kitt_voice_segment_14.wav` (0.66 MB - longest segment)
 8. **Atlas** (Male) - `kitt_voice_segment_16.wav` (0.32 MB)
 9. **Cipher** (Male) - `kitt_voice_segment_34.wav` (0.27 MB)
-10. **Nexus** (Male/Robotic) - `kitt_voice_segment_19.wav` (0.20 MB)
-11. **Quantum** (Male) - `kitt_voice_segment_36.wav` (0.19 MB)
 
 ---
 

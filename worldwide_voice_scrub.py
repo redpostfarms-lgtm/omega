@@ -3,12 +3,9 @@ OMEGA WORLDWIDE VOICE COLLECTION SYSTEM
 Scrub and collect free voice resources for agent council
 Target: 10+ voices (5 female, 5 male, 1+ robotic/KITT-style)
 """
-import requests
 import json
-from pathlib import Path
 from datetime import datetime
-import subprocess
-import os
+from pathlib import Path
 
 class WorldwideVoiceScrub:
     def __init__(self):
