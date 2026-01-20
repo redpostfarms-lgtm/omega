@@ -134,11 +134,9 @@ class GateVoiceSystem:
         if not self.initialize_tts():
             print("Cannot start interactive mode without TTS\n")
             return
-        
-        # Initial greeting
-        greeting = f"""Hello. I am {self.agent_name}, the {self.full_name}.
-        I am now online and speaking with the KITT voice system.
-        All security protocols are active. How may I assist you?"""
+
+        # Initial greeting (shorter for faster processing)
+        greeting = "Hello. I am Gate. All systems online. How may I assist you?"
         
         self.speak(greeting)
         
