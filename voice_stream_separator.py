@@ -4,13 +4,14 @@ Voice Stream Separator
 Separates multiple voice streams from audio files
 """
 import os
-import sys
+import warnings
 from pathlib import Path
+
+import librosa
 import numpy as np
 import soundfile as sf
-import librosa
 from sklearn.cluster import KMeans
-import warnings
+
 warnings.filterwarnings('ignore')
 
 class VoiceStreamSeparator:
@@ -119,7 +120,7 @@ class VoiceStreamSeparator:
 
     def extract_voice_only(self, y, sr, output_file):
         """Extract voice component using harmonic-percussive separation"""
-        print(f"\n  🎵 Extracting voice component...")
+        print("\n  🎵 Extracting voice component...")
 
         try:
             # Separate harmonic (voice/music) from percussive (drums/noise)
