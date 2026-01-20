@@ -1,0 +1,10 @@
+{
+  "reportMissingTypeStubs": false,
+  "reportUnknownParameterType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownMemberType": false,
+  "reportMissingTypeArgument": false,
+  "reportPrivateUsage": false,
+  "reportGeneralTypeIssues": false
+}
