@@ -145,7 +145,10 @@ class MorningInitializer:
 
     def authenticate_services(self):
         """Authenticate with all external services"""
-        self.print_phase(3, "Service Authentication")
+        self.print_phase(3, "Service Authentication & API Health Check")
+
+        # Run API health check first (critical for Omega LLM)
+        self.check_api_health()
 
         # Check Git authentication
         self.check_service("Git", self.check_git)
@@ -212,6 +215,60 @@ class MorningInitializer:
         telegram = self.configs['.autopilot.json'].get('telegram', {})
         token = telegram.get('token', '')
         return token != '' and token != 'YOUR_BOT_TOKEN_HERE'
+
+    def check_api_health(self):
+        """Run comprehensive API health check for all LLM services"""
+        print("\n  🔍 Running Omega API Health Check...")
+        print("  " + "-" * 76)
+
+        try:
+            # Import and run the API health monitor
+            from omega_api_daily_monitor import APIHealthMonitor
+
+            monitor = APIHealthMonitor()
+            results = monitor.run_all_tests()
+            analysis = monitor.analyze_results()
+
+            # Save results
+            monitor.save_log()
+            monitor.update_omega_status()
+
+            # Display summary
+            print(f"\n  API Health Summary:")
+            print(f"    Total Services: {analysis['total_tests']}")
+            print(f"    Operational:    {analysis['passed']} ✅")
+            print(f"    Failed:         {analysis['failed']} {'⚠️' if analysis['failed'] > 0 else ''}")
+            print(f"    Skipped:        {analysis['skipped']}")
+            print(f"\n    LLM Status:     {'AVAILABLE ✅' if analysis['llm_available'] else 'UNAVAILABLE ❌'}")
+            print(f"    Working LLMs:   {', '.join(analysis['working_llms']) if analysis['working_llms'] else 'None'}")
+            print(f"    Redundancy:     {analysis['redundancy_status']}")
+
+            # Record in status
+            if analysis['llm_available']:
+                self.status['services']['Omega LLM'] = {
+                    'status': 'ok',
+                    'message': f"Operational via {', '.join(analysis['working_llms'])}",
+                    'redundancy': analysis['redundancy_status']
+                }
+                print(f"\n  ✅ Omega LLM is OPERATIONAL")
+            else:
+                self.status['services']['Omega LLM'] = {
+                    'status': 'error',
+                    'message': 'No working LLM services found'
+                }
+                self.status['errors'].append('Critical: No working LLM services')
+                print(f"\n  ❌ Omega LLM is NOT OPERATIONAL")
+                print(f"     ACTION REQUIRED: Check API keys and service status")
+
+            print("  " + "-" * 76)
+
+        except Exception as e:
+            print(f"  ❌ API Health Check Error: {e}")
+            self.status['errors'].append(f"API health check failed: {e}")
+            self.status['services']['Omega LLM'] = {
+                'status': 'error',
+                'message': f'Health check error: {str(e)}'
+            }
 
     # ==================== PHASE 4: System Components ====================
 

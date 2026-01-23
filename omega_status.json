@@ -45,5 +45,15 @@
     "memory_usage": "unknown",
     "disk_space": "unknown"
   },
-  "ready": true
+  "ready": true,
+  "api_health": {
+    "last_check": "2026-01-23T10:56:04.820599",
+    "llm_available": true,
+    "working_services": [
+      "OpenRouter"
+    ],
+    "redundancy": "MINIMAL",
+    "status": "OPERATIONAL"
+  },
+  "last_updated": "2026-01-23T10:56:04.820599"
 }
