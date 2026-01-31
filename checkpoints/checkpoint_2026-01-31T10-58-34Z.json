@@ -1,0 +1,106 @@
+{
+  "checkpoint_id": "CP-20260131-105834",
+  "timestamp_utc": "2026-01-31T10:58:34Z",
+  "project": "The-Gatekeeper / Omega",
+  "branch": "cranky-satoshi",
+  "head_sha": "69a40346baf51f2f882fc97980d2137486b2fd15",
+  "authoritative": true,
+
+  "remotes": {
+    "origin": "https://github.com/redpostfarms-lgtm/The-Gatekeeper.git",
+    "omega": "https://github.com/redpostfarms-lgtm/omega.git"
+  },
+
+  "recent_commits": [
+    {"sha": "69a40346", "msg": "feat: Add Omega core system with Ed25519/ECDSA signing, memory partitions, and governance kernel"},
+    {"sha": "a9832ec7", "msg": "fix: Apply Phase 1/2 security audit fixes across core system"},
+    {"sha": "a264148a", "msg": "feat: Add security remediation toolkit for secret scanning and purging"}
+  ],
+
+  "system_state": {
+    "omega_version": "2.0.0",
+    "kernel_version": "1.0.0",
+    "kernel_signature": "OMEGA-K10-STRUCTURAL",
+    "constraints_loaded": 10,
+    "constraints_ids": ["K1","K2","K3","K4","K5","K6","K7","K8","K9","K10"],
+    "all_structural": true,
+    "all_apply_to_shards": true,
+    "health_status": "healthy"
+  },
+
+  "components_verified": {
+    "omega_system.py": {
+      "status": "PASS",
+      "tests": ["boot", "chain_integrity", "law_freeze", "3_simulations"],
+      "features": ["Pure Python Ed25519", "ECDSA P-256", "SQLite WAL", "WebSocket auth", "nonce TTL pruning"]
+    },
+    "omega_unified_core.py": {
+      "status": "PASS",
+      "tests": ["10/10 components initialized"],
+      "features": ["Integration layer for all Omega components"]
+    },
+    "omega_memory_partition.py": {
+      "status": "PASS",
+      "tests": ["chain_integrity", "law_freeze_guard"],
+      "features": ["LAW/FACT/CONTEXT/EXPLORATION/HIVE partitions", "SHA-256 chain", "genesis 0x64 hash", "sort_keys consistency"]
+    },
+    "omega_policy_signing.py": {
+      "status": "PASS",
+      "tests": ["key_gen", "sign", "verify", "tamper_detect", "safe_halt_enforcement"],
+      "features": ["Ed25519 sign/verify", "ECDSA dual-sign", "Safe Halt blocks signing"]
+    },
+    "omega_scalability_enhanced.py": {
+      "status": "PASS",
+      "tests": ["deque_rotation"],
+      "features": ["deque(maxlen=1000) bounded memory", "ResourceMonitor"]
+    },
+    "omega_invariant_kernel.py": {
+      "status": "PASS",
+      "features": ["K1-K10 constraint enforcement", "violation logging", "structural immutability"]
+    }
+  },
+
+  "security_audit": {
+    "phase1_critical": "COMPLETE",
+    "phase2_stability": "COMPLETE",
+    "fixes_applied": [
+      "Hardcoded GitHub PAT removed → env var",
+      ".gitignore expanded to 51+ lines",
+      "LAW_STORE frozen after boot",
+      "Genesis hash verification fixed (entry_id == 1)",
+      "Genesis previous_hash standardized to 0x64",
+      "Safe Halt enforcement on sign_ed25519, sign_ecdsa, sign_manifest",
+      "pop(0) → deque(maxlen=1000)",
+      "Nonce TTL pruning (300s window)",
+      "SimulationRunner.results capped at 500"
+    ],
+    "security_toolkit": {
+      "scan_secrets_git_history.sh": "Scans tree + staged + full history for 11 secret patterns",
+      "purge_exposed_pat.sh": "git-filter-repo history rewrite with backup",
+      "pre-commit-hook.sh": "Blocks commits with secret patterns",
+      "ci_secret_scan_job": "Added to .github/workflows/ci.yml"
+    },
+    "outstanding_manual_action": "REVOKE exposed GitHub PAT from GitHub Settings"
+  },
+
+  "decisions_made": [
+    "Pure Python Ed25519 — no external crypto dependencies",
+    "SQLite WAL mode for concurrent read/write",
+    "LAW_STORE immutable after boot — no runtime law injection",
+    "Genesis previous_hash = '0' * 64 (not 'GENESIS')",
+    "json.dumps with sort_keys=True for deterministic hashing",
+    "Inline Safe Halt checks (not decorator) due to definition ordering",
+    "deque over list for bounded metric storage",
+    "Nonce stored as Dict[str, float] with TTL pruning, not bare set()",
+    "Origin remote updated to redpostfarms-lgtm/The-Gatekeeper"
+  ],
+
+  "integrity": {
+    "chain_integrity": "VERIFIED",
+    "law_store_frozen": true,
+    "kernel_constraints_immutable": true,
+    "all_tests_passing": true,
+    "pushed_to_origin": true,
+    "pushed_to_omega": true
+  }
+}

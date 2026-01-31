@@ -1,0 +1,97 @@
+{
+  "baseline_id": "GK-20260131-105834",
+  "role": "GATEKEEPER",
+  "checkpoint_ref": "CP-20260131-105834",
+  "timestamp_utc": "2026-01-31T10:58:34Z",
+  "purpose": "Enforcement, validation, and boundary rules derived from authoritative checkpoint",
+
+  "trusted_state": {
+    "head_sha": "69a40346baf51f2f882fc97980d2137486b2fd15",
+    "branch": "cranky-satoshi",
+    "kernel_signature": "OMEGA-K10-STRUCTURAL",
+    "kernel_version": "1.0.0",
+    "all_constraints_structural": true,
+    "law_store_frozen": true,
+    "chain_integrity_verified": true
+  },
+
+  "enforcement_rules": {
+    "E1_LAW_IMMUTABILITY": {
+      "rule": "LAW_STORE must be frozen after boot. Any insert_law() call post-initialization MUST be rejected.",
+      "enforced_in": ["omega_system.py:OmegaMemoryDB", "omega_memory_partition.py:OmegaMemoryPartition"],
+      "mechanism": "_init_complete / _law_store_frozen flags",
+      "violation_response": "REJECT with RuntimeError"
+    },
+    "E2_CHAIN_INTEGRITY": {
+      "rule": "SHA-256 hash chain must be continuous. Genesis uses hash(payload), subsequent entries use hash(prev+payload).",
+      "enforced_in": ["omega_system.py:verify_chain_integrity", "omega_memory_partition.py:verify_chain_integrity"],
+      "genesis_previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "serialization": "json.dumps(payload, sort_keys=True)",
+      "violation_response": "HALT chain writes, report mismatch"
+    },
+    "E3_SAFE_HALT_SIGNING_BLOCK": {
+      "rule": "When system is in SAFE HALT MODE, all signing operations MUST be blocked.",
+      "enforced_in": ["omega_policy_signing.py:sign_ed25519", "omega_policy_signing.py:sign_ecdsa", "omega_policy_signing.py:sign_manifest"],
+      "mechanism": "Inline is_safe_halt() check before signing",
+      "violation_response": "Raise RuntimeError"
+    },
+    "E4_KERNEL_IMMUTABILITY": {
+      "rule": "K1-K10 constraints are STRUCTURAL and cannot be bypassed, modified, or removed at runtime.",
+      "enforced_in": ["omega_invariant_kernel.py:InvariantKernel"],
+      "constraint_count": 10,
+      "violation_response": "Log violation, block action, increment violation_count"
+    },
+    "E5_NO_SECRETS_IN_CODE": {
+      "rule": "No hardcoded secrets (PATs, API keys, passwords) in any source file.",
+      "enforced_in": ["tools/security/scan_secrets_git_history.sh", "tools/security/pre-commit-hook.sh", ".github/workflows/ci.yml:secret-scan"],
+      "patterns_count": 11,
+      "violation_response": "Block commit (pre-commit), fail PR (CI)"
+    },
+    "E6_BOUNDED_MEMORY": {
+      "rule": "All metric/result collections must be bounded. No unbounded list growth.",
+      "enforced_in": ["omega_scalability_enhanced.py:ResourceMonitor (deque maxlen=1000)", "omega_system.py:SimulationRunner (MAX_RESULTS=500)"],
+      "violation_response": "Oldest entries auto-evicted"
+    },
+    "E7_NONCE_REPLAY_PROTECTION": {
+      "rule": "WebSocket nonces must have TTL pruning. Stale nonces pruned after 300s.",
+      "enforced_in": ["omega_system.py:WebSocketNodeManager"],
+      "nonce_window_seconds": 300,
+      "violation_response": "Reject replayed message"
+    }
+  },
+
+  "validation_boundaries": {
+    "files_in_scope": [
+      "omega_system.py",
+      "omega_unified_core.py",
+      "omega_memory_partition.py",
+      "omega_policy_signing.py",
+      "omega_invariant_kernel.py",
+      "omega_scalability_enhanced.py",
+      "omega_kernel_state.json",
+      "store_github_token.py",
+      ".gitignore",
+      ".github/workflows/ci.yml",
+      "tools/security/*"
+    ],
+    "test_commands": [
+      "python omega_system.py",
+      "python omega_unified_core.py",
+      "python omega_memory_partition.py",
+      "python omega_policy_signing.py",
+      "python omega_scalability_enhanced.py",
+      "bash tools/security/scan_secrets_git_history.sh"
+    ]
+  },
+
+  "recognition_criteria": {
+    "this_baseline_is_trusted_if": [
+      "head_sha matches 69a40346baf51f2f882fc97980d2137486b2fd15",
+      "kernel_signature equals OMEGA-K10-STRUCTURAL",
+      "all 10 constraints present and structural",
+      "law_store_frozen == true",
+      "chain_integrity == VERIFIED",
+      "no secrets detected by scan_secrets_git_history.sh"
+    ]
+  }
+}
