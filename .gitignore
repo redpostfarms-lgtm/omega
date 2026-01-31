@@ -1,2 +1,54 @@
+# Secrets and keys
+*.bin
+*.key
+*.pem
+.env
+.env.*
+root_sk.bin
+root_pk.bin
+
+# Security tool backups (purge_exposed_pat.sh)
+.git-backup-*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Data / Databases
+*.db
+*.sqlite3
+*.db-wal
+*.db-shm
+
+# Runtime state
+.omega_session_state.json
+omega_memory.json
+omega_autonomous_memory.json
+
+# Node
+node_modules/
+
+# OS
 nul
-node_modules
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Virtual environments
+.venv/
+venv/
+env/

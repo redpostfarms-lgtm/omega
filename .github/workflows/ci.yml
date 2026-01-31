@@ -119,11 +119,23 @@ jobs:
           pytest tests/ -v -m "integration" || true
         continue-on-error: true
 
+  # Secret Scanning (blocks PRs with exposed secrets)
+  secret-scan:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for thorough scanning
+
+      - name: Scan for secrets
+        run: bash tools/security/scan_secrets_git_history.sh
+
   # Security Scanning
   security:
     name:  Security Scan
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v4
 
       - name:  Set up Python
