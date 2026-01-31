@@ -1,6 +1,6 @@
 @echo off
 REM Navigate to the correct directory first
-cd /d "D:\RPF_BRAIN\The Gatekeeper"
+cd /d "%~dp0"
 
 echo.
 echo ========================================

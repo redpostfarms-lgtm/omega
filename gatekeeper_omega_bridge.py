@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """
-Gatekeeper-Omega Integration Bridge
-===================================
-Unified integration layer connecting:
-- Gatekeeper security & threat detection
+OMEGA UNIFIED SYSTEM BRIDGE
+===========================
+The central integration layer for the Omega system.
+
+Omega is the unified AI system (formerly Gatekeeper + Omega merged).
+All components operate under Omega's Invariant Kernel (K1-K10).
+
+Components integrated:
+- Security & threat detection (formerly Gatekeeper)
 - Omega AI voice system
 - Control panel web interface
 - System automation & scheduling
+- Invariant Kernel enforcement
 
-This bridge ensures all components work cohesively.
+This bridge ensures all components work cohesively while
+respecting the immutable constraints of the Invariant Kernel.
 """
 
 import logging
@@ -20,12 +27,23 @@ from enum import Enum
 import threading
 from functools import wraps
 
+# Import the Invariant Kernel
+try:
+    from omega_invariant_kernel import (
+        get_kernel, InvariantKernel, kernel_enforced,
+        KernelViolationError, ShardKernelInterface
+    )
+    KERNEL_AVAILABLE = True
+except ImportError:
+    KERNEL_AVAILABLE = False
+    get_kernel = None
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-logger = logging.getLogger('GatekeeperOmegaBridge')
+logger = logging.getLogger('OmegaSystemBridge')
 
 
 class SystemStatus(Enum):
@@ -36,27 +54,45 @@ class SystemStatus(Enum):
     OFFLINE = "offline"
 
 
-class GatekeeperOmegaBridge:
+class OmegaSystemBridge:
     """
-    Main integration bridge connecting all system components.
+    Main integration bridge connecting all Omega system components.
     Provides unified API for security, voice, UI, and automation.
+
+    All actions are validated against the Invariant Kernel (K1-K10).
     """
-    
+
+    # System identity
+    SYSTEM_NAME = "Omega"
+    SYSTEM_VERSION = "2.0.0"  # Version 2 = unified system with kernel
+
     def __init__(self):
-        """Initialize the bridge and all subsystems."""
+        """Initialize the bridge and all subsystems including the kernel."""
         self.status = SystemStatus.OFFLINE
         self.components = {}
         self.errors = []
         self.lock = threading.RLock()
         self.initialized_at = datetime.now()
-        
-        logger.info("Initializing Gatekeeper-Omega Bridge...")
+
+        # Initialize Invariant Kernel first (highest priority)
+        self.kernel = None
+        if KERNEL_AVAILABLE:
+            try:
+                self.kernel = get_kernel()
+                logger.info(f"Invariant Kernel v{self.kernel.KERNEL_VERSION} loaded")
+            except Exception as e:
+                logger.error(f"Failed to load Invariant Kernel: {e}")
+        else:
+            logger.warning("Invariant Kernel not available - operating without constraints")
+
+        logger.info(f"Initializing {self.SYSTEM_NAME} System Bridge v{self.SYSTEM_VERSION}...")
         self._initialize_components()
     
     def _initialize_components(self):
         """Initialize all system components with error handling."""
         components_to_init = [
-            ('gatekeeper_integration', self._init_gatekeeper),
+            ('invariant_kernel', self._init_kernel),
+            ('security_module', self._init_security),  # Renamed from gatekeeper
             ('omega_voice', self._init_omega_voice),
             ('control_panel', self._init_control_panel),
             ('wazuh_siem', self._init_wazuh),
@@ -82,27 +118,46 @@ class GatekeeperOmegaBridge:
                 })
         
         # Determine overall status
-        if successful >= 2:  # At least 2 components must work
+        # Kernel is CRITICAL - without it, system operates in degraded mode
+        kernel_loaded = 'invariant_kernel' in self.components and self.components['invariant_kernel']
+
+        if successful >= 2 and kernel_loaded:
             self.status = SystemStatus.HEALTHY
-            logger.info("Bridge initialization SUCCESSFUL")
+            logger.info(f"{self.SYSTEM_NAME} Bridge initialization SUCCESSFUL")
+        elif successful >= 2:
+            self.status = SystemStatus.WARNING
+            logger.warning(f"{self.SYSTEM_NAME} Bridge initialization PARTIAL - kernel not loaded")
         elif successful >= 1:
             self.status = SystemStatus.WARNING
-            logger.warning("Bridge initialization PARTIAL - some components failed")
+            logger.warning(f"{self.SYSTEM_NAME} Bridge initialization PARTIAL - some components failed")
         else:
             self.status = SystemStatus.CRITICAL
-            logger.critical("Bridge initialization FAILED - no components available")
+            logger.critical(f"{self.SYSTEM_NAME} Bridge initialization FAILED - no components available")
     
-    def _init_gatekeeper(self) -> Optional[Any]:
-        """Initialize Gatekeeper security module."""
+    def _init_kernel(self) -> Optional[Any]:
+        """Initialize the Invariant Kernel - highest priority component."""
+        if self.kernel:
+            return self.kernel
+        if KERNEL_AVAILABLE:
+            try:
+                self.kernel = get_kernel()
+                return self.kernel
+            except Exception as e:
+                logger.error(f"Kernel initialization error: {e}")
+                raise
+        return None
+
+    def _init_security(self) -> Optional[Any]:
+        """Initialize security module (formerly Gatekeeper)."""
         try:
             from gatekeeper_integration_module import GatekeeperIntegration
-            gk = GatekeeperIntegration()
-            return gk
+            security = GatekeeperIntegration()
+            return security
         except ImportError:
-            logger.warning("gatekeeper_integration_module not available")
+            logger.warning("Security integration module not available")
             return None
         except Exception as e:
-            logger.error(f"Gatekeeper initialization error: {e}")
+            logger.error(f"Security module initialization error: {e}")
             raise
     
     def _init_omega_voice(self) -> Optional[Any]:
@@ -152,10 +207,23 @@ class GatekeeperOmegaBridge:
     def get_system_health(self) -> Dict[str, Any]:
         """Get comprehensive system health report."""
         with self.lock:
+            # Include kernel status
+            kernel_status = None
+            if self.kernel:
+                kernel_status = {
+                    'version': self.kernel.KERNEL_VERSION,
+                    'signature': self.kernel.KERNEL_SIGNATURE,
+                    'constraints_loaded': len(self.kernel.get_all_constraints()),
+                    'violation_count': self.kernel.get_violation_count()
+                }
+
             return {
+                'system_name': self.SYSTEM_NAME,
+                'system_version': self.SYSTEM_VERSION,
                 'timestamp': datetime.now().isoformat(),
                 'status': self.status.value,
                 'uptime_seconds': (datetime.now() - self.initialized_at).total_seconds(),
+                'kernel': kernel_status,
                 'components': {
                     name: {
                         'available': component is not None,
@@ -173,64 +241,99 @@ class GatekeeperOmegaBridge:
             return self.components.get(name)
     
     def get_security_status(self) -> Dict[str, Any]:
-        """Get security status from Gatekeeper."""
-        gk = self.get_component('gatekeeper_integration')
-        if not gk:
-            return {'error': 'Gatekeeper not available', 'status': 'unknown'}
-        
+        """Get security status from security module."""
+        security = self.get_component('security_module')
+        if not security:
+            return {'error': 'Security module not available', 'status': 'unknown'}
+
         try:
             # Get threats from integrated security systems
-            status = gk.get_status()
-            metrics = gk.get_system_metrics()
-            
+            status = security.get_status()
+            metrics = security.get_system_metrics()
+
             return {
-                'gatekeeper_status': status,
+                'security_status': status,
                 'system_metrics': metrics,
                 'timestamp': datetime.now().isoformat()
             }
         except Exception as e:
             logger.error(f"Error getting security status: {e}")
             return {'error': str(e), 'status': 'error'}
+
+    def validate_action(self, action: Dict[str, Any]) -> tuple[bool, List[Any]]:
+        """Validate an action against the Invariant Kernel (K1-K10)."""
+        if not self.kernel:
+            logger.warning("Kernel not available - action not validated")
+            return True, []  # Allow but warn
+
+        return self.kernel.validate_action(action)
+
+    def create_shard_interface(self, shard_id: str) -> Optional['ShardKernelInterface']:
+        """Create a kernel interface for a child shard."""
+        if not self.kernel:
+            logger.warning("Cannot create shard interface - kernel not available")
+            return None
+
+        return ShardKernelInterface(shard_id, self.kernel)
     
     def execute_voice_command(self, command: str) -> Dict[str, Any]:
-        """Execute a voice command through integrated systems."""
+        """Execute a voice command through integrated systems.
+
+        All commands are validated against the Invariant Kernel before execution.
+        """
         try:
             # Log the command
             logger.info(f"Executing voice command: {command}")
-            
+
+            # Validate against kernel first
+            action = {'type': 'voice_command', 'command': command}
+            is_valid, violations = self.validate_action(action)
+
+            if not is_valid:
+                violation_ids = [v.constraint_id for v in violations]
+                logger.warning(f"Voice command blocked by kernel: {violation_ids}")
+                return {
+                    'command': command,
+                    'status': 'blocked',
+                    'reason': f'Kernel violation: {violation_ids}'
+                }
+
             # Route to appropriate subsystem
             if 'security' in command.lower() or 'threat' in command.lower():
-                gk = self.get_component('gatekeeper_integration')
-                if gk:
+                security = self.get_component('security_module')
+                if security:
                     return {
                         'command': command,
-                        'system': 'gatekeeper',
+                        'system': 'security',
                         'status': 'routed'
                     }
-            
+
             # Default: execute in Omega voice system
             omega = self.get_component('omega_voice')
             if omega:
                 return {
                     'command': command,
-                    'system': 'omega',
+                    'system': 'omega_voice',
                     'status': 'routed'
                 }
-            
+
             return {'command': command, 'status': 'no_handler'}
-        
+
         except Exception as e:
             logger.error(f"Error executing voice command: {e}")
             return {'error': str(e), 'status': 'error'}
     
     def run_diagnostics(self) -> Dict[str, Any]:
         """Run comprehensive system diagnostics."""
-        logger.info("Running system diagnostics...")
-        
+        logger.info(f"Running {self.SYSTEM_NAME} system diagnostics...")
+
         diagnostics = {
+            'system_name': self.SYSTEM_NAME,
+            'system_version': self.SYSTEM_VERSION,
             'timestamp': datetime.now().isoformat(),
             'system_health': self.get_system_health(),
             'security_status': self.get_security_status(),
+            'kernel_export': self.kernel.export_kernel() if self.kernel else None,
             'component_details': {}
         }
         
@@ -271,16 +374,26 @@ _bridge_instance = None
 _bridge_lock = threading.Lock()
 
 
-def get_bridge() -> GatekeeperOmegaBridge:
-    """Get or create the global bridge instance."""
+def get_bridge() -> OmegaSystemBridge:
+    """Get or create the global Omega bridge instance."""
     global _bridge_instance
-    
+
     if _bridge_instance is None:
         with _bridge_lock:
             if _bridge_instance is None:
-                _bridge_instance = GatekeeperOmegaBridge()
-    
+                _bridge_instance = OmegaSystemBridge()
+
     return _bridge_instance
+
+
+# Alias for backward compatibility
+def get_omega() -> OmegaSystemBridge:
+    """Get the Omega system bridge (preferred method)."""
+    return get_bridge()
+
+
+# Legacy alias - deprecated
+GatekeeperOmegaBridge = OmegaSystemBridge
 
 
 def bridge_component(component_name: str):
@@ -298,36 +411,72 @@ def bridge_component(component_name: str):
     return decorator
 
 
+def kernel_validated(func):
+    """Decorator to validate function calls against the Invariant Kernel."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        bridge = get_bridge()
+
+        # Build action from function call
+        action = {
+            'type': f'function:{func.__name__}',
+            'args_count': len(args),
+            'kwargs_keys': list(kwargs.keys())
+        }
+
+        is_valid, violations = bridge.validate_action(action)
+        if not is_valid:
+            violation_ids = [v.constraint_id for v in violations]
+            raise RuntimeError(f"Action blocked by Invariant Kernel: {violation_ids}")
+
+        return func(*args, **kwargs)
+    return wrapper
+
+
 # Main execution example
 if __name__ == '__main__':
     import sys
-    
-    print("=" * 60)
-    print("GATEKEEPER-OMEGA BRIDGE - SYSTEM CHECK")
-    print("=" * 60)
-    
+
+    print("=" * 70)
+    print("OMEGA UNIFIED SYSTEM - BRIDGE CHECK")
+    print("=" * 70)
+
     # Initialize bridge
-    bridge = get_bridge()
-    
+    bridge = get_omega()
+
+    # Print system info
+    print(f"\nSystem: {bridge.SYSTEM_NAME} v{bridge.SYSTEM_VERSION}")
+
     # Print health status
     health = bridge.get_system_health()
-    print(f"\nStatus: {health['status']}")
+    print(f"Status: {health['status']}")
     print(f"Components: {len(health['components'])} loaded")
     print(f"Errors: {health['error_count']}")
-    
+
+    # Kernel status
+    if health.get('kernel'):
+        kernel = health['kernel']
+        print(f"\n--- INVARIANT KERNEL ---")
+        print(f"Version: {kernel['version']}")
+        print(f"Signature: {kernel['signature']}")
+        print(f"Constraints: {kernel['constraints_loaded']} loaded (K1-K10)")
+        print(f"Violations: {kernel['violation_count']}")
+    else:
+        print("\n[WARN] Invariant Kernel not loaded!")
+
     # Run diagnostics
     print("\nRunning full diagnostics...")
     diagnostics = bridge.run_diagnostics()
-    
+
     print(f"\nHealth Check: {diagnostics['system_health']['status']}")
-    print(f"Security Status: OK" if 'gatekeeper_status' in diagnostics['security_status'] else "Security: PENDING")
-    
+    print(f"Security Status: {'OK' if 'security_status' in diagnostics['security_status'] else 'PENDING'}")
+
     # Save report
     report_file = bridge.save_diagnostics()
     if report_file:
         print(f"\nReport saved to: {report_file}")
-    
-    print("\n" + "=" * 60)
-    
+
+    print("\n" + "=" * 70)
+
     # Exit with appropriate code
     sys.exit(0 if bridge.status == SystemStatus.HEALTHY else 1)

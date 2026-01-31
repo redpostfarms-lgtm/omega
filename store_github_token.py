@@ -40,13 +40,19 @@ def store_token(token: str, username: str = "redpostfarms"):
         return False
 
 if __name__ == "__main__":
-    token = "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"
-    username = "redpostfarms"
-    
+    import os
+
+    token = os.environ.get("GITHUB_TOKEN")
+    username = os.environ.get("GITHUB_USERNAME", "redpostfarms")
+
+    if not token:
+        print("ERROR: Set GITHUB_TOKEN environment variable before running.")
+        print("  Example: set GITHUB_TOKEN=ghp_your_token_here")
+        sys.exit(1)
+
     if store_token(token, username):
-        print("\n✅ GitHub token configured!")
+        print("\nGitHub token configured!")
         print("\nTesting authentication...")
-        # Test with a dry-run fetch
         try:
             result = subprocess.run(
                 ['git', 'fetch', 'origin', '--dry-run'],
@@ -55,19 +61,19 @@ if __name__ == "__main__":
                 timeout=15
             )
             if result.returncode == 0:
-                print("✅ Authentication successful!")
+                print("Authentication successful!")
             else:
-                print(f"⚠️  Fetch test returned: {result.returncode}")
+                print(f"Fetch test returned: {result.returncode}")
                 if result.stderr:
                     print(f"   {result.stderr.strip()}")
         except Exception as e:
-            print(f"⚠️  Could not test: {e}")
+            print(f"Could not test: {e}")
     else:
-        print("\n❌ Failed to store token. Please use manual method.")
+        print("\nFailed to store token. Please use manual method.")
         print("\nManual setup:")
         print("1. Open Windows Credential Manager")
         print("2. Go to Windows Credentials")
         print("3. Add Generic Credential:")
         print("   - Internet address: git:https://github.com")
         print(f"   - Username: {username}")
-        print(f"   - Password: {token}")
+        print("   - Password: <your token>")

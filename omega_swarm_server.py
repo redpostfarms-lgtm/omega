@@ -21,9 +21,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'static', 'scripts'))
 try:
     from static.scripts.qr_handler import qr  # type: ignore[import]
     app.register_blueprint(qr)
-    print("✅ QR handler blueprint registered")
+    print("[OK] QR handler blueprint registered")
 except ImportError as e:
-    print(f"⚠️  QR handler blueprint not available: {e}")
+    print(f"[WARN] QR handler blueprint not available: {e}")
 
 PHONE_HIERARCHY = {
     0: {"name": "QUEEN", "color": "#ffcc00", "role": "master", "label": "Queen Controller"},
@@ -43,7 +43,7 @@ def load_html_file(filename):
         with open(filepath, 'r', encoding='utf-8') as f:
             return f.read()
     except Exception as e:
-        print(f"⚠️ Error loading {filename}: {e}")
+        print(f"[WARN] Error loading {filename}: {e}")
         return None
 
 QUEEN_HTML = load_html_file('queen.html')
@@ -321,28 +321,28 @@ def index():
 
 if __name__ == '__main__':
     print("=" * 80)
-    print("⚡ OMEGA SWARM SERVER")
+    print("OMEGA SWARM SERVER")
     print("=" * 80)
     print()
-    
+
     if QUEEN_HTML:
-        print(f"✅ Queen UI loaded ({len(QUEEN_HTML)} bytes)")
+        print(f"[OK] Queen UI loaded ({len(QUEEN_HTML)} bytes)")
     else:
-        print("❌ Queen UI failed to load")
-    
+        print("[FAIL] Queen UI failed to load")
+
     if DRONE_HTML:
-        print(f"✅ Drone UI loaded ({len(DRONE_HTML)} bytes)")
+        print(f"[OK] Drone UI loaded ({len(DRONE_HTML)} bytes)")
     else:
-        print("❌ Drone UI failed to load")
-    
+        print("[FAIL] Drone UI failed to load")
+
     print()
-    print("🚀 Starting server on http://0.0.0.0:5002")
+    print("[START] Starting server on http://0.0.0.0:5002")
     print()
-    print("📱 Control Panel: http://127.0.0.1:5002")
-    print("👑 Queen: http://127.0.0.1:5002/queen")
-    print("🤖 Drone: http://127.0.0.1:5002/drone?id=1")
+    print("Control Panel: http://127.0.0.1:5002")
+    print("Queen: http://127.0.0.1:5002/queen")
+    print("Drone: http://127.0.0.1:5002/drone?id=1")
     print()
     print("=" * 80)
     print()
-    
+
     app.run(host='0.0.0.0', port=5002, debug=False, threaded=True)

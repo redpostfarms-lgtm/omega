@@ -72,8 +72,8 @@ class ResourceMonitor:
     
     def __init__(self):
         self.metrics = {
-            "memory_usage": [],
-            "cpu_usage": [],
+            "memory_usage": deque(maxlen=1000),
+            "cpu_usage": deque(maxlen=1000),
             "active_connections": 0,
             "requests_per_second": 0
         }
@@ -83,15 +83,12 @@ class ResourceMonitor:
         """Record metric value."""
         with self.lock:
             if metric_name not in self.metrics:
-                self.metrics[metric_name] = []
-            
+                self.metrics[metric_name] = deque(maxlen=1000)
+
             self.metrics[metric_name].append({
                 "timestamp": datetime.now().isoformat(),
                 "value": value
             })
-            
-            if len(self.metrics[metric_name]) > 1000:
-                self.metrics[metric_name].pop(0)
     
     def get_average(self, metric_name: str, window: int = 60) -> float:
         """Get average metric over time window."""
