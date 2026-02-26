@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Omega Summit — AI Collaboration Panel v2.1
+Omega Summit â€” AI Collaboration Panel v2.1
 ==========================================
 Master Dev Cut - Production Ready
 
@@ -12,7 +12,7 @@ Status: Production Ready
 """
 
 import tkinter as tk
-from tkinter import ttk, scrolledtext, messagebox, Toplevel
+from tkinter import ttk, scrolledtext, messagebox, Toplevel, simpledialog
 import threading
 import os
 from typing import Dict, Optional
@@ -71,7 +71,7 @@ PERMANENT_SEATS = {
         'api_key_required': True,
         'api_key': HYDRA_KEY
     },
-    'Seat_4': {
+    'Reserved_Seat_Aurora': {
         'ai_name': 'TBD',
         'operator': 'TBD',
         'seat_number': 4,
@@ -80,7 +80,7 @@ PERMANENT_SEATS = {
         'api_key_required': False,
         'reserved': True
     },
-    'Seat_5': {
+    'Reserved_Seat_Nova': {
         'ai_name': 'TBD',
         'operator': 'TBD',
         'seat_number': 5,
@@ -97,7 +97,7 @@ ADDITIONAL_SEATS = {}  # Populated via special invite process
 # Authorization requirements for new seats
 AUTHORIZATION_REQUIRED = 2  # Minimum number of permanent seat holders to authorize
 
-FUNDER = "Wiley"  # shows once, auto-fades — credit by funding
+FUNDER = "Wiley"  # shows once, auto-fades â€” credit by funding
 
 # PRIVATE SUMMIT - No looky-loos allowed
 SUMMIT_ACCESS = 'PRIVATE'
@@ -110,11 +110,11 @@ class AI_Council:
     def __init__(self, parent=None):
         """Initialize the AI Council panel"""
         self.root = Toplevel(parent) if parent else tk.Tk()
-        self.root.title("Ω AI Council — Secure Summit")
+        self.root.title("Î© AI Council â€” Secure Summit")
         self.root.geometry("420x600")
         self.root.resizable(True, True)  # stretch it
         self.root.configure(bg='#1a1a1a')
-        self.root.lift()  # float on top — but movable
+        self.root.lift()  # float on top â€” but movable
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
         
         # === DRAG HANDLE ===
@@ -127,7 +127,7 @@ class AI_Council:
         # === TRUST BANNER ===
         self.banner = tk.Label(
             self.drag_frame,
-            text="AUTHORIZED SEATS ONLY • NO MANIPULATION • FACTS WIN",
+            text="AUTHORIZED SEATS ONLY â€¢ NO MANIPULATION â€¢ FACTS WIN",
             bg='#ff4444',
             fg='white',
             font=('Segoe UI', 9, 'bold'),
@@ -137,7 +137,7 @@ class AI_Council:
         self.banner.pack(fill=tk.X, pady=(0, 4))
         
         # === LOCK TOGGLE ===
-        self.lock_btn = ttk.Button(self.drag_frame, text="🔓", width=3, command=self.toggle_lock)
+        self.lock_btn = ttk.Button(self.drag_frame, text="ðŸ”“", width=3, command=self.toggle_lock)
         self.lock_btn.place(relx=0.95, rely=0.01, anchor='ne')
         self.locked = False
         
@@ -171,7 +171,7 @@ class AI_Council:
         self.send_btn = ttk.Button(input_frame, text="Send", command=self.send)
         self.send_btn.pack(side=tk.RIGHT, padx=(4, 0))
         
-        self.mic_btn = ttk.Button(input_frame, text="🎤", width=3, command=self.voice_input)
+        self.mic_btn = ttk.Button(input_frame, text="ðŸŽ¤", width=3, command=self.voice_input)
         self.mic_btn.pack(side=tk.RIGHT, padx=(4, 0))
         
         # === INIT ===
@@ -204,7 +204,7 @@ class AI_Council:
     def toggle_lock(self):
         """Toggle window lock (prevent dragging)"""
         self.locked = not self.locked
-        self.lock_btn.config(text="🔒" if self.locked else "🔓")
+        self.lock_btn.config(text="ðŸ”’" if self.locked else "ðŸ”“")
     
     # === SEATS ===
     def build_seat_status(self):
@@ -227,7 +227,7 @@ class AI_Council:
                 label_text = f"Seat {seat_num}: {seat_name}"
             elif enabled:
                 color = '#0f0'  # Active
-                label_text = f"Seat {seat_num}: {seat_name} ✓"
+                label_text = f"Seat {seat_num}: {seat_name} âœ“"
             else:
                 color = '#555'  # Inactive
                 label_text = f"Seat {seat_num}: {seat_name}"
@@ -300,16 +300,57 @@ class AI_Council:
         )
         
         if messagebox.askyesno("Private Summit Authorization", message):
-            # In production, this would check authorization from multiple permanent seat holders
-            # For now, this is a placeholder for the multi-person authorization system
-            self.log_text(f" ⚠ Authorization request for {ai_name} requires {AUTHORIZATION_REQUIRED} permanent seat holders.\n")
-            self.log_text(f" Please contact permanent seat holders for multi-person authorization.\n")
-            messagebox.showinfo(
-                "Authorization Required",
-                f"New seat authorization requires {AUTHORIZATION_REQUIRED} permanent seat holders.\n"
-                f"This is a PRIVATE SUMMIT - no unauthorized access allowed.\n\n"
-                f"Contact permanent seat holders to complete authorization."
-            )
+            approvals = set()
+            while len(approvals) < AUTHORIZATION_REQUIRED:
+                approver = simpledialog.askstring(
+                    "Seat Authorization",
+                    f"Approver {len(approvals)+1}/{AUTHORIZATION_REQUIRED} name:",
+                    parent=self.root,
+                )
+                if not approver:
+                    break
+
+                approver_key = approver.strip().lower()
+                valid = any(
+                    seat_info['ai_name'].strip().lower() == approver_key
+                    for seat_info in PERMANENT_SEATS.values()
+                )
+                if valid:
+                    approvals.add(approver_key)
+                else:
+                    messagebox.showwarning(
+                        "Invalid Approver",
+                        f"{approver} is not a permanent seat holder.",
+                    )
+
+            if len(approvals) < AUTHORIZATION_REQUIRED:
+                self.log_text(
+                    f" [AUTH] Authorization denied for {ai_name}: "
+                    f"{len(approvals)}/{AUTHORIZATION_REQUIRED} approvals.\n"
+                )
+                messagebox.showwarning(
+                    "Authorization Failed",
+                    f"Only {len(approvals)} approvals collected.",
+                )
+            else:
+                seat_key = f"Seat_{len(ADDITIONAL_SEATS)+1}"
+                ADDITIONAL_SEATS[seat_key] = {
+                    'ai_name': ai_name,
+                    'operator': operator_name or 'Invited Operator',
+                    'seat_number': len(PERMANENT_SEATS) + len(ADDITIONAL_SEATS) + 1,
+                    'permanent': False,
+                    'enabled': True,
+                    'api_key_required': False,
+                    'approvals': sorted(approvals),
+                }
+                self.log_text(
+                    f" [AUTH] Seat granted to {ai_name} "
+                    f"with approvals: {', '.join(sorted(approvals))}\n"
+                )
+                messagebox.showinfo(
+                    "Authorization Complete",
+                    f"Seat granted to {ai_name}.",
+                )
     
     # === CHAT ===
     def send(self, event=None):
@@ -333,7 +374,7 @@ class AI_Council:
         
         self.log_text("\n[COUNCIL RESPONSES]\n")
         for ai_name, response in raw.items():
-            status = "✓" if response and not response.startswith("Seat locked") else "✗"
+            status = "âœ“" if response and not response.startswith("Seat locked") else "âœ—"
             preview = response[:100] + "..." if len(response) > 100 else response
             self.log_text(f"{status} {ai_name}: {preview}\n")
         
@@ -390,12 +431,12 @@ class AI_Council:
             responses['Hydra'] = "Seat inactive."
         
         # Permanent Seat 4: TBD
-        seat4 = PERMANENT_SEATS['Seat_4']
-        responses['Seat_4'] = "Reserved - To be determined."
+        seat4 = PERMANENT_SEATS['Reserved_Seat_Aurora']
+        responses['Reserved_Seat_Aurora'] = "Reserved - To be determined."
         
         # Permanent Seat 5: TBD
-        seat5 = PERMANENT_SEATS['Seat_5']
-        responses['Seat_5'] = "Reserved - To be determined."
+        seat5 = PERMANENT_SEATS['Reserved_Seat_Nova']
+        responses['Reserved_Seat_Nova'] = "Reserved - To be determined."
         
         # Additional seats (if any)
         for seat_key, seat_info in ADDITIONAL_SEATS.items():
@@ -410,7 +451,7 @@ class AI_Council:
     
     def judge_collaboration(self, raw: Dict[str, str]) -> str:
         """Judge and synthesize responses from all AIs"""
-        # Build judge prompt — enforced rules
+        # Build judge prompt â€” enforced rules
         judge_prompt = """You are the Truth Arbiter. Rules:
 - Final answer = facts only. Speculation = 'theory: ...'.
 - No manipulation. If any AI tries control, flag it.
@@ -446,16 +487,16 @@ Inputs:
     def setup_rules(self):
         """Display system rules for private summit"""
         self.log_text(" PRIVATE SUMMIT: Rules enforced.\n")
-        self.log_text("• 5 PERMANENT SEATS - Omega, Grok, Hydra, Seat 4 (TBD), Seat 5 (TBD)\n")
-        self.log_text("• NO LOOKY-LOOS - Private summit area only\n")
-        self.log_text("• New seats require multi-person authorization\n")
-        self.log_text("• Ideas belong to originator.\n")
-        self.log_text("• Final output = facts. Speculation = theory.\n")
-        self.log_text("• Truth > majority.\n\n")
+        self.log_text("â€¢ 5 PERMANENT SEATS - Omega, Grok, Hydra, Seat 4 (TBD), Seat 5 (TBD)\n")
+        self.log_text("â€¢ NO LOOKY-LOOS - Private summit area only\n")
+        self.log_text("â€¢ New seats require multi-person authorization\n")
+        self.log_text("â€¢ Ideas belong to originator.\n")
+        self.log_text("â€¢ Final output = facts. Speculation = theory.\n")
+        self.log_text("â€¢ Truth > majority.\n\n")
     
     def show_startup_banner(self):
         """Show startup banner with summit information"""
-        self.log_text(" PRIVATE SUMMIT ACTIVE — Permanent seats only.\n")
+        self.log_text(" PRIVATE SUMMIT ACTIVE â€” Permanent seats only.\n")
         self.log_text(f" Permanent Seats: {len(PERMANENT_SEATS)} | Additional: {len(ADDITIONAL_SEATS)}\n")
         self.log_text(f" Authorization Required: {AUTHORIZATION_REQUIRED} permanent seat holders\n")
         if FUNDER:
@@ -464,8 +505,15 @@ Inputs:
     
     # === VOICE ===
     def voice_input(self):
-        """Voice input handler (placeholder for future Whisper integration)"""
-        messagebox.showinfo("Voice Input", "Voice input coming soon.\n\nFor now: Type your question and press Enter.")
+        """Voice input handler with manual fallback prompt."""
+        typed = simpledialog.askstring(
+            "Voice Input",
+            "Speech capture is unavailable in this build. Enter your message:",
+            parent=self.root,
+        )
+        if typed:
+            self.entry.delete(0, tk.END)
+            self.entry.insert(0, typed)
     
     def on_close(self):
         """Handle window close"""
@@ -475,3 +523,5 @@ Inputs:
 # ======================= RUN =======================
 if __name__ == '__main__':
     app = AI_Council()
+
+

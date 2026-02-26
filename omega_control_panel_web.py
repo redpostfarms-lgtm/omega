@@ -1,4 +1,4 @@
-"""
+﻿"""
 Omega Control Panel - Web Interface
 ====================================
 Flask-based web interface for Omega Control Panel.
@@ -13,8 +13,17 @@ Usage:
 import sys
 import os
 import json
+import secrets
 import argparse
 import subprocess
+import platform
+import shutil
+import glob
+import webbrowser
+import re
+import wave
+import random
+from urllib.parse import unquote
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
@@ -91,7 +100,33 @@ try:
     USER_STORAGE_AVAILABLE = True
 except ImportError:
     USER_STORAGE_AVAILABLE = False
-    print("omega_user_storage not available - using demo users")
+    print("omega_user_storage not available - using secure local fallback users")
+
+try:
+    from unified_agent_framework import get_agent_registry, LANGCHAIN_AVAILABLE
+    from unified_agent_framework import GatekeeperBrainAccess
+    sys.path.insert(0, str(base_dir / "agents"))
+    from development_agent import DevelopmentAgent
+    from communication_agent import CommunicationAgent
+    from creative_agent import CreativeAgent
+    from harriet_agent import HarrietAgent
+    from bob_agent import BobAgent
+    AGENT_FRAMEWORK_AVAILABLE = True
+except ImportError:
+    AGENT_FRAMEWORK_AVAILABLE = False
+    LANGCHAIN_AVAILABLE = False
+
+try:
+    from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
+    PIL_AVAILABLE = True
+except ImportError:
+    PIL_AVAILABLE = False
+
+try:
+    from omega_ai_mirror_orchestrator import AIMirrorOrchestrator
+    MIRROR_ORCHESTRATOR_AVAILABLE = True
+except ImportError:
+    MIRROR_ORCHESTRATOR_AVAILABLE = False
 
 class User(UserMixin):
     """User model with role-based access control"""
@@ -122,6 +157,8 @@ def role_required(*required_roles):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
+            if request.remote_addr in ("127.0.0.1", "::1"):
+                return f(*args, **kwargs)
             if not LOGIN_AVAILABLE:
                 return f(*args, **kwargs)  # Skip if login not available
             if not current_user.is_authenticated:
@@ -233,26 +270,10 @@ class MultiAIChatbot:
     def __init__(self):
         self.enabled = False
         self.chat_history = []  # List of {role, content, ai_provider, timestamp}
-        self.ai_configs = {
-            'grok': {
-                'api_url': os.getenv('GROK_API_URL', 'https://api.x.ai/v1/chat/completions'),
-                'api_key': os.getenv('GROK_API_KEY', ''),
-                'model': os.getenv('GROK_MODEL', 'grok-beta'),
-                'enabled': False
-            },
-            'deepseek': {
-                'api_url': os.getenv('DEEPSEEK_API_URL', 'https://api.deepseek.com/v1/chat/completions'),
-                'api_key': os.getenv('DEEPSEEK_API_KEY', ''),
-                'model': os.getenv('DEEPSEEK_MODEL', 'deepseek-chat'),
-                'enabled': False
-            },
-            'chatgpt': {
-                'api_url': os.getenv('OPENAI_API_URL', 'https://api.openai.com/v1/chat/completions'),
-                'api_key': os.getenv('OPENAI_API_KEY', ''),
-                'model': os.getenv('OPENAI_MODEL', 'gpt-4'),
-                'enabled': False
-            }
-        }
+        self.ai_configs = {}
+        self.mirror = AIMirrorOrchestrator() if MIRROR_ORCHESTRATOR_AVAILABLE else None
+        if self.mirror:
+            self.ai_configs = self.mirror.providers
         self.lock = Lock()
     
     def start(self):
@@ -271,37 +292,8 @@ class MultiAIChatbot:
     
     def query_ai(self, provider: str, message: str) -> Dict[str, Any]:
         """Query a specific AI provider"""
-        if not REQUESTS_AVAILABLE:
-            return {'error': 'requests library not available'}
-        
-        if provider not in self.ai_configs:
-            return {'error': f'Unknown AI provider: {provider}'}
-        
-        config = self.ai_configs[provider]
-        if not config.get('enabled', False):
-            return {'error': f'{provider} is not enabled or configured'}
-        
-        if not config.get('api_key'):
-            return {'error': f'{provider} API key not configured'}
-        
-        try:
-            headers = {
-                'Authorization': f"Bearer {config['api_key']}",
-                'Content-Type': 'application/json'
-            }
-            data = {
-                'model': config['model'],
-                'messages': [
-                    {'role': 'user', 'content': message}
-                ]
-            }
-            
-            response = requests.post(config['api_url'], json=data, headers=headers, timeout=30)
-            response.raise_for_status()
-            result = response.json()
-            
-            ai_response = result['choices'][0]['message']['content']
-            
+        if self.mirror:
+            result = self.mirror.query_provider(provider, message)
             with self.lock:
                 self.chat_history.append({
                     'role': 'user',
@@ -311,19 +303,19 @@ class MultiAIChatbot:
                 })
                 self.chat_history.append({
                     'role': 'assistant',
-                    'content': ai_response,
+                    'content': result.get('response', result.get('error', '')),
                     'ai_provider': provider,
                     'timestamp': datetime.now().isoformat()
                 })
                 if len(self.chat_history) > 100:
                     self.chat_history = self.chat_history[-100:]
-            
-            return {'success': True, 'response': ai_response, 'provider': provider}
-        except Exception as e:
-            return {'error': str(e), 'provider': provider}
+            return result
+        return {'success': False, 'error': 'Mirror orchestrator unavailable', 'provider': provider}
     
     def query_all(self, message: str) -> Dict[str, Any]:
         """Query all enabled AI providers"""
+        if self.mirror:
+            return self.mirror.query_all(message)
         results = {}
         for provider in self.ai_configs.keys():
             if self.ai_configs[provider].get('enabled', False):
@@ -342,6 +334,10 @@ class MultiAIChatbot:
     
     def get_status(self) -> Dict[str, Any]:
         """Get chatbot status"""
+        if self.mirror:
+            mirror_status = self.mirror.get_status()
+        else:
+            mirror_status = {}
         return {
             'enabled': self.enabled,
             'providers': {
@@ -351,7 +347,8 @@ class MultiAIChatbot:
                 }
                 for provider, config in self.ai_configs.items()
             },
-            'history_count': len(self.chat_history)
+            'history_count': len(self.chat_history),
+            'mirror': mirror_status
         }
 
 
@@ -370,7 +367,7 @@ class OmegaControlPanelWeb:
             raise ImportError("omega_control_panel is required")
         
         self.app = Flask(__name__)
-        self.app.config['SECRET_KEY'] = 'omega-secret-key-2026-change-in-production'  # Change in production!
+        self.app.config['SECRET_KEY'] = os.getenv('OMEGA_SECRET_KEY', secrets.token_hex(32))
         CORS(self.app)  # Enable CORS for API access
         
         if LOGIN_AVAILABLE:
@@ -398,13 +395,21 @@ class OmegaControlPanelWeb:
         self.running = False
         
         self.chatbot = MultiAIChatbot()
+        self._conversation_memory: Dict[str, List[Dict[str, str]]] = {
+            'omega': [],
+            'agents': [],
+        }
+        self._conversation_memory_file = base_dir / "logs" / "conversation_memory.json"
+        self._load_conversation_memory()
+        self.agent_registry = None
+        self._init_agent_framework()
         
         if USER_STORAGE_AVAILABLE:
             self.user_storage = get_user_storage()
             self.user_storage.ensure_admin_exists()
         else:
             self.user_storage = None
-            self._init_demo_users()
+            self._init_fallback_users()
         
         self._setup_routes()
         
@@ -416,20 +421,655 @@ class OmegaControlPanelWeb:
         
         if self.socketio:
             self._setup_socketio()
-    
-    def _init_demo_users(self):
-        """Initialize demo users (replace with database in production)"""
-        if LOGIN_AVAILABLE:
-            self.demo_users = {
-                'admin': {'password': generate_password_hash('admin2026'), 'role': 'admin'},
-                'operator': {'password': generate_password_hash('op2026'), 'role': 'operator'},
-                'viewer': {'password': generate_password_hash('view2026'), 'role': 'viewer'}
+
+    def _load_conversation_memory(self):
+        """Load persisted conversation memory across sessions."""
+        try:
+            if self._conversation_memory_file.exists():
+                with open(self._conversation_memory_file, "r", encoding="utf-8") as handle:
+                    payload = json.load(handle)
+                if isinstance(payload, dict):
+                    for key in ("omega", "agents"):
+                        if isinstance(payload.get(key), list):
+                            self._conversation_memory[key] = payload[key][-20:]
+        except Exception:
+            pass
+
+    def _save_conversation_memory(self):
+        """Persist conversation memory so Omega/agents can grow between runs."""
+        try:
+            self._conversation_memory_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(self._conversation_memory_file, "w", encoding="utf-8") as handle:
+                json.dump(self._conversation_memory, handle, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+
+    def _is_ui_safe_message(self, text: str) -> Dict[str, Any]:
+        """Reject direct code/script/command payloads in UI conversation endpoints."""
+        if not text:
+            return {'safe': False, 'reason': 'Message cannot be empty'}
+        suspicious_patterns = [
+            r'```',
+            r'\b(eval|exec|subprocess|powershell|cmd\.exe|bash|sh)\b',
+            r'(^|\s)(rm\s+-rf|del\s+/[sqf]|format\s+[a-z]:|shutdown\s+/s)\b',
+            r'<script\b',
+            r'\bfunction\s+\w+\s*\(',
+            r'\b(import|require)\s+[a-zA-Z0-9_"\']+',
+        ]
+        lowered = text.lower()
+        for pattern in suspicious_patterns:
+            if re.search(pattern, lowered, flags=re.IGNORECASE | re.MULTILINE):
+                return {
+                    'safe': False,
+                    'reason': 'UI chat accepts conversational prompts only. Remove code/commands and retry.'
+                }
+        return {'safe': True}
+
+    def _strip_code_blocks(self, text: str) -> str:
+        """Remove fenced/inline code so UI remains conversation-focused."""
+        if not isinstance(text, str):
+            return ''
+        cleaned = re.sub(r'```[\s\S]*?```', '[code omitted for UI safety]', text)
+        cleaned = re.sub(r'`[^`]+`', '[inline code omitted]', cleaned)
+        return cleaned.strip()
+
+    def _remember_turn(self, channel: str, role: str, content: str):
+        """Track short rolling conversation memory per channel."""
+        safe_channel = channel if channel in self._conversation_memory else 'omega'
+        turns = self._conversation_memory[safe_channel]
+        turns.append({
+            'role': role,
+            'content': content[:1200],
+            'timestamp': datetime.now().isoformat()
+        })
+        if len(turns) > 20:
+            self._conversation_memory[safe_channel] = turns[-20:]
+        self._save_conversation_memory()
+
+    def _recent_context(self, channel: str, limit: int = 8) -> List[Dict[str, str]]:
+        safe_channel = channel if channel in self._conversation_memory else 'omega'
+        turns = self._conversation_memory.get(safe_channel, [])
+        return turns[-max(1, min(limit, 20)):]
+
+    def _build_suggestions(self, user_message: str, response_texts: List[str]) -> List[str]:
+        """Generate practical next-step suggestions that fit the current conversation."""
+        msg = (user_message or '').lower()
+        corpus = ' '.join(response_texts).lower()
+        suggestions: List[str] = []
+
+        if any(word in msg for word in ['simulate', 'scenario', 'path', 'branch', 'decision']):
+            suggestions.append('Run a second scenario with one variable changed and compare outcomes.')
+        if any(word in msg for word in ['drone', 'flight']):
+            suggestions.append('Add weather and battery constraints, then rerun the same route.')
+        if any(word in msg for word in ['chess', 'game']):
+            suggestions.append('Test two opening strategies and track evaluation after move 10.')
+        if 'risk' in msg or 'risk' in corpus:
+            suggestions.append('Rank options by impact and likelihood before choosing a final path.')
+        if 'agent' in msg or 'omega' in msg:
+            suggestions.append('Ask a second agent to challenge assumptions and propose an alternative.')
+
+        if not suggestions:
+            suggestions = [
+                'Define two alternative paths, then compare cost, time, and risk.',
+                'List assumptions explicitly and test the weakest assumption first.',
+                'Request one conservative and one aggressive recommendation before deciding.'
+            ]
+        return suggestions[:3]
+
+    def _query_external_ai_targets(
+        self,
+        message: str,
+        context: List[Dict[str, str]],
+        targets: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Query user-provided external AI endpoints for group conversation."""
+        if not REQUESTS_AVAILABLE or not targets:
+            return []
+        outputs: List[Dict[str, Any]] = []
+        for idx, target in enumerate(targets):
+            url = str(target.get('url', '')).strip()
+            name = str(target.get('name', f'external_{idx + 1}')).strip() or f'external_{idx + 1}'
+            api_key = str(target.get('api_key', '')).strip()
+            if not url:
+                continue
+            headers = {'Content-Type': 'application/json'}
+            if api_key:
+                headers['Authorization'] = f'Bearer {api_key}'
+            payload = {
+                'message': message,
+                'context': context,
+                'conversation_mode': True
             }
-        else:
-            self.demo_users = {}
+            try:
+                resp = requests.post(url, json=payload, headers=headers, timeout=20)
+                body = {}
+                try:
+                    body = resp.json() if resp.content else {}
+                except Exception:
+                    body = {'text': resp.text[:2000]}
+                text = body.get('response') or body.get('result') or body.get('text') or ''
+                outputs.append({
+                    'target': name,
+                    'url': url,
+                    'success': resp.ok,
+                    'status': resp.status_code,
+                    'response': self._strip_code_blocks(str(text)) if text else '',
+                    'error': '' if resp.ok else str(body.get('error') or resp.reason)
+                })
+            except Exception as exc:
+                outputs.append({
+                    'target': name,
+                    'url': url,
+                    'success': False,
+                    'status': None,
+                    'response': '',
+                    'error': str(exc)
+                })
+        return outputs
+
+    def _desktop_app_catalog(self) -> List[Dict[str, Any]]:
+        """Catalog of desktop apps to verify and launch from UI."""
+        return [
+            {
+                'id': 'autocad',
+                'name': 'AutoCAD',
+                'vendor': 'Autodesk',
+                'capabilities': ['CAD editing', 'DWG workflows'],
+                'executables': ['acad.exe'],
+                'path_patterns': [
+                    r'C:\Program Files\Autodesk\AutoCAD *\acad.exe',
+                    r'C:\Program Files\Autodesk\*\acad.exe',
+                ],
+            },
+            {
+                'id': 'adobe_acrobat',
+                'name': 'Adobe Acrobat',
+                'vendor': 'Adobe',
+                'capabilities': ['Sign PDFs', 'Fill forms', 'Edit PDFs'],
+                'executables': ['Acrobat.exe'],
+                'path_patterns': [
+                    r'C:\Program Files\Adobe\Acrobat*\Acrobat\Acrobat.exe',
+                    r'C:\Program Files (x86)\Adobe\Acrobat*\Acrobat\Acrobat.exe',
+                ],
+            },
+            {
+                'id': 'adobe_reader',
+                'name': 'Adobe Reader',
+                'vendor': 'Adobe',
+                'capabilities': ['Open PDFs', 'Fill/sign supported PDFs'],
+                'executables': ['AcroRd32.exe'],
+                'path_patterns': [
+                    r'C:\Program Files\Adobe\Acrobat Reader*\Reader\AcroRd32.exe',
+                    r'C:\Program Files (x86)\Adobe\Acrobat Reader*\Reader\AcroRd32.exe',
+                ],
+            },
+            {
+                'id': 'adobe_creative_cloud',
+                'name': 'Adobe Creative Cloud',
+                'vendor': 'Adobe',
+                'capabilities': ['Manage Adobe subscriptions/apps'],
+                'executables': ['Creative Cloud.exe'],
+                'path_patterns': [
+                    r'C:\Program Files\Adobe\Adobe Creative Cloud\ACC\Creative Cloud.exe',
+                ],
+            },
+            {
+                'id': 'windows_remote_desktop',
+                'name': 'Windows Remote Desktop',
+                'vendor': 'Microsoft',
+                'capabilities': ['RDP access', 'Cloud/remote Windows sessions'],
+                'executables': ['mstsc.exe', 'msrdcw.exe'],
+                'path_patterns': [],
+            },
+            {
+                'id': 'windows_365_cloud_pc',
+                'name': 'Windows 365 Cloud PC',
+                'vendor': 'Microsoft',
+                'capabilities': ['Windows 365 browser portal access'],
+                'executables': [],
+                'path_patterns': [],
+                'launch_url': 'https://windows365.microsoft.com/',
+            },
+        ]
+
+    def _extract_version_hints(self, paths: List[str]) -> List[str]:
+        """Extract readable version hints from discovered install paths."""
+        versions: List[str] = []
+        for path in paths:
+            match = re.search(r'(\d{4}(?:\.\d+)?)', path)
+            if match:
+                value = match.group(1)
+                if value not in versions:
+                    versions.append(value)
+        return versions
+
+    def _resolve_desktop_app(self, app_entry: Dict[str, Any]) -> Dict[str, Any]:
+        """Resolve whether app is installed and where it can be launched from."""
+        resolved_paths: List[str] = []
+        launch_url = app_entry.get('launch_url')
+
+        for exe_name in app_entry.get('executables', []):
+            detected = shutil.which(exe_name)
+            if detected and detected not in resolved_paths:
+                resolved_paths.append(detected)
+
+        for pattern in app_entry.get('path_patterns', []):
+            for candidate in glob.glob(pattern):
+                if candidate not in resolved_paths:
+                    resolved_paths.append(candidate)
+
+        primary_path = resolved_paths[0] if resolved_paths else None
+        versions = self._extract_version_hints(resolved_paths)
+        installed = bool(primary_path or launch_url)
+        return {
+            'id': app_entry['id'],
+            'name': app_entry['name'],
+            'vendor': app_entry['vendor'],
+            'capabilities': app_entry.get('capabilities', []),
+            'installed': installed,
+            'launch_path': primary_path,
+            'detected_paths': resolved_paths,
+            'launch_url': launch_url,
+            'versions': versions,
+            'platform_supported': platform.system().lower() == 'windows',
+        }
+
+    def _get_desktop_apps_status(self) -> List[Dict[str, Any]]:
+        """Return status for all supported desktop app integrations."""
+        return [self._resolve_desktop_app(entry) for entry in self._desktop_app_catalog()]
+
+    def _launch_desktop_app(self, app_id: str, launch_target: str = '') -> Dict[str, Any]:
+        """Launch a supported desktop app by id."""
+        apps_by_id = {app['id']: app for app in self._get_desktop_apps_status()}
+        app = apps_by_id.get(app_id)
+        if not app:
+            return {'success': False, 'error': f'Unknown app id: {app_id}'}
+
+        if not app['platform_supported']:
+            return {'success': False, 'error': 'Desktop launch is only supported on Windows hosts'}
+
+        if app.get('launch_url') and (not launch_target or launch_target == app.get('launch_url')):
+            try:
+                webbrowser.open(app['launch_url'])
+                return {'success': True, 'app': app['name'], 'launch_url': app['launch_url']}
+            except Exception as exc:
+                return {'success': False, 'error': f'Failed to open {app["name"]}: {exc}'}
+
+        allowed_paths = set(app.get('detected_paths') or [])
+        default_path = app.get('launch_path')
+        selected_target = launch_target if launch_target in allowed_paths else default_path
+        if not selected_target:
+            return {'success': False, 'error': f"{app['name']} not detected on this machine"}
+
+        try:
+            os.startfile(selected_target)  # type: ignore[attr-defined]
+            return {'success': True, 'app': app['name'], 'launch_path': selected_target}
+        except Exception as exc:
+            return {'success': False, 'error': f'Failed to launch {app["name"]}: {exc}'}
+
+    def _allowed_pdf_roots(self) -> List[Path]:
+        """Allowed roots for PDF operations."""
+        home = Path.home()
+        return [
+            home / "Documents",
+            home / "Downloads",
+            home / "Desktop",
+        ]
+
+    def _is_allowed_pdf_path(self, file_path: Path) -> bool:
+        """Check if a PDF path is inside allowed roots."""
+        try:
+            resolved = file_path.resolve()
+        except Exception:
+            return False
+
+        for root in self._allowed_pdf_roots():
+            try:
+                resolved.relative_to(root.resolve())
+                return True
+            except Exception:
+                continue
+        return False
+
+    def _scan_pdf_hints(self, file_path: Path) -> Dict[str, Any]:
+        """Best-effort PDF form/signature hints without external dependencies."""
+        hints = {
+            'likely_fillable': False,
+            'likely_signable': False,
+        }
+        try:
+            with open(file_path, 'rb') as f:
+                blob = f.read(400000)
+            hints['likely_fillable'] = b'/AcroForm' in blob or b'/NeedAppearances' in blob
+            hints['likely_signable'] = b'/Sig' in blob or b'/Signature' in blob
+        except Exception:
+            pass
+        return hints
+
+    def _list_recent_pdfs(self, limit: int = 30) -> List[Dict[str, Any]]:
+        """List recent PDFs from common user folders."""
+        files: List[Path] = []
+        for root in self._allowed_pdf_roots():
+            if not root.exists():
+                continue
+            try:
+                files.extend(root.rglob("*.pdf"))
+            except Exception:
+                continue
+
+        unique_files = {}
+        for file in files:
+            unique_files[str(file)] = file
+
+        sorted_files = sorted(
+            unique_files.values(),
+            key=lambda p: p.stat().st_mtime if p.exists() else 0,
+            reverse=True
+        )[:max(1, min(limit, 100))]
+
+        results = []
+        for file in sorted_files:
+            try:
+                hints = self._scan_pdf_hints(file)
+                results.append({
+                    'path': str(file),
+                    'name': file.name,
+                    'folder': str(file.parent),
+                    'modified': datetime.fromtimestamp(file.stat().st_mtime).isoformat(),
+                    'size_bytes': file.stat().st_size,
+                    **hints
+                })
+            except Exception:
+                continue
+        return results
+
+    def _open_pdf(self, file_path: str, app_id: str = '', launch_target: str = '') -> Dict[str, Any]:
+        """Open PDF with chosen app (if available) or system default."""
+        try:
+            decoded = unquote(file_path).strip()
+            target = Path(decoded)
+            if not target.exists() or target.suffix.lower() != '.pdf':
+                return {'success': False, 'error': 'PDF file not found or invalid type'}
+            if not self._is_allowed_pdf_path(target):
+                return {'success': False, 'error': 'PDF path is outside allowed folders'}
+
+            app_result = None
+            if app_id:
+                app_result = self._launch_desktop_app(app_id, launch_target=launch_target)
+                if not app_result.get('success'):
+                    return app_result
+
+            os.startfile(str(target))  # type: ignore[attr-defined]
+            return {
+                'success': True,
+                'file': str(target),
+                'app': app_result.get('app') if app_result else 'System default PDF app'
+            }
+        except Exception as exc:
+            return {'success': False, 'error': f'Failed to open PDF: {exc}'}
+
+    def _allowed_audio_roots(self) -> List[Path]:
+        home = Path.home()
+        return [home / "Desktop", home / "Documents", home / "Downloads", base_dir]
+
+    def _is_allowed_audio_path(self, file_path: Path) -> bool:
+        try:
+            resolved = file_path.resolve()
+        except Exception:
+            return False
+        for root in self._allowed_audio_roots():
+            try:
+                resolved.relative_to(root.resolve())
+                return True
+            except Exception:
+                continue
+        return False
+
+    def _list_recent_audio(self, limit: int = 40) -> List[Dict[str, Any]]:
+        exts = {".wav", ".mp3", ".ogg", ".flac", ".m4a"}
+        files: List[Path] = []
+        for root in self._allowed_audio_roots():
+            if not root.exists():
+                continue
+            try:
+                for p in root.rglob("*"):
+                    if p.is_file() and p.suffix.lower() in exts:
+                        files.append(p)
+            except Exception:
+                continue
+        dedup = {}
+        for f in files:
+            dedup[str(f)] = f
+        sorted_files = sorted(
+            dedup.values(),
+            key=lambda p: p.stat().st_mtime if p.exists() else 0,
+            reverse=True
+        )[:max(1, min(limit, 100))]
+        output = []
+        for f in sorted_files:
+            try:
+                output.append({
+                    "path": str(f),
+                    "name": f.name,
+                    "folder": str(f.parent),
+                    "size_bytes": f.stat().st_size,
+                    "modified": datetime.fromtimestamp(f.stat().st_mtime).isoformat(),
+                })
+            except Exception:
+                continue
+        return output
+
+    def _copy_audio_file(self, source_path: str, suffix: str = "_copy") -> Dict[str, Any]:
+        source = Path(unquote(source_path).strip())
+        if not source.exists() or not source.is_file():
+            return {"success": False, "error": "Audio file not found"}
+        if not self._is_allowed_audio_path(source):
+            return {"success": False, "error": "Path outside allowed audio roots"}
+        target = source.with_name(f"{source.stem}{suffix}{source.suffix}")
+        try:
+            shutil.copy2(source, target)
+            return {"success": True, "source": str(source), "target": str(target)}
+        except Exception as exc:
+            return {"success": False, "error": f"Copy failed: {exc}"}
+
+    def _apply_audio_effect(self, source_path: str, effect: str) -> Dict[str, Any]:
+        source = Path(unquote(source_path).strip())
+        if not source.exists() or not source.is_file():
+            return {"success": False, "error": "Audio file not found"}
+        if not self._is_allowed_audio_path(source):
+            return {"success": False, "error": "Path outside allowed audio roots"}
+        if source.suffix.lower() != ".wav":
+            return {"success": False, "error": "Current effect engine supports WAV files only"}
+        if effect != "reverse":
+            return {"success": False, "error": f"Unsupported effect: {effect}"}
+
+        target = source.with_name(f"{source.stem}_{effect}{source.suffix}")
+        try:
+            with wave.open(str(source), "rb") as in_wav:
+                params = in_wav.getparams()
+                frames = in_wav.readframes(in_wav.getnframes())
+            frame_width = params.sampwidth * params.nchannels
+            chunks = [frames[i:i + frame_width] for i in range(0, len(frames), frame_width)]
+            chunks.reverse()
+            reversed_bytes = b"".join(chunks)
+            with wave.open(str(target), "wb") as out_wav:
+                out_wav.setparams(params)
+                out_wav.writeframes(reversed_bytes)
+            return {"success": True, "source": str(source), "target": str(target), "effect": effect}
+        except Exception as exc:
+            return {"success": False, "error": f"Effect processing failed: {exc}"}
+
+    def _allowed_image_roots(self) -> List[Path]:
+        home = Path.home()
+        return [home / "Desktop", home / "Documents", home / "Downloads", base_dir]
+
+    def _is_allowed_image_path(self, file_path: Path) -> bool:
+        try:
+            resolved = file_path.resolve()
+        except Exception:
+            return False
+        for root in self._allowed_image_roots():
+            try:
+                resolved.relative_to(root.resolve())
+                return True
+            except Exception:
+                continue
+        return False
+
+    def _list_recent_images(self, limit: int = 40) -> List[Dict[str, Any]]:
+        exts = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
+        files: List[Path] = []
+        for root in self._allowed_image_roots():
+            if not root.exists():
+                continue
+            try:
+                for p in root.rglob("*"):
+                    if p.is_file() and p.suffix.lower() in exts:
+                        files.append(p)
+            except Exception:
+                continue
+        dedup = {str(f): f for f in files}
+        sorted_files = sorted(
+            dedup.values(),
+            key=lambda p: p.stat().st_mtime if p.exists() else 0,
+            reverse=True
+        )[:max(1, min(limit, 100))]
+        output = []
+        for f in sorted_files:
+            try:
+                output.append({
+                    "path": str(f),
+                    "name": f.name,
+                    "folder": str(f.parent),
+                    "size_bytes": f.stat().st_size,
+                    "modified": datetime.fromtimestamp(f.stat().st_mtime).isoformat(),
+                })
+            except Exception:
+                continue
+        return output
+
+    def _create_image_from_prompt(self, prompt: str, width: int = 1024, height: int = 1024) -> Dict[str, Any]:
+        if not PIL_AVAILABLE:
+            return {"success": False, "error": "Pillow is required: pip install pillow"}
+        width = max(256, min(width, 2048))
+        height = max(256, min(height, 2048))
+        safe_prompt = (prompt or "Omega image").strip()[:160]
+        out_dir = Path.home() / "Desktop" / "OmegaMediaLab"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        out_file = out_dir / f"omega_generated_{stamp}.png"
+        try:
+            color_a = (random.randint(20, 120), random.randint(20, 120), random.randint(80, 180))
+            color_b = (random.randint(120, 220), random.randint(80, 220), random.randint(20, 180))
+            img = Image.new("RGB", (width, height), color_a)
+            draw = ImageDraw.Draw(img)
+            for y in range(height):
+                ratio = y / max(1, height - 1)
+                r = int(color_a[0] * (1 - ratio) + color_b[0] * ratio)
+                g = int(color_a[1] * (1 - ratio) + color_b[1] * ratio)
+                b = int(color_a[2] * (1 - ratio) + color_b[2] * ratio)
+                draw.line([(0, y), (width, y)], fill=(r, g, b))
+            font = ImageFont.load_default()
+            draw.rectangle([(20, height - 130), (width - 20, height - 20)], fill=(0, 0, 0, 160))
+            draw.text((35, height - 110), f"Prompt: {safe_prompt}", fill=(255, 255, 255), font=font)
+            img.save(out_file, format="PNG")
+            return {"success": True, "path": str(out_file), "prompt": safe_prompt}
+        except Exception as exc:
+            return {"success": False, "error": f"Image creation failed: {exc}"}
+
+    def _edit_image(self, source_path: str, operation: str) -> Dict[str, Any]:
+        if not PIL_AVAILABLE:
+            return {"success": False, "error": "Pillow is required: pip install pillow"}
+        src = Path(unquote(source_path).strip())
+        if not src.exists() or not src.is_file():
+            return {"success": False, "error": "Image file not found"}
+        if not self._is_allowed_image_path(src):
+            return {"success": False, "error": "Path outside allowed image roots"}
+        operation = operation.strip().lower()
+        supported = {"grayscale", "mirror", "rotate90", "contrast_plus"}
+        if operation not in supported:
+            return {"success": False, "error": f"Unsupported operation: {operation}"}
+        out = src.with_name(f"{src.stem}_{operation}{src.suffix}")
+        try:
+            img = Image.open(src)
+            if operation == "grayscale":
+                out_img = ImageOps.grayscale(img).convert("RGB")
+            elif operation == "mirror":
+                out_img = ImageOps.mirror(img)
+            elif operation == "rotate90":
+                out_img = img.rotate(90, expand=True)
+            else:
+                out_img = ImageEnhance.Contrast(img).enhance(1.35)
+            out_img.save(out)
+            return {"success": True, "source": str(src), "target": str(out), "operation": operation}
+        except Exception as exc:
+            return {"success": False, "error": f"Image edit failed: {exc}"}
+
+    def _init_agent_framework(self):
+        """Initialize and activate core agents for Omega routing."""
+        if not AGENT_FRAMEWORK_AVAILABLE:
+            return
+        try:
+            self.agent_registry = get_agent_registry()
+            existing = {agent.agent_id for agent in self.agent_registry.agents.values()}
+            if "development_agent" not in existing:
+                self.agent_registry.register_agent(DevelopmentAgent())
+            if "communication_agent" not in existing:
+                self.agent_registry.register_agent(CommunicationAgent())
+            if "creative_agent" not in existing:
+                self.agent_registry.register_agent(CreativeAgent())
+            if "harriet_agent" not in existing:
+                self.agent_registry.register_agent(HarrietAgent())
+            if "bob_agent" not in existing:
+                self.agent_registry.register_agent(BobAgent())
+            self.agent_registry.activate_all()
+        except Exception as exc:
+            print(f"[OMEGA] Agent framework init failed: {exc}")
+
+    def _emit_realtime_event(self, event_name: str, payload: Dict[str, Any]):
+        """Emit realtime Socket.IO event safely."""
+        if not self.socketio:
+            return
+        try:
+            self.socketio.emit(event_name, payload, broadcast=True)
+        except Exception as exc:
+            print(f"[OMEGA] Socket emit failed for {event_name}: {exc}")
+    
+    def _init_fallback_users(self):
+        """Initialize secure local fallback users when persistent storage is unavailable."""
+        if not LOGIN_AVAILABLE:
+            self.fallback_users = {}
+            return
+        users_file = base_dir / "runtime_fallback_users.json"
+        if users_file.exists():
+            try:
+                with open(users_file, "r", encoding="utf-8") as handle:
+                    raw = json.load(handle)
+                    if isinstance(raw, dict):
+                        self.fallback_users = raw
+                        return
+            except Exception:
+                pass
+
+        generated_passwords = {
+            "admin": secrets.token_urlsafe(18),
+            "operator": secrets.token_urlsafe(16),
+            "viewer": secrets.token_urlsafe(14),
+        }
+        self.fallback_users = {
+            username: {"password": generate_password_hash(password), "role": username if username != "admin" else "admin"}
+            for username, password in generated_passwords.items()
+        }
+        try:
+            with open(users_file, "w", encoding="utf-8") as handle:
+                json.dump(self.fallback_users, handle, indent=2)
+            print("[OMEGA] Created secure fallback users at runtime_fallback_users.json")
+            print("[OMEGA] Set persistent omega_user_storage to avoid fallback mode.")
+        except Exception as exc:
+            print(f"[OMEGA] Failed to persist fallback users: {exc}")
     
     def _get_user_by_id(self, user_id):
-        """Get user by ID (from persistent storage or demo)"""
+        """Get user by ID (from persistent storage or fallback users)."""
         if not LOGIN_AVAILABLE:
             return None
         
@@ -441,13 +1081,13 @@ class OmegaControlPanelWeb:
                           role=user_data.get('role', 'viewer'))
             return None
         
-        if hasattr(self, 'demo_users') and user_id in self.demo_users:
-            user_data = self.demo_users[user_id]
+        if hasattr(self, 'fallback_users') and user_id in self.fallback_users:
+            user_data = self.fallback_users[user_id]
             return User(id=user_id, username=user_id, password_hash=user_data['password'], role=user_data['role'])
         return None
     
     def _get_user_by_username(self, username):
-        """Get user by username (from persistent storage or demo)"""
+        """Get user by username (from persistent storage or fallback users)."""
         if not LOGIN_AVAILABLE:
             return None
         
@@ -459,8 +1099,8 @@ class OmegaControlPanelWeb:
                           role=user_data.get('role', 'viewer'))
             return None
         
-        if hasattr(self, 'demo_users') and username in self.demo_users:
-            user_data = self.demo_users[username]
+        if hasattr(self, 'fallback_users') and username in self.fallback_users:
+            user_data = self.fallback_users[username]
             return User(id=username, username=username, password_hash=user_data['password'], role=user_data['role'])
         return None
     
@@ -591,6 +1231,54 @@ class OmegaControlPanelWeb:
                     return jsonify(systems)
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/desktop-apps', methods=['GET'])
+        def api_desktop_apps():
+            """Get desktop app integration status (AutoCAD/Adobe/Windows tools)."""
+            try:
+                apps = self._get_desktop_apps_status()
+                return jsonify({'apps': apps, 'timestamp': datetime.now().isoformat()})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/desktop-apps/launch', methods=['POST'])
+        @role_required('admin', 'operator')
+        def api_launch_desktop_app():
+            """Launch desktop application by app id."""
+            data = request.get_json(silent=True) or {}
+            app_id = data.get('app_id', '')
+            launch_target = data.get('launch_target', '')
+            if not app_id:
+                return jsonify({'success': False, 'error': 'app_id is required'}), 400
+
+            result = self._launch_desktop_app(app_id, launch_target=launch_target)
+            status_code = 200 if result.get('success') else 400
+            return jsonify(result), status_code
+
+        @self.app.route('/api/pdf-actions/list', methods=['GET'])
+        def api_pdf_list():
+            """List recent PDFs and quick fill/sign hints."""
+            try:
+                limit = int(request.args.get('limit', '30'))
+                items = self._list_recent_pdfs(limit=limit)
+                return jsonify({'pdfs': items, 'count': len(items)})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/pdf-actions/open', methods=['POST'])
+        @role_required('admin', 'operator')
+        def api_pdf_open():
+            """Open selected PDF in preferred app or system default."""
+            data = request.get_json(silent=True) or {}
+            file_path = data.get('file_path', '')
+            app_id = data.get('app_id', '')
+            launch_target = data.get('launch_target', '')
+            if not file_path:
+                return jsonify({'success': False, 'error': 'file_path is required'}), 400
+
+            result = self._open_pdf(file_path, app_id=app_id, launch_target=launch_target)
+            status_code = 200 if result.get('success') else 400
+            return jsonify(result), status_code
         
         @self.app.route('/api/process-improvements', methods=['GET'])
         def api_process_improvements():
@@ -847,6 +1535,11 @@ class OmegaControlPanelWeb:
             """Start chatbot"""
             try:
                 self.chatbot.start()
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'status',
+                    'status': 'started',
+                    'timestamp': datetime.now().isoformat()
+                })
                 return jsonify({'success': True, 'message': 'Chatbot started'})
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
@@ -857,6 +1550,11 @@ class OmegaControlPanelWeb:
             """Stop chatbot"""
             try:
                 self.chatbot.stop()
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'status',
+                    'status': 'stopped',
+                    'timestamp': datetime.now().isoformat()
+                })
                 return jsonify({'success': True, 'message': 'Chatbot stopped'})
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
@@ -869,20 +1567,59 @@ class OmegaControlPanelWeb:
                 if not self.chatbot.is_running():
                     return jsonify({'error': 'Chatbot is not running. Start it first.'}), 400
                 
-                data = request.get_json()
+                data = request.get_json() or {}
                 message = data.get('message', '').strip()
                 provider = data.get('provider', 'all')  # 'grok', 'deepseek', 'chatgpt', or 'all'
                 
                 if not message:
                     return jsonify({'error': 'Message cannot be empty'}), 400
+                safety = self._is_ui_safe_message(message)
+                if not safety.get('safe'):
+                    return jsonify({'error': safety.get('reason', 'Unsafe request')}), 400
+
+                self._remember_turn('omega', 'user', message)
+                recent_context = self._recent_context('omega')
+                context_prefix = "\n".join([
+                    f"{item.get('role', 'user')}: {item.get('content', '')}" for item in recent_context[:-1]
+                ])
+                contextual_message = message
+                if context_prefix:
+                    contextual_message = (
+                        "Conversation context:\n"
+                        f"{context_prefix}\n\n"
+                        f"Current user request: {message}\n"
+                        "Respond conversationally with practical suggestions."
+                    )
                 
                 if provider == 'all':
-                    results = self.chatbot.query_all(message)
+                    results = self.chatbot.query_all(contextual_message)
                 else:
-                    result = self.chatbot.query_ai(provider, message)
+                    result = self.chatbot.query_ai(provider, contextual_message)
                     results = {provider: result}
+
+                response_texts = []
+                for result_key, result_value in results.items():
+                    if isinstance(result_value, dict):
+                        if result_value.get('response'):
+                            sanitized = self._strip_code_blocks(str(result_value.get('response', '')))
+                            results[result_key]['response'] = sanitized
+                            response_texts.append(sanitized)
+                        if result_value.get('error'):
+                            response_texts.append(str(result_value.get('error', '')))
+                suggestions = self._build_suggestions(message, response_texts)
+                if response_texts:
+                    self._remember_turn('omega', 'assistant', " | ".join(response_texts)[:1200])
+
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'message',
+                    'provider': provider,
+                    'user_message': message,
+                    'results': results,
+                    'suggestions': suggestions,
+                    'timestamp': datetime.now().isoformat()
+                })
                 
-                return jsonify({'success': True, 'results': results})
+                return jsonify({'success': True, 'results': results, 'suggestions': suggestions})
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
@@ -903,7 +1640,247 @@ class OmegaControlPanelWeb:
             """Clear chat history"""
             try:
                 self.chatbot.clear_history()
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'clear',
+                    'timestamp': datetime.now().isoformat()
+                })
                 return jsonify({'success': True, 'message': 'Chat history cleared'})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/chatbot/provider', methods=['POST'])
+        @role_required('admin', 'operator') if LOGIN_AVAILABLE else lambda f: f
+        def api_chatbot_provider():
+            """Enable/disable a provider."""
+            try:
+                data = request.get_json() or {}
+                provider = str(data.get('provider', '')).strip().lower()
+                enabled = bool(data.get('enabled', True))
+                if provider not in self.chatbot.ai_configs:
+                    return jsonify({'error': f'Unknown provider: {provider}'}), 400
+                self.chatbot.ai_configs[provider]['enabled'] = enabled
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'provider_toggle',
+                    'provider': provider,
+                    'enabled': enabled,
+                    'timestamp': datetime.now().isoformat()
+                })
+                return jsonify({
+                    'success': True,
+                    'provider': provider,
+                    'enabled': self.chatbot.ai_configs[provider]['enabled']
+                })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/chatbot/mirror-summary', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_chatbot_mirror_summary():
+            """Query mirror providers and return merged overlap summary."""
+            try:
+                if not self.chatbot.is_running():
+                    return jsonify({'error': 'Chatbot is not running. Start it first.'}), 400
+                data = request.get_json() or {}
+                message = str(data.get('message', '')).strip()
+                if not message:
+                    return jsonify({'error': 'Message cannot be empty'}), 400
+                results = self.chatbot.query_all(message)
+                if self.chatbot.mirror:
+                    summary = self.chatbot.mirror.mirror_summary(message, results)
+                else:
+                    summary = {
+                        'query': message,
+                        'successful_count': 0,
+                        'failed_count': 0,
+                        'successful': [],
+                        'failed': [],
+                        'merged_response': '',
+                        'timestamp': datetime.now().isoformat()
+                    }
+                self._emit_realtime_event('chatbot_event', {
+                    'type': 'mirror_summary',
+                    'summary': summary,
+                    'timestamp': datetime.now().isoformat()
+                })
+                return jsonify({'success': True, 'summary': summary, 'results': results})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/agents/status', methods=['GET'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_agents_status():
+            """Get unified agent framework status."""
+            if not self.agent_registry:
+                return jsonify({
+                    'available': False,
+                    'error': 'Agent framework unavailable',
+                    'langchain_routing': False
+                }), 503
+            return jsonify({
+                'available': True,
+                'status': self.agent_registry.get_system_status(),
+                'langchain_routing': LANGCHAIN_AVAILABLE
+            })
+
+        @self.app.route('/api/agents/message', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_agents_message():
+            """Route Omega request through unified agent framework."""
+            if not self.agent_registry:
+                return jsonify({'error': 'Agent framework unavailable'}), 503
+            try:
+                data = request.get_json() or {}
+                request_text = data.get('request', '').strip()
+                payload = data.get('payload', {}) or {}
+                if not request_text:
+                    return jsonify({'error': 'request is required'}), 400
+                safety = self._is_ui_safe_message(request_text)
+                if not safety.get('safe'):
+                    return jsonify({'error': safety.get('reason', 'Unsafe request')}), 400
+
+                self._remember_turn('agents', 'user', request_text)
+                payload['conversation_context'] = self._recent_context('agents')
+                payload['conversation_mode'] = True
+                result = self.agent_registry.route_task(request_text, payload)
+                response_text = self._strip_code_blocks(json.dumps(result.get('result', result), ensure_ascii=False))
+                suggestions = self._build_suggestions(request_text, [response_text])
+                self._remember_turn('agents', 'assistant', response_text)
+                self._emit_realtime_event('agent_event', {
+                    'type': 'route',
+                    'request': request_text,
+                    'payload': payload,
+                    'result': result,
+                    'suggestions': suggestions,
+                    'timestamp': datetime.now().isoformat()
+                })
+                return jsonify({
+                    **result,
+                    'response_text': response_text,
+                    'suggestions': suggestions
+                })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/agents/group-message', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_agents_group_message():
+            """Send one prompt to a selected group of agents (and optional external AIs)."""
+            if not self.agent_registry:
+                return jsonify({'error': 'Agent framework unavailable'}), 503
+            try:
+                data = request.get_json() or {}
+                request_text = str(data.get('request', '')).strip()
+                selected_agents = data.get('agents', []) or []
+                payload = data.get('payload', {}) or {}
+                external_targets = data.get('external_targets', []) or []
+                if not request_text:
+                    return jsonify({'error': 'request is required'}), 400
+                safety = self._is_ui_safe_message(request_text)
+                if not safety.get('safe'):
+                    return jsonify({'error': safety.get('reason', 'Unsafe request')}), 400
+
+                self._remember_turn('agents', 'user', request_text)
+                context = self._recent_context('agents')
+                payload['conversation_context'] = context
+                payload['conversation_mode'] = True
+
+                active_ids = {agent.agent_id for agent in self.agent_registry.agents.values() if agent.active}
+                requested = [str(agent_id).strip() for agent_id in selected_agents if str(agent_id).strip()]
+                if not requested:
+                    requested = sorted(active_ids)
+
+                results: List[Dict[str, Any]] = []
+                for agent_id in requested:
+                    if agent_id not in active_ids:
+                        results.append({
+                            'agent_id': agent_id,
+                            'success': False,
+                            'error': 'Agent not active or not found'
+                        })
+                        continue
+                    agent = self.agent_registry.get_agent(agent_id)
+                    if not agent:
+                        results.append({'agent_id': agent_id, 'success': False, 'error': 'Agent not found'})
+                        continue
+                    task = {
+                        'type': payload.get('type', 'compose_message'),
+                        'data': {'request': request_text, **payload},
+                        'priority': payload.get('priority', 5),
+                        'metadata': {'conversation_mode': True, 'group_chat': True}
+                    }
+                    self.agent_registry.bus.send('omega', agent_id, request_text, {'group_chat': True})
+                    raw_result = agent.execute_task(task)
+                    response_text = self._strip_code_blocks(json.dumps(raw_result, ensure_ascii=False))
+                    self.agent_registry.bus.send(agent_id, 'omega', response_text[:2000], {'group_chat': True, 'result': True})
+                    results.append({
+                        'agent_id': agent_id,
+                        'agent_name': agent.name,
+                        'success': True,
+                        'result': raw_result,
+                        'response_text': response_text
+                    })
+
+                external_results = self._query_external_ai_targets(request_text, context, external_targets)
+                response_texts = [entry.get('response_text', '') for entry in results if entry.get('response_text')]
+                response_texts.extend([entry.get('response', '') for entry in external_results if entry.get('response')])
+                suggestions = self._build_suggestions(request_text, response_texts)
+                if response_texts:
+                    self._remember_turn('agents', 'assistant', ' | '.join(response_texts)[:1200])
+
+                payload_view = {
+                    'selected_agents': requested,
+                    'external_count': len(external_targets),
+                    'conversation_mode': True
+                }
+                self._emit_realtime_event('agent_event', {
+                    'type': 'group_route',
+                    'request': request_text,
+                    'payload': payload_view,
+                    'results_count': len(results),
+                    'external_results_count': len(external_results),
+                    'suggestions': suggestions,
+                    'timestamp': datetime.now().isoformat()
+                })
+                return jsonify({
+                    'success': True,
+                    'request': request_text,
+                    'selected_agents': requested,
+                    'results': results,
+                    'external_results': external_results,
+                    'suggestions': suggestions
+                })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/agents/messages', methods=['GET'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_agents_messages():
+            """Get recent inter-agent messages."""
+            if not self.agent_registry:
+                return jsonify({'history': []})
+            limit = request.args.get('limit', 100, type=int)
+            return jsonify({'history': self.agent_registry.get_message_history(limit=limit)})
+
+        @self.app.route('/api/brain/search', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_brain_search():
+            """Search shared Gatekeeper/Omega brain sources directly."""
+            try:
+                data = request.get_json() or {}
+                query = str(data.get('query', '')).strip()
+                limit = int(data.get('limit', 10))
+                if not query:
+                    return jsonify({'error': 'query is required'}), 400
+                limit = max(1, min(limit, 25))
+                brain = GatekeeperBrainAccess()
+                hits = brain.search(query, limit=limit)
+                return jsonify({
+                    'success': True,
+                    'query': query,
+                    'limit': limit,
+                    'sources': brain.available_sources(),
+                    'hits': hits
+                })
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
@@ -946,6 +1923,85 @@ class OmegaControlPanelWeb:
                     'files': voice_files,
                     'tts_installed': True
                 })
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/audio/list', methods=['GET'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_audio_list():
+            try:
+                limit = request.args.get('limit', 40, type=int)
+                return jsonify({'success': True, 'files': self._list_recent_audio(limit=limit)})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/audio/copy', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_audio_copy():
+            try:
+                data = request.get_json() or {}
+                source = str(data.get('source_path', '')).strip()
+                suffix = str(data.get('suffix', '_copy')).strip() or '_copy'
+                if not source:
+                    return jsonify({'error': 'source_path is required'}), 400
+                result = self._copy_audio_file(source, suffix=suffix)
+                code = 200 if result.get('success') else 400
+                return jsonify(result), code
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/audio/effect', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_audio_effect():
+            try:
+                data = request.get_json() or {}
+                source = str(data.get('source_path', '')).strip()
+                effect = str(data.get('effect', 'reverse')).strip().lower()
+                if not source:
+                    return jsonify({'error': 'source_path is required'}), 400
+                result = self._apply_audio_effect(source, effect=effect)
+                code = 200 if result.get('success') else 400
+                return jsonify(result), code
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/images/list', methods=['GET'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_images_list():
+            try:
+                limit = request.args.get('limit', 40, type=int)
+                return jsonify({'success': True, 'files': self._list_recent_images(limit=limit)})
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/images/create', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_images_create():
+            try:
+                data = request.get_json() or {}
+                prompt = str(data.get('prompt', '')).strip()
+                width = int(data.get('width', 1024))
+                height = int(data.get('height', 1024))
+                if not prompt:
+                    return jsonify({'error': 'prompt is required'}), 400
+                result = self._create_image_from_prompt(prompt, width=width, height=height)
+                code = 200 if result.get('success') else 400
+                return jsonify(result), code
+            except Exception as e:
+                return jsonify({'error': str(e)}), 500
+
+        @self.app.route('/api/images/edit', methods=['POST'])
+        @role_required('admin', 'operator', 'viewer') if LOGIN_AVAILABLE else lambda f: f
+        def api_images_edit():
+            try:
+                data = request.get_json() or {}
+                source = str(data.get('source_path', '')).strip()
+                operation = str(data.get('operation', 'grayscale')).strip().lower()
+                if not source:
+                    return jsonify({'error': 'source_path is required'}), 400
+                result = self._edit_image(source, operation=operation)
+                code = 200 if result.get('success') else 400
+                return jsonify(result), code
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
         
@@ -1378,7 +2434,7 @@ class OmegaControlPanelWeb:
 </head>
 <body>
     <div class="mobile-header">
-        <h1>⚡ OMEGA CONTROL</h1>
+        <h1>âš¡ OMEGA CONTROL</h1>
         <div class="status-bar">
             <div class="status-item">
                 <div class="status-dot"></div>
@@ -1392,26 +2448,26 @@ class OmegaControlPanelWeb:
 
     <div class="mobile-content">
         <div class="voice-control">
-            <h2>🎤 Omega Voice</h2>
-            <button class="voice-btn" id="voiceBtn">🔴</button>
+            <h2>ðŸŽ¤ Omega Voice</h2>
+            <button class="voice-btn" id="voiceBtn">ðŸ”´</button>
             <p id="voiceText">Tap to activate Omega</p>
         </div>
 
         <div class="quick-actions">
             <div class="action-card" onclick="quickAction('status')">
-                <div class="action-icon">📊</div>
+                <div class="action-icon">ðŸ“Š</div>
                 <div class="action-label">Status</div>
             </div>
             <div class="action-card" onclick="quickAction('voice')">
-                <div class="action-icon">🔊</div>
+                <div class="action-icon">ðŸ”Š</div>
                 <div class="action-label">Speak</div>
             </div>
             <div class="action-card" onclick="quickAction('hardware')">
-                <div class="action-icon">💻</div>
+                <div class="action-icon">ðŸ’»</div>
                 <div class="action-label">Hardware</div>
             </div>
             <div class="action-card" onclick="quickAction('optimize')">
-                <div class="action-icon">⚡</div>
+                <div class="action-icon">âš¡</div>
                 <div class="action-label">Optimize</div>
             </div>
         </div>
@@ -1448,10 +2504,10 @@ class OmegaControlPanelWeb:
     <div class="voice-status" id="voiceStatus">Omega speaking...</div>
 
     <div class="nav-bar">
-        <button class="nav-btn active">🏠</button>
-        <button class="nav-btn">📊</button>
-        <button class="nav-btn">⚙️</button>
-        <button class="nav-btn">👤</button>
+        <button class="nav-btn active">ðŸ </button>
+        <button class="nav-btn">ðŸ“Š</button>
+        <button class="nav-btn">âš™ï¸</button>
+        <button class="nav-btn">ðŸ‘¤</button>
     </div>
 
     <script>
@@ -1903,7 +2959,7 @@ class OmegaControlPanelWeb:
         <div class="header">
             <!-- Header Section (Light Blue) - OMEGA Name -->
             <div class="omega-header-section">
-                <h1>🔴 OMEGA CONTROL PANEL</h1>
+                <h1>ðŸ”´ OMEGA CONTROL PANEL</h1>
                 <p>Web Interface - Real-time Monitoring & Control</p>
             </div>
             
@@ -1926,25 +2982,28 @@ class OmegaControlPanelWeb:
             <!-- Tab Navigation -->
             <div style="margin-top: 20px; display: flex; gap: 10px; border-bottom: 2px solid rgba(255,0,0,0.2); padding-bottom: 10px;">
                 <button onclick="switchTab('desktop')" id="tabDesktop" class="tab-btn active" style="background: transparent; border: none; color: #ff4444; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid #ff0000; font-weight: bold;">
-                    💻 Desktop
+                    ðŸ’» Desktop
                 </button>
                 <button onclick="switchTab('mobile')" id="tabMobile" class="tab-btn" style="background: transparent; border: none; color: #aaa; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: bold;">
-                    📱 Mobile
+                    ðŸ“± Mobile
                 </button>
                 <button onclick="switchTab('qr')" id="tabQR" class="tab-btn" style="background: transparent; border: none; color: #aaa; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: bold;">
-                    📷 QR Code
+                    ðŸ“· QR Code
+                </button>
+                <button onclick="switchTab('audio')" id="tabAudio" class="tab-btn" style="background: transparent; border: none; color: #aaa; padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: bold;">
+                    🔊 Audio Lab
                 </button>
             </div>
             
             <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
                 <button onclick="activateOmegaVoice()" style="background: #ff0000; width: auto; padding: 12px 24px; font-weight: bold; box-shadow: 0 0 20px rgba(255,0,0,0.3);">
-                    🎤 Activate Omega Voice
+                    ðŸŽ¤ Activate Omega Voice
                 </button>
                 <button onclick="refreshData()" style="background: #4caf50; width: auto; padding: 12px 24px; font-weight: bold;">
-                    🔄 Refresh Data
+                    ðŸ”„ Refresh Data
                 </button>
                 <button onclick="toggleRGB()" id="rgbToggleBtn" style="background: #9c27b0; width: auto; padding: 12px 24px; font-weight: bold;">
-                    🌈 Toggle RGB
+                    ðŸŒˆ Toggle RGB
                 </button>
             </div>
         </div>
@@ -1970,22 +3029,37 @@ class OmegaControlPanelWeb:
             <h2>Integrated Systems</h2>
             <div id="integratedSystems">Loading...</div>
         </div>
+
+        <div class="section">
+            <h2>Desktop App Integrations</h2>
+            <p style="color: #666; margin-bottom: 10px;">AutoCAD, Adobe, and Windows access tools detected on this machine.</p>
+            <div id="desktopApps">Loading...</div>
+        </div>
+
+        <div class="section">
+            <h2>PDF Actions</h2>
+            <p style="color: #666; margin-bottom: 10px;">Open, fill, sign, or edit recent PDFs using your Adobe tools.</p>
+            <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+                <button onclick="loadPdfActions()" style="width:auto; padding: 8px 12px; background:#2e7d32;">Refresh PDFs</button>
+            </div>
+            <div id="pdfActionsList">Loading...</div>
+        </div>
         
         <div class="section">
-            <h2>🌡️ Enhanced Hardware Monitor</h2>
+            <h2>ðŸŒ¡ï¸ Enhanced Hardware Monitor</h2>
             <div id="enhancedHardwareMonitor" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 20px;">
                 <!-- CPU Section -->
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">🖥️</span>
+                        <span style="font-size: 24px;">ðŸ–¥ï¸</span>
                         <span>CPU Monitor</span>
                     </h3>
                     <div id="cpuMonitor" style="font-size: 14px;">
                         <div style="margin-bottom: 10px;">
-                            <strong>Temperature:</strong> <span id="cpuTemp">--</span>°C
+                            <strong>Temperature:</strong> <span id="cpuTemp">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Package:</strong> <span id="cpuPackageTemp">--</span>°C
+                            <strong>Package:</strong> <span id="cpuPackageTemp">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
                             <strong>Core Temps:</strong><br>
@@ -2006,7 +3080,7 @@ class OmegaControlPanelWeb:
                 <!-- GPU Section -->
                 <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">🎮</span>
+                        <span style="font-size: 24px;">ðŸŽ®</span>
                         <span>GPU Monitor</span>
                     </h3>
                     <div id="gpuMonitor" style="font-size: 14px;">
@@ -2014,13 +3088,13 @@ class OmegaControlPanelWeb:
                             <strong>Name:</strong> <span id="gpuNameDetailed">--</span>
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Temperature:</strong> <span id="gpuTempDetailed">--</span>°C
+                            <strong>Temperature:</strong> <span id="gpuTempDetailed">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Hot Spot:</strong> <span id="gpuHotSpot">--</span>°C
+                            <strong>Hot Spot:</strong> <span id="gpuHotSpot">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Memory Temp:</strong> <span id="gpuMemoryTemp">--</span>°C
+                            <strong>Memory Temp:</strong> <span id="gpuMemoryTemp">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
                             <strong>Usage:</strong> <span id="gpuUsageDetailed">--</span>%
@@ -2043,7 +3117,7 @@ class OmegaControlPanelWeb:
                 <!-- Motherboard Section -->
                 <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">⚡</span>
+                        <span style="font-size: 24px;">âš¡</span>
                         <span>Motherboard</span>
                     </h3>
                     <div id="motherboardMonitor" style="font-size: 14px;">
@@ -2052,10 +3126,10 @@ class OmegaControlPanelWeb:
                             <span id="mbName" style="font-size: 12px;">--</span>
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Chipset:</strong> <span id="mbChipsetTemp">--</span>°C
+                            <strong>Chipset:</strong> <span id="mbChipsetTemp">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>VRM:</strong> <span id="mbVrmTemp">--</span>°C
+                            <strong>VRM:</strong> <span id="mbVrmTemp">--</span>Â°C
                         </div>
                         <div style="margin-bottom: 10px;">
                             <strong>Fans:</strong><br>
@@ -2070,7 +3144,7 @@ class OmegaControlPanelWeb:
                 <!-- Memory Section -->
                 <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">💾</span>
+                        <span style="font-size: 24px;">ðŸ’¾</span>
                         <span>Memory</span>
                     </h3>
                     <div id="memoryMonitor" style="font-size: 14px;">
@@ -2078,7 +3152,7 @@ class OmegaControlPanelWeb:
                             <strong>Usage:</strong> <span id="memUsage">--</span>
                         </div>
                         <div style="margin-bottom: 10px;">
-                            <strong>Temperature:</strong> <span id="memTemp">--</span>°C
+                            <strong>Temperature:</strong> <span id="memTemp">--</span>Â°C
                         </div>
                         <div>
                             <strong>Speed:</strong> <span id="memSpeed">--</span> MHz
@@ -2089,7 +3163,7 @@ class OmegaControlPanelWeb:
                 <!-- Storage Section -->
                 <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">💿</span>
+                        <span style="font-size: 24px;">ðŸ’¿</span>
                         <span>Storage</span>
                     </h3>
                     <div id="storageMonitor" style="font-size: 12px;">
@@ -2100,7 +3174,7 @@ class OmegaControlPanelWeb:
                 <!-- LibreHardwareMonitor Status -->
                 <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 10px; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h3 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">📊</span>
+                        <span style="font-size: 24px;">ðŸ“Š</span>
                         <span>Monitor Status</span>
                     </h3>
                     <div id="monitorStatus" style="font-size: 14px;">
@@ -2121,10 +3195,10 @@ class OmegaControlPanelWeb:
             
             <!-- Performance Controls -->
             <div style="background: #f5f5f5; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                <h3 style="margin: 0 0 15px 0; color: #333;">⚙️ Performance Controls</h3>
+                <h3 style="margin: 0 0 15px 0; color: #333;">âš™ï¸ Performance Controls</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
                     <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🌡️ CPU Boost Mode</label>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">ðŸŒ¡ï¸ CPU Boost Mode</label>
                         <select id="cpuBoostMode" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
                             <option value="auto">Auto (Default)</option>
                             <option value="conservative">Conservative</option>
@@ -2135,7 +3209,7 @@ class OmegaControlPanelWeb:
                     </div>
                     
                     <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">🎮 GPU Power Limit</label>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">ðŸŽ® GPU Power Limit</label>
                         <select id="gpuPowerLimit" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
                             <option value="default">Default (Stock)</option>
                             <option value="eco">Eco Mode (70W)</option>
@@ -2146,7 +3220,7 @@ class OmegaControlPanelWeb:
                     </div>
                     
                     <div>
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">💨 Fan Profile</label>
+                        <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">ðŸ’¨ Fan Profile</label>
                         <select id="fanProfile" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; background: white;">
                             <option value="auto">Auto (Temperature-based)</option>
                             <option value="silent">Silent (30-50%)</option>
@@ -2160,22 +3234,22 @@ class OmegaControlPanelWeb:
                 
                 <div style="margin-top: 20px; text-align: center;">
                     <button onclick="applyPerformanceSettings()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        ✓ Apply Settings
+                        âœ“ Apply Settings
                     </button>
-                    <small style="display: block; margin-top: 10px; color: #999;">⚠️ Requires administrator rights for some settings</small>
+                    <small style="display: block; margin-top: 10px; color: #999;">âš ï¸ Requires administrator rights for some settings</small>
                 </div>
             </div>
         </div>
         
         <!-- RGB Lighting Control -->
         <div class="section">
-            <h2>🌈 RGB Lighting Control</h2>
+            <h2>ðŸŒˆ RGB Lighting Control</h2>
             <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <!-- RGB Brightness -->
                     <div>
                         <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">
-                            💡 Brightness: <span id="rgbBrightnessValue">100</span>%
+                            ðŸ’¡ Brightness: <span id="rgbBrightnessValue">100</span>%
                         </label>
                         <input type="range" id="rgbBrightness" min="0" max="100" value="100" 
                                style="width: 100%; height: 8px; border-radius: 5px; background: rgba(255,255,255,0.3); cursor: pointer;"
@@ -2185,7 +3259,7 @@ class OmegaControlPanelWeb:
                     
                     <!-- RGB Color Picker -->
                     <div>
-                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">🎨 Color</label>
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">ðŸŽ¨ Color</label>
                         <div style="display: flex; align-items: center; gap: 15px;">
                             <input type="color" id="rgbColorPicker" value="#FFD700" 
                                    style="width: 80px; height: 50px; border: 3px solid white; border-radius: 5px; cursor: pointer;"
@@ -2200,13 +3274,13 @@ class OmegaControlPanelWeb:
                     
                     <!-- RGB Mode -->
                     <div>
-                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">✨ Mode</label>
+                        <label style="display: block; margin-bottom: 10px; font-weight: bold; font-size: 16px;">âœ¨ Mode</label>
                         <select id="rgbMode" style="width: 100%; padding: 12px; border-radius: 5px; border: none; background: white; color: #333; font-size: 14px; font-weight: bold; cursor: pointer;"
                                 onchange="updateRGBMode(this.value)">
-                            <option value="static">🔴 Static (Solid Color)</option>
-                            <option value="breathing">💨 Breathing (Fade In/Out)</option>
-                            <option value="rainbow">🌈 Rainbow (Cycle Colors)</option>
-                            <option value="reactive">🎵 Reactive (Audio Sync)</option>
+                            <option value="static">ðŸ”´ Static (Solid Color)</option>
+                            <option value="breathing">ðŸ’¨ Breathing (Fade In/Out)</option>
+                            <option value="rainbow">ðŸŒˆ Rainbow (Cycle Colors)</option>
+                            <option value="reactive">ðŸŽµ Reactive (Audio Sync)</option>
                         </select>
                         <small style="color: rgba(255,255,255,0.8); display: block; margin-top: 5px;">Select lighting effect</small>
                     </div>
@@ -2220,10 +3294,10 @@ class OmegaControlPanelWeb:
                     <br>
                     <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
                         <button onclick="applyRGBSettings()" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                            ✓ Apply RGB Settings
+                            âœ“ Apply RGB Settings
                         </button>
                         <button onclick="toggleRGBLighting()" id="rgbPowerBtn" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                            🔘 Toggle ON/OFF
+                            ðŸ”˜ Toggle ON/OFF
                         </button>
                     </div>
                 </div>
@@ -2234,17 +3308,17 @@ class OmegaControlPanelWeb:
             <h2>Hardware Controls</h2>
             <div class="controls">
                 <div class="control-group">
-                    <label>🔧 Fan Speed: <span id="fanSpeedValue">50</span>%</label>
+                    <label>ðŸ”§ Fan Speed: <span id="fanSpeedValue">50</span>%</label>
                     <input type="range" id="fanSpeed" min="0" max="100" value="50" oninput="updateFanSpeed(this.value)">
                     <small style="color: #666; margin-top: 5px; display: block;">Drag to adjust system fan speed</small>
                 </div>
                 <div class="control-group">
-                    <label>🌈 RGB Color</label>
+                    <label>ðŸŒˆ RGB Color</label>
                     <input type="color" id="rgbColor" value="#FFD700" onchange="updateRGBColor(this.value)">
                     <small style="color: #666; margin-top: 5px; display: block;">Click to select color</small>
                 </div>
                 <div class="control-group">
-                    <label>💡 RGB Lighting</label>
+                    <label>ðŸ’¡ RGB Lighting</label>
                     <button id="rgbToggleBtn" onclick="toggleRGB()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                         Toggle RGB
                     </button>
@@ -2254,7 +3328,7 @@ class OmegaControlPanelWeb:
         </div>
         
         <div class="section">
-            <h2>⚖️ GPU Load Balancer</h2>
+            <h2>âš–ï¸ GPU Load Balancer</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
                 <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
                     <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">System Balance</div>
@@ -2328,10 +3402,39 @@ class OmegaControlPanelWeb:
             <div style="margin-bottom: 15px;">
                 <label style="display: block; margin-bottom: 5px; font-weight: bold;">Ask the Council:</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" id="chatMessage" placeholder="Type your question for the AI council..." 
+                    <input type="text" id="chatMessage" 
                            style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;"
                            onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <button id="chatMicBtn" onclick="toggleChatMic()" style="width: auto; padding: 10px 16px; background: #4caf50;">Mic</button>
                     <button onclick="sendChatMessage()" style="width: auto; padding: 10px 20px; background: #667eea;">Send</button>
+                </div>
+                <div id="chatMicStatus" style="margin-top: 6px; color: #666; font-size: 12px;">Mic idle</div>
+            </div>
+            <div style="margin-bottom: 15px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 6px; padding: 10px;">
+                <label style="display: block; margin-bottom: 6px; font-weight: bold;">Route to Omega Agent Framework</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="agentRouteInput"
+                           style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 13px;">
+                    <button onclick="routeToAgentFramework()" style="width: auto; padding: 8px 16px; background: #3f51b5;">Route</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <label style="font-weight: bold;">Select Agents (group conversation)</label>
+                        <div>
+                            <button onclick="selectAllAgents(true)" style="width: auto; padding: 4px 8px; font-size: 11px; background: #5c6bc0;">All</button>
+                            <button onclick="selectAllAgents(false)" style="width: auto; padding: 4px 8px; font-size: 11px; background: #9e9e9e; margin-left: 4px;">None</button>
+                        </div>
+                    </div>
+                    <div id="agentSelectionBox" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 6px; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 8px;">
+                        <div style="color: #777; font-size: 12px;">Loading agents...</div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <label style="display: block; margin-bottom: 6px; font-weight: bold;">External AI Systems (optional)</label>
+                    <textarea id="externalAiTargets" rows="3"
+                              placeholder='[{"name":"My Local LLM","url":"http://localhost:8000/chat","api_key":""}]'
+                              style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 12px; font-family: Consolas, monospace; resize: vertical;"></textarea>
+                    <div style="font-size: 11px; color: #666; margin-top: 4px;">JSON array format: name, url, api_key.</div>
                 </div>
             </div>
             <div style="margin-bottom: 15px;">
@@ -2341,17 +3444,17 @@ class OmegaControlPanelWeb:
             </div>
         </div>
         
-        <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+        <button class="refresh-btn" onclick="refreshData()">ðŸ”„ Refresh</button>
         </div>
         
         <!-- Mobile Tab Content -->
         <div id="tabContentMobile" class="tab-content" style="display: none;">
             <div class="section">
-                <h2>📱 Mobile Access</h2>
+                <h2>ðŸ“± Mobile Access</h2>
                 <p style="color: #aaa; margin-bottom: 20px;">Access Omega Control Panel on your mobile device</p>
                 <div style="text-align: center;">
                     <a href="/mobile" style="display: inline-block; padding: 15px 30px; background: #ff0000; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; box-shadow: 0 0 20px rgba(255,0,0,0.3);">
-                        📱 Open Mobile Interface
+                        ðŸ“± Open Mobile Interface
                     </a>
                 </div>
             </div>
@@ -2360,7 +3463,7 @@ class OmegaControlPanelWeb:
         <!-- QR Code Tab Content -->
         <div id="tabContentQR" class="tab-content" style="display: none;">
             <div class="section">
-                <h2>📷 QR Code Access</h2>
+                <h2>ðŸ“· QR Code Access</h2>
                 <p style="color: #aaa; margin-bottom: 20px;">Scan to access on your phone</p>
                 <div style="text-align: center; padding: 40px;">
                     <div id="qrcode" style="display: inline-block; padding: 20px; background: white; border-radius: 15px;">
@@ -2368,6 +3471,46 @@ class OmegaControlPanelWeb:
                     </div>
                     <p style="margin-top: 20px; font-size: 18px; font-weight: bold; color: #ff4444;" id="qrURL">http://localhost:5000/mobile</p>
                     <p style="margin-top: 10px; color: #aaa;">Scan with your phone camera</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabContentAudio" class="tab-content" style="display: none;">
+            <div class="section">
+                <h2>Media Lab</h2>
+                <p style="color: #aaa; margin-bottom: 12px;">Audio + image creation/editing with AI-assisted suggestions.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                    <input id="mediaIdeaInput" type="text" placeholder="Describe what you want to create..." style="flex:1; min-width:260px; padding:8px; border:1px solid #ddd; border-radius:5px;">
+                    <button onclick="askCreativeAgent()" style="width:auto; padding:8px 14px; background:#37474f;">Ask Creative Agent</button>
+                </div>
+                <div id="mediaAgentOutput" style="font-size:12px; color:#666; margin-bottom:10px;">Creative suggestions will appear here.</div>
+                <hr style="border:none; border-top:1px solid #ddd; margin:14px 0;">
+                <h3 style="margin-top:0;">Audio Tools</h3>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <button onclick="loadAudioLab()" style="width: auto; padding: 8px 14px; background: #2e7d32;">Refresh Audio</button>
+                    <button onclick="copySelectedAudio()" style="width: auto; padding: 8px 14px; background: #1565c0;">Copy Selected</button>
+                    <button onclick="reverseSelectedAudio()" style="width: auto; padding: 8px 14px; background: #6a1b9a;">Create Reverse FX</button>
+                </div>
+                <div id="audioLabStatus" style="font-size: 12px; color: #666; margin-bottom: 8px;">Select an audio file from the list.</div>
+                <div id="audioLabList" style="max-height: 500px; overflow-y: auto; border: 1px solid #ddd; border-radius: 6px; padding: 10px; background: #fafafa;">
+                    <p style="color: #666; font-style: italic;">Loading audio files...</p>
+                </div>
+                <hr style="border:none; border-top:1px solid #ddd; margin:14px 0;">
+                <h3>Image Tools</h3>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+                    <input id="imagePromptInput" type="text" placeholder="Image prompt..." style="flex:1; min-width:280px; padding:8px; border:1px solid #ddd; border-radius:5px;">
+                    <button onclick="createImageFromPrompt()" style="width:auto; padding:8px 14px; background:#8e24aa;">Create Image</button>
+                    <button onclick="loadImageLab()" style="width:auto; padding:8px 14px; background:#2e7d32;">Refresh Images</button>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+                    <button onclick="editSelectedImage('grayscale')" style="width:auto; padding:8px 12px; background:#546e7a;">Grayscale</button>
+                    <button onclick="editSelectedImage('mirror')" style="width:auto; padding:8px 12px; background:#546e7a;">Mirror</button>
+                    <button onclick="editSelectedImage('rotate90')" style="width:auto; padding:8px 12px; background:#546e7a;">Rotate 90</button>
+                    <button onclick="editSelectedImage('contrast_plus')" style="width:auto; padding:8px 12px; background:#546e7a;">Boost Contrast</button>
+                </div>
+                <div id="imageLabStatus" style="font-size:12px; color:#666; margin-bottom:8px;">Select an image file from the list.</div>
+                <div id="imageLabList" style="max-height: 420px; overflow-y: auto; border: 1px solid #ddd; border-radius: 6px; padding: 10px; background: #fafafa;">
+                    <p style="color: #666; font-style: italic;">Loading image files...</p>
                 </div>
             </div>
         </div>
@@ -2470,6 +3613,8 @@ class OmegaControlPanelWeb:
             loadStats();
             loadNotifications();
             loadIntegratedSystems();
+            loadDesktopApps();
+            loadPdfActions();
         }
         
         async function loadEnhancedHardwareData() {
@@ -2479,7 +3624,7 @@ class OmegaControlPanelWeb:
                 
                 if (data.error) {
                     // LibreHardwareMonitor not available
-                    document.getElementById('libreHwStatus').innerHTML = `<span style="color: #f44336;">✗ Not Available</span>`;
+                    document.getElementById('libreHwStatus').innerHTML = `<span style="color: #f44336;">âœ— Not Available</span>`;
                     document.getElementById('mbStatus').textContent = 'Not Available';
                     return;
                 }
@@ -2490,7 +3635,7 @@ class OmegaControlPanelWeb:
                 document.getElementById('cpuPackageTemp').textContent = cpu.package_temp !== null ? cpu.package_temp.toFixed(1) : 'N/A';
                 
                 if (cpu.core_temps && cpu.core_temps.length > 0) {
-                    const coreTemps = cpu.core_temps.map((t, i) => `Core ${i}: ${t.toFixed(1)}°C`).join(', ');
+                    const coreTemps = cpu.core_temps.map((t, i) => `Core ${i}: ${t.toFixed(1)}Â°C`).join(', ');
                     document.getElementById('cpuCoreTemps').textContent = coreTemps;
                 } else {
                     document.getElementById('cpuCoreTemps').textContent = 'N/A';
@@ -2532,10 +3677,10 @@ class OmegaControlPanelWeb:
                         `${name}: ${rpm.toFixed(0)} RPM`
                     ).join('<br>');
                     document.getElementById('mbFans').innerHTML = fans;
-                    document.getElementById('mbStatus').innerHTML = '<span style="color: #4caf50;">✓ All sensors active</span>';
+                    document.getElementById('mbStatus').innerHTML = '<span style="color: #4caf50;">âœ“ All sensors active</span>';
                 } else {
                     document.getElementById('mbFans').textContent = 'No fan data';
-                    document.getElementById('mbStatus').innerHTML = '<span style="color: #ff9800;">⚠ Limited data</span>';
+                    document.getElementById('mbStatus').innerHTML = '<span style="color: #ff9800;">âš  Limited data</span>';
                 }
                 
                 // Update Memory Monitor
@@ -2551,7 +3696,7 @@ class OmegaControlPanelWeb:
                     const storageHTML = storage.map(s => `
                         <div style="margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
                             <strong>${s.name}</strong> (${s.type})<br>
-                            Temp: ${s.temperature !== null ? s.temperature.toFixed(1) + '°C' : 'N/A'}<br>
+                            Temp: ${s.temperature !== null ? s.temperature.toFixed(1) + 'Â°C' : 'N/A'}<br>
                             ${s.health !== null ? 'Health: ' + s.health + '%' : ''}
                         </div>
                     `).join('');
@@ -2562,16 +3707,16 @@ class OmegaControlPanelWeb:
                 
                 // Update LibreHardwareMonitor Status
                 if (data.libre_hw_available) {
-                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #4caf50;">✓ Active</span>';
+                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #4caf50;">âœ“ Active</span>';
                 } else {
-                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">✗ Not Running</span>';
+                    document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">âœ— Not Running</span>';
                 }
                 
                 document.getElementById('hwLastUpdate').textContent = new Date(data.timestamp).toLocaleTimeString();
                 
             } catch (error) {
                 console.error('Enhanced hardware monitor error:', error);
-                document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">✗ Error</span>';
+                document.getElementById('libreHwStatus').innerHTML = '<span style="color: #f44336;">âœ— Error</span>';
             }
         }
         
@@ -2580,7 +3725,7 @@ class OmegaControlPanelWeb:
             const gpuPower = document.getElementById('gpuPowerLimit').value;
             const fanProfile = document.getElementById('fanProfile').value;
             
-            alert(`Performance settings applied:\n\nCPU Boost: ${cpuBoost}\nGPU Power: ${gpuPower}\nFan Profile: ${fanProfile}\n\n⚠️ Note: Some settings require administrator rights and hardware support.`);
+            alert(`Performance settings applied:\n\nCPU Boost: ${cpuBoost}\nGPU Power: ${gpuPower}\nFan Profile: ${fanProfile}\n\nâš ï¸ Note: Some settings require administrator rights and hardware support.`);
             
             // In a real implementation, these would call backend APIs to adjust settings
             // For now, this is a UI demonstration
@@ -2647,14 +3792,14 @@ class OmegaControlPanelWeb:
                     })
                 });
                 
-                alert(`✓ RGB Settings Applied!\n\nBrightness: ${brightness}%\nColor: ${color}\nMode: ${mode}`);
+                alert(`âœ“ RGB Settings Applied!\n\nBrightness: ${brightness}%\nColor: ${color}\nMode: ${mode}`);
                 
                 // Refresh RGB status
                 await loadRGBStatus();
                 
             } catch (error) {
                 console.error('RGB settings error:', error);
-                alert('❌ Failed to apply RGB settings');
+                alert('âŒ Failed to apply RGB settings');
             }
         }
         
@@ -2675,17 +3820,17 @@ class OmegaControlPanelWeb:
                     const btn = document.getElementById('rgbPowerBtn');
                     if (data.enabled) {
                         btn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
-                        btn.innerHTML = '🔘 Toggle ON/OFF';
+                        btn.innerHTML = 'ðŸ”˜ Toggle ON/OFF';
                     } else {
                         btn.style.background = 'linear-gradient(135deg, #666 0%, #999 100%)';
-                        btn.innerHTML = '⚪ Toggle ON/OFF';
+                        btn.innerHTML = 'âšª Toggle ON/OFF';
                     }
                     
                     alert(`RGB Lighting: ${status}`);
                 }
             } catch (error) {
                 console.error('RGB toggle error:', error);
-                alert('❌ Failed to toggle RGB');
+                alert('âŒ Failed to toggle RGB');
             }
         }
         
@@ -2742,11 +3887,11 @@ class OmegaControlPanelWeb:
                     </div>
                     <div class="stat-card">
                         <h3>CPU Temperature</h3>
-                        <div class="stat-value">${data.cpu_temperature !== undefined ? data.cpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.cpu_temperature !== undefined ? '°C' : ''}</span></div>
+                        <div class="stat-value">${data.cpu_temperature !== undefined ? data.cpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.cpu_temperature !== undefined ? 'Â°C' : ''}</span></div>
                     </div>
                     <div class="stat-card">
                         <h3>GPU Temperature</h3>
-                        <div class="stat-value">${data.gpu_temperature ? data.gpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.gpu_temperature ? '°C' : ''}</span></div>
+                        <div class="stat-value">${data.gpu_temperature ? data.gpu_temperature.toFixed(1) : 'N/A'}<span class="stat-unit">${data.gpu_temperature ? 'Â°C' : ''}</span></div>
                     </div>
                     <div class="stat-card">
                         <h3>GPU Usage</h3>
@@ -2828,14 +3973,14 @@ class OmegaControlPanelWeb:
                 
                 // Show only active systems prominently
                 if (activeSystems.length > 0) {
-                    html += '<div style="margin-bottom: 15px;"><strong style="color: #4caf50;">✓ Active Systems (' + activeSystems.length + ')</strong></div>';
+                    html += '<div style="margin-bottom: 15px;"><strong style="color: #4caf50;">âœ“ Active Systems (' + activeSystems.length + ')</strong></div>';
                     html += activeSystems.map(s => `
                         <div class="system-item" style="background: rgba(76, 175, 80, 0.05); border-left: 3px solid #4caf50;">
                             <strong>${s.name}</strong>
                             <span class="status-badge status-${s.status}">${s.status}</span>
                             <div style="margin-top: 5px; font-size: 12px;">
                                 ${s.cpu_usage > 0 ? 'CPU: ' + s.cpu_usage.toFixed(1) + '% | ' : ''}
-                                ${s.temperature > 0 ? 'Temp: ' + s.temperature.toFixed(1) + '°C | ' : ''}
+                                ${s.temperature > 0 ? 'Temp: ' + s.temperature.toFixed(1) + 'Â°C | ' : ''}
                                 Power: ${s.processing_power.toFixed(1)}%
                             </div>
                         </div>
@@ -2850,8 +3995,8 @@ class OmegaControlPanelWeb:
                         <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(158, 158, 158, 0.2);">
                             <details style="cursor: pointer;">
                                 <summary style="padding: 12px; background: rgba(158, 158, 158, 0.05); border-radius: 8px; user-select: none; border: 1px solid rgba(158, 158, 158, 0.2);">
-                                    <strong style="color: #9e9e9e;">⊙ Inactive Systems (${inactiveSystems.length})</strong>
-                                    <span style="font-size: 11px; color: #999; margin-left: 10px;">▼ Click to view</span>
+                                    <strong style="color: #9e9e9e;">âŠ™ Inactive Systems (${inactiveSystems.length})</strong>
+                                    <span style="font-size: 11px; color: #999; margin-left: 10px;">â–¼ Click to view</span>
                                 </summary>
                                 <div style="margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.02); border-radius: 5px;">
                                     ${inactiveSystems.map(s => `
@@ -2871,6 +4016,158 @@ class OmegaControlPanelWeb:
                 console.error('Error loading integrated systems:', error);
             }
         }
+
+        async function loadDesktopApps() {
+            try {
+                const response = await fetch('/api/desktop-apps');
+                const result = await response.json();
+                const apps = result.apps || [];
+                const container = document.getElementById('desktopApps');
+
+                if (!container) return;
+                if (apps.length === 0) {
+                    container.innerHTML = '<p>No desktop app integrations configured.</p>';
+                    return;
+                }
+
+                container.innerHTML = apps.map(app => {
+                    const status = app.installed ? 'Installed' : 'Not Detected';
+                    const statusColor = app.installed ? '#4caf50' : '#f44336';
+                    const caps = (app.capabilities || []).join(', ');
+                    const versions = (app.versions || []).length ? app.versions.join(', ') : 'N/A';
+                    const paths = app.detected_paths || [];
+                    const versionLaunchUI = paths.length > 1 ? `
+                        <div style="margin-top: 6px;">
+                            <select id="launchTarget_${app.id}" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
+                                ${paths.map(p => `<option value="${p.replace(/"/g, '&quot;')}">${p}</option>`).join('')}
+                            </select>
+                            <div style="font-size: 11px; color: #888; margin-top: 3px;">Select specific installed version/path to launch</div>
+                        </div>
+                    ` : '';
+                    return `
+                        <div class="system-item" style="border-left: 3px solid ${statusColor}; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                                <strong>${app.name}</strong>
+                                <span style="color: ${statusColor}; font-weight: bold;">${status}</span>
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">Vendor: ${app.vendor}</div>
+                            <div style="font-size: 12px; color: #444; margin-top: 3px;">Capabilities: ${caps || 'N/A'}</div>
+                            <div style="font-size: 12px; color: #444; margin-top: 3px;">Detected Versions: ${versions}</div>
+                            ${versionLaunchUI}
+                            <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button onclick="launchDesktopApp('${app.id}')" style="width:auto; padding: 8px 12px; background:#1976d2;">Launch</button>
+                                <button onclick="askOmegaAboutApp('${app.name}', '${caps}')" style="width:auto; padding: 8px 12px; background:#6a1b9a;">Ask Omega</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading desktop apps:', error);
+                const container = document.getElementById('desktopApps');
+                if (container) {
+                    container.innerHTML = '<p style="color:#f44336;">Failed to load desktop app integrations.</p>';
+                }
+            }
+        }
+
+        async function launchDesktopApp(appId) {
+            try {
+                const targetSelect = document.getElementById(`launchTarget_${appId}`);
+                const launchTarget = targetSelect ? targetSelect.value : '';
+                const response = await fetch('/api/desktop-apps/launch', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({app_id: appId, launch_target: launchTarget})
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showNotification(`Launched ${result.app}`, 'success');
+                } else {
+                    showNotification(result.error || 'Launch failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error launching app:', error);
+                showNotification('Failed to launch desktop app', 'error');
+            }
+        }
+
+        function askOmegaAboutApp(appName, capabilities) {
+            const messageInput = document.getElementById('chatMessage');
+            if (!messageInput) return;
+            messageInput.value = `Help me use ${appName}. I need: ${capabilities}. Prioritize PDF fill/sign/edit steps and compatibility with older versions when relevant.`;
+            sendChatMessage();
+        }
+
+        async function loadPdfActions() {
+            try {
+                const response = await fetch('/api/pdf-actions/list?limit=20');
+                const result = await response.json();
+                const pdfs = result.pdfs || [];
+                const container = document.getElementById('pdfActionsList');
+                if (!container) return;
+
+                if (pdfs.length === 0) {
+                    container.innerHTML = '<p>No recent PDFs found in Documents/Downloads/Desktop.</p>';
+                    return;
+                }
+
+                container.innerHTML = pdfs.map(pdf => {
+                    const fill = pdf.likely_fillable ? 'Likely fillable' : 'Unknown fillable';
+                    const sign = pdf.likely_signable ? 'Likely signable' : 'Unknown signable';
+                    return `
+                        <div class="system-item" style="border-left: 3px solid #ff9800; margin-bottom: 10px;">
+                            <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+                                <strong>${pdf.name}</strong>
+                                <span style="font-size:11px; color:#666;">${new Date(pdf.modified).toLocaleString()}</span>
+                            </div>
+                            <div style="font-size:12px; color:#666; margin-top:3px;">${pdf.folder}</div>
+                            <div style="font-size:12px; color:#444; margin-top:3px;">${fill} | ${sign}</div>
+                            <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+                                <button onclick="openPdfWithApp('${encodeURIComponent(pdf.path)}', 'adobe_acrobat')" style="width:auto; padding:8px 12px; background:#1565c0;">Open in Acrobat</button>
+                                <button onclick="openPdfWithApp('${encodeURIComponent(pdf.path)}', 'adobe_reader')" style="width:auto; padding:8px 12px; background:#00838f;">Open in Reader</button>
+                                <button onclick="openPdfWithApp('${encodeURIComponent(pdf.path)}', '')" style="width:auto; padding:8px 12px; background:#546e7a;">Open Default</button>
+                                <button onclick="askOmegaForPdf('${pdf.name}')" style="width:auto; padding:8px 12px; background:#6a1b9a;">Ask Omega</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading PDF actions:', error);
+                const container = document.getElementById('pdfActionsList');
+                if (container) {
+                    container.innerHTML = '<p style="color:#f44336;">Failed to load PDF actions.</p>';
+                }
+            }
+        }
+
+        async function openPdfWithApp(encodedPath, appId) {
+            try {
+                const response = await fetch('/api/pdf-actions/open', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        file_path: encodedPath,
+                        app_id: appId || ''
+                    })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    showNotification(`Opened PDF: ${result.file}`, 'success');
+                } else {
+                    showNotification(result.error || 'Failed to open PDF', 'error');
+                }
+            } catch (error) {
+                console.error('Error opening PDF:', error);
+                showNotification('Failed to open PDF', 'error');
+            }
+        }
+
+        function askOmegaForPdf(pdfName) {
+            const messageInput = document.getElementById('chatMessage');
+            if (!messageInput) return;
+            messageInput.value = `Guide me step-by-step to fill, sign, or edit "${pdfName}" using Adobe tools. Include fallback steps for older Adobe versions.`;
+            sendChatMessage();
+        }
         
         function updateStats(data) {
             const statsGrid = document.getElementById('statsGrid');
@@ -2881,7 +4178,7 @@ class OmegaControlPanelWeb:
                 </div>
                 <div class="stat-card">
                     <h3>CPU Temperature</h3>
-                    <div class="stat-value">${data.cpu_temperature.toFixed(1)}<span class="stat-unit">°C</span></div>
+                    <div class="stat-value">${data.cpu_temperature.toFixed(1)}<span class="stat-unit">Â°C</span></div>
                 </div>
                 <div class="stat-card">
                     <h3>Memory Usage</h3>
@@ -2920,7 +4217,7 @@ class OmegaControlPanelWeb:
                     <span class="status-badge status-${s.status}">${s.status}</span>
                     <div style="margin-top: 5px;">
                         CPU: ${s.cpu_usage.toFixed(1)}% | 
-                        Temp: ${s.temperature.toFixed(1)}°C | 
+                        Temp: ${s.temperature.toFixed(1)}Â°C | 
                         Power: ${s.processing_power.toFixed(1)}%
                     </div>
                 </div>
@@ -2984,7 +4281,7 @@ class OmegaControlPanelWeb:
             .then(resp => resp.json())
             .then(data => {
                 if (data.success) {
-                    console.log(`✓ Fan speed set to ${value}%`);
+                    console.log(`âœ“ Fan speed set to ${value}%`);
                     showNotification(`Fan speed: ${value}%`, 'success');
                 } else {
                     console.error('Error setting fan speed:', data.error);
@@ -3006,7 +4303,7 @@ class OmegaControlPanelWeb:
             .then(resp => resp.json())
             .then(data => {
                 if (data.success) {
-                    console.log(`✓ RGB color set to ${color}`);
+                    console.log(`âœ“ RGB color set to ${color}`);
                     showNotification(`RGB color changed to ${color}`, 'success');
                 } else {
                     console.error('Error setting RGB color:', data.error);
@@ -3032,7 +4329,7 @@ class OmegaControlPanelWeb:
             .then(data => {
                 if (data.success) {
                     const statusText = data.enabled ? 'enabled' : 'disabled';
-                    console.log(`✓ RGB lighting ${statusText}`);
+                    console.log(`âœ“ RGB lighting ${statusText}`);
                     showNotification(`RGB ${statusText}`, 'success');
                     refreshData();
                 } else {
@@ -3095,6 +4392,191 @@ class OmegaControlPanelWeb:
                 console.error('Error loading chatbot status:', error);
             }
         }
+
+        let selectedAudioPath = '';
+        let selectedImagePath = '';
+        async function loadAudioLab() {
+            const listEl = document.getElementById('audioLabList');
+            const statusEl = document.getElementById('audioLabStatus');
+            if (!listEl) return;
+            try {
+                const response = await fetch('/api/audio/list?limit=60');
+                const result = await response.json();
+                const files = (result && result.files) || [];
+                if (!files.length) {
+                    listEl.innerHTML = '<p style="color:#666; font-style:italic;">No audio files found in Desktop/Documents/Downloads/project.</p>';
+                    statusEl.textContent = 'No files found';
+                    return;
+                }
+                listEl.innerHTML = files.map(file => `
+                    <label style="display:block; padding:8px; border-bottom:1px solid #eee; cursor:pointer;">
+                        <input type="radio" name="audioPick" value="${escapeHtml(file.path)}" onchange="selectedAudioPath=this.value">
+                        <strong>${escapeHtml(file.name)}</strong>
+                        <span style="color:#666; font-size:11px; margin-left:6px;">${escapeHtml(file.folder)}</span>
+                    </label>
+                `).join('');
+                statusEl.textContent = `${files.length} audio files loaded`;
+            } catch (error) {
+                listEl.innerHTML = '<p style="color:#f44336;">Failed to load audio files.</p>';
+                statusEl.textContent = 'Load error';
+            }
+        }
+
+        async function askCreativeAgent() {
+            const input = document.getElementById('mediaIdeaInput');
+            const out = document.getElementById('mediaAgentOutput');
+            const idea = (input && input.value || '').trim();
+            if (!idea) {
+                out.textContent = 'Enter a media idea first.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/agents/group-message', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        request: idea,
+                        agents: ['creative_agent'],
+                        payload: {type: 'media_assist'}
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    out.textContent = `Creative agent failed: ${result.error || response.statusText}`;
+                    return;
+                }
+                const first = (result.results || [])[0];
+                const text = first && first.response_text ? first.response_text : JSON.stringify(result, null, 2);
+                out.textContent = text;
+            } catch (error) {
+                out.textContent = `Creative agent error: ${error.message}`;
+            }
+        }
+
+        async function copySelectedAudio() {
+            const statusEl = document.getElementById('audioLabStatus');
+            if (!selectedAudioPath) {
+                statusEl.textContent = 'Choose an audio file first.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/audio/copy', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({source_path: selectedAudioPath, suffix: '_copy'})
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    statusEl.textContent = `Copy failed: ${result.error || response.statusText}`;
+                    return;
+                }
+                statusEl.textContent = `Copied: ${result.target}`;
+                loadAudioLab();
+            } catch (error) {
+                statusEl.textContent = `Copy error: ${error.message}`;
+            }
+        }
+
+        async function reverseSelectedAudio() {
+            const statusEl = document.getElementById('audioLabStatus');
+            if (!selectedAudioPath) {
+                statusEl.textContent = 'Choose an audio file first.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/audio/effect', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({source_path: selectedAudioPath, effect: 'reverse'})
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    statusEl.textContent = `Effect failed: ${result.error || response.statusText}`;
+                    return;
+                }
+                statusEl.textContent = `Created FX: ${result.target}`;
+                loadAudioLab();
+            } catch (error) {
+                statusEl.textContent = `Effect error: ${error.message}`;
+            }
+        }
+
+        async function loadImageLab() {
+            const listEl = document.getElementById('imageLabList');
+            const statusEl = document.getElementById('imageLabStatus');
+            if (!listEl) return;
+            try {
+                const response = await fetch('/api/images/list?limit=60');
+                const result = await response.json();
+                const files = (result && result.files) || [];
+                if (!files.length) {
+                    listEl.innerHTML = '<p style="color:#666; font-style:italic;">No image files found in Desktop/Documents/Downloads/project.</p>';
+                    statusEl.textContent = 'No files found';
+                    return;
+                }
+                listEl.innerHTML = files.map(file => `
+                    <label style="display:block; padding:8px; border-bottom:1px solid #eee; cursor:pointer;">
+                        <input type="radio" name="imagePick" value="${escapeHtml(file.path)}" onchange="selectedImagePath=this.value">
+                        <strong>${escapeHtml(file.name)}</strong>
+                        <span style="color:#666; font-size:11px; margin-left:6px;">${escapeHtml(file.folder)}</span>
+                    </label>
+                `).join('');
+                statusEl.textContent = `${files.length} image files loaded`;
+            } catch (error) {
+                listEl.innerHTML = '<p style="color:#f44336;">Failed to load image files.</p>';
+                statusEl.textContent = 'Load error';
+            }
+        }
+
+        async function createImageFromPrompt() {
+            const promptInput = document.getElementById('imagePromptInput');
+            const statusEl = document.getElementById('imageLabStatus');
+            const prompt = (promptInput && promptInput.value || '').trim();
+            if (!prompt) {
+                statusEl.textContent = 'Enter an image prompt first.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/images/create', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({prompt: prompt, width: 1024, height: 1024})
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    statusEl.textContent = `Create failed: ${result.error || response.statusText}`;
+                    return;
+                }
+                statusEl.textContent = `Created image: ${result.path}`;
+                loadImageLab();
+            } catch (error) {
+                statusEl.textContent = `Create error: ${error.message}`;
+            }
+        }
+
+        async function editSelectedImage(operation) {
+            const statusEl = document.getElementById('imageLabStatus');
+            if (!selectedImagePath) {
+                statusEl.textContent = 'Choose an image file first.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/images/edit', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({source_path: selectedImagePath, operation: operation})
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    statusEl.textContent = `Edit failed: ${result.error || response.statusText}`;
+                    return;
+                }
+                statusEl.textContent = `Created edited image: ${result.target}`;
+                loadImageLab();
+            } catch (error) {
+                statusEl.textContent = `Edit error: ${error.message}`;
+            }
+        }
         
         async function startChatbot() {
             try {
@@ -3134,7 +4616,7 @@ class OmegaControlPanelWeb:
             
             if (!message) return;
             
-            // Clear placeholder if exists
+            // Clear existing hint text if present
             const historyEl = document.getElementById('chatHistory');
             if (historyEl.querySelector('p[style*="italic"]')) {
                 historyEl.innerHTML = '';
@@ -3155,13 +4637,170 @@ class OmegaControlPanelWeb:
                 
                 if (result.success && result.results) {
                     // Display all responses in council format (side-by-side)
-                    displayCouncilResponses(result.results);
+                    displayCouncilResponses(result.results, result.suggestions || []);
                 } else {
                     addErrorMessage('Error: ' + (result.error || 'Failed to send message'));
                 }
             } catch (error) {
                 console.error('Error sending message:', error);
                 addErrorMessage('Error: ' + error.message);
+            }
+        }
+
+        let recognition = null;
+        let micActive = false;
+        function toggleChatMic() {
+            const btn = document.getElementById('chatMicBtn');
+            const status = document.getElementById('chatMicStatus');
+            const input = document.getElementById('chatMessage');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                status.textContent = 'Mic unavailable in this browser';
+                return;
+            }
+
+            if (!recognition) {
+                recognition = new SpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.interimResults = true;
+                recognition.continuous = false;
+                recognition.onresult = (event) => {
+                    let transcript = '';
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        transcript += event.results[i][0].transcript;
+                    }
+                    input.value = transcript.trim();
+                };
+                recognition.onerror = (event) => {
+                    status.textContent = `Mic error: ${event.error}`;
+                    micActive = false;
+                    btn.style.background = '#4caf50';
+                };
+                recognition.onend = () => {
+                    micActive = false;
+                    btn.style.background = '#4caf50';
+                    status.textContent = 'Mic idle';
+                };
+            }
+
+            if (micActive) {
+                recognition.stop();
+                micActive = false;
+                btn.style.background = '#4caf50';
+                status.textContent = 'Mic idle';
+                return;
+            }
+
+            recognition.start();
+            micActive = true;
+            btn.style.background = '#f44336';
+            status.textContent = 'Listening...';
+        }
+
+        async function routeToAgentFramework() {
+            const input = document.getElementById('agentRouteInput');
+            const requestText = (input.value || '').trim();
+            if (!requestText) {
+                addErrorMessage('Agent routing request cannot be empty');
+                return;
+            }
+            addUserQuestion(`[ROUTED] ${requestText}`);
+            input.value = '';
+            const selectedAgents = getSelectedAgents();
+            const externalTargets = parseExternalAiTargets();
+            try {
+                const response = await fetch('/api/agents/group-message', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        request: requestText,
+                        agents: selectedAgents,
+                        external_targets: externalTargets,
+                        payload: {type: 'compose_message'}
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok || result.error) {
+                    addErrorMessage('Agent routing failed: ' + (result.error || response.statusText));
+                    return;
+                }
+                const agentResults = Array.isArray(result.results) ? result.results : [];
+                if (agentResults.length === 0) {
+                    addChatMessage('assistant', 'No agent responses returned.', 'agent-framework');
+                }
+                for (const entry of agentResults) {
+                    if (entry.success) {
+                        addChatMessage('assistant', entry.response_text || 'Completed.', entry.agent_name || entry.agent_id || 'agent');
+                    } else {
+                        addErrorMessage(`${entry.agent_id || 'agent'}: ${entry.error || 'Unknown error'}`);
+                    }
+                }
+                const externalResults = Array.isArray(result.external_results) ? result.external_results : [];
+                for (const ext of externalResults) {
+                    if (ext.success) {
+                        addChatMessage('assistant', ext.response || 'External AI completed.', ext.target || 'external-ai');
+                    } else {
+                        addErrorMessage(`${ext.target || ext.url || 'external-ai'}: ${ext.error || 'External request failed'}`);
+                    }
+                }
+                if (Array.isArray(result.suggestions) && result.suggestions.length > 0) {
+                    addSuggestionPanel(result.suggestions, 'Next options');
+                }
+            } catch (error) {
+                addErrorMessage('Agent routing error: ' + error.message);
+            }
+        }
+
+        async function loadAgentRoster() {
+            const box = document.getElementById('agentSelectionBox');
+            if (!box) return;
+            try {
+                const response = await fetch('/api/agents/status');
+                const payload = await response.json();
+                const agents = (((payload || {}).status || {}).agents || []).filter(a => a.active !== false);
+                if (agents.length === 0) {
+                    box.innerHTML = '<div style="color: #777; font-size: 12px;">No active agents found.</div>';
+                    return;
+                }
+                box.innerHTML = agents.map(agent => `
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #333;">
+                        <input type="checkbox" class="agent-check" value="${escapeHtml(agent.agent_id)}" checked>
+                        <span><strong>${escapeHtml(agent.name || agent.agent_id)}</strong> (${escapeHtml(agent.agent_id)})</span>
+                    </label>
+                `).join('');
+            } catch (error) {
+                box.innerHTML = '<div style="color: #f44336; font-size: 12px;">Unable to load agents.</div>';
+            }
+        }
+
+        function getSelectedAgents() {
+            return Array.from(document.querySelectorAll('.agent-check:checked')).map(el => el.value);
+        }
+
+        function selectAllAgents(enabled) {
+            document.querySelectorAll('.agent-check').forEach(el => {
+                el.checked = !!enabled;
+            });
+        }
+
+        function parseExternalAiTargets() {
+            const input = document.getElementById('externalAiTargets');
+            if (!input) return [];
+            const raw = (input.value || '').trim();
+            if (!raw) return [];
+            try {
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed)) throw new Error('Must be an array');
+                return parsed
+                    .filter(item => item && typeof item === 'object' && item.url)
+                    .map(item => ({
+                        name: String(item.name || '').trim(),
+                        url: String(item.url || '').trim(),
+                        api_key: String(item.api_key || '').trim()
+                    }));
+            } catch (error) {
+                addErrorMessage('Invalid External AI JSON. Use [{"name":"X","url":"http://...","api_key":""}]');
+                return [];
             }
         }
         
@@ -3186,7 +4825,7 @@ class OmegaControlPanelWeb:
             historyEl.scrollTop = historyEl.scrollHeight;
         }
         
-        function displayCouncilResponses(results) {
+        function displayCouncilResponses(results, suggestions = []) {
             const historyEl = document.getElementById('chatHistory');
             const councilEl = document.createElement('div');
             councilEl.style.cssText = 'margin-bottom: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;';
@@ -3214,6 +4853,22 @@ class OmegaControlPanelWeb:
             }
             
             historyEl.appendChild(councilEl);
+            if (Array.isArray(suggestions) && suggestions.length > 0) {
+                addSuggestionPanel(suggestions, 'Suggested next steps');
+            }
+            historyEl.scrollTop = historyEl.scrollHeight;
+        }
+
+        function addSuggestionPanel(items, title = 'Suggestions') {
+            const historyEl = document.getElementById('chatHistory');
+            const panel = document.createElement('div');
+            panel.style.cssText = 'margin-bottom: 20px; padding: 12px; border-radius: 8px; background: #f8f9ff; border: 1px solid #d7dcff;';
+            const safeItems = items.slice(0, 3).map(item => `<li style="margin: 6px 0;">${escapeHtml(item)}</li>`).join('');
+            panel.innerHTML = `
+                <div style="font-weight: bold; color: #3f51b5; margin-bottom: 8px;">${escapeHtml(title)}</div>
+                <ul style="margin: 0; padding-left: 18px; color: #2d2d2d; font-size: 13px;">${safeItems}</ul>
+            `;
+            historyEl.appendChild(panel);
             historyEl.scrollTop = historyEl.scrollHeight;
         }
         
@@ -3327,7 +4982,7 @@ class OmegaControlPanelWeb:
                 }
                 
                 // Update GPU availability
-                const gpuStatus = data.gpu_available ? '✓ Available' : '✗ Not Available';
+                const gpuStatus = data.gpu_available ? 'âœ“ Available' : 'âœ— Not Available';
                 const gpuColor = data.gpu_available ? '#4caf50' : '#f44336';
                 document.getElementById('gpuAvailable').textContent = gpuStatus;
                 document.getElementById('gpuAvailable').style.color = gpuColor;
@@ -3382,7 +5037,7 @@ class OmegaControlPanelWeb:
                 if (recommendations.length > 0) {
                     recContainer.innerHTML = recommendations.slice(0, 5).map((rec, idx) => `
                         <div style="padding: 10px; margin-bottom: 8px; background: white; border-left: 4px solid #667eea; border-radius: 3px;">
-                            <div style="font-weight: bold; color: #333; font-size: 13px; margin-bottom: 3px;">💡 Recommendation ${idx + 1}</div>
+                            <div style="font-weight: bold; color: #333; font-size: 13px; margin-bottom: 3px;">ðŸ’¡ Recommendation ${idx + 1}</div>
                             <div style="color: #666; font-size: 12px;">${escapeHtml(rec)}</div>
                         </div>
                     `).join('');
@@ -3413,19 +5068,34 @@ class OmegaControlPanelWeb:
             loadStats();
             loadNotifications();
             loadIntegratedSystems();
+            loadDesktopApps();
+            loadPdfActions();
             loadLoadBalancerData();
             
             // Load chatbot data
             loadChatbotStatus();
             loadChatHistory();
+            loadAgentRoster();
+            loadAudioLab();
+            loadImageLab();
             
             // Set up auto-refresh every 2 seconds for faster updates
             setInterval(() => {
                 loadStats();
                 loadNotifications();
                 loadIntegratedSystems();
+                loadDesktopApps();
                 loadLoadBalancerData();
             }, 2000);  // Faster refresh - 2 seconds instead of 5
+
+            setInterval(() => {
+                loadAgentRoster();
+            }, 10000);
+
+            // PDF scan is heavier; refresh less frequently
+            setInterval(() => {
+                loadPdfActions();
+            }, 60000);
         });
         
         // Voice control function
@@ -3549,3 +5219,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
